@@ -78,6 +78,9 @@ flutter:
     - assets/image/new/big_logo.png
     - assets/image/new/telkomsel.png
     - assets/image/new/ic_hore_apps2.jpg
+    - assets/image/coverage/BG.png
+    - assets/image/coverage/ic_logo_hore.png
+    - assets/image/coverage/logout.png
     - assets/csv/kecamatan.csv
     - assets/csv/kabupaten.csv
     - assets/csv/provinsi.csv
