@@ -195,21 +195,27 @@ class _SearchLocationState extends State<SearchLocation> {
                     width: 5,
                   ),
                   ButtonApp.black('PJP', () {
-                    CommonUi.openPage(context, HistoryPJP(outletSimple));
+                    // CommonUi.openPage(context, HistoryPJP(outletSimple));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => HistoryPJP(outletSimple)));
                   }),
                   SizedBox(
                     width: 8,
                   ),
                   ButtonApp.black('Edit', () {
-                    CommonUi.openPage(
-                        context, EditorOutlet(outletSimple.idutama));
+                    // CommonUi.openPage(
+                    //     context, EditorOutlet(outletSimple.idutama));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => EditorOutlet(outletSimple.idutama)));
                   }),
                   SizedBox(
                     width: 8,
                   ),
                   ButtonApp.black('Detail', () {
-                    CommonUi.openPage(
-                        context, ViewOutlet(outletSimple.idutama));
+                    // CommonUi.openPage(
+                    //     context, ViewOutlet(outletSimple.idutama));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => ViewOutlet(outletSimple.idutama)));
                   }),
                 ],
               ),

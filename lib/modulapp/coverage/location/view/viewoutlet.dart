@@ -45,8 +45,8 @@ class _ViewOutletState extends State<ViewOutlet> {
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
     HttpOutlet httpOutlet = new HttpOutlet();
-    List<dynamic> ld = await (httpOutlet.detailOutlet(widget.idoutlet) as Future<List<dynamic>>);
-    if (ld.length == 1) {
+    List<dynamic>? ld = await (httpOutlet.detailOutlet(widget.idoutlet));
+    if (ld!.length == 1) {
       Map<String, dynamic> map = ld[0];
       _outlet = Outlet.fromJson(map);
 
@@ -63,14 +63,14 @@ class _ViewOutletState extends State<ViewOutlet> {
               Provinsi? prov = await _httpDashboard.getProv(kab.realid);
               _outlet!.prov = prov;
             }
-            List<Kelurahan> lkel =
-                await (_httpDashboard.getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
+            List<Kelurahan>? lkel =
+                await (_httpDashboard.getListKelurahan(kec.realid));
 
-            lkel.forEach((element) {
+            for (var element in lkel!) {
               if (element.idkel == _outlet!.idkelurahan) {
                 _outlet!.kel = element;
               }
-            });
+            }
           }
         }
         return true;
