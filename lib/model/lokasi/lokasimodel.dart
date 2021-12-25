@@ -1,0 +1,187 @@
+import 'package:hero/database/stringdb.dart';
+
+class Provinsi {
+  int? id;
+  String? realid;
+  String? nama;
+
+  Provinsi({this.id, this.realid, this.nama});
+  Provinsi.fromJson(Map<String, dynamic> map) {
+    //
+    //   "id_provinsi": "PRV004",
+    // "nama_provinsi": "LAMPUNG",
+    // "lastmodified": "2020-11-29 09:00:00"
+    //
+
+    this.realid = map['id_provinsi'] == null ? '' : map['id_provinsi'];
+    this.nama = map['nama_provinsi'] == null ? '' : map['nama_provinsi'];
+  }
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map[TbProv.id] = id;
+    map[TbProv.realid] = realid;
+    map[TbProv.nama] = nama;
+    return map;
+  }
+
+  Provinsi.formDb(this.id, this.realid, this.nama);
+
+  bool operator ==(dynamic other) =>
+      other != null && other is Provinsi && this.realid == other.realid;
+
+  @override
+  int get hashCode => super.hashCode;
+
+  @override
+  String toString() {
+    return '${this.nama}';
+  }
+}
+
+class Kabupaten {
+  int? id;
+  String? realid;
+  String? idprov;
+  String? nama;
+  int? radiusClockin;
+
+  Kabupaten({this.id, this.realid, this.idprov, this.nama});
+
+  Kabupaten.formDb(this.id, this.realid, this.idprov, this.nama);
+
+  Kabupaten.fromJson(Map<String, dynamic> map) {
+    // "id_provinsi": "PRV004",
+    // "id_kabupaten": "KAB029",
+    // "nama_kabupaten": "KOTA BANDAR LAMPUNG",
+    // "radius_clock_in": "0",
+    // "lastmodified": "2020-11-29 09:00:00"
+    this.realid = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
+    this.idprov = map['id_provinsi'] == null ? '' : map['id_provinsi'];
+    this.nama = map['nama_kabupaten'] == null ? '' : map['nama_kabupaten'];
+    if (map['radius_clock_in'] == null) {
+      this.radiusClockin = 25;
+    } else {
+      this.radiusClockin = int.tryParse(map['radius_clock_in']) == null
+          ? 25
+          : int.tryParse(map['radius_clock_in']);
+    }
+  }
+
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map[TbKab.id] = id;
+    map[TbKab.realid] = realid;
+    map[TbKab.idprov] = idprov;
+    map[TbKab.nama] = nama;
+    return map;
+  }
+
+  bool operator ==(dynamic other) =>
+      other != null && other is Kabupaten && this.realid == other.realid;
+
+  @override
+  int get hashCode => super.hashCode;
+
+  @override
+  String toString() {
+    return '${this.nama}';
+  }
+}
+
+class Kecamatan {
+  int? id;
+  String? realid;
+  String? idcluster;
+  String? idkab;
+  String? nama;
+
+  Kecamatan({
+    required this.realid,
+    required this.idcluster,
+    required this.idkab,
+    required this.nama,
+    this.id,
+  });
+
+  Kecamatan.fromJson(Map<String, dynamic> map) {
+    // "id_kabupaten": "KAB029",
+    // "id_cluster": "CTR005",
+    // "id_kecamatan": "KEC172",
+    // "nama_kecamatan": "BUMI WARAS",
+    // "lastmodified": "2020-11-29 09:00:00"
+
+    this.realid = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
+    this.idkab = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
+    this.idcluster = map['id_cluster'] == null ? '' : map['id_cluster'];
+    this.nama = map['nama_kecamatan'] == null ? '' : map['nama_kecamatan'];
+  }
+
+  Kecamatan.fromDb(
+    this.id,
+    this.realid,
+    this.idcluster,
+    this.idkab,
+    this.nama,
+  );
+
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map[TbKec.id] = id;
+    map[TbKec.realid] = realid;
+    map[TbKec.idkab] = idkab;
+    map[TbKec.idcluster] = idcluster;
+    map[TbKec.nama] = nama;
+    return map;
+  }
+
+  bool operator ==(dynamic other) =>
+      other != null && other is Kecamatan && this.realid == other.realid;
+
+  @override
+  int get hashCode => super.hashCode;
+  @override
+  String toString() {
+    return '${this.nama}';
+  }
+}
+
+class Kelurahan {
+  int? id;
+  String? idkel;
+  String? idkec;
+  String? nama;
+
+  Kelurahan({this.id, this.idkec, this.idkel, this.nama});
+
+  Kelurahan.fromDb(this.id, this.idkec, this.idkel, this.nama);
+
+  // "id_kecamatan": "KEC172",
+  // "id_kelurahan": "KLH8478",
+  // "nama_kelurahan": "BUMI RAYA",
+  // "lastmodified": "2020-11-29 09:00:00"
+  Kelurahan.fromJson(Map<String, dynamic> map) {
+    this.idkel = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
+    this.idkec = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
+    this.nama = map['nama_kelurahan'] == null ? '' : map['nama_kelurahan'];
+  }
+
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map[TbKel.id] = id;
+    map[TbKel.idkel] = idkel;
+    map[TbKel.idkec] = idkec;
+    map[TbKel.nama] = nama;
+    return map;
+  }
+
+  bool operator ==(dynamic other) =>
+      other != null && other is Kelurahan && this.idkel == other.idkel;
+
+  @override
+  int get hashCode => super.hashCode;
+
+  @override
+  String toString() {
+    return '${this.nama}';
+  }
+}
