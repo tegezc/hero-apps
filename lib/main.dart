@@ -11,7 +11,9 @@ import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/modulapp/camera/previewvideo.dart';
 import 'package:hero/modulapp/coverage/clockin/mapcloclin.dart';
 import 'package:hero/modulapp/coverage/clockin/menusales.dart';
-import 'package:hero/modulapp/coverage/coveragehome.dart';
+// ! Ubah path coverage / beranda {
+import 'package:hero/modulapp/coverage/coveragehome_new.dart';
+// ! Ubah path coverage / beranda }
 import 'package:hero/modulapp/coverage/distribution/daftarproductdistribusi.dart';
 import 'package:hero/modulapp/coverage/distribution/homepembeliandistribusi.dart';
 import 'package:hero/modulapp/coverage/distribution/pembayaran/pembayarandistribusi.dart';
@@ -51,7 +53,7 @@ const fetchBackground = "tracinglocsales";
 //             desiredAccuracy: LocationAccuracy.high);
 //         Notification1 notification = new Notification1();
 //         notification.showNotificationWithNoSound(userLocation.toString());
-//    
+//
 //     }
 //     return Future.value(true);
 //   });
@@ -65,7 +67,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     return MaterialApp(
       title: 'Hore Mobile Apps',
       theme: ThemeData(
@@ -95,7 +98,8 @@ class MyApp extends StatelessWidget {
     switch (settings.name) {
       case HomeControllpage.routeName:
         {
-          final HomeControllpageParam? args = settings.arguments as HomeControllpageParam?;
+          final HomeControllpageParam? args =
+              settings.arguments as HomeControllpageParam?;
           return _buildRoute(
               settings,
               new HomeControllpage(
@@ -122,14 +126,16 @@ class MyApp extends StatelessWidget {
         }
       case PembayaranDistribusi.routeName:
         {
-          final ParamPembayaran? paramPembayaran = settings.arguments as ParamPembayaran?;
+          final ParamPembayaran? paramPembayaran =
+              settings.arguments as ParamPembayaran?;
           return _buildRoute(
               settings, new PembayaranDistribusi(paramPembayaran));
         }
       case PageSuccess.routeName:
         {
           final param = settings.arguments;
-          return _buildRoute(settings, new PageSuccess(param as PageSuccessParam?));
+          return _buildRoute(
+              settings, new PageSuccess(param as PageSuccessParam?));
         }
       case HomePembelianDistribusi.routeName:
         {
@@ -161,18 +167,21 @@ class MyApp extends StatelessWidget {
         }
       case CameraView.routeName:
         {
-          final ParamPreviewPhoto? item = settings.arguments as ParamPreviewPhoto?;
+          final ParamPreviewPhoto? item =
+              settings.arguments as ParamPreviewPhoto?;
           return _buildRoute(settings, new CameraView(item));
         }
       case PreviewPhotoWithUpload.routeName:
         {
-          final ParamPreviewPhoto? item = settings.arguments as ParamPreviewPhoto?;
+          final ParamPreviewPhoto? item =
+              settings.arguments as ParamPreviewPhoto?;
           return _buildRoute(settings, new PreviewPhotoWithUpload(item));
         }
 
       case PreviewPhoto.routeName:
         {
-          final ParamPreviewPhoto? item = settings.arguments as ParamPreviewPhoto?;
+          final ParamPreviewPhoto? item =
+              settings.arguments as ParamPreviewPhoto?;
           return _buildRoute(settings, new PreviewPhoto(item));
         }
       case HomeSurvey.routeName:
@@ -187,7 +196,8 @@ class MyApp extends StatelessWidget {
         }
       case PreviewVideoUpload.routeName:
         {
-          final ParamPreviewVideo? item = settings.arguments as ParamPreviewVideo?;
+          final ParamPreviewVideo? item =
+              settings.arguments as ParamPreviewVideo?;
           return _buildRoute(settings, new PreviewVideoUpload(item));
         }
       default:
@@ -247,6 +257,23 @@ class _HomeControllpageState extends State<HomeControllpage> {
   //     }
   //   });
   // }
+  Widget _titleCoverage() {
+    return Row(children: [
+      Image(
+        image: AssetImage('assets/image/coverage/ic_logo_hore.png'),
+        height: 40,
+      ),
+      Spacer(),
+      GestureDetector(
+          onTap: () {
+            _showDialogConfirmLogout();
+          },
+          child: Image(
+            image: AssetImage('assets/image/coverage/logout.png'),
+            height: 40,
+          ))
+    ]);
+  }
 
   Widget _titleWidget(String id) {
     return Row(
@@ -260,7 +287,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
         ),
         Text(
           id,
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          style: TextStyle(color: Colors.white, fontSize: 14),
         ),
         Spacer(),
         OutlineButton(
@@ -270,10 +297,10 @@ class _HomeControllpageState extends State<HomeControllpage> {
           color: Colors.black,
           child: Text(
             'LOGOUT',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
           borderSide: BorderSide(
-            color: Colors.black, //Color of the border
+            color: Colors.white, //Color of the border
             style: BorderStyle.solid, //Style of the border
             width: 0.9, //width of the border
           ),
@@ -294,14 +321,22 @@ class _HomeControllpageState extends State<HomeControllpage> {
       return Scaffold(
         // backgroundColor: Colors.white,
         //  resizeToAvoidBottomPadding: false,
+        extendBodyBehindAppBar: _selectedtab == 0 ? true : false,
+        extendBody: _selectedtab == 0 ? true : false,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: _titleWidget(_iduser!),
+          // backgroundColor: Colors.white,
+          elevation: 0,
+          backgroundColor:
+              _selectedtab != 0 ? Colors.red[600] : Colors.transparent,
+          title: _selectedtab != 0 ? _titleWidget(_iduser!) : _titleCoverage(),
         ),
         body: _getSelectedWidget(_selectedtab),
         bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 10,
           unselectedFontSize: 10,
+          elevation: 0,
+          backgroundColor:
+              _selectedtab == 0 ? Colors.transparent : Colors.white,
           type: BottomNavigationBarType.fixed,
           onTap: (v) {
             setState(() {
@@ -311,7 +346,63 @@ class _HomeControllpageState extends State<HomeControllpage> {
           // new
           currentIndex: _selectedtab!,
           // new
-          items: _btmMenu,
+          // items: _btmMenu,
+          items: [
+            BottomNavigationBarItem(
+              // icon: Icon(Icons.location_on),
+              icon: Image(
+                image: _selectedtab == 0
+                    ? AssetImage('assets/image/icon/new/ic_coverage.png')
+                    : AssetImage('assets/image/icon/new/disable/coverage.png'),
+                height: 50,
+              ),
+              label: '', // 'Coverage'
+            ),
+            BottomNavigationBarItem(
+              // icon: Icon(Icons.location_on),
+              icon: Image(
+                image: _selectedtab == 1
+                    ? AssetImage('assets/image/icon/new/ic_distribution.png')
+                    : AssetImage(
+                        'assets/image/icon/new/disable/distribution.png'),
+                height: 50,
+              ),
+              label: '', // 'Coverage'
+            ),
+            BottomNavigationBarItem(
+              // icon: Icon(Icons.location_on),
+              icon: Image(
+                image: _selectedtab == 2
+                    ? AssetImage('assets/image/icon/new/ic_merchandising.png')
+                    : AssetImage(
+                        'assets/image/icon/new/disable/merchandising.png'),
+                height: 50,
+              ),
+              label: '', // 'Coverage'
+            ),
+            BottomNavigationBarItem(
+              // icon: Icon(Icons.location_on),
+              icon: Image(
+                image: _selectedtab == 3
+                    ? AssetImage('assets/image/icon/new/ic_promotion.png')
+                    : AssetImage('assets/image/icon/new/disable/promotion.png'),
+                height: 50,
+              ),
+              label: '', // 'Coverage'
+            ),
+            if (_enumAccount == EnumAccount.sf)
+              BottomNavigationBarItem(
+                // icon: Icon(Icons.location_on),
+                icon: Image(
+                  image: _selectedtab == 4
+                      ? AssetImage('assets/image/icon/new/ic_market_audit.png')
+                      : AssetImage(
+                          'assets/image/icon/new/disable/market_audit.png'),
+                  height: 50,
+                ),
+                label: '', // 'Coverage'
+              ),
+          ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
       );
     } else {
@@ -323,21 +414,52 @@ class _HomeControllpageState extends State<HomeControllpage> {
     this._setupLoginSUccess().then((value) {
       _btmMenu = [];
 
-      _btmMenu.add(new BottomNavigationBarItem(
-        icon: Icon(Icons.location_on),
-        label: 'Coverage',
+      _btmMenu.add(BottomNavigationBarItem(
+        // icon: Icon(Icons.location_on),
+        icon: Image(
+          image: _selectedtab == 0
+              ? AssetImage('assets/image/icon/new/coverage.png')
+              : AssetImage('assets/image/icon/new/disable/coverage.png'),
+          height: 50,
+        ),
+
+        label: '', // 'Coverage'
       ));
-      _btmMenu.add(new BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart), label: 'Distribution'));
-      _btmMenu.add(new BottomNavigationBarItem(
-          icon: Icon(Icons.work), label: 'Merchandising'));
-      _btmMenu.add(new BottomNavigationBarItem(
-          icon: Icon(Icons.campaign), label: 'Promotion'));
+      _btmMenu.add(const BottomNavigationBarItem(
+          // icon: Icon(Icons.shopping_cart),
+          icon: Image(
+            image: AssetImage('assets/image/icon/new/disable/distribution.png'),
+            height: 50,
+          ),
+          label: '' //'Distribution'
+          ));
+      _btmMenu.add(const BottomNavigationBarItem(
+          // icon: Icon(Icons.work),
+          icon: Image(
+            image:
+                AssetImage('assets/image/icon/new/disable/merchandising.png'),
+            height: 50,
+          ),
+          label: '' //'Merchandising'
+          ));
+      _btmMenu.add(const BottomNavigationBarItem(
+          // icon: Icon(Icons.campaign),
+          icon: Image(
+            image: AssetImage('assets/image/icon/new/disable/promotion.png'),
+            height: 50,
+          ),
+          label: '' //'Promotion'
+          ));
       if (_enumAccount == EnumAccount.sf) {
-        _btmMenu.add(new BottomNavigationBarItem(
-          icon: Icon(Icons.widgets),
-          label: 'Market Audit',
-        ));
+        _btmMenu.add(const BottomNavigationBarItem(
+            // icon: Icon(Icons.widgets),
+            icon: Image(
+              image:
+                  AssetImage('assets/image/icon/new/disable/market_audit.png'),
+              height: 50,
+            ),
+            label: '' //'Market Audit',
+            ));
       }
 
       setState(() {
