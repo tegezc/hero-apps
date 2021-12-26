@@ -81,6 +81,24 @@ flutter:
     - assets/image/coverage/BG.png
     - assets/image/coverage/ic_logo_hore.png
     - assets/image/coverage/logout.png
+    - assets/image/icon/coverage.png
+    - assets/image/icon/distribution.png
+    - assets/image/icon/market_audit.png
+    - assets/image/icon/merchandising.png
+    - assets/image/icon/promotion.png
+    - assets/image/icon/new/ic_coverage.png
+    - assets/image/icon/new/ic_distribution.png
+    - assets/image/icon/new/ic_market_audit.png
+    - assets/image/icon/new/ic_merchandising.png
+    - assets/image/icon/new/ic_promotion.png
+    - assets/image/icon/new/disable/coverage.png
+    - assets/image/icon/new/disable/distribution.png
+    - assets/image/icon/new/disable/market_audit.png
+    - assets/image/icon/new/disable/merchandising.png
+    - assets/image/icon/new/disable/promotion.png
+    - assets/image/feature_button/ic_cari_outlet.png
+    - assets/image/feature_button/ic_retur.png
+    - assets/image/feature_button/ic_tambah_outlet.png
     - assets/csv/kecamatan.csv
     - assets/csv/kabupaten.csv
     - assets/csv/provinsi.csv
