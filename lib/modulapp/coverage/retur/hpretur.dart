@@ -47,18 +47,18 @@ class _HomePageReturState extends State<HomePageRetur> {
         UIHpRetur item = snapshot.data!;
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.red[600],
             iconTheme: IconThemeData(
-              color: Colors.black, //change your color here
+              color: Colors.white, //change your color here
             ),
             title: Row(
               children: [
                 Text(
                   'Retur',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
                 Spacer(),
-                ButtonApp.blue('+ Entry', () {
+                ButtonApp.white('+ Entry', () {
                   Navigator.pushNamed(context, ReturEditor.routeName);
                 })
               ],

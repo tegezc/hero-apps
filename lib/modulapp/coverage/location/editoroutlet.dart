@@ -113,13 +113,13 @@ class _EditorOutletState extends State<EditorOutlet> {
                       tabs: [
                         // wallet share, sales broadband share, voucher fisik share
                         Tab(
-                          child: LabelBlack.size2('Data Outlet'),
+                          child: LabelWhite.size2('Data Outlet'),
                         ),
                         Tab(
-                          child: LabelBlack.size2('Owner Outlet'),
+                          child: LabelWhite.size2('Owner Outlet'),
                         ),
                         Tab(
-                          child: LabelBlack.size2('PIC'),
+                          child: LabelWhite.size2('PIC'),
                         ),
                       ],
                     ),

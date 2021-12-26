@@ -23,19 +23,19 @@ class ScaffoldLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red[600],
         iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.white, //change your color here
         ),
         title: Container(
           alignment: Alignment.center,
           child: Text(title!,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
               )),
         ),
         actions: <Widget>[
-          ButtonApp.black(textBtn, () {
+          ButtonApp.white(textBtn, () {
             onTap!();
           }),
         ],
