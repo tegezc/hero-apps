@@ -111,12 +111,12 @@ class _LoginPageState extends State<LoginPage> {
                           _proseslogin();
                         });
                       }),
-                ButtonRed('Reset Password', onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    ResetPassword.routeName,
-                  );
-                }),
+                // ButtonRed('Reset Password', onTap: () {
+                //   Navigator.pushNamed(
+                //     context,
+                //     ResetPassword.routeName,
+                //   );
+                // }),
               ],
             ),
           ],
