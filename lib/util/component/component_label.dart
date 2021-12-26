@@ -47,6 +47,37 @@ class LabelBlack extends StatelessWidget {
   }
 }
 
+class LabelWhite extends StatelessWidget {
+  final String? text;
+  final double _fontsize;
+  final bool bold;
+  LabelWhite.title(this.text, {this.bold = false}) : _fontsize = 20.0;
+  LabelWhite.size1(this.text, {this.bold = false}) : _fontsize = 16.0;
+  LabelWhite.size2(this.text, {this.bold = false}) : _fontsize = 14.0;
+  LabelWhite.size3(this.text, {this.bold = false}) : _fontsize = 12.0;
+  LabelWhite.size4(this.text, {this.bold = false}) : _fontsize = 10.0;
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle _labelStyle = TextStyle(
+        color: Colors.white,
+        fontSize: _fontsize,
+        fontWeight: FontWeight.normal);
+    if (this.bold) {
+      _labelStyle = TextStyle(
+          color: Colors.white,
+          fontSize: _fontsize,
+          fontWeight: FontWeight.bold);
+    }
+
+    return Text(
+      text!,
+      maxLines: 5,
+      style: _labelStyle,
+    );
+  }
+}
+
 class LabelApp extends StatelessWidget {
   final String? text;
   final double fontsize;

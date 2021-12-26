@@ -41,13 +41,13 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: this.automaticallyImplyLeading,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red[600],
         iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.white, //change your color here
         ),
         title: Text(
           this.title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         actions: [],

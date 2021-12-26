@@ -180,6 +180,9 @@ class ButtonApp extends StatefulWidget {
   ButtonApp.black(this.text, this.onTap, {this.enable = true})
       : enumWarnaButton = EnumWarnaButton.black;
 
+  ButtonApp.white(this.text, this.onTap, {this.enable = true})
+      : enumWarnaButton = EnumWarnaButton.white;
+
   @override
   _ButtonAppState createState() => _ButtonAppState();
 }
@@ -204,6 +207,9 @@ class _ButtonAppState extends State<ButtonApp> {
         break;
       case EnumWarnaButton.black:
         _color = Colors.black;
+        break;
+      case EnumWarnaButton.white:
+        _color = Colors.white;
         break;
     }
     super.initState();
@@ -504,4 +510,4 @@ enum EnumButtonMenu {
   clockin
 }
 
-enum EnumWarnaButton { blue, red, yellow, green, black }
+enum EnumWarnaButton { blue, red, yellow, green, black, white }
