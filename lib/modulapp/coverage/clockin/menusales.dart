@@ -66,7 +66,7 @@ class _MenuSalesState extends State<MenuSales> {
               SizedBox(
                 height: 12,
               ),
-              Divider(),
+              //Divider(),
               _controllMenu(),
             ],
           ),

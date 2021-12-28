@@ -183,20 +183,20 @@ class _PageTabDsState extends State<PageTabDs> {
         //_controllerTap(item);
       },
       child: Container(
-        color: Colors.white,
+       // color: Colors.white,
         child: Column(
           children: [
             Divider(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Icon(
                         Icons.playlist_add_check,
-                        color: Colors.green,
+                        color: Colors.white,
                       ),
                       SizedBox(
                         width: 12,
@@ -208,9 +208,9 @@ class _PageTabDsState extends State<PageTabDs> {
                           children: [
                             // LabelBlack.size2(item.iddigipos),
                             // _spasi(),
-                            LabelBlack.size2(item.namapembeli),
+                            LabelBlack.size3(item.namapembeli),
                             _spasi(),
-                            LabelBlack.size2('tgl: ${item.getStrTgl()}'),
+                            LabelBlack.size3('tgl: ${item.getStrTgl()}'),
                           ],
                         ),
                       ),
@@ -238,7 +238,7 @@ class _PageTabDsState extends State<PageTabDs> {
         Divider(),
         Padding(
           padding: const EdgeInsets.only(
-              left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
           child: Column(
             children: [
               Row(
@@ -257,9 +257,9 @@ class _PageTabDsState extends State<PageTabDs> {
                       children: [
                         // LabelBlack.size2(item.iddigipos),
                         // _spasi(),
-                        LabelBlack.size2(nama),
+                        LabelBlack.size3(nama),
                         _spasi(),
-                        LabelBlack.size2('tgl: ${item.getStrTgl()}'),
+                        LabelBlack.size3('tgl: ${item.getStrTgl()}'),
                       ],
                     ),
                   ),

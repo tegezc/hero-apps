@@ -150,8 +150,14 @@ class DateUtility {
     if (dt == null) {
       return '';
     }
+    String menit;
+    if( dt.minute < 10){
+       menit = '0${dt.minute}';
+    }else{
+       menit = '${dt.minute}';
+    }
     return '${namaHariPanjang[dt.weekday]}, ${dt.day}-${dt.month}-${dt.year} ${dt.hour}:'
-        '${dt.minute}:${dt.second}';
+        '${menit}:${dt.second}';
   }
 
   static final namaBulanPendek = const [
