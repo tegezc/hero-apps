@@ -62,16 +62,24 @@ class _CoverageHomeState extends State<CoverageHome> {
           return Stack(children: [
             SingleChildScrollView(
               child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    //image: AssetImage('assets/image/coverage/BG.png'),
+                    image: AssetImage('assets/image/new/BG.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 height: size.height,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FractionallySizedBox(
-                        widthFactor: 1,
-                        child: Image(
-                            image: AssetImage('assets/image/coverage/BG.png'))),
+                    Container()
+                    // FractionallySizedBox(
+                    //     widthFactor: 1,
+                    //     child: Image(
+                    //         image: AssetImage('assets/image/coverage/BG.png'))),
                   ],
                 ),
               ),
@@ -134,9 +142,18 @@ class _CoverageHomeState extends State<CoverageHome> {
                                     'assets/image/feature_button/ic_retur.png'),
                                 height: 28)),
                       ]),
-                  Container(
-                    padding: const EdgeInsets.only(top:10),
-                    child: _pjp(item)
+                  Expanded(
+                    child: Container(
+                        //color: Colors.red,
+                        padding: const EdgeInsets.only(top: 10),
+
+                        child: _pjp(item)
+
+
+                    ),
+                  ),
+                  SizedBox(
+                    height: 70,
                   )
                 ]))
           ]);
@@ -240,11 +257,21 @@ class _CoverageHomeState extends State<CoverageHome> {
         ],
       ),
     ));
-
+    List<Widget> lwlist = [];
     item.lpjp.forEach((element) {
       //lw.add(_cellPjp(element.tempat.nama, element.tempat.id, element.enumPjp));
-      lw.add(_cellPjp(element));
+      lwlist.add(_cellPjp(element));
     });
+    lw.add(Expanded(
+      child: Container(
+        //color: Colors.grey,
+        alignment: Alignment.center,
+        child: ListView(
+          padding: EdgeInsets.only(top: 0),
+          children: lwlist,
+        ),
+      ),
+    ));
 
     lw.add(SizedBox(
       height: 20,
@@ -258,16 +285,17 @@ class _CoverageHomeState extends State<CoverageHome> {
           children: lw,
         ));
   }
+
   Widget _cellPjp(Pjp pjp) {
     Color? colorIcon;
     late Widget action;
 
     if (pjp.enumPjp == EnumPjp.done) {
-      colorIcon = Colors.green;
-      action = LabelBlack.size2('Status: Done');
+      colorIcon = Colors.blue;
+      action = LabelWhite.size2('Status: Done');
     } else if (pjp.enumPjp == EnumPjp.progress) {
-      colorIcon = Colors.red;
-      action = ButtonApp.red('Clock In', () {
+      colorIcon = Colors.white;
+      action = ButtonApp.white('Clock In', () {
         print("Clock In");
         Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
             .then((value) {
@@ -275,8 +303,8 @@ class _CoverageHomeState extends State<CoverageHome> {
         });
       });
     } else if (pjp.enumPjp == EnumPjp.belum) {
-      colorIcon = Colors.grey;
-      action = LabelBlack.size2('Not Clock In ');
+      colorIcon = Colors.white;
+      action = LabelWhite.size2('Not Clock In ');
     }
     String? nama = pjp.tempat!.nama;
     if (pjp.tempat!.nama!.length > 17) {
@@ -302,8 +330,8 @@ class _CoverageHomeState extends State<CoverageHome> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    LabelBlack.size2(pjp.tempat!.id),
-                    LabelBlack.size2(nama),
+                    LabelWhite.size2(pjp.tempat!.id),
+                    LabelWhite.size2(nama),
                   ],
                 ),
               ),

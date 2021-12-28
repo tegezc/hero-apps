@@ -34,7 +34,6 @@ class PropertyImage extends StatelessWidget {
       default:
         return Container();
     }
-    
   }
 
   Widget _map() {
@@ -66,16 +65,24 @@ class PropertyImage extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         height: height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FractionallySizedBox(
-                widthFactor: 1,
-                child: Image(image: AssetImage('assets/image/new/BG.png'))),
-          ],
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/image/new/BG.png'),
+            fit: BoxFit.cover,
+          ),
         ),
+        // child:
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   mainAxisSize: MainAxisSize.max,
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     Container()
+        //     // FractionallySizedBox(
+        //     //     widthFactor: 1,
+        //     //     child: Image(image: AssetImage('assets/image/new/BG.png'))),
+        //   ],
+        // ),
       ),
     );
   }
