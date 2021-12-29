@@ -19,8 +19,9 @@
 
     <application
         android:label="HORE"
-        android:icon="@mipmap/launcher_icon">
-
+        android:icon="@mipmap/launcher_icon"
+        android:requestLegacyExternalStorage="true">
+        
         <!-- TODO: Add your API key here -->
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBD3VdphypyBuboC12_MNHfUWTmjHBtumM"/>

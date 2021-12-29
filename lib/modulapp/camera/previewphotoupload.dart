@@ -31,7 +31,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Image.file(
-                      File(widget.param!.pathPhoto!),
+                      File(widget.param!.pathPhoto!.path),
                     ),
                   )),
               Row(
@@ -103,7 +103,8 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
   /// kondisi pjp tutup
   Future<bool> _uploadPhotoAndChekOut() async {
     HttpDIstribution httpDist = HttpDIstribution();
-    bool value = await httpDist.uploadPhoto(widget.param!.pathPhoto!, true);
+    bool value =
+        await httpDist.uploadPhoto(widget.param!.pathPhoto!.path, true);
     if (value) {
       HttpDashboard httpDashboard = HttpDashboard();
       bool vcheckout = await httpDashboard.clockout();
@@ -115,7 +116,8 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
   /// ambil photo menu distribusi sekaligus tag as finish
   Future<FinishMenu?> _uploadPhotoDistribution() async {
     HttpDIstribution httpDist = HttpDIstribution();
-    bool value = await httpDist.uploadPhoto(widget.param!.pathPhoto!, false);
+    bool value =
+        await httpDist.uploadPhoto(widget.param!.pathPhoto!.path, false);
     if (value) {
       HttpDashboard httpDashboard = HttpDashboard();
       FinishMenu vcheckout =

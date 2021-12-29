@@ -160,10 +160,11 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
         ),
       );
     } else {
-      return AspectRatio(
-        aspectRatio: controller!.value.aspectRatio,
-        child: CameraPreview(controller!),
-      );
+      // return AspectRatio(
+      //   aspectRatio: controller!.value.aspectRatio,
+      //   child: CameraPreview(controller!),
+      // );
+      return CameraPreview(controller!);
     }
   }
 
@@ -247,12 +248,13 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     }
   }
 
+  XFile? imageFile;
   void onTakePictureButtonPressed() {
-    takePicture().then((String? filePath) {
+    takePicture().then((XFile? filePath) {
       if (mounted) {
         setState(() {
           //   imagePath = filePath;
-
+          imageFile = filePath;
           videoController?.dispose();
           videoController = null;
         });
@@ -281,7 +283,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     });
   }
 
-  Future<String?> takePicture() async {
+  Future<XFile?> takePicture() async {
     if (!controller!.value.isInitialized) {
       showInSnackBar('Error: select a camera first.');
       return null;
@@ -301,13 +303,14 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
     try {
       /// Comment error sementara
+      XFile file = await controller!.takePicture();
       //await controller.takePicture(filePath);
       /// end
+      return file;
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;
     }
-    return filePath;
   }
 
   void _showCameraException(CameraException e) {
@@ -340,7 +343,7 @@ enum EnumTakePhoto {
 }
 
 class ParamPreviewPhoto {
-  String? pathPhoto;
+  XFile? pathPhoto;
   EnumTakePhoto enumTakePhoto;
   EnumNumber? enumNumber;
 

@@ -184,8 +184,9 @@ class HttpDIstribution {
 
   Future<bool> uploadPhoto(String filepath, bool isclose) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    String idhitory = await (AccountHore.getIdHistoryPjp() as Future<String>);
+    String? idhitory = await AccountHore.getIdHistoryPjp();
     String url = '';
+    print(isclose);
     if (isclose) {
       url = 'clockout/pjp_upload_foto';
     } else {
@@ -197,7 +198,7 @@ class HttpDIstribution {
     ///===================================
     var request = http.MultipartRequest('POST', Uri.parse(uri));
     request.headers.addAll(headers);
-    request.fields['id_history_pjp'] = idhitory;
+    request.fields['id_history_pjp'] = idhitory!;
     request.files.add(http.MultipartFile.fromBytes(
       'myfile1', File(filepath).readAsBytesSync(),
       filename: filepath.split("/").last,

@@ -31,7 +31,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Image.file(
-                      File(widget.param!.pathPhoto!),
+                      File(widget.param!.pathPhoto!.path),
                     ),
                   )),
               Row(
@@ -48,7 +48,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
 
                       case EnumTakePhoto.marketaudit:
                         StoredPathPhoto.setPhotoMarketAudit(
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
@@ -62,7 +62,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                         StoredPathPhoto.setPhotoMerchandising(
                                 EnumMerchandising.etalase,
                                 widget.param!.enumNumber,
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
@@ -80,7 +80,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                         StoredPathPhoto.setPhotoMerchandising(
                                 EnumMerchandising.spanduk,
                                 widget.param!.enumNumber,
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
@@ -93,7 +93,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                         StoredPathPhoto.setPhotoMerchandising(
                                 EnumMerchandising.poster,
                                 widget.param!.enumNumber,
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
@@ -106,7 +106,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                         StoredPathPhoto.setPhotoMerchandising(
                                 EnumMerchandising.papan,
                                 widget.param!.enumNumber,
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
@@ -119,7 +119,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                         StoredPathPhoto.setPhotoMerchandising(
                                 EnumMerchandising.backdrop,
                                 widget.param!.enumNumber,
-                                widget.param!.pathPhoto!)
+                                widget.param!.pathPhoto!.path)
                             .then((value) {
                           Navigator.popUntil(
                               context,
