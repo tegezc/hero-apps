@@ -100,87 +100,149 @@ class _PageTabState extends State<PageTab> {
           }
           UIPageTabSf item = snapshot.data!;
 
-          return Container(
-            height: s.height,
-            width: s.width,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  LabelBlack.size1(title, bold: true),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ButtonApp.blue(item.getStrAwal(), () {
-                          _datePicker(true, item);
-                        }),
-                      ),
-                      ButtonApp.blue(item.getStrAkhir(), () {
-                        _datePicker(false, item);
-                      }),
-                      IconButton(
-                          icon: Icon(
-                            Icons.play_arrow_outlined,
-                            size: 40,
-                          ),
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            _controller.text = '';
-                            _blocPageTabSf.searchRangeTanggal(widget.enumTab);
-                          }),
-                    ],
-                  ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: s.width - 80,
-                          child: new TextField(
-                            keyboardType: TextInputType.text,
-                            controller: _controller,
-                            style: new TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                            decoration: new InputDecoration(
-                                // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                                // suffixIcon:
-                                //     new Icon(Icons.search, color: Colors.black),
-                                hintText: ConstString.hintSearch,
-                                hintStyle: new TextStyle(color: Colors.black)),
-                            onChanged: (v) {},
-                          ),
-                        ),
-                        IconButton(
-                            icon: Icon(Icons.search, size: 30),
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              _blocPageTabSf.searchByQuery(
-                                  widget.enumTab, _controller.text);
-                            })
-                      ],
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      //image: AssetImage('assets/image/coverage/BG.png'),
+                      image: AssetImage('assets/image/new/BG.png'),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  _content(item)
-                ],
+                  height: s.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [Container()],
+                  ),
+                ),
               ),
-            ),
+              Container(
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 50),
+                height: s.height,
+                width: s.width,
+                child: Column(
+                  children: [
+                    SizedBox( //untuk jarak atas ke tulisan judul
+                      width: s.width,
+                      height: 40,
+                    ),
+                    LabelBlack.size1(title, bold: true),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 0.0,bottom: 0.0),
+                      child: Container(
+                        // color: Colors.black45,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ButtonApp.blue(item.getStrAwal(), () {
+                                _datePicker(true, item);
+                              }),
+                            ),
+                            ButtonApp.blue(item.getStrAkhir(), () {
+                              _datePicker(false, item);
+                            }),
+                            // GestureDetector(
+                            //     onTap: () {
+                            //       FocusScope.of(context).unfocus();
+                            //       _controller.text = '';
+                            //       _blocPageTabSf.searchRangeTanggal(widget.enumTab);
+                            //     },
+                            //     child: Image(
+                            //       image: AssetImage('assets/image/searchicon.png'),
+                            //       height: 4,
+                            //     )),
+                            IconButton(
+                                icon: const Icon(
+                                  Icons.play_arrow_outlined,
+                                  size: 40,
+                                ),
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  _controller.text = '';
+                                  _blocPageTabSf.searchRangeTanggal(widget.enumTab);
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Container(
+                        // color: Colors.black45,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 40,
+                                child: TextField(
+                                  keyboardType: TextInputType.text,
+                                  controller: _controller,
+                                  style: const TextStyle(
+                                    color: Colors.black45,
+                                    fontSize: 12,
+                                  ),
+                                  decoration: InputDecoration(
+                                      // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
+                                      border: const OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(10.0)),
+                                      ),
+                                      // suffixIcon:
+                                      //     new Icon(Icons.search, color: Colors.black),
+                                      hintText: ConstString.hintSearch,
+                                      hintStyle:
+                                          new TextStyle(color: Colors.black45)),
+                                  onChanged: (v) {},
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                                icon: Icon(Icons.search, size: 30),
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  _blocPageTabSf.searchByQuery(
+                                      widget.enumTab, _controller.text);
+                                })
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        child: Container(
+                            // color: Colors.red,
+                            margin: EdgeInsets.only(
+                                top: 10.0, left: 10.0, right: 10.0),
+                            padding: EdgeInsets.all(5.0),
+                            child: Card(
+                              elevation: 2,
+                              color: Colors.red[600],
+                              child: _content(item),
+                            ))),
+                    SizedBox(
+                      height: 70,
+                    )
+                  ],
+                ),
+              )
+            ],
           );
         });
   }
 
   Widget _content(UIPageTabSf item) {
     return ListView.builder(
+      padding: EdgeInsets.only(top: 20),
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      //physics: NeverScrollableScrollPhysics(),
       itemCount: item.getCountList(),
       itemBuilder: (context, index) {
         return ListTile(
@@ -224,20 +286,19 @@ class _PageTabState extends State<PageTab> {
         //_controllerTap(item);
       },
       child: Container(
-        color: Colors.white,
+        // color: Colors.white,
         child: Column(
           children: [
-            Divider(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+                  left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Icon(
                         Icons.playlist_add_check,
-                        color: Colors.green,
+                        color: Colors.white,
                       ),
                       SizedBox(
                         width: 12,
@@ -249,13 +310,13 @@ class _PageTabState extends State<PageTab> {
                           children: [
                             // LabelBlack.size2(item.iddigipos),
                             // _spasi(),
-                            LabelBlack.size2(item.namapembeli),
+                            LabelWhite.size3(item.namapembeli),
                             _spasi(),
-                            LabelBlack.size2('tgl: ${item.getStrTgl()}'),
+                            LabelWhite.size3('tgl: ${item.getStrTgl()}'),
                           ],
                         ),
                       ),
-                      ButtonApp.blue('View Detail', () {
+                      ButtonApp.white('View Detail', () {
                         _controllerTap(item);
                       }),
                     ],
@@ -276,17 +337,16 @@ class _PageTabState extends State<PageTab> {
     }
     return Column(
       children: [
-        Divider(),
         Padding(
           padding: const EdgeInsets.only(
-              left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+              left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
           child: Column(
             children: [
               Row(
                 children: [
                   Icon(
                     Icons.playlist_add_check,
-                    color: Colors.green,
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 12,
@@ -298,13 +358,13 @@ class _PageTabState extends State<PageTab> {
                       children: [
                         // LabelBlack.size2(item.iddigipos),
                         // _spasi(),
-                        LabelBlack.size2(nama),
+                        LabelWhite.size3(nama),
                         _spasi(),
-                        LabelBlack.size2('tgl: ${item.getStrTgl()}'),
+                        LabelWhite.size3('tgl: ${item.getStrTgl()}'),
                       ],
                     ),
                   ),
-                  ButtonApp.blue(item.nonota, () {
+                  ButtonApp.white(item.nonota, () {
                     _tapNota(item.nonota);
                   }),
                 ],
@@ -312,6 +372,7 @@ class _PageTabState extends State<PageTab> {
             ],
           ),
         ),
+        Divider(),
       ],
     );
   }

@@ -218,7 +218,7 @@ class _ButtonAppState extends State<ButtonApp> {
   @override
   Widget build(BuildContext context) {
     final TextStyle style =
-        TextStyle(color: widget.enable ? _color : Colors.grey);
+        TextStyle(color: widget.enable ? _color : Colors.grey, fontSize: 12);
     // return OutlineButton(
     //   child: Text(
     //     widget.text,
@@ -246,6 +246,10 @@ class _ButtonAppState extends State<ButtonApp> {
         style: style,
       ),
       style: OutlinedButton.styleFrom(
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(30.0)
+        ),
+        // backgroundColor: Colors.white,
         primary: _color,
         side: BorderSide(color: _color!, width: 0.5),
       ),

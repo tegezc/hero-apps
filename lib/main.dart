@@ -287,24 +287,17 @@ class _HomeControllpageState extends State<HomeControllpage> {
         ),
         Text(
           id,
-          style: TextStyle(color: Colors.white, fontSize: 14),
+          style: TextStyle(color: Colors.black, fontSize: 14),
         ),
         Spacer(),
-        OutlineButton(
-          onPressed: () {
-            _showDialogConfirmLogout();
-          },
-          color: Colors.black,
-          child: Text(
-            'LOGOUT',
-            style: TextStyle(color: Colors.white),
-          ),
-          borderSide: BorderSide(
-            color: Colors.white, //Color of the border
-            style: BorderStyle.solid, //Style of the border
-            width: 0.9, //width of the border
-          ),
-        ),
+        GestureDetector(
+            onTap: () {
+              _showDialogConfirmLogout();
+            },
+            child: Image(
+              image: AssetImage('assets/image/coverage/logout.png'),
+              height: 40,
+            )),
       ],
     );
   }
@@ -321,13 +314,13 @@ class _HomeControllpageState extends State<HomeControllpage> {
       return Scaffold(
         // backgroundColor: Colors.white,
         //  resizeToAvoidBottomPadding: false,
-        extendBodyBehindAppBar: _selectedtab == 0 ? true : false,
-        extendBody: _selectedtab == 0 ? true : false,
+        extendBodyBehindAppBar: true, //_selectedtab == 0 ? true : false,
+        extendBody: true, //_selectedtab == 0 ? true : false,
         appBar: AppBar(
           // backgroundColor: Colors.white,
           elevation: 0,
-          backgroundColor:
-              _selectedtab != 0 ? Colors.red[600] : Colors.transparent,
+          backgroundColor: Colors.transparent,
+              // _selectedtab != 0 ? Colors.red[600] : Colors.transparent,
           title: _selectedtab != 0 ? _titleWidget(_iduser!) : _titleCoverage(),
         ),
         body: _getSelectedWidget(_selectedtab),
@@ -335,8 +328,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
           selectedFontSize: 10,
           unselectedFontSize: 10,
           elevation: 0,
-          backgroundColor:
-              _selectedtab == 0 ? Colors.transparent : Colors.white,
+          backgroundColor: Colors.transparent,
+              // _selectedtab == 0 ? Colors.transparent : Colors.white,
           type: BottomNavigationBarType.fixed,
           onTap: (v) {
             setState(() {

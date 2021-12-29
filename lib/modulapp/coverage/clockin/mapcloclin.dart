@@ -123,7 +123,7 @@ class _MapClockInState extends State<MapClockIn> {
                 onMapCreated: _onMapCreated,
                 initialCameraPosition: CameraPosition(
                   target: _lokasi,
-                  zoom: 19.0,
+                  zoom: 18.0,
                 ),
                 //    circles: circles,
               ),
@@ -136,7 +136,7 @@ class _MapClockInState extends State<MapClockIn> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _enumAccount == EnumAccount.sf ? _cellSF() : _cellDs(),
-                  ButtonApp.red('Clock In ( ${distanceInMeters.toInt()} m)',
+                  ButtonApp.red('Clock In : Radius in ( ${distanceInMeters.toInt()}m )',
                       () {
                     _showDialogConfirmClockin();
                   }),
@@ -215,12 +215,12 @@ class _MapClockInState extends State<MapClockIn> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: LabelApp.size2(
-                      'Pilih kondisi PJP, apakah open atau close?'),
+                      'Pilih kondisi PJP, apakah outlet open atau close?'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('OPEN', () {
+                  child: ButtonApp.green('OPEN', () {
                     _clockin(EnumStatusTempat.open).then((value) {
                       if (value) {
                         Navigator.of(context).pop();
@@ -233,7 +233,7 @@ class _MapClockInState extends State<MapClockIn> {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('CLOSE', () {
+                  child: ButtonApp.red('CLOSE', () {
                     _clockin(EnumStatusTempat.close).then((value) {
                       if (value) {
                         Navigator.of(context).pop();
