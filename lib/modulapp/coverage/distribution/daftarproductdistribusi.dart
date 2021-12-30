@@ -138,7 +138,9 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
   Widget _cell(ItemTransaksi trx) {
     return TextButton(
       onPressed: () async {
-        var result = await CommonUi.openPage(context, PembelianItem(trx));
+        // var result = await CommonUi.openPage(context, PembelianItem(trx));
+        var result = await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PembelianItem(trx)));
         if (result == null) {
           _blocDaftarProduct.reloadDaftarProduct();
         }

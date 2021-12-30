@@ -40,8 +40,8 @@ class DaoSerial {
   }
 
   Future<List<SerialNumber>> getSerialByIdProduct(String? idproduct) async {
-    var dbClient = await (DatabaseHelper().db as Future<Database>);
-    List<Map> list = await dbClient.rawQuery(
+    var dbClient = await (DatabaseHelper().db);
+    List<Map> list = await dbClient!.rawQuery(
         'SELECT * FROM ${TbSerial.tableName} WHERE ${TbSerial.idproduk}=$idproduct');
 
     List<SerialNumber> lseri = [];
