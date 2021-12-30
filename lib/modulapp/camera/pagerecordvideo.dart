@@ -41,7 +41,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     with WidgetsBindingObserver {
   List<CameraDescription> cameras = [];
   CameraController? _controller;
-  String? _videoPath;
+  XFile? _videoPath;
   // VideoPlayerController _videoController;
 //  VoidCallback _videoPlayerListener;
   bool _enableAudio = true;
@@ -61,9 +61,10 @@ class _PageTakeVideoState extends State<PageTakeVideo>
           _counter--;
         } else {
           _timer!.cancel();
-          stopVideoRecording().then((_) async {
+          stopVideoRecording().then((file) async {
             if (mounted) setState(() {});
             print('Video recorded to: $_videoPath');
+            _videoPath = file;
             ParamPreviewVideo param =
                 ParamPreviewVideo(_videoPath, widget.promotion);
             await Navigator.pushNamed(
@@ -297,7 +298,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   }
 
   void onVideoRecordButtonPressed() {
-    startVideoRecording().then((String? filePath) {
+    startVideoRecording().then((_) {
       _isshowtimer = true;
       _startTimer();
       if (mounted) setState(() {});
@@ -326,44 +327,43 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   //   });
   // }
 
-  Future<String?> startVideoRecording() async {
+  Future<void> startVideoRecording() async {
     if (!_controller!.value.isInitialized) {
       print('Error: select a camera first.');
-      return null;
+      // return null;
     }
 
-    final Directory extDir =
-        await (getExternalStorageDirectory() as FutureOr<Directory>); //getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir.path}/video/';
+    final Directory? extDir =
+        await  getExternalStorageDirectory() ; //getApplicationDocumentsDirectory();
+    final String dirPath = '${extDir!.path}/video/';
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath${timestamp()}.mp4';
 
     if (_controller!.value.isRecordingVideo) {
       // A recording is already started, do nothing.
-      return null;
+      // return null;
     }
 
     try {
-      _videoPath = filePath;
       print('video: $filePath');
 
       /// comment error sementara
-      //await _controller.startVideoRecording(filePath);
+      await _controller!.startVideoRecording();
       ///end
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;
     }
-    return filePath;
+    // return filePath;
   }
 
-  Future<void> stopVideoRecording() async {
+  Future<XFile?> stopVideoRecording() async {
     if (!_controller!.value.isRecordingVideo) {
       return null;
     }
 
     try {
-      await _controller!.stopVideoRecording();
+      return _controller!.stopVideoRecording();
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;

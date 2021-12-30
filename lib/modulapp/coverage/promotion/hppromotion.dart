@@ -112,6 +112,9 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
           }
         }
       });
+    }else{
+      TgzDialog.generalDialogConfirm(context,
+                'Untuk dapat mengakhiri proses Promotion,Minimal harus submit satu video');
     }
   }
 

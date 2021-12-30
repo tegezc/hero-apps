@@ -134,21 +134,21 @@ class HttpPromotion {
 
   Future<bool> uploadVideo(String filepath, Promotion promotion) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    String idhitory = await (AccountHore.getIdHistoryPjp() as Future<String>);
+    String? idhitory = await AccountHore.getIdHistoryPjp();
     Uint8List file = File(filepath).readAsBytesSync();
 
     ///===================================
     var request = http.MultipartRequest('POST',
         Uri.parse('${ConstApp.domain}/clockinpromotion/promotion_create'));
     request.headers.addAll(headers);
-    request.fields['id_history_pjp'] = idhitory;
+    request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_weekly'] = promotion.idjnsweekly!;
     request.fields['nama_program_lokal'] =
         promotion.nmlocal == null ? '' : promotion.nmlocal!;
     request.files.add(http.MultipartFile.fromBytes(
       'myfile1',
       file,
-      //filename: filepath.split("/").last,
+      // filename: filepath.split("/").last,
       contentType: MediaType('application', 'mp4'),
       filename: 'myfile1',
     ));
@@ -165,6 +165,7 @@ class HttpPromotion {
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         int? i = ConverterNumber.stringToInt(map['status']);
+        print(i);
         if (i == 1) {
           return true;
         }
