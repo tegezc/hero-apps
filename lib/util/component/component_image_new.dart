@@ -98,4 +98,33 @@ class PropertyImage extends StatelessWidget {
   // }
 }
 
+class ClockInImageIcon extends StatefulWidget {
+  final Function onTap;
+  final String image;
+  final String disableImage;
+  final double width;
+  final bool? enable;
+
+  const ClockInImageIcon(
+      {required this.onTap, required this.image, required this.disableImage, this.enable = true, this.width = 140});
+
+  @override
+  State<ClockInImageIcon> createState() => _ClockInImageIconState();
+}
+
+class _ClockInImageIconState extends State<ClockInImageIcon> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        widget.enable! ? widget.onTap() : print('');
+      },
+      child: Image(
+        image: AssetImage(widget.enable! ? widget.image : widget.disableImage),
+        width: widget.width,
+      )
+    );
+  }
+}
+
 enum EnumPropertyImage { bgbawah, map, textwelcome, textreset, logo }

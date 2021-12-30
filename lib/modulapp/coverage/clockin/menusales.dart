@@ -8,6 +8,7 @@ import 'package:hero/modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
 import 'package:hero/util/component/component_button.dart';
+import 'package:hero/util/component/component_image_new.dart';
 import 'package:hero/util/component/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/constapp.dart';
@@ -128,46 +129,87 @@ class _MenuSalesState extends State<MenuSales> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-              _tapMenu(EnumTab.distribution);
-            }, enable: _menu!.isDistEnable),
-            ButtonMenu(
-              Icons.work,
-              'MERCHANDISING',
-              () {
+            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
+            //   _tapMenu(EnumTab.distribution);
+            // }, enable: _menu!.isDistEnable),
+            // ButtonMenu(
+            //   Icons.work,
+            //   'MERCHANDISING',
+            //   () {
+            //     _tapMenu(EnumTab.merchandising);
+            //   },
+            //   enable: _menu!.isMerchEnable,
+            // ),
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumTab.distribution);
+              },
+              image: 'assets/image/icon/ic_distri.png',
+              disableImage: 'assets/image/icon/disable/ic_distri.png',
+              enable: _menu!.isDistEnable,
+            ),
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.merchandising);
               },
+              image: 'assets/image/icon/ic_merch.png',
+              disableImage: 'assets/image/icon/disable/ic_merch.png',
               enable: _menu!.isMerchEnable,
-            ),
+            )
           ],
         ),
+        SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(
-              Icons.campaign,
-              'PROMOTION',
-              () {
+            // ButtonMenu(
+            //   Icons.campaign,
+            //   'PROMOTION',
+            //   () {
+            //     _tapMenu(EnumTab.promotion);
+            //   },
+            //   enable: _menu!.isPromEnable,
+            // ),
+            // ButtonMenu(
+            //   Icons.widgets,
+            //   'MARKET AUDIT',
+            //   () {
+            //     _tapMenu(EnumTab.survey);
+            //   },
+            //   enable: _menu!.isMarketEnable,
+            // ),
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.promotion);
               },
+              image: 'assets/image/icon/ic_promo.png',
+              disableImage: 'assets/image/icon/disable/ic_promo.png',
               enable: _menu!.isPromEnable,
             ),
-            ButtonMenu(
-              Icons.widgets,
-              'MARKET AUDIT',
-              () {
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.survey);
               },
+              image: 'assets/image/icon/ic_market_audit.png',
+              disableImage: 'assets/image/icon/disable/ic_market_audit.png',
               enable: _menu!.isMarketEnable,
-            ),
+            )
           ],
         ),
+        SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.location_off, 'Clock Out', () {
-              _showDialogConfirmClockOut();
-            }),
+            // ButtonMenu(Icons.location_off, 'Clock Out', () {
+            //   _showDialogConfirmClockOut();
+            // }),
+            ClockInImageIcon(
+              onTap: () {
+                _showDialogConfirmClockOut();
+              },
+              image: 'assets/image/icon/ic_clockout.png',
+              disableImage: 'assets/image/icon/disable/ic_clockout.png',
+            ),
             Container(),
           ],
         ),

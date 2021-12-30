@@ -89,55 +89,58 @@ class _CoverageHomeState extends State<CoverageHome> {
                       child: _account(
                           item.profile.namaSales, item.profile.namaTap)),
                   SizedBox(height: 20),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              if (item.enumAccount == EnumAccount.sf) {
-                                // CommonUi.openPage(context, SearchLocation());
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SearchLocation()));
-                              } else {
-                                // CommonUi.openPage(context, SearchLocationDs());
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SearchLocationDs()));
-                              }
-                            },
-                            child: Image(
-                                image: AssetImage(
-                                    'assets/image/feature_button/ic_cari_outlet.png'),
-                                height: 35)),
-                        GestureDetector(
-                            onTap: () {
-                              if (item.enumAccount == EnumAccount.sf) {
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                if (item.enumAccount == EnumAccount.sf) {
+                                  // CommonUi.openPage(context, SearchLocation());
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SearchLocation()));
+                                } else {
+                                  // CommonUi.openPage(context, SearchLocationDs());
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SearchLocationDs()));
+                                }
+                              },
+                              child: Image(
+                                  image: AssetImage(
+                                      'assets/image/feature_button/ic_cari_outlet.png'),
+                                  height: 35)),
+                          GestureDetector(
+                              onTap: () {
+                                if (item.enumAccount == EnumAccount.sf) {
+                                  Navigator.pushNamed(
+                                      context, EditorOutlet.routeName,
+                                      arguments: null);
+                                } else {
+                                  _showDialogPilihTambahLokasi();
+                                }
+                              },
+                              child: Image(
+                                  image: AssetImage(
+                                      'assets/image/feature_button/ic_tambah_outlet.png'),
+                                  height: 35)),
+                          GestureDetector(
+                              onTap: () {
                                 Navigator.pushNamed(
-                                    context, EditorOutlet.routeName,
-                                    arguments: null);
-                              } else {
-                                _showDialogPilihTambahLokasi();
-                              }
-                            },
-                            child: Image(
-                                image: AssetImage(
-                                    'assets/image/feature_button/ic_tambah_outlet.png'),
-                                height: 35)),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, HomePageRetur.routeName);
-                            },
-                            child: Image(
-                                image: AssetImage(
-                                    'assets/image/feature_button/ic_retur.png'),
-                                height: 35)),
-                      ]),
+                                    context, HomePageRetur.routeName);
+                              },
+                              child: Image(
+                                  image: AssetImage(
+                                      'assets/image/feature_button/ic_retur.png'),
+                                  height: 35)),
+                        ]),
+                  ),
                   Expanded(
                     child: Container(
                         //color: Colors.red,
