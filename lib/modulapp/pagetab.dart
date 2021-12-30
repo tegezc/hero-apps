@@ -126,13 +126,15 @@ class _PageTabState extends State<PageTab> {
                 width: s.width,
                 child: Column(
                   children: [
-                    SizedBox( //untuk jarak atas ke tulisan judul
+                    SizedBox(
+                      //untuk jarak atas ke tulisan judul
                       width: s.width,
                       height: 40,
                     ),
                     LabelBlack.size1(title, bold: true),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 0.0,bottom: 0.0),
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 0.0, bottom: 0.0),
                       child: Container(
                         // color: Colors.black45,
                         child: Row(
@@ -166,7 +168,8 @@ class _PageTabState extends State<PageTab> {
                                 onPressed: () {
                                   FocusScope.of(context).unfocus();
                                   _controller.text = '';
-                                  _blocPageTabSf.searchRangeTanggal(widget.enumTab);
+                                  _blocPageTabSf
+                                      .searchRangeTanggal(widget.enumTab);
                                 }),
                           ],
                         ),
@@ -193,8 +196,8 @@ class _PageTabState extends State<PageTab> {
                                   decoration: InputDecoration(
                                       // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
                                       border: const OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(10.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                       ),
                                       // suffixIcon:
                                       //     new Icon(Icons.search, color: Colors.black),
@@ -219,8 +222,8 @@ class _PageTabState extends State<PageTab> {
                     Expanded(
                         child: Container(
                             // color: Colors.red,
-                            margin: EdgeInsets.only(
-                                top: 10.0, left: 0, right: 0),
+                            margin:
+                                EdgeInsets.only(top: 10.0, left: 0, right: 0),
                             padding: EdgeInsets.all(5.0),
                             child: Card(
                               elevation: 2,
@@ -380,11 +383,8 @@ class _PageTabState extends State<PageTab> {
   void _tapNota(String? nota) {
     print('nota clicked');
     print(nota);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                FakturPembayaran(nota, true)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => FakturPembayaran(nota, true)));
     // CommonUi.openPage(context, new FakturPembayaran(nota, true));
   }
 
@@ -393,15 +393,21 @@ class _PageTabState extends State<PageTab> {
       case EnumTab.distribution:
         break;
       case EnumTab.merchandising:
-        CommonUi.openPage(context, new HomeViewMerchandising(item));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HomeViewMerchandising(item)));
+        // CommonUi.openPage(context, new HomeViewMerchandising(item));
 
         break;
       case EnumTab.promotion:
-        CommonUi.openPage(context, new HomePageViewPromotion(item));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => HomePageViewPromotion(item)));
+        // CommonUi.openPage(context, new HomePageViewPromotion(item));
         break;
       case EnumTab.survey:
         {
-          CommonUi.openPage(context, new HomeHistorySurvey(item));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HomeHistorySurvey(item)));
+          // CommonUi.openPage(context, new HomeHistorySurvey(item));
         }
         break;
       case EnumTab.mt:
