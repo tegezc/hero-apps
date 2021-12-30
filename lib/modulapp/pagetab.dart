@@ -220,7 +220,7 @@ class _PageTabState extends State<PageTab> {
                         child: Container(
                             // color: Colors.red,
                             margin: EdgeInsets.only(
-                                top: 10.0, left: 10.0, right: 10.0),
+                                top: 10.0, left: 0, right: 0),
                             padding: EdgeInsets.all(5.0),
                             child: Card(
                               elevation: 2,
@@ -378,7 +378,14 @@ class _PageTabState extends State<PageTab> {
   }
 
   void _tapNota(String? nota) {
-    CommonUi.openPage(context, new FakturPembayaran(nota, true));
+    print('nota clicked');
+    print(nota);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                FakturPembayaran(nota, true)));
+    // CommonUi.openPage(context, new FakturPembayaran(nota, true));
   }
 
   void _controllerTap(LokasiSearch item) {
