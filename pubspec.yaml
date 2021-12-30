@@ -81,11 +81,18 @@ flutter:
     - assets/image/coverage/BG.png
     - assets/image/coverage/ic_logo_hore.png
     - assets/image/coverage/logout.png
-    - assets/image/icon/coverage.png
-    - assets/image/icon/distribution.png
-    - assets/image/icon/market_audit.png
-    - assets/image/icon/merchandising.png
-    - assets/image/icon/promotion.png
+    - assets/image/icon/ic_coverage.png
+    - assets/image/icon/ic_distri.png
+    - assets/image/icon/ic_market_audit.png
+    - assets/image/icon/ic_merch.png
+    - assets/image/icon/ic_promo.png
+    - assets/image/icon/ic_clockout.png
+    - assets/image/icon/disable/ic_coverage.png
+    - assets/image/icon/disable/ic_distri.png
+    - assets/image/icon/disable/ic_market_audit.png
+    - assets/image/icon/disable/ic_merch.png
+    - assets/image/icon/disable/ic_promo.png
+    - assets/image/icon/disable/ic_clockout.png
     - assets/image/icon/new/ic_coverage.png
     - assets/image/icon/new/ic_distribution.png
     - assets/image/icon/new/ic_market_audit.png
