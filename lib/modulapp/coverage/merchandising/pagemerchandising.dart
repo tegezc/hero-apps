@@ -75,9 +75,9 @@ class _PageMerchandisingState extends State<PageMerchandising> {
   void _setValue() {
     // print(widget.merchandising);
     // print(widget.merchandising.isPhotoShowing());
-    _telkomselController!.text = widget.merchandising!.telkomsel == null
-        ? ''
-        : '${widget.merchandising!.telkomsel}';
+    _telkomselController!.text = widget.merchandising!.telkomsel != null
+        ? '${widget.merchandising!.telkomsel}'
+        : '';
     _isatController!.text =
         widget.merchandising!.isat == null ? '' : '${widget.merchandising!.isat}';
     _xlController!.text =

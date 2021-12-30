@@ -28,7 +28,7 @@ class HttpMerchandising {
 
   Future<bool> createMerchadising(Merchandising merchandising) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    String idhitory = await (AccountHore.getIdHistoryPjp() as Future<String>);
+    String? idhitory = await AccountHore.getIdHistoryPjp();
     String? path1 = merchandising.pathPhoto1;
     String? path2 = merchandising.pathPhoto2;
     String? path3 = merchandising.pathPhoto3;
@@ -39,7 +39,7 @@ class HttpMerchandising {
         Uri.parse(
             '${ConstApp.domain}/clockinmerchandising/merchandising_create'));
     request.headers.addAll(headers);
-    request.fields['id_history_pjp'] = idhitory;
+    request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_share'] = merchandising.idjenisshare!;
     request.fields['telkomsel'] = '${merchandising.telkomsel}';
     request.fields['isat'] = '${merchandising.isat}';
