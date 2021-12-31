@@ -53,7 +53,7 @@ class HttpSurvey {
 
   Future<bool> createSurveyBelanja(Map<String, dynamic> map) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    String idhitory = await (AccountHore.getIdHistoryPjp() as Future<String>);
+    String? idhitory = await  AccountHore.getIdHistoryPjp() ;
     String path1 = map['path'];
     // Map<String, dynamic> mp = {
     //   "id_outlet": _cacheuisurvey.pjp.id,
@@ -73,7 +73,7 @@ class HttpSurvey {
         Uri.parse(
             '${ConstApp.domain}/clockinmarketaudit/marketaudit_create_belanja'));
     request.headers.addAll(headers);
-    request.fields['id_history_pjp'] = idhitory;
+    request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_share'] = map['id_jenis_share'];
     request.fields['telkomsel'] = '${map['telkomsel']}';
     request.fields['isat'] = '${map['isat']}';
