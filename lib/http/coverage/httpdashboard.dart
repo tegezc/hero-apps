@@ -101,8 +101,8 @@ class HttpDashboard {
         headers: headers,
         body: jsonEncode(param),
       );
-      print(response.body);
-      print(response.statusCode);
+      print("tracking sales : ${response.body}");
+      print("tracking sales : ${response.statusCode}");
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -234,7 +234,7 @@ class HttpDashboard {
         break;
     }
     Map map = {"menu_clockin": keyTag, "id_history_pjp": idhistoryPjp};
-
+    print("liat map: $map");
     http.Response? response;
     Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_finish');
     FinishMenu finishMenu = FinishMenu(false, null);
