@@ -27,12 +27,13 @@ class TgzFile {
   // }
 
   Future<bool> deleteDirectory() async {
-    final Directory? extDir = await  getExternalStorageDirectory() ;
+    final Directory? extDir = await getExternalStorageDirectory();
     // extDir.deleteSync(recursive: true);
     try {
       await extDir!.delete();
       return true;
     } catch (e) {
+      print("error delete: $e");
       return false;
     }
   }
