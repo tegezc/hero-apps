@@ -104,7 +104,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
             SizedBox(
               height: 12,
             ),
-            !widget.uiSurvey!.isbelanjasubmitted
+            widget.uiSurvey!.isbelanjasubmitted
                 ? Container()
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -203,8 +203,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
               child: FractionallySizedBox(
                   widthFactor: 0.9,
                   child: widget.uiSurvey!.isbelanjasubmitted
-                      ? Image.file(
-                          File(url),
+                      ? Image.network(
+                          url,
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
                             print(exception);

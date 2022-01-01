@@ -102,8 +102,8 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
             _issubmitbuttonshowing
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                        color: Colors.green,
+                    child: ElevatedButton(
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
                         child: Text(
                           'SUBMIT',
                           style: TextStyle(color: Colors.white),
