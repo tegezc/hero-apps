@@ -99,18 +99,18 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red[600],
         iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.white, //change your color here
         ),
         title: Row(
           children: [
             Text(
               'Distribusi',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             Spacer(),
-            ButtonApp.blue('+ Penjualan', () async {
+            ButtonApp.white('+ Penjualan', () async {
               await Navigator.pushNamed(
                   context, DaftarProductDistribusi.routeName,
                   arguments: widget.pjp);
@@ -166,7 +166,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     List<Widget> lw = [];
     lw.add(Padding(
       padding: const EdgeInsets.all(8.0),
-      child: LabelBlack.size1('Daftar Nota'),
+      child: LabelWhite.size1('Daftar Nota'),
     ));
 
     if (lnota != null) {
@@ -180,8 +180,9 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(4),
+          color: Colors.red[600],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,19 +202,25 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
       onTap: () {
         AccountHore.getAccount().then((value) {
           if (value == EnumAccount.sf) {
-            CommonUi.openPage(
-                context, new FakturPembayaran(nota.noNota, false));
+            // CommonUi.openPage(
+            //     context, new FakturPembayaran(nota.noNota, false));
+            Navigator.push(context,MaterialPageRoute(
+                                          builder: (context) =>
+                                              FakturPembayaran(nota.noNota, false)));
           } else {
-            CommonUi.openPage(
-                context, new FakturPembayaranDs(nota.noNota, false));
+            // CommonUi.openPage(
+            //     context, new FakturPembayaranDs(nota.noNota, false));
+            Navigator.push(context,MaterialPageRoute(
+                                          builder: (context) =>
+                                              FakturPembayaranDs(nota.noNota, false)));
           }
         });
       },
       child: Container(
-        color: Colors.white,
+        // color: Colors.white,
         child: Column(
           children: [
-            Divider(),
+            Divider(color: Colors.white60),
             Padding(
               padding: const EdgeInsets.only(
                   left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
@@ -221,14 +228,14 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                 leading: nota.isShared
                     ? Icon(
                         Icons.check_circle_outline,
-                        color: Colors.green,
+                        color: Colors.white,
                       )
                     : SizedBox(
                         height: 24,
                         width: 24,
                       ),
-                title: LabelBlack.size2('${nota.noNota} / $ket'),
-                trailing: Icon(Icons.keyboard_arrow_right),
+                title: LabelWhite.size2('${nota.noNota} / $ket'),
+                trailing: Icon(Icons.keyboard_arrow_right,color:Colors.white),
               ),
             ),
           ],

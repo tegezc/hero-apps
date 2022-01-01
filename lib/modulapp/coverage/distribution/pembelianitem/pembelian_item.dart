@@ -30,11 +30,11 @@ class _PembelianItemState extends State<PembelianItem> {
     _blocPembelian = BlocPembelian();
     _isRange = false;
 
-    // dev only
-    _isRange = true;
-    _textController1.text = '9000000000000003';
-    _textController2.text = '9000000000000100';
-
+    // // dev only
+    // _isRange = true;
+    // _textController1.text = '9000000000000003';
+    // _textController2.text = '9000000000000100';
+    print("id produk: ${widget.trx}");
     super.initState();
   }
 
@@ -67,37 +67,43 @@ class _PembelianItemState extends State<PembelianItem> {
           UIPembelian item = snapshot.data!;
           return CustomScaffold(
             title: 'Pembelian',
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: size.height - 123,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 12,
-                            ),
-                            _contentTransaksi(item.trx!),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            _contentSeri(item),
-                            SizedBox(
-                              height: 100,
-                            ),
-                          ],
-                        ),
+            body: Stack(
+              children: [
+                SizedBox(
+                  width: size.width,
+                  height: size.height,
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 12,
+                          ),
+                          _contentTransaksi(item.trx!),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          _contentSeri(item),
+                          SizedBox(
+                            height: 50,
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
                     width: size.width - 2,
-                    child: RaisedButton(
-                        color: Colors.green,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              item.isSafetosubmit()
+                                  ? Colors.green
+                                  : Colors.grey),
+                        ),
                         child: Text(
                           'BELI',
                           style: TextStyle(color: Colors.white),
@@ -114,8 +120,8 @@ class _PembelianItemState extends State<PembelianItem> {
                               }
                             : null),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });
@@ -136,6 +142,7 @@ class _PembelianItemState extends State<PembelianItem> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            color: Colors.red[600],
             child: Column(
               children: [
                 Padding(
@@ -144,12 +151,10 @@ class _PembelianItemState extends State<PembelianItem> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                          width: 200,
-                          child: TextFieldNumberOnly(
-                              'Nomor Seri', _textController1)),
+                          width: 200, child: _inputNoSeri(_textController1)),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
-                        child: ButtonApp.yellow(txtbtn, () {
+                        child: ButtonApp.white(txtbtn, () {
                           setState(() {
                             print('click');
                             _isRange = !_isRange;
@@ -167,8 +172,7 @@ class _PembelianItemState extends State<PembelianItem> {
                           children: [
                             SizedBox(
                                 width: 200,
-                                child: TextFieldNumberOnly(
-                                    'Nomor Seri', _textController2)),
+                                child: _inputNoSeri(_textController2)),
                             Container(),
                           ],
                         ),
@@ -179,7 +183,7 @@ class _PembelianItemState extends State<PembelianItem> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ButtonApp.blue('SEARCH', () {
+                      ButtonApp.white('SEARCH', () {
                         FocusScope.of(context).unfocus();
                         String snawal = _textController1.text;
                         String snakhir = _textController2.text;
@@ -190,6 +194,43 @@ class _PembelianItemState extends State<PembelianItem> {
                 ),
               ],
             ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _inputNoSeri(TextEditingController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            "Nomor Seri",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        TextFormField(
+          controller: controller,
+          cursorColor: Colors.white,
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                color: Colors.yellow,
+                width: 2.0,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                color: Colors.white,
+              ),
+            ),
+            isDense: true,
           ),
         ),
       ],

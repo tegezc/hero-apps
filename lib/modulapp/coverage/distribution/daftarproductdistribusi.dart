@@ -7,6 +7,7 @@ import 'package:hero/modulapp/coverage/distribution/pembelianitem/pembelian_item
 import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
 import 'package:hero/util/uiutil.dart';
+import 'package:intl/intl.dart';
 
 class DaftarProductDistribusi extends StatefulWidget {
   static const routeName = '/daftarproductdistribusi';
@@ -53,48 +54,47 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
 
           UIDaftarProduct item = snapshot.data!;
           return CustomScaffold(
-            title: 'Distibusi',
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: size.height - 123,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: LabelBlack.size1('Daftar Product'),
-                            ),
-                            _content(item.litemtrx!),
-                            SizedBox(
-                              height: 150,
-                            ),
-                          ],
+            title: 'Distribusi',
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: size.height,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                         ),
-                      ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: LabelBlack.size1('Daftar Product'),
+                        ),
+                        _content(item.litemtrx!),
+                        // SizedBox(
+                        //   height: 150,
+                        // ),
+                      ],
                     ),
                   ),
-                  SizedBox(
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
                     width: size.width - 2,
                     child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: Color(
-                          0xFFFF7F50,
-                        )),
+                            backgroundColor: Colors.red[600]),
                         // color: Color(0xFFFF7F50),
-                        child: Text(
-                          'KERANJANG BELANJA (${item.jmlkeranjang})',
-                          style: TextStyle(color: Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top:15.0,bottom: 15.0),
+                          child: Text(
+                            'KERANJANG BELANJA (${item.jmlkeranjang})',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         onPressed: item.jmlkeranjang == 0
                             ? null
@@ -110,63 +110,117 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
                                 });
                               }),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });
   }
 
+  // Widget _content(List<ItemTransaksi> ltrx) {
+  //   List<Widget> lw = [];
+  //   lw.add(SizedBox(
+  //     height: 4,
+  //   ));
+  //   ltrx.forEach((element) {
+  //     lw.add(_cell(element));
+  //   });
+  //   return Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: Card(
+  //       child: Column(
+  //         children: lw,
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _content(List<ItemTransaksi> ltrx) {
-    List<Widget> lw = [];
-    lw.add(SizedBox(
-      height: 4,
-    ));
-    ltrx.forEach((element) {
-      lw.add(_cell(element));
-    });
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        child: Column(
-          children: lw,
+        color: Colors.red[600],
+        child: ListView.separated(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: ltrx.length,
+          itemBuilder: (ctx, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
+              child: TextButton(
+                style: ButtonStyle(alignment: Alignment.centerLeft),
+                onPressed: () async {
+                  // var result = await CommonUi.openPage(context, PembelianItem(trx));
+                  var result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PembelianItem(ltrx[index])));
+                  if (result == null) {
+                    _blocDaftarProduct.reloadDaftarProduct();
+                  }
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LabelWhite.size2(ltrx[index].product!.nama),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    LabelWhite.size3('Stock : ${ltrx[index].product!.stock} pcs'),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    LabelWhite.size3('Keranjang : ${ltrx[index].jumlah} pcs'),
+                    // Divider(
+                    //   thickness: 2,
+                    // ),
+                  ],
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (ctx, index) => Padding(
+            padding: const EdgeInsets.only(left:8.0,right:8.0),
+            child: const Divider(thickness: 2,color: Colors.white60,),
+          ),
         ),
       ),
     );
   }
 
-  Widget _cell(ItemTransaksi trx) {
-    return TextButton(
-      onPressed: () async {
-        // var result = await CommonUi.openPage(context, PembelianItem(trx));
-        var result = await Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PembelianItem(trx)));
-        if (result == null) {
-          _blocDaftarProduct.reloadDaftarProduct();
-        }
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 4,
-          ),
-          LabelBlack.size2(trx.product!.nama),
-          SizedBox(
-            height: 4,
-          ),
-          LabelBlack.size3('Stock : ${trx.product!.stock} pcs'),
-          SizedBox(
-            height: 4,
-          ),
-          LabelBlack.size3('Keranjang : ${trx.jumlah} pcs'),
-          Divider(
-            thickness: 2,
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _cell(ItemTransaksi trx) {
+  //   return TextButton(
+  //     onPressed: () async {
+  //       // var result = await CommonUi.openPage(context, PembelianItem(trx));
+  //       var result = await Navigator.push(context,
+  //           MaterialPageRoute(builder: (context) => PembelianItem(trx)));
+  //       if (result == null) {
+  //         _blocDaftarProduct.reloadDaftarProduct();
+  //       }
+  //     },
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         SizedBox(
+  //           height: 4,
+  //         ),
+  //         LabelBlack.size2(trx.product!.nama),
+  //         SizedBox(
+  //           height: 4,
+  //         ),
+  //         LabelBlack.size3('Stock : ${trx.product!.stock} pcs'),
+  //         SizedBox(
+  //           height: 4,
+  //         ),
+  //         LabelBlack.size3('Keranjang : ${trx.jumlah} pcs'),
+  //         Divider(
+  //           thickness: 2,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   // Widget _cellRekomendasi(String text, int pcs) {
   //   return Row(

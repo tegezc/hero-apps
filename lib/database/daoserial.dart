@@ -8,8 +8,8 @@ class DaoSerial {
   Future<bool> batchInsert(List<SerialNumber>? lserial) async {
     try {
       if (lserial != null) {
-        var dbClient = await (DatabaseHelper().db as Future<Database>);
-        await dbClient.transaction((txn) async {
+        var dbClient = await DatabaseHelper().db;
+        await dbClient!.transaction((txn) async {
           var batch = txn.batch();
 
           // insert provinsi
@@ -56,9 +56,9 @@ class DaoSerial {
   }
 
   Future<List<SerialNumber>> getAllSn() async {
-    var dbClient = await (DatabaseHelper().db as Future<Database>);
+    var dbClient = await DatabaseHelper().db;
     List<Map> list =
-        await dbClient.rawQuery('SELECT * FROM ${TbSerial.tableName}');
+        await dbClient!.rawQuery('SELECT * FROM ${TbSerial.tableName}');
 
     List<SerialNumber> lseri = [];
     for (int i = 0; i < list.length; i++) {
@@ -86,8 +86,8 @@ class DaoSerial {
   }
 
   Future<int> deleteSerialByIdProduct(String? idproduct) async {
-    var dbClient = await (DatabaseHelper().db as Future<Database>);
-    int res = await dbClient.rawDelete(
+    var dbClient = await DatabaseHelper().db;
+    int res = await dbClient!.rawDelete(
         'DELETE FROM ${TbSerial.tableName} WHERE ${TbSerial.idproduk}=$idproduct');
     return res;
   }
