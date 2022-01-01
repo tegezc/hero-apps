@@ -136,7 +136,6 @@ class HttpPromotion {
     Map<String, String> headers = await HttpUtil.getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     Uint8List file = File(filepath).readAsBytesSync();
-
     ///===================================
     var request = http.MultipartRequest('POST',
         Uri.parse('${ConstApp.domain}/clockinpromotion/promotion_create'));
@@ -149,10 +148,10 @@ class HttpPromotion {
       'myfile1',
       file,
       // filename: filepath.split("/").last,
-      contentType: MediaType('application', 'mp4'),
+      contentType: MediaType('video', 'mp4'),
       filename: 'myfile1',
     ));
-
+    
     try {
       var res = await request.send();
       var response = await http.Response.fromStream(res);

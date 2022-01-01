@@ -51,7 +51,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   bool _isshowtimer = false;
 
   void _startTimer() {
-    _counter = 30;
+    _counter = 3;
     if (_timer != null) {
       _timer!.cancel();
     }
@@ -157,7 +157,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
               ),
             ),
           ),
-          _isshowtimer ? _timer30Detik() : _captureControlRowWidget(),
+          _isshowtimer ? _timer3Detik() : _captureControlRowWidget(),
           _isshowtimer
               ? Container()
               : Padding(
@@ -194,7 +194,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
   }
 
-  Widget _timer30Detik() {
+  Widget _timer3Detik() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0, bottom: 16),
       child: Card(
@@ -207,7 +207,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
                 height: 8,
               ),
               LabelAppMiring.size3(
-                'Setelah 30 detik, video akan berhenti secara otomatis.',
+                'Setelah 3 detik, video akan berhenti secara otomatis.',
                 color: Colors.red[900],
               ),
             ],
