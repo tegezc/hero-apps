@@ -62,34 +62,34 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
           UIPembayaran item = snapshot.data!;
           return CustomScaffold(
             title: 'Pembayaran',
-            body: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: size.height - 123,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 12,
-                            ),
-                            _content(item),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            _perhitungan(item),
-                            SizedBox(
-                              height: 100,
-                            ),
-                          ],
-                        ),
+            body: Stack(
+              children: [
+                SizedBox(
+                  width: size.width,
+                  height: size.height,
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 12,
+                          ),
+                          _content(item),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          _perhitungan(item),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
                     width: size.width - 2,
                     child: RaisedButton(
                         color: Colors.green,
@@ -112,7 +112,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                                     Navigator.of(context).pop();
                                     Navigator.pushNamed(
                                         context, PageSuccess.routeName,
-                                        arguments: new PageSuccessParam(
+                                        arguments: PageSuccessParam(
                                             HomePembelianDistribusi.routeName,
                                             ConstString.textDistribusi,
                                             'Transaksi Anda Berhasil',
@@ -122,8 +122,8 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                               }
                             : null),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });
