@@ -63,7 +63,7 @@ class HttpDIstribution {
     try {
       final Map<String, String> headers = await HttpUtil.getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      print("detail nota: ${response.body}");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return DetailNota.fromJson(value);
@@ -82,7 +82,7 @@ class HttpDIstribution {
           '/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
       final Map<String, String> headers = await HttpUtil.getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      print("daftar nota: ${response.body}");
 
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -226,13 +226,13 @@ class HttpDIstribution {
     Uri uri = ConstApp.uri('/clockindistribusi/penjualan_bayar_lunas');
     http.Response? response;
     try {
-      print(jsonEncode(dataPembeli.toJson()));
+      print("data pembeli: ${jsonEncode(dataPembeli.toJson())}");
       response = await http.post(
         uri,
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
-      print(response.body);
+      print("submit lunas: ${response.body}");
       print(response.statusCode);
       if (response.statusCode == 200) {
         return true;
