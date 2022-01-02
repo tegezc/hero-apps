@@ -166,9 +166,9 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     List<Widget> lw = [];
     lw.add(Padding(
       padding: const EdgeInsets.all(8.0),
-      child: LabelWhite.size1('Daftar Nota'),
+      child: lnota != null ? LabelWhite.size1('Daftar Nota') : LabelBlack.size1('Daftar Nota'),
     ));
-
+    
     if (lnota != null) {
       for (int i = 0; i < lnota.length; i++) {
         Nota nota = lnota[i];
@@ -180,9 +180,9 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.white),
+          border: Border.all(color: lnota != null ? Colors.white : Colors.red),
           borderRadius: BorderRadius.circular(4),
-          color: Colors.red[600],
+          color: lnota != null ? Colors.red[600] : Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,7 +266,8 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                     Navigator.of(context).pop();
                     ParamPreviewPhoto params =
                         ParamPreviewPhoto(EnumTakePhoto.distribusi,pathPhoto: null,);
-                    CommonUi.openPage(context, CameraView(params));
+                    // CommonUi.openPage(context, CameraView(params));
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=> CameraView(params)));
                   }),
                 ),
                 Padding(
