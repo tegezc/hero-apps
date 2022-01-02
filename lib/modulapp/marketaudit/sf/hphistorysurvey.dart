@@ -43,12 +43,12 @@ class _HomeHistorySurveyState extends State<HomeHistorySurvey> {
     HttpSurvey httpSurvey = new HttpSurvey();
     _item =
         await httpSurvey.getDetailPromotion(EnumSurvey.belanja, idtempat, dt);
-    UISurvey uiSurvey =
-        await (httpSurvey.getDetailPromotion(EnumSurvey.broadband, idtempat, dt) as Future<UISurvey>);
-    _item!.lsurveyBroadband = uiSurvey.lsurveyBroadband;
+    UISurvey? uiSurvey =
+        await httpSurvey.getDetailPromotion(EnumSurvey.broadband, idtempat, dt);
+    _item!.lsurveyBroadband = uiSurvey!.lsurveyBroadband;
     uiSurvey =
-        await (httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt) as Future<UISurvey>);
-    _item!.lsurveyFisik = uiSurvey.lsurveyFisik;
+        await httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt);
+    _item!.lsurveyFisik = uiSurvey!.lsurveyFisik;
     if (_item != null) {
       return true;
     }
