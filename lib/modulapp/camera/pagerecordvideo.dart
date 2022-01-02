@@ -51,7 +51,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   bool _isshowtimer = false;
 
   void _startTimer() {
-    _counter = 3;
+    _counter = 30;
     if (_timer != null) {
       _timer!.cancel();
     }
@@ -157,7 +157,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
               ),
             ),
           ),
-          _isshowtimer ? _timer3Detik() : _captureControlRowWidget(),
+          _isshowtimer ? _timer30Detik() : _captureControlRowWidget(),
           _isshowtimer
               ? Container()
               : Padding(
@@ -194,7 +194,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
   }
 
-  Widget _timer3Detik() {
+  Widget _timer30Detik() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0, bottom: 16),
       child: Card(
@@ -274,7 +274,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
     _controller = CameraController(
       cameraDescription!,
-      ResolutionPreset.medium,
+      ResolutionPreset.low,
       enableAudio: _enableAudio,
     );
 
