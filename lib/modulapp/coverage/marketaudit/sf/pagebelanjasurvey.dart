@@ -104,7 +104,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
             SizedBox(
               height: 12,
             ),
-            widget.uiSurvey!.isbelanjasubmitted
+            !widget.uiSurvey!.isbelanjasubmitted
                 ? Container()
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
