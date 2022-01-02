@@ -54,8 +54,7 @@ class Merchandising {
         tri == null ||
         sf == null ||
         axis == null ||
-        other == null) return false;
-
+        other == null || pathPhoto1 == null) return false;
     return true;
   }
 
