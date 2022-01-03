@@ -123,6 +123,38 @@ class HttpDIstribution {
     }
   }
 
+  Future<List<SerialNumber>?> getAllDaftarSn(
+      String? idproduct) async {
+    Map<String, String> headers = await HttpUtil.getHeader();
+
+    Map map = {
+      "id_produk": idproduct,
+    };
+
+    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_daftar_sn_all');
+
+    http.Response? response;
+    try {
+      response = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(map),
+      );
+      print(response.body);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        dynamic value = json.decode(response.body);
+        return _olahDaftarSn(value);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      print(response?.body);
+      return null;
+    }
+  }
+
   Future<List<SerialNumber>?> getDaftarSn(
       String? idproduct, String serialawal, String serialakhir) async {
     Map<String, String> headers = await HttpUtil.getHeader();
@@ -194,16 +226,16 @@ class HttpDIstribution {
     }
 
     String uri = '${ConstApp.domain}/$url';
-
+    print("URL upload foto clockout:  $uri");
     ///===================================
     var request = http.MultipartRequest('POST', Uri.parse(uri));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
     request.files.add(http.MultipartFile.fromBytes(
       'myfile1', File(filepath).readAsBytesSync(),
-      filename: filepath.split("/").last,
-      contentType: MediaType('application', 'jpeg'),
-      //      filename: 'myfile1'),
+      // filename: filepath.split("/").last,
+      contentType: MediaType('image', 'jpg'),
+      filename: 'myfile1',
     ));
     var res = await request.send();
     var response = await http.Response.fromStream(res);
