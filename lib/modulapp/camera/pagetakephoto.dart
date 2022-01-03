@@ -225,7 +225,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     }
     controller = CameraController(
       cameraDescription!,
-      ResolutionPreset.medium,
+      ResolutionPreset.low,
       enableAudio: enableAudio,
     );
 
