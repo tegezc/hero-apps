@@ -144,16 +144,16 @@ class _MenuSalesState extends State<MenuSales> {
               onTap: () {
                 _tapMenu(EnumTab.distribution);
               },
-              image: 'assets/image/icon/en_distri.png',
-              disableImage: 'assets/image/icon/disable/ds_distri.png',
+              image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_distribution.png',
               enable: _menu!.isDistEnable,
             ),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.merchandising);
               },
-              image: 'assets/image/icon/en_merch.png',
-              disableImage: 'assets/image/icon/disable/ds_merch.png',
+              image: 'assets/image/icon/clockin/enable/ic_en_merchandising.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_merchandising.png',
               enable: _menu!.isMerchEnable,
             )
           ],
@@ -182,16 +182,16 @@ class _MenuSalesState extends State<MenuSales> {
               onTap: () {
                 _tapMenu(EnumTab.promotion);
               },
-              image: 'assets/image/icon/en_promo.png',
-              disableImage: 'assets/image/icon/disable/ds_promo.png',
+              image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_promotion.png',
               enable: _menu!.isPromEnable,
             ),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.survey);
               },
-              image: 'assets/image/icon/en_market_audit.png',
-              disableImage: 'assets/image/icon/disable/ds_market_audit.png',
+              image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_market_audit.png',
               enable: _menu!.isMarketEnable,
             )
           ],
@@ -207,8 +207,8 @@ class _MenuSalesState extends State<MenuSales> {
               onTap: () {
                 _showDialogConfirmClockOut();
               },
-              image: 'assets/image/icon/en_clockout.png',
-              disableImage: 'assets/image/icon/disable/ds_clockout.png',
+              image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_clockout.png',
             ),
             Container(),
           ],
@@ -223,25 +223,48 @@ class _MenuSalesState extends State<MenuSales> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-              _tapMenu(EnumTab.distribution);
-            }, enable: _menu!.isDistEnable),
-            ButtonMenu(
-              Icons.campaign,
-              'PROMOTION',
-              () {
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumTab.distribution);
+              },
+              image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_distribution.png',
+              enable: _menu!.isDistEnable,
+            ),
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.promotion);
               },
+              image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_promotion.png',
               enable: _menu!.isPromEnable,
             ),
+            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
+            //   _tapMenu(EnumTab.distribution);
+            // }, enable: _menu!.isDistEnable),
+            // ButtonMenu(
+            //   Icons.campaign,
+            //   'PROMOTION',
+            //   () {
+            //     _tapMenu(EnumTab.promotion);
+            //   },
+            //   enable: _menu!.isPromEnable,
+            // ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.location_off, 'Clock Out', () {
-              _showDialogConfirmClockOut();
-            }),
+            ClockInImageIcon(
+              onTap: () {
+                _showDialogConfirmClockOut();
+              },
+              image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_clockout.png',
+            ),
+            // ButtonMenu(Icons.location_off, 'Clock Out', () {
+            //   _showDialogConfirmClockOut();
+            // }),
             Container(),
           ],
         ),
@@ -255,41 +278,80 @@ class _MenuSalesState extends State<MenuSales> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-              _tapMenu(EnumTab.distribution);
-            }, enable: _menu!.isDistEnable),
-            ButtonMenu(
-              Icons.work,
-              'MERCHANDISING',
-              () {
+            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
+            //   _tapMenu(EnumTab.distribution);
+            // }, enable: _menu!.isDistEnable),
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumTab.distribution);
+              },
+              image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_distribution.png',
+              enable: _menu!.isDistEnable,
+            ),
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.merchandising);
               },
+              image: 'assets/image/icon/clockin/enable/ic_en_merchandising.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_merchandising.png',
               enable: _menu!.isMerchEnable,
-            ),
+            )
+            // ButtonMenu(
+            //   Icons.work,
+            //   'MERCHANDISING',
+            //   () {
+            //     _tapMenu(EnumTab.merchandising);
+            //   },
+            //   enable: _menu!.isMerchEnable,
+            // ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(
-              Icons.campaign,
-              'PROMOTION',
-              () {
+            // ButtonMenu(
+            //   Icons.campaign,
+            //   'PROMOTION',
+            //   () {
+            //     _tapMenu(EnumTab.promotion);
+            //   },
+            //   enable: _menu!.isPromEnable,
+            // ),
+            ClockInImageIcon(
+              onTap: () {
                 _tapMenu(EnumTab.promotion);
               },
+              image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_promotion.png',
               enable: _menu!.isPromEnable,
             ),
-            ButtonMenu(Icons.file_copy, 'Market Audit', () {
-              _tapMenu(EnumTab.survey);
-            }),
+            // ButtonMenu(Icons.file_copy, 'Market Audit', () {
+            //   _tapMenu(EnumTab.survey);
+            // }),
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumTab.survey);
+              },
+              image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_market_audit.png',
+              enable: _menu!.isMarketEnable,
+            )
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonMenu(Icons.location_off, 'Clock Out', () {
-              _showDialogConfirmClockOut();
-            }),
+            // ButtonMenu(Icons.location_off, 'Clock Out', () {
+            //   _showDialogConfirmClockOut();
+            // }),
+            ClockInImageIcon(
+              onTap: () {
+                _showDialogConfirmClockOut();
+              },
+              image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
+              disableImage: 'assets/image/icon/clockin/disable/ic_ds_clockout.png',
+            ),
             Container(),
           ],
         ),
