@@ -49,40 +49,42 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
     if (_m == null) {
       return Container();
     }
-    return Column(
-      children: [
-        Container(
-          width: s.width,
-          height: s.height - 130,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 8),
-                    child: LabelBlack.title(
-                      _title,
-                      bold: true,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            width: s.width,
+            height: s.height - 130,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                        child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 8),
+                      child: LabelBlack.title(
+                        _title,
+                        bold: true,
+                      ),
+                    )),
+                    _cardForm(s.width),
+                    SizedBox(
+                      height: 10,
                     ),
-                  )),
-                  _cardForm(s.width),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _listPhoto(
-                      s.width, _m!.pathPhoto1, _m!.pathPhoto2, _m!.pathPhoto3),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ],
+                    _listPhoto(
+                        s.width, _m!.pathPhoto1, _m!.pathPhoto2, _m!.pathPhoto3),
+                    SizedBox(
+                      height: 100,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
