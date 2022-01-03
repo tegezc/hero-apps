@@ -187,10 +187,11 @@ class _PageTakeVideoState extends State<PageTakeVideo>
         ),
       );
     } else {
-      return AspectRatio(
-        aspectRatio: _controller!.value.aspectRatio,
-        child: CameraPreview(_controller!),
-      );
+      // return AspectRatio(
+      //   aspectRatio: _controller!.value.aspectRatio,
+      //   child: CameraPreview(_controller!),
+      // );
+      return CameraPreview(_controller!);
     }
   }
 
@@ -207,7 +208,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
                 height: 8,
               ),
               LabelAppMiring.size3(
-                'Setelah 3 detik, video akan berhenti secara otomatis.',
+                'Setelah 30 detik, video akan berhenti secara otomatis.',
                 color: Colors.red[900],
               ),
             ],
