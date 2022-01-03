@@ -93,6 +93,18 @@ flutter:
     - assets/image/icon/disable/ds_merch.png
     - assets/image/icon/disable/ds_promo.png
     - assets/image/icon/disable/ds_clockout.png
+    - assets/image/icon/clockin/enable/ic_en_clock_out.png
+    - assets/image/icon/clockin/enable/ic_en_coverage.png
+    - assets/image/icon/clockin/enable/ic_en_distribution.png
+    - assets/image/icon/clockin/enable/ic_en_market_audit.png
+    - assets/image/icon/clockin/enable/ic_en_merchandising.png
+    - assets/image/icon/clockin/enable/ic_en_promotion.png
+    - assets/image/icon/clockin/disable/ic_ds_clockout.png
+    - assets/image/icon/clockin/disable/ic_ds_coverage.png
+    - assets/image/icon/clockin/disable/ic_ds_distribution.png
+    - assets/image/icon/clockin/disable/ic_ds_merchandising.png
+    - assets/image/icon/clockin/disable/ic_ds_promotion.png
+    - assets/image/icon/clockin/disable/ic_ds_market_audit.png
     - assets/image/icon/new/ic_coverage.png
     - assets/image/icon/new/ic_distribution.png
     - assets/image/icon/new/ic_market_audit.png
