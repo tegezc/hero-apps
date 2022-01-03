@@ -25,7 +25,9 @@ class Menu {
     if (map['status'] != null) {
       if (map['status'] == 'OPEN') {
         enumStatusTempat = EnumStatusTempat.open;
-      } else if (map['status'] == 'CLOSE') {}
+      } else if (map['status'] == 'CLOSE') {
+        enumStatusTempat = EnumStatusTempat.close;
+      }
     }
   }
 
