@@ -29,6 +29,29 @@ class BlocPembelian {
     });
   }
 
+  void semuaSerial() async{
+    _semuaSerial().then((value){
+      if(value){
+        _sink(_cachePembelian);
+      }
+    });
+  }
+
+  Future<bool> _semuaSerial() async{
+    List<SerialNumber>? allsn = await _httpDIstribution.getAllDaftarSn(_cachePembelian.trx!.product!.id);
+    _cachePembelian.lserialChecked =
+        await _daoSerial.getSerialByIdProduct(_cachePembelian.trx!.product!.id);
+     if (allsn != null) {
+      _cacheLsn = List.from(allsn);
+      _cachePembelian.lserialChecked!.forEach((element) {
+        int index = allsn.indexOf(element);
+        allsn[index].ischecked = true;
+      });
+      _cachePembelian.lserial = allsn;
+    }
+    return true;
+  }
+
   Future<bool> _olahPencarian(String snawal, String snakhir) async {
     List<SerialNumber>? lsn = await _httpDIstribution.getDaftarSn(
         _cachePembelian.trx!.product!.id, snawal, snakhir);
@@ -40,6 +63,7 @@ class BlocPembelian {
       _cachePembelian.lserialChecked!.forEach((element) {
         int index = lsn.indexOf(element);
         lsn[index].ischecked = true;
+        changeRadio(index, true);
       });
       _cachePembelian.lserial = lsn;
     }

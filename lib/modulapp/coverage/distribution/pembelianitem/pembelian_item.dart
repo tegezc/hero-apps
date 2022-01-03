@@ -51,6 +51,7 @@ class _PembelianItemState extends State<PembelianItem> {
     Size size = MediaQuery.of(context).size;
     if (_counterBuild == 0) {
       _blocPembelian.firstTime(widget.trx);
+      _blocPembelian.semuaSerial();
       _counterBuild++;
     }
 
@@ -187,7 +188,13 @@ class _PembelianItemState extends State<PembelianItem> {
                         FocusScope.of(context).unfocus();
                         String snawal = _textController1.text;
                         String snakhir = _textController2.text;
-                        _blocPembelian.cariSerial(snawal, snakhir);
+                        if (snawal == "" && snakhir == "") {
+                          _blocPembelian.semuaSerial();
+                        } else {
+                          setState(() {
+                          _blocPembelian.cariSerial(snawal, snakhir);
+                          });
+                        }
                       }),
                     ],
                   ),
@@ -280,6 +287,7 @@ class _PembelianItemState extends State<PembelianItem> {
   }
 
   Widget _cell(SerialNumber seri, int index) {
+    print("check: $seri.ischecked");
     return ListTile(
       leading: Checkbox(
         onChanged: (bool? value) {
