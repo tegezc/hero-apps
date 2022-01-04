@@ -9,6 +9,7 @@ import 'package:background_locator/settings/ios_settings.dart';
 import 'package:background_locator/settings/locator_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
+import 'package:hero/model/profile.dart';
 import 'package:hero/model/tgzlocation.dart';
 import 'package:hero/util/locationutil.dart';
 import 'package:location/location.dart' as loc;
@@ -70,6 +71,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
     print('1');
     HttpDashboard httpDashboard = HttpDashboard();
     String? flagtimeint = await AccountHore.getIdlokasi();
+    Profile? profile = await AccountHore.getProfile();
     print('key: $flagtimeint');
     int? flagint = 0;
     if (flagtimeint != null) {
@@ -93,7 +95,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
               print('send loc $tmp');
               TgzLocation tgzLocation =
                   TgzLocation(latitute: loc[0], longitute: loc[1]);
-              bool value = await httpDashboard.trackingSales(tgzLocation);
+              bool value = await httpDashboard.trackingSales(profile.id!,tgzLocation);
               print(value);
             }
 
@@ -129,6 +131,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
 
   Future<void> _conditionNotRunning() async {
     // start jika jam > 06:00
+    Profile? profile = await AccountHore.getProfile();
     DateTime dt = DateTime.now();
     DateTime dt6 = DateTime(dt.year, dt.month, dt.day, 6, dt.minute, dt.second);
     DateTime dt18 = DateTime(dt.year, dt.month, dt.day, 18, 0, 0);
@@ -138,7 +141,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
           latitute: '${locationData.latitude}',
           longitute: '${locationData.longitude}');
       HttpDashboard httpDashboard = HttpDashboard();
-      await httpDashboard.trackingSales(tgzLocation);
+      await httpDashboard.trackingSales(profile.id!,tgzLocation);
       _onStart();
     }
   }

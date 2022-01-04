@@ -71,7 +71,7 @@ class HttpDashboard {
     }
   }
 
-  Future<bool> trackingSales(TgzLocation userLocation) async {
+  Future<bool> trackingSales(String sales,TgzLocation userLocation) async {
     // Map<String, String> headers = {
     //   'Auth-Key': 'restapihore',
     //   'Client-Service': 'frontendclienthore',
@@ -90,6 +90,7 @@ class HttpDashboard {
     final Map<String, String> headers = await HttpUtil.getHeader();
 
     Map param = {
+      "id_sales": "${sales}",
       "longitude": "${userLocation.longitute}",
       "latitude": "${userLocation.latitute}"
     };
