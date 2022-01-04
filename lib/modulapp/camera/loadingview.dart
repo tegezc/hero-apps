@@ -119,8 +119,7 @@ class TgzDialog {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child:
-                      LabelBlack.size2('Semua field harus di isi, minimal 0'),
+                  child: LabelBlack.size2('Semua field harus di isi, minimal 0 dan upload 1 foto'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

@@ -6,6 +6,7 @@ import 'package:hero/modulapp/coverage/merchandising/pagemerchandising.dart';
 import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 import 'blocmerchandising.dart';
@@ -23,11 +24,12 @@ class HomeMerchandising extends StatefulWidget {
 class _HomeMerchandisingState extends State<HomeMerchandising> {
   BlocMerchandising? _blocMerchandising;
   int _counterBuild = 0;
-
+  EnumAccount? enumAccount;
   @override
   void initState() {
     print('idtempat pjp home merchandising: ${widget.pjp!.tempat!.id}');
     _blocMerchandising = BlocMerchandising();
+    getEnumAccount().then((value)=> setState((){}));
     super.initState();
   }
 
@@ -35,6 +37,11 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
   void dispose() {
     _blocMerchandising!.dispose();
     super.dispose();
+  }
+
+  Future<bool> getEnumAccount() async{
+    enumAccount = await AccountHore.getAccount();
+    return true;
   }
 
   @override
@@ -70,8 +77,13 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                             Navigator.of(context).pop();
                           } else {
                             if (value.message == null) {
-                              TgzDialog.generalDialogConfirm(context,
-                                  'untuk dapat mengakhiri proses merchandising,Seluruh tab harus di isi.');
+                              if (enumAccount == EnumAccount.sf) {
+                                TgzDialog.generalDialogConfirm(context,
+                                    'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
+                              } else {
+                                TgzDialog.generalDialogConfirm(context,
+                                    'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');
+                              }
                             } else {
                               TgzDialog.generalDialogConfirm(
                                   context, value.message);
