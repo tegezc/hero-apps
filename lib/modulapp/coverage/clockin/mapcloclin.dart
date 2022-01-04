@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hero/database/daoserial.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
-import 'package:hero/model/menu.dart';
+//import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/coverage/clockin/menusales.dart';
@@ -26,11 +26,11 @@ class MapClockIn extends StatefulWidget {
 
 class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
-  Menu? _menu;
+  // Menu? _menu;
   EnumAccount? _enumAccount;
   double? _hightCell;
   late double _minusWidget;
-  EnumStatusTempat? _statusPjp;
+  // EnumStatusTempat? _statusPjp;
   List<Marker> lmarkers = [];
 //-2.991415, 104.763568
   late LatLng _lokasi;
@@ -64,20 +64,20 @@ class _MapClockInState extends State<MapClockIn> {
       print(value);
       setState(() {});
     });
-    _reloadData().then((value) {
-      print("menu: $value");
-      setState(() {});
-    });
+    // _reloadData().then((value) {
+    //   print("menu: $value");
+    //   setState(() {});
+    // });
   }
 
-  Future<bool> _reloadData() async {
-    HttpDashboard httpDashboard = HttpDashboard();
-    _menu = await httpDashboard.getMenu();
-    _statusPjp = _menu?.enumStatusTempat;
-    print("<status PJP> :  $_statusPjp");
-    _enumAccount = await AccountHore.getAccount();
-    return true;
-  }
+  // Future<bool> _reloadData() async {
+  //   HttpDashboard httpDashboard = HttpDashboard();
+  //   _menu = await httpDashboard.getMenu();
+  //   _statusPjp = _menu?.enumStatusTempat;
+  //   print("<status PJP> :  $_statusPjp");
+  //   _enumAccount = await AccountHore.getAccount();
+  //   return true;
+  // }
 
   Future<bool> _setupLocation() async {
     // Position position = await Geolocator.getCurrentPosition(
@@ -218,6 +218,90 @@ class _MapClockInState extends State<MapClockIn> {
       ],
     );
   }
+  //
+  // _showDialogConfirmClockin() {
+  //   showDialog<String>(
+  //       context: context,
+  //       builder: (BuildContext context) => SimpleDialog(
+  //             title: Text('Confirm'),
+  //             shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
+  //             children: <Widget>[
+  //               Padding(
+  //                 padding: const EdgeInsets.all(16.0),
+  //                 child: LabelApp.size2(
+  //                     'Pilih kondisi PJP, apakah outlet open atau close?'),
+  //               ),
+  //               _statusPjp == null
+  //                   ? Padding(
+  //                       padding: const EdgeInsets.only(
+  //                           right: 16.0, left: 16.0, bottom: 3.0),
+  //                       child: ButtonApp.green('OPEN', () {
+  //                         _clockin(EnumStatusTempat.open).then((value) {
+  //                           if (value) {
+  //                             Navigator.of(context).pop();
+  //                             Navigator.pushNamed(context, MenuSales.routeName,
+  //                                 arguments: widget.pjp);
+  //                           }
+  //                         });
+  //                       }),
+  //                     )
+  //                   : _statusPjp == EnumStatusTempat.close
+  //                       ? const SizedBox()
+  //                       : Padding(
+  //                           padding: const EdgeInsets.only(
+  //                               right: 16.0, left: 16.0, bottom: 3.0),
+  //                           child: ButtonApp.green('OPEN', () {
+  //                             _clockin(EnumStatusTempat.open).then((value) {
+  //                               if (value) {
+  //                                 Navigator.of(context).pop();
+  //                                 Navigator.pushNamed(
+  //                                     context, MenuSales.routeName,
+  //                                     arguments: widget.pjp);
+  //                               }
+  //                             });
+  //                           }),
+  //                         ),
+  //               _statusPjp == null
+  //                   ? Padding(
+  //                       padding: const EdgeInsets.only(
+  //                           right: 16.0, left: 16.0, bottom: 3.0),
+  //                       child: ButtonApp.red('CLOSE', () {
+  //                         _clockin(EnumStatusTempat.close).then((value) {
+  //                           if (value) {
+  //                             Navigator.of(context).pop();
+  //                             Navigator.pushNamed(
+  //                               context,
+  //                               CameraView.routeName,
+  //                               arguments: ParamPreviewPhoto(
+  //                                   EnumTakePhoto.distibusiclose),
+  //                             );
+  //                           }
+  //                         });
+  //                       }),
+  //                     )
+  //                   : _statusPjp == EnumStatusTempat.open
+  //                       ? const SizedBox()
+  //                       : Padding(
+  //                           padding: const EdgeInsets.only(
+  //                               right: 16.0, left: 16.0, bottom: 3.0),
+  //                           child: ButtonApp.red('CLOSE', () {
+  //                             _clockin(EnumStatusTempat.close).then((value) {
+  //                               if (value) {
+  //                                 Navigator.of(context).pop();
+  //                                 Navigator.pushNamed(
+  //                                   context,
+  //                                   CameraView.routeName,
+  //                                   arguments: ParamPreviewPhoto(
+  //                                       EnumTakePhoto.distibusiclose),
+  //                                 );
+  //                               }
+  //                             });
+  //                           }),
+  //                         ),
+  //             ],
+  //           ));
+  // }
 
   _showDialogConfirmClockin() {
     showDialog<String>(
@@ -230,74 +314,38 @@ class _MapClockInState extends State<MapClockIn> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: LabelApp.size2(
-                      'Pilih kondisi PJP, apakah outlet open atau close?'),
+                      'Pilih kondisi PJP, apakah open atau close?'),
                 ),
-                _statusPjp == null
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, left: 16.0, bottom: 3.0),
-                        child: ButtonApp.green('OPEN', () {
-                          _clockin(EnumStatusTempat.open).then((value) {
-                            if (value) {
-                              Navigator.of(context).pop();
-                              Navigator.pushNamed(context, MenuSales.routeName,
-                                  arguments: widget.pjp);
-                            }
-                          });
-                        }),
-                      )
-                    : _statusPjp == EnumStatusTempat.close
-                        ? const SizedBox()
-                        : Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, left: 16.0, bottom: 3.0),
-                        child: ButtonApp.green('OPEN', () {
-                          _clockin(EnumStatusTempat.open).then((value) {
-                            if (value) {
-                              Navigator.of(context).pop();
-                              Navigator.pushNamed(context, MenuSales.routeName,
-                                  arguments: widget.pjp);
-                            }
-                          });
-                        }),
-                      ),
-                _statusPjp == null
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, left: 16.0, bottom: 3.0),
-                        child: ButtonApp.red('CLOSE', () {
-                          _clockin(EnumStatusTempat.close).then((value) {
-                            if (value) {
-                              Navigator.of(context).pop();
-                              Navigator.pushNamed(
-                                context,
-                                CameraView.routeName,
-                                arguments: ParamPreviewPhoto(
-                                    EnumTakePhoto.distibusiclose),
-                              );
-                            }
-                          });
-                        }),
-                      )
-                    : _statusPjp == EnumStatusTempat.open
-                        ? const SizedBox()
-                        : Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, left: 16.0, bottom: 3.0),
-                        child: ButtonApp.red('CLOSE', () {
-                          _clockin(EnumStatusTempat.close).then((value) {
-                            if (value) {
-                              Navigator.of(context).pop();
-                              Navigator.pushNamed(
-                                context,
-                                CameraView.routeName,
-                                arguments: ParamPreviewPhoto(
-                                    EnumTakePhoto.distibusiclose),
-                              );
-                            }
-                          });
-                        }),
-                      ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('OPEN', () {
+                    _clockin(EnumStatusTempat.open).then((value) {
+                      if (value) {
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, MenuSales.routeName,
+                            arguments: widget.pjp);
+                      }
+                    });
+                  }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('CLOSE', () {
+                    _clockin(EnumStatusTempat.close).then((value) {
+                      if (value) {
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(
+                          context,
+                          CameraView.routeName,
+                          arguments:
+                              ParamPreviewPhoto(EnumTakePhoto.distibusiclose),
+                        );
+                      }
+                    });
+                  }),
+                ),
               ],
             ));
   }
