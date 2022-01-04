@@ -23,7 +23,7 @@ class SwipeBackObserver extends NavigatorObserver {
 class CommonUi {
   static Future openPage(context, Widget builder) async {
     // wait until animation finished
-    await SwipeBackObserver.promise.future;
+    // await SwipeBackObserver.promise.future;
 
     return await Navigator.of(context).push(
       MaterialPageRoute(builder: (ctx) => builder),

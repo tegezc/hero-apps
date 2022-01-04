@@ -45,7 +45,10 @@ class _ViewSekolahState extends State<ViewSekolah> {
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
     HttpSekolah httpOutlet = new HttpSekolah();
-    List<dynamic> ld = await (httpOutlet.detailSekolah(widget.idsekolah) as Future<List<dynamic>>);
+    List<dynamic>? ld = await httpOutlet.detailSekolah(widget.idsekolah);
+    if (ld == null) {
+      return false;
+    }
     if (ld.length == 1) {
       Map<String, dynamic> map = ld[0];
       _sekolah = Sekolah.fromJson(map);
@@ -63,14 +66,15 @@ class _ViewSekolahState extends State<ViewSekolah> {
               Provinsi? prov = await _httpDashboard.getProv(kab.realid);
               _sekolah!.prov = prov;
             }
-            List<Kelurahan> lkel =
-                await (_httpDashboard.getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
-
-            lkel.forEach((element) {
-              if (element.idkel == _sekolah!.idkel) {
-                _sekolah!.kel = element;
-              }
-            });
+            List<Kelurahan>? lkel =
+                await _httpDashboard.getListKelurahan(kec.realid);
+            if (lkel != null) {
+              lkel.forEach((element) {
+                if (element.idkel == _sekolah!.idkel) {
+                  _sekolah!.kel = element;
+                }
+              });
+            }
           }
         }
         return true;
