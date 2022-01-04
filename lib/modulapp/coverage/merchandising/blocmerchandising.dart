@@ -4,6 +4,7 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/preferencephoto.dart';
+import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:rxdart/subjects.dart';
 
 class UIMerchan {
@@ -80,6 +81,7 @@ class BlocMerchandising {
 
   Future<FinishMenu> selesai(Pjp pjp) async {
     // _sinkLoading();
+    EnumAccount enumAccount = await AccountHore.getAccount();
     HttpMerchandising httpm = HttpMerchandising();
     Map<String, Merchandising>? map = await httpm.getDetailMerch(
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
@@ -98,15 +100,20 @@ class BlocMerchandising {
       print(_cacheUiMerc!.backdrop);
 
       // karena wajib diisi semua maka tidak ada yg boleh null
-      if (_cacheUiMerc!.etalase == null ||
-          _cacheUiMerc!.spanduk == null ||
-          _cacheUiMerc!.poster == null ||
-          _cacheUiMerc!.papanNama == null ||
-          _cacheUiMerc!.backdrop == null) {
-      } else {
-        HttpDashboard httpDashboard = HttpDashboard();
-        vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
-        return vcheckout;
+      if (enumAccount == EnumAccount.sf) {
+        if (_cacheUiMerc!.etalase == null || _cacheUiMerc!.spanduk == null) {
+        } else {
+          HttpDashboard httpDashboard = HttpDashboard();
+          vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
+          return vcheckout;
+        }
+      }else{
+        if (_cacheUiMerc!.poster == null || _cacheUiMerc!.spanduk == null) {
+        } else {
+          HttpDashboard httpDashboard = HttpDashboard();
+          vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
+          return vcheckout;
+        }
       }
     }
     return vcheckout;
@@ -208,7 +215,6 @@ class BlocMerchandising {
             _cacheUiMerc!.etalase!.pathPhoto3 = path;
             break;
           default:
-            
         }
         break;
       case EnumMerchandising.spanduk:
