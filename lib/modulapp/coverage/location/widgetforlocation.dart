@@ -35,9 +35,12 @@ class ScaffoldLocation extends StatelessWidget {
               )),
         ),
         actions: <Widget>[
-          ButtonApp.white(textBtn, () {
-            onTap!();
-          }),
+          Container(
+            margin: EdgeInsets.all(15),
+            child: ButtonApp.black(textBtn, () {
+              onTap!();
+            },bgColor: Colors.white,),
+          ),
         ],
         bottom: bottom,
       ),
@@ -61,8 +64,8 @@ class ScaffoldLocView extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.white, //change your color here
         ),
-        title: Container(
-          alignment: Alignment.center,
+        title: Center(
+          widthFactor: 2,
           child: Text(title!,
               style: TextStyle(
                 color: Colors.white,

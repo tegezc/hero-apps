@@ -39,8 +39,8 @@ class _EditorOutletState extends State<EditorOutlet> {
     }
     _blocOutlet = new BlocOutlet();
     _title = _enumEditorState == EnumEditorState.baru
-        ? _title = 'Tambah Outlet'
-        : 'Edit Outlet';
+        ? _title = 'Tambah Lokasi'
+        : 'Edit Lokasi';
     super.initState();
   }
 
@@ -109,6 +109,7 @@ class _EditorOutletState extends State<EditorOutlet> {
                       }
                     },
                     bottom: TabBar(
+                      indicatorColor: Colors.white,
                       isScrollable: true,
                       tabs: [
                         // wallet share, sales broadband share, voucher fisik share
