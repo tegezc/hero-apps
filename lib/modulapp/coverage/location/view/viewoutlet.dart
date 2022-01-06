@@ -44,7 +44,7 @@ class _ViewOutletState extends State<ViewOutlet> {
 
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
-    HttpOutlet httpOutlet = new HttpOutlet();
+    HttpOutlet httpOutlet = HttpOutlet();
     List<dynamic>? ld = await (httpOutlet.detailOutlet(widget.idoutlet));
     if (ld!.length == 1) {
       Map<String, dynamic> map = ld[0];
@@ -94,6 +94,7 @@ class _ViewOutletState extends State<ViewOutlet> {
         child: ScaffoldLocView(
             title: _title,
             bottom: TabBar(
+              indicatorColor: Colors.white,
               isScrollable: true,
               tabs: [
                 // wallet share, sales broadband share, voucher fisik share
@@ -135,7 +136,7 @@ class TabViewOutlet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-        child: new Padding(
+        child: Padding(
           padding: const EdgeInsets.only(left: 18.0, right: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -209,12 +209,12 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
  */
         disposeCallback: LocationCallbackHandler.disposeCallback,
         iosSettings: IOSSettings(
-            accuracy: LocationAccuracy.NAVIGATION, distanceFilter: 0),
+            accuracy: LocationAccuracy.NAVIGATION, distanceFilter: 5),
         autoStop: false,
-        androidSettings: AndroidSettings(
+        androidSettings: const AndroidSettings(
             accuracy: LocationAccuracy.NAVIGATION,
             interval: 10,
-            distanceFilter: 0,
+            distanceFilter: 5,
             wakeLockTime: 10,
             client: LocationClient.google,
             androidNotificationSettings: AndroidNotificationSettings(

@@ -58,108 +58,138 @@ class _HomePageReturState extends State<HomePageRetur> {
                   style: TextStyle(color: Colors.white),
                 ),
                 Spacer(),
-                ButtonApp.white('+ Entry', () {
-                  Navigator.pushNamed(context, ReturEditor.routeName);
-                })
+                SizedBox(
+                  height: 30,
+                  child: ButtonApp.black(
+                    '+ Entry',
+                    () {
+                      Navigator.pushNamed(context, ReturEditor.routeName);
+                    },
+                    bgColor: Colors.white,
+                  ),
+                )
               ],
             ),
             centerTitle: true,
           ),
-          body: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            child: Container(
-              height: s.height,
-              width: s.width,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ButtonTglVer1(widthbtntgl, 'Tanggal Awal', item.tglAwal,
-                            onTap: () {
-                          _datePicker(true, item);
-                        }),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        ButtonTglVer1(
-                            widthbtntgl, 'Tanggal Akhir', item.tglAkhir,
-                            onTap: () {
-                          _datePicker(false, item);
-                        }),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: IconButton(
-                              icon: Icon(
-                                Icons.play_arrow_outlined,
-                                size: 40,
-                              ),
-                              onPressed: () {
-                                _controller.text = '';
-                                FocusScope.of(context).unfocus();
-                                _blocHpRetur.searchRangeTanggal();
-                              }),
-                        ),
-                      ],
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      //image: AssetImage('assets/image/coverage/BG.png'),
+                      image: AssetImage('assets/image/new/BG.png'),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: s.width - 80,
-                          child: new TextField(
-                            keyboardType: TextInputType.text,
-                            controller: _controller,
-                            style: new TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                            decoration: new InputDecoration(
-                                // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                                // suffixIcon:
-                                //     new Icon(Icons.search, color: Colors.black),
-                                hintText: "Serial number...",
-                                hintStyle: new TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                        IconButton(
-                            icon: Icon(Icons.search, size: 30),
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              String txt = _controller.text;
-                              if (txt.length > 0) {
-                                _blocHpRetur.searchBySerial(_controller.text);
-                              }
-                            })
-                      ],
-                    ),
+                  height: s.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [Container()],
                   ),
-                  Container(
-                    height: s.height - 270,
-                    child: ListView.builder(
-                      itemCount: item.getCountList(),
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: _controllCell(item, index),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: Container(
+                  height: s.height,
+                  width: s.width,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ButtonApp.black(item.getStrAwal(), () {
+                              _datePicker(true, item);
+                            }),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            ButtonApp.black(item.getStrAkhir(), () {
+                              _datePicker(false, item);
+                            }),
+                            IconButton(
+                                icon: Icon(
+                                  Icons.play_arrow_outlined,
+                                  size: 40,
+                                ),
+                                onPressed: () {
+                                  _controller.text = '';
+                                  FocusScope.of(context).unfocus();
+                                  _blocHpRetur.searchRangeTanggal();
+                                }),
+                          ],
+                        ),
+                      ),
+                      Divider(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: s.width - 80,
+                              height: 40,
+                              child: TextField(
+                                keyboardType: TextInputType.text,
+                                controller: _controller,
+                                style: const TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 12,
+                                ),
+                                decoration: const InputDecoration(
+                                    // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    // suffixIcon:
+                                    //     new Icon(Icons.search, color: Colors.black),
+                                    hintText: "Serial number...",
+                                    hintStyle:
+                                        TextStyle(color: Colors.black45)),
+                              ),
+                            ),
+                            IconButton(
+                                icon: Icon(Icons.search, size: 30),
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  String txt = _controller.text;
+                                  if (txt.length > 0) {
+                                    _blocHpRetur
+                                        .searchBySerial(_controller.text);
+                                  }
+                                })
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: s.height - 270,
+                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                            color: Colors.red[600],
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: ListView.builder(
+                          itemCount: item.getCountList(),
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: _controllCell(item, index),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

@@ -48,21 +48,21 @@ class _SearchLocationState extends State<SearchLocation> {
       stream: _blocDashboard.uidashboard,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CustomScaffold(title: 'Cari Outlet', body: Container());
+          return CustomScaffold(title: 'Cari Lokasi', body: Container());
         } else {
           UISearchLocation item = snapshot.data!;
 
           return CustomScaffold(
-            title: 'Cari Outlet',
+            title: 'Cari Lokasi',
             body: SingleChildScrollView(
               child: Column(
                 children: [
                   // ButtonApp.blue('Add Outlet', () {
                   //   CommonUi.openPage(context, EditorOutlet(null));
                   // }),
-                  _searchoutlet(item),
+                  _searchLokasi(item),
                   SizedBox(
-                    height: 100,
+                    height: 15,
                   ),
                 ],
               ),
@@ -73,60 +73,64 @@ class _SearchLocationState extends State<SearchLocation> {
     );
   }
 
-  Widget _searchoutlet(UISearchLocation item) {
+  Widget _searchLokasi(UISearchLocation item) {
     double w = MediaQuery.of(context).size.width;
-    return Container(
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: w - 90,
-                    child: new TextField(
-                      focusNode: _focusNode,
-                      keyboardType: TextInputType.text,
-                      controller: _controller,
-                      style: new TextStyle(
-                        fontSize: 14,
-                      ),
-                      decoration: new InputDecoration(
-                          // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
-                          ),
-                          // suffixIcon:
-                          //     new Icon(Icons.search, color: Colors.black),
-                          hintText: ConstString.hintSearch,
-                          hintStyle: new TextStyle(fontSize: 14)),
-                      onChanged: (v) {},
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: w - 90,
+                  child: TextField(
+                    focusNode: _focusNode,
+                    keyboardType: TextInputType.text,
+                    controller: _controller,
+                    style: new TextStyle(
+                      fontSize: 14,
                     ),
+                    decoration: InputDecoration(
+                        // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                        // suffixIcon:
+                        //     new Icon(Icons.search, color: Colors.black),
+                        hintText: ConstString.hintSearch,
+                        hintStyle: const TextStyle(fontSize: 14)),
+                    onChanged: (v) {},
                   ),
-                  IconButton(
-                      icon: Icon(Icons.search, size: 30),
-                      onPressed: () {
-                        this._prosesSearch();
-                      })
-                ],
-              ),
-            ),
-            item.isloading ? _showloading() : _hasilSearch(item.ltempat!),
-          ],
-        ));
+                ),
+                IconButton(
+                    icon: const Icon(Icons.search, size: 30),
+                    onPressed: () {
+                      _prosesSearch();
+                    })
+              ],
+            )),
+        _containerSearch(item)
+      ],
+    );
+  }
+
+  Widget _containerSearch(UISearchLocation item) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: size.height * 0.75,
+      margin: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+          color: Colors.red[600], borderRadius: BorderRadius.circular(10.0)),
+      child: item.isloading ? _showloading() : _hasilSearch(item.ltempat!),
+    );
   }
 
   Widget _showloading() {
     return Center(
-      child: LoadingBouncingLine.circle(backgroundColor: Colors.deepOrange),
+      child: LoadingBouncingLine.circle(backgroundColor: Colors.white),
     );
   }
 
@@ -139,35 +143,39 @@ class _SearchLocationState extends State<SearchLocation> {
         LokasiSimple tempat = ltempat[i]!;
         lw.add(_cellOutlet(tempat));
       }
+      lw.add(Divider(color: Colors.grey[400]));
     }
 
-    return Column(
-      children: lw,
+    return SingleChildScrollView(
+      child: Column(
+        children: lw,
+      ),
     );
   }
 
   Widget _hasilKosong() {
     return Center(
       child: LabelAppMiring.size3(
-        'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"',
-        textAlign: TextAlign.center,
-      ),
+          'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"',
+          textAlign: TextAlign.center,
+          color: Colors.white),
     );
   }
 
   Widget _cellOutlet(LokasiSimple outletSimple) {
     return Column(
       children: [
-        Divider(),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
           child: Column(
             children: [
+              Divider(color:Colors.grey[400]),
               Row(
                 children: [
                   Icon(
                     Icons.store,
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 12,
@@ -177,15 +185,16 @@ class _SearchLocationState extends State<SearchLocation> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        LabelBlack.size2(outletSimple.idminor == null
+                        LabelWhite.size3(outletSimple.idminor == null
                             ? ''
                             : outletSimple.idminor),
-                        LabelBlack.size2(outletSimple.text),
+                        LabelWhite.size3(outletSimple.text),
                       ],
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -194,29 +203,52 @@ class _SearchLocationState extends State<SearchLocation> {
                   SizedBox(
                     width: 5,
                   ),
-                  ButtonApp.black('PJP', () {
-                    // CommonUi.openPage(context, HistoryPJP(outletSimple));
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => HistoryPJP(outletSimple)));
-                  }),
+                  SizedBox(
+                    height: 25,
+                    child: ButtonApp.red(
+                      'PJP',
+                      () {
+                        // CommonUi.openPage(context, HistoryPJP(outletSimple));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => HistoryPJP(outletSimple)));
+                      },
+                      bgColor: Colors.white,
+                    ),
+                  ),
                   SizedBox(
                     width: 8,
                   ),
-                  ButtonApp.black('Edit', () {
-                    // CommonUi.openPage(
-                    //     context, EditorOutlet(outletSimple.idutama));
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => EditorOutlet(outletSimple.idutama)));
-                  }),
+                  SizedBox(
+                    height: 25,
+                    child: ButtonApp.red(
+                      'Edit',
+                      () {
+                        // CommonUi.openPage(
+                        //     context, EditorOutlet(outletSimple.idutama));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) =>
+                                EditorOutlet(outletSimple.idutama)));
+                      },
+                      bgColor: Colors.white,
+                    ),
+                  ),
                   SizedBox(
                     width: 8,
                   ),
-                  ButtonApp.black('Detail', () {
-                    // CommonUi.openPage(
-                    //     context, ViewOutlet(outletSimple.idutama));
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => ViewOutlet(outletSimple.idutama)));
-                  }),
+                  SizedBox(
+                    height: 25,
+                    child: ButtonApp.red(
+                      'Detail',
+                      () {
+                        // CommonUi.openPage(
+                        //     context, ViewOutlet(outletSimple.idutama));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) =>
+                                ViewOutlet(outletSimple.idutama)));
+                      },
+                      bgColor: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ],

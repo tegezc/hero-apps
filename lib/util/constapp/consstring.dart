@@ -6,7 +6,7 @@ class ConstString {
   static String textMerchandising = 'Merchandising';
   static String textSurvey = 'Market Audit';
   static String textPromotion = 'Promotion';
-  static String hintSearch = 'By Id digipos, nama, nomor rs . . .';
+  static String hintSearch = 'Search by id, nama, rs . . .';
   static String hintSearchDs = 'nama . . .';
   static String failedValidasi =
       'Field yang bertanda bintang (*) Wajib di isi. dan mungkin perlu '
