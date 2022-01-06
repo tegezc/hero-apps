@@ -503,6 +503,38 @@ class ButtonAppLoading extends StatelessWidget {
   }
 }
 
+class ButtonClockIn extends StatefulWidget {
+  final Function onTap;
+  final String text;
+  const ButtonClockIn({Key? key, required this.onTap, required this.text})
+      : super(key: key);
+
+  @override
+  _ButtonClockInState createState() => _ButtonClockInState();
+}
+
+class _ButtonClockInState extends State<ButtonClockIn> {
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {
+        widget.onTap();
+      },
+      child: Text(
+        widget.text,
+        style: const TextStyle(color: Colors.black, fontSize: 12),
+      ),
+      style: OutlinedButton.styleFrom(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        backgroundColor: Colors.grey[350],
+        //primary: Colors.,
+        //side: BorderSide(color: _color!, width: 0.5),
+      ),
+    );
+  }
+}
+
 enum EnumButtonMenu {
   distribution,
   merchandise,

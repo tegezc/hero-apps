@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
@@ -288,13 +289,24 @@ class _CoverageHomeState extends State<CoverageHome> {
       action = LabelWhite.size3('Status: Done');
     } else if (pjp.enumPjp == EnumPjp.progress) {
       colorIcon = Colors.white;
-      action = ButtonApp.white('Clock In', () {
-        print("Clock In");
-        Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
-            .then((value) {
-          _blocDashboard!.firstTime();
-        });
-      });
+      // action = ButtonApp.white('Clock In', () {
+      //   print("Clock In");
+      //   Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
+      //       .then((value) {
+      //     _blocDashboard!.firstTime();
+      //   });
+      // });
+      action = ButtonClockIn(
+          onTap: () {
+            if (kDebugMode) {
+              print("Clock In");
+            }
+            Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
+                .then((value) {
+              _blocDashboard!.firstTime();
+            });
+          },
+          text: "Clock In");
     } else if (pjp.enumPjp == EnumPjp.belum) {
       colorIcon = Colors.white;
       action = LabelWhite.size3('Not Clock In ');
