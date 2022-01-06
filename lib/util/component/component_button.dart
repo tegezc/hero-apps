@@ -161,25 +161,26 @@ class ButtonRed extends StatelessWidget {
 class ButtonApp extends StatefulWidget {
   final Function onTap;
   final String? text;
+  final Color? bgColor;
   final EnumWarnaButton enumWarnaButton;
   final bool enable;
 
-  ButtonApp.red(this.text, this.onTap, {this.enable = true})
+  ButtonApp.red(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.red;
 
-  ButtonApp.blue(this.text, this.onTap, {this.enable = true})
+  ButtonApp.blue(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.blue;
 
-  ButtonApp.yellow(this.text, this.onTap, {this.enable = true})
+  ButtonApp.yellow(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.yellow;
 
-  ButtonApp.green(this.text, this.onTap, {this.enable = true})
+  ButtonApp.green(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.green;
 
-  ButtonApp.black(this.text, this.onTap, {this.enable = true})
+  ButtonApp.black(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.black;
 
-  ButtonApp.white(this.text, this.onTap, {this.enable = true})
+  ButtonApp.white(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.white;
 
   @override
@@ -245,8 +246,9 @@ class _ButtonAppState extends State<ButtonApp> {
         style: style,
       ),
       style: OutlinedButton.styleFrom(
+        backgroundColor: widget.bgColor,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
         // backgroundColor: Colors.white,
         primary: _color,
         side: BorderSide(color: _color!, width: 0.5),
