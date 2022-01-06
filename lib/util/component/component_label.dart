@@ -186,7 +186,7 @@ class Label2row extends StatelessWidget {
         children: [
           LabelApp.size2(
             text1,
-            color: Colors.blue,
+            color: Colors.grey,
           ),
           SizedBox(
             height: 4,
