@@ -12,7 +12,6 @@ import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/uiutil.dart';
 
 class HomePembelianDistribusi extends StatefulWidget {
   static const String routeName = '/homepembeliandistribusi';
@@ -105,19 +104,22 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
         ),
         title: Row(
           children: [
-            Text(
+            const Text(
               'Distribusi',
               style: TextStyle(color: Colors.white),
             ),
-            Spacer(),
-            ButtonApp.white('+ Penjualan', () async {
-              await Navigator.pushNamed(
-                  context, DaftarProductDistribusi.routeName,
-                  arguments: widget.pjp);
-              _reloadNota().then((value) {
-                setState(() {});
-              });
-            }),
+            const Spacer(),
+            ButtonClockIn(
+                borderColor: Colors.black,
+                text: '+Entry',
+                onTap: () async {
+                  await Navigator.pushNamed(
+                      context, DaftarProductDistribusi.routeName,
+                      arguments: widget.pjp);
+                  _reloadNota().then((value) {
+                    setState(() {});
+                  });
+                }),
           ],
         ),
         centerTitle: true,
@@ -125,20 +127,23 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            ButtonApp.blue(
-              'Ambil Foto',
-              () {
-                //CommonUi.openPage(context, DummyView());
-                _showDialogConfirmClockOut();
-              },
-              enable: _lnota!.length > 0,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ButtonStrectWidth(
+                text: 'Ambil Foto',
+                onTap: () {
+                  //CommonUi.openPage(context, DummyView());
+                  _showDialogConfirmClockOut();
+                },
+                isenable: false, //_lnota!.length > 0,
+              ),
             ),
             _contentStruk(_lnota),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 12,
             ),
             _enumAccount == EnumAccount.sf
@@ -153,7 +158,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
             _dataTable(_lsa!, 'SA'),
             _dataTable(_lvoint!, 'VO Internet'),
             _dataTable(_lvog!, 'VO Games'),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -166,9 +171,11 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     List<Widget> lw = [];
     lw.add(Padding(
       padding: const EdgeInsets.all(8.0),
-      child: lnota != null ? LabelWhite.size1('Daftar Nota') : LabelBlack.size1('Daftar Nota'),
+      child: lnota != null
+          ? LabelWhite.size2('Daftar Nota')
+          : LabelBlack.size2('Daftar Nota'),
     ));
-    
+
     if (lnota != null) {
       for (int i = 0; i < lnota.length; i++) {
         Nota nota = lnota[i];
@@ -177,6 +184,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     }
 
     return Container(
+        width: double.infinity,
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
@@ -204,15 +212,19 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
           if (value == EnumAccount.sf) {
             // CommonUi.openPage(
             //     context, new FakturPembayaran(nota.noNota, false));
-            Navigator.push(context,MaterialPageRoute(
-                                          builder: (context) =>
-                                              FakturPembayaran(nota.noNota, false)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        FakturPembayaran(nota.noNota, false)));
           } else {
             // CommonUi.openPage(
             //     context, new FakturPembayaranDs(nota.noNota, false));
-            Navigator.push(context,MaterialPageRoute(
-                                          builder: (context) =>
-                                              FakturPembayaranDs(nota.noNota, false)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        FakturPembayaranDs(nota.noNota, false)));
           }
         });
       },
@@ -235,7 +247,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                         width: 24,
                       ),
                 title: LabelWhite.size2('${nota.noNota} / $ket'),
-                trailing: Icon(Icons.keyboard_arrow_right,color:Colors.white),
+                trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white),
               ),
             ),
           ],
@@ -264,10 +276,15 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ya', () {
                     Navigator.of(context).pop();
-                    ParamPreviewPhoto params =
-                        ParamPreviewPhoto(EnumTakePhoto.distribusi,pathPhoto: null,);
+                    ParamPreviewPhoto params = ParamPreviewPhoto(
+                      EnumTakePhoto.distribusi,
+                      pathPhoto: null,
+                    );
                     // CommonUi.openPage(context, CameraView(params));
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=> CameraView(params)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CameraView(params)));
                   }),
                 ),
                 Padding(
