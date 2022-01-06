@@ -115,6 +115,9 @@ class _CoverageHomeState extends State<CoverageHome> {
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_cari_outlet.png'),
                                   height: 35)),
+                          const SizedBox(
+                            width: 3,
+                          ),
                           GestureDetector(
                               onTap: () {
                                 if (item.enumAccount == EnumAccount.sf) {
@@ -129,6 +132,9 @@ class _CoverageHomeState extends State<CoverageHome> {
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_tambah_outlet.png'),
                                   height: 35)),
+                          const SizedBox(
+                            width: 3,
+                          ),
                           GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
@@ -256,6 +262,9 @@ class _CoverageHomeState extends State<CoverageHome> {
       //lw.add(_cellPjp(element.tempat.nama, element.tempat.id, element.enumPjp));
       lwlist.add(_cellPjp(element));
     }
+    lwlist.add(const Divider(
+      color: Colors.white,
+    ));
     lw.add(Expanded(
       child: Container(
         //color: Colors.grey,

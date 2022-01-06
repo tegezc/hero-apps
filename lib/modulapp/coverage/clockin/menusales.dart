@@ -33,7 +33,6 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   void _setup() {
-    print('masuk');
     _reloadData().then((value) {
       setState(() {});
     });
@@ -71,8 +70,8 @@ class _MenuSalesState extends State<MenuSales> {
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 12,
+              const SizedBox(
+                height: 30,
               ),
               //Divider(),
               _controllMenu(),

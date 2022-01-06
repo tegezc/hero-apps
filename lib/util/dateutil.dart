@@ -160,21 +160,32 @@ class DateUtility {
   /*
   * ex: Kamis, 10-12-2020 09:00:00
   * */
-  static String dateToStringLengkap(DateTime dt) {
+  static String dateToStringLengkap(DateTime? dt) {
     if (dt == null) {
       return '';
     }
-    String menit;
-    if (dt.minute < 10) {
-      menit = '0${dt.minute}';
-    } else {
-      menit = '${dt.minute}';
-    }
-    return '${namaHariPanjang[dt.weekday]}, ${dt.day}-${dt.month}-${dt.year} ${dt.hour}:'
-        '${menit}:${dt.second}';
+    String day = correntFormatToTwoDigit(dt.day);
+    String month = correntFormatToTwoDigit(dt.month);
+    String jam = correntFormatToTwoDigit(dt.hour);
+
+    String menit = correntFormatToTwoDigit(dt.minute);
+    String second = correntFormatToTwoDigit(dt.second);
+
+    return '${namaHariPanjang[dt.weekday]}, $day-$month-${dt.year} $jam:'
+        '$menit:$second';
   }
 
-  static final namaBulanPendek = const [
+  static String correntFormatToTwoDigit(int satuOrDuadigit) {
+    String duadigitstring;
+    if (satuOrDuadigit < 10) {
+      duadigitstring = '0$satuOrDuadigit';
+    } else {
+      duadigitstring = '$satuOrDuadigit';
+    }
+    return duadigitstring;
+  }
+
+  static const namaBulanPendek = [
     '',
     'Jan',
     'Feb',
@@ -190,7 +201,7 @@ class DateUtility {
     'Des'
   ];
 
-  static final namaHariPanjang = const [
+  static const namaHariPanjang = [
     '',
     'Senin',
     'Selasa',
