@@ -177,7 +177,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
   Widget _content(List<Pjp>? lpjp, Size s) {
     return SizedBox(
       width: s.width,
-      height: s.height - 165,
+      height: s.height * 0.75,
       child: ListView.separated(
         padding: const EdgeInsets.all(8),
         itemCount: _countList(),
@@ -239,11 +239,10 @@ class _HistoryPJPState extends State<HistoryPJP> {
   }
 
   Widget _btnShowMore() {
-    return RaisedButton(
-        child: Text('show more'),
-        color: Colors.green,
+    return TextButton(
+        child: Text('SHOW MORE',style: TextStyle(color: Colors.blue)),
         onPressed: () {
-          this._showMore();
+          _showMore();
         });
   }
 }
