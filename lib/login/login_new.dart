@@ -41,36 +41,38 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Stack(children: [
-      PropertyImage.bgbawah(),
-      Container(
-        height: size.height,
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  PropertyImage.map(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  // PropertyImage.textWelcome(),
-                  // SizedBox(
-                  //   height: 30,
-                  // ),
-                  _contentForm(),
-                ],
+      body: Stack(
+        children:[
+          PropertyImage.bgbawah(),
+          Container(
+          height: size.height,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: size.height * 0.15,
+                    ),
+                    PropertyImage.map(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    // PropertyImage.textWelcome(),
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
+                    _contentForm(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        )]
       ),
-    ]));
+    );
   }
 
   Widget _contentForm() {
