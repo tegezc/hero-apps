@@ -42,7 +42,7 @@ class BlocHomePageCoverage {
 
   Future<bool> _setupFirstime() async {
     List<Pjp>? lpjp = await _httpDashboard.getPjpHariIni();
-
+    print("masuk");
     _cacheuicvrg = UIHomeCvrg();
     _cacheuicvrg!.profile = await AccountHore.getProfile();
     _cacheuicvrg!.lpjp = this._filterpjp(lpjp);
@@ -83,7 +83,7 @@ class BlocHomePageCoverage {
             return false;
           }
         }
-        
+
       case PermissionStatus.deniedForever:
         {
           print('DENIED');
@@ -99,7 +99,6 @@ class BlocHomePageCoverage {
             return false;
           }
         }
-        
     }
 
     return false;
@@ -166,7 +165,8 @@ class BlocHomePageCoverage {
 
   void _setTgl() {
     _cacheuicvrg!.dt = DateTime.now();
-    _cacheuicvrg!.strTanggal = DateUtility.dateToStringPanjang(_cacheuicvrg!.dt);
+    _cacheuicvrg!.strTanggal =
+        DateUtility.dateToStringPanjang(_cacheuicvrg!.dt);
   }
 
   void _sink(UIHomeCvrg? item) {

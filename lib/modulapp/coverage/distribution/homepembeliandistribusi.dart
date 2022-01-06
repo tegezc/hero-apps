@@ -133,12 +133,13 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ButtonStrectWidth(
+                buttonColor: Colors.green,
                 text: 'Ambil Foto',
                 onTap: () {
                   //CommonUi.openPage(context, DummyView());
                   _showDialogConfirmClockOut();
                 },
-                isenable: false, //_lnota!.length > 0,
+                isenable: _lnota!.length > 0,
               ),
             ),
             _contentStruk(_lnota),
