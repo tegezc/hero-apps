@@ -538,7 +538,8 @@ class ButtonAppLoading extends StatelessWidget {
 class ButtonClockIn extends StatelessWidget {
   final String text;
   final Function onTap;
-  ButtonClockIn({required this.text, required this.onTap});
+  final Color? borderColor;
+  ButtonClockIn({required this.text, required this.onTap, this.borderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -546,6 +547,7 @@ class ButtonClockIn extends StatelessWidget {
   }
 
   Widget _loginButton() {
+    Color _borderColor = borderColor ?? Colors.white;
     return InkWell(
       onTap: () {
         onTap();
@@ -553,11 +555,15 @@ class ButtonClockIn extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 10, right: 10),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
           // alignment: Alignment.center,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            border: Border.all(
+              color: _borderColor,
+              width: 0.5,
+            ),
             // boxShadow: <BoxShadow>[
             //   BoxShadow(
             //       color: Colors.blue,
@@ -622,6 +628,43 @@ class ButtonAppSolidClockIn extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ButtonStrectWidth extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  final bool isenable;
+  const ButtonStrectWidth(
+      {Key? key,
+      required this.text,
+      required this.onTap,
+      required this.isenable})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color? color = isenable ? Colors.green : Colors.grey[400];
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        // backgroundColor: Colors.white,
+        primary: Colors.green,
+        side: BorderSide(color: color!, width: 0.5),
+        minimumSize: const Size.fromHeight(
+            40), // fromHeight use double.infinity as width and 40 is the height
+      ),
+      onPressed: isenable
+          ? () {
+              onTap();
+            }
+          : null,
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 11, color: Colors.white),
       ),
     );
   }
