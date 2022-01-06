@@ -165,22 +165,28 @@ class ButtonApp extends StatefulWidget {
   final EnumWarnaButton enumWarnaButton;
   final bool enable;
 
-  ButtonApp.red(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.red(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.red;
 
-  ButtonApp.blue(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.blue(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.blue;
 
-  ButtonApp.yellow(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.yellow(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.yellow;
 
-  ButtonApp.green(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.green(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.green;
 
-  ButtonApp.black(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.black(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.black;
 
-  ButtonApp.white(this.text, this.onTap, {this.enable = true, this.bgColor = Colors.transparent})
+  ButtonApp.white(this.text, this.onTap,
+      {this.enable = true, this.bgColor = Colors.transparent})
       : enumWarnaButton = EnumWarnaButton.white;
 
   @override
@@ -592,7 +598,8 @@ class ButtonClockIn extends StatelessWidget {
 class ButtonAppSolidClockIn extends StatelessWidget {
   final String text;
   final Function onTap;
-  ButtonAppSolidClockIn(this.text, {required this.onTap});
+  bool? isenable;
+  ButtonAppSolidClockIn(this.text, {required this.onTap, this.isenable});
 
   @override
   Widget build(BuildContext context) {
@@ -639,8 +646,10 @@ class ButtonStrectWidth extends StatelessWidget {
   final String text;
   final Function onTap;
   final bool isenable;
+  final Color buttonColor;
   const ButtonStrectWidth(
       {Key? key,
+      required this.buttonColor,
       required this.text,
       required this.onTap,
       required this.isenable})
@@ -648,13 +657,13 @@ class ButtonStrectWidth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? color = isenable ? Colors.green : Colors.grey[400];
+    Color? color = isenable ? buttonColor : Colors.grey[400];
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         // backgroundColor: Colors.white,
-        primary: Colors.green,
+        primary: buttonColor,
         side: BorderSide(color: color!, width: 0.5),
         minimumSize: const Size.fromHeight(
             40), // fromHeight use double.infinity as width and 40 is the height
