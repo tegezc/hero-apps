@@ -317,7 +317,9 @@ class _CoverageHomeState extends State<CoverageHome> {
     }
     return Column(
       children: [
-        const Divider(),
+        const Divider(
+          color: Colors.white,
+        ),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),

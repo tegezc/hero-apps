@@ -503,33 +503,125 @@ class ButtonAppLoading extends StatelessWidget {
   }
 }
 
-class ButtonClockIn extends StatefulWidget {
-  final Function onTap;
+// class ButtonClockIn extends StatefulWidget {
+//   final Function onTap;
+//   final String text;
+//   const ButtonClockIn({Key? key, required this.onTap, required this.text})
+//       : super(key: key);
+//
+//   @override
+//   _ButtonClockInState createState() => _ButtonClockInState();
+// }
+//
+// class _ButtonClockInState extends State<ButtonClockIn> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return OutlinedButton(
+//       onPressed: () {
+//         widget.onTap();
+//       },
+//       child: Text(
+//         widget.text,
+//         style: const TextStyle(color: Colors.black, fontSize: 12),
+//       ),
+//       style: OutlinedButton.styleFrom(
+//         shape:
+//             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+//         backgroundColor: Colors.grey[350],
+//         //primary: Colors.,
+//         //side: BorderSide(color: _color!, width: 0.5),
+//       ),
+//     );
+//   }
+// }
+
+class ButtonClockIn extends StatelessWidget {
   final String text;
-  const ButtonClockIn({Key? key, required this.onTap, required this.text})
-      : super(key: key);
+  final Function onTap;
+  ButtonClockIn({required this.text, required this.onTap});
 
-  @override
-  _ButtonClockInState createState() => _ButtonClockInState();
-}
-
-class _ButtonClockInState extends State<ButtonClockIn> {
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {
-        widget.onTap();
+    return _loginButton();
+  }
+
+  Widget _loginButton() {
+    return InkWell(
+      onTap: () {
+        onTap();
       },
-      child: Text(
-        widget.text,
-        style: const TextStyle(color: Colors.black, fontSize: 12),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 10, right: 10),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          // alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            // boxShadow: <BoxShadow>[
+            //   BoxShadow(
+            //       color: Colors.blue,
+            //       offset: Offset(2, 4),
+            //       blurRadius: 5,
+            //       spreadRadius: 2)
+            // ],
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
       ),
-      style: OutlinedButton.styleFrom(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        backgroundColor: Colors.grey[350],
-        //primary: Colors.,
-        //side: BorderSide(color: _color!, width: 0.5),
+    );
+  }
+}
+
+class ButtonAppSolidClockIn extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  ButtonAppSolidClockIn(this.text, {required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return _loginButton();
+  }
+
+  Widget _loginButton() {
+    return InkWell(
+      onTap: () {
+        this.onTap();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 10, right: 10),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          // alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            // boxShadow: <BoxShadow>[
+            //   BoxShadow(
+            //       color: Colors.blue,
+            //       offset: Offset(2, 4),
+            //       blurRadius: 5,
+            //       spreadRadius: 2)
+            // ],
+          ),
+          child: Center(
+            child: Text(
+              this.text,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
       ),
     );
   }

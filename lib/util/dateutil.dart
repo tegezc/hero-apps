@@ -140,7 +140,21 @@ class DateUtility {
     if (dt == null) {
       return '';
     }
-    return '${namaHariPanjang[dt.weekday]}, ${dt.day}-${dt.month}-${dt.year}';
+    String day = "";
+    if (dt.day > 9) {
+      day = "${dt.day}";
+    } else {
+      day = "0${dt.day}";
+    }
+
+    String month = "";
+    if (dt.month > 9) {
+      month = "${dt.month}";
+    } else {
+      month = "0${dt.month}";
+    }
+
+    return '${namaHariPanjang[dt.weekday]}, $day-$month-${dt.year}';
   }
 
   /*
@@ -151,10 +165,10 @@ class DateUtility {
       return '';
     }
     String menit;
-    if( dt.minute < 10){
-       menit = '0${dt.minute}';
-    }else{
-       menit = '${dt.minute}';
+    if (dt.minute < 10) {
+      menit = '0${dt.minute}';
+    } else {
+      menit = '${dt.minute}';
     }
     return '${namaHariPanjang[dt.weekday]}, ${dt.day}-${dt.month}-${dt.year} ${dt.hour}:'
         '${menit}:${dt.second}';

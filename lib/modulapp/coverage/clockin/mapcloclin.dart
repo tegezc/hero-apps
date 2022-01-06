@@ -150,9 +150,9 @@ class _MapClockInState extends State<MapClockIn> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _enumAccount == EnumAccount.sf ? _cellSF() : _cellDs(),
-                  ButtonApp.red(
+                  ButtonAppSolidClockIn(
                       'Clock In : Radius in ( ${distanceInMeters.toInt()}m )',
-                      () {
+                      onTap: () {
                     _showDialogConfirmClockin();
                   }),
                 ],

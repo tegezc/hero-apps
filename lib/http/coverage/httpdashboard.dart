@@ -57,13 +57,12 @@ class HttpDashboard {
       );
       print(response.body);
       print(response.statusCode);
-        // "status": 201,
-        // "message": "Data has been created.",
-        // "id_history_pjp": "27"
+      // "status": 201,
+      // "message": "Data has been created.",
+      // "id_history_pjp": "27"
 
-        Map<String, dynamic> value = json.decode(response.body);
-        return value['id_history_pjp'];
-      
+      Map<String, dynamic> value = json.decode(response.body);
+      return value['id_history_pjp'];
     } catch (e) {
       print(e);
       print(response?.body);
@@ -71,7 +70,7 @@ class HttpDashboard {
     }
   }
 
-  Future<bool> trackingSales(String sales,TgzLocation userLocation) async {
+  Future<bool> trackingSales(String sales, TgzLocation userLocation) async {
     // Map<String, String> headers = {
     //   'Auth-Key': 'restapihore',
     //   'Client-Service': 'frontendclienthore',
@@ -102,8 +101,8 @@ class HttpDashboard {
         headers: headers,
         body: jsonEncode(param),
       );
-      print("tracking sales : ${response.body}");
-      print("tracking sales : ${response.statusCode}");
+      //   print("tracking sales : ${response.body}");
+      //   print("tracking sales : ${response.statusCode}");
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -291,7 +290,7 @@ class HttpDashboard {
         int? i = ConverterNumber.stringToInt(map['status']);
         print(i);
         // if (i == 1) {
-          return true;
+        return true;
         // }
       }
       return false;

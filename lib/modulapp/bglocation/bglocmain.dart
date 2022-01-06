@@ -72,7 +72,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
     HttpDashboard httpDashboard = HttpDashboard();
     String? flagtimeint = await AccountHore.getIdlokasi();
     Profile? profile = await AccountHore.getProfile();
-    print('key: $flagtimeint');
+    //  print('key: $flagtimeint');
     int? flagint = 0;
     if (flagtimeint != null) {
       flagint = int.tryParse(flagtimeint);
@@ -92,11 +92,12 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
           if (timeint > flagint!) {
             List<String> loc = lineloc[1].split('|');
             if (loc.length == 2) {
-              print('send loc $tmp');
+              //        print('send loc $tmp');
               TgzLocation tgzLocation =
                   TgzLocation(latitute: loc[0], longitute: loc[1]);
-              bool value = await httpDashboard.trackingSales(profile.id!,tgzLocation);
-              print(value);
+              bool value =
+                  await httpDashboard.trackingSales(profile.id!, tgzLocation);
+              //        print(value);
             }
 
             flagint = timeint;
@@ -141,7 +142,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
           latitute: '${locationData.latitude}',
           longitute: '${locationData.longitude}');
       HttpDashboard httpDashboard = HttpDashboard();
-      await httpDashboard.trackingSales(profile.id!,tgzLocation);
+      await httpDashboard.trackingSales(profile.id!, tgzLocation);
       _onStart();
     }
   }
