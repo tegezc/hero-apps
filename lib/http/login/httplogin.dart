@@ -35,8 +35,8 @@ class HttpLogin {
         body: map,
       );
       print(response.body);
+      print(response.statusCode);
       if (response.statusCode == 200) {
-        print(response.body);
         return json.decode(response.body);
       } else {
         return null;

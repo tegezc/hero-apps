@@ -122,6 +122,7 @@ class ButtonGray extends StatelessWidget {
     );
   }
 }
+
 class ButtonRed extends StatelessWidget {
   final String text;
   final Function onTap;
@@ -145,11 +146,9 @@ class ButtonRed extends StatelessWidget {
             // border: Border.all(width: 1, color: Colors.red[600]!),
           ),
           child: Text(
-              text,
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+            text,
+            style: const TextStyle(
+                fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -246,9 +245,8 @@ class _ButtonAppState extends State<ButtonApp> {
         style: style,
       ),
       style: OutlinedButton.styleFrom(
-        shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(30.0)
-        ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         // backgroundColor: Colors.white,
         primary: _color,
         side: BorderSide(color: _color!, width: 0.5),
