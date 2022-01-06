@@ -150,9 +150,9 @@ class _MapClockInState extends State<MapClockIn> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _enumAccount == EnumAccount.sf ? _cellSF() : _cellDs(),
-                  ButtonApp.red(
-                      'Clock In : Radius in ( ${distanceInMeters.toInt()}m )',
-                      () {
+                  ButtonAppSolidClockIn(
+                      'Clock In : Radius ( ${distanceInMeters.toInt()} m )',
+                      onTap: () {
                     _showDialogConfirmClockin();
                   }),
                 ],
@@ -205,15 +205,16 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   Widget _cellDs() {
+    String strTgl = DateUtility.dateToStringLengkap(DateTime.now());
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 4.0, bottom: 0),
-          child: LabelBlack.size2('Universitas B'),
+          child: LabelBlack.size2(widget.pjp!.tempat!.nama),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: LabelBlack.size2('Selasa, 12-10-2020 11:02'),
+          child: LabelBlack.size2(strTgl),
         ),
       ],
     );

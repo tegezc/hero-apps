@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
@@ -114,6 +115,9 @@ class _CoverageHomeState extends State<CoverageHome> {
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_cari_outlet.png'),
                                   height: 35)),
+                          const SizedBox(
+                            width: 3,
+                          ),
                           GestureDetector(
                               onTap: () {
                                 if (item.enumAccount == EnumAccount.sf) {
@@ -128,6 +132,9 @@ class _CoverageHomeState extends State<CoverageHome> {
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_tambah_outlet.png'),
                                   height: 35)),
+                          const SizedBox(
+                            width: 3,
+                          ),
                           GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
@@ -255,6 +262,9 @@ class _CoverageHomeState extends State<CoverageHome> {
       //lw.add(_cellPjp(element.tempat.nama, element.tempat.id, element.enumPjp));
       lwlist.add(_cellPjp(element));
     }
+    lwlist.add(const Divider(
+      color: Colors.white,
+    ));
     lw.add(Expanded(
       child: Container(
         //color: Colors.grey,
@@ -288,13 +298,24 @@ class _CoverageHomeState extends State<CoverageHome> {
       action = LabelWhite.size3('Status: Done');
     } else if (pjp.enumPjp == EnumPjp.progress) {
       colorIcon = Colors.white;
-      action = ButtonApp.white('Clock In', () {
-        print("Clock In");
-        Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
-            .then((value) {
-          _blocDashboard!.firstTime();
-        });
-      });
+      // action = ButtonApp.white('Clock In', () {
+      //   print("Clock In");
+      //   Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
+      //       .then((value) {
+      //     _blocDashboard!.firstTime();
+      //   });
+      // });
+      action = ButtonClockIn(
+          onTap: () {
+            if (kDebugMode) {
+              print("Clock In");
+            }
+            Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
+                .then((value) {
+              _blocDashboard!.firstTime();
+            });
+          },
+          text: "Clock In");
     } else if (pjp.enumPjp == EnumPjp.belum) {
       colorIcon = Colors.white;
       action = LabelWhite.size3('Not Clock In ');
@@ -305,7 +326,9 @@ class _CoverageHomeState extends State<CoverageHome> {
     }
     return Column(
       children: [
-        const Divider(),
+        const Divider(
+          color: Colors.white,
+        ),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
