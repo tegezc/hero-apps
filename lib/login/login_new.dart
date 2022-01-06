@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hero/http/login/httplogin.dart';
-import 'package:hero/login/resetpassword.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_image_new.dart';
@@ -42,40 +41,38 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children:[
-          PropertyImage.bgbawah(),
-          Container(
-          height: size.height,
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Container(
-                color: Colors.transparent,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    PropertyImage.map(),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    // PropertyImage.textWelcome(),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
-                    _contentForm(),
-                  ],
-                ),
+        body: Stack(children: [
+      PropertyImage.bgbawah(),
+      Container(
+        height: size.height,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  PropertyImage.map(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  // PropertyImage.textWelcome(),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  _contentForm(),
+                ],
               ),
             ),
           ),
         ),
-        ]
-      )
-    );
+      ),
+    ]));
   }
+
   Widget _contentForm() {
     return Center(
       child: FractionallySizedBox(
@@ -106,8 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() {
                           _isloading = true;
                         });
-                        Future.delayed(const Duration(milliseconds: 500),
-                            () {
+                        Future.delayed(const Duration(milliseconds: 500), () {
                           _proseslogin();
                         });
                       }),
@@ -151,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<bool> _extractJsonLogin() async {
     String username = _idTextController.text;
     String password = _passwordTextController.text;
-    HttpLogin httpLogin = new HttpLogin();
+    HttpLogin httpLogin = HttpLogin();
     Map<String, dynamic>? map = await httpLogin.login(username, password);
     if (map != null) {
       Profile profile = Profile.fromJson(map);

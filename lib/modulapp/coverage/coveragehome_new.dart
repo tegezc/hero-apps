@@ -62,7 +62,7 @@ class _CoverageHomeState extends State<CoverageHome> {
           return Stack(children: [
             SingleChildScrollView(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     //image: AssetImage('assets/image/coverage/BG.png'),
                     image: AssetImage('assets/image/new/BG.png'),
@@ -74,9 +74,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container()
-                  ],
+                  children: [Container()],
                 ),
               ),
             ),
@@ -88,7 +86,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       height: 50,
                       child: _account(
                           item.profile.namaSales, item.profile.namaTap)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -112,7 +110,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                                               SearchLocationDs()));
                                 }
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_cari_outlet.png'),
                                   height: 35)),
@@ -126,7 +124,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                                   _showDialogPilihTambahLokasi();
                                 }
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_tambah_outlet.png'),
                                   height: 35)),
@@ -135,7 +133,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                                 Navigator.pushNamed(
                                     context, HomePageRetur.routeName);
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'assets/image/feature_button/ic_retur.png'),
                                   height: 35)),
@@ -147,7 +145,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                         padding: const EdgeInsets.only(top: 10),
                         child: _pjp(item)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 70,
                   )
                 ]))
@@ -160,14 +158,14 @@ class _CoverageHomeState extends State<CoverageHome> {
     return Row(
       children: [
         _photoAccount(),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LabelBlack.size1(nama),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             LabelBlack.size1(tap),
@@ -178,7 +176,7 @@ class _CoverageHomeState extends State<CoverageHome> {
   }
 
   Widget _photoAccount() {
-    return Center(
+    return const Center(
       child: Icon(
         Icons.account_circle_outlined,
         size: 50,
@@ -191,8 +189,8 @@ class _CoverageHomeState extends State<CoverageHome> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -247,28 +245,28 @@ class _CoverageHomeState extends State<CoverageHome> {
       child: Row(
         children: [
           LabelWhite.size2('Daftar PJP hari ${item.strTanggal}:'),
-          Spacer(),
+          const Spacer(),
           LabelWhite.size2(item.strJumlah),
         ],
       ),
     ));
     List<Widget> lwlist = [];
-    item.lpjp.forEach((element) {
+    for (var element in item.lpjp) {
       //lw.add(_cellPjp(element.tempat.nama, element.tempat.id, element.enumPjp));
       lwlist.add(_cellPjp(element));
-    });
+    }
     lw.add(Expanded(
       child: Container(
         //color: Colors.grey,
         alignment: Alignment.center,
         child: ListView(
-          padding: EdgeInsets.only(top: 0),
+          padding: const EdgeInsets.only(top: 0),
           children: lwlist,
         ),
       ),
     ));
 
-    lw.add(SizedBox(
+    lw.add(const SizedBox(
       height: 20,
     ));
 
@@ -307,7 +305,7 @@ class _CoverageHomeState extends State<CoverageHome> {
     }
     return Column(
       children: [
-        Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
@@ -317,7 +315,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                 Icons.location_on,
                 color: colorIcon,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
@@ -330,7 +328,11 @@ class _CoverageHomeState extends State<CoverageHome> {
                   ],
                 ),
               ),
-              Expanded(flex: 2, child: Center(child: action,)),
+              Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: action,
+                  )),
             ],
           ),
         ),
