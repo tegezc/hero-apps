@@ -9,6 +9,8 @@ enum EnumPjp { done, progress, belum }
 
 enum EnumStatusTempat { open, close }
 
+enum EnumStatusClockIn { belum, open, close }
+
 enum EnumJenisLokasi { outlet, poi, sekolah, kampus, fakultas }
 enum EnumStateWidget { startup, active, loading, done }
 enum EnumPicOwner { pic, owner }
