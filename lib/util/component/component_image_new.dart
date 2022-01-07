@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero/model/enumapp.dart';
 
 class PropertyImage extends StatelessWidget {
   final EnumPropertyImage _enumProperty;
@@ -102,11 +103,17 @@ class ClockInImageIcon extends StatefulWidget {
   final Function onTap;
   final String image;
   final String disableImage;
+  final String completeImage;
   final double width;
-  final bool? enable;
+  final EnumBtnMenuState enable;
 
   const ClockInImageIcon(
-      {required this.onTap, required this.image, required this.disableImage, this.enable = true, this.width = 140});
+      {required this.onTap,
+      required this.image,
+      required this.disableImage,
+      required this.completeImage,
+      required this.enable,
+      this.width = 140});
 
   @override
   State<ClockInImageIcon> createState() => _ClockInImageIconState();
@@ -115,15 +122,28 @@ class ClockInImageIcon extends StatefulWidget {
 class _ClockInImageIconState extends State<ClockInImageIcon> {
   @override
   Widget build(BuildContext context) {
+    String urlimage = widget.image;
+    switch (widget.enable) {
+      case EnumBtnMenuState.enable:
+        urlimage = widget.image;
+        break;
+      case EnumBtnMenuState.disable:
+        urlimage = widget.disableImage;
+        break;
+      case EnumBtnMenuState.complete:
+        urlimage = widget.completeImage;
+        break;
+    }
     return GestureDetector(
-      onTap: (){
-        widget.enable! ? widget.onTap() : print('');
-      },
-      child: Image(
-        image: AssetImage(widget.enable! ? widget.image : widget.disableImage),
-        width: widget.width,
-      )
-    );
+        onTap: () {
+          if (widget.enable == EnumBtnMenuState.enable) {
+            widget.onTap();
+          }
+        },
+        child: Image(
+          image: AssetImage(urlimage),
+          width: widget.width,
+        ));
   }
 }
 

@@ -302,9 +302,10 @@ class HttpDashboard {
   }
 
   Future<EnumStatusClockIn?> checkStatusClockIn(String idpjp) async {
+    print("IDPJP CHECK: $idpjp");
     Map<String, String> headers = await HttpUtil.getHeader();
-    String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
-    Map map = {"id_history_pjp": idhistoryPjp};
+    //  String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
+    Map map = {"id_history_pjp": idpjp};
 
     Uri uri = ConstApp.uri('/clockin/pjp_clockin_status');
     http.Response? response;
@@ -326,6 +327,7 @@ class HttpDashboard {
         if (ld != null) {
           if (ld["status"] != null) {
             String status = ld["status"];
+            //print(status == "2");
             if (status == "0") {
               return EnumStatusClockIn.belum;
             } else if (status == "1") {
@@ -335,9 +337,9 @@ class HttpDashboard {
             }
           }
         }
-        return EnumStatusClockIn.belum;
+        return null;
       } else {
-        return EnumStatusClockIn.belum;
+        return null;
       }
     } catch (e) {
       print(e);
@@ -362,9 +364,9 @@ class HttpDashboard {
           lpjp.add(pjp);
         }
         lpjp.sort((a, b) => a.nokunjungan!.compareTo(b.nokunjungan!));
-        lpjp.forEach((element) {
-          print(element.nokunjungan);
-        });
+        // lpjp.forEach((element) {
+        //   print(element.nokunjungan);
+        // });
       }
       return lpjp;
     } catch (e) {

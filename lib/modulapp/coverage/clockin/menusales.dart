@@ -82,17 +82,6 @@ class _MenuSalesState extends State<MenuSales> {
     );
   }
 
-  Widget _controllMenu() {
-    if (_enumAccount == EnumAccount.ds) {
-      if (widget.pjp!.idjenilokasi == ConstApp.keyPOI) {
-        return _openDsPoi();
-      }
-      return _openDS();
-    }
-
-    return _openSf();
-  }
-
   _showDialogConfirmClockOut() {
     showDialog<String>(
         context: context,
@@ -129,6 +118,17 @@ class _MenuSalesState extends State<MenuSales> {
     return result;
   }
 
+  Widget _controllMenu() {
+    if (_enumAccount == EnumAccount.ds) {
+      if (widget.pjp!.idjenilokasi == ConstApp.keyPOI) {
+        return _openDsPoi();
+      }
+      return _openDS();
+    }
+
+    return _openSf();
+  }
+
   Widget _openSf() {
     return Column(
       children: [
@@ -153,7 +153,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_distribution.png',
-              enable: _menu!.isDistEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_distribution.png',
+              enable: _menu!.isDistEnable!,
             ),
             ClockInImageIcon(
               onTap: () {
@@ -162,7 +164,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_merchandising.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_merchandising.png',
-              enable: _menu!.isMerchEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_merchandising.png',
+              enable: _menu!.isMerchEnable!,
             )
           ],
         ),
@@ -193,7 +197,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_promotion.png',
-              enable: _menu!.isPromEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_promotion.png',
+              enable: _menu!.isPromEnable!,
             ),
             ClockInImageIcon(
               onTap: () {
@@ -202,7 +208,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_market_audit.png',
-              enable: _menu!.isMarketEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_market_audit.png',
+              enable: _menu!.isMarketEnable!,
             )
           ],
         ),
@@ -245,7 +253,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_distribution.png',
-              enable: _menu!.isDistEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_distribution.png',
+              enable: _menu!.isDistEnable!,
             ),
             ClockInImageIcon(
               onTap: () {
@@ -254,7 +264,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_promotion.png',
-              enable: _menu!.isPromEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_promotion.png',
+              enable: _menu!.isPromEnable!,
             ),
             // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
             //   _tapMenu(EnumTab.distribution);
@@ -309,7 +321,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_distribution.png',
-              enable: _menu!.isDistEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_distribution.png',
+              enable: _menu!.isDistEnable!,
             ),
             ClockInImageIcon(
               onTap: () {
@@ -318,7 +332,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_merchandising.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_merchandising.png',
-              enable: _menu!.isMerchEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_merchandising.png',
+              enable: _menu!.isMerchEnable!,
             )
             // ButtonMenu(
             //   Icons.work,
@@ -348,7 +364,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_promotion.png',
-              enable: _menu!.isPromEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_promotion.png',
+              enable: _menu!.isPromEnable!,
             ),
             // ButtonMenu(Icons.file_copy, 'Market Audit', () {
             //   _tapMenu(EnumTab.survey);
@@ -360,7 +378,9 @@ class _MenuSalesState extends State<MenuSales> {
               image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
               disableImage:
                   'assets/image/icon/clockin/disable/ic_ds_market_audit.png',
-              enable: _menu!.isMarketEnable,
+              completeImage:
+                  'assets/image/icon/clockin/complete/ic_ck_market_audit.png',
+              enable: _menu!.isMarketEnable!,
             )
           ],
         ),

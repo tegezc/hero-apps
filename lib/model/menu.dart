@@ -2,11 +2,11 @@ import 'package:hero/model/enumapp.dart';
 
 class Menu {
   EnumStatusTempat? enumStatusTempat;
-  bool? isDistEnable;
-  bool? isMerchEnable;
-  bool? isPromEnable;
-  bool? isMarketEnable;
-  bool? isReportMtEnable;
+  EnumBtnMenuState? isDistEnable;
+  EnumBtnMenuState? isMerchEnable;
+  EnumBtnMenuState? isPromEnable;
+  EnumBtnMenuState? isMarketEnable;
+  EnumBtnMenuState? isReportMtEnable;
 
   // "status": "OPEN",
   // "clockin_distribusi": "ENABLED",
@@ -31,11 +31,20 @@ class Menu {
     }
   }
 
-  bool? _olahtag(String? str) {
+  EnumBtnMenuState _olahtag(String? str) {
     if (str == null) {
-      return null;
+      return EnumBtnMenuState.disable;
     }
-    return str == 'ENABLED' || str == 'START';
+
+    if (str == 'ENABLED' || str == 'START') {
+      return EnumBtnMenuState.enable;
+    } else if (str == "DISABLED") {
+      return EnumBtnMenuState.disable;
+    } else if (str == "FINISH") {
+      return EnumBtnMenuState.complete;
+    }
+    return EnumBtnMenuState.disable;
+    // return str == 'ENABLED' || str == 'START';
     // return true; // for development, enable all
   }
 }

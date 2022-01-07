@@ -25,17 +25,17 @@ class CoverageHome extends StatefulWidget {
 }
 
 class _CoverageHomeState extends State<CoverageHome> {
-  BlocHomePageCoverage? _blocDashboard;
+  final BlocHomePageCoverage _blocDashboard = BlocHomePageCoverage();
   int _counterBuild = 0;
+
   @override
   void initState() {
-    _blocDashboard = BlocHomePageCoverage();
     super.initState();
   }
 
   @override
   void dispose() {
-    _blocDashboard!.dispose();
+    _blocDashboard.dispose();
     super.dispose();
   }
 
@@ -43,12 +43,12 @@ class _CoverageHomeState extends State<CoverageHome> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (_counterBuild == 0) {
-      _blocDashboard!.firstTime();
+      _blocDashboard.firstTime();
       _counterBuild++;
     }
 
     return StreamBuilder<UIHomeCvrg?>(
-        stream: _blocDashboard!.uihpcvrg,
+        stream: _blocDashboard.uihpcvrg,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Container();
@@ -296,15 +296,10 @@ class _CoverageHomeState extends State<CoverageHome> {
     if (pjp.enumPjp == EnumPjp.done) {
       colorIcon = Colors.blue;
       action = LabelWhite.size3('Status: Done');
-    } else if (pjp.enumPjp == EnumPjp.progress) {
+    } else if (pjp.enumPjp == EnumPjp.progress ||
+        pjp.enumPjp == EnumPjp.notclockinyet) {
+      String text = pjp.enumPjp == EnumPjp.progress ? "Progress" : "Clock In";
       colorIcon = Colors.white;
-      // action = ButtonApp.white('Clock In', () {
-      //   print("Clock In");
-      //   Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
-      //       .then((value) {
-      //     _blocDashboard!.firstTime();
-      //   });
-      // });
       action = ButtonClockIn(
           onTap: () {
             if (kDebugMode) {
@@ -312,10 +307,10 @@ class _CoverageHomeState extends State<CoverageHome> {
             }
             Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
                 .then((value) {
-              _blocDashboard!.firstTime();
+              _blocDashboard.firstTime();
             });
           },
-          text: "Clock In");
+          text: text);
     } else if (pjp.enumPjp == EnumPjp.belum) {
       colorIcon = Colors.white;
       action = LabelWhite.size3('Not Clock In ');
@@ -342,7 +337,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                 width: 10,
               ),
               Expanded(
-                flex: 3,
+                flex: 6,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -352,7 +347,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                 ),
               ),
               Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: Center(
                     child: action,
                   )),
