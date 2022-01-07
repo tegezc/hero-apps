@@ -301,6 +301,51 @@ class HttpDashboard {
     }
   }
 
+  Future<EnumStatusClockIn?> checkStatusClockIn(String idpjp) async {
+    Map<String, String> headers = await HttpUtil.getHeader();
+    String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
+    Map map = {"id_history_pjp": idhistoryPjp};
+
+    Uri uri = ConstApp.uri('/clockin/pjp_clockin_status');
+    http.Response? response;
+    try {
+      response = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(map),
+      );
+      print(response.body);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        //  {
+        //  "status":"0"
+        //  "message": "0:belum clockin,1:OPEN,2:Close",
+        //  }"
+
+        Map<String, dynamic>? ld = json.decode(response.body);
+        if (ld != null) {
+          if (ld["status"] != null) {
+            String status = ld["status"];
+            if (status == "0") {
+              return EnumStatusClockIn.belum;
+            } else if (status == "1") {
+              return EnumStatusClockIn.open;
+            } else if (status == "2") {
+              return EnumStatusClockIn.close;
+            }
+          }
+        }
+        return EnumStatusClockIn.belum;
+      } else {
+        return EnumStatusClockIn.belum;
+      }
+    } catch (e) {
+      print(e);
+      print(response?.body);
+      return null;
+    }
+  }
+
   List<Pjp> _olahDaftarPjp(dynamic value) {
     List<Pjp> lpjp = [];
 

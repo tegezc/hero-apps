@@ -27,7 +27,7 @@ class MapClockIn extends StatefulWidget {
 
 class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
-  Menu? _menu;
+  EnumStatusClockIn? _statusClockIn;
   EnumAccount? _enumAccount;
   double? _hightCell;
   late double _minusWidget;
@@ -65,10 +65,17 @@ class _MapClockInState extends State<MapClockIn> {
     });
   }
 
-  Future<EnumStatusTempat?> _getStatusClockInOpenOrClose() async {
+  Future<EnumStatusClockIn?> _getStatusClockInOpenOrClose() async {
+    print("get menu");
     HttpDashboard httpDashboard = HttpDashboard();
-    _menu = await httpDashboard.getMenu();
-    return _menu?.enumStatusTempat;
+    String? idpjp = "";
+    if (widget.pjp != null) {
+      idpjp = widget.pjp?.id;
+      _statusClockIn = await httpDashboard.checkStatusClockIn(idpjp!);
+      return _statusClockIn;
+    }
+
+    return null;
   }
 
   Future<bool> _setupLocation() async {
@@ -156,7 +163,7 @@ class _MapClockInState extends State<MapClockIn> {
                       onTap: () {
                         _buttonClockInOnClick();
                       },
-                      isenable: _isbuttonEnable,
+                      isenable: true, //_isbuttonEnable,
                     ),
                   ),
                 ],
@@ -171,6 +178,7 @@ class _MapClockInState extends State<MapClockIn> {
 
   void _buttonClockInOnClick() {
     TgzDialog.loadingDialog(context);
+    print("masuk");
     _getStatusClockInOpenOrClose().then((value) {
       Navigator.of(context).pop();
       if (value != null) {
