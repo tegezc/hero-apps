@@ -54,37 +54,49 @@ class _ReturEditorState extends State<ReturEditor> {
           UIReturEditor item = snapshot.data!;
           return CustomScaffold(
             title: 'Retur',
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: size.height - 123,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 12,
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width,
+                        height: size.height,
+                        child: SingleChildScrollView(
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                _contentTransaksi(item),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                _contentSeri(item),
+                              ],
                             ),
-                            _contentTransaksi(item),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            _contentSeri(item),
-                            SizedBox(
-                              height: 100,
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
                     width: size.width - 2,
-                    child: RaisedButton(
-                        color: Colors.green,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                item.isSafetosubmit()
+                                    ? Colors.red[600]
+                                    : Colors.grey[400]),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            ))),
                         child: Text(
                           'RETUR',
                           style: TextStyle(color: Colors.white),
@@ -101,8 +113,8 @@ class _ReturEditorState extends State<ReturEditor> {
                               }
                             : null),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });
@@ -116,15 +128,15 @@ class _ReturEditorState extends State<ReturEditor> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, top: 13.0, bottom: 8.0),
-                  child: Column(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: [
                       LabelApp.size2(
                         'Alasan Retur :',
                       ),
@@ -149,68 +161,53 @@ class _ReturEditorState extends State<ReturEditor> {
                           'Pilih alasan retur',
                           style: TextStyle(color: Colors.black),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                          width: 200,
-                          child: TextFieldNumberOnly(
-                              'Nomor Seri :', _textController1)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: ButtonApp.yellow(judul, () {
-                          setState(() {
-                            print('click');
-                            _isRange = !_isRange;
-                          });
-                        }),
                       ),
-                    ],
-                  ),
-                ),
-                _isRange
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
+                      SizedBox(height: 15),
+                      Padding(
+                        padding: const EdgeInsets.only(top:8.0,bottom:8.0),
+                        child: SizedBox(
+                            width: 200,
+                            child: TextFieldNumberOnly(
+                                'Nomor Seri :', _textController1)),
+                      ),
+                      SizedBox(height: 15),
+                      _isRange
+                          ? Padding(
+                            padding: const EdgeInsets.only(top:8.0,bottom:8.0),
+                            child: SizedBox(
                                 width: 200,
                                 child: TextFieldNumberOnly(
                                     'Nomor Seri', _textController2)),
-                            Container(),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(top: 20.0),
-                            //   child: ButtonApp.yellow('Hide', () {
-                            //     setState(() {
-                            //       _isRange = false;
-                            //     });
-                            //   }),
-                            // ),
-                          ],
-                        ),
-                      )
-                    : Container(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ButtonApp.blue('SEARCH', () {
+                          )
+                          : Container(),
+                      SizedBox(height: 15),
+                      ButtonApp.black('SEARCH', () {
                         FocusScope.of(context).unfocus();
                         _blocReturEditor.searchSerialNumber(
                             _textController1.text, _textController2.text);
                       }),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Material(
+                        type: MaterialType.circle,
+                        color: Colors.red[600],
+                        child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                print('click');
+                                _isRange = !_isRange;
+                              });
+                            },
+                            icon: Icon(
+                                _isRange
+                                    ? Icons.arrow_upward_rounded
+                                    : Icons.arrow_downward_rounded,
+                                color: Colors.white))),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
