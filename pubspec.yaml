@@ -99,6 +99,12 @@ flutter:
     - assets/image/icon/clockin/enable/ic_en_market_audit.png
     - assets/image/icon/clockin/enable/ic_en_merchandising.png
     - assets/image/icon/clockin/enable/ic_en_promotion.png
+    - assets/image/icon/clockin/complete/ic_ck_clock_out.png
+    - assets/image/icon/clockin/complete/ic_ck_coverage.png
+    - assets/image/icon/clockin/complete/ic_ck_distribution.png
+    - assets/image/icon/clockin/complete/ic_ck_market_audit.png
+    - assets/image/icon/clockin/complete/ic_ck_merchandising.png
+    - assets/image/icon/clockin/complete/ic_ck_promotion.png
     - assets/image/icon/clockin/disable/ic_ds_clockout.png
     - assets/image/icon/clockin/disable/ic_ds_coverage.png
     - assets/image/icon/clockin/disable/ic_ds_distribution.png

@@ -5,7 +5,7 @@ enum EnumJenisOutlet { device, reguler, pareto }
 
 enum EnumMerchandising { etalase, spanduk, poster, papan, backdrop }
 
-enum EnumPjp { done, progress, belum }
+enum EnumPjp { done, notclockinyet, progress, belum }
 
 enum EnumStatusTempat { open, close }
 
@@ -16,3 +16,5 @@ enum EnumStateWidget { startup, active, loading, done }
 enum EnumPicOwner { pic, owner }
 enum EnumEditorState { baru, edit }
 enum EnumJenjangSekolah { SD, SMP, SMA, PONPES }
+
+enum EnumBtnMenuState { enable, disable, complete }

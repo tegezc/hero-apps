@@ -563,7 +563,7 @@ class ButtonClockIn extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 10, right: 10),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
           // alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.white,

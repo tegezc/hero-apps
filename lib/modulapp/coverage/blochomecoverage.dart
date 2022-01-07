@@ -136,7 +136,12 @@ class BlocHomePageCoverage {
         element.enumPjp = EnumPjp.done;
       } else {
         if (iscurrent) {
-          element.enumPjp = EnumPjp.progress;
+          if (element.isAlreadyClockIn()) {
+            element.enumPjp = EnumPjp.progress;
+          } else {
+            element.enumPjp = EnumPjp.notclockinyet;
+          }
+
           iscurrent = false;
         } else {
           element.enumPjp = EnumPjp.belum;

@@ -35,7 +35,8 @@ var m = {
   "nama_kabupaten": "BANGKA TENGAH",
   "radius_clock_in": "2",
   "jam_clock_in": null,
-  "jam_clock_out": null
+  "jam_clock_out": null,
+  "status": "OPEN" //bisa OPEN, CLOSE, START, FINISH, null,
 };
 
 /// json dari history pjp
@@ -54,8 +55,9 @@ class Pjp {
       clockout = DateUtility.stringToJam(map['jam_clock_out'], dt);
     }
 
-    status = map['status'] == null ? '' : map['status'];
+    status = map['status'] == null ? null : map['status'];
   }
+
   String? id;
   int? nokunjungan;
   String? nohp;
@@ -76,6 +78,7 @@ class Pjp {
   Tempat? tempat;
   EnumStatusTempat? enumStatusTempat;
   EnumPjp? enumPjp;
+
   Pjp(this.clockin, this.clockout, this.tempat, this.enumStatusTempat);
 
   Pjp.fromJson(Map<String, dynamic> map) {
@@ -93,10 +96,12 @@ class Pjp {
     tempat = Tempat.kosong();
     tempat!.id = map['id_digipos'] == null ? '' : map['id_digipos'];
     tempat!.nama = map['nama'] == null ? '' : map['nama'];
+    status = map['status'] == null ? null : map['status'];
+
     print('nohp: $nohp');
   }
 
-  EnumJenisLokasi? getJenisLokasi(){
+  EnumJenisLokasi? getJenisLokasi() {
     EnumJenisLokasi? enumJenisLokasi;
     switch (this.idjenilokasi) {
       case 'OUT':
@@ -116,6 +121,13 @@ class Pjp {
         break;
     }
     return enumJenisLokasi;
+  }
+
+  bool isAlreadyClockIn() {
+    if (clockin != null && clockout == null) {
+      return true;
+    }
+    return false;
   }
 
   bool isStatusDone() {

@@ -4,7 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hero/database/daoserial.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
-import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
@@ -27,7 +26,7 @@ class MapClockIn extends StatefulWidget {
 
 class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
-  EnumStatusClockIn? _statusClockIn;
+  // EnumStatusClockIn? _statusClockIn;
   EnumAccount? _enumAccount;
   double? _hightCell;
   late double _minusWidget;
@@ -63,19 +62,6 @@ class _MapClockInState extends State<MapClockIn> {
       print(value);
       setState(() {});
     });
-  }
-
-  Future<EnumStatusClockIn?> _getStatusClockInOpenOrClose() async {
-    print("get menu");
-    HttpDashboard httpDashboard = HttpDashboard();
-    String? idpjp = "";
-    if (widget.pjp != null) {
-      idpjp = widget.pjp?.id;
-      _statusClockIn = await httpDashboard.checkStatusClockIn(idpjp!);
-      return _statusClockIn;
-    }
-
-    return null;
   }
 
   Future<bool> _setupLocation() async {
@@ -125,6 +111,18 @@ class _MapClockInState extends State<MapClockIn> {
       radius = widget.pjp?.radius;
     }
     bool _isbuttonEnable = _distanceInMeters <= radius!;
+
+    String textButton =
+        'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Radius($radius)';
+    EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
+    if (statusClockIn != null) {
+      if (statusClockIn == EnumStatusClockIn.open) {
+        textButton = "Ke Menu";
+      } else if (statusClockIn == EnumStatusClockIn.close) {
+        textButton = "Ambil Photo";
+      }
+    }
+
     return CustomScaffold(
       body: Container(
         height: size.height,
@@ -158,8 +156,7 @@ class _MapClockInState extends State<MapClockIn> {
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: ButtonStrectWidth(
                       buttonColor: Colors.red,
-                      text:
-                          'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Radius($radius)',
+                      text: textButton,
                       onTap: () {
                         _buttonClockInOnClick();
                       },
@@ -177,20 +174,32 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   void _buttonClockInOnClick() {
-    TgzDialog.loadingDialog(context);
     print("masuk");
-    _getStatusClockInOpenOrClose().then((value) {
-      Navigator.of(context).pop();
-      if (value != null) {
-        if (value == EnumStatusTempat.open) {
-          _gotoMenu();
-        } else if (value == EnumStatusTempat.close) {
-          _takePhoto();
-        } else {
-          _showDialogConfirmClockin();
-        }
+    EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
+    if (statusClockIn != null) {
+      if (statusClockIn == EnumStatusClockIn.open) {
+        _gotoMenu();
+      } else if (statusClockIn == EnumStatusClockIn.close) {
+        _takePhoto();
+      } else if (statusClockIn == EnumStatusClockIn.belum) {
+        _showDialogConfirmClockin();
       }
-    });
+    }
+  }
+
+  EnumStatusClockIn? _getStatusClockInOpenOrClose() {
+    if (widget.pjp?.status != null) {
+      String? status = widget.pjp?.status;
+      if (status == "OPEN" || status == "START") {
+        return EnumStatusClockIn.open;
+      } else if (status == "CLOSE") {
+        return EnumStatusClockIn.close;
+      }
+    } else {
+      return EnumStatusClockIn.belum;
+    }
+
+    return null;
   }
 
   Future<bool> _clockin(EnumStatusTempat enumStatusTempat) async {
