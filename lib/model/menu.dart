@@ -47,4 +47,32 @@ class Menu {
     // return str == 'ENABLED' || str == 'START';
     // return true; // for development, enable all
   }
+
+  bool isSfComplete() {
+    if (isDistEnable == EnumBtnMenuState.complete &&
+        isMerchEnable == EnumBtnMenuState.complete &&
+        isPromEnable == EnumBtnMenuState.complete &&
+        isMarketEnable == EnumBtnMenuState.complete) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isDsComplete() {
+    if (isDistEnable == EnumBtnMenuState.complete &&
+        isMerchEnable == EnumBtnMenuState.complete &&
+        isPromEnable == EnumBtnMenuState.complete &&
+        isMarketEnable == EnumBtnMenuState.complete) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isPoiComplete() {
+    if (isDistEnable == EnumBtnMenuState.complete &&
+        isPromEnable == EnumBtnMenuState.complete) {
+      return true;
+    }
+    return false;
+  }
 }

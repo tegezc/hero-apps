@@ -9,6 +9,7 @@ import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
 import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_image_new.dart';
+import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/constapp.dart';
@@ -86,14 +87,19 @@ class _MenuSalesState extends State<MenuSales> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Clock Out', () {
+                  child: LabelBlack.size2("Apakah anda yakin akan clockout?"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('Ya', () {
                     _clockOut().then((value) {
                       if (value) {
                         Navigator.popUntil(context, ModalRoute.withName('/'));
@@ -104,7 +110,7 @@ class _MenuSalesState extends State<MenuSales> {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Cancel', () {
+                  child: ButtonApp.black('Tidak', () {
                     Navigator.of(context).pop();
                   }),
                 ),
@@ -130,22 +136,13 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   Widget _openSf() {
+    bool isComplete = _menu!.isSfComplete();
+
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-            //   _tapMenu(EnumTab.distribution);
-            // }, enable: _menu!.isDistEnable),
-            // ButtonMenu(
-            //   Icons.work,
-            //   'MERCHANDISING',
-            //   () {
-            //     _tapMenu(EnumTab.merchandising);
-            //   },
-            //   enable: _menu!.isMerchEnable,
-            // ),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.distribution);
@@ -170,26 +167,10 @@ class _MenuSalesState extends State<MenuSales> {
             )
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // ButtonMenu(
-            //   Icons.campaign,
-            //   'PROMOTION',
-            //   () {
-            //     _tapMenu(EnumTab.promotion);
-            //   },
-            //   enable: _menu!.isPromEnable,
-            // ),
-            // ButtonMenu(
-            //   Icons.widgets,
-            //   'MARKET AUDIT',
-            //   () {
-            //     _tapMenu(EnumTab.survey);
-            //   },
-            //   enable: _menu!.isMarketEnable,
-            // ),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.promotion);
@@ -215,32 +196,13 @@ class _MenuSalesState extends State<MenuSales> {
           ],
         ),
         const SizedBox(height: 10),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     // ButtonMenu(Icons.location_off, 'Clock Out', () {
-        //     //   _showDialogConfirmClockOut();
-        //     // }),
-        //     ClockInImageIcon(
-        //       onTap: () {
-        //         _showDialogConfirmClockOut();
-        //       },
-        //       image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
-        //       disableImage:
-        //           'assets/image/icon/clockin/disable/ic_ds_clockout.png',
-        //     ),
-        //     Container(),
-        //   ],
-        // ),
-
-        ButtonAppSolidClockIn("Clock Out", onTap: () {
-          _showDialogConfirmClockOut();
-        }),
+        _buttonClockOut(isComplete),
       ],
     );
   }
 
   Widget _openDsPoi() {
+    bool isComplete = _menu!.isSfComplete();
     return Column(
       children: [
         Row(
@@ -268,52 +230,20 @@ class _MenuSalesState extends State<MenuSales> {
                   'assets/image/icon/clockin/complete/ic_ck_promotion.png',
               enable: _menu!.isPromEnable!,
             ),
-            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-            //   _tapMenu(EnumTab.distribution);
-            // }, enable: _menu!.isDistEnable),
-            // ButtonMenu(
-            //   Icons.campaign,
-            //   'PROMOTION',
-            //   () {
-            //     _tapMenu(EnumTab.promotion);
-            //   },
-            //   enable: _menu!.isPromEnable,
-            // ),
           ],
         ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: [
-        //     ClockInImageIcon(
-        //       onTap: () {
-        //         _showDialogConfirmClockOut();
-        //       },
-        //       image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
-        //       disableImage:
-        //           'assets/image/icon/clockin/disable/ic_ds_clockout.png',
-        //     ),
-        //     // ButtonMenu(Icons.location_off, 'Clock Out', () {
-        //     //   _showDialogConfirmClockOut();
-        //     // }),
-        //     Container(),
-        //   ],
-        // ),
-        ButtonAppSolidClockIn("Clock Out", onTap: () {
-          _showDialogConfirmClockOut();
-        }),
+        _buttonClockOut(isComplete),
       ],
     );
   }
 
   Widget _openDS() {
+    bool isComplete = _menu!.isSfComplete();
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // ButtonMenu(Icons.shopping_cart, 'DISTRIBUTION', () {
-            //   _tapMenu(EnumTab.distribution);
-            // }, enable: _menu!.isDistEnable),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.distribution);
@@ -336,27 +266,11 @@ class _MenuSalesState extends State<MenuSales> {
                   'assets/image/icon/clockin/complete/ic_ck_merchandising.png',
               enable: _menu!.isMerchEnable!,
             )
-            // ButtonMenu(
-            //   Icons.work,
-            //   'MERCHANDISING',
-            //   () {
-            //     _tapMenu(EnumTab.merchandising);
-            //   },
-            //   enable: _menu!.isMerchEnable,
-            // ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // ButtonMenu(
-            //   Icons.campaign,
-            //   'PROMOTION',
-            //   () {
-            //     _tapMenu(EnumTab.promotion);
-            //   },
-            //   enable: _menu!.isPromEnable,
-            // ),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.promotion);
@@ -368,9 +282,6 @@ class _MenuSalesState extends State<MenuSales> {
                   'assets/image/icon/clockin/complete/ic_ck_promotion.png',
               enable: _menu!.isPromEnable!,
             ),
-            // ButtonMenu(Icons.file_copy, 'Market Audit', () {
-            //   _tapMenu(EnumTab.survey);
-            // }),
             ClockInImageIcon(
               onTap: () {
                 _tapMenu(EnumTab.survey);
@@ -384,32 +295,25 @@ class _MenuSalesState extends State<MenuSales> {
             )
           ],
         ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     // ButtonMenu(Icons.location_off, 'Clock Out', () {
-        //     //   _showDialogConfirmClockOut();
-        //     // }),
-        //     ClockInImageIcon(
-        //       onTap: () {
-        //         _showDialogConfirmClockOut();
-        //       },
-        //       image: 'assets/image/icon/clockin/enable/ic_en_clock_out.png',
-        //       disableImage:
-        //           'assets/image/icon/clockin/disable/ic_ds_clockout.png',
-        //     ),
-        //     Container(),
-        //   ],
-        // ),
-        ButtonAppSolidClockIn("Clock Out", onTap: () {
-          _showDialogConfirmClockOut();
-        }),
+        _buttonClockOut(isComplete),
       ],
     );
   }
 
+  Widget _buttonClockOut(bool iscomplete) {
+    print(iscomplete);
+    return ButtonStrectWidth(
+      text: "Clock Out",
+      onTap: () {
+        _showDialogConfirmClockOut();
+      },
+      buttonColor: Colors.red,
+      isenable: iscomplete ? true : false,
+    );
+  }
+
   void _tapMenu(EnumTab enumTab) {
-    HttpDashboard httpDashboard = new HttpDashboard();
+    HttpDashboard httpDashboard = HttpDashboard();
     httpDashboard.startMenu(enumTab).then((value) async {
       if (value) {
         switch (enumTab) {
