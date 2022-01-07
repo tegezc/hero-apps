@@ -65,7 +65,6 @@ class ScaffoldLocView extends StatelessWidget {
           color: Colors.white, //change your color here
         ),
         title: Center(
-          widthFactor: 2,
           child: Text(title!,
               style: TextStyle(
                 color: Colors.white,
