@@ -121,7 +121,7 @@ class _SearchLocationState extends State<SearchLocation> {
       width: size.width,
       height: size.height * 0.75,
       margin: EdgeInsets.all(8.0),
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           color: Colors.red[600], borderRadius: BorderRadius.circular(10.0)),
       child: item.isloading ? _showloading() : _hasilSearch(item.ltempat!),
@@ -143,7 +143,6 @@ class _SearchLocationState extends State<SearchLocation> {
         LokasiSimple tempat = ltempat[i]!;
         lw.add(_cellOutlet(tempat));
       }
-      lw.add(Divider(color: Colors.grey[400]));
     }
 
     return SingleChildScrollView(
@@ -170,7 +169,6 @@ class _SearchLocationState extends State<SearchLocation> {
               left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
           child: Column(
             children: [
-              Divider(color:Colors.grey[400]),
               Row(
                 children: [
                   Icon(
@@ -251,6 +249,7 @@ class _SearchLocationState extends State<SearchLocation> {
                   ),
                 ],
               ),
+              Divider(color:Colors.grey[400]),
             ],
           ),
         ),
