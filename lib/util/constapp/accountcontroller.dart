@@ -32,6 +32,12 @@ class AccountHore {
     return idhistorypjp;
   }
 
+  static Future<bool> setIdHistoryPjp(String idhistorypjp) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(keyCurrentIdHistoryPjp, idhistorypjp);
+    return true;
+  }
+
   static Future<Profile> getProfile() async {
     // keyJeniAccount = 'roleakun';
     // keyid = 'idprofile';
@@ -77,12 +83,6 @@ class AccountHore {
     await prefs.setString(keyToken, profile.token!);
     await prefs.setString(keyJeniAccount, profile.role!);
 
-    return true;
-  }
-
-  static Future<bool> setIdHistoryPjp(String idhistorypjp) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(keyCurrentIdHistoryPjp, idhistorypjp);
     return true;
   }
 
