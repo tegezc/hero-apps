@@ -70,7 +70,8 @@ class HttpDashboard {
     }
   }
 
-  Future<bool> trackingSales(String sales, TgzLocation userLocation) async {
+  Future<bool> trackingSales(
+      String sales, TgzLocation userLocation, String dateString) async {
     // Map<String, String> headers = {
     //   'Auth-Key': 'restapihore',
     //   'Client-Service': 'frontendclienthore',
@@ -91,7 +92,8 @@ class HttpDashboard {
     Map param = {
       "id_sales": "${sales}",
       "longitude": "${userLocation.longitute}",
-      "latitude": "${userLocation.latitute}"
+      "latitude": "${userLocation.latitute}",
+      "waktu_user": "$dateString"
     };
     Uri uri = ConstApp.uri('/tracking/tracking_pjp');
     http.Response? response;
@@ -119,7 +121,7 @@ class HttpDashboard {
     Map<String, String> headers = await HttpUtil.getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idhistoryPjp};
-
+    print(idhistoryPjp);
     Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_status');
     http.Response? response;
     try {
