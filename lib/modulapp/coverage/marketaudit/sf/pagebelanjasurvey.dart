@@ -53,8 +53,9 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
   }
 
   void _setValue() {
-    _telkomselController!.text =
-        widget.uiSurvey!.telkomsel == null ? '' : '${widget.uiSurvey!.telkomsel}';
+    _telkomselController!.text = widget.uiSurvey!.telkomsel == null
+        ? ''
+        : '${widget.uiSurvey!.telkomsel}';
     _isatController!.text =
         widget.uiSurvey!.isat == null ? '' : '${widget.uiSurvey!.isat}';
     _xlController!.text =
@@ -88,8 +89,10 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                       icon: Icon(Icons.camera_alt),
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
-                        ParamPreviewPhoto params =
-                            ParamPreviewPhoto(EnumTakePhoto.marketaudit,pathPhoto: null,);
+                        ParamPreviewPhoto params = ParamPreviewPhoto(
+                          EnumTakePhoto.marketaudit,
+                          pathPhoto: null,
+                        );
                         await Navigator.pushNamed(context, CameraView.routeName,
                             arguments: params);
 
@@ -110,7 +113,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
                         color: Colors.green,
-                        child: Text(
+                        child: const Text(
                           'SUBMIT',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -174,8 +177,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     );
   }
 
-  Widget _cellForm(double width, String label, TextEditingController? controller,
-      EnumOperator enumOperator) {
+  Widget _cellForm(double width, String label,
+      TextEditingController? controller, EnumOperator enumOperator) {
     return Row(
       children: [
         SizedBox(width: 80, child: LabelBlack.size2(label)),

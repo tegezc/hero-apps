@@ -208,14 +208,14 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
         variable stay with value of last run after unRegisterLocationUpdate
  */
         disposeCallback: LocationCallbackHandler.disposeCallback,
-        iosSettings: IOSSettings(
+        iosSettings: const IOSSettings(
             accuracy: LocationAccuracy.NAVIGATION, distanceFilter: 5),
         autoStop: false,
         androidSettings: const AndroidSettings(
             accuracy: LocationAccuracy.NAVIGATION,
             interval: 10,
-            distanceFilter: 5,
-            wakeLockTime: 10,
+            distanceFilter: 20,
+            wakeLockTime: 30,
             client: LocationClient.google,
             androidNotificationSettings: AndroidNotificationSettings(
                 notificationChannelName: 'Location tracking',
