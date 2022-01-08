@@ -302,13 +302,7 @@ class _CoverageHomeState extends State<CoverageHome> {
       colorIcon = Colors.white;
       action = ButtonClockIn(
           onTap: () {
-            if (kDebugMode) {
-              print("Clock In");
-            }
-            Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
-                .then((value) {
-              _blocDashboard.firstTime();
-            });
+            _handleClockin(pjp);
           },
           text: text);
     } else if (pjp.enumPjp == EnumPjp.belum) {
@@ -356,5 +350,21 @@ class _CoverageHomeState extends State<CoverageHome> {
         ),
       ],
     );
+  }
+
+  void _handleClockin(Pjp pjp) {
+    _saveHistoryPjpId(pjp.idhistorypjp).then((value) {
+      Navigator.pushNamed(context, MapClockIn.routeName, arguments: pjp)
+          .then((value) {
+        _blocDashboard.firstTime();
+      });
+    });
+  }
+
+  Future<bool> _saveHistoryPjpId(String? idhistorypjp) async {
+    if (idhistorypjp != null) {
+      await AccountHore.setIdHistoryPjp(idhistorypjp);
+    }
+    return true;
   }
 }

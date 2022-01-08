@@ -65,12 +65,9 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   Future<bool> _setupLocation() async {
-    // Position position = await Geolocator.getCurrentPosition(
-    //     desiredAccuracy: LocationAccuracy.high);
     LocationData position = await LocationUtil.getCurrentLocation();
     print('current location : $position');
-    // distanceInMeters = Geolocator.distanceBetween(
-    //     position.latitude, position.longitude, widget.pjp.lat, widget.pjp.long);
+
     _distanceInMeters = Geolocator.distanceBetween(position.latitude!,
         position.longitude!, _lokasi.latitude, _lokasi.longitude);
 
@@ -80,17 +77,6 @@ class _MapClockInState extends State<MapClockIn> {
         enumAccount == EnumAccount.sf ? _hightCell = 123 : _hightCell = 100;
     _minusWidget =
         enumAccount == EnumAccount.sf ? _minusWidget = 211 : _minusWidget = 181;
-
-    //  LatLng locSales = LatLng(position.latitude, position.longitude);
-    // circles = Set.from([
-    //   Circle(
-    //     circleId: CircleId('currentlocation'),
-    //     center: locSales,
-    //     radius: 1,
-    //     fillColor: Colors.blue,
-    //     strokeWidth: 1,
-    //   )
-    // ]);
 
     return true;
   }
@@ -179,6 +165,7 @@ class _MapClockInState extends State<MapClockIn> {
     if (statusClockIn != null) {
       if (statusClockIn == EnumStatusClockIn.open) {
         _gotoMenu();
+        //_prosesOpen();
       } else if (statusClockIn == EnumStatusClockIn.close) {
         _takePhoto();
       } else if (statusClockIn == EnumStatusClockIn.belum) {
@@ -207,7 +194,6 @@ class _MapClockInState extends State<MapClockIn> {
     String? value = await httpdashboard.clockin(widget.pjp!, enumStatusTempat);
     print(value);
     if (value != null) {
-      AccountHore.setIdHistoryPjp(value);
       DaoSerial daoSerial = new DaoSerial();
       int res = await daoSerial.deleteAllSerial();
       if (res > 0) {}
@@ -274,6 +260,8 @@ class _MapClockInState extends State<MapClockIn> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('OPEN', () {
+                    Navigator.of(context).pop();
+
                     _prosesOpen();
                   }),
                 ),
@@ -281,6 +269,7 @@ class _MapClockInState extends State<MapClockIn> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('CLOSE', () {
+                    Navigator.of(context).pop();
                     _prosesClose();
                   }),
                 ),
@@ -289,6 +278,7 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   void _prosesOpen() {
+    TgzDialog.loadingDialog(context);
     _clockin(EnumStatusTempat.open).then((value) {
       if (value) {
         Navigator.of(context).pop();
@@ -298,6 +288,7 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   void _prosesClose() {
+    TgzDialog.loadingDialog(context);
     _clockin(EnumStatusTempat.close).then((value) {
       if (value) {
         Navigator.of(context).pop();

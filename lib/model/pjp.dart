@@ -16,7 +16,9 @@ import 'package:hero/util/numberconverter.dart';
 // "jam_clock_out": null,
 // "id_kabupaten": "KAB027",
 // "nama_kabupaten": "BELITUNG TIMUR",
-// "radius_clock_in": "5"
+// "radius_clock_in": "5",
+// "status":"OPEN",
+//"id_history_pjp":null
 
 var m = {
   "id_sales": "SSF0440",
@@ -67,6 +69,7 @@ class Pjp {
   double? lat;
   String? status;
   int? radius;
+  String? idhistorypjp;
 
   // - OUT : outlet
   // - SEK : sekolah
@@ -97,6 +100,7 @@ class Pjp {
     tempat!.id = map['id_digipos'] == null ? '' : map['id_digipos'];
     tempat!.nama = map['nama'] == null ? '' : map['nama'];
     status = map['status'] == null ? null : map['status'];
+    idhistorypjp = map['id_history_pjp'] == null ? null : map['id_history_pjp'];
 
     print('nohp: $nohp');
   }

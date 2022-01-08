@@ -175,6 +175,22 @@ class DateUtility {
         '$menit:$second';
   }
 
+  /*
+  * ex: Kamis, 10-12-2020 09:00:00
+  * */
+  static String dateToYYYYMMDDHHMMSS(DateTime? dt) {
+    if (dt == null) {
+      return '';
+    }
+    String day = correntFormatToTwoDigit(dt.day);
+    String month = correntFormatToTwoDigit(dt.month);
+    String jam = correntFormatToTwoDigit(dt.hour);
+    String menit = correntFormatToTwoDigit(dt.minute);
+    String second = correntFormatToTwoDigit(dt.second);
+
+    return '${dt.year}-$month-$day $jam:$menit:$second';
+  }
+
   static String correntFormatToTwoDigit(int satuOrDuadigit) {
     String duadigitstring;
     if (satuOrDuadigit < 10) {
