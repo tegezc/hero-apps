@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:hero/util/filesystem/itgzfile.dart';
 import 'package:path_provider/path_provider.dart';
 
-class TgzFile {
+class TgzFile implements ITgzFile {
   // Future<List<FileSystemEntity>> dirContents() async {
   //   final Directory extDir = await getExternalStorageDirectory();
   //   // extDir.deleteSync(recursive: true);
@@ -25,6 +26,15 @@ class TgzFile {
   //     return null;
   //   }
   // }
+
+  Future<bool> isPathExist(String path) async {
+    try {
+      final file = File(path);
+      return await file.exists();
+    } catch (e) {
+      return false;
+    }
+  }
 
   Future<bool> deleteDirectory() async {
     final Directory? extDir = await getExternalStorageDirectory();

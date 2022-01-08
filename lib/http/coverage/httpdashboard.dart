@@ -7,7 +7,7 @@ import 'package:hero/model/tgzlocation.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/numberconverter.dart';
-import 'package:hero/util/tgzfile.dart';
+import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:http/http.dart' as http;
 
 import '../httputil.dart';

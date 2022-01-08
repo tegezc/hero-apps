@@ -18,9 +18,56 @@ class PreviewPhotoWithUpload extends StatefulWidget {
 }
 
 class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
+  int _buildCount = 0;
+  String? _urlImageOrNull;
+
+  void _setupUrlImage() {
+    if (_buildCount == 0) {
+      if (widget.param != null) {
+        widget.param!.getPhotoUrlOrNull().then((value) {
+          _urlImageOrNull = value;
+          setState(() {});
+        });
+        _buildCount++;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    _setupUrlImage();
     Size s = MediaQuery.of(context).size;
+    if (_urlImageOrNull == null) {
+      return CustomScaffold(
+          body: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                    width: s.width,
+                    height: s.height - 140,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Container(),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ButtonApp.blue('Ambil Lagi', () {
+                      Navigator.of(context).pop();
+                    }),
+                    ButtonApp.blue('Cancel', () {
+                      int counter = 0;
+                      Navigator.popUntil(context, (route) {
+                        return counter++ == 2;
+                      });
+                    }),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          title: 'Photo');
+    }
     return CustomScaffold(
         body: Center(
           child: Column(
@@ -31,7 +78,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Image.file(
-                      File(widget.param!.pathPhoto!.path),
+                      File(_urlImageOrNull!),
                     ),
                   )),
               Row(
@@ -102,9 +149,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   /// kondisi pjp tutup
   Future<bool> _uploadPhotoAndChekOut() async {
-    HttpDIstribution httpDist = HttpDIstribution();
-    bool value =
-        await httpDist.uploadPhoto(widget.param!.pathPhoto!.path, true);
+    bool value = await _uploadPhotoDistributionIsSuccess();
     if (value) {
       HttpDashboard httpDashboard = HttpDashboard();
       bool vcheckout = await httpDashboard.clockout();
@@ -115,9 +160,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   /// ambil photo menu distribusi sekaligus tag as finish
   Future<FinishMenu?> _uploadPhotoDistribution() async {
-    HttpDIstribution httpDist = HttpDIstribution();
-    bool value =
-        await httpDist.uploadPhoto(widget.param!.pathPhoto!.path, false);
+    bool value = await _uploadPhotoDistributionIsSuccess();
     if (value) {
       HttpDashboard httpDashboard = HttpDashboard();
       FinishMenu vcheckout =
@@ -125,5 +168,10 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
       return vcheckout;
     }
     return null;
+  }
+
+  Future<bool> _uploadPhotoDistributionIsSuccess() async {
+    HttpDIstribution httpDist = HttpDIstribution();
+    return await httpDist.uploadPhoto(_urlImageOrNull!, false);
   }
 }

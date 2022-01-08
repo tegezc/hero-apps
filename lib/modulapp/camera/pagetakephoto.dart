@@ -10,6 +10,8 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/modulapp/camera/previewphotoupload.dart';
+import 'package:hero/util/filesystem/itgzfile.dart';
+import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -63,8 +65,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     _initialCamera().then((value) {
       setState(() {
         _isLoading = false;
-        print(cameras);
-        if (cameras.length > 0) {
+        if (cameras.isNotEmpty) {
           onNewCameraSelected(cameras[0]);
         }
       });
@@ -123,9 +124,10 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
               decoration: BoxDecoration(
                 color: Colors.black,
                 border: Border.all(
-                  color: controller != null && controller!.value.isRecordingVideo
-                      ? Colors.redAccent
-                      : Colors.grey,
+                  color:
+                      controller != null && controller!.value.isRecordingVideo
+                          ? Colors.redAccent
+                          : Colors.grey,
                   width: 3.0,
                 ),
               ),
@@ -201,9 +203,10 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
               title: Icon(getCameraLensIcon(cameraDescription.lensDirection)),
               groupValue: controller?.description,
               value: cameraDescription,
-              onChanged: controller != null && controller!.value.isRecordingVideo
-                  ? null
-                  : onNewCameraSelected,
+              onChanged:
+                  controller != null && controller!.value.isRecordingVideo
+                      ? null
+                      : onNewCameraSelected,
             ),
           ),
         );
@@ -318,18 +321,6 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     showInSnackBar('Error: ${e.code}\n${e.description}');
   }
 }
-//
-// class DummyView extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return CustomScaffold(
-//       title: 'Camera',
-//       body: Center(
-//         child: Text('Dalam Proses Dev'),
-//       ),
-//     );
-//   }
-// }
 
 enum EnumTakePhoto {
   distribusi,
@@ -346,6 +337,17 @@ class ParamPreviewPhoto {
   XFile? pathPhoto;
   EnumTakePhoto enumTakePhoto;
   EnumNumber? enumNumber;
+  ITgzFile tgzFile;
 
-  ParamPreviewPhoto(this.enumTakePhoto, {this.pathPhoto, this.enumNumber});
+  Future<String?> getPhotoUrlOrNull() async {
+    if (pathPhoto != null) {
+      String urlImage = pathPhoto!.path;
+      if (await tgzFile.isPathExist(urlImage)) {}
+      return urlImage;
+    }
+    return null;
+  }
+
+  ParamPreviewPhoto(this.enumTakePhoto, {this.pathPhoto, this.enumNumber})
+      : tgzFile = TgzFile();
 }
