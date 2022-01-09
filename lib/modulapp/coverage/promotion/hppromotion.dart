@@ -71,9 +71,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                               child: LabelBlack.size1('Jenis Promosi'),
                             ),
                             _content(item, size.width),
-                            SizedBox(
-                              height: 100,
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -82,12 +80,15 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                 ],
               ),
             ),
-            action: ButtonApp.blue('Selesai', () {
-              TgzDialog.showdialogSelesai(context,
-                  'Apakah anda yakin akan mengakhiri proses promotion?', () {
-                this._selesai(item);
-              });
-            }),
+            action: Padding(
+              padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+              child: ButtonApp.black('Selesai', () {
+                TgzDialog.showdialogSelesai(context,
+                    'Apakah anda yakin akan mengakhiri proses promotion?', () {
+                  _selesai(item);
+                });
+              },bgColor: Colors.white,),
+            ),
           );
         });
   }
@@ -155,6 +156,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
           }
         },
         child: Card(
+          color: Colors.red[600],
           child: Padding(
             padding: const EdgeInsets.only(
                 left: 8.0, right: 8.0, bottom: 12.0, top: 12.0),
@@ -175,14 +177,24 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                     SizedBox(
                       width: 4,
                     ),
-                    LabelBlack.size2(
-                      item.nama,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        LabelWhite.size3("Promotion"),
+                        const SizedBox(height:4),
+                        LabelWhite.size2(
+                          item.nama,
+                        ),
+                        const SizedBox(height:10),
+                        LabelWhite.size4("Duration : ${item.isVideoExist ? 30 : 0} detik")
+                      ],
                     ),
                   ],
                 ),
                 Icon(
-                  Icons.videocam,
-                  size: 24,
+                  Icons.videocam_rounded,
+                  size: 48,
+                  color: Colors.white
                 ),
               ],
             ),
