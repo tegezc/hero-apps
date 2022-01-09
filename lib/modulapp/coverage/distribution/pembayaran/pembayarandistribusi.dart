@@ -71,15 +71,15 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                     child: Center(
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           _content(item),
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           _perhitungan(item),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                         ],
@@ -101,7 +101,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                         onTap: () {
                           bool isproses = true;
                           if (item.enumAccount == EnumAccount.ds) {
-                            if (_controller2.text.trim().length == 0) {
+                            if (_controller2.text.trim().isEmpty) {
                               isproses = false;
                               _confirmNohpKosong();
                             }

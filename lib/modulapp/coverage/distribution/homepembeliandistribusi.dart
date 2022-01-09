@@ -17,7 +17,7 @@ class HomePembelianDistribusi extends StatefulWidget {
   static const String routeName = '/homepembeliandistribusi';
   final Pjp? pjp;
 
-  HomePembelianDistribusi(this.pjp);
+  HomePembelianDistribusi(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _HomePembelianDistribusiState createState() =>
@@ -35,6 +35,9 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
   late bool _isrekomendasishowing;
   late bool _isloading;
   EnumAccount? _enumAccount;
+
+  int _countBuild = 0;
+
   @override
   void initState() {
     _isloading = true;
@@ -46,7 +49,6 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     _lvog = [];
     _lnota = [];
     super.initState();
-    this._setup();
   }
 
   void _setup() {
@@ -90,6 +92,10 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
 
   @override
   Widget build(BuildContext context) {
+    if (_countBuild == 0) {
+      _setup();
+      _countBuild++;
+    }
     if (_isloading) {
       return CustomScaffold(
         title: 'Loading...',
@@ -99,7 +105,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[600],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         title: Row(
@@ -139,7 +145,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                   //CommonUi.openPage(context, DummyView());
                   _showDialogConfirmClockOut();
                 },
-                isenable: _lnota!.length > 0,
+                isenable: _lnota!.isNotEmpty,
               ),
             ),
             _contentStruk(_lnota),
@@ -229,30 +235,28 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
           }
         });
       },
-      child: Container(
-        // color: Colors.white,
-        child: Column(
-          children: [
-            Divider(color: Colors.white60),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
-              child: ListTile(
-                leading: nota.isShared
-                    ? Icon(
-                        Icons.check_circle_outline,
-                        color: Colors.white,
-                      )
-                    : SizedBox(
-                        height: 24,
-                        width: 24,
-                      ),
-                title: LabelWhite.size2('${nota.noNota} / $ket'),
-                trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white),
-              ),
+      child: Column(
+        children: [
+          const Divider(color: Colors.white60),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
+            child: ListTile(
+              leading: nota.isShared
+                  ? const Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.white,
+                    )
+                  : const SizedBox(
+                      height: 24,
+                      width: 24,
+                    ),
+              title: LabelWhite.size2('${nota.noNota} / $ket'),
+              trailing:
+                  const Icon(Icons.keyboard_arrow_right, color: Colors.white),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -261,8 +265,8 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -301,7 +305,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
 
   Widget _dataTable(List<ItemRekomendasi> lrek, String title) {
     List<DataRow> ldr = [];
-    lrek.forEach((element) {
+    for (var element in lrek) {
       ldr.add(DataRow(
         cells: <DataCell>[
           DataCell(Text(element.nama!)),
@@ -312,14 +316,14 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
           DataCell(Text('${element.rkmd}')),
         ],
       ));
-    });
+    }
     if (!_isrekomendasishowing) {
       return Container();
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Padding(
