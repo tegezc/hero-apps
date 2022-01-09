@@ -4,15 +4,14 @@ import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/coverage/distribution/blocdaftarproduct.dart';
 import 'package:hero/modulapp/coverage/distribution/pembayaran/pembayarandistribusi.dart';
 import 'package:hero/modulapp/coverage/distribution/pembelianitem/pembelian_item.dart';
+import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
-import 'package:hero/util/uiutil.dart';
-import 'package:intl/intl.dart';
 
 class DaftarProductDistribusi extends StatefulWidget {
   static const routeName = '/daftarproductdistribusi';
   final Pjp? pjp;
-  DaftarProductDistribusi(this.pjp);
+  DaftarProductDistribusi(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _DaftarProductDistribusiState createState() =>
@@ -63,10 +62,10 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         Padding(
@@ -85,30 +84,50 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
                   bottom: 0,
                   child: SizedBox(
                     width: size.width - 2,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.red[600]),
-                        // color: Color(0xFFFF7F50),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top:15.0,bottom: 15.0),
-                          child: Text(
-                            'KERANJANG BELANJA (${item.jmlkeranjang})',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        onPressed: item.jmlkeranjang == 0
-                            ? null
-                            : () {
-                                ParamPembayaran params =
-                                    ParamPembayaran(item.litemtrx, widget.pjp);
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: ButtonStrectWidth(
+                        text: 'KERANJANG BELANJA (${item.jmlkeranjang})',
+                        buttonColor: Colors.red,
+                        isenable: item.jmlkeranjang != 0,
+                        onTap: () {
+                          ParamPembayaran params =
+                              ParamPembayaran(item.litemtrx, widget.pjp);
 
-                                Navigator.pushNamed(
-                                        context, PembayaranDistribusi.routeName,
-                                        arguments: params)
-                                    .then((value) {
-                                  _blocDaftarProduct.reloadDaftarProduct();
-                                });
-                              }),
+                          Navigator.pushNamed(
+                                  context, PembayaranDistribusi.routeName,
+                                  arguments: params)
+                              .then((value) {
+                            _blocDaftarProduct.reloadDaftarProduct();
+                          });
+                        },
+                      ),
+                    ),
+                    // OutlinedButton(
+                    //     style: OutlinedButton.styleFrom(
+                    //         backgroundColor: Colors.red[600]),
+                    //     // color: Color(0xFFFF7F50),
+                    //     child: Padding(
+                    //       padding:
+                    //           const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                    //       child: Text(
+                    //         'KERANJANG BELANJA (${item.jmlkeranjang})',
+                    //         style: const TextStyle(color: Colors.white),
+                    //       ),
+                    //     ),
+                    //     onPressed: item.jmlkeranjang == 0
+                    //         ? null
+                    //         : () {
+                    //             ParamPembayaran params =
+                    //                 ParamPembayaran(item.litemtrx, widget.pjp);
+                    //
+                    //             Navigator.pushNamed(
+                    //                     context, PembayaranDistribusi.routeName,
+                    //                     arguments: params)
+                    //                 .then((value) {
+                    //               _blocDaftarProduct.reloadDaftarProduct();
+                    //             });
+                    //           }),
                   ),
                 ),
               ],
@@ -139,16 +158,16 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        color: Colors.red[600],
+        color: Colors.white, //Colors.red[600],
         child: ListView.separated(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: ltrx.length,
           itemBuilder: (ctx, index) {
             return Padding(
-              padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: TextButton(
-                style: ButtonStyle(alignment: Alignment.centerLeft),
+                style: const ButtonStyle(alignment: Alignment.centerLeft),
                 onPressed: () async {
                   // var result = await CommonUi.openPage(context, PembelianItem(trx));
                   var result = await Navigator.push(
@@ -163,26 +182,30 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    LabelWhite.size2(ltrx[index].product!.nama),
-                    SizedBox(
+                    LabelBlack.size2(ltrx[index].product!.nama),
+                    const SizedBox(
                       height: 4,
                     ),
-                    LabelWhite.size3('Stock : ${ltrx[index].product!.stock} pcs'),
-                    SizedBox(
+                    LabelBlack.size3(
+                        'Stock : ${ltrx[index].product!.stock} pcs'),
+                    const SizedBox(
                       height: 4,
                     ),
-                    LabelWhite.size3('Keranjang : ${ltrx[index].jumlah} pcs'),
-                    // Divider(
-                    //   thickness: 2,
-                    // ),
+                    LabelBlack.size3('Keranjang : ${ltrx[index].jumlah} pcs'),
+                    const Divider(
+                      thickness: 2,
+                    ),
                   ],
                 ),
               ),
             );
           },
-          separatorBuilder: (ctx, index) => Padding(
-            padding: const EdgeInsets.only(left:8.0,right:8.0),
-            child: const Divider(thickness: 2,color: Colors.white60,),
+          separatorBuilder: (ctx, index) => const Padding(
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Divider(
+              thickness: 2,
+              color: Colors.white60,
+            ),
           ),
         ),
       ),
