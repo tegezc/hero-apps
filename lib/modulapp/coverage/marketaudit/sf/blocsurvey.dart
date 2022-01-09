@@ -70,10 +70,12 @@ class BlocSurvey {
         .add(new ItemSurveyVoucher(EnumOperator.telkomsel));
     _cacheuisurvey!.lsurveyBroadband!
         .add(new ItemSurveyVoucher(EnumOperator.isat));
-    _cacheuisurvey!.lsurveyBroadband!.add(new ItemSurveyVoucher(EnumOperator.xl));
+    _cacheuisurvey!.lsurveyBroadband!
+        .add(new ItemSurveyVoucher(EnumOperator.xl));
     _cacheuisurvey!.lsurveyBroadband!
         .add(new ItemSurveyVoucher(EnumOperator.tri));
-    _cacheuisurvey!.lsurveyBroadband!.add(new ItemSurveyVoucher(EnumOperator.sf));
+    _cacheuisurvey!.lsurveyBroadband!
+        .add(new ItemSurveyVoucher(EnumOperator.sf));
     _cacheuisurvey!.lsurveyBroadband!
         .add(new ItemSurveyVoucher(EnumOperator.axis));
     _cacheuisurvey!.lsurveyBroadband!
@@ -86,7 +88,8 @@ class BlocSurvey {
     _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.tri));
     _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.sf));
     _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.axis));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.other));
+    _cacheuisurvey!.lsurveyFisik!
+        .add(new ItemSurveyVoucher(EnumOperator.other));
     _loadDrInternet().then((value) {
       _sink(_cacheuisurvey);
     });
@@ -97,6 +100,49 @@ class BlocSurvey {
     b = await _loadDataVoucher(EnumSurvey.fisik);
     b = await _loadDataVoucher(EnumSurvey.broadband);
     print(b);
+    return true;
+  }
+
+  Future<bool> _loadDataBelanja() async {
+    String? idtempat = _cachePjp!.id;
+    DateTime dt = DateTime.now();
+    HttpSurvey httpSurvey = new HttpSurvey();
+    UISurvey? item =
+        await httpSurvey.getDetailPromotion(EnumSurvey.belanja, idtempat, dt);
+    if (item != null) {
+      _cacheuisurvey!.telkomsel = item.telkomsel;
+      _cacheuisurvey!.isat = item.isat;
+      _cacheuisurvey!.xl = item.xl;
+      _cacheuisurvey!.tri = item.tri;
+      _cacheuisurvey!.axis = item.axis;
+      _cacheuisurvey!.other = item.other;
+      _cacheuisurvey!.sf = item.sf;
+      _cacheuisurvey!.pathphotobelanja = item.pathphotobelanja;
+      _cacheuisurvey!.isbelanjasubmitted = true;
+    }
+    return false;
+  }
+
+  Future<bool> _loadDataVoucher(EnumSurvey enumSurvey) async {
+    String? idtempat = _cachePjp!.id;
+    DateTime dt = DateTime.now();
+    HttpSurvey httpSurvey = new HttpSurvey();
+    if (enumSurvey == EnumSurvey.fisik) {
+      UISurvey? item =
+          await httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt);
+      if (item != null) {
+        _cacheuisurvey!.lsurveyFisik = item.lsurveyFisik;
+        _cacheuisurvey!.isfisiksubmitted = true;
+      }
+    } else {
+      UISurvey? item = await httpSurvey.getDetailPromotion(
+          EnumSurvey.broadband, idtempat, dt);
+      if (item != null) {
+        _cacheuisurvey!.lsurveyBroadband = item.lsurveyBroadband;
+        _cacheuisurvey!.isbroadbandsubmitted = true;
+      }
+    }
+
     return true;
   }
 
@@ -174,49 +220,6 @@ class BlocSurvey {
       print(b);
     }
     return result;
-  }
-
-  Future<bool> _loadDataBelanja() async {
-    String? idtempat = _cachePjp!.id;
-    DateTime dt = DateTime.now();
-    HttpSurvey httpSurvey = new HttpSurvey();
-    UISurvey? item =
-        await httpSurvey.getDetailPromotion(EnumSurvey.belanja, idtempat, dt);
-    if (item != null) {
-      _cacheuisurvey!.telkomsel = item.telkomsel;
-      _cacheuisurvey!.isat = item.isat;
-      _cacheuisurvey!.xl = item.xl;
-      _cacheuisurvey!.tri = item.tri;
-      _cacheuisurvey!.axis = item.axis;
-      _cacheuisurvey!.other = item.other;
-      _cacheuisurvey!.sf = item.sf;
-      _cacheuisurvey!.pathphotobelanja = item.pathphotobelanja;
-      _cacheuisurvey!.isbelanjasubmitted = true;
-    }
-    return false;
-  }
-
-  Future<bool> _loadDataVoucher(EnumSurvey enumSurvey) async {
-    String? idtempat = _cachePjp!.id;
-    DateTime dt = DateTime.now();
-    HttpSurvey httpSurvey = new HttpSurvey();
-    if (enumSurvey == EnumSurvey.fisik) {
-      UISurvey? item =
-          await httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt);
-      if (item != null) {
-        _cacheuisurvey!.lsurveyFisik = item.lsurveyFisik;
-        _cacheuisurvey!.isfisiksubmitted = true;
-      }
-    } else {
-      UISurvey? item = await httpSurvey.getDetailPromotion(
-          EnumSurvey.broadband, idtempat, dt);
-      if (item != null) {
-        _cacheuisurvey!.lsurveyBroadband = item.lsurveyBroadband;
-        _cacheuisurvey!.isbroadbandsubmitted = true;
-      }
-    }
-
-    return true;
   }
 
   void changedText(int index, String str, EnumSurvey enumSurvey) {
