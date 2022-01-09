@@ -53,7 +53,7 @@ class HttpSurvey {
 
   Future<bool> createSurveyBelanja(Map<String, dynamic> map) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    String? idhitory = await  AccountHore.getIdHistoryPjp() ;
+    String? idhitory = await AccountHore.getIdHistoryPjp();
     String path1 = map['path'];
     // Map<String, dynamic> mp = {
     //   "id_outlet": _cacheuisurvey.pjp.id,
@@ -149,7 +149,7 @@ class HttpSurvey {
     if (mp['data'] != null) {
       List<dynamic> ld = mp['data'];
       print('ld.length: ${ld.length}');
-      if (ld.length == 0) {
+      if (ld.isEmpty) {
         return null;
       }
       Map<String, dynamic> map = ld[0];
@@ -204,21 +204,25 @@ class HttpSurvey {
     return item;
   }
 
-  UISurvey _olahDetailSurveyBelanja(dynamic value) {
+  UISurvey? _olahDetailSurveyBelanja(dynamic value) {
     UISurvey item = UISurvey();
     Map<String, dynamic> mp = value;
     if (mp['data'] != null) {
       List<dynamic> ld = mp['data'];
-      for (int i = 0; i < ld.length; i++) {
-        Map<String, dynamic> map = ld[i];
-        item.telkomsel = ConverterNumber.stringToInt(map['telkomsel']);
-        item.isat = ConverterNumber.stringToInt(map['isat']);
-        item.xl = ConverterNumber.stringToInt(map['xl']);
-        item.tri = ConverterNumber.stringToInt(map['tri']);
-        item.axis = ConverterNumber.stringToInt(map['axis']);
-        item.other = ConverterNumber.stringToInt(map['other']);
-        item.sf = ConverterNumber.stringToInt(map['smartfren']);
-        item.pathphotobelanja = map['foto_belanja'];
+      if (ld.isEmpty) {
+        return null;
+      } else {
+        for (int i = 0; i < ld.length; i++) {
+          Map<String, dynamic> map = ld[i];
+          item.telkomsel = ConverterNumber.stringToInt(map['telkomsel']);
+          item.isat = ConverterNumber.stringToInt(map['isat']);
+          item.xl = ConverterNumber.stringToInt(map['xl']);
+          item.tri = ConverterNumber.stringToInt(map['tri']);
+          item.axis = ConverterNumber.stringToInt(map['axis']);
+          item.other = ConverterNumber.stringToInt(map['other']);
+          item.sf = ConverterNumber.stringToInt(map['smartfren']);
+          item.pathphotobelanja = map['foto_belanja'];
+        }
       }
     }
     return item;

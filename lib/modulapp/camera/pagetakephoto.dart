@@ -251,19 +251,19 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     }
   }
 
-  XFile? imageFile;
+  // XFile? imageFile;
   void onTakePictureButtonPressed() {
-    takePicture().then((XFile? filePath) {
+    takePicture().then((String? filePath) {
       if (mounted) {
         setState(() {
           //   imagePath = filePath;
-          imageFile = filePath;
+          // imageFile = filePath;
           videoController?.dispose();
           videoController = null;
         });
         if (filePath != null) {
           ///data/data/com.tgz.cobacamera/app_flutter/Pictures/flutter_test/1603038382586.jpg
-          print('path: $filePath');
+          print('path photo di kirim ke preview: ${filePath}');
           //  showInSnackBar('Picture saved to $filePath');
           ParamPreviewPhoto params = widget.params!;
           params.pathPhoto = filePath;
@@ -286,18 +286,11 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     });
   }
 
-  Future<XFile?> takePicture() async {
+  Future<String?> takePicture() async {
     if (!controller!.value.isInitialized) {
       showInSnackBar('Error: select a camera first.');
       return null;
     }
-    final Directory? extDir =
-        await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir!.path}/photo';
-    await Directory(dirPath).create(recursive: true);
-    print(dirPath);
-    final String filePath = '$dirPath/${timestamp()}.jpeg';
-    print(filePath);
 
     if (controller!.value.isTakingPicture) {
       // A capture is already pending, do nothing.
@@ -305,13 +298,32 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     }
 
     try {
-      /// Comment error sementara
-      XFile file = await controller!.takePicture();
-      //await controller.takePicture(filePath);
-      /// end
-      return file;
+      XFile rawImage = await controller!.takePicture();
+      return await _copyPhotoFroCacheToDestinationDirectory(rawImage);
     } on CameraException catch (e) {
       _showCameraException(e);
+      return null;
+    }
+  }
+
+  Future<String?> _copyPhotoFroCacheToDestinationDirectory(
+      XFile sourceFile) async {
+    try {
+      final Directory? extDir =
+          await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
+      final String dirPath = '${extDir!.path}/photo';
+      await Directory(dirPath).create(recursive: true);
+      print("Directory Photo: $dirPath");
+      final String filePath = '$dirPath/${timestamp()}.jpeg';
+
+      File imageFile = File(sourceFile.path);
+
+      await imageFile.copy(
+        filePath,
+      );
+      return filePath;
+    } catch (e) {
+      print(e);
       return null;
     }
   }
@@ -334,14 +346,14 @@ enum EnumTakePhoto {
 }
 
 class ParamPreviewPhoto {
-  XFile? pathPhoto;
+  String? pathPhoto;
   EnumTakePhoto enumTakePhoto;
   EnumNumber? enumNumber;
   ITgzFile tgzFile;
 
   Future<String?> getPhotoUrlOrNull() async {
     if (pathPhoto != null) {
-      String urlImage = pathPhoto!.path;
+      String urlImage = pathPhoto!;
       if (await tgzFile.isPathExist(urlImage)) {}
       return urlImage;
     }

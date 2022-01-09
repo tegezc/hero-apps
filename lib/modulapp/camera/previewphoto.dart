@@ -7,6 +7,7 @@ import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/util/component/component_button.dart';
+import 'package:hero/util/component/component_label.dart';
 import 'package:hero/util/component/component_widget.dart';
 
 class PreviewPhoto extends StatefulWidget {
@@ -37,6 +38,8 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
   @override
   Widget build(BuildContext context) {
     _setupUrlImage();
+
+    print("PREVIEW PHOTO: $_urlImageOrNull");
     Size s = MediaQuery.of(context).size;
     if (_urlImageOrNull == null) {
       return CustomScaffold(
@@ -48,7 +51,9 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                     height: s.height - 140,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Container(),
+                      child: Container(
+                        child: LabelBlack.size1("Photo gagal di tampilkan"),
+                      ),
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -92,6 +97,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                           break;
 
                         case EnumTakePhoto.marketaudit:
+                          print("PAKAI PHOTO: $_urlImageOrNull");
                           StoredPathPhoto.setPhotoMarketAudit(_urlImageOrNull!)
                               .then((value) {
                             Navigator.popUntil(
@@ -102,7 +108,6 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                           });
                           break;
                         case EnumTakePhoto.merchetalase:
-                          print('bloc set preference');
                           StoredPathPhoto.setPhotoMerchandising(
                                   EnumMerchandising.etalase,
                                   widget.param!.enumNumber,

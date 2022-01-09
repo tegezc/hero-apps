@@ -364,6 +364,8 @@ class _CoverageHomeState extends State<CoverageHome> {
   Future<bool> _saveHistoryPjpId(String? idhistorypjp) async {
     if (idhistorypjp != null) {
       await AccountHore.setIdHistoryPjp(idhistorypjp);
+    } else {
+      await AccountHore.setIdHistoryPjp("");
     }
     return true;
   }

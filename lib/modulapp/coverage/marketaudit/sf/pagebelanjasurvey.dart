@@ -27,9 +27,11 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
   TextEditingController? _smartController;
   TextEditingController? _axisController;
   TextEditingController? _otherController;
+  BlocSurvey? _blocSurvey;
 
   @override
   void initState() {
+    _blocSurvey = widget.blocSurvey;
     _telkomselController = new TextEditingController();
     _isatController = new TextEditingController();
     _xlController = new TextEditingController();
@@ -74,6 +76,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
   Widget build(BuildContext context) {
     _setValue();
     Size s = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -98,7 +101,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
 
                         String? path =
                             await StoredPathPhoto.getPhotoMarketAudit();
-                        widget.blocSurvey!.setpathphoto(path);
+                        print("BELANJA SURVEY: $path");
+                        _blocSurvey!.setpathphoto(path);
                       },
                     ),
                   )
@@ -107,7 +111,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
             SizedBox(
               height: 12,
             ),
-            !widget.uiSurvey!.isbelanjasubmitted
+            widget.uiSurvey!.isbelanjasubmitted
                 ? Container()
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -120,7 +124,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                         onPressed: () {
                           if (widget.uiSurvey!.isbelanjabisasubmit()) {
                             TgzDialog.loadingDialog(context);
-                            widget.blocSurvey!.submitBelanja().then((value) {
+                            _blocSurvey!.submitBelanja().then((value) {
                               Navigator.of(context).pop();
                               if (value) {
                                 _confirmSuccessSimpan();
@@ -132,11 +136,12 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                             TgzDialog.confirmHarusDiisi(context);
                           }
                           // widget.blocSurvey.changeTextBelanja(
-                          //     _telkomselController.text, EnumOperator.telkomsel);
+                          //     _telkomselController.text,
+                          //     EnumOperator.telkomsel);
                           // widget.blocSurvey.changeTextBelanja(
                           //     _isatController.text, EnumOperator.isat);
-                          // widget.blocSurvey
-                          //     .changeTextBelanja(_xlController.text, EnumOperator.xl);
+                          // widget.blocSurvey.changeTextBelanja(
+                          //     _xlController.text, EnumOperator.xl);
                           // widget.blocSurvey.changeTextBelanja(
                           //     _triController.text, EnumOperator.tri);
                           // widget.blocSurvey.changeTextBelanja(
@@ -188,7 +193,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
               '',
               controller,
               onChanged: (str) {
-                widget.blocSurvey!.changeTextBelanja(str, enumOperator);
+                _blocSurvey!.changeTextBelanja(str, enumOperator);
               },
             ))
       ],
@@ -218,7 +223,6 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                           File(url),
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
-                            print(exception);
                             return Container();
                           },
                         )),
@@ -246,7 +250,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    widget.blocSurvey!.refresh();
+                    _blocSurvey!.refresh();
                     Navigator.of(context).pop();
                   }),
                 ),
