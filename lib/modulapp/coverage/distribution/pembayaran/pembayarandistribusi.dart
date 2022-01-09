@@ -89,38 +89,69 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 ),
                 Positioned(
                   bottom: 0,
-                  child: SizedBox(
+                  child: Container(
+                    color: Colors.white,
                     width: size.width - 2,
-                    child: RaisedButton(
-                        color: Colors.green,
-                        child: Text(
-                          'BAYAR',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: item.isvalid()
-                            ? () {
-                                bool isproses = true;
-                                if (item.enumAccount == EnumAccount.ds) {
-                                  if (_controller2.text.trim().length == 0) {
-                                    isproses = false;
-                                    _confirmNohpKosong();
-                                  }
-                                }
-                                if (isproses) {
-                                  TgzDialog.loadingDialog(context);
-                                  _blocPembayaran.bayar().then((value) {
-                                    Navigator.of(context).pop();
-                                    Navigator.pushNamed(
-                                        context, PageSuccess.routeName,
-                                        arguments: PageSuccessParam(
-                                            HomePembelianDistribusi.routeName,
-                                            ConstString.textDistribusi,
-                                            'Transaksi Anda Berhasil',
-                                            ''));
-                                  });
-                                }
-                              }
-                            : null),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: ButtonStrectWidth(
+                        text: 'BAYAR',
+                        isenable: item.isvalid(),
+                        buttonColor: Colors.red,
+                        onTap: () {
+                          bool isproses = true;
+                          if (item.enumAccount == EnumAccount.ds) {
+                            if (_controller2.text.trim().length == 0) {
+                              isproses = false;
+                              _confirmNohpKosong();
+                            }
+                          }
+                          if (isproses) {
+                            TgzDialog.loadingDialog(context);
+                            _blocPembayaran.bayar().then((value) {
+                              Navigator.of(context).pop();
+                              Navigator.pushNamed(
+                                  context, PageSuccess.routeName,
+                                  arguments: PageSuccessParam(
+                                      HomePembelianDistribusi.routeName,
+                                      ConstString.textDistribusi,
+                                      'Transaksi Anda Berhasil',
+                                      ''));
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                    // RaisedButton(
+                    //     color: Colors.green,
+                    //     child: Text(
+                    //       'BAYAR',
+                    //       style: TextStyle(color: Colors.white),
+                    //     ),
+                    //     onPressed: item.isvalid()
+                    //         ? () {
+                    //             bool isproses = true;
+                    //             if (item.enumAccount == EnumAccount.ds) {
+                    //               if (_controller2.text.trim().length == 0) {
+                    //                 isproses = false;
+                    //                 _confirmNohpKosong();
+                    //               }
+                    //             }
+                    //             if (isproses) {
+                    //               TgzDialog.loadingDialog(context);
+                    //               _blocPembayaran.bayar().then((value) {
+                    //                 Navigator.of(context).pop();
+                    //                 Navigator.pushNamed(
+                    //                     context, PageSuccess.routeName,
+                    //                     arguments: PageSuccessParam(
+                    //                         HomePembelianDistribusi.routeName,
+                    //                         ConstString.textDistribusi,
+                    //                         'Transaksi Anda Berhasil',
+                    //                         ''));
+                    //               });
+                    //             }
+                    //           }
+                    //         : null),
                   ),
                 ),
               ],
