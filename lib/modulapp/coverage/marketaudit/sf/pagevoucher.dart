@@ -100,15 +100,10 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
           children: [
             _dataTable(_item!.lsurveyBroadband!, ''),
             _issubmitbuttonshowing
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
-                        child: Text(
-                          'SUBMIT',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
+            ? ButtonStrectWidth(
+                    buttonColor: Colors.red,
+                    text: "SUBMIT",
+                    onTap: () {
                           // for (int i = 0; i < _lcontroller.length; i++) {
                           //   String str = _lcontroller[i].text;
                           //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
@@ -129,8 +124,8 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                           } else {
                             TgzDialog.confirmHarusDiisi(context);
                           }
-                        }),
-                  )
+                        },
+                    isenable: true)
                 : Container(),
             SizedBox(
               height: 150,

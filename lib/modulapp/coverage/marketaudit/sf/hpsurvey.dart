@@ -59,47 +59,51 @@ class _HomeSurveyState extends State<HomeSurvey> {
               child: Scaffold(
                 appBar: AppBar(
                   actions: [
-                    ButtonApp.blue('Selesai', () {
-                      TgzDialog.loadingDialog(context);
-                      HttpDashboard httpDashboard = HttpDashboard();
-                      httpDashboard.finishMenu(EnumTab.survey).then((value) {
-                        Navigator.of(context).pop();
-                        if (value.issuccess) {
+                    Padding(
+                      padding: const EdgeInsets.only(top:12.0, bottom: 12.0),
+                      child: ButtonApp.black('Selesai', () {
+                        TgzDialog.loadingDialog(context);
+                        HttpDashboard httpDashboard = HttpDashboard();
+                        httpDashboard.finishMenu(EnumTab.survey).then((value) {
                           Navigator.of(context).pop();
-                        } else {
-                          if (value.message == null) {
-                            TgzDialog.generalDialogConfirm(context,
-                                'untuk dapat mengakhiri proses Market Audit,Seluruh tab harus di isi minimal dengan angka 0.');
+                          if (value.issuccess) {
+                            Navigator.of(context).pop();
                           } else {
-                            TgzDialog.generalDialogConfirm(
-                                context, value.message);
+                            if (value.message == null) {
+                              TgzDialog.generalDialogConfirm(context,
+                                  'untuk dapat mengakhiri proses Market Audit,Seluruh tab harus di isi minimal dengan angka 0.');
+                            } else {
+                              TgzDialog.generalDialogConfirm(
+                                  context, value.message);
+                            }
                           }
-                        }
-                      });
-                    }),
+                        });
+                      },bgColor: Colors.white,),
+                    ),
                   ],
                   bottom: TabBar(
+                    indicatorColor: Colors.white,
                     isScrollable: true,
                     tabs: [
                       // wallet share, sales broadband share, voucher fisik share
                       Tab(
-                        child: LabelBlack.size2('Belanja Share'),
+                        child: LabelWhite.size2('Belanja Share'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Sales Broadband Share'),
+                        child: LabelWhite.size2('Sales Broadband Share'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Voucher Internet Share'),
+                        child: LabelWhite.size2('Voucher Internet Share'),
                       ),
                     ],
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.red[600],
                   iconTheme: IconThemeData(
-                    color: Colors.black, //change your color here
+                    color: Colors.white, //change your color here
                   ),
                   title: Text(
                     ConstString.textSurvey,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   centerTitle: true,
                 ),

@@ -85,12 +85,10 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
           children: [
             _cardForm(s.width),
             widget.uiSurvey!.pathphotobelanja == null
-                ? ContainerRounded(
-                    radius: 8.0,
-                    child: IconButton(
-                      iconSize: 50,
-                      icon: Icon(Icons.camera_alt),
-                      onPressed: () async {
+            ? ButtonStrectWidth(
+                    buttonColor: Colors.green,
+                    text: "Ambil Foto",
+                    onTap: () async {
                         FocusScope.of(context).unfocus();
                         ParamPreviewPhoto params = ParamPreviewPhoto(
                           EnumTakePhoto.marketaudit,
@@ -104,8 +102,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                         print("BELANJA SURVEY: $path");
                         _blocSurvey!.setpathphoto(path);
                       },
-                    ),
-                  )
+                    isenable: true)
                 : Container(),
             _showImage(widget.uiSurvey!.pathphotobelanja),
             SizedBox(
@@ -113,15 +110,10 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
             ),
             widget.uiSurvey!.isbelanjasubmitted
                 ? Container()
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                        color: Colors.green,
-                        child: const Text(
-                          'SUBMIT',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
+                :  ButtonStrectWidth(
+                    buttonColor: Colors.red,
+                    text: "SUBMIT",
+                    onTap: () {
                           if (widget.uiSurvey!.isbelanjabisasubmit()) {
                             TgzDialog.loadingDialog(context);
                             _blocSurvey!.submitBelanja().then((value) {
@@ -150,8 +142,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                           //     _axisController.text, EnumOperator.axis);
                           // widget.blocSurvey.changeTextBelanja(
                           //     _otherController.text, EnumOperator.other);
-                        }),
-                  ),
+                        },
+                    isenable: true),
             SizedBox(
               height: 100,
             ),
