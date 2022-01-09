@@ -123,8 +123,7 @@ class HttpDIstribution {
     }
   }
 
-  Future<List<SerialNumber>?> getAllDaftarSn(
-      String? idproduct) async {
+  Future<List<SerialNumber>?> getAllDaftarSn(String? idproduct) async {
     Map<String, String> headers = await HttpUtil.getHeader();
 
     Map map = {
@@ -166,6 +165,7 @@ class HttpDIstribution {
     };
 
     Uri uri = ConstApp.uri('/clockindistribusi/penjualan_daftar_sn');
+    print("URL DAFTAR SERIAL NUMBER: ${uri.path}");
 
     http.Response? response;
     try {
@@ -227,6 +227,7 @@ class HttpDIstribution {
 
     String uri = '${ConstApp.domain}/$url';
     print("URL upload foto clockout:  $uri");
+
     ///===================================
     var request = http.MultipartRequest('POST', Uri.parse(uri));
     request.headers.addAll(headers);

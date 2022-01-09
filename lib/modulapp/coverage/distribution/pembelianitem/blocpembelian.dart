@@ -5,10 +5,10 @@ import 'package:hero/model/serialnumber.dart';
 import 'package:rxdart/subjects.dart';
 
 class BlocPembelian {
-  UIPembelian _cachePembelian = UIPembelian();
-  late List<SerialNumber> _cacheLsn;
-  HttpDIstribution _httpDIstribution = HttpDIstribution();
-  DaoSerial _daoSerial = DaoSerial();
+  final UIPembelian _cachePembelian = UIPembelian();
+  List<SerialNumber>? _cacheLsn;
+  final HttpDIstribution _httpDIstribution = HttpDIstribution();
+  final DaoSerial _daoSerial = DaoSerial();
 
   final BehaviorSubject<UIPembelian> _uiPembelian = BehaviorSubject();
 
@@ -21,35 +21,36 @@ class BlocPembelian {
     _sink(_cachePembelian);
   }
 
-  void cariSerial(String snawal, String snakhir) async {
-    _olahPencarian(snawal, snakhir).then((value) {
+  void semuaSerial() async {
+    _semuaSerial().then((value) {
       if (value) {
         _sink(_cachePembelian);
       }
     });
   }
 
-  void semuaSerial() async{
-    _semuaSerial().then((value){
-      if(value){
-        _sink(_cachePembelian);
-      }
-    });
-  }
-
-  Future<bool> _semuaSerial() async{
-    List<SerialNumber>? allsn = await _httpDIstribution.getAllDaftarSn(_cachePembelian.trx!.product!.id);
+  Future<bool> _semuaSerial() async {
+    List<SerialNumber>? allsn = await _httpDIstribution
+        .getAllDaftarSn(_cachePembelian.trx!.product!.id);
     _cachePembelian.lserialChecked =
         await _daoSerial.getSerialByIdProduct(_cachePembelian.trx!.product!.id);
-     if (allsn != null) {
+    if (allsn != null) {
       _cacheLsn = List.from(allsn);
-      _cachePembelian.lserialChecked!.forEach((element) {
+      for (var element in _cachePembelian.lserialChecked!) {
         int index = allsn.indexOf(element);
         allsn[index].ischecked = true;
-      });
+      }
       _cachePembelian.lserial = allsn;
     }
     return true;
+  }
+
+  void cariSerial(String snawal, String snakhir) async {
+    _olahPencarian(snawal, snakhir).then((value) {
+      if (value) {
+        _sink(_cachePembelian);
+      }
+    });
   }
 
   Future<bool> _olahPencarian(String snawal, String snakhir) async {
@@ -60,12 +61,15 @@ class BlocPembelian {
 
     if (lsn != null) {
       _cacheLsn = List.from(lsn);
-      _cachePembelian.lserialChecked!.forEach((element) {
+      for (var element in lsn) {
         int index = lsn.indexOf(element);
         lsn[index].ischecked = true;
-        changeRadio(index, true);
-      });
-      _cachePembelian.lserial = lsn;
+      }
+      for (var element in _cachePembelian.lserialChecked!) {
+        int index = lsn.indexOf(element);
+        lsn[index].ischecked = true;
+      }
+      _cachePembelian.lserial = List.from(lsn);
     }
     return true;
   }
@@ -79,7 +83,7 @@ class BlocPembelian {
       _cachePembelian.lserialChecked!.remove(serial);
     }
 
-    List<SerialNumber> lsn = List.from(_cacheLsn);
+    List<SerialNumber> lsn = List.from(_cacheLsn!);
     _cachePembelian.lserialChecked!.forEach((element) {
       int index = lsn.indexOf(element);
       lsn[index].ischecked = true;
