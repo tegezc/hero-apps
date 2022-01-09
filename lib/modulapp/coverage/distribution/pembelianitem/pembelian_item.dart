@@ -3,7 +3,6 @@ import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/component/component_button.dart';
 import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
 import 'package:hero/util/component/component_widget.dart';
 
 import 'blocpembelian.dart';
@@ -78,15 +77,15 @@ class _PembelianItemState extends State<PembelianItem> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           _contentTransaksi(item.trx!),
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           _contentSeri(item),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
                         ],
@@ -96,30 +95,26 @@ class _PembelianItemState extends State<PembelianItem> {
                 ),
                 Positioned(
                   bottom: 0,
-                  child: SizedBox(
+                  child: Container(
+                    color: Colors.white,
                     width: size.width - 2,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              item.isSafetosubmit()
-                                  ? Colors.green
-                                  : Colors.grey),
-                        ),
-                        child: Text(
-                          'BELI',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: item.isSafetosubmit()
-                            ? () {
-                                _blocPembelian.beli().then((value) {
-                                  if (value) {
-                                    _confirmSuccessSimpan();
-                                  } else {
-                                    _confirmGagalMenyimpan();
-                                  }
-                                });
-                              }
-                            : null),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ButtonStrectWidth(
+                        text: 'Beli',
+                        buttonColor: Colors.red,
+                        isenable: item.isSafetosubmit(),
+                        onTap: () {
+                          _blocPembelian.beli().then((value) {
+                            if (value) {
+                              _confirmSuccessSimpan();
+                            } else {
+                              _confirmGagalMenyimpan();
+                            }
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -129,11 +124,20 @@ class _PembelianItemState extends State<PembelianItem> {
   }
 
   Widget _contentTransaksi(ItemTransaksi trx) {
-    String txtbtn = _isRange ? 'Hide' : 'Range';
+    Size size = MediaQuery.of(context).size;
+    Icon icon = _isRange
+        ? const Icon(
+            Icons.arrow_upward,
+            color: Colors.white,
+          )
+        : const Icon(
+            Icons.arrow_downward,
+            color: Colors.white,
+          );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
         Padding(
@@ -152,15 +156,23 @@ class _PembelianItemState extends State<PembelianItem> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                          width: 200, child: _inputNoSeri(_textController1)),
+                          width: size.width - 100,
+                          child: _inputNoSeri(_textController1)),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
-                        child: ButtonApp.white(txtbtn, () {
-                          setState(() {
-                            print('click');
-                            _isRange = !_isRange;
-                          });
-                        }),
+                        child: IconButton(
+                          icon: icon,
+                          onPressed: () {
+                            setState(() {
+                              _isRange = !_isRange;
+                            });
+                          },
+                        ),
+                        // ButtonApp.white(txtbtn, () {
+                        //   setState(() {
+                        //     _isRange = !_isRange;
+                        //   });
+                        // }),
                       ),
                     ],
                   ),
@@ -172,7 +184,7 @@ class _PembelianItemState extends State<PembelianItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                                width: 200,
+                                width: size.width - 100,
                                 child: _inputNoSeri(_textController2)),
                             Container(),
                           ],
@@ -184,16 +196,14 @@ class _PembelianItemState extends State<PembelianItem> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ButtonApp.white('SEARCH', () {
+                      ButtonApp.black('SEARCH', () {
                         FocusScope.of(context).unfocus();
                         String snawal = _textController1.text;
                         String snakhir = _textController2.text;
                         if (snawal == "" && snakhir == "") {
                           _blocPembelian.semuaSerial();
                         } else {
-                          setState(() {
                           _blocPembelian.cariSerial(snawal, snakhir);
-                          });
                         }
                       }),
                     ],
@@ -211,8 +221,8 @@ class _PembelianItemState extends State<PembelianItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 4.0),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 4.0),
           child: Text(
             "Nomor Seri",
             style: TextStyle(color: Colors.white),
@@ -221,19 +231,19 @@ class _PembelianItemState extends State<PembelianItem> {
         TextFormField(
           controller: controller,
           cursorColor: Colors.white,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             fillColor: Colors.white,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.yellow,
                 width: 2.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.white,
               ),
             ),
@@ -248,7 +258,7 @@ class _PembelianItemState extends State<PembelianItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
         Padding(
@@ -268,7 +278,7 @@ class _PembelianItemState extends State<PembelianItem> {
 
   Widget _contentListSeri(List<SerialNumber> lseri) {
     List<Widget> lw = [];
-    lw.add(SizedBox(
+    lw.add(const SizedBox(
       height: 4,
     ));
     for (int i = 0; i < lseri.length; i++) {
@@ -287,7 +297,7 @@ class _PembelianItemState extends State<PembelianItem> {
   }
 
   Widget _cell(SerialNumber seri, int index) {
-    print("check: $seri.ischecked");
+    print("check: ${seri.ischecked}");
     return ListTile(
       leading: Checkbox(
         onChanged: (bool? value) {

@@ -12,7 +12,6 @@ class DaoSerial {
         await dbClient!.transaction((txn) async {
           var batch = txn.batch();
 
-          // insert provinsi
           for (int i = 0; i < lserial.length; i++) {
             SerialNumber p = lserial[i];
             batch.insert(TbSerial.tableName, p.toMap());
@@ -24,14 +23,13 @@ class DaoSerial {
         });
       }
     } catch (err) {
-      print('Caught error: $err');
       return false;
     }
     return true;
   }
 
   Future<int?> getCountByIdProduct(String? idproduct) async {
-    var dbClient = await (DatabaseHelper().db as Future<Database?>);
+    var dbClient = await (DatabaseHelper().db);
 
     int? count = Sqflite.firstIntValue(await dbClient!.rawQuery(
         'SELECT COUNT(*) FROM ${TbSerial.tableName} WHERE ${TbSerial.idproduk}=$idproduct'));
@@ -46,7 +44,7 @@ class DaoSerial {
 
     List<SerialNumber> lseri = [];
     for (int i = 0; i < list.length; i++) {
-      SerialNumber serial = this._createSeri(list[i] as Map<String, dynamic>);
+      SerialNumber serial = _createSeri(list[i] as Map<String, dynamic>);
       serial.ischecked = true;
 
       lseri.add(serial);
@@ -62,7 +60,7 @@ class DaoSerial {
 
     List<SerialNumber> lseri = [];
     for (int i = 0; i < list.length; i++) {
-      SerialNumber serial = this._createSeri(list[i] as Map<String, dynamic>);
+      SerialNumber serial = _createSeri(list[i] as Map<String, dynamic>);
 
       lseri.add(serial);
     }
@@ -71,7 +69,7 @@ class DaoSerial {
   }
 
   SerialNumber _createSeri(Map<String, dynamic> map) {
-    return new SerialNumber.fromDb(
+    return SerialNumber.fromDb(
       serial: map[TbSerial.serial],
       hargajual: map[TbSerial.hargajual],
       hargamodal: map[TbSerial.hargamodal],
@@ -80,7 +78,7 @@ class DaoSerial {
   }
 
   Future<int> deleteAllSerial() async {
-    var dbClient = await (DatabaseHelper().db as Future<Database?>);
+    var dbClient = await (DatabaseHelper().db);
     int res = await dbClient!.rawDelete('DELETE FROM ${TbSerial.tableName}');
     return res;
   }
