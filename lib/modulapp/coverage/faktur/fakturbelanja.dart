@@ -245,7 +245,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(),
-        ButtonApp.blue('Share', () async {
+        ButtonApp.black('Share', () async {
           _takeScreenshotandShare();
         }),
       ],
@@ -271,11 +271,12 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
           ),
           body: Center(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-            child: _imageFile != null ? Image.memory(_imageFile!) : Container(),
-          ),
-              )),
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child:
+                  _imageFile != null ? Image.memory(_imageFile!) : Container(),
+            ),
+          )),
         ),
       );
     }).catchError((onError) {
