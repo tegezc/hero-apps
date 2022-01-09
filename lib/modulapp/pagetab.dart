@@ -319,9 +319,12 @@ class _PageTabState extends State<PageTab> {
                           ],
                         ),
                       ),
-                      ButtonApp.white('View Detail', () {
-                        _controllerTap(item);
-                      }),
+                      SizedBox(
+                        height: 30,
+                        child: ButtonApp.black('View Detail', () {
+                          _controllerTap(item);
+                        },bgColor: Colors.white,),
+                      ),
                     ],
                   ),
                 ],
@@ -367,9 +370,12 @@ class _PageTabState extends State<PageTab> {
                       ],
                     ),
                   ),
-                  ButtonApp.white(item.nonota, () {
-                    _tapNota(item.nonota);
-                  }),
+                  SizedBox(
+                    height:30,
+                    child: ButtonApp.black(item.nonota, () {
+                      _tapNota(item.nonota);
+                    },bgColor: Colors.white,),
+                  ),
                 ],
               ),
             ],
