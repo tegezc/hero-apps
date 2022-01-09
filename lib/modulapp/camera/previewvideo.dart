@@ -72,12 +72,15 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   LabelBlack.size1(
                     widget.param!.promotion!.nama,
                     bold: true,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   _promotion!.nama == programlocal
                       ? Padding(
@@ -101,14 +104,9 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                       ),
                     ),
                   ),
-                  IconButton(
-                      icon: Icon(
-                        _controller.value.isPlaying
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                      ),
-                      onPressed: () {
-                        setState(() {
+                  TextButton(
+                    onPressed: (){
+                      setState(() {
                           // If the video is playing, pause it.
                           if (_controller.value.isPlaying) {
                             _controller.pause();
@@ -117,7 +115,9 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                             _controller.play();
                           }
                         });
-                      }),
+                    },
+                    child: Text(_controller.value.isPlaying ? "PAUSE" : "PLAY"),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
