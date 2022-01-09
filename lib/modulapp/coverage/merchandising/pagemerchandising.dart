@@ -78,16 +78,18 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     _telkomselController!.text = widget.merchandising!.telkomsel != null
         ? '${widget.merchandising!.telkomsel}'
         : '';
-    _isatController!.text =
-        widget.merchandising!.isat == null ? '' : '${widget.merchandising!.isat}';
+    _isatController!.text = widget.merchandising!.isat == null
+        ? ''
+        : '${widget.merchandising!.isat}';
     _xlController!.text =
         widget.merchandising!.xl == null ? '' : '${widget.merchandising!.xl}';
     _triController!.text =
         widget.merchandising!.tri == null ? '' : '${widget.merchandising!.tri}';
     _smartController!.text =
         widget.merchandising!.sf == null ? '' : '${widget.merchandising!.sf}';
-    _axisController!.text =
-        widget.merchandising!.axis == null ? '' : '${widget.merchandising!.axis}';
+    _axisController!.text = widget.merchandising!.axis == null
+        ? ''
+        : '${widget.merchandising!.axis}';
     _otherController!.text = widget.merchandising!.other == null
         ? ''
         : '${widget.merchandising!.other}';
@@ -112,18 +114,16 @@ class _PageMerchandisingState extends State<PageMerchandising> {
               ),
             )),
             _cardForm(s.width),
+            const SizedBox(height:10),
             widget.merchandising!.isPhotoShowing()
-                ? ContainerRounded(
-                    radius: 8.0,
-                    child: IconButton(
-                      iconSize: 50,
-                      icon: Icon(Icons.camera_alt),
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        this._takePhoto();
-                      },
-                    ),
-                  )
+                ? ButtonStrectWidth(
+                    buttonColor: Colors.green,
+                    text: "Ambil Foto",
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      _takePhoto();
+                    },
+                    isenable: true)
                 : Container(),
             _listPhoto(
               s.width,
@@ -131,37 +131,29 @@ class _PageMerchandisingState extends State<PageMerchandising> {
               widget.merchandising!.pathPhoto2,
               widget.merchandising!.pathPhoto3,
             ),
-            SizedBox(
-              height: 12,
-            ),
             widget.merchandising!.isServerExist
                 ? Container()
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                        color: Colors.green,
-                        child: Text(
-                          'SUBMIT',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          if (widget.merchandising!.isvalidtosubmit()) {
-                            TgzDialog.loadingDialog(context);
-                            widget.blocMerchandising!
-                                .submit(widget.enumMerchandising)
-                                .then((value) {
-                              Navigator.of(context).pop();
-                              if (value) {
-                                _confirmSuccessSimpan();
-                              } else {
-                                _confirmGagalMenyimpan();
-                              }
-                            });
+                : ButtonStrectWidth(
+                    buttonColor: Colors.red,
+                    text: "SUBMIT",
+                    onTap: () {
+                      if (widget.merchandising!.isvalidtosubmit()) {
+                        TgzDialog.loadingDialog(context);
+                        widget.blocMerchandising!
+                            .submit(widget.enumMerchandising)
+                            .then((value) {
+                          Navigator.of(context).pop();
+                          if (value) {
+                            _confirmSuccessSimpan();
                           } else {
-                            TgzDialog.confirmHarusDiisi(context);
+                            _confirmGagalMenyimpan();
                           }
-                        }),
-                  ),
+                        });
+                      } else {
+                        TgzDialog.confirmHarusDiisi(context);
+                      }
+                    },
+                    isenable: true),
             SizedBox(
               height: 100,
             ),
@@ -176,25 +168,25 @@ class _PageMerchandisingState extends State<PageMerchandising> {
       ParamPreviewPhoto? params;
       switch (widget.enumMerchandising) {
         case EnumMerchandising.etalase:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchetalase, pathPhoto: null,
-              enumNumber: widget.merchandising!.getPhotoKe());
+          params = ParamPreviewPhoto(EnumTakePhoto.merchetalase,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
 
           break;
         case EnumMerchandising.spanduk:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchspanduk,pathPhoto: null,
-              enumNumber: widget.merchandising!.getPhotoKe());
+          params = ParamPreviewPhoto(EnumTakePhoto.merchspanduk,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
         case EnumMerchandising.poster:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchposter,pathPhoto: null,
-              enumNumber: widget.merchandising!.getPhotoKe());
+          params = ParamPreviewPhoto(EnumTakePhoto.merchposter,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
         case EnumMerchandising.papan:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchpapan,pathPhoto: null,
-              enumNumber: widget.merchandising!.getPhotoKe());
+          params = ParamPreviewPhoto(EnumTakePhoto.merchpapan,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
         case EnumMerchandising.backdrop:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchbackdrop,pathPhoto: null,
-              enumNumber: widget.merchandising!.getPhotoKe());
+          params = ParamPreviewPhoto(EnumTakePhoto.merchbackdrop,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
       }
       await Navigator.pushNamed(
@@ -234,8 +226,8 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     );
   }
 
-  Widget _cellForm(double width, String label, TextEditingController? controller,
-      EnumOperator enumOperator) {
+  Widget _cellForm(double width, String label,
+      TextEditingController? controller, EnumOperator enumOperator) {
     return Row(
       children: [
         SizedBox(width: 80, child: LabelBlack.size2(label)),

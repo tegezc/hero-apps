@@ -65,61 +65,65 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
               child: Scaffold(
                 appBar: AppBar(
                   actions: [
-                    ButtonApp.blue('Selesai', () {
-                      TgzDialog.showdialogSelesai(context,
-                          'Apakah anda akan mengakhiri proses merchandising?',
-                          () {
-                        TgzDialog.loadingDialog(context);
-                        _blocMerchandising!.selesai(widget.pjp!).then((value) {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                          if (value.issuccess) {
+                    Padding(
+                      padding: const EdgeInsets.only(top:12.0,bottom:12.0),
+                      child: ButtonApp.black('Selesai', () {
+                        TgzDialog.showdialogSelesai(context,
+                            'Apakah anda akan mengakhiri proses merchandising?',
+                            () {
+                          TgzDialog.loadingDialog(context);
+                          _blocMerchandising!.selesai(widget.pjp!).then((value) {
                             Navigator.of(context).pop();
-                          } else {
-                            if (value.message == null) {
-                              if (enumAccount == EnumAccount.sf) {
-                                TgzDialog.generalDialogConfirm(context,
-                                    'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
-                              } else {
-                                TgzDialog.generalDialogConfirm(context,
-                                    'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');
-                              }
+                            Navigator.of(context).pop();
+                            if (value.issuccess) {
+                              Navigator.of(context).pop();
                             } else {
-                              TgzDialog.generalDialogConfirm(
-                                  context, value.message);
+                              if (value.message == null) {
+                                if (enumAccount == EnumAccount.sf) {
+                                  TgzDialog.generalDialogConfirm(context,
+                                      'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
+                                } else {
+                                  TgzDialog.generalDialogConfirm(context,
+                                      'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');
+                                }
+                              } else {
+                                TgzDialog.generalDialogConfirm(
+                                    context, value.message);
+                              }
                             }
-                          }
+                          });
                         });
-                      });
-                    }),
+                      },bgColor: Colors.white,),
+                    ),
                   ],
                   bottom: TabBar(
+                    indicatorColor: Colors.white,
                     isScrollable: true,
                     tabs: [
                       Tab(
-                        child: LabelBlack.size2('Etalase'),
+                        child: LabelWhite.size2('Etalase'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Spanduk'),
+                        child: LabelWhite.size2('Spanduk'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Poster'),
+                        child: LabelWhite.size2('Poster'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Papan Nama Toko'),
+                        child: LabelWhite.size2('Papan Nama Toko'),
                       ),
                       Tab(
-                        child: LabelBlack.size2('Backdrop'),
+                        child: LabelWhite.size2('Backdrop'),
                       ),
                     ],
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.red[600],
                   iconTheme: IconThemeData(
-                    color: Colors.black, //change your color here
+                    color: Colors.white, //change your color here
                   ),
                   title: Text(
                     ConstString.textMerchandising,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   centerTitle: true,
                 ),
