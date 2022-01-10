@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero/login/inputcodeverification.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_image.dart';
-import 'package:hero/util/component/component_textfield.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/image/component_image.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
 
 class ResetPassword extends StatefulWidget {
   static const routeName = '/resetpassword';

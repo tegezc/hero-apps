@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/serialnumber.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 import 'blocpembelian.dart';
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/coverage/location/editoroutlet.dart';
 import 'package:hero/modulapp/coverage/location/view/viewoutlet.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
@@ -249,7 +249,7 @@ class _SearchLocationState extends State<SearchLocation> {
                   ),
                 ],
               ),
-              Divider(color:Colors.grey[400]),
+              Divider(color: Colors.grey[400]),
             ],
           ),
         ),

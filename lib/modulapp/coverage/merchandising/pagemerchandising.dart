@@ -7,10 +7,10 @@ import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class PageMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
@@ -114,7 +114,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
               ),
             )),
             _cardForm(s.width),
-            const SizedBox(height:10),
+            const SizedBox(height: 10),
             widget.merchandising!.isPhotoShowing()
                 ? ButtonStrectWidth(
                     buttonColor: Colors.green,

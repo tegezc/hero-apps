@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 class LoadingNunggu extends StatelessWidget {

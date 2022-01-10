@@ -6,9 +6,9 @@ import 'package:hero/http/coverage/httpdistibusi.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/distribusi/nota.dart';
 import 'package:hero/model/profile.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/numberconverter.dart';
@@ -172,8 +172,8 @@ class _FakturPembayaranDsState extends State<FakturPembayaranDs> {
     List<Widget> lw = [];
     if (ltrx != null) {
       ltrx.forEach((element) {
-        lw.add(_cellTransaksi(
-            element.product!.nama, element.product!.hargajual!, element.jumlah!));
+        lw.add(_cellTransaksi(element.product!.nama,
+            element.product!.hargajual!, element.jumlah!));
       });
     }
 
@@ -277,20 +277,18 @@ class _FakturPembayaranDsState extends State<FakturPembayaranDs> {
   }
 
   _onShare(BuildContext context, String pathimage, String text) async {
-    
-      // A builder is used to retrieve the context immediately
-      // surrounding the ElevatedButton.
-      //
-      // The context's `findRenderObject` returns the first
-      // RenderObject in its descendent tree when it's not
-      // a RenderObjectWidget. The ElevatedButton's RenderObject
-      // has its position and size after it's built.
-      final RenderBox box = context.findRenderObject() as RenderBox;
-      List<String> imagePaths = [pathimage];
+    // A builder is used to retrieve the context immediately
+    // surrounding the ElevatedButton.
+    //
+    // The context's `findRenderObject` returns the first
+    // RenderObject in its descendent tree when it's not
+    // a RenderObjectWidget. The ElevatedButton's RenderObject
+    // has its position and size after it's built.
+    final RenderBox box = context.findRenderObject() as RenderBox;
+    List<String> imagePaths = [pathimage];
 
-      await Share.shareFiles(imagePaths,
-          text: text,
-          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
-    
+    await Share.shareFiles(imagePaths,
+        text: text,
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }

@@ -6,9 +6,9 @@ import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/pagebelanjasurvey.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/pagevoucher.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomeSurvey extends StatefulWidget {
@@ -60,25 +60,31 @@ class _HomeSurveyState extends State<HomeSurvey> {
                 appBar: AppBar(
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.only(top:12.0, bottom: 12.0),
-                      child: ButtonApp.black('Selesai', () {
-                        TgzDialog.loadingDialog(context);
-                        HttpDashboard httpDashboard = HttpDashboard();
-                        httpDashboard.finishMenu(EnumTab.survey).then((value) {
-                          Navigator.of(context).pop();
-                          if (value.issuccess) {
+                      padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                      child: ButtonApp.black(
+                        'Selesai',
+                        () {
+                          TgzDialog.loadingDialog(context);
+                          HttpDashboard httpDashboard = HttpDashboard();
+                          httpDashboard
+                              .finishMenu(EnumTab.survey)
+                              .then((value) {
                             Navigator.of(context).pop();
-                          } else {
-                            if (value.message == null) {
-                              TgzDialog.generalDialogConfirm(context,
-                                  'untuk dapat mengakhiri proses Market Audit,Seluruh tab harus di isi minimal dengan angka 0.');
+                            if (value.issuccess) {
+                              Navigator.of(context).pop();
                             } else {
-                              TgzDialog.generalDialogConfirm(
-                                  context, value.message);
+                              if (value.message == null) {
+                                TgzDialog.generalDialogConfirm(context,
+                                    'untuk dapat mengakhiri proses Market Audit,Seluruh tab harus di isi minimal dengan angka 0.');
+                              } else {
+                                TgzDialog.generalDialogConfirm(
+                                    context, value.message);
+                              }
                             }
-                          }
-                        });
-                      },bgColor: Colors.white,),
+                          });
+                        },
+                        bgColor: Colors.white,
+                      ),
                     ),
                   ],
                   bottom: TabBar(

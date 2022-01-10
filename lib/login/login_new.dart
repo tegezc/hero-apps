@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/model/profile.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_image_new.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/image/component_image_new.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -41,10 +41,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children:[
-          PropertyImage.bgbawah(),
-          Container(
+      body: Stack(children: [
+        PropertyImage.bgbawah(),
+        Container(
           height: size.height,
           child: SingleChildScrollView(
             child: Form(
@@ -70,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        )]
-      ),
+        )
+      ]),
     );
   }
 

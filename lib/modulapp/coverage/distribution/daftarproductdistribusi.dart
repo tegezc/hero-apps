@@ -4,9 +4,9 @@ import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/coverage/distribution/blocdaftarproduct.dart';
 import 'package:hero/modulapp/coverage/distribution/pembayaran/pembayarandistribusi.dart';
 import 'package:hero/modulapp/coverage/distribution/pembelianitem/pembelian_item.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class DaftarProductDistribusi extends StatefulWidget {
   static const routeName = '/daftarproductdistribusi';

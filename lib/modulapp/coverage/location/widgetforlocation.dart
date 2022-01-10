@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
 
 import 'bloc/abstractbloclokasi.dart';
 
@@ -37,9 +37,13 @@ class ScaffoldLocation extends StatelessWidget {
         actions: <Widget>[
           Container(
             margin: EdgeInsets.all(15),
-            child: ButtonApp.black(textBtn, () {
-              onTap!();
-            },bgColor: Colors.white,),
+            child: ButtonApp.black(
+              textBtn,
+              () {
+                onTap!();
+              },
+              bgColor: Colors.white,
+            ),
           ),
         ],
         bottom: bottom,

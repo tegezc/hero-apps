@@ -6,8 +6,8 @@ import 'package:hero/http/coverage/httpdistibusi.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class PreviewPhotoWithUpload extends StatefulWidget {
   static const routeName = '/previewphotoupload';

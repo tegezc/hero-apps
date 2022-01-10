@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 class LoadingNunggu extends StatelessWidget {
@@ -119,7 +119,8 @@ class TgzDialog {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: LabelBlack.size2('Semua field harus di isi, minimal 0 dan upload 1 foto'),
+                  child: LabelBlack.size2(
+                      'Semua field harus di isi, minimal 0 dan upload 1 foto'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

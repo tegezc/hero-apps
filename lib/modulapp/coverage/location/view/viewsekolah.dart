@@ -5,8 +5,8 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:hero/model/lokasi/sekolah.dart';
 import 'package:hero/modulapp/coverage/location/view/viewpageidentitas.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 import '../widgetforlocation.dart';
 

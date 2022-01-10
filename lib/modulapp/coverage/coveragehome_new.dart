@@ -14,8 +14,8 @@ import 'package:hero/modulapp/coverage/retur/hpretur.dart';
 import 'package:hero/modulapp/coverage/searchlocation/locationditolak.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocation.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocationds.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 

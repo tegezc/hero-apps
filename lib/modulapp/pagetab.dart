@@ -6,8 +6,8 @@ import 'package:hero/modulapp/coverage/faktur/fakturbelanja.dart';
 import 'package:hero/modulapp/marketaudit/sf/hphistorysurvey.dart';
 import 'package:hero/modulapp/merchandising/homeviewmerchandising.dart';
 import 'package:hero/modulapp/promotion/hpviewpromotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 
@@ -321,9 +321,13 @@ class _PageTabState extends State<PageTab> {
                       ),
                       SizedBox(
                         height: 30,
-                        child: ButtonApp.black('View Detail', () {
-                          _controllerTap(item);
-                        },bgColor: Colors.white,),
+                        child: ButtonApp.black(
+                          'View Detail',
+                          () {
+                            _controllerTap(item);
+                          },
+                          bgColor: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -371,10 +375,14 @@ class _PageTabState extends State<PageTab> {
                     ),
                   ),
                   SizedBox(
-                    height:30,
-                    child: ButtonApp.black(item.nonota, () {
-                      _tapNota(item.nonota);
-                    },bgColor: Colors.white,),
+                    height: 30,
+                    child: ButtonApp.black(
+                      item.nonota,
+                      () {
+                        _tapNota(item.nonota);
+                      },
+                      bgColor: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -399,14 +407,18 @@ class _PageTabState extends State<PageTab> {
       case EnumTab.distribution:
         break;
       case EnumTab.merchandising:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomeViewMerchandising(item)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeViewMerchandising(item)));
         // CommonUi.openPage(context, new HomeViewMerchandising(item));
 
         break;
       case EnumTab.promotion:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePageViewPromotion(item)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePageViewPromotion(item)));
         // CommonUi.openPage(context, new HomePageViewPromotion(item));
         break;
       case EnumTab.survey:

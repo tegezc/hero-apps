@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class ViewMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
@@ -73,8 +73,8 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
                     SizedBox(
                       height: 10,
                     ),
-                    _listPhoto(
-                        s.width, _m!.pathPhoto1, _m!.pathPhoto2, _m!.pathPhoto3),
+                    _listPhoto(s.width, _m!.pathPhoto1, _m!.pathPhoto2,
+                        _m!.pathPhoto3),
                     SizedBox(
                       height: 100,
                     ),

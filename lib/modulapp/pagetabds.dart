@@ -5,8 +5,8 @@ import 'package:hero/modulapp/blocpagetabds.dart';
 import 'package:hero/modulapp/coverage/faktur/fakturbelanjads.dart';
 import 'package:hero/modulapp/marketaudit/sf/hphistorysurvey.dart';
 import 'package:hero/modulapp/promotion/hpviewpromotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 
@@ -183,7 +183,7 @@ class _PageTabDsState extends State<PageTabDs> {
         //_controllerTap(item);
       },
       child: Container(
-       // color: Colors.white,
+        // color: Colors.white,
         child: Column(
           children: [
             Divider(),

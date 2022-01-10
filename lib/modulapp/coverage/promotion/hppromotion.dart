@@ -6,9 +6,9 @@ import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagerecordvideo.dart';
 import 'package:hero/modulapp/coverage/promotion/blocpromotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomePagePromotion extends StatefulWidget {
@@ -71,7 +71,6 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                               child: LabelBlack.size1('Jenis Promosi'),
                             ),
                             _content(item, size.width),
-                            
                           ],
                         ),
                       ),
@@ -82,12 +81,17 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
             ),
             action: Padding(
               padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
-              child: ButtonApp.black('Selesai', () {
-                TgzDialog.showdialogSelesai(context,
-                    'Apakah anda yakin akan mengakhiri proses promotion?', () {
-                  _selesai(item);
-                });
-              },bgColor: Colors.white,),
+              child: ButtonApp.black(
+                'Selesai',
+                () {
+                  TgzDialog.showdialogSelesai(context,
+                      'Apakah anda yakin akan mengakhiri proses promotion?',
+                      () {
+                    _selesai(item);
+                  });
+                },
+                bgColor: Colors.white,
+              ),
             ),
           );
         });
@@ -113,9 +117,9 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
           }
         }
       });
-    }else{
+    } else {
       TgzDialog.generalDialogConfirm(context,
-                'Untuk dapat mengakhiri proses Promotion,Minimal harus submit satu video');
+          'Untuk dapat mengakhiri proses Promotion,Minimal harus submit satu video');
     }
   }
 
@@ -181,21 +185,18 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         LabelWhite.size3("Promotion"),
-                        const SizedBox(height:4),
+                        const SizedBox(height: 4),
                         LabelWhite.size2(
                           item.nama,
                         ),
-                        const SizedBox(height:10),
-                        LabelWhite.size4("Duration : ${item.isVideoExist ? 30 : 0} detik")
+                        const SizedBox(height: 10),
+                        LabelWhite.size4(
+                            "Duration : ${item.isVideoExist ? 30 : 0} detik")
                       ],
                     ),
                   ],
                 ),
-                Icon(
-                  Icons.videocam_rounded,
-                  size: 48,
-                  color: Colors.white
-                ),
+                Icon(Icons.videocam_rounded, size: 48, color: Colors.white),
               ],
             ),
           ),
