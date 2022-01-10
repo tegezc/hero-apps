@@ -85,66 +85,66 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
           children: [
             _cardForm(s.width),
             widget.uiSurvey!.pathphotobelanja == null
-            ? ButtonStrectWidth(
+                ? ButtonStrectWidth(
                     buttonColor: Colors.green,
                     text: "Ambil Foto",
                     onTap: () async {
-                        FocusScope.of(context).unfocus();
-                        ParamPreviewPhoto params = ParamPreviewPhoto(
-                          EnumTakePhoto.marketaudit,
-                          pathPhoto: null,
-                        );
-                        await Navigator.pushNamed(context, CameraView.routeName,
-                            arguments: params);
+                      FocusScope.of(context).unfocus();
+                      ParamPreviewPhoto params = ParamPreviewPhoto(
+                        EnumTakePhoto.marketaudit,
+                        pathPhoto: null,
+                      );
+                      await Navigator.pushNamed(context, CameraView.routeName,
+                          arguments: params);
 
-                        String? path =
-                            await StoredPathPhoto.getPhotoMarketAudit();
-                        print("BELANJA SURVEY: $path");
-                        _blocSurvey!.setpathphoto(path);
-                      },
+                      String? path =
+                          await StoredPathPhoto.getPhotoMarketAudit();
+                      print("BELANJA SURVEY: $path");
+                      _blocSurvey!.setpathphoto(path);
+                    },
                     isenable: true)
                 : Container(),
             _showImage(widget.uiSurvey!.pathphotobelanja),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             widget.uiSurvey!.isbelanjasubmitted
                 ? Container()
-                :  ButtonStrectWidth(
+                : ButtonStrectWidth(
                     buttonColor: Colors.red,
                     text: "SUBMIT",
                     onTap: () {
-                          if (widget.uiSurvey!.isbelanjabisasubmit()) {
-                            TgzDialog.loadingDialog(context);
-                            _blocSurvey!.submitBelanja().then((value) {
-                              Navigator.of(context).pop();
-                              if (value) {
-                                _confirmSuccessSimpan();
-                              } else {
-                                _confirmGagalMenyimpan();
-                              }
-                            });
+                      if (widget.uiSurvey!.isbelanjabisasubmit()) {
+                        TgzDialog.loadingDialog(context);
+                        _blocSurvey!.submitBelanja().then((value) {
+                          Navigator.of(context).pop();
+                          if (value) {
+                            _confirmSuccessSimpan();
                           } else {
-                            TgzDialog.confirmHarusDiisi(context);
+                            _confirmGagalMenyimpan();
                           }
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _telkomselController.text,
-                          //     EnumOperator.telkomsel);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _isatController.text, EnumOperator.isat);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _xlController.text, EnumOperator.xl);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _triController.text, EnumOperator.tri);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _smartController.text, EnumOperator.sf);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _axisController.text, EnumOperator.axis);
-                          // widget.blocSurvey.changeTextBelanja(
-                          //     _otherController.text, EnumOperator.other);
-                        },
+                        });
+                      } else {
+                        TgzDialog.confirmHarusDiisi(context);
+                      }
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _telkomselController.text,
+                      //     EnumOperator.telkomsel);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _isatController.text, EnumOperator.isat);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _xlController.text, EnumOperator.xl);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _triController.text, EnumOperator.tri);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _smartController.text, EnumOperator.sf);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _axisController.text, EnumOperator.axis);
+                      // widget.blocSurvey.changeTextBelanja(
+                      //     _otherController.text, EnumOperator.other);
+                    },
                     isenable: true),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -230,7 +230,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -258,7 +258,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

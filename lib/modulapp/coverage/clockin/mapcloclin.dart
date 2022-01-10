@@ -159,50 +159,6 @@ class _MapClockInState extends State<MapClockIn> {
     );
   }
 
-  void _buttonClockInOnClick() {
-    print("masuk");
-    EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
-    if (statusClockIn != null) {
-      if (statusClockIn == EnumStatusClockIn.open) {
-        _gotoMenu();
-        //_prosesOpen();
-      } else if (statusClockIn == EnumStatusClockIn.close) {
-        _takePhoto();
-      } else if (statusClockIn == EnumStatusClockIn.belum) {
-        _showDialogConfirmClockin();
-      }
-    }
-  }
-
-  EnumStatusClockIn? _getStatusClockInOpenOrClose() {
-    if (widget.pjp?.status != null) {
-      String? status = widget.pjp?.status;
-      if (status == "OPEN" || status == "START") {
-        return EnumStatusClockIn.open;
-      } else if (status == "CLOSE") {
-        return EnumStatusClockIn.close;
-      }
-    } else {
-      return EnumStatusClockIn.belum;
-    }
-
-    return null;
-  }
-
-  Future<bool> _clockin(EnumStatusTempat enumStatusTempat) async {
-    HttpDashboard httpdashboard = new HttpDashboard();
-    String? value = await httpdashboard.clockin(widget.pjp!, enumStatusTempat);
-    print(value);
-    if (value != null) {
-      DaoSerial daoSerial = new DaoSerial();
-      int res = await daoSerial.deleteAllSerial();
-      if (res > 0) {}
-      return true;
-    }
-
-    return false;
-  }
-
   Widget _cellSF() {
     String strTgl = DateUtility.dateToStringLengkap(DateTime.now());
     return Column(
@@ -275,6 +231,52 @@ class _MapClockInState extends State<MapClockIn> {
                 ),
               ],
             ));
+  }
+
+  void _buttonClockInOnClick() {
+    print("masuk");
+    EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
+    if (statusClockIn != null) {
+      if (statusClockIn == EnumStatusClockIn.open) {
+        _gotoMenu();
+        //_prosesOpen();
+      } else if (statusClockIn == EnumStatusClockIn.close) {
+        _takePhoto();
+      } else if (statusClockIn == EnumStatusClockIn.belum) {
+        _showDialogConfirmClockin();
+      }
+    }
+  }
+
+  EnumStatusClockIn? _getStatusClockInOpenOrClose() {
+    if (widget.pjp?.status != null) {
+      String? status = widget.pjp?.status;
+      if (status == "OPEN" || status == "START") {
+        return EnumStatusClockIn.open;
+      } else if (status == "CLOSE") {
+        return EnumStatusClockIn.close;
+      }
+    } else {
+      return EnumStatusClockIn.belum;
+    }
+
+    return null;
+  }
+
+  Future<bool> _clockin(EnumStatusTempat enumStatusTempat) async {
+    HttpDashboard httpdashboard = HttpDashboard();
+    String? idhistorypjp =
+        await httpdashboard.clockin(widget.pjp!, enumStatusTempat);
+    print(idhistorypjp);
+    if (idhistorypjp != null) {
+      await AccountHore.setIdHistoryPjp(idhistorypjp);
+      DaoSerial daoSerial = DaoSerial();
+      int res = await daoSerial.deleteAllSerial();
+      if (res > 0) {}
+      return true;
+    }
+
+    return false;
   }
 
   void _prosesOpen() {
