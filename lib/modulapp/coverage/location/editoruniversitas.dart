@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/coverage/location/pageidentitas.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/loadingpage/loadingview.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -289,8 +289,8 @@ class _TabDataKampusState extends State<TabDataKampus> {
               },
             ),
             _spasi(),
-            FormAlamat(
-                widget.blocUniversitas!.controllLokasi, widget.dataLokasiAlamat),
+            FormAlamat(widget.blocUniversitas!.controllLokasi,
+                widget.dataLokasiAlamat),
             TextFieldNormal(
               'Alamat (min 10 char) *',
               _calamat,

@@ -3,8 +3,8 @@ import 'package:hero/http/coverage/httpsurvey.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/marketaudit/sf/viewbelanjasurvey.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 import 'viewvouchersurvey.dart';

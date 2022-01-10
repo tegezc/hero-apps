@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/modulapp/coverage/retur/blocretureditor.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class ReturEditor extends StatefulWidget {
   static const routeName = '/retureditor';
@@ -164,7 +164,7 @@ class _ReturEditorState extends State<ReturEditor> {
                       ),
                       SizedBox(height: 15),
                       Padding(
-                        padding: const EdgeInsets.only(top:8.0,bottom:8.0),
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: SizedBox(
                             width: 200,
                             child: TextFieldNumberOnly(
@@ -173,12 +173,13 @@ class _ReturEditorState extends State<ReturEditor> {
                       SizedBox(height: 15),
                       _isRange
                           ? Padding(
-                            padding: const EdgeInsets.only(top:8.0,bottom:8.0),
-                            child: SizedBox(
-                                width: 200,
-                                child: TextFieldNumberOnly(
-                                    'Nomor Seri', _textController2)),
-                          )
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: SizedBox(
+                                  width: 200,
+                                  child: TextFieldNumberOnly(
+                                      'Nomor Seri', _textController2)),
+                            )
                           : Container(),
                       SizedBox(height: 15),
                       ButtonApp.black('SEARCH', () {

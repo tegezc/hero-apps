@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../dateutil.dart';
-import 'component_label.dart';
+import '../../dateutil.dart';
+import '../label/component_label.dart';
 
 /// komponen untuk login
 class ButtonLogin extends StatefulWidget {

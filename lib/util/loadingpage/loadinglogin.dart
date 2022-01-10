@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hero/util/component/component_image.dart';
-import 'package:hero/util/component/component_loading.dart';
+import 'package:hero/util/component/image/component_image.dart';
+import 'package:hero/util/component/loading/component_loading.dart';
 
 class LoadingLoginPage extends StatefulWidget {
   @override

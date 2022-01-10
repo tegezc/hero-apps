@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/resetpassword.dart';
 import 'package:hero/model/profile.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_image.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/image/component_image.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 
 class LoginPage extends StatefulWidget {

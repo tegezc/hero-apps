@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/owner.dart';
 import 'package:hero/model/lokasi/pic.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/label/component_label.dart';
 
 class ViewPageIdentitas extends StatelessWidget {
   final EnumPicOwner enumPicOwner;

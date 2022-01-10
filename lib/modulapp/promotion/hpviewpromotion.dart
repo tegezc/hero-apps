@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httppromotion.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 import 'previewvideopromotion.dart';

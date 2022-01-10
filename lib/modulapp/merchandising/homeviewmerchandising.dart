@@ -4,8 +4,8 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
 import 'package:hero/modulapp/merchandising/viewmerchandisingitem.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomeViewMerchandising extends StatefulWidget {

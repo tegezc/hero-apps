@@ -3,9 +3,9 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/merchandising/pagemerchandising.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
@@ -29,7 +29,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
   void initState() {
     print('idtempat pjp home merchandising: ${widget.pjp!.tempat!.id}');
     _blocMerchandising = BlocMerchandising();
-    getEnumAccount().then((value)=> setState((){}));
+    getEnumAccount().then((value) => setState(() {}));
     super.initState();
   }
 
@@ -39,7 +39,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
     super.dispose();
   }
 
-  Future<bool> getEnumAccount() async{
+  Future<bool> getEnumAccount() async {
     enumAccount = await AccountHore.getAccount();
     return true;
   }
@@ -66,34 +66,40 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                 appBar: AppBar(
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.only(top:12.0,bottom:12.0),
-                      child: ButtonApp.black('Selesai', () {
-                        TgzDialog.showdialogSelesai(context,
-                            'Apakah anda akan mengakhiri proses merchandising?',
-                            () {
-                          TgzDialog.loadingDialog(context);
-                          _blocMerchandising!.selesai(widget.pjp!).then((value) {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                            if (value.issuccess) {
+                      padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                      child: ButtonApp.black(
+                        'Selesai',
+                        () {
+                          TgzDialog.showdialogSelesai(context,
+                              'Apakah anda akan mengakhiri proses merchandising?',
+                              () {
+                            TgzDialog.loadingDialog(context);
+                            _blocMerchandising!
+                                .selesai(widget.pjp!)
+                                .then((value) {
                               Navigator.of(context).pop();
-                            } else {
-                              if (value.message == null) {
-                                if (enumAccount == EnumAccount.sf) {
-                                  TgzDialog.generalDialogConfirm(context,
-                                      'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
-                                } else {
-                                  TgzDialog.generalDialogConfirm(context,
-                                      'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');
-                                }
+                              Navigator.of(context).pop();
+                              if (value.issuccess) {
+                                Navigator.of(context).pop();
                               } else {
-                                TgzDialog.generalDialogConfirm(
-                                    context, value.message);
+                                if (value.message == null) {
+                                  if (enumAccount == EnumAccount.sf) {
+                                    TgzDialog.generalDialogConfirm(context,
+                                        'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
+                                  } else {
+                                    TgzDialog.generalDialogConfirm(context,
+                                        'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');
+                                  }
+                                } else {
+                                  TgzDialog.generalDialogConfirm(
+                                      context, value.message);
+                                }
                               }
-                            }
+                            });
                           });
-                        });
-                      },bgColor: Colors.white,),
+                        },
+                        bgColor: Colors.white,
+                      ),
                     ),
                   ],
                   bottom: TabBar(

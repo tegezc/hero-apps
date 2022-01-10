@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hero/model/retur.dart';
 import 'package:hero/modulapp/coverage/retur/blochpretur.dart';
 import 'package:hero/modulapp/coverage/retur/retureditor.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class HomePageRetur extends StatefulWidget {
   static const routeName = '/homepagerektur';

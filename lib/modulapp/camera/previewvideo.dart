@@ -6,10 +6,10 @@ import 'package:hero/http/coverage/httppromotion.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:video_player/video_player.dart';
 
@@ -105,16 +105,16 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                     ),
                   ),
                   TextButton(
-                    onPressed: (){
+                    onPressed: () {
                       setState(() {
-                          // If the video is playing, pause it.
-                          if (_controller.value.isPlaying) {
-                            _controller.pause();
-                          } else {
-                            // If the video is paused, play it.
-                            _controller.play();
-                          }
-                        });
+                        // If the video is playing, pause it.
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        } else {
+                          // If the video is paused, play it.
+                          _controller.play();
+                        }
+                      });
                     },
                     child: Text(_controller.value.isPlaying ? "PAUSE" : "PLAY"),
                   ),
@@ -128,7 +128,8 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                         TgzDialog.loadingDialog(context);
                         HttpPromotion httpPromotion = HttpPromotion();
                         httpPromotion
-                            .uploadVideo(widget.param!.source!.path, _promotion!)
+                            .uploadVideo(
+                                widget.param!.source!.path, _promotion!)
                             .then((value) {
                           Navigator.of(context).pop();
                           if (value) {

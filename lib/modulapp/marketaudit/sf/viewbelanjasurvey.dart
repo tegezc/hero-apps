@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class ViewBelanjaSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;

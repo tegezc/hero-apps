@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/merchandising/viewmerchandisingitem.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomeViewMerchandisingDs extends StatefulWidget {

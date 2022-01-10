@@ -6,10 +6,10 @@ import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 class PageBelanjaSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;
@@ -83,7 +83,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _cardForm(s.width),
+            _cardForm(s.width, widget.uiSurvey!.isbelanjasubmitted == false),
             widget.uiSurvey!.pathphotobelanja == null
                 ? ButtonStrectWidth(
                     buttonColor: Colors.green,
@@ -127,21 +127,20 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                       } else {
                         TgzDialog.confirmHarusDiisi(context);
                       }
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _telkomselController.text,
-                      //     EnumOperator.telkomsel);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _isatController.text, EnumOperator.isat);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _xlController.text, EnumOperator.xl);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _triController.text, EnumOperator.tri);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _smartController.text, EnumOperator.sf);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _axisController.text, EnumOperator.axis);
-                      // widget.blocSurvey.changeTextBelanja(
-                      //     _otherController.text, EnumOperator.other);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _telkomselController!.text, EnumOperator.telkomsel);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _isatController!.text, EnumOperator.isat);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _xlController!.text, EnumOperator.xl);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _triController!.text, EnumOperator.tri);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _smartController!.text, EnumOperator.sf);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _axisController!.text, EnumOperator.axis);
+                      widget.blocSurvey!.changeTextBelanja(
+                          _otherController!.text, EnumOperator.other);
                     },
                     isenable: true),
             const SizedBox(
@@ -153,29 +152,35 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     );
   }
 
-  Widget _cardForm(double width) {
+  Widget _cardForm(double width, bool isEnable) {
     double w = width - 120;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            _cellForm(w, 'Telkomsel', _telkomselController,
+                EnumOperator.telkomsel, isEnable),
+            _cellForm(w, 'Isat', _isatController, EnumOperator.isat, isEnable),
+            _cellForm(w, 'XL', _xlController, EnumOperator.xl, isEnable),
+            _cellForm(w, '3', _triController, EnumOperator.tri, isEnable),
             _cellForm(
-                w, 'Telkomsel', _telkomselController, EnumOperator.telkomsel),
-            _cellForm(w, 'Isat', _isatController, EnumOperator.isat),
-            _cellForm(w, 'XL', _xlController, EnumOperator.xl),
-            _cellForm(w, '3', _triController, EnumOperator.tri),
-            _cellForm(w, 'Smartfren', _smartController, EnumOperator.sf),
-            _cellForm(w, 'Axis', _axisController, EnumOperator.axis),
-            _cellForm(w, 'Other', _otherController, EnumOperator.other),
+                w, 'Smartfren', _smartController, EnumOperator.sf, isEnable),
+            _cellForm(w, 'Axis', _axisController, EnumOperator.axis, isEnable),
+            _cellForm(
+                w, 'Other', _otherController, EnumOperator.other, isEnable),
           ],
         ),
       ),
     );
   }
 
-  Widget _cellForm(double width, String label,
-      TextEditingController? controller, EnumOperator enumOperator) {
+  Widget _cellForm(
+      double width,
+      String label,
+      TextEditingController? controller,
+      EnumOperator enumOperator,
+      bool isenable) {
     return Row(
       children: [
         SizedBox(width: 80, child: LabelBlack.size2(label)),
@@ -187,6 +192,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
               onChanged: (str) {
                 _blocSurvey!.changeTextBelanja(str, enumOperator);
               },
+              enable: isenable,
             ))
       ],
     );

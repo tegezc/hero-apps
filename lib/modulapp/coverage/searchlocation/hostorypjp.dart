@@ -3,8 +3,8 @@ import 'package:hero/http/coverage/pjp/httppjp.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/model/tempat.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
@@ -240,7 +240,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
 
   Widget _btnShowMore() {
     return TextButton(
-        child: Text('SHOW MORE',style: TextStyle(color: Colors.blue)),
+        child: Text('SHOW MORE', style: TextStyle(color: Colors.blue)),
         onPressed: () {
           _showMore();
         });

@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:hero/model/promotion/promotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
 import 'package:path_provider/path_provider.dart';
 //import 'package:video_player/video_player.dart';
 
@@ -335,7 +335,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
 
     final Directory? extDir =
-        await  getExternalStorageDirectory() ; //getApplicationDocumentsDirectory();
+        await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
     final String dirPath = '${extDir!.path}/video/';
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath${timestamp()}.mp4';
@@ -350,6 +350,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
 
       /// comment error sementara
       await _controller!.startVideoRecording();
+
       ///end
     } on CameraException catch (e) {
       _showCameraException(e);

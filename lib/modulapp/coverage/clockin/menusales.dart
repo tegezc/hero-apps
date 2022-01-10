@@ -7,10 +7,10 @@ import 'package:hero/modulapp/coverage/distribution/homepembeliandistribusi.dart
 import 'package:hero/modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_image_new.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/image/component_image_new.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/constapp.dart';
 

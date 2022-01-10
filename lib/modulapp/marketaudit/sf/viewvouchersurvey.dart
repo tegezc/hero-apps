@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
-import 'package:hero/util/component/component_label.dart';
+import 'package:hero/util/component/label/component_label.dart';
 
 class ViewVoucherSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;

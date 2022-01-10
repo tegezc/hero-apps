@@ -4,8 +4,8 @@ import 'package:hero/http/httplokasi/httpsearchlocation.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:hero/model/lokasi/universitas.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_widget.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/component_widget.dart';
 
 import '../widgetforlocation.dart';
 import 'viewpageidentitas.dart';
@@ -45,7 +45,8 @@ class _ViewKampusState extends State<ViewKampus> {
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
     HttpKampus httpOutlet = new HttpKampus();
-    List<dynamic> ld = await (httpOutlet.detailUniv(widget.iduniv) as Future<List<dynamic>>);
+    List<dynamic> ld =
+        await (httpOutlet.detailUniv(widget.iduniv) as Future<List<dynamic>>);
     if (ld.length == 1) {
       Map<String, dynamic> map = ld[0];
       _kampus = Universitas.fromJson(map);
@@ -63,8 +64,8 @@ class _ViewKampusState extends State<ViewKampus> {
               Provinsi? prov = await _httpDashboard.getProv(kab.realid);
               _kampus!.prov = prov;
             }
-            List<Kelurahan> lkel =
-                await (_httpDashboard.getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
+            List<Kelurahan> lkel = await (_httpDashboard
+                .getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
 
             lkel.forEach((element) {
               if (element.idkel == _kampus!.idkel) {

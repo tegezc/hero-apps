@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
-import 'package:hero/util/component/component_button.dart';
-import 'package:hero/util/component/component_label.dart';
-import 'package:hero/util/component/component_textfield.dart';
+import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/textfield/component_textfield.dart';
 
 import 'blocsurvey.dart';
 
@@ -100,31 +100,31 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
           children: [
             _dataTable(_item!.lsurveyBroadband!, ''),
             _issubmitbuttonshowing
-            ? ButtonStrectWidth(
+                ? ButtonStrectWidth(
                     buttonColor: Colors.red,
                     text: "SUBMIT",
                     onTap: () {
-                          // for (int i = 0; i < _lcontroller.length; i++) {
-                          //   String str = _lcontroller[i].text;
-                          //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
-                          // }
-                          print(_isbolehsubmit());
-                          if (_isbolehsubmit()) {
-                            TgzDialog.loadingDialog(context);
-                            widget.blocSurvey!
-                                .submitVoucher(widget.enumSurvey)
-                                .then((value) {
-                              Navigator.of(context).pop();
-                              if (value) {
-                                _confirmSuccessSimpan();
-                              } else {
-                                _confirmGagalMenyimpan();
-                              }
-                            });
+                      // for (int i = 0; i < _lcontroller.length; i++) {
+                      //   String str = _lcontroller[i].text;
+                      //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
+                      // }
+                      print(_isbolehsubmit());
+                      if (_isbolehsubmit()) {
+                        TgzDialog.loadingDialog(context);
+                        widget.blocSurvey!
+                            .submitVoucher(widget.enumSurvey)
+                            .then((value) {
+                          Navigator.of(context).pop();
+                          if (value) {
+                            _confirmSuccessSimpan();
                           } else {
-                            TgzDialog.confirmHarusDiisi(context);
+                            _confirmGagalMenyimpan();
                           }
-                        },
+                        });
+                      } else {
+                        TgzDialog.confirmHarusDiisi(context);
+                      }
+                    },
                     isenable: true)
                 : Container(),
             SizedBox(
