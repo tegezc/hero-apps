@@ -7,6 +7,7 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
+import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/modulapp/coverage/clockin/menusales.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -32,6 +33,7 @@ class _MapClockInState extends State<MapClockIn> {
   late double _minusWidget;
   List<Marker> lmarkers = [];
   late LatLng _lokasi;
+  late final ClockInClockOutController _clockInClockOutController;
   //
   // LatLng _locSales = const LatLng(-5.398178, 105.264676);
 //  LatLng _locSales;
@@ -46,6 +48,7 @@ class _MapClockInState extends State<MapClockIn> {
   void initState() {
     print('${widget.pjp!.lat} || ${widget.pjp!.long}');
     _lokasi = LatLng(widget.pjp!.lat!, widget.pjp!.long!);
+    _clockInClockOutController = ClockInClockOutController();
     lmarkers.add(Marker(
         markerId: MarkerId('location'),
         draggable: false,
@@ -263,25 +266,11 @@ class _MapClockInState extends State<MapClockIn> {
     return null;
   }
 
-  Future<bool> _clockin(EnumStatusTempat enumStatusTempat) async {
-    HttpDashboard httpdashboard = HttpDashboard();
-    String? idhistorypjp =
-        await httpdashboard.clockin(widget.pjp!, enumStatusTempat);
-    print(idhistorypjp);
-    if (idhistorypjp != null) {
-      await AccountHore.setIdHistoryPjp(idhistorypjp);
-      DaoSerial daoSerial = DaoSerial();
-      int res = await daoSerial.deleteAllSerial();
-      if (res > 0) {}
-      return true;
-    }
-
-    return false;
-  }
-
   void _prosesOpen() {
     TgzDialog.loadingDialog(context);
-    _clockin(EnumStatusTempat.open).then((value) {
+    _clockInClockOutController
+        .clockin(EnumStatusTempat.open, widget.pjp!)
+        .then((value) {
       if (value) {
         Navigator.of(context).pop();
         _gotoMenu();
@@ -290,13 +279,7 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   void _prosesClose() {
-    TgzDialog.loadingDialog(context);
-    _clockin(EnumStatusTempat.close).then((value) {
-      if (value) {
-        Navigator.of(context).pop();
-        _takePhoto();
-      }
-    });
+    _takePhoto();
   }
 
   void _gotoMenu() {
@@ -307,7 +290,8 @@ class _MapClockInState extends State<MapClockIn> {
     Navigator.pushNamed(
       context,
       CameraView.routeName,
-      arguments: ParamPreviewPhoto(EnumTakePhoto.distibusiclose),
+      arguments:
+          ParamPreviewPhoto(EnumTakePhoto.distibusiclose, pjp: widget.pjp),
     );
   }
 }
