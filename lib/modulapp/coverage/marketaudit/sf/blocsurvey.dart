@@ -32,8 +32,17 @@ class UISurvey {
         axis != null &&
         other != null &&
         pathphotobelanja != null) {
-      return true;
+      if (telkomsel! >= 1000 &&
+          isat! >= 1000 &&
+          xl! >= 1000 &&
+          tri! >= 1000 &&
+          sf! >= 1000 &&
+          axis! >= 1000 &&
+          other! >= 1000) {
+        return true;
+      }
     }
+
     return false;
   }
 }

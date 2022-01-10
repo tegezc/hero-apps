@@ -9,6 +9,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/previewphotoupload.dart';
 import 'package:hero/util/filesystem/itgzfile.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
@@ -350,6 +351,7 @@ class ParamPreviewPhoto {
   EnumTakePhoto enumTakePhoto;
   EnumNumber? enumNumber;
   ITgzFile tgzFile;
+  Pjp? pjp;
 
   Future<String?> getPhotoUrlOrNull() async {
     if (pathPhoto != null) {
@@ -360,6 +362,7 @@ class ParamPreviewPhoto {
     return null;
   }
 
-  ParamPreviewPhoto(this.enumTakePhoto, {this.pathPhoto, this.enumNumber})
+  ParamPreviewPhoto(this.enumTakePhoto,
+      {this.pathPhoto, this.enumNumber, this.pjp})
       : tgzFile = TgzFile();
 }

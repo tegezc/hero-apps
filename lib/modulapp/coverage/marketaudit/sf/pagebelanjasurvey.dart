@@ -130,7 +130,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                           }
                         });
                       } else {
-                        TgzDialog.confirmHarusDiisi(context);
+                        _confirmInputTidakValid();
                       }
                       widget.blocSurvey!.changeTextBelanja(
                           _telkomselController!.text, EnumOperator.telkomsel);
@@ -286,6 +286,33 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Market Audit gagal disimpan.'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('Ok', () {
+                    Navigator.of(context).pop();
+                  }),
+                ),
+              ],
+            ));
+  }
+
+  _confirmInputTidakValid() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+              title: LabelApp.size1(
+                'Confirm',
+                color: Colors.red,
+              ),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: LabelBlack.size2('Harus lebih dari 1000 rupiah.'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

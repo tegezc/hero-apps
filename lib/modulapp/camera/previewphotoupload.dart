@@ -6,6 +6,7 @@ import 'package:hero/http/coverage/httpdistibusi.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
+import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
@@ -13,6 +14,7 @@ class PreviewPhotoWithUpload extends StatefulWidget {
   static const routeName = '/previewphotoupload';
   final ParamPreviewPhoto? param;
   PreviewPhotoWithUpload(this.param);
+
   @override
   _PreviewPhotoWithUploadState createState() => _PreviewPhotoWithUploadState();
 }
@@ -149,12 +151,22 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   /// kondisi pjp tutup
   Future<bool> _uploadPhotoAndChekOut() async {
-    bool value = await _uploadPhotoDistributionIsSuccess();
-    if (value) {
-      HttpDashboard httpDashboard = HttpDashboard();
-      bool vcheckout = await httpDashboard.clockout();
-      return vcheckout;
+    ClockInClockOutController clockInClockOutController =
+        ClockInClockOutController();
+    bool isclockin = await clockInClockOutController.clockin(
+        EnumStatusTempat.close, widget.param!.pjp!);
+    print("proses clockin clockout");
+    print("hasil clock in: $isclockin");
+    if (isclockin) {
+      bool value = await _uploadPhotoDistributionIsSuccess();
+      print("hasil upload photo: $isclockin");
+      if (value) {
+        bool isclockout = await clockInClockOutController.clockOut();
+        print("hasil clockout : $isclockin");
+        return isclockout;
+      }
     }
+
     return false;
   }
 
@@ -172,6 +184,6 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   Future<bool> _uploadPhotoDistributionIsSuccess() async {
     HttpDIstribution httpDist = HttpDIstribution();
-    return await httpDist.uploadPhoto(_urlImageOrNull!, false);
+    return await httpDist.uploadPhoto(_urlImageOrNull!, true);
   }
 }

@@ -3,6 +3,7 @@ import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
+import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/modulapp/coverage/distribution/homepembeliandistribusi.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
@@ -27,9 +28,11 @@ class _MenuSalesState extends State<MenuSales> {
   Menu? _menu;
   EnumAccount? _enumAccount;
   int _counterBuild = 0;
+  late ClockInClockOutController _clockInClockOutController;
 
   @override
   void initState() {
+    _clockInClockOutController = ClockInClockOutController();
     super.initState();
   }
 
@@ -100,7 +103,7 @@ class _MenuSalesState extends State<MenuSales> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ya', () {
-                    _clockOut().then((value) {
+                    _clockInClockOutController.clockOut().then((value) {
                       if (value) {
                         Navigator.popUntil(context, ModalRoute.withName('/'));
                       }
@@ -116,12 +119,6 @@ class _MenuSalesState extends State<MenuSales> {
                 ),
               ],
             ));
-  }
-
-  Future<bool> _clockOut() async {
-    HttpDashboard httpDashboard = HttpDashboard();
-    bool result = await httpDashboard.clockout();
-    return result;
   }
 
   Widget _controllMenu() {
