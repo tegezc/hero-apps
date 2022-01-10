@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero/database/daoserial.dart';
-import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
@@ -20,23 +18,21 @@ import 'package:location/location.dart';
 class MapClockIn extends StatefulWidget {
   static const routeName = '/mapclockin';
   final Pjp? pjp;
-  MapClockIn(this.pjp);
+  const MapClockIn(this.pjp, {Key? key}) : super(key: key);
   @override
   _MapClockInState createState() => _MapClockInState();
 }
 
 class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
-  // EnumStatusClockIn? _statusClockIn;
+
   EnumAccount? _enumAccount;
-  double? _hightCell;
   late double _minusWidget;
   List<Marker> lmarkers = [];
   late LatLng _lokasi;
   late final ClockInClockOutController _clockInClockOutController;
-  //
-  // LatLng _locSales = const LatLng(-5.398178, 105.264676);
-//  LatLng _locSales;
+
+  EnumStatusTempat? _valueRadioButton;
 
   double _distanceInMeters = 0.0;
   Set<Circle>? circles;
@@ -46,15 +42,12 @@ class _MapClockInState extends State<MapClockIn> {
 
   @override
   void initState() {
-    print('${widget.pjp!.lat} || ${widget.pjp!.long}');
     _lokasi = LatLng(widget.pjp!.lat!, widget.pjp!.long!);
     _clockInClockOutController = ClockInClockOutController();
     lmarkers.add(Marker(
-        markerId: MarkerId('location'),
+        markerId: const MarkerId('location'),
         draggable: false,
-        onTap: () {
-          print('mark di klik');
-        },
+        onTap: () {},
         position: _lokasi));
     super.initState();
     _setup();
@@ -62,24 +55,21 @@ class _MapClockInState extends State<MapClockIn> {
 
   void _setup() {
     _setupLocation().then((value) {
-      print(value);
       setState(() {});
     });
   }
 
   Future<bool> _setupLocation() async {
     LocationData position = await LocationUtil.getCurrentLocation();
-    print('current location : $position');
 
     _distanceInMeters = Geolocator.distanceBetween(position.latitude!,
         position.longitude!, _lokasi.latitude, _lokasi.longitude);
 
     EnumAccount enumAccount = await AccountHore.getAccount();
     _enumAccount = enumAccount;
-    _hightCell =
-        enumAccount == EnumAccount.sf ? _hightCell = 123 : _hightCell = 100;
-    _minusWidget =
-        enumAccount == EnumAccount.sf ? _minusWidget = 211 : _minusWidget = 181;
+    // _hightCell =
+    //     enumAccount == EnumAccount.sf ? _hightCell = 400 : _hightCell = 100;
+    _minusWidget = enumAccount == EnumAccount.sf ? 250 : 181;
 
     return true;
   }
@@ -103,6 +93,7 @@ class _MapClockInState extends State<MapClockIn> {
 
     String textButton =
         'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Radius($radius)';
+    bool isShowRadio = true;
     EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
     if (statusClockIn != null) {
       if (statusClockIn == EnumStatusClockIn.open) {
@@ -110,15 +101,21 @@ class _MapClockInState extends State<MapClockIn> {
       } else if (statusClockIn == EnumStatusClockIn.close) {
         textButton = "Ambil Photo";
       }
+
+      if (statusClockIn == EnumStatusClockIn.open ||
+          statusClockIn == EnumStatusClockIn.close) {
+        isShowRadio = false;
+        _minusWidget = _minusWidget - 65;
+      }
     }
 
     return CustomScaffold(
-      body: Container(
+      body: SizedBox(
         height: size.height,
         width: size.width,
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: size.height - _minusWidget,
               width: size.width,
               child: GoogleMap(
@@ -135,11 +132,15 @@ class _MapClockInState extends State<MapClockIn> {
             ),
             Container(
               color: Colors.white,
-              height: _hightCell,
+              // height: 400,
               width: size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  isShowRadio ? _radioButtonGroup() : Container(),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   _enumAccount == EnumAccount.sf ? _cellSF() : _cellDs(),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -149,7 +150,7 @@ class _MapClockInState extends State<MapClockIn> {
                       onTap: () {
                         _buttonClockInOnClick();
                       },
-                      isenable: true, //_isbuttonEnable,
+                      isenable: _isbuttonEnable,
                     ),
                   ),
                 ],
@@ -162,6 +163,50 @@ class _MapClockInState extends State<MapClockIn> {
     );
   }
 
+  Widget _radioButtonGroup() {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 50.0, right: 10.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: _itemRadio(EnumStatusTempat.open),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: _itemRadio(EnumStatusTempat.close),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+      ],
+    );
+  }
+
+  Widget _itemRadio(EnumStatusTempat enumStatusTempat) {
+    String text = enumStatusTempat == EnumStatusTempat.close ? "Close" : "Open";
+    return Row(
+      children: [
+        Radio<EnumStatusTempat>(
+          value: enumStatusTempat,
+          groupValue: _valueRadioButton,
+          onChanged: (EnumStatusTempat? value) {
+            setState(() {
+              _valueRadioButton = value;
+            });
+          },
+        ),
+        LabelBlack.size1(text),
+      ],
+    );
+  }
+
   Widget _cellSF() {
     String strTgl = DateUtility.dateToStringLengkap(DateTime.now());
     return Column(
@@ -170,10 +215,10 @@ class _MapClockInState extends State<MapClockIn> {
         //   padding: const EdgeInsets.only(top: 4, bottom: 0),
         //   child: LabelBlack.size3('$distanceInMeters'),
         // ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5.0, bottom: 0),
-          child: LabelBlack.size2(widget.pjp!.tempat!.id),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 0.0, bottom: 0),
+        //   child: LabelBlack.size2(widget.pjp!.tempat!.id),
+        // ),
         Padding(
           padding: const EdgeInsets.only(top: 4.0, bottom: 0),
           child: LabelBlack.size2(widget.pjp!.tempat!.nama),
@@ -191,7 +236,7 @@ class _MapClockInState extends State<MapClockIn> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 0),
+          padding: const EdgeInsets.only(top: 0.0, bottom: 0),
           child: LabelBlack.size2(widget.pjp!.tempat!.nama),
         ),
         Padding(
@@ -202,34 +247,86 @@ class _MapClockInState extends State<MapClockIn> {
     );
   }
 
-  _showDialogConfirmClockin() {
+  _showDialogOpen() {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: LabelApp.size2(
-                      'Pilih kondisi PJP, apakah open atau close?'),
+                  child: LabelApp.size2('Anda memilih open, anda yakin ?'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('OPEN', () {
+                  child: ButtonApp.black('TEMPAT OPEN', () {
                     Navigator.of(context).pop();
-
                     _prosesOpen();
                   }),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('CLOSE', () {
+                  child: ButtonApp.black('CANCEL', () {
+                    Navigator.of(context).pop();
+                  }),
+                ),
+              ],
+            ));
+  }
+
+  _showDialogConfirmNotPickYet() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: LabelApp.size2(
+                      'Anda belum menentukan status tempat di radio button.'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('CANCEL', () {
+                    Navigator.of(context).pop();
+                  }),
+                ),
+              ],
+            ));
+  }
+
+  _showDialogClose() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: LabelApp.size2('Anda memilih Close, anda yakin?'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('TEMPAT CLOSE', () {
                     Navigator.of(context).pop();
                     _prosesClose();
+                  }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('CANCEL', () {
+                    Navigator.of(context).pop();
                   }),
                 ),
               ],
@@ -237,7 +334,6 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   void _buttonClockInOnClick() {
-    print("masuk");
     EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
     if (statusClockIn != null) {
       if (statusClockIn == EnumStatusClockIn.open) {
@@ -246,7 +342,15 @@ class _MapClockInState extends State<MapClockIn> {
       } else if (statusClockIn == EnumStatusClockIn.close) {
         _takePhoto();
       } else if (statusClockIn == EnumStatusClockIn.belum) {
-        _showDialogConfirmClockin();
+        if (_valueRadioButton == null) {
+          _showDialogConfirmNotPickYet();
+        } else {
+          if (_valueRadioButton == EnumStatusTempat.close) {
+            _showDialogClose();
+          } else if (_valueRadioButton == EnumStatusTempat.open) {
+            _showDialogOpen();
+          }
+        }
       }
     }
   }
