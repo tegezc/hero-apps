@@ -3,6 +3,7 @@ import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/widget/widget_success_submit.dart';
 
 import 'blocsurvey.dart';
 
@@ -11,7 +12,7 @@ class PageVoucherSurvey extends StatefulWidget {
   final BlocSurvey? blocSurvey;
   final EnumSurvey enumSurvey;
 
-  PageVoucherSurvey(this.uiSurvey, this.blocSurvey, this.enumSurvey);
+  const PageVoucherSurvey(this.uiSurvey, this.blocSurvey, this.enumSurvey);
 
   @override
   _PageVoucherSurveyState createState() => _PageVoucherSurveyState();
@@ -33,7 +34,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
       _issubmitbuttonshowing = !_item!.isfisiksubmitted;
     }
     for (int i = 0; i < 21; i++) {
-      _lcontroller.add(new TextEditingController());
+      _lcontroller.add(TextEditingController());
     }
 
     super.initState();
@@ -94,45 +95,51 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   @override
   Widget build(BuildContext context) {
     _setvalue();
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _dataTable(_item!.lsurveyBroadband!, ''),
-            _issubmitbuttonshowing
-                ? ButtonStrectWidth(
-                    buttonColor: Colors.red,
-                    text: "SUBMIT",
-                    onTap: () {
-                      // for (int i = 0; i < _lcontroller.length; i++) {
-                      //   String str = _lcontroller[i].text;
-                      //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
-                      // }
-                      print(_isbolehsubmit());
-                      if (_isbolehsubmit()) {
-                        TgzDialog.loadingDialog(context);
-                        widget.blocSurvey!
-                            .submitVoucher(widget.enumSurvey)
-                            .then((value) {
-                          Navigator.of(context).pop();
-                          if (value) {
-                            _confirmSuccessSimpan();
-                          } else {
-                            _confirmGagalMenyimpan();
-                          }
-                        });
-                      } else {
-                        TgzDialog.confirmHarusDiisi(context);
-                      }
-                    },
-                    isenable: true)
-                : Container(),
-            SizedBox(
-              height: 150,
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _issubmitbuttonshowing ? Container() : _successDisubmit(),
+          _dataTable(_item!.lsurveyBroadband!, ''),
+          _issubmitbuttonshowing
+              ? ButtonStrectWidth(
+                  buttonColor: Colors.red,
+                  text: "SUBMIT",
+                  onTap: () {
+                    // for (int i = 0; i < _lcontroller.length; i++) {
+                    //   String str = _lcontroller[i].text;
+                    //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
+                    // }
+                    print(_isbolehsubmit());
+                    if (_isbolehsubmit()) {
+                      TgzDialog.loadingDialog(context);
+                      widget.blocSurvey!
+                          .submitVoucher(widget.enumSurvey)
+                          .then((value) {
+                        Navigator.of(context).pop();
+                        if (value) {
+                          _confirmSuccessSimpan();
+                        } else {
+                          _confirmGagalMenyimpan();
+                        }
+                      });
+                    } else {
+                      TgzDialog.confirmHarusDiisi(context);
+                    }
+                  },
+                  isenable: true)
+              : Container(),
+          const SizedBox(
+            height: 150,
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _successDisubmit() {
+    return const Padding(
+      padding: EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
+      child: WidgeSuccessSubmit(),
     );
   }
 
@@ -235,7 +242,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -263,7 +270,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

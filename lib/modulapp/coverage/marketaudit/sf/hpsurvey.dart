@@ -104,12 +104,12 @@ class _HomeSurveyState extends State<HomeSurvey> {
                     ],
                   ),
                   backgroundColor: Colors.red[600],
-                  iconTheme: IconThemeData(
+                  iconTheme: const IconThemeData(
                     color: Colors.white, //change your color here
                   ),
                   title: Text(
                     ConstString.textSurvey,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   centerTitle: true,
                 ),

@@ -6,16 +6,37 @@ class WidgeSuccessSubmit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      width: double.infinity,
+      color: Colors.transparent,
       child: Row(
         children: [
-          Icon(
-            Icons.check_circle,
-            color: Colors.green,
-          ),
-          Text("Sudah berhasil di submit"),
+          const Spacer(),
+          _content(),
+          const Spacer(),
         ],
       ),
+    );
+  }
+
+  Widget _content() {
+    return Container(
+      //color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: const [
+            Icon(
+              Icons.check_circle,
+              color: Colors.green,
+            ),
+            Text("Sudah berhasil di submit"),
+          ],
+        ),
+      ),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: Colors.white,
+          border: Border.all(color: Colors.green)),
     );
   }
 }

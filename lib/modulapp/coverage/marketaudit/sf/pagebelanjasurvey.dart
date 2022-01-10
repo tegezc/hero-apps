@@ -10,11 +10,13 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/component/widget/widget_success_submit.dart';
 
 class PageBelanjaSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;
   final BlocSurvey? blocSurvey;
-  PageBelanjaSurvey(this.uiSurvey, this.blocSurvey);
+  const PageBelanjaSurvey(this.uiSurvey, this.blocSurvey, {Key? key})
+      : super(key: key);
   @override
   _PageBelanjaSurveyState createState() => _PageBelanjaSurveyState();
 }
@@ -32,13 +34,13 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
   @override
   void initState() {
     _blocSurvey = widget.blocSurvey;
-    _telkomselController = new TextEditingController();
-    _isatController = new TextEditingController();
-    _xlController = new TextEditingController();
-    _triController = new TextEditingController();
-    _smartController = new TextEditingController();
-    _axisController = new TextEditingController();
-    _otherController = new TextEditingController();
+    _telkomselController = TextEditingController();
+    _isatController = TextEditingController();
+    _xlController = TextEditingController();
+    _triController = TextEditingController();
+    _smartController = TextEditingController();
+    _axisController = TextEditingController();
+    _otherController = TextEditingController();
     super.initState();
   }
 
@@ -83,6 +85,9 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            widget.uiSurvey!.isbelanjasubmitted
+                ? _successDisubmit()
+                : Container(),
             _cardForm(s.width, widget.uiSurvey!.isbelanjasubmitted == false),
             widget.uiSurvey!.pathphotobelanja == null
                 ? ButtonStrectWidth(
@@ -152,8 +157,15 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     );
   }
 
+  Widget _successDisubmit() {
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: WidgeSuccessSubmit(),
+    );
+  }
+
   Widget _cardForm(double width, bool isEnable) {
-    double w = width - 120;
+    double w = width - 150;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -183,7 +195,11 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
       bool isenable) {
     return Row(
       children: [
-        SizedBox(width: 80, child: LabelBlack.size2(label)),
+        SizedBox(width: 70, child: LabelBlack.size2(label)),
+        SizedBox(
+          width: 30,
+          child: LabelBlack.size1(": Rp"),
+        ),
         SizedBox(
             width: width,
             child: TextFieldNumberOnly(
@@ -213,7 +229,6 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                           url,
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
-                            print(exception);
                             return Container();
                           },
                         )
