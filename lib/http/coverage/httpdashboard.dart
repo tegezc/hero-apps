@@ -121,7 +121,7 @@ class HttpDashboard {
     Map<String, String> headers = await HttpUtil.getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idhistoryPjp};
-    print(idhistoryPjp);
+    print("ID HISTORY: $idhistoryPjp");
     Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_status');
     http.Response? response;
     try {
