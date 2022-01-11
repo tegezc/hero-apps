@@ -42,7 +42,7 @@ class BlocMerchandising {
   void firstTime(Pjp pjp) {
     _cachePjp = pjp;
     _setupFirstime(pjp).then((value) {
-      this._sink(_cacheUiMerc);
+      _sink(_cacheUiMerc);
     });
   }
 
@@ -107,7 +107,7 @@ class BlocMerchandising {
           vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
           return vcheckout;
         }
-      }else{
+      } else {
         if (_cacheUiMerc!.poster == null || _cacheUiMerc!.spanduk == null) {
         } else {
           HttpDashboard httpDashboard = HttpDashboard();
@@ -139,7 +139,7 @@ class BlocMerchandising {
         merchandising = _cacheUiMerc!.backdrop;
         break;
     }
-    HttpMerchandising httpMerchandising = new HttpMerchandising();
+    HttpMerchandising httpMerchandising = HttpMerchandising();
     bool result = await httpMerchandising.createMerchadising(merchandising!);
     if (result) {
       HttpMerchandising httpm = HttpMerchandising();
@@ -274,13 +274,13 @@ class BlocMerchandising {
         }
         break;
     }
-    this._sink(_cacheUiMerc);
+    _sink(_cacheUiMerc);
   }
 
   Merchandising? _textChanged(
       Merchandising? merchandising, EnumOperator enumOperator, String str) {
     int? value;
-    if (str.trim().length > 0) {
+    if (str.trim().isNotEmpty) {
       value = int.tryParse(str);
     }
 

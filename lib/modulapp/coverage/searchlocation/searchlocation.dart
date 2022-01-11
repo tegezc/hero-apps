@@ -2,31 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/coverage/location/editoroutlet.dart';
 import 'package:hero/modulapp/coverage/location/view/viewoutlet.dart';
+import 'package:hero/util/colorutil.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/horeboxdecoration.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/constapp/consstring.dart';
-import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 import 'blocsearchlocation.dart';
 import 'hostorypjp.dart';
 
 class SearchLocation extends StatefulWidget {
+  const SearchLocation({Key? key}) : super(key: key);
+
   @override
   _SearchLocationState createState() => _SearchLocationState();
 }
 
 class _SearchLocationState extends State<SearchLocation> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   late BlocSearchLocation _blocDashboard;
   int _buildCounter = 0;
   FocusNode? _focusNode;
+  final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
 
   @override
   void initState() {
-    _focusNode = new FocusNode();
+    _focusNode = FocusNode();
     _blocDashboard = BlocSearchLocation();
     super.initState();
   }
@@ -55,21 +60,41 @@ class _SearchLocationState extends State<SearchLocation> {
           return CustomScaffold(
             title: 'Cari Lokasi',
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // ButtonApp.blue('Add Outlet', () {
-                  //   CommonUi.openPage(context, EditorOutlet(null));
-                  // }),
-                  _searchLokasi(item),
-                  SizedBox(
-                    height: 15,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    //image: AssetImage('assets/image/coverage/BG.png'),
+                    image: AssetImage('assets/image/new/BG.png'),
+                    fit: BoxFit.cover,
                   ),
-                ],
+                ),
+                child: Column(
+                  children: [
+                    _searchLokasi(item),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                ),
               ),
             ),
           );
         }
       },
+    );
+  }
+
+  Widget _headerPencarian() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LabelWhite.size1("Berikut Daftar Pencarian : "),
+          const Divider(
+            color: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 
@@ -88,7 +113,7 @@ class _SearchLocationState extends State<SearchLocation> {
                     focusNode: _focusNode,
                     keyboardType: TextInputType.text,
                     controller: _controller,
-                    style: new TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                     decoration: InputDecoration(
@@ -116,14 +141,17 @@ class _SearchLocationState extends State<SearchLocation> {
   }
 
   Widget _containerSearch(UISearchLocation item) {
+    print(item);
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
       height: size.height * 0.75,
-      margin: EdgeInsets.all(8.0),
-      padding: EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-          color: Colors.red[600], borderRadius: BorderRadius.circular(10.0)),
+          //color: Colors.red[600],
+          borderRadius: BorderRadius.circular(10.0),
+          gradient: _boxDecoration.gradientBackgroundApp()),
       child: item.isloading ? _showloading() : _hasilSearch(item.ltempat!),
     );
   }
@@ -136,8 +164,17 @@ class _SearchLocationState extends State<SearchLocation> {
 
   Widget _hasilSearch(List<LokasiSimple?> ltempat) {
     List<Widget> lw = [];
-    if (ltempat.length == 0 && _controller.text.length > 0) {
-      lw.add(_hasilKosong());
+    lw.add(_headerPencarian());
+    if (ltempat.isEmpty) {
+      if (_controller.text.isNotEmpty) {
+        lw.add(WidgetPencarianKosong(
+            text:
+                'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"'));
+      } else {
+        lw.add(const WidgetPencarianKosong(
+            text:
+                'Silahkan masukkan kata kunci untuk mendapatkan hasil pencarian'));
+      }
     } else {
       for (int i = 0; i < ltempat.length; i++) {
         LokasiSimple tempat = ltempat[i]!;
@@ -152,15 +189,6 @@ class _SearchLocationState extends State<SearchLocation> {
     );
   }
 
-  Widget _hasilKosong() {
-    return Center(
-      child: LabelAppMiring.size3(
-          'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"',
-          textAlign: TextAlign.center,
-          color: Colors.white),
-    );
-  }
-
   Widget _cellOutlet(LokasiSimple outletSimple) {
     return Column(
       children: [
@@ -171,11 +199,11 @@ class _SearchLocationState extends State<SearchLocation> {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.store,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Expanded(
@@ -192,59 +220,56 @@ class _SearchLocationState extends State<SearchLocation> {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(),
                   // ButtonApp.blue('Edit', () {}),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   SizedBox(
                     height: 25,
-                    child: ButtonApp.red(
-                      'PJP',
-                      () {
+                    child: ButtonCustome(
+                      text: 'PJP',
+                      onTap: () {
                         // CommonUi.openPage(context, HistoryPJP(outletSimple));
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => HistoryPJP(outletSimple)));
                       },
-                      bgColor: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   SizedBox(
                     height: 25,
-                    child: ButtonApp.red(
-                      'Edit',
-                      () {
+                    child: ButtonCustome(
+                      text: 'Edit',
+                      onTap: () {
                         // CommonUi.openPage(
                         //     context, EditorOutlet(outletSimple.idutama));
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) =>
                                 EditorOutlet(outletSimple.idutama)));
                       },
-                      bgColor: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   SizedBox(
                     height: 25,
-                    child: ButtonApp.red(
-                      'Detail',
-                      () {
+                    child: ButtonCustome(
+                      text: 'Detail',
+                      onTap: () {
                         // CommonUi.openPage(
                         //     context, ViewOutlet(outletSimple.idutama));
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) =>
                                 ViewOutlet(outletSimple.idutama)));
                       },
-                      bgColor: Colors.white,
                     ),
                   ),
                 ],
@@ -260,7 +285,7 @@ class _SearchLocationState extends State<SearchLocation> {
   void _prosesSearch() {
     _focusNode!.unfocus();
     String query = _controller.text;
-    if (query.length > 0) {
+    if (query.isNotEmpty) {
       _blocDashboard.searchLokasi(query, EnumJenisLokasi.outlet);
     }
   }

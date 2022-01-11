@@ -14,8 +14,10 @@ import 'package:hero/modulapp/coverage/retur/hpretur.dart';
 import 'package:hero/modulapp/coverage/searchlocation/locationditolak.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocation.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocationds.dart';
+import 'package:hero/util/colorutil.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/horeboxdecoration.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 
@@ -27,6 +29,7 @@ class CoverageHome extends StatefulWidget {
 class _CoverageHomeState extends State<CoverageHome> {
   final BlocHomePageCoverage _blocDashboard = BlocHomePageCoverage();
   int _counterBuild = 0;
+  final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
 
   @override
   void initState() {
@@ -148,7 +151,6 @@ class _CoverageHomeState extends State<CoverageHome> {
                   ),
                   Expanded(
                     child: Container(
-                        //color: Colors.red,
                         padding: const EdgeInsets.only(top: 10),
                         child: _pjp(item)),
                   ),
@@ -259,7 +261,6 @@ class _CoverageHomeState extends State<CoverageHome> {
     ));
     List<Widget> lwlist = [];
     for (var element in item.lpjp) {
-      //lw.add(_cellPjp(element.tempat.nama, element.tempat.id, element.enumPjp));
       lwlist.add(_cellPjp(element));
     }
     lwlist.add(const Divider(
@@ -267,7 +268,7 @@ class _CoverageHomeState extends State<CoverageHome> {
     ));
     lw.add(Expanded(
       child: Container(
-        //color: Colors.grey,
+        color: Colors.transparent,
         alignment: Alignment.center,
         child: ListView(
           padding: const EdgeInsets.only(top: 0),
@@ -280,13 +281,17 @@ class _CoverageHomeState extends State<CoverageHome> {
       height: 20,
     ));
 
-    return Card(
-        elevation: 2,
-        color: Colors.red[600],
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: lw,
-        ));
+    return Container(
+      child: Card(
+          elevation: 0,
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: lw,
+          )),
+      decoration:
+          BoxDecoration(gradient: _boxDecoration.gradientBackgroundApp()),
+    );
   }
 
   Widget _cellPjp(Pjp pjp) {
@@ -300,7 +305,7 @@ class _CoverageHomeState extends State<CoverageHome> {
         pjp.enumPjp == EnumPjp.notclockinyet) {
       String text = pjp.enumPjp == EnumPjp.progress ? "Progress" : "Clock In";
       colorIcon = Colors.white;
-      action = ButtonClockIn(
+      action = ButtonClockInGradient(
           onTap: () {
             _handleClockin(pjp);
           },
@@ -331,7 +336,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                 width: 10,
               ),
               Expanded(
-                flex: 6,
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -341,7 +346,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                 ),
               ),
               Expanded(
-                  flex: 5,
+                  flex: 1,
                   child: Center(
                     child: action,
                   )),

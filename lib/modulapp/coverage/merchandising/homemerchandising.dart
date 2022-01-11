@@ -15,7 +15,7 @@ class HomeMerchandising extends StatefulWidget {
   static const routeName = '/homemerchandising';
   final Pjp? pjp;
 
-  HomeMerchandising(this.pjp);
+  HomeMerchandising(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _HomeMerchandisingState createState() => _HomeMerchandisingState();
@@ -124,12 +124,12 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                     ],
                   ),
                   backgroundColor: Colors.red[600],
-                  iconTheme: IconThemeData(
+                  iconTheme: const IconThemeData(
                     color: Colors.white, //change your color here
                   ),
                   title: Text(
                     ConstString.textMerchandising,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   centerTitle: true,
                 ),

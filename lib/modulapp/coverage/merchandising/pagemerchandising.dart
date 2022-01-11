@@ -16,7 +16,7 @@ class PageMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
   final Merchandising? merchandising;
   final BlocMerchandising? blocMerchandising;
-  PageMerchandising(
+  const PageMerchandising(
       this.enumMerchandising, this.merchandising, this.blocMerchandising);
   @override
   _PageMerchandisingState createState() => _PageMerchandisingState();
@@ -50,13 +50,13 @@ class _PageMerchandisingState extends State<PageMerchandising> {
         _title = 'Backdrop';
         break;
     }
-    _telkomselController = new TextEditingController();
-    _isatController = new TextEditingController();
-    _xlController = new TextEditingController();
-    _triController = new TextEditingController();
-    _smartController = new TextEditingController();
-    _axisController = new TextEditingController();
-    _otherController = new TextEditingController();
+    _telkomselController = TextEditingController();
+    _isatController = TextEditingController();
+    _xlController = TextEditingController();
+    _triController = TextEditingController();
+    _smartController = TextEditingController();
+    _axisController = TextEditingController();
+    _otherController = TextEditingController();
     super.initState();
   }
 
@@ -115,7 +115,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
             )),
             _cardForm(s.width),
             const SizedBox(height: 10),
-            widget.merchandising!.isPhotoShowing()
+            widget.merchandising!.isTakePhotoShowing()
                 ? ButtonStrectWidth(
                     buttonColor: Colors.green,
                     text: "Ambil Foto",
@@ -154,7 +154,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                       }
                     },
                     isenable: true),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -322,7 +322,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -350,7 +350,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -377,7 +377,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

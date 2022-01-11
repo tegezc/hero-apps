@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../colorutil.dart';
 import '../../dateutil.dart';
 import '../label/component_label.dart';
 
@@ -157,7 +158,6 @@ class ButtonRed extends StatelessWidget {
 }
 
 /// komponen utama
-
 class ButtonApp extends StatefulWidget {
   final Function onTap;
   final String? text;
@@ -225,22 +225,6 @@ class _ButtonAppState extends State<ButtonApp> {
   Widget build(BuildContext context) {
     final TextStyle style =
         TextStyle(color: widget.enable ? _color : Colors.grey, fontSize: 12);
-    // return OutlineButton(
-    //   child: Text(
-    //     widget.text,
-    //     style: style,
-    //   ),
-    //   onPressed: widget.enable
-    //       ? () {
-    //           widget.onTap();
-    //         }
-    //       : null,
-    //   borderSide: BorderSide(
-    //     color: widget.enable ? _color : Colors.grey, //Color of the border
-    //     style: BorderStyle.solid, //Style of the border
-    //     width: 0.7, //width of the border
-    //   ),
-    // );
     return OutlinedButton(
       onPressed: widget.enable
           ? () {
@@ -258,6 +242,35 @@ class _ButtonAppState extends State<ButtonApp> {
         // backgroundColor: Colors.white,
         primary: _color,
         side: BorderSide(color: _color!, width: 0.5),
+      ),
+    );
+  }
+}
+
+class ButtonCustome extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  const ButtonCustome({Key? key, required this.text, required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const TextStyle style = TextStyle(color: Colors.red, fontSize: 12);
+    return OutlinedButton(
+      onPressed: () {
+        onTap();
+      },
+      child: Text(
+        text,
+        style: style,
+      ),
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.white,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+        // backgroundColor: Colors.white,
+        //primary: Colors.,
+        side: const BorderSide(color: Colors.black, width: 1),
       ),
     );
   }
@@ -580,6 +593,57 @@ class ButtonClockIn extends StatelessWidget {
             //       spreadRadius: 2)
             // ],
           ),
+          child: Center(
+            child: Text(
+              text,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonClockInGradient extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  ButtonClockInGradient({required this.text, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return _buttonGradient();
+  }
+
+  Widget _buttonGradient() {
+    return InkWell(
+      onTap: () {
+        onTap();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 5, right: 5),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
+          // alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              border: Border.all(
+                color: Colors.white,
+                width: 0.5,
+              ),
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    HexColor('#cccccc'),
+                    HexColor("#F2F2F2"),
+                    HexColor("#DBDBDB"),
+                    HexColor("#EAEAEA")
+                  ])),
           child: Center(
             child: Text(
               text,
