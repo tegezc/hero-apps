@@ -5,6 +5,8 @@ import 'package:hero/modulapp/coverage/retur/retureditor.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/component/widget/horeboxdecoration.dart';
+import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 
 class HomePageRetur extends StatefulWidget {
   static const routeName = '/homepagerektur';
@@ -17,6 +19,7 @@ class _HomePageReturState extends State<HomePageRetur> {
   TextEditingController _controller = new TextEditingController();
   late BlocHpRetur _blocHpRetur;
   int _counterBuild = 0;
+  HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
   @override
   void initState() {
     _blocHpRetur = new BlocHpRetur();
@@ -94,12 +97,12 @@ class _HomePageReturState extends State<HomePageRetur> {
               ),
               SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(),
-                child: Container(
+                child: SizedBox(
                   height: s.height,
                   width: s.width,
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Padding(
@@ -110,14 +113,14 @@ class _HomePageReturState extends State<HomePageRetur> {
                             ButtonApp.black(item.getStrAwal(), () {
                               _datePicker(true, item);
                             }),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             ButtonApp.black(item.getStrAkhir(), () {
                               _datePicker(false, item);
                             }),
                             IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.play_arrow_outlined,
                                   size: 40,
                                 ),
@@ -129,7 +132,7 @@ class _HomePageReturState extends State<HomePageRetur> {
                           ],
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -158,11 +161,11 @@ class _HomePageReturState extends State<HomePageRetur> {
                               ),
                             ),
                             IconButton(
-                                icon: Icon(Icons.search, size: 30),
+                                icon: const Icon(Icons.search, size: 30),
                                 onPressed: () {
                                   FocusScope.of(context).unfocus();
                                   String txt = _controller.text;
-                                  if (txt.length > 0) {
+                                  if (txt.isNotEmpty) {
                                     _blocHpRetur
                                         .searchBySerial(_controller.text);
                                   }
@@ -171,18 +174,23 @@ class _HomePageReturState extends State<HomePageRetur> {
                         ),
                       ),
                       Container(
-                        height: s.height - 270,
-                        margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                        // height: s.height - 270,
+                        margin: const EdgeInsets.only(left: 8.0, right: 8.0),
                         decoration: BoxDecoration(
-                            color: Colors.red[600],
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: ListView.builder(
-                          itemCount: item.getCountList(),
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: _controllCell(item, index),
-                            );
-                          },
+                            // color: Colors.red[600],
+                            borderRadius: BorderRadius.circular(8.0),
+                            gradient: _boxDecoration.gradientBackgroundApp()),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: _headerPencarian(),
+                            ),
+                            SizedBox(
+                              height: s.height - 290,
+                              child: _controllContentPencarian(item),
+                            )
+                          ],
                         ),
                       ),
                     ],
@@ -191,6 +199,47 @@ class _HomePageReturState extends State<HomePageRetur> {
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  Widget _headerPencarian() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LabelWhite.size1("Berikut Daftar Pencarian : "),
+          const Divider(
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _controllContentPencarian(UIHpRetur item) {
+    if (item.getCountList() == 0) {
+      if (_controller.text.isNotEmpty) {
+        return const WidgetPencarianKosong(
+            text:
+                'Pencarian retur dengan kriteria tersebut \nTIDAK DITEMUKAN.');
+      } else {
+        return const WidgetPencarianKosong(
+            text:
+                'Silahkan masukkan no retur \nuntuk mendapatkan hasil pencarian');
+      }
+    } else {
+      return _contentPencarian(item);
+    }
+  }
+
+  Widget _contentPencarian(UIHpRetur item) {
+    return ListView.builder(
+      itemCount: item.getCountList(),
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: _controllCell(item, index),
         );
       },
     );
@@ -217,7 +266,7 @@ class _HomePageReturState extends State<HomePageRetur> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 4,
     );
   }

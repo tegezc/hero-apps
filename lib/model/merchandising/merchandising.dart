@@ -32,7 +32,7 @@ class Merchandising {
         '\n photo3 :$pathPhoto3';
   }
 
-  bool isPhotoShowing() {
+  bool isTakePhotoShowing() {
     return pathPhoto1 == null || pathPhoto2 == null || pathPhoto3 == null;
   }
 
@@ -54,7 +54,8 @@ class Merchandising {
         tri == null ||
         sf == null ||
         axis == null ||
-        other == null || pathPhoto1 == null) return false;
+        other == null ||
+        pathPhoto1 == null) return false;
     return true;
   }
 
