@@ -109,154 +109,131 @@ class _PageTabState extends State<PageTab> {
             return Container();
           }
           UIPageTabSf item = snapshot.data!;
-
-          return Stack(
-            children: [
-              SingleChildScrollView(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      //image: AssetImage('assets/image/coverage/BG.png'),
-                      image: AssetImage('assets/image/new/BG.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  height: s.height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding:
-                            const EdgeInsets.only(left: 8, right: 8, top: 50),
-                        height: s.height,
-                        width: s.width,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              //untuk jarak atas ke tulisan judul
-                              width: s.width,
-                              height: 40,
-                            ),
-                            LabelBlack.size1(title, bold: true),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0,
-                                  right: 20.0,
-                                  top: 0.0,
-                                  bottom: 0.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child:
-                                        ButtonApp.blue(item.getStrAwal(), () {
-                                      _datePicker(true, item);
-                                    }),
-                                  ),
-                                  ButtonApp.blue(item.getStrAkhir(), () {
-                                    _datePicker(false, item);
-                                  }),
-                                  // GestureDetector(
-                                  //     onTap: () {
-                                  //       FocusScope.of(context).unfocus();
-                                  //       _controller.text = '';
-                                  //       _blocPageTabSf.searchRangeTanggal(widget.enumTab);
-                                  //     },
-                                  //     child: Image(
-                                  //       image: AssetImage('assets/image/searchicon.png'),
-                                  //       height: 4,
-                                  //     )),
-                                  IconButton(
-                                      icon: const Icon(
-                                        Icons.play_arrow_outlined,
-                                        size: 40,
-                                      ),
-                                      onPressed: () {
-                                        FocusScope.of(context).unfocus();
-                                        _controller.text = '';
-                                        _blocPageTabSf
-                                            .searchRangeTanggal(widget.enumTab);
-                                      }),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: 40,
-                                      child: TextField(
-                                        keyboardType: TextInputType.text,
-                                        controller: _controller,
-                                        style: const TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 12,
-                                        ),
-                                        decoration: InputDecoration(
-                                            border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.0)),
-                                            ),
-                                            hintText: ConstString.hintSearch,
-                                            hintStyle: const TextStyle(
-                                                color: Colors.black45)),
-                                        onChanged: (v) {},
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      icon: const Icon(Icons.search, size: 30),
-                                      onPressed: () {
-                                        FocusScope.of(context).unfocus();
-                                        _blocPageTabSf.searchByQuery(
-                                            widget.enumTab, _controller.text);
-                                      })
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                                child: Container(
-                                    // color: Colors.red,
-                                    decoration: BoxDecoration(
-                                        //color: Colors.red[600],
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        gradient: _boxDecoration
-                                            .gradientBackgroundApp()),
-                                    margin: const EdgeInsets.only(
-                                        top: 10.0, left: 0, right: 0),
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Card(
-                                      elevation: 0,
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          _headerPencarian(),
-                                          _controllContentPencarian(item),
-                                          // _content(item),
-                                        ],
-                                      ),
-                                    ))),
-                            const SizedBox(
-                              height: 70,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+          return SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  //image: AssetImage('assets/image/coverage/BG.png'),
+                  image: AssetImage('assets/image/new/BG.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
+              height: s.height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 8, right: 8, top: 50),
+                    height: s.height,
+                    width: s.width,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          //untuk jarak atas ke tulisan judul
+                          width: s.width,
+                          height: 40,
+                        ),
+                        LabelBlack.size1(title, bold: true),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, top: 0.0, bottom: 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ButtonApp.blue(item.getStrAwal(), () {
+                                  _datePicker(true, item);
+                                }),
+                              ),
+                              ButtonApp.blue(item.getStrAkhir(), () {
+                                _datePicker(false, item);
+                              }),
+                              IconButton(
+                                  icon: const Icon(
+                                    Icons.play_arrow_outlined,
+                                    size: 40,
+                                  ),
+                                  onPressed: () {
+                                    FocusScope.of(context).unfocus();
+                                    _controller.text = '';
+                                    _blocPageTabSf
+                                        .searchRangeTanggal(widget.enumTab);
+                                  }),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  height: 40,
+                                  child: TextField(
+                                    keyboardType: TextInputType.text,
+                                    controller: _controller,
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 12,
+                                    ),
+                                    decoration: InputDecoration(
+                                        border: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        hintText: ConstString.hintSearch,
+                                        hintStyle: const TextStyle(
+                                            color: Colors.black45)),
+                                    onChanged: (v) {},
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                  icon: const Icon(Icons.search, size: 30),
+                                  onPressed: () {
+                                    FocusScope.of(context).unfocus();
+                                    _blocPageTabSf.searchByQuery(
+                                        widget.enumTab, _controller.text);
+                                  })
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    gradient:
+                                        _boxDecoration.gradientBackgroundApp()),
+                                margin: const EdgeInsets.only(
+                                    top: 10.0, left: 0, right: 0),
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      _headerPencarian(),
+                                      _controllContentPencarian(item),
+                                      // _content(item),
+                                    ],
+                                  ),
+                                ))),
+                        const SizedBox(
+                          height: 70,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           );
         });
   }

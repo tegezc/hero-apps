@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
@@ -14,7 +13,6 @@ import 'package:hero/modulapp/coverage/retur/hpretur.dart';
 import 'package:hero/modulapp/coverage/searchlocation/locationditolak.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocation.dart';
 import 'package:hero/modulapp/coverage/searchlocation/searchlocationds.dart';
-import 'package:hero/util/colorutil.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/horeboxdecoration.dart';
@@ -104,7 +102,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SearchLocation()));
+                                              const SearchLocation()));
                                 } else {
                                   // CommonUi.openPage(context, SearchLocationDs());
                                   Navigator.push(

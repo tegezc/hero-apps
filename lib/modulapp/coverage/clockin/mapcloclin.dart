@@ -27,7 +27,7 @@ class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
 
   EnumAccount? _enumAccount;
-  late double _minusWidget;
+  double _minusWidget = 250.0;
   List<Marker> lmarkers = [];
   late LatLng _lokasi;
   late final ClockInClockOutController _clockInClockOutController;
@@ -65,11 +65,7 @@ class _MapClockInState extends State<MapClockIn> {
     _distanceInMeters = Geolocator.distanceBetween(position.latitude!,
         position.longitude!, _lokasi.latitude, _lokasi.longitude);
 
-    EnumAccount enumAccount = await AccountHore.getAccount();
-    _enumAccount = enumAccount;
-    // _hightCell =
-    //     enumAccount == EnumAccount.sf ? _hightCell = 400 : _hightCell = 100;
-    _minusWidget = enumAccount == EnumAccount.sf ? 250 : 181;
+    _enumAccount = await AccountHore.getAccount();
 
     return true;
   }
@@ -92,14 +88,16 @@ class _MapClockInState extends State<MapClockIn> {
     bool _isbuttonEnable = _distanceInMeters <= radius!;
 
     String textButton =
-        'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Radius($radius)';
+        'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Max($radius)';
     bool isShowRadio = true;
     EnumStatusClockIn? statusClockIn = _getStatusClockInOpenOrClose();
     if (statusClockIn != null) {
       if (statusClockIn == EnumStatusClockIn.open) {
-        textButton = "Ke Menu";
+        textButton =
+            "Ke Menu : Radius ( ${_distanceInMeters.toInt()} m ) - Max($radius)";
       } else if (statusClockIn == EnumStatusClockIn.close) {
-        textButton = "Ambil Photo";
+        textButton =
+            "Ambil Photo : Radius ( ${_distanceInMeters.toInt()} m ) - Max($radius)";
       }
 
       if (statusClockIn == EnumStatusClockIn.open ||
@@ -150,7 +148,7 @@ class _MapClockInState extends State<MapClockIn> {
                       onTap: () {
                         _buttonClockInOnClick();
                       },
-                      isenable: _isbuttonEnable,
+                      isenable: true, //TODO _isbuttonEnable,
                     ),
                   ),
                 ],
@@ -211,14 +209,6 @@ class _MapClockInState extends State<MapClockIn> {
     String strTgl = DateUtility.dateToStringLengkap(DateTime.now());
     return Column(
       children: [
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 4, bottom: 0),
-        //   child: LabelBlack.size3('$distanceInMeters'),
-        // ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 0.0, bottom: 0),
-        //   child: LabelBlack.size2(widget.pjp!.tempat!.id),
-        // ),
         Padding(
           padding: const EdgeInsets.only(top: 4.0, bottom: 0),
           child: LabelBlack.size2(widget.pjp!.tempat!.nama),

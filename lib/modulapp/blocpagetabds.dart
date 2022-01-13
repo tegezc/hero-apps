@@ -20,7 +20,7 @@ class BlocPageTabDs {
     _cacheItem!.page = 1;
     _cacheItem!.query = '';
     //  _cacheItem.lcombo = ItemUi.getcombojenislokasi();
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void searchRangeTanggal(EnumTab enumTab) {
@@ -34,7 +34,7 @@ class BlocPageTabDs {
         _cacheItem!.loutlet!.clear();
         _cacheItem!.loutlet!.addAll(item.loutlet!);
         _cacheItem!.total = item.total;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -42,13 +42,13 @@ class BlocPageTabDs {
   void showmore(EnumTab enumTab) {
     _cacheItem!.page = _cacheItem!.page + 1;
     _httpPageDs
-        .getDaftarLokasi(
-            enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, _cacheItem!.page)
+        .getDaftarLokasi(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir,
+            _cacheItem!.page)
         .then((value) {
       if (value != null) {
         UIPageTabDs item = value;
         _cacheItem!.loutlet!.addAll(item.loutlet!);
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -61,7 +61,7 @@ class BlocPageTabDs {
       print(value);
       if (value != null) {
         _cacheItem!.loutlet = value;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -128,7 +128,7 @@ class UIPageTabDs {
       return false;
     }
 
-    if (this.page == 0) {
+    if (page == 0) {
       return false;
     }
 

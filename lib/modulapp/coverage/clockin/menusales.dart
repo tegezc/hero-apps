@@ -122,14 +122,13 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   Widget _controllMenu() {
-    if (_enumAccount == EnumAccount.ds) {
-      if (widget.pjp!.idjenilokasi == ConstApp.keyPOI) {
-        return _openDsPoi();
-      }
-      return _openDS();
+    if (_enumAccount == EnumAccount.sf) {
+      return _openSf();
     }
-
-    return _openSf();
+    if (widget.pjp!.idjenilokasi == ConstApp.keyPOI) {
+      return _openDsPoi();
+    }
+    return _openDS();
   }
 
   Widget _openSf() {
@@ -235,7 +234,7 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   Widget _openDS() {
-    bool isComplete = _menu!.isSfComplete();
+    bool isComplete = _menu!.isDsComplete();
     return Column(
       children: [
         Row(
@@ -265,6 +264,7 @@ class _MenuSalesState extends State<MenuSales> {
             )
           ],
         ),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -292,6 +292,7 @@ class _MenuSalesState extends State<MenuSales> {
             )
           ],
         ),
+        const SizedBox(height: 10),
         _buttonClockOut(isComplete),
       ],
     );
@@ -322,12 +323,6 @@ class _MenuSalesState extends State<MenuSales> {
             );
             break;
           case EnumTab.merchandising:
-            // if (_enumAccount == EnumAccount.sf) {
-            //   await Navigator.pushNamed(context, HomeMerchandising.routeName,
-            //       arguments: widget.pjp);
-            // } else {
-            //   await Navigator.pushNamed(context, HomeMerchandisingDs.routeName);
-            // }
             await Navigator.pushNamed(context, HomeMerchandising.routeName,
                 arguments: widget.pjp);
             break;
