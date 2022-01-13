@@ -4,7 +4,8 @@ import 'package:hero/util/numberconverter.dart';
 
 class Merchandising {
   static String tagBackdrop = 'BACKDROP';
-  static String tagEtalase = 'ETALASE';
+  static String tagPerdana = 'PERDANA';
+  static String tagVoucherFisik = 'VOUCHER_FISIK';
   static String tagPapan = 'PAPAN_NAMA';
   static String tagPoster = 'POSTER';
   static String tagSpanduk = 'SPANDUK';

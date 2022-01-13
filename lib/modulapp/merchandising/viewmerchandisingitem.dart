@@ -19,8 +19,8 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
   void initState() {
     _m = widget.merchandising;
     switch (widget.enumMerchandising) {
-      case EnumMerchandising.etalase:
-        _title = 'Etalase';
+      case EnumMerchandising.perdana:
+        _title = 'Perdana';
         break;
       case EnumMerchandising.spanduk:
         _title = 'Spanduk';
@@ -33,6 +33,9 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
         break;
       case EnumMerchandising.backdrop:
         _title = 'Backdrop';
+        break;
+      case EnumMerchandising.voucherfisik:
+        _title = 'Voucher Fisik';
         break;
     }
     super.initState();

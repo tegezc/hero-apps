@@ -47,8 +47,8 @@ class StoredPathPhoto {
       EnumMerchandising enumMerchandising, EnumNumber? photoke) {
     String p = 'MER';
     switch (enumMerchandising) {
-      case EnumMerchandising.etalase:
-        p = '${p}etalase';
+      case EnumMerchandising.perdana:
+        p = '${p}perdana';
         break;
       case EnumMerchandising.spanduk:
         p = '${p}spanduk';
@@ -61,6 +61,9 @@ class StoredPathPhoto {
         break;
       case EnumMerchandising.backdrop:
         p = '${p}backdrop';
+        break;
+      case EnumMerchandising.voucherfisik:
+        p = '${p}voucherfisik';
         break;
     }
 

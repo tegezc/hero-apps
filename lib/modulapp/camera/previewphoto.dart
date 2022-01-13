@@ -107,9 +107,26 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                                 ));
                           });
                           break;
-                        case EnumTakePhoto.merchetalase:
+                        case EnumTakePhoto.merchperdana:
                           StoredPathPhoto.setPhotoMerchandising(
-                                  EnumMerchandising.etalase,
+                                  EnumMerchandising.perdana,
+                                  widget.param!.enumNumber,
+                                  _urlImageOrNull!)
+                              .then((value) {
+                            Navigator.popUntil(
+                                context,
+                                ModalRoute.withName(
+                                  HomeMerchandising.routeName,
+                                ));
+                            // int counter = 0;
+                            // Navigator.popUntil(context, (route) {
+                            //   return counter++ == 2;
+                            // });
+                          });
+                          break;
+                        case EnumTakePhoto.merchvoucherfisik:
+                          StoredPathPhoto.setPhotoMerchandising(
+                                  EnumMerchandising.voucherfisik,
                                   widget.param!.enumNumber,
                                   _urlImageOrNull!)
                               .then((value) {
@@ -211,53 +228,34 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
             ));
 
         break;
-      case EnumTakePhoto.merchetalase:
-        print('bloc set preference');
+      case EnumTakePhoto.merchperdana:
+        _gotoMerchandasingHomePage();
 
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-              HomeMerchandising.routeName,
-            ));
-        // int counter = 0;
-        // Navigator.popUntil(context, (route) {
-        //   return counter++ == 2;
-        // });
-
+        break;
+      case EnumTakePhoto.merchvoucherfisik:
+        _gotoMerchandasingHomePage();
         break;
 
       case EnumTakePhoto.merchspanduk:
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-              HomeMerchandising.routeName,
-            ));
-
+        _gotoMerchandasingHomePage();
         break;
       case EnumTakePhoto.merchposter:
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-              HomeMerchandising.routeName,
-            ));
-
+        _gotoMerchandasingHomePage();
         break;
       case EnumTakePhoto.merchpapan:
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-              HomeMerchandising.routeName,
-            ));
-
+        _gotoMerchandasingHomePage();
         break;
       case EnumTakePhoto.merchbackdrop:
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-              HomeMerchandising.routeName,
-            ));
-
+        _gotoMerchandasingHomePage();
         break;
     }
+  }
+
+  void _gotoMerchandasingHomePage() {
+    Navigator.popUntil(
+        context,
+        ModalRoute.withName(
+          HomeMerchandising.routeName,
+        ));
   }
 }
