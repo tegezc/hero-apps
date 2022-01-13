@@ -60,7 +60,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
 
           UIMerchan item = snapshot.data!;
           return DefaultTabController(
-            length: 5,
+            length: 6,
             child: SafeArea(
               child: Scaffold(
                 appBar: AppBar(
@@ -107,7 +107,10 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                     isScrollable: true,
                     tabs: [
                       Tab(
-                        child: LabelWhite.size2('Etalase'),
+                        child: LabelWhite.size2('Perdana'),
+                      ),
+                      Tab(
+                        child: LabelWhite.size2('Voucher Fisik'),
                       ),
                       Tab(
                         child: LabelWhite.size2('Spanduk'),
