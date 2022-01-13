@@ -34,9 +34,6 @@ class _PageMerchandisingState extends State<PageMerchandising> {
   @override
   void initState() {
     switch (widget.enumMerchandising) {
-      case EnumMerchandising.etalase:
-        _title = 'Etalase';
-        break;
       case EnumMerchandising.spanduk:
         _title = 'Spanduk';
         break;
@@ -48,6 +45,12 @@ class _PageMerchandisingState extends State<PageMerchandising> {
         break;
       case EnumMerchandising.backdrop:
         _title = 'Backdrop';
+        break;
+      case EnumMerchandising.perdana:
+        _title = 'Perdana';
+        break;
+      case EnumMerchandising.voucherfisik:
+        _title = 'Voucher Fisik';
         break;
     }
     _telkomselController = TextEditingController();
@@ -167,11 +170,6 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     if (widget.merchandising!.isvalidtakephoto()) {
       ParamPreviewPhoto? params;
       switch (widget.enumMerchandising) {
-        case EnumMerchandising.etalase:
-          params = ParamPreviewPhoto(EnumTakePhoto.merchetalase,
-              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
-
-          break;
         case EnumMerchandising.spanduk:
           params = ParamPreviewPhoto(EnumTakePhoto.merchspanduk,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
@@ -186,6 +184,14 @@ class _PageMerchandisingState extends State<PageMerchandising> {
           break;
         case EnumMerchandising.backdrop:
           params = ParamPreviewPhoto(EnumTakePhoto.merchbackdrop,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
+          break;
+        case EnumMerchandising.perdana:
+          params = ParamPreviewPhoto(EnumTakePhoto.merchperdana,
+              pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
+          break;
+        case EnumMerchandising.voucherfisik:
+          params = ParamPreviewPhoto(EnumTakePhoto.merchvoucherfisik,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
       }

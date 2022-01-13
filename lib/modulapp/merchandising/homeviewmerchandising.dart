@@ -16,7 +16,8 @@ class HomeViewMerchandising extends StatefulWidget {
 }
 
 class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
-  Merchandising? _metalase;
+  Merchandising? _perdana;
+  Merchandising? _voucherFisik;
   Merchandising? _mspanduk;
   Merchandising? _mposter;
   Merchandising? _mpapan;
@@ -47,7 +48,8 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
         widget.itemOutlet.tgl,
         widget.itemOutlet.getJenisLokasi());
     if (map != null) {
-      _metalase = map[Merchandising.tagEtalase];
+      _perdana = map[Merchandising.tagPerdana];
+      _voucherFisik = map[Merchandising.tagVoucherFisik];
       _mspanduk = map[Merchandising.tagSpanduk];
       _mposter = map[Merchandising.tagPoster];
       _mpapan = map[Merchandising.tagPapan];
@@ -71,7 +73,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
       );
     }
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -79,7 +81,10 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
               isScrollable: true,
               tabs: [
                 Tab(
-                  child: LabelBlack.size2('Etalase'),
+                  child: LabelBlack.size2('Perdana'),
+                ),
+                Tab(
+                  child: LabelBlack.size2('Voucher Fisik'),
                 ),
                 Tab(
                   child: LabelBlack.size2('Spanduk'),
@@ -107,7 +112,8 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
           ),
           body: TabBarView(
             children: [
-              ViewMerchandising(EnumMerchandising.etalase, _metalase),
+              ViewMerchandising(EnumMerchandising.perdana, _perdana),
+              ViewMerchandising(EnumMerchandising.voucherfisik, _voucherFisik),
               ViewMerchandising(EnumMerchandising.spanduk, _mspanduk),
               ViewMerchandising(EnumMerchandising.poster, _mposter),
               ViewMerchandising(EnumMerchandising.papan, _mpapan),

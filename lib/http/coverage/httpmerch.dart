@@ -147,7 +147,6 @@ class HttpMerchandising {
         break;
       default:
         namalokasi = '';
-
     }
     Uri uri = ConstApp.uri(
         '/bottommenumerchandising/merchandising_detail/$idoutlet/$namalokasi/$strDt');
@@ -188,16 +187,18 @@ class HttpMerchandising {
           Merchandising merchandising = Merchandising.fromJson(map);
           merchandising.isServerExist = true;
           print(merchandising.idjenisshare);
-          if (merchandising.idjenisshare == Merchandising.tagEtalase) {
-            moutlet[Merchandising.tagEtalase] = merchandising;
+          if (merchandising.idjenisshare == Merchandising.tagPerdana) {
+            moutlet[Merchandising.tagPerdana] = merchandising;
+          }
+          if (merchandising.idjenisshare == Merchandising.tagVoucherFisik) {
+            moutlet[Merchandising.tagVoucherFisik] = merchandising;
           } else if (merchandising.idjenisshare == Merchandising.tagSpanduk) {
             moutlet[Merchandising.tagSpanduk] = merchandising;
           } else if (merchandising.idjenisshare == Merchandising.tagPoster) {
             moutlet[Merchandising.tagPoster] = merchandising;
           } else if (merchandising.idjenisshare == Merchandising.tagPapan) {
             moutlet[Merchandising.tagPapan] = merchandising;
-          } else if (merchandising.idjenisshare ==
-              Merchandising.tagBackdrop) {
+          } else if (merchandising.idjenisshare == Merchandising.tagBackdrop) {
             moutlet[Merchandising.tagBackdrop] = merchandising;
           }
         }

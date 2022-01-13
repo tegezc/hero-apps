@@ -46,7 +46,7 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
 }
 
 void logError(String code, String? message) =>
-    print('Error: $code\nError Message: $message');
+    debugPrint('Error: $code\nError Message: $message');
 
 class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   List<CameraDescription> cameras = [];
@@ -220,7 +220,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
   void showInSnackBar(String message) {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(message)));
+    //_scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(message)));
   }
 
   void onNewCameraSelected(CameraDescription? cameraDescription) async {
@@ -339,7 +339,8 @@ enum EnumTakePhoto {
   distribusi,
   marketaudit,
   distibusiclose,
-  merchetalase,
+  merchperdana,
+  merchvoucherfisik,
   merchspanduk,
   merchposter,
   merchpapan,

@@ -14,7 +14,8 @@ class UIMerchan {
   // POSTER
   // SPANDUK
 
-  Merchandising? etalase;
+  Merchandising? perdana;
+  Merchandising? voucherFisik;
   Merchandising? backdrop;
   Merchandising? papanNama;
   Merchandising? poster;
@@ -53,15 +54,19 @@ class BlocMerchandising {
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
     print('idtempat: ${pjp.id}');
     if (map != null) {
-      _cacheUiMerc!.etalase = map[Merchandising.tagEtalase];
+      _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
+      _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
       _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
       _cacheUiMerc!.poster = map[Merchandising.tagPoster];
       _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
       _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
     }
 
-    if (_cacheUiMerc!.etalase == null) {
-      _cacheUiMerc!.etalase = Merchandising.kosong(pjp, 'ETALASE');
+    if (_cacheUiMerc!.perdana == null) {
+      _cacheUiMerc!.perdana = Merchandising.kosong(pjp, 'PERDANA');
+    }
+    if (_cacheUiMerc!.voucherFisik == null) {
+      _cacheUiMerc!.voucherFisik = Merchandising.kosong(pjp, 'VOUCHER FISIK');
     }
     if (_cacheUiMerc!.backdrop == null) {
       _cacheUiMerc!.backdrop = Merchandising.kosong(pjp, 'BACKDROP');
@@ -87,21 +92,24 @@ class BlocMerchandising {
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
     FinishMenu vcheckout = FinishMenu(false, null);
     if (map != null) {
-      _cacheUiMerc!.etalase = map[Merchandising.tagEtalase];
+      _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
+      _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
       _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
       _cacheUiMerc!.poster = map[Merchandising.tagPoster];
       _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
       _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
 
-      print(_cacheUiMerc!.etalase);
-      print(_cacheUiMerc!.spanduk);
-      print(_cacheUiMerc!.poster);
-      print(_cacheUiMerc!.papanNama);
-      print(_cacheUiMerc!.backdrop);
+      // print(_cacheUiMerc!.etalase);
+      // print(_cacheUiMerc!.spanduk);
+      // print(_cacheUiMerc!.poster);
+      // print(_cacheUiMerc!.papanNama);
+      // print(_cacheUiMerc!.backdrop);
 
       // karena wajib diisi semua maka tidak ada yg boleh null
       if (enumAccount == EnumAccount.sf) {
-        if (_cacheUiMerc!.etalase == null || _cacheUiMerc!.spanduk == null) {
+        if (_cacheUiMerc!.perdana == null ||
+            _cacheUiMerc!.voucherFisik == null ||
+            _cacheUiMerc!.spanduk == null) {
         } else {
           HttpDashboard httpDashboard = HttpDashboard();
           vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
@@ -123,9 +131,6 @@ class BlocMerchandising {
     //  _sinkLoading();
     Merchandising? merchandising;
     switch (enumMerchandising) {
-      case EnumMerchandising.etalase:
-        merchandising = _cacheUiMerc!.etalase;
-        break;
       case EnumMerchandising.spanduk:
         merchandising = _cacheUiMerc!.spanduk;
         break;
@@ -138,6 +143,12 @@ class BlocMerchandising {
       case EnumMerchandising.backdrop:
         merchandising = _cacheUiMerc!.backdrop;
         break;
+      case EnumMerchandising.perdana:
+        merchandising = _cacheUiMerc!.perdana;
+        break;
+      case EnumMerchandising.voucherfisik:
+        merchandising = _cacheUiMerc!.voucherFisik;
+        break;
     }
     HttpMerchandising httpMerchandising = HttpMerchandising();
     bool result = await httpMerchandising.createMerchadising(merchandising!);
@@ -147,8 +158,11 @@ class BlocMerchandising {
           _cachePjp.id, DateTime.now(), _cachePjp.getJenisLokasi());
       print('idtempat: ${_cachePjp.id}');
       if (map != null) {
-        if (map[Merchandising.tagEtalase] != null) {
-          _cacheUiMerc!.etalase = map[Merchandising.tagEtalase];
+        if (map[Merchandising.tagPerdana] != null) {
+          _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
+        }
+        if (map[Merchandising.tagVoucherFisik] != null) {
+          _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
         }
 
         if (map[Merchandising.tagSpanduk] != null) {
@@ -177,10 +191,6 @@ class BlocMerchandising {
     EnumOperator enumOperator,
   ) {
     switch (enumMerchandising) {
-      case EnumMerchandising.etalase:
-        _cacheUiMerc!.etalase =
-            _textChanged(_cacheUiMerc!.etalase, enumOperator, text);
-        break;
       case EnumMerchandising.spanduk:
         _cacheUiMerc!.spanduk =
             _textChanged(_cacheUiMerc!.spanduk, enumOperator, text);
@@ -197,26 +207,20 @@ class BlocMerchandising {
         _cacheUiMerc!.backdrop =
             _textChanged(_cacheUiMerc!.backdrop, enumOperator, text);
         break;
+      case EnumMerchandising.perdana:
+        _cacheUiMerc!.backdrop =
+            _textChanged(_cacheUiMerc!.perdana, enumOperator, text);
+        break;
+      case EnumMerchandising.voucherfisik:
+        _cacheUiMerc!.backdrop =
+            _textChanged(_cacheUiMerc!.voucherFisik, enumOperator, text);
+        break;
     }
     //  _sink(_cacheUiMerc);
   }
 
   void setPhotoPath(EnumMerchandising merchandising, String? path) {
     switch (merchandising) {
-      case EnumMerchandising.etalase:
-        switch (_cacheUiMerc!.etalase!.getPhotoKe()) {
-          case EnumNumber.satu:
-            _cacheUiMerc!.etalase!.pathPhoto1 = path;
-            break;
-          case EnumNumber.dua:
-            _cacheUiMerc!.etalase!.pathPhoto2 = path;
-            break;
-          case EnumNumber.tiga:
-            _cacheUiMerc!.etalase!.pathPhoto3 = path;
-            break;
-          default:
-        }
-        break;
       case EnumMerchandising.spanduk:
         switch (_cacheUiMerc!.spanduk!.getPhotoKe()) {
           case EnumNumber.satu:
@@ -269,6 +273,34 @@ class BlocMerchandising {
             break;
           case EnumNumber.tiga:
             _cacheUiMerc!.backdrop!.pathPhoto3 = path;
+            break;
+          default:
+        }
+        break;
+      case EnumMerchandising.perdana:
+        switch (_cacheUiMerc!.perdana!.getPhotoKe()) {
+          case EnumNumber.satu:
+            _cacheUiMerc!.perdana!.pathPhoto1 = path;
+            break;
+          case EnumNumber.dua:
+            _cacheUiMerc!.perdana!.pathPhoto2 = path;
+            break;
+          case EnumNumber.tiga:
+            _cacheUiMerc!.perdana!.pathPhoto3 = path;
+            break;
+          default:
+        }
+        break;
+      case EnumMerchandising.voucherfisik:
+        switch (_cacheUiMerc!.voucherFisik!.getPhotoKe()) {
+          case EnumNumber.satu:
+            _cacheUiMerc!.voucherFisik!.pathPhoto1 = path;
+            break;
+          case EnumNumber.dua:
+            _cacheUiMerc!.voucherFisik!.pathPhoto2 = path;
+            break;
+          case EnumNumber.tiga:
+            _cacheUiMerc!.voucherFisik!.pathPhoto3 = path;
             break;
           default:
         }

@@ -3,7 +3,14 @@ enum EnumTab { distribution, merchandising, promotion, survey, mt }
 //Device, Reguler, Pareto
 enum EnumJenisOutlet { device, reguler, pareto }
 
-enum EnumMerchandising { etalase, spanduk, poster, papan, backdrop }
+enum EnumMerchandising {
+  perdana,
+  voucherfisik,
+  spanduk,
+  poster,
+  papan,
+  backdrop
+}
 
 enum EnumPjp { done, notclockinyet, progress, belum }
 

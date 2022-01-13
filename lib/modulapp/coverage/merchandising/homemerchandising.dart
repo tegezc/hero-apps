@@ -135,8 +135,10 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                 ),
                 body: TabBarView(
                   children: [
-                    PageMerchandising(EnumMerchandising.etalase, item.etalase,
+                    PageMerchandising(EnumMerchandising.perdana, item.perdana,
                         _blocMerchandising),
+                    PageMerchandising(EnumMerchandising.voucherfisik,
+                        item.voucherFisik, _blocMerchandising),
                     PageMerchandising(EnumMerchandising.spanduk, item.spanduk,
                         _blocMerchandising),
                     PageMerchandising(EnumMerchandising.poster, item.poster,
