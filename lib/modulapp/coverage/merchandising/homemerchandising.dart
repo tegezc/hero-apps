@@ -85,7 +85,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                                 if (value.message == null) {
                                   if (enumAccount == EnumAccount.sf) {
                                     TgzDialog.generalDialogConfirm(context,
-                                        'untuk dapat mengakhiri proses merchandising,tab etalase dan spanduk wajib diisi.');
+                                        'untuk dapat mengakhiri proses merchandising,tab perdana,voucher fisik dan spanduk wajib diisi.');
                                   } else {
                                     TgzDialog.generalDialogConfirm(context,
                                         'untuk dapat mengakhiri proses merchandising,tab spanduk dan poster wajib diisi.');

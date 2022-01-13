@@ -41,29 +41,13 @@ import 'modulapp/camera/previewphoto.dart';
 import 'modulapp/camera/previewphotoupload.dart';
 import 'modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 
-const fetchBackground = "tracinglocsales";
-
-// void callbackDispatcher() {
-//   Workmanager.executeTask((task, inputData) async {
-//     switch (task) {
-//       case fetchBackground:
-//         // HttpDashboard httpDashboard = HttpDashboard();
-//         // httpDashboard.trackingSales(inputData);
-//         Position userLocation = await Geolocator.getCurrentPosition(
-//             desiredAccuracy: LocationAccuracy.high);
-//         Notification1 notification = new Notification1();
-//         notification.showNotificationWithNoSound(userLocation.toString());
-//
-//     }
-//     return Future.value(true);
-//   });
-// }
-
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -76,20 +60,15 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeControllpage(
-        statelogin: new HomeControllpageParam(EnumStateLogin.loading),
+        statelogin: HomeControllpageParam(EnumStateLogin.loading),
       ),
       //home: LoadingLoginPage(),
       navigatorObservers: <NavigatorObserver>[
         SwipeBackObserver(),
       ],
-      routes: <String, WidgetBuilder>{
-        // '/home': (BuildContext context) => new HomeControllpage(
-        //       firstime: false,
-        //     ),
-        // '/menusales': (BuildContext context) => new MenuSales(),
-      },
+      routes: const <String, WidgetBuilder>{},
       onGenerateRoute: (settings) {
-        return this._getRoute(settings);
+        return _getRoute(settings);
       },
     );
   }
@@ -102,103 +81,101 @@ class MyApp extends StatelessWidget {
               settings.arguments as HomeControllpageParam?;
           return _buildRoute(
               settings,
-              new HomeControllpage(
+              HomeControllpage(
                 statelogin: args,
               ));
         }
       case ResetPassword.routeName:
-        return _buildRoute(settings, new ResetPassword());
+        return _buildRoute(settings, ResetPassword());
       case InputCodeVerification.routeName:
-        return _buildRoute(settings, new InputCodeVerification());
+        return _buildRoute(settings, InputCodeVerification());
       case MapClockIn.routeName:
         final Pjp? args = settings.arguments as Pjp?;
-        return _buildRoute(settings, new MapClockIn(args));
+        return _buildRoute(settings, MapClockIn(args));
       case MenuSales.routeName:
         final Pjp? args = settings.arguments as Pjp?;
-        return _buildRoute(settings, new MenuSales(args));
+        return _buildRoute(settings, MenuSales(args));
       case DaftarProductDistribusi.routeName:
         final Pjp? item = settings.arguments as Pjp?;
-        return _buildRoute(settings, new DaftarProductDistribusi(item));
+        return _buildRoute(settings, DaftarProductDistribusi(item));
       case PembelianItem.routeName:
         {
           final ItemTransaksi? args = settings.arguments as ItemTransaksi?;
-          return _buildRoute(settings, new PembelianItem(args));
+          return _buildRoute(settings, PembelianItem(args));
         }
       case PembayaranDistribusi.routeName:
         {
           final ParamPembayaran? paramPembayaran =
               settings.arguments as ParamPembayaran?;
-          return _buildRoute(
-              settings, new PembayaranDistribusi(paramPembayaran));
+          return _buildRoute(settings, PembayaranDistribusi(paramPembayaran));
         }
       case PageSuccess.routeName:
         {
           final param = settings.arguments;
-          return _buildRoute(
-              settings, new PageSuccess(param as PageSuccessParam?));
+          return _buildRoute(settings, PageSuccess(param as PageSuccessParam?));
         }
       case HomePembelianDistribusi.routeName:
         {
           final Pjp? item = settings.arguments as Pjp?;
-          return _buildRoute(settings, new HomePembelianDistribusi(item));
+          return _buildRoute(settings, HomePembelianDistribusi(item));
         }
       case HomeMerchandising.routeName:
         {
           final Pjp? item = settings.arguments as Pjp?;
-          return _buildRoute(settings, new HomeMerchandising(item));
+          return _buildRoute(settings, HomeMerchandising(item));
         }
       case HomePagePromotion.routeName:
         {
           final Pjp? item = settings.arguments as Pjp?;
-          return _buildRoute(settings, new HomePagePromotion(item));
+          return _buildRoute(settings, HomePagePromotion(item));
         }
       case HomePageRetur.routeName:
         {
-          return _buildRoute(settings, new HomePageRetur());
+          return _buildRoute(settings, HomePageRetur());
         }
       case ReturEditor.routeName:
         {
-          return _buildRoute(settings, new ReturEditor());
+          return _buildRoute(settings, ReturEditor());
         }
       case EditorOutlet.routeName:
         {
           final String? item = settings.arguments as String?;
-          return _buildRoute(settings, new EditorOutlet(item));
+          return _buildRoute(settings, EditorOutlet(item));
         }
       case CameraView.routeName:
         {
           final ParamPreviewPhoto? item =
               settings.arguments as ParamPreviewPhoto?;
-          return _buildRoute(settings, new CameraView(item));
+          return _buildRoute(settings, CameraView(item));
         }
       case PreviewPhotoWithUpload.routeName:
         {
           final ParamPreviewPhoto? item =
               settings.arguments as ParamPreviewPhoto?;
-          return _buildRoute(settings, new PreviewPhotoWithUpload(item));
+          return _buildRoute(settings, PreviewPhotoWithUpload(item));
         }
 
       case PreviewPhoto.routeName:
         {
           final ParamPreviewPhoto? item =
               settings.arguments as ParamPreviewPhoto?;
-          return _buildRoute(settings, new PreviewPhoto(item));
+          return _buildRoute(settings, PreviewPhoto(item));
         }
       case HomeSurvey.routeName:
         {
           final Pjp? item = settings.arguments as Pjp?;
-          return _buildRoute(settings, new HomeSurvey(item));
+          return _buildRoute(settings, HomeSurvey(item));
         }
       case PageTakeVideo.routeName:
         {
           final Promotion? item = settings.arguments as Promotion?;
-          return _buildRoute(settings, new PageTakeVideo(item));
+          return _buildRoute(settings, PageTakeVideo(item));
         }
       case PreviewVideoUpload.routeName:
         {
           final ParamPreviewVideo? item =
               settings.arguments as ParamPreviewVideo?;
-          return _buildRoute(settings, new PreviewVideoUpload(item));
+          return _buildRoute(settings, PreviewVideoUpload(item));
         }
       default:
         return null;
@@ -206,7 +183,7 @@ class MyApp extends StatelessWidget {
   }
 
   MaterialPageRoute _buildRoute(RouteSettings settings, Widget builder) {
-    return new MaterialPageRoute(
+    return MaterialPageRoute(
       settings: settings,
       builder: (BuildContext context) => builder,
     );
@@ -215,7 +192,8 @@ class MyApp extends StatelessWidget {
 
 class HomeControllpage extends StatefulWidget {
   static const routeName = '/';
-  HomeControllpage({Key? key, required this.statelogin}) : super(key: key);
+  const HomeControllpage({Key? key, required this.statelogin})
+      : super(key: key);
   final HomeControllpageParam? statelogin;
 
   @override
@@ -230,33 +208,18 @@ class _HomeControllpageState extends State<HomeControllpage> {
   late List<BottomNavigationBarItem> _btmMenu;
 
   /// test only
-  bool _test = false;
+  final bool _test = false;
 
   @override
   void initState() {
     _stateLogin = widget.statelogin!.enumStateLogin;
     if (_stateLogin == EnumStateLogin.loading) {
-      print('masuk sini donk');
       _stateLogin = EnumStateLogin.loginonprogress;
-      //  this._setup();
     }
     _selectedtab = 0;
     super.initState();
   }
 
-  // void _setup() {
-  //   SetupData setupData = new SetupData();
-  //   setupData.setupData().then((value) {
-  //     if (value) {
-  //       print('bulk insert');
-  //       setState(() {
-  //         _stateLogin = EnumStateLogin.loginonprogress;
-  //       });
-  //     } else {
-  //       print('bulk insert gagal');
-  //     }
-  //   });
-  // }
   Widget _titleCoverage() {
     return Row(children: [
       Image(
@@ -312,8 +275,6 @@ class _HomeControllpageState extends State<HomeControllpage> {
       return LoginPage(_callbackSuccessLogin);
     } else if (_stateLogin == EnumStateLogin.loginsuccess) {
       return Scaffold(
-        // backgroundColor: Colors.white,
-        //  resizeToAvoidBottomPadding: false,
         extendBodyBehindAppBar: true, //_selectedtab == 0 ? true : false,
         extendBody: true, //_selectedtab == 0 ? true : false,
         appBar: AppBar(
@@ -388,8 +349,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
                 // icon: Icon(Icons.location_on),
                 icon: Image(
                   image: _selectedtab == 4
-                      ? AssetImage('assets/image/icon/new/ic_market_audit.png')
-                      : AssetImage(
+                      ? const AssetImage(
+                          'assets/image/icon/new/ic_market_audit.png')
+                      : const AssetImage(
                           'assets/image/icon/new/disable/market_audit.png'),
                   height: 50,
                 ),
@@ -404,58 +366,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
   }
 
   void _callbackSuccessLogin() {
-    this._setupLoginSUccess().then((value) {
-      _btmMenu = [];
-
-      _btmMenu.add(BottomNavigationBarItem(
-        // icon: Icon(Icons.location_on),
-        icon: Image(
-          image: _selectedtab == 0
-              ? AssetImage('assets/image/icon/new/coverage.png')
-              : AssetImage('assets/image/icon/new/disable/coverage.png'),
-          height: 50,
-        ),
-
-        label: '', // 'Coverage'
-      ));
-      _btmMenu.add(const BottomNavigationBarItem(
-          // icon: Icon(Icons.shopping_cart),
-          icon: Image(
-            image: AssetImage('assets/image/icon/new/disable/distribution.png'),
-            height: 50,
-          ),
-          label: '' //'Distribution'
-          ));
-      _btmMenu.add(const BottomNavigationBarItem(
-          // icon: Icon(Icons.work),
-          icon: Image(
-            image:
-                AssetImage('assets/image/icon/new/disable/merchandising.png'),
-            height: 50,
-          ),
-          label: '' //'Merchandising'
-          ));
-      _btmMenu.add(const BottomNavigationBarItem(
-          // icon: Icon(Icons.campaign),
-          icon: Image(
-            image: AssetImage('assets/image/icon/new/disable/promotion.png'),
-            height: 50,
-          ),
-          label: '' //'Promotion'
-          ));
-      if (_enumAccount == EnumAccount.sf) {
-        _btmMenu.add(const BottomNavigationBarItem(
-            // icon: Icon(Icons.widgets),
-            icon: Image(
-              image:
-                  AssetImage('assets/image/icon/new/disable/market_audit.png'),
-              height: 50,
-            ),
-            label: '' //'Market Audit',
-            ));
-      }
-
+    _setupLoginSUccess().then((value) {
       setState(() {
+        _selectedtab = 0;
         _stateLogin = EnumStateLogin.loginsuccess;
       });
     });
@@ -464,50 +377,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
   Future<bool> _setupLoginSUccess() async {
     _enumAccount = await AccountHore.getAccount();
     Profile p = await AccountHore.getProfile();
-    _setupBackgroundProses(p);
     _iduser = p.id;
     return true;
-  }
-
-  void _setupBackgroundProses(Profile profile) {
-    // Map<String, dynamic> inputTask = {
-    //   'Auth-Key': 'restapihore',
-    //   'Client-Service': 'frontendclienthore',
-    //   'User-ID': '${profile.id}',
-    //   'Auth-session': '${profile.token}',
-    //   'Id-Level': '${profile.role}',
-    //   'Nama-Sales': '${profile.namaSales}',
-    //   'Id-Tap': '${profile.idtap}',
-    //   'Nama-Tap': '${profile.namaTap}',
-    //   'Id-Cluster': '${profile.idcluster}',
-    //   'Nama-Cluster': '${profile.namaCluster}',
-    // };
-    // // HttpDashboard httpDashboard = HttpDashboard();
-    // // httpDashboard.trackingSales(inputTask);
-    // Workmanager.initialize(
-    //     callbackDispatcher, // The top level function, aka callbackDispatcher
-    //     isInDebugMode:
-    //         true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-    //     );
-    // // Periodic task registration
-    // //Workmanager.cancelAll();
-    // // Workmanager.registerPeriodicTask(
-    // //   "1",
-    // //   fetchBackground,
-    // //   inputData: {"ya": "ok"},
-    // //   // inputData: inputTask,
-    // //   // When no frequency is provided the default 15 minutes is set.
-    // //   // Minimum frequency is 15 min. Android will automatically change your frequency to 15 min if you have configured a lower frequency.
-    // //   frequency: Duration(minutes: 15),
-    // // );
-    // Workmanager.registerOneOffTask("1", fetchBackground,
-    //     inputData: {"haha": "hihi"}, initialDelay: Duration(minutes: 16));
-    // Workmanager.registerOneOffTask("2", fetchBackground,
-    //     inputData: {"haha": "hihi"}, initialDelay: Duration(minutes: 20));
-    // Workmanager.registerOneOffTask("3", fetchBackground,
-    //     inputData: {"haha": "hihi"}, initialDelay: Duration(minutes: 25));
-    // Workmanager.registerOneOffTask("4", fetchBackground,
-    //     inputData: {"haha": "hihi"}, initialDelay: Duration(minutes: 30));
   }
 
   Widget _getSelectedWidget(int? selectedtab) {
@@ -519,8 +390,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
       case 1:
         {
           return _enumAccount == EnumAccount.sf
-              ? PageDistribusi()
-              : PageDistribusiDs();
+              ? const PageDistribusi()
+              : const PageDistribusiDs();
         }
       case 2:
         {

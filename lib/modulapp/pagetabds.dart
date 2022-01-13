@@ -7,52 +7,54 @@ import 'package:hero/modulapp/marketaudit/sf/hphistorysurvey.dart';
 import 'package:hero/modulapp/promotion/hpviewpromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/widget/horeboxdecoration.dart';
+import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 
 import 'merchandising/homeviewmerchandising.dart';
 
 class PageDistribusiDs extends StatelessWidget {
+  const PageDistribusiDs({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return PageTabDs(EnumTab.distribution);
+    return const PageTabDs(EnumTab.distribution);
   }
 }
 
 class PageMerchandisingDs extends StatelessWidget {
+  const PageMerchandisingDs({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return PageTabDs(EnumTab.merchandising);
+    return const PageTabDs(EnumTab.merchandising);
   }
 }
 
 class PagePromotionDs extends StatelessWidget {
+  const PagePromotionDs({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return PageTabDs(EnumTab.promotion);
+    return const PageTabDs(EnumTab.promotion);
   }
 }
 
-// class PageSurveyDs extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return PageTabDs(EnumTab.survey);
-//   }
-// }
-
 class PageTabDs extends StatefulWidget {
   final EnumTab enumTab;
-  PageTabDs(this.enumTab);
+  const PageTabDs(this.enumTab, {Key? key}) : super(key: key);
   @override
   _PageTabDsState createState() => _PageTabDsState();
 }
 
 class _PageTabDsState extends State<PageTabDs> {
-  TextEditingController _controller = new TextEditingController();
+  TextEditingController _controller = TextEditingController();
 
   late BlocPageTabDs _blocPageTabDs;
   late bool _isbtnfiltershow;
   int _counterBuild = 0;
+  HoreBoxDecoration _horeBoxDecoration = HoreBoxDecoration();
   @override
   void initState() {
     _isbtnfiltershow = false;
@@ -103,34 +105,72 @@ class _PageTabDsState extends State<PageTabDs> {
           }
           UIPageTabDs item = snapshot.data!;
 
-          return Container(
-            height: s.height,
-            width: s.width,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+          return SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  //image: AssetImage('assets/image/coverage/BG.png'),
+                  image: AssetImage('assets/image/new/BG.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              height: s.height,
+              width: s.width,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    height: 12,
-                  ),
-                  LabelBlack.size1(title, bold: true),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  _isbtnfiltershow
-                      ? SizedBox(
-                          width: s.width - 12,
-                          child: ButtonAppSolid('Edit Filter', onTap: () {
-                            setState(() {
-                              _isbtnfiltershow = false;
-                            });
-                          }),
-                        )
-                      : _serchFilter(item),
                   Container(
-                      height: s.height - 325,
-                      width: s.width,
-                      child: _content(item)),
+                    padding: const EdgeInsets.only(left: 8, right: 8, top: 50),
+                    height: s.height,
+                    width: s.width,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          //untuk jarak atas ke tulisan judul
+                          height: 30,
+                        ),
+                        LabelBlack.size1(title, bold: true),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        _isbtnfiltershow
+                            ? SizedBox(
+                                width: s.width - 12,
+                                child: ButtonAppSolid('Edit Filter', onTap: () {
+                                  setState(() {
+                                    _isbtnfiltershow = false;
+                                  });
+                                }),
+                              )
+                            : _serchFilter(item),
+                        Expanded(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    gradient: _horeBoxDecoration
+                                        .gradientBackgroundApp()),
+                                margin: const EdgeInsets.only(
+                                    top: 10.0, left: 0, right: 0),
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      _headerPencarian(),
+                                      _controllContentPencarian(item),
+                                      // _content(item),
+                                    ],
+                                  ),
+                                ))),
+                        const SizedBox(
+                          height: 70,
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -138,8 +178,39 @@ class _PageTabDsState extends State<PageTabDs> {
         });
   }
 
+  Widget _headerPencarian() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LabelWhite.size1("Berikut Daftar Pencarian : "),
+          const Divider(
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _controllContentPencarian(UIPageTabDs item) {
+    if (item.getCountList() == 0) {
+      if (_controller.text.isNotEmpty) {
+        return const WidgetPencarianKosong(
+            text: 'Pencarian dengan kriteria tersebut \nTIDAK DITEMUKAN.');
+      } else {
+        return const WidgetPencarianKosong(
+            text:
+                'Silahkan masukkan kata kunci \nuntuk mendapatkan hasil pencarian');
+      }
+    } else {
+      return _content(item);
+    }
+  }
+
   Widget _content(UIPageTabDs uiPageTabDs) {
     return ListView.builder(
+      padding: const EdgeInsets.only(top: 20),
+      shrinkWrap: true,
       itemCount: uiPageTabDs.getCountList(),
       itemBuilder: (context, index) {
         return ListTile(
@@ -151,7 +222,7 @@ class _PageTabDsState extends State<PageTabDs> {
 
   Widget _btnShowMore() {
     return RaisedButton(
-        child: Text('show more'),
+        child: const Text('show more'),
         color: Colors.green,
         onPressed: () {
           _blocPageTabDs.showmore(widget.enumTab);
@@ -159,7 +230,7 @@ class _PageTabDsState extends State<PageTabDs> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 4,
     );
   }
@@ -182,48 +253,45 @@ class _PageTabDsState extends State<PageTabDs> {
       onTap: () {
         //_controllerTap(item);
       },
-      child: Container(
-        // color: Colors.white,
-        child: Column(
-          children: [
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.playlist_add_check,
-                        color: Colors.white,
+      child: Column(
+        children: [
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.playlist_add_check,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // LabelBlack.size2(item.iddigipos),
+                          // _spasi(),
+                          LabelBlack.size3(item.namapembeli),
+                          _spasi(),
+                          LabelBlack.size3('tgl: ${item.getStrTgl()}'),
+                        ],
                       ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // LabelBlack.size2(item.iddigipos),
-                            // _spasi(),
-                            LabelBlack.size3(item.namapembeli),
-                            _spasi(),
-                            LabelBlack.size3('tgl: ${item.getStrTgl()}'),
-                          ],
-                        ),
-                      ),
-                      ButtonApp.blue('View Detail', () {
-                        _controllerTap(item);
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    ButtonApp.blue('View Detail', () {
+                      _controllerTap(item);
+                    }),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -235,7 +303,7 @@ class _PageTabDsState extends State<PageTabDs> {
     }
     return Column(
       children: [
-        Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 1.0, bottom: 1.0),
@@ -243,11 +311,11 @@ class _PageTabDsState extends State<PageTabDs> {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.playlist_add_check,
                     color: Colors.green,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Expanded(
@@ -276,7 +344,7 @@ class _PageTabDsState extends State<PageTabDs> {
   }
 
   void _tapNota(String? nota) {
-    CommonUi.openPage(context, new FakturPembayaranDs(nota, true));
+    CommonUi.openPage(context, FakturPembayaranDs(nota, true));
   }
 
   void _controllerTap(LokasiSearch item) {
@@ -284,15 +352,15 @@ class _PageTabDsState extends State<PageTabDs> {
       case EnumTab.distribution:
         break;
       case EnumTab.merchandising:
-        CommonUi.openPage(context, new HomeViewMerchandising(item));
+        CommonUi.openPage(context, HomeViewMerchandising(item));
 
         break;
       case EnumTab.promotion:
-        CommonUi.openPage(context, new HomePageViewPromotion(item));
+        CommonUi.openPage(context, HomePageViewPromotion(item));
         break;
       case EnumTab.survey:
         {
-          CommonUi.openPage(context, new HomeHistorySurvey(item));
+          CommonUi.openPage(context, HomeHistorySurvey(item));
         }
         break;
       case EnumTab.mt:
@@ -308,7 +376,7 @@ class _PageTabDsState extends State<PageTabDs> {
     if (!isawal) {
       if (item.tglAwal != null) {
         dtawal = item.tglAwal;
-        initialDt = dtawal!.add(new Duration(days: 1));
+        initialDt = dtawal!.add(const Duration(days: 1));
       }
     }
     DateTime? picked = await showDatePicker(
@@ -330,8 +398,6 @@ class _PageTabDsState extends State<PageTabDs> {
   Widget _serchFilter(UIPageTabDs item) {
     double w = MediaQuery.of(context).size.width;
     return Container(
-        // margin: const EdgeInsets.all(8.0),
-        // padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(4),
@@ -352,7 +418,7 @@ class _PageTabDsState extends State<PageTabDs> {
                   _datePicker(false, item);
                 }),
                 IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.play_arrow_outlined,
                       size: 40,
                     ),
@@ -370,29 +436,28 @@ class _PageTabDsState extends State<PageTabDs> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: w - 70,
-                    child: new TextField(
+                    width: w - 80,
+                    child: TextField(
                       keyboardType: TextInputType.text,
                       controller: _controller,
-                      style: new TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                       ),
-                      decoration: new InputDecoration(
-                          // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-                          border: OutlineInputBorder(
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
                           // suffixIcon:
                           //     new Icon(Icons.search, color: Colors.black),
                           hintText: ConstString.hintSearchDs,
-                          hintStyle: new TextStyle(color: Colors.black)),
+                          hintStyle: const TextStyle(color: Colors.black)),
                       onChanged: (v) {},
                     ),
                   ),
                   IconButton(
-                      icon: Icon(Icons.search, size: 30),
+                      icon: const Icon(Icons.search, size: 30),
                       onPressed: () {
                         FocusScope.of(context).unfocus();
 
