@@ -41,8 +41,8 @@ class BlocPageTabSf {
   void showmore(EnumTab enumTab) {
     _cacheItem!.page = _cacheItem!.page + 1;
     _httpPageSf
-        .getDaftarOutlet(
-            enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, _cacheItem!.page)
+        .getDaftarOutlet(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir,
+            _cacheItem!.page)
         .then((value) {
       if (value != null) {
         UIPageTabSf item = value;
@@ -57,10 +57,9 @@ class BlocPageTabSf {
     _httpPageSf
         .cariOutlet(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, query)
         .then((value) {
-      print(value);
       if (value != null) {
         _cacheItem!.loutlet = value;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -69,7 +68,7 @@ class BlocPageTabSf {
     _cacheItem!.tglAwal = dt;
     if (_cacheItem!.tglAkhir != null) {
       bool ok = _cacheItem!.tglAkhir!.isBefore(_cacheItem!.tglAwal!);
-      print(ok);
+
       if (ok) {
         _cacheItem!.tglAkhir = _cacheItem!.tglAwal;
       }

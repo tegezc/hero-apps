@@ -24,7 +24,6 @@ class Owner {
   bool _cstr(String? str) {
     if (str != null) {
       if (str.isNotEmpty) {
-        print('true');
         return true;
       }
     }

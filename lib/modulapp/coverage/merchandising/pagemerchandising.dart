@@ -307,7 +307,6 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                     File(url),
                     errorBuilder: (BuildContext context, Object exception,
                         StackTrace? stackTrace) {
-                      print(exception);
                       return Container();
                     },
                   )),

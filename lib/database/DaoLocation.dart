@@ -59,7 +59,6 @@ class SetupData1 {
         });
       }
     } catch (err) {
-      print('Caught error: $err');
       return false;
     }
     return true;

@@ -197,7 +197,6 @@ class _ReturEditorState extends State<ReturEditor> {
                         child: IconButton(
                             onPressed: () {
                               setState(() {
-                                print('click');
                                 _isRange = !_isRange;
                               });
                             },

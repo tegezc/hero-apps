@@ -102,7 +102,7 @@ class BlocSurvey {
     bool b = await _loadDataBelanja();
     b = await _loadDataVoucher(EnumSurvey.fisik);
     b = await _loadDataVoucher(EnumSurvey.broadband);
-    print(b);
+
     return true;
   }
 
@@ -133,7 +133,6 @@ class BlocSurvey {
     if (enumSurvey == EnumSurvey.fisik) {
       UISurvey? item = await httpSurvey.getDetailMarketAuditSF(
           EnumSurvey.fisik, idtempat, dt);
-      print("detail market audit survei fisik: $item");
       if (item != null) {
         _cacheuisurvey!.lsurveyFisik = item.lsurveyFisik;
         _cacheuisurvey!.isfisiksubmitted = true;
@@ -141,7 +140,6 @@ class BlocSurvey {
     } else {
       UISurvey? item = await httpSurvey.getDetailMarketAuditSF(
           EnumSurvey.broadband, idtempat, dt);
-      print("detail market audit broad band: $item");
       if (item != null) {
         _cacheuisurvey!.lsurveyBroadband = item.lsurveyBroadband;
         _cacheuisurvey!.isbroadbandsubmitted = true;
@@ -221,7 +219,6 @@ class BlocSurvey {
     bool result = await _httpSurvey.createSurveyBelanja(map);
     if (result) {
       bool b = await _loadDataBelanja();
-      print(b);
     }
     return result;
   }

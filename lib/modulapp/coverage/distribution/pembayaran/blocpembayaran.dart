@@ -26,7 +26,6 @@ class BlocPembayaran {
   }
 
   Future<bool> setupPembayaran(List<ItemTransaksi>? ltrx, Pjp pjp) async {
-    print('bloc pemb : ${pjp.nohp}');
     if (ltrx == null) {
       return false;
     }
@@ -57,8 +56,7 @@ class BlocPembayaran {
   }
 
   void onChagedText(String str) {
-    print(str);
-    if (str.length > 0) {
+    if (str.isNotEmpty) {
       int? tmp = ConverterNumber.stringToInt(str);
       _cachePembelian.dataPembeli.linkaja = tmp;
       _sink(_cachePembelian);

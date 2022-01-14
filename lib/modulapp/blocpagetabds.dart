@@ -58,7 +58,6 @@ class BlocPageTabDs {
     _httpPageDs
         .cariOutlet(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, query)
         .then((value) {
-      print(value);
       if (value != null) {
         _cacheItem!.loutlet = value;
         _sinkItem(_cacheItem);
@@ -70,7 +69,7 @@ class BlocPageTabDs {
     _cacheItem!.tglAwal = dt;
     if (_cacheItem!.tglAkhir != null) {
       bool ok = _cacheItem!.tglAkhir!.isBefore(_cacheItem!.tglAwal!);
-      print(ok);
+
       if (ok) {
         _cacheItem!.tglAkhir = _cacheItem!.tglAwal;
       }

@@ -346,8 +346,6 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
 
     try {
-      print('video: $filePath');
-
       /// comment error sementara
       await _controller!.startVideoRecording();
 
@@ -398,6 +396,6 @@ class _PageTakeVideoState extends State<PageTakeVideo>
 
   void _showCameraException(CameraException e) {
     logError(e.code, e.description);
-    print('Error: ${e.code}\n${e.description}');
+    // print('Error: ${e.code}\n${e.description}');
   }
 }

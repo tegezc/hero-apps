@@ -189,7 +189,6 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   }
 
   Widget _infoPembeli(DataPembeli dp) {
-    print(dp.namapembeli);
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
       child: Card(

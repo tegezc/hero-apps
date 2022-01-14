@@ -82,8 +82,6 @@ class ControllLokasi {
 
         dataLokasiAlamat!.lkel =
             await _httpDashboard.getListKelurahan(kec.realid);
-        print(kec.realid);
-        print(dataLokasiAlamat!.lkel);
         dataLokasiAlamat!.lprov = await _httpDashboard.getDaftarProvinsi();
 
         dataLokasiAlamat!.lkel!.forEach((element) {
@@ -92,7 +90,6 @@ class ControllLokasi {
           }
         });
 
-        print(dataLokasiAlamat.toString());
         dataLokasiAlamat!.kondisikan();
       }
     }

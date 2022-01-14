@@ -39,7 +39,6 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
       _issubmitbuttonshowing = _item!.isfisiksubmitted;
     }
 
-    print("_issubmitbuttonshowing $_issubmitbuttonshowing");
     for (int i = 0; i < 21; i++) {
       _lcontroller.add(TextEditingController());
     }
@@ -81,7 +80,6 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     bool adanull = false;
     _lcontroller.forEach((element) {
       if (!adanull) {
-        print('element != null');
         int? value = int.tryParse(element.text);
         if (value == null) {
           adanull = true;
@@ -121,7 +119,6 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                     //   String str = _lcontroller[i].text;
                     //   widget.blocSurvey.changedText(i, str, widget.enumSurvey);
                     // }
-                    print(_isbolehsubmit());
                     if (_isbolehsubmit()) {
                       TgzDialog.loadingDialog(context);
                       _blocSurvey!

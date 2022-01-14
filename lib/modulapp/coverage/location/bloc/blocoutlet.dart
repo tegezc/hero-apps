@@ -43,12 +43,9 @@ class BlocOutlet extends AbsBlocLokasi {
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idoutlet).then((value) {
       if (value) {
-        print('masuk');
-
-        print(_cacheUioutlet!.outlet.owner);
         controllPic!.firstTimeEdit(_cacheUioutlet!.outlet.pic);
         controllOwner!.firstTimeEdit(_cacheUioutlet!.outlet.owner);
-        this._sink(_cacheUioutlet);
+        _sink(_cacheUioutlet);
       }
     });
   }
@@ -88,9 +85,8 @@ class BlocOutlet extends AbsBlocLokasi {
     controllPic!.firstTimePic();
     controllOwner!.firstTimeOwner();
     setupAsync().then((value) {
-      print(value);
       if (value) {
-        this._sink(_cacheUioutlet);
+        _sink(_cacheUioutlet);
       }
     });
   }
@@ -123,15 +119,14 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   Future<bool> updateOutlet() async {
-    print('update');
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
 
     HttpOutlet httpController = new HttpOutlet();
     Map<String, dynamic>? response =
         await httpController.updateOutlet(_cacheUioutlet!.outlet);
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
     if (response != null) {
       if (response['status'] == 200) {
         return true;

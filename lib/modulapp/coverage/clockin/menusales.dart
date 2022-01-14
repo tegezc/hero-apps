@@ -300,7 +300,6 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   Widget _buttonClockOut(bool iscomplete) {
-    print(iscomplete);
     return ButtonStrectWidth(
       text: "Clock Out",
       onTap: () {

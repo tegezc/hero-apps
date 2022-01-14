@@ -95,9 +95,7 @@ class BlocPembelian {
   Future<bool> beli() async {
     int res = await _daoSerial
         .deleteSerialByIdProduct(_cachePembelian.trx!.product!.id);
-    if (res >= 0) {
-      print(res);
-    }
+    if (res >= 0) {}
     bool result = await _daoSerial.batchInsert(_cachePembelian.lserialChecked);
     return result;
   }
