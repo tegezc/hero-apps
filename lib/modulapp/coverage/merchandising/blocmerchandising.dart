@@ -8,12 +8,6 @@ import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:rxdart/subjects.dart';
 
 class UIMerchan {
-  // BACKDROP
-  // ETALASE
-  // PAPAN_NAMA
-  // POSTER
-  // SPANDUK
-
   Merchandising? perdana;
   Merchandising? voucherFisik;
   Merchandising? backdrop;
@@ -54,31 +48,53 @@ class BlocMerchandising {
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
     print('idtempat: ${pjp.id}');
     if (map != null) {
-      _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
-      _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
-      _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
-      _cacheUiMerc!.poster = map[Merchandising.tagPoster];
-      _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
-      _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
+      if (map[Merchandising.tagPerdana] != null) {
+        _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
+      }
+
+      if (map[Merchandising.tagVoucherFisik] != null) {
+        _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
+      }
+
+      if (map[Merchandising.tagSpanduk] != null) {
+        _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
+      }
+
+      if (map[Merchandising.tagPoster] != null) {
+        _cacheUiMerc!.poster = map[Merchandising.tagPoster];
+      }
+
+      if (map[Merchandising.tagPapan] != null) {
+        _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
+      }
+
+      if (map[Merchandising.tagBackdrop] != null) {
+        _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
+      }
     }
 
     if (_cacheUiMerc!.perdana == null) {
-      _cacheUiMerc!.perdana = Merchandising.kosong(pjp, 'PERDANA');
+      _cacheUiMerc!.perdana =
+          Merchandising.kosong(pjp, Merchandising.tagPerdana);
     }
     if (_cacheUiMerc!.voucherFisik == null) {
-      _cacheUiMerc!.voucherFisik = Merchandising.kosong(pjp, 'VOUCHER FISIK');
+      _cacheUiMerc!.voucherFisik =
+          Merchandising.kosong(pjp, Merchandising.tagVoucherFisik);
     }
     if (_cacheUiMerc!.backdrop == null) {
-      _cacheUiMerc!.backdrop = Merchandising.kosong(pjp, 'BACKDROP');
+      _cacheUiMerc!.backdrop =
+          Merchandising.kosong(pjp, Merchandising.tagBackdrop);
     }
     if (_cacheUiMerc!.papanNama == null) {
-      _cacheUiMerc!.papanNama = Merchandising.kosong(pjp, 'PAPAN_NAMA');
+      _cacheUiMerc!.papanNama =
+          Merchandising.kosong(pjp, Merchandising.tagPapan);
     }
     if (_cacheUiMerc!.poster == null) {
-      _cacheUiMerc!.poster = Merchandising.kosong(pjp, 'POSTER');
+      _cacheUiMerc!.poster = Merchandising.kosong(pjp, Merchandising.tagPoster);
     }
     if (_cacheUiMerc!.spanduk == null) {
-      _cacheUiMerc!.spanduk = Merchandising.kosong(pjp, 'SPANDUK');
+      _cacheUiMerc!.spanduk =
+          Merchandising.kosong(pjp, Merchandising.tagSpanduk);
     }
 
     return true;
@@ -208,11 +224,11 @@ class BlocMerchandising {
             _textChanged(_cacheUiMerc!.backdrop, enumOperator, text);
         break;
       case EnumMerchandising.perdana:
-        _cacheUiMerc!.backdrop =
+        _cacheUiMerc!.perdana =
             _textChanged(_cacheUiMerc!.perdana, enumOperator, text);
         break;
       case EnumMerchandising.voucherfisik:
-        _cacheUiMerc!.backdrop =
+        _cacheUiMerc!.voucherFisik =
             _textChanged(_cacheUiMerc!.voucherFisik, enumOperator, text);
         break;
     }
@@ -236,6 +252,8 @@ class BlocMerchandising {
         }
         break;
       case EnumMerchandising.poster:
+        print(_cacheUiMerc);
+        print(_cacheUiMerc!.poster);
         switch (_cacheUiMerc!.poster!.getPhotoKe()) {
           case EnumNumber.satu:
             _cacheUiMerc!.poster!.pathPhoto1 = path;

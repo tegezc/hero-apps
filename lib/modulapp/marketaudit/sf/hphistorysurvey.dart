@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/http/coverage/httpsurvey.dart';
+import 'package:hero/http/coverage/marketaudit/httpmarketaudit.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/marketaudit/sf/viewbelanjasurvey.dart';
@@ -40,14 +40,14 @@ class _HomeHistorySurveyState extends State<HomeHistorySurvey> {
   Future<bool> _loadDataInternet() async {
     String? idtempat = widget.itemOutlet.idoutlet;
     DateTime? dt = widget.itemOutlet.tgl;
-    HttpSurvey httpSurvey = new HttpSurvey();
-    _item =
-        await httpSurvey.getDetailPromotion(EnumSurvey.belanja, idtempat, dt);
-    UISurvey? uiSurvey =
-        await httpSurvey.getDetailPromotion(EnumSurvey.broadband, idtempat, dt);
+    HttpMarketAuditSF httpSurvey = new HttpMarketAuditSF();
+    _item = await httpSurvey.getDetailMarketAuditSF(
+        EnumSurvey.belanja, idtempat, dt);
+    UISurvey? uiSurvey = await httpSurvey.getDetailMarketAuditSF(
+        EnumSurvey.broadband, idtempat, dt);
     _item!.lsurveyBroadband = uiSurvey!.lsurveyBroadband;
     uiSurvey =
-        await httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt);
+        await httpSurvey.getDetailMarketAuditSF(EnumSurvey.fisik, idtempat, dt);
     _item!.lsurveyFisik = uiSurvey!.lsurveyFisik;
     if (_item != null) {
       return true;

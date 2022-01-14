@@ -44,7 +44,7 @@ class PageSurvey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTab(EnumTab.survey);
+    return PageTab(EnumTab.marketaudit);
   }
 }
 
@@ -88,7 +88,7 @@ class _PageTabState extends State<PageTab> {
       case EnumTab.promotion:
         title = 'Promotion';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         title = 'Market Audit';
         break;
       case EnumTab.mt:
@@ -442,7 +442,7 @@ class _PageTabState extends State<PageTab> {
                 builder: (context) => HomePageViewPromotion(item)));
         // CommonUi.openPage(context, new HomePageViewPromotion(item));
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeHistorySurvey(item)));

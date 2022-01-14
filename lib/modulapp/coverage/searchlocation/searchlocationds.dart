@@ -12,6 +12,8 @@ import 'package:hero/modulapp/coverage/location/view/viewsekolah.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/component/widget/horeboxdecoration.dart';
+import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
@@ -25,7 +27,7 @@ class SearchLocationDs extends StatefulWidget {
 }
 
 class _SearchLocationDsState extends State<SearchLocationDs> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   late List<ItemComboJenisLokasi> _lcombo;
   ItemComboJenisLokasi? _currentJenisLokasi;
@@ -33,6 +35,8 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
   late BlocSearchLocation _blocDashboard;
   late bool _isbtnfiltershow;
   int _counterBuild = 0;
+
+  final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
 
   @override
   void initState() {
@@ -66,29 +70,57 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
         UISearchLocation item = snapshot.data!;
         return CustomScaffold(
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _isbtnfiltershow
-                      ? SizedBox(
-                          width: s.width - 12,
-                          child: ButtonAppSolid('Edit Filter', onTap: () {
-                            setState(() {
-                              _isbtnfiltershow = false;
-                            });
-                          }),
-                        )
-                      : _serchFilter(context),
-                  item.isloading
-                      ? _showloading()
-                      : _searchLocation(item.ltempat!),
-                  SizedBox(
-                    height: 100,
+              child: Container(
+                width: s.width,
+                height: s.height - 60,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    //image: AssetImage('assets/image/coverage/BG.png'),
+                    image: AssetImage('assets/image/new/BG.png'),
+                    fit: BoxFit.cover,
                   ),
-                ],
+                ),
+                child: Column(
+                  children: [
+                    _isbtnfiltershow
+                        ? SizedBox(
+                            width: s.width - 12,
+                            child: ButtonStrectWidth(
+                              text: 'Edit Filter',
+                              onTap: () {
+                                setState(() {
+                                  _isbtnfiltershow = false;
+                                });
+                              },
+                              isenable: true,
+                              buttonColor: Colors.green,
+                            ),
+                          )
+                        : _serchFilter(context),
+                    _containerSearch(item),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                ),
               ),
             ),
             title: 'Cari Lokasi');
       },
+    );
+  }
+
+  Widget _headerPencarian() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LabelWhite.size1("Berikut Daftar Pencarian : "),
+          const Divider(
+            color: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 
@@ -130,7 +162,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                           .map((value) => DropdownMenuItem(
                                 child: Text(
                                   value.text,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black, fontSize: 14),
                                 ),
                                 value: value,
@@ -161,31 +193,31 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                 children: [
                   SizedBox(
                     width: w - 90,
-                    child: new TextField(
+                    child: TextField(
                       keyboardType: TextInputType.text,
                       controller: _controller,
-                      style: new TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
-                      decoration: new InputDecoration(
+                      decoration: InputDecoration(
                           // contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
                           // suffixIcon:
                           //     new Icon(Icons.search, color: Colors.black),
                           hintText: ConstString.hintSearchDs,
-                          hintStyle: new TextStyle(fontSize: 14)),
+                          hintStyle: const TextStyle(fontSize: 14)),
                       onChanged: (v) {},
                     ),
                   ),
                   IconButton(
-                      icon: Icon(Icons.search, size: 30),
+                      icon: const Icon(Icons.search, size: 30),
                       onPressed: () {
                         if (_currentJenisLokasi != null) {
                           String query = _controller.text;
-                          if (query.length > 0) {
+                          if (query.isNotEmpty) {
                             _blocDashboard.searchLokasi(
                                 query, _currentJenisLokasi!.enumJenisLokasi);
                           }
@@ -203,33 +235,58 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
         ));
   }
 
-  Widget _searchLocation(List<LokasiSimple?> list) {
-    return Container(
+  Widget _containerSearch(UISearchLocation item) {
+    print(item);
+    Size size = MediaQuery.of(context).size;
+    return Expanded(
+      child: Container(
+        width: size.width,
+        // height: size.height * 0.75,
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: _content(list),
-        ));
+            //color: Colors.red[600],
+            borderRadius: BorderRadius.circular(10.0),
+            gradient: _boxDecoration.gradientBackgroundApp()),
+        child: item.isloading ? _showloading() : _searchLocation(item.ltempat!),
+      ),
+    );
+  }
+
+  Widget _searchLocation(List<LokasiSimple?> list) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: _content(list),
+    );
   }
 
   List<Widget> _content(List<LokasiSimple?> litem) {
     List<Widget> lw = [];
-    for (int i = 0; i < litem.length; i++) {
-      LokasiSimple item = litem[i]!;
-      lw.add(_cellLocation(item));
+    lw.add(_headerPencarian());
+    if (litem.isEmpty) {
+      if (_controller.text.isNotEmpty) {
+        lw.add(WidgetPencarianKosong(
+            text:
+                'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"'));
+      } else {
+        lw.add(const WidgetPencarianKosong(
+            text:
+                'Silahkan masukkan kata kunci untuk mendapatkan hasil pencarian'));
+      }
+    } else {
+      for (int i = 0; i < litem.length; i++) {
+        LokasiSimple item = litem[i]!;
+        lw.add(_cellLocation(item));
+      }
     }
+
     return lw;
   }
 
   Widget _cellLocation(LokasiSimple lok) {
     return Column(
       children: [
-        Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
@@ -237,10 +294,10 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.store,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Expanded(
@@ -264,19 +321,19 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   ButtonApp.black('PJP', () {
                     CommonUi.openPage(context, HistoryPJP(lok));
                   }),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   ButtonApp.black('Edit', () {
                     _controllEditButton(lok);
                   }),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   ButtonApp.black('Detail', () {
@@ -333,8 +390,8 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

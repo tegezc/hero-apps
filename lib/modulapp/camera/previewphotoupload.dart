@@ -92,7 +92,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
                         EnumTakePhoto.distibusiclose) {
                       _uploadPhotoAndChekOut().then((value) {
                         Navigator.of(context).pop();
-                        print(widget.param!.enumTakePhoto);
+
                         if (value) {
                           Navigator.popUntil(
                               context,
@@ -184,6 +184,6 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   Future<bool> _uploadPhotoDistributionIsSuccess() async {
     HttpDIstribution httpDist = HttpDIstribution();
-    return await httpDist.uploadPhoto(_urlImageOrNull!, true);
+    return await httpDist.uploadPhoto(_urlImageOrNull!, isclose: false);
   }
 }

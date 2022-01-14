@@ -67,7 +67,7 @@ class _HomeSurveyState extends State<HomeSurvey> {
                           TgzDialog.loadingDialog(context);
                           HttpDashboard httpDashboard = HttpDashboard();
                           httpDashboard
-                              .finishMenu(EnumTab.survey)
+                              .finishMenu(EnumTab.marketaudit)
                               .then((value) {
                             Navigator.of(context).pop();
                             if (value.issuccess) {

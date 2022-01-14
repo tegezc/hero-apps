@@ -285,10 +285,10 @@ class _TabDataFakultasState extends State<TabDataFakultas> {
       child: Form(
         key: _formKeyValue,
         autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           children: <Widget>[
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 2.0),
               child: Column(

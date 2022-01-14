@@ -32,6 +32,7 @@ class HttpMerchandising {
     String? path1 = merchandising.pathPhoto1;
     String? path2 = merchandising.pathPhoto2;
     String? path3 = merchandising.pathPhoto3;
+    print("ID JENIS Share: ${merchandising.idjenisshare}");
 
     ///===================================
     var request = http.MultipartRequest(

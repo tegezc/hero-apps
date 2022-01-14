@@ -34,6 +34,9 @@ class Merchandising {
   }
 
   bool isTakePhotoShowing() {
+    if (isServerExist) {
+      return false;
+    }
     return pathPhoto1 == null || pathPhoto2 == null || pathPhoto3 == null;
   }
 

@@ -31,6 +31,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
   TextEditingController? _otherController;
   BlocSurvey? _blocSurvey;
 
+  int _countBuild = 0;
+
   @override
   void initState() {
     _blocSurvey = widget.blocSurvey;
@@ -76,7 +78,11 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
 
   @override
   Widget build(BuildContext context) {
-    _setValue();
+    if (_countBuild == 0) {
+      _setValue();
+      _countBuild++;
+    }
+
     Size s = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -263,8 +269,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    _blocSurvey!.refresh();
                     Navigator.of(context).pop();
+                    _blocSurvey!.refresh();
                   }),
                 ),
               ],

@@ -5,6 +5,7 @@ import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/modulapp/coverage/distribution/homepembeliandistribusi.dart';
+import 'package:hero/modulapp/coverage/marketaudit/ds/uidsmarketaudit.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
@@ -180,7 +181,7 @@ class _MenuSalesState extends State<MenuSales> {
             ),
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumTab.survey);
+                _tapMenu(EnumTab.marketaudit);
               },
               image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
               disableImage:
@@ -281,7 +282,7 @@ class _MenuSalesState extends State<MenuSales> {
             ),
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumTab.survey);
+                _tapMenu(EnumTab.marketaudit);
               },
               image: 'assets/image/icon/clockin/enable/ic_en_market_audit.png',
               disableImage:
@@ -331,9 +332,13 @@ class _MenuSalesState extends State<MenuSales> {
                 arguments: widget.pjp);
 
             break;
-          case EnumTab.survey:
-            await Navigator.pushNamed(context, HomeSurvey.routeName,
-                arguments: widget.pjp);
+          case EnumTab.marketaudit:
+            if (_enumAccount == EnumAccount.sf) {
+              await Navigator.pushNamed(context, HomeSurvey.routeName,
+                  arguments: widget.pjp);
+            } else {
+              await Navigator.pushNamed(context, CoverageMarketAudit.routeName);
+            }
 
             break;
           case EnumTab.mt:

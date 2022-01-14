@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:hero/http/coverage/httpdashboard.dart';
+import 'package:hero/model/enumapp.dart';
+import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/marketaudit/ds/blocdsmarketaudit.dart';
-import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
+import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
 class CoverageMarketAudit extends StatefulWidget {
+  static const routeName = '/dsmarketaudit';
+  const CoverageMarketAudit({Key? key}) : super(key: key);
+
   @override
   _CoverageMarketAuditState createState() => _CoverageMarketAuditState();
 }
 
 class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
-  TextEditingController _namaController = TextEditingController();
-  TextEditingController _nelponController = TextEditingController();
-  TextEditingController _internetController = TextEditingController();
-  TextEditingController _gamesController = TextEditingController();
-  TextEditingController _quotaController = TextEditingController();
-  TextEditingController _rpController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _nelponController = TextEditingController();
+  final TextEditingController _internetController = TextEditingController();
+  final TextEditingController _gamesController = TextEditingController();
+  final TextEditingController _quotaController = TextEditingController();
+  final TextEditingController _rpController = TextEditingController();
 
-  EnumOperator? _nelpon;
-  EnumOperator? _internet;
-  EnumOperator? _games;
+  int _counterBuild = 0;
 
-  EnumSering? _enumSering;
+  final BlocDsQuisioner _blocDsQuisioner = BlocDsQuisioner();
 
   @override
   void initState() {
-    _nelpon = EnumOperator.telkomsel;
-    _internet = EnumOperator.telkomsel;
-    _games = EnumOperator.telkomsel;
-    _enumSering = EnumSering.bulanan;
     super.initState();
   }
 
@@ -39,69 +39,293 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
     super.dispose();
   }
 
-  void _handleClickRadioButton(EnumDSMA enumDSMA, EnumOperator? enumOperator) {
-    switch (enumDSMA) {
-      case EnumDSMA.nelpon:
-        setState(() {
-          _nelpon = enumOperator;
-        });
-        break;
-      case EnumDSMA.internet:
-        setState(() {
-          _internet = enumOperator;
-        });
-        break;
-      case EnumDSMA.games:
-        setState(() {
-          _games = enumOperator;
-        });
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      title: 'Market Audit',
-      body: Container(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                _spasi(),
-                _textField('Nama Pelanggan', _namaController),
-                _spasi(),
-                _radioOperator('Operator Nelpon', EnumDSMA.nelpon),
-                _spasi(),
-                _textFieldNumberOnly('MSISDN Nelpon', _nelponController),
-                _spasi(),
-                _radioOperator('Operator Internet', EnumDSMA.internet),
-                _spasi(),
-                _textFieldNumberOnly('MSISDN Internet', _internetController),
-                _spasi(),
-                _radioOperator(
-                    'Operator Digital (Games & Video)', EnumDSMA.games),
-                _spasi(),
-                _textFieldNumberOnly(
-                    'MSISDN Digital (Games & Video)', _gamesController),
-                _spasi(),
-                _radioSering(),
-                _spasi(),
-                _textFieldNumberOnly(
-                    'Berapa GB kebutuhan Quota 1 bulan', _quotaController),
-                _spasi(),
-                _textFieldNumberOnly(
-                    'Berapa Rupiah kebutuhan Pulsa 1 bulan', _rpController),
-                SizedBox(
-                  height: 50,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    if (_counterBuild == 0) {
+      _blocDsQuisioner.firstTime();
+      _counterBuild++;
+    }
+    return StreamBuilder<ModelUiQuisioner?>(
+        stream: _blocDsQuisioner.modelUiQuisioner,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+          } else {
+            ModelUiQuisioner? item = snapshot.data;
+            switch (item!.enumStateWidget) {
+              case EnumStateWidget.startup:
+                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+              case EnumStateWidget.active:
+                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+              case EnumStateWidget.loading:
+                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+
+              case EnumStateWidget.done:
+                return CustomScaffold(
+                  title: 'Market Audit',
+                  body: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          _spasi(),
+                          _textField('Nama Pelanggan', _namaController),
+                          _spasi(),
+                          Card(
+                            elevation: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LabelApp.size1("Operator Nelpon"),
+                                ),
+                                const Divider(),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: LabelApp.size2("Operator *"),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButton(
+                                        items: item.getListOperator().isEmpty
+                                            ? null
+                                            : item
+                                                .getListOperator()
+                                                .map(
+                                                    (value) => DropdownMenuItem(
+                                                          child:
+                                                              LabelBlack.size2(
+                                                                  value.nama),
+                                                          value: value,
+                                                        ))
+                                                .toList(),
+                                        onChanged: (dynamic item) {
+                                          setState(() {
+                                            _blocDsQuisioner
+                                                .changeComboOperatorNelpon(
+                                                    item);
+                                          });
+                                        },
+                                        value: item.getCurrentOperatorNelpon(),
+                                        isExpanded: false,
+                                        hint:
+                                            LabelBlack.size2('Pilih Operator'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFieldNormalNumberOnly(
+                                      "MSISDN Nelpon *", _nelponController),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _spasi(),
+                          Card(
+                            elevation: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LabelApp.size1("Operator Internet"),
+                                ),
+                                const Divider(),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: LabelApp.size2("Operator *"),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButton(
+                                        items: item.getListOperator().isEmpty
+                                            ? null
+                                            : item
+                                                .getListOperator()
+                                                .map(
+                                                    (value) => DropdownMenuItem(
+                                                          child:
+                                                              LabelBlack.size2(
+                                                                  value.nama),
+                                                          value: value,
+                                                        ))
+                                                .toList(),
+                                        onChanged: (dynamic item) {
+                                          setState(() {
+                                            _blocDsQuisioner
+                                                .changeComboOperatorInternet(
+                                                    item);
+                                          });
+                                        },
+                                        value:
+                                            item.getCurrentOperatorInternet(),
+                                        isExpanded: false,
+                                        hint:
+                                            LabelBlack.size2('Pilih Operator'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFieldNormalNumberOnly(
+                                      "MSISDN Internet *", _internetController),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _spasi(),
+                          Card(
+                            elevation: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LabelApp.size1(
+                                      "Operator Digital (Games & Video)"),
+                                ),
+                                const Divider(),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: LabelApp.size2("Operator *"),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButton(
+                                        items: item.getListOperator().isEmpty
+                                            ? null
+                                            : item
+                                                .getListOperator()
+                                                .map(
+                                                    (value) => DropdownMenuItem(
+                                                          child:
+                                                              LabelBlack.size2(
+                                                                  value.nama),
+                                                          value: value,
+                                                        ))
+                                                .toList(),
+                                        onChanged: (dynamic item) {
+                                          setState(() {
+                                            _blocDsQuisioner
+                                                .changeComboOperatorDigital(
+                                                    item);
+                                          });
+                                        },
+                                        value: item.getCurrentOperatorDigital(),
+                                        isExpanded: false,
+                                        hint:
+                                            LabelBlack.size2('Pilih Operator'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFieldNormalNumberOnly(
+                                      "MSISDN Digital (Games & Video) *",
+                                      _gamesController),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _spasi(),
+                          Card(
+                            elevation: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LabelApp.size1(
+                                      "Sering membeli paket apa?"),
+                                ),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: DropdownButton(
+                                    items: item.getListFrekuensi().isEmpty
+                                        ? null
+                                        : item
+                                            .getListFrekuensi()
+                                            .map((value) => DropdownMenuItem(
+                                                  child: LabelBlack.size2(
+                                                      value.nama),
+                                                  value: value,
+                                                ))
+                                            .toList(),
+                                    onChanged: (dynamic item) {
+                                      setState(() {
+                                        _blocDsQuisioner
+                                            .changeComboFrekuensi(item);
+                                      });
+                                    },
+                                    value: item.getCurrentFrekuensi(),
+                                    isExpanded: false,
+                                    hint: LabelBlack.size2(
+                                        'Pilih Frekuensi pembelian'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _spasi(),
+                          _textFieldNumberOnly(
+                              'Berapa GB kebutuhan Quota 1 bulan',
+                              _quotaController),
+                          _spasi(),
+                          _textFieldNumberOnly(
+                              'Berapa Rupiah kebutuhan Pulsa 1 bulan',
+                              _rpController),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ButtonStrectWidth(
+                            isenable: true,
+                            text: 'Submit',
+                            onTap: () {
+                              _handleButtonSubmit(item);
+                            },
+                            buttonColor: Colors.red,
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+
+              case EnumStateWidget.failed:
+                return CustomScaffold(
+                  title: 'Market Audit',
+                  body: LabelBlack.size1("Terjadi kesalahan."),
+                );
+            }
+          }
+        });
   }
 
   Widget _textFieldNumberOnly(String label, TextEditingController controller) {
@@ -119,7 +343,7 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
       child: Column(
         children: [
           _labelKetValue('ID Sekolah/Kampus :', 'SEK00004'),
-          Divider(),
+          const Divider(),
           TextFieldNormal(label, controller),
         ],
       ),
@@ -135,161 +359,79 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
     );
   }
 
-  Widget _radioOperator(String label, EnumDSMA enumDSMA) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: LabelApp.size2(label),
-          ),
-          Divider(),
-          Row(
-            children: [
-              __barisRadio(EnumOperator.telkomsel, enumDSMA),
-              SizedBox(
-                width: 8,
-              ),
-              __barisRadio(EnumOperator.isat, enumDSMA),
-            ],
-          ),
-          Row(
-            children: [
-              __barisRadio(EnumOperator.xl, enumDSMA),
-              SizedBox(
-                width: 8,
-              ),
-              __barisRadio(EnumOperator.tri, enumDSMA),
-              SizedBox(
-                width: 8,
-              ),
-              __barisRadio(EnumOperator.sf, enumDSMA),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _radioSering() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: LabelApp.size2('Sering membeli paket apa ?'),
-              ),
-              Divider(),
-              Row(
-                children: [
-                  __barisRadioSering(EnumSering.harian),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  __barisRadioSering(EnumSering.mingguan),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  __barisRadioSering(EnumSering.bulanan),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget __barisRadio(EnumOperator enumOperator, EnumDSMA enumDSMA) {
-    String label = '';
-    switch (enumOperator) {
-      case EnumOperator.telkomsel:
-        label = 'Telkomsel';
-        break;
-      case EnumOperator.tri:
-        label = 'Tri';
-        break;
-      case EnumOperator.isat:
-        label = 'Indosat';
-        break;
-      case EnumOperator.xl:
-        label = 'XL';
-        break;
-      case EnumOperator.sf:
-        label = 'Smartfren';
-        break;
-      case EnumOperator.axis:
-        label = 'Axis';
-        break;
-      case EnumOperator.other:
-        label = 'Other';
-        break;
-    }
-    EnumOperator? groupField;
-    switch (enumDSMA) {
-      case EnumDSMA.nelpon:
-        groupField = _nelpon;
-        break;
-      case EnumDSMA.internet:
-        groupField = _internet;
-        break;
-      case EnumDSMA.games:
-        groupField = _games;
-        break;
-    }
-    return Row(
-      children: [
-        Radio<EnumOperator>(
-          value: enumOperator,
-          groupValue: groupField,
-          onChanged: (EnumOperator? value) {
-            print('DSMA : $enumDSMA || value: $value');
-            _handleClickRadioButton(enumDSMA, value);
-          },
-        ),
-        LabelApp.size2(label),
-      ],
-    );
-  }
-
-  Widget __barisRadioSering(EnumSering enumSering) {
-    String label = '';
-    switch (enumSering) {
-      case EnumSering.harian:
-        label = 'Harian';
-        break;
-      case EnumSering.mingguan:
-        label = 'Mingguan';
-        break;
-      case EnumSering.bulanan:
-        label = 'Bulanan';
-        break;
-    }
-
-    return Row(
-      children: [
-        Radio<EnumSering>(
-          value: enumSering,
-          groupValue: _enumSering,
-          onChanged: (EnumSering? value) {
-            setState(() {
-              _enumSering = value;
-            });
-          },
-        ),
-        LabelApp.size2(label),
-      ],
-    );
-  }
-
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 16,
     );
+  }
+
+  void _handleButtonSubmit(ModelUiQuisioner item) {
+    item.setQuesioner(
+        nama: _namaController.text,
+        msisdnnelpon: _nelponController.text,
+        msisdninternet: _internetController.text,
+        msisdndigital: _gamesController.text,
+        kuotaperbulan: _quotaController.text,
+        pulsaperbulan: _rpController.text);
+    if (item.isQuisionerValidToSubmit()) {
+      _showDialogPilihan();
+    } else {
+      TgzDialog.generalDialogConfirm(context, "Semua field wajib di isi");
+    }
+  }
+
+  _showDialogPilihan() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: LabelApp.size2('Anda yakin akan meng-submit data ?'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('Submit', () {
+                    TgzDialog.loadingDialog(context);
+                    _blocDsQuisioner.submit().then((value) {
+                      if (value) {
+                        _clockOutMarketAuditDS();
+                      } else {
+                        Navigator.of(context).pop();
+                      }
+                    });
+                    Navigator.of(context).pop();
+                  }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('CANCEL', () {
+                    Navigator.of(context).pop();
+                  }),
+                ),
+              ],
+            ));
+  }
+
+  void _clockOutMarketAuditDS() {
+    HttpDashboard httpDashboard = HttpDashboard();
+    httpDashboard.finishMenu(EnumTab.marketaudit).then((value) {
+      Navigator.of(context).pop();
+      if (value.issuccess) {
+        Navigator.of(context).pop();
+      } else {
+        if (value.message == null) {
+          TgzDialog.generalDialogConfirm(context,
+              'untuk dapat mengakhiri proses Market Audit,Seluruh tab harus di isi minimal dengan angka 0.');
+        } else {
+          TgzDialog.generalDialogConfirm(context, value.message);
+        }
+      }
+    });
   }
 }

@@ -214,7 +214,7 @@ class HttpDIstribution {
     }
   }
 
-  Future<bool> uploadPhoto(String filepath, bool isclose) async {
+  Future<bool> uploadPhoto(String filepath, {required bool isclose}) async {
     Map<String, String> headers = await HttpUtil.getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String url = '';

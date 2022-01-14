@@ -1,4 +1,4 @@
-import 'package:hero/http/coverage/httpsurvey.dart';
+import 'package:hero/http/coverage/marketaudit/httpmarketaudit.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
@@ -54,7 +54,7 @@ class BlocSurvey {
   final BehaviorSubject<UISurvey?> _uisurvey = BehaviorSubject();
 
   Stream<UISurvey?> get uisurvey => _uisurvey.stream;
-  HttpSurvey _httpSurvey = new HttpSurvey();
+  final HttpMarketAuditSF _httpSurvey = HttpMarketAuditSF();
   UISurvey? getUiFakultas() {
     return _cacheuisurvey;
   }
@@ -76,29 +76,23 @@ class BlocSurvey {
     // _cacheuisurvey.other = 0;
     _cacheuisurvey!.pjp = pjp;
     _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.telkomsel));
+        .add(ItemSurveyVoucher(EnumOperator.telkomsel));
+    _cacheuisurvey!.lsurveyBroadband!.add(ItemSurveyVoucher(EnumOperator.isat));
+    _cacheuisurvey!.lsurveyBroadband!.add(ItemSurveyVoucher(EnumOperator.xl));
+    _cacheuisurvey!.lsurveyBroadband!.add(ItemSurveyVoucher(EnumOperator.tri));
+    _cacheuisurvey!.lsurveyBroadband!.add(ItemSurveyVoucher(EnumOperator.sf));
+    _cacheuisurvey!.lsurveyBroadband!.add(ItemSurveyVoucher(EnumOperator.axis));
     _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.isat));
-    _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.xl));
-    _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.tri));
-    _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.sf));
-    _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.axis));
-    _cacheuisurvey!.lsurveyBroadband!
-        .add(new ItemSurveyVoucher(EnumOperator.other));
+        .add(ItemSurveyVoucher(EnumOperator.other));
 
     _cacheuisurvey!.lsurveyFisik!
-        .add(new ItemSurveyVoucher(EnumOperator.telkomsel));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.isat));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.xl));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.tri));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.sf));
-    _cacheuisurvey!.lsurveyFisik!.add(new ItemSurveyVoucher(EnumOperator.axis));
-    _cacheuisurvey!.lsurveyFisik!
-        .add(new ItemSurveyVoucher(EnumOperator.other));
+        .add(ItemSurveyVoucher(EnumOperator.telkomsel));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.isat));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.xl));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.tri));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.sf));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.axis));
+    _cacheuisurvey!.lsurveyFisik!.add(ItemSurveyVoucher(EnumOperator.other));
     _loadDrInternet().then((value) {
       _sink(_cacheuisurvey);
     });
@@ -115,9 +109,9 @@ class BlocSurvey {
   Future<bool> _loadDataBelanja() async {
     String? idtempat = _cachePjp!.id;
     DateTime dt = DateTime.now();
-    HttpSurvey httpSurvey = new HttpSurvey();
-    UISurvey? item =
-        await httpSurvey.getDetailPromotion(EnumSurvey.belanja, idtempat, dt);
+    HttpMarketAuditSF httpSurvey = HttpMarketAuditSF();
+    UISurvey? item = await httpSurvey.getDetailMarketAuditSF(
+        EnumSurvey.belanja, idtempat, dt);
     if (item != null) {
       _cacheuisurvey!.telkomsel = item.telkomsel;
       _cacheuisurvey!.isat = item.isat;
@@ -135,17 +129,19 @@ class BlocSurvey {
   Future<bool> _loadDataVoucher(EnumSurvey enumSurvey) async {
     String? idtempat = _cachePjp!.id;
     DateTime dt = DateTime.now();
-    HttpSurvey httpSurvey = new HttpSurvey();
+    HttpMarketAuditSF httpSurvey = HttpMarketAuditSF();
     if (enumSurvey == EnumSurvey.fisik) {
-      UISurvey? item =
-          await httpSurvey.getDetailPromotion(EnumSurvey.fisik, idtempat, dt);
+      UISurvey? item = await httpSurvey.getDetailMarketAuditSF(
+          EnumSurvey.fisik, idtempat, dt);
+      print("detail market audit survei fisik: $item");
       if (item != null) {
         _cacheuisurvey!.lsurveyFisik = item.lsurveyFisik;
         _cacheuisurvey!.isfisiksubmitted = true;
       }
     } else {
-      UISurvey? item = await httpSurvey.getDetailPromotion(
+      UISurvey? item = await httpSurvey.getDetailMarketAuditSF(
           EnumSurvey.broadband, idtempat, dt);
+      print("detail market audit broad band: $item");
       if (item != null) {
         _cacheuisurvey!.lsurveyBroadband = item.lsurveyBroadband;
         _cacheuisurvey!.isbroadbandsubmitted = true;
@@ -160,7 +156,7 @@ class BlocSurvey {
     // SALES_BROADBAND
     // VOUCHER_FISIK
 
-    String idjenisshare = 'BELANJA';
+    String idjenisshare = '';
     List<ItemSurveyVoucher>? lsurvey;
     if (es == EnumSurvey.broadband) {
       idjenisshare = 'SALES_BROADBAND';
@@ -198,8 +194,7 @@ class BlocSurvey {
 
     bool result = await _httpSurvey.createSurvey(map);
     if (result) {
-      bool b = await this._loadDataVoucher(es);
-      print(b);
+      bool b = await _loadDataVoucher(es);
     }
     return result;
   }
@@ -225,7 +220,7 @@ class BlocSurvey {
 
     bool result = await _httpSurvey.createSurveyBelanja(map);
     if (result) {
-      bool b = await this._loadDataBelanja();
+      bool b = await _loadDataBelanja();
       print(b);
     }
     return result;
@@ -342,13 +337,11 @@ class BlocSurvey {
   }
 
   void refresh() {
-    if (!_isDisposed) {
-      _uisurvey.sink.add(_cacheuisurvey);
-    }
+    _sink(_cacheuisurvey);
   }
 
   void _sink(UISurvey? item) {
-    if (!_isDisposed) {
+    if (_isDisposed == false) {
       _uisurvey.sink.add(item);
     }
   }

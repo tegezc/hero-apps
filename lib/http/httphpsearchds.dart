@@ -26,7 +26,7 @@ class HttphpsearchDs {
       case EnumTab.promotion:
         url = 'bottommenupromotion/promotion_list';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         url = 'bottommenumarketaudit/marketaudit_list';
         break;
       default:
@@ -69,7 +69,7 @@ class HttphpsearchDs {
       case EnumTab.promotion:
         url = 'bottommenupromotion/promotion_list_cari';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         url = 'bottommenumarketaudit/marketaudit_list_cari';
         break;
       default:

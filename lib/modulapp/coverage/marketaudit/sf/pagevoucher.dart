@@ -24,15 +24,22 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   UISurvey? _item;
   bool _issubmitbuttonshowing = true;
 
+  int _countBuild = 0;
+
+  BlocSurvey? _blocSurvey;
+
   @override
   void initState() {
+    _blocSurvey = widget.blocSurvey;
     _item = widget.uiSurvey;
     _lcontroller = [];
     if (widget.enumSurvey == EnumSurvey.broadband) {
-      _issubmitbuttonshowing = !_item!.isbroadbandsubmitted;
+      _issubmitbuttonshowing = _item!.isbroadbandsubmitted;
     } else {
-      _issubmitbuttonshowing = !_item!.isfisiksubmitted;
+      _issubmitbuttonshowing = _item!.isfisiksubmitted;
     }
+
+    print("_issubmitbuttonshowing $_issubmitbuttonshowing");
     for (int i = 0; i < 21; i++) {
       _lcontroller.add(TextEditingController());
     }
@@ -94,14 +101,19 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
 
   @override
   Widget build(BuildContext context) {
-    _setvalue();
+    if (_countBuild == 0) {
+      _setvalue();
+      _countBuild++;
+    }
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          _issubmitbuttonshowing ? Container() : _successDisubmit(),
+          _issubmitbuttonshowing ? _successDisubmit() : Container(),
           _dataTable(_item!.lsurveyBroadband!, ''),
           _issubmitbuttonshowing
-              ? ButtonStrectWidth(
+              ? Container()
+              : ButtonStrectWidth(
                   buttonColor: Colors.red,
                   text: "SUBMIT",
                   onTap: () {
@@ -112,7 +124,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                     print(_isbolehsubmit());
                     if (_isbolehsubmit()) {
                       TgzDialog.loadingDialog(context);
-                      widget.blocSurvey!
+                      _blocSurvey!
                           .submitVoucher(widget.enumSurvey)
                           .then((value) {
                         Navigator.of(context).pop();
@@ -126,8 +138,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                       TgzDialog.confirmHarusDiisi(context);
                     }
                   },
-                  isenable: true)
-              : Container(),
+                  isenable: true),
           const SizedBox(
             height: 150,
           ),
@@ -228,7 +239,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
         '',
         _lcontroller[index],
         onChanged: (str) {
-          widget.blocSurvey!.changedText(index, str, widget.enumSurvey);
+          _blocSurvey!.changedText(index, str, widget.enumSurvey);
         },
       ),
     );
@@ -254,8 +265,8 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    widget.blocSurvey!.refresh();
                     Navigator.of(context).pop();
+                    _blocSurvey!.refresh();
                   }),
                 ),
               ],
