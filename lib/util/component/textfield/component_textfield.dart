@@ -189,7 +189,7 @@ class _TextFieldNumberOnlyState extends State<TextFieldNumberOnly> {
       maxLines: 1,
       controller: controller,
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

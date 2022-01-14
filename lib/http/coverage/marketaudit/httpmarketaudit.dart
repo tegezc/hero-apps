@@ -10,9 +10,9 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../httputil.dart';
+import '../../httputil.dart';
 
-class HttpSurvey {
+class HttpMarketAuditSF {
   Future<bool> createSurvey(Map<String, dynamic> map) async {
     Map<String, String> headers = await HttpUtil.getHeader();
     print(jsonEncode(map));
@@ -102,7 +102,7 @@ class HttpSurvey {
     return false;
   }
 
-  Future<UISurvey?> getDetailPromotion(
+  Future<UISurvey?> getDetailMarketAuditSF(
       EnumSurvey enumSurvey, String? idoutlet, DateTime? tgl) async {
     String idshare = '';
     // BELANJA
@@ -126,13 +126,13 @@ class HttpSurvey {
     try {
       final Map<String, String> headers = await HttpUtil.getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      print("$idshare : ${response.body}");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         if (enumSurvey == EnumSurvey.belanja) {
-          return this._olahDetailSurveyBelanja(value);
+          return _olahDetailSurveyBelanja(value);
         } else {
-          return this._olahDetailSurvey(value, enumSurvey);
+          return _olahDetailSurvey(value, enumSurvey);
         }
       }
       return null;
@@ -143,7 +143,7 @@ class HttpSurvey {
   }
 
   UISurvey? _olahDetailSurvey(dynamic value, EnumSurvey enumSurvey) {
-    UISurvey item = UISurvey();
+    UISurvey? item;
     List<ItemSurveyVoucher> lsurvey = [];
     Map<String, dynamic> mp = value;
     if (mp['data'] != null) {
@@ -195,23 +195,27 @@ class HttpSurvey {
       p6.hd = ConverterNumber.stringToInt(map['other_hd']);
       lsurvey.add(p6);
 
-      if (enumSurvey == EnumSurvey.broadband) {
-        item.lsurveyBroadband = lsurvey;
-      } else {
-        item.lsurveyFisik = lsurvey;
+      if (lsurvey.isNotEmpty) {
+        item = UISurvey();
+        if (enumSurvey == EnumSurvey.broadband) {
+          item.lsurveyBroadband = lsurvey;
+        } else {
+          item.lsurveyFisik = lsurvey;
+        }
       }
     }
     return item;
   }
 
   UISurvey? _olahDetailSurveyBelanja(dynamic value) {
-    UISurvey item = UISurvey();
+    UISurvey? item;
     Map<String, dynamic> mp = value;
     if (mp['data'] != null) {
       List<dynamic> ld = mp['data'];
       if (ld.isEmpty) {
         return null;
       } else {
+        item = UISurvey();
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           item.telkomsel = ConverterNumber.stringToInt(map['telkomsel']);

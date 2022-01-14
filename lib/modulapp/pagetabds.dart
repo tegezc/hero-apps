@@ -83,7 +83,7 @@ class _PageTabDsState extends State<PageTabDs> {
       case EnumTab.promotion:
         title = 'Promotion';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         title = 'Market Audit';
         break;
       case EnumTab.mt:
@@ -358,7 +358,7 @@ class _PageTabDsState extends State<PageTabDs> {
       case EnumTab.promotion:
         CommonUi.openPage(context, HomePageViewPromotion(item));
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         {
           CommonUi.openPage(context, HomeHistorySurvey(item));
         }

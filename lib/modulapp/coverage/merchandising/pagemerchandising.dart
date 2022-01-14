@@ -11,6 +11,7 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/component/widget/widget_success_submit.dart';
 
 class PageMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
@@ -31,6 +32,8 @@ class _PageMerchandisingState extends State<PageMerchandising> {
   TextEditingController? _axisController;
   TextEditingController? _otherController;
   String? _title;
+
+  int _buildCounter = 0;
   @override
   void initState() {
     switch (widget.enumMerchandising) {
@@ -100,7 +103,11 @@ class _PageMerchandisingState extends State<PageMerchandising> {
 
   @override
   Widget build(BuildContext context) {
-    _setValue();
+    if (_buildCounter == 0) {
+      _setValue();
+      _buildCounter++;
+    }
+    // _setValue();
     Size s = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Padding(
@@ -108,6 +115,9 @@ class _PageMerchandisingState extends State<PageMerchandising> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            widget.merchandising!.isServerExist
+                ? _successDisubmit()
+                : Container(),
             Center(
                 child: Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 8),
@@ -163,6 +173,13 @@ class _PageMerchandisingState extends State<PageMerchandising> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _successDisubmit() {
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: WidgeSuccessSubmit(),
     );
   }
 

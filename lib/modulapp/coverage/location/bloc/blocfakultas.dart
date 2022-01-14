@@ -73,24 +73,21 @@ class BlocFakultas extends AbsBlocLokasi {
 
   void firstTimeBaru() {
     super.init(EnumEditorState.baru, null);
-    _cacheUiFakultas = new UIFakultas();
+    _cacheUiFakultas = UIFakultas();
     _cacheUiFakultas!.enumEditorState = EnumEditorState.baru;
     _cacheUiFakultas!.fakultas = Fakultas.kosong();
 
     controllPic!.firstTimePic();
     controllOwner!.firstTimeOwner();
     setupAsync().then((value) {
-      print(value);
       if (value) {
-        this._sink(_cacheUiFakultas);
+        _sink(_cacheUiFakultas);
       }
     });
   }
 
   Future<bool> setupAsync() async {
     _cacheUiFakultas!.luniv = await _httpController.getComboUniv();
-    // Position position = await Geolocator.getCurrentPosition(
-    //     desiredAccuracy: LocationAccuracy.high);
 
     LocationData position = await LocationUtil.getCurrentLocation();
 
@@ -101,11 +98,11 @@ class BlocFakultas extends AbsBlocLokasi {
 
   Future<bool> saveFakultas() async {
     _cacheUiFakultas!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
     Map<String, dynamic>? response =
         await _httpController.createFakultas(_cacheUiFakultas!.fakultas);
     _cacheUiFakultas!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
     if (response != null) {
       if (response['status'] == 201) {
         return true;
@@ -117,12 +114,12 @@ class BlocFakultas extends AbsBlocLokasi {
 
   Future<bool> updateFakultas() async {
     _cacheUiFakultas!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
 
     Map<String, dynamic>? response =
         await _httpController.updateFakultas(_cacheUiFakultas!.fakultas);
     _cacheUiFakultas!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
     if (response != null) {
       if (response['status'] == 200) {
         return true;

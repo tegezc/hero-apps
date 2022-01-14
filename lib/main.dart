@@ -39,6 +39,7 @@ import 'modulapp/camera/pagerecordvideo.dart';
 import 'modulapp/camera/pagetakephoto.dart';
 import 'modulapp/camera/previewphoto.dart';
 import 'modulapp/camera/previewphotoupload.dart';
+import 'modulapp/coverage/marketaudit/ds/uidsmarketaudit.dart';
 import 'modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 
 void main() {
@@ -165,6 +166,11 @@ class MyApp extends StatelessWidget {
         {
           final Pjp? item = settings.arguments as Pjp?;
           return _buildRoute(settings, HomeSurvey(item));
+        }
+      case CoverageMarketAudit.routeName:
+        {
+          //final Pjp? item = settings.arguments as Pjp?;
+          return _buildRoute(settings, const CoverageMarketAudit());
         }
       case PageTakeVideo.routeName:
         {

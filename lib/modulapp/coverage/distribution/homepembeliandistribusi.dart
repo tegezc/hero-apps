@@ -25,7 +25,7 @@ class HomePembelianDistribusi extends StatefulWidget {
 }
 
 class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   List<ItemRekomendasi>? _lsegel;
   List<ItemRekomendasi>? _lsa;
   List<ItemRekomendasi>? _lvoint;

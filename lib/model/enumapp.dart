@@ -1,4 +1,4 @@
-enum EnumTab { distribution, merchandising, promotion, survey, mt }
+enum EnumTab { distribution, merchandising, promotion, marketaudit, mt }
 
 //Device, Reguler, Pareto
 enum EnumJenisOutlet { device, reguler, pareto }
@@ -19,7 +19,7 @@ enum EnumStatusTempat { open, close }
 enum EnumStatusClockIn { belum, open, close }
 
 enum EnumJenisLokasi { outlet, poi, sekolah, kampus, fakultas }
-enum EnumStateWidget { startup, active, loading, done }
+enum EnumStateWidget { startup, active, loading, done, failed }
 enum EnumPicOwner { pic, owner }
 enum EnumEditorState { baru, edit }
 enum EnumJenjangSekolah { SD, SMP, SMA, PONPES }

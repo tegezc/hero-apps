@@ -268,6 +268,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
           //  showInSnackBar('Picture saved to $filePath');
           ParamPreviewPhoto params = widget.params!;
           params.pathPhoto = filePath;
+          print('EnumTakePhoto di camera: ${params.enumTakePhoto}');
           if (widget.params!.enumTakePhoto != EnumTakePhoto.distribusi &&
               widget.params!.enumTakePhoto != EnumTakePhoto.distibusiclose) {
             Navigator.pushNamed(

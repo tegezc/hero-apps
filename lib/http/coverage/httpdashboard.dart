@@ -176,7 +176,7 @@ class HttpDashboard {
       case EnumTab.promotion:
         keyTag = 'PROMOTION';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         keyTag = 'MARKET AUDIT';
         break;
       case EnumTab.mt:
@@ -228,7 +228,7 @@ class HttpDashboard {
       case EnumTab.promotion:
         keyTag = 'PROMOTION';
         break;
-      case EnumTab.survey:
+      case EnumTab.marketaudit:
         keyTag = 'MARKET AUDIT';
         break;
       case EnumTab.mt:
@@ -288,12 +288,10 @@ class HttpDashboard {
       print('cloclout: ${response.body}');
       print('cloclout SC: ${response.statusCode}');
       if (response.statusCode == 200) {
-        Map<String, dynamic> map = json.decode(response.body);
-        int? i = ConverterNumber.stringToInt(map['status']);
-        print(i);
-        // if (i == 1) {
+        // Map<String, dynamic>? map = json.decode(response.body);
+        // if(map == null){}
+        // int? i = ConverterNumber.stringToInt(map['status']);
         return true;
-        // }
       }
       return false;
     } catch (e) {
