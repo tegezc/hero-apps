@@ -113,7 +113,7 @@ class ClockInImageIcon extends StatefulWidget {
       required this.disableImage,
       required this.completeImage,
       required this.enable,
-      this.width = 140});
+      this.width = 120});
 
   @override
   State<ClockInImageIcon> createState() => _ClockInImageIconState();

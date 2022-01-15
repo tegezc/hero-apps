@@ -76,9 +76,14 @@ class _MenuSalesState extends State<MenuSales> {
           child: Column(
             children: [
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
-              //Divider(),
+              const Image(
+                  image: AssetImage('assets/image/new/big_logo.png'),
+                  height: 90),
+              const SizedBox(
+                height: 20,
+              ),
               _controllMenu(),
             ],
           ),
