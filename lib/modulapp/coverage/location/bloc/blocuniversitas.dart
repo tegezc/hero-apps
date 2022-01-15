@@ -74,9 +74,8 @@ class BlocUniversitas extends AbsBlocLokasi {
     controllPic!.firstTimePic();
     controllOwner!.firstTimeOwner();
     setupAsync().then((value) {
-      print(value);
       if (value) {
-        this._sink(_cacheUiUniv);
+        _sink(_cacheUiUniv);
       }
     });
   }
@@ -107,7 +106,6 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   Future<bool> updateUniv() async {
-    print('update');
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUiUniv);
 

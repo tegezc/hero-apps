@@ -440,8 +440,6 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
     const url = 'https://referensi.data.kemdikbud.go.id/index11.php';
     if (await canLaunch(url)) {
       await launch(url);
-    } else {
-      print('Could not launch $url');
-    }
+    } else {}
   }
 }

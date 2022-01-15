@@ -264,11 +264,11 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
         });
         if (filePath != null) {
           ///data/data/com.tgz.cobacamera/app_flutter/Pictures/flutter_test/1603038382586.jpg
-          print('path photo di kirim ke preview: ${filePath}');
+
           //  showInSnackBar('Picture saved to $filePath');
           ParamPreviewPhoto params = widget.params!;
           params.pathPhoto = filePath;
-          print('EnumTakePhoto di camera: ${params.enumTakePhoto}');
+
           if (widget.params!.enumTakePhoto != EnumTakePhoto.distribusi &&
               widget.params!.enumTakePhoto != EnumTakePhoto.distibusiclose) {
             Navigator.pushNamed(
@@ -315,7 +315,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
           await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
       final String dirPath = '${extDir!.path}/photo';
       await Directory(dirPath).create(recursive: true);
-      print("Directory Photo: $dirPath");
+
       final String filePath = '$dirPath/${timestamp()}.jpeg';
 
       File imageFile = File(sourceFile.path);
@@ -325,7 +325,6 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
       );
       return filePath;
     } catch (e) {
-      print(e);
       return null;
     }
   }

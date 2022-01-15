@@ -38,8 +38,6 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
   @override
   Widget build(BuildContext context) {
     _setupUrlImage();
-
-    print("PREVIEW PHOTO: $_urlImageOrNull");
     Size s = MediaQuery.of(context).size;
     if (_urlImageOrNull == null) {
       return CustomScaffold(
@@ -97,7 +95,6 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                           break;
 
                         case EnumTakePhoto.marketaudit:
-                          print("PAKAI PHOTO: $_urlImageOrNull");
                           StoredPathPhoto.setPhotoMarketAudit(_urlImageOrNull!)
                               .then((value) {
                             Navigator.popUntil(

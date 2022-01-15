@@ -23,7 +23,24 @@ class ConverterNumber {
   }
 
   static String getCurrentcy(int? value) {
-    int? d = value;
+    int d = 0;
+    if (value != null) {
+      d = value;
+    }
+
+    final currencyFormatter = NumberFormat("#,##0", "id");
+    return currencyFormatter.format(d); // IDR100.286.020.524,17
+  }
+
+  static String getCurrentcyOrNol(String? value) {
+    int d = 0;
+    if (value != null) {
+      int? makeint = int.tryParse(value);
+      if (makeint != null) {
+        d = makeint;
+      }
+    }
+
     final currencyFormatter = NumberFormat("#,##0", "id");
     return currencyFormatter.format(d); // IDR100.286.020.524,17
   }

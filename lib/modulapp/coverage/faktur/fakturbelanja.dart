@@ -279,9 +279,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
           )),
         ),
       );
-    }).catchError((onError) {
-      print(onError);
-    });
+    }).catchError((onError) {});
   }
 
   _onShare(BuildContext context, String pathimage, String text) async {

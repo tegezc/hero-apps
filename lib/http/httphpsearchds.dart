@@ -43,7 +43,7 @@ class HttphpsearchDs {
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarOutlet(value);
+        return _olahDaftarLokasiDs(value);
       }
       return null;
     } catch (e) {
@@ -52,7 +52,7 @@ class HttphpsearchDs {
     }
   }
 
-  Future<List<LokasiSearch>?> cariOutlet(EnumTab enumTab, DateTime? tglAwal,
+  Future<List<LokasiSearch>?> cariLokasi(EnumTab enumTab, DateTime? tglAwal,
       DateTime? tglAkhir, String query) async {
     String starDt = DateUtility.dateToStringYYYYMMDD(tglAwal);
     String finishDt = DateUtility.dateToStringYYYYMMDD(tglAkhir);
@@ -118,10 +118,10 @@ class HttphpsearchDs {
   // ]
   // }
   //
-  UIPageTabDs? _olahDaftarOutlet(dynamic value) {
+  UIPageTabDs? _olahDaftarLokasiDs(dynamic value) {
     UIPageTabDs uiPageTabSf = UIPageTabDs();
 
-    List<LokasiSearch> loutlet = [];
+    List<LokasiSearch> lLokasi = [];
 
     try {
       Map<String, dynamic> map = value;
@@ -130,14 +130,14 @@ class HttphpsearchDs {
 
       List<dynamic> ld = map['data'];
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           LokasiSearch retur = LokasiSearch.fromJson(map);
-          loutlet.add(retur);
+          lLokasi.add(retur);
         }
       }
-      uiPageTabSf.loutlet = loutlet;
+      uiPageTabSf.lLokasi = lLokasi;
       return uiPageTabSf;
     } catch (e) {
       return null;

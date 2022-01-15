@@ -46,7 +46,6 @@ class BlocMerchandising {
     HttpMerchandising httpm = HttpMerchandising();
     Map<String, Merchandising>? map = await httpm.getDetailMerch(
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
-    print('idtempat: ${pjp.id}');
     if (map != null) {
       if (map[Merchandising.tagPerdana] != null) {
         _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
@@ -172,7 +171,7 @@ class BlocMerchandising {
       HttpMerchandising httpm = HttpMerchandising();
       Map<String, Merchandising>? map = await httpm.getDetailMerch(
           _cachePjp.id, DateTime.now(), _cachePjp.getJenisLokasi());
-      print('idtempat: ${_cachePjp.id}');
+
       if (map != null) {
         if (map[Merchandising.tagPerdana] != null) {
           _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
@@ -252,8 +251,6 @@ class BlocMerchandising {
         }
         break;
       case EnumMerchandising.poster:
-        print(_cacheUiMerc);
-        print(_cacheUiMerc!.poster);
         switch (_cacheUiMerc!.poster!.getPhotoKe()) {
           case EnumNumber.satu:
             _cacheUiMerc!.poster!.pathPhoto1 = path;

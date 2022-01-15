@@ -33,7 +33,7 @@ class _PembelianItemState extends State<PembelianItem> {
     // _isRange = true;
     // _textController1.text = '9000000000000003';
     // _textController2.text = '9000000000000100';
-    print("id produk: ${widget.trx}");
+
     super.initState();
   }
 
@@ -272,32 +272,52 @@ class _PembelianItemState extends State<PembelianItem> {
           ),
         ),
         _contentListSeri(item.lserial),
+        const SizedBox(
+          height: 50,
+        ),
       ],
     );
   }
 
   Widget _contentListSeri(List<SerialNumber> lseri) {
-    List<Widget> lw = [];
-    lw.add(const SizedBox(
-      height: 4,
-    ));
-    for (int i = 0; i < lseri.length; i++) {
-      SerialNumber item = lseri[i];
-      lw.add(_cell(item, i));
-    }
+    Size s = MediaQuery.of(context).size;
+    // List<Widget> lw = [];
+    // lw.add(const SizedBox(
+    //   height: 4,
+    // ));
+    // for (int i = 0; i < lseri.length; i++) {
+    //   SerialNumber item = lseri[i];
+    //   lw.add(_cell(item, i));
+    // }
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        child: Column(
-          children: lw,
-        ),
+    // return Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: Card(
+    //     child: Column(
+    //       children: lw,
+    //     ),
+    //   ),
+    // );
+
+    // return ListView.builder(
+    //   itemCount: lseri.length,
+    //   itemBuilder: (context, index) {
+    //     return _cell(lseri[index], index);
+    //   },
+    // );
+    return SizedBox(
+      height: s.height - 300,
+      width: s.width,
+      child: ListView.builder(
+        itemCount: lseri.length,
+        itemBuilder: (context, index) {
+          return _cell(lseri[index], index);
+        },
       ),
     );
   }
 
   Widget _cell(SerialNumber seri, int index) {
-    print("check: ${seri.ischecked}");
     return ListTile(
       leading: Checkbox(
         onChanged: (bool? value) {
@@ -317,7 +337,7 @@ class _PembelianItemState extends State<PembelianItem> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -346,7 +366,7 @@ class _PembelianItemState extends State<PembelianItem> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

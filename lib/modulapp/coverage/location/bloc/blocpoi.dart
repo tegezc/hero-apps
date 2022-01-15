@@ -61,9 +61,8 @@ class BlocPoi extends AbsBlocLokasi {
     _cacheUipoi!.enumEditorState = EnumEditorState.baru;
     _cacheUipoi!.poi = Poi.kosong();
     setupAsync().then((value) {
-      print(value);
       if (value) {
-        this._sink(_cacheUipoi);
+        _sink(_cacheUipoi);
       }
     });
   }
@@ -102,7 +101,6 @@ class BlocPoi extends AbsBlocLokasi {
   }
 
   Future<bool> updatePoi() async {
-    print('update');
     _cacheUipoi!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUipoi);
 

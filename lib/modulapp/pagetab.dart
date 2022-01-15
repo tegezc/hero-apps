@@ -416,8 +416,6 @@ class _PageTabState extends State<PageTab> {
   }
 
   void _tapNota(String? nota) {
-    print('nota clicked');
-    print(nota);
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => FakturPembayaran(nota, true)));
     // CommonUi.openPage(context, new FakturPembayaran(nota, true));

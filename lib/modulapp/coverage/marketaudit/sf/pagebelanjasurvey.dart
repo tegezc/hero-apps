@@ -110,7 +110,6 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
 
                       String? path =
                           await StoredPathPhoto.getPhotoMarketAudit();
-                      print("BELANJA SURVEY: $path");
                       _blocSurvey!.setpathphoto(path);
                     },
                     isenable: true)

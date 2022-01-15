@@ -43,7 +43,6 @@ class TgzFile implements ITgzFile {
       await extDir!.delete();
       return true;
     } catch (e) {
-      print("error delete: $e");
       return false;
     }
   }

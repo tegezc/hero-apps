@@ -12,18 +12,14 @@ class HttpSekolah {
     try {
       Uri uri = ConstApp.uri('/lokasi/tampil/SEK/$idsekolah');
       http.Response response = await http.get(uri, headers: headers);
-
-      print(response.body);
       return json.decode(response.body);
     } catch (e) {
-      print(e);
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> createSekolah(Sekolah sekolah) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    print(sekolah.toJson());
     http.Response? response;
     try {
       Uri uri = ConstApp.uri('/lokasi/sekolah_create');
@@ -33,22 +29,17 @@ class HttpSekolah {
         body: jsonEncode(sekolah.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> updateSekolah(Sekolah sekolah) async {
     Map<String, String> headers = await HttpUtil.getHeader();
-    print(sekolah.toJson());
     http.Response? response;
     try {
       Uri uri = ConstApp.uri('/lokasi/sekolah_update/${sekolah.idsekolah}');

@@ -383,8 +383,6 @@ class _TabDataKampusState extends State<TabDataKampus> {
     const url = 'https://referensi.data.kemdikbud.go.id/index11.php';
     if (await canLaunch(url)) {
       await launch(url);
-    } else {
-      print('Could not launch $url');
-    }
+    } else {}
   }
 }

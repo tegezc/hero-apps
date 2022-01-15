@@ -19,9 +19,7 @@ class CSVReader {
             realid: lsplit[2],
             nama: lsplit[3]);
         lkec.add(kecamatan);
-      } else {
-        print('kecamatan gagal: $element');
-      }
+      } else {}
     });
     return lkec;
   }
@@ -62,9 +60,7 @@ class CSVReader {
         Kabupaten kabupaten =
             Kabupaten(realid: lsplit[1], nama: lsplit[2], idprov: lsplit[0]);
         lkab.add(kabupaten);
-      } else {
-        print('kabupaten gagal: $element');
-      }
+      } else {}
     });
     return lkab;
   }
@@ -81,9 +77,7 @@ class CSVReader {
         //   15,         Jambi
         Provinsi provinsi = Provinsi(realid: lsplit[0], nama: lsplit[1]);
         lprov.add(provinsi);
-      } else {
-        print('provinsi gagal: $element');
-      }
+      } else {}
     });
     return lprov;
   }

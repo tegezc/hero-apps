@@ -44,7 +44,7 @@ class Quisioner {
     };
   }
 
-  var contohmap = {
+  var contohCreate = {
     "id_history_pjp": "54",
     "nama_pelanggan": "NOFY",
     "op_telepon": "1",
@@ -58,9 +58,22 @@ class Quisioner {
     "pulsa_per_bulan": "100000"
   };
 
+  var contohView = {
+    "nama_pelanggan": "silasila",
+    "op_telepon": "telkomsel",
+    "msisdn_telepon": "08523565356",
+    "op_internet": "telkomsel",
+    "msisdn_internet": "0852365287",
+    "op_digital": "xl",
+    "msisdn_digital": "086328624554",
+    "jenis": "Bulanan",
+    "kuota_per_bulan": "30",
+    "pulsa_per_bulan": "100000"
+  };
+
   factory Quisioner.fromMap(Map<String, dynamic> map) {
     return Quisioner(
-      idhistorypjp: map['id_history_pjp'],
+      idhistorypjp: "",
       namaPelanggan: map['nama_pelanggan'],
       opTelp: map['op_telepon'],
       msisdnTelp: map['msisdn_telepon'],
@@ -68,7 +81,7 @@ class Quisioner {
       msisdnInternet: map['msisdn_internet'],
       opDigital: map['op_digital'],
       msisdnDigital: map['msisdn_digital'],
-      frekBeliPaket: map['frekuensi_beli_paket'],
+      frekBeliPaket: map['jenis'],
       kuotaPerBulan: map['kuota_per_bulan'],
       pulsaPerbulan: map['pulsa_per_bulan'],
     );

@@ -101,8 +101,6 @@ class Pjp {
     tempat!.nama = map['nama'] == null ? '' : map['nama'];
     status = map['status'] == null ? null : map['status'];
     idhistorypjp = map['id_history_pjp'] == null ? null : map['id_history_pjp'];
-
-    print('nohp: $nohp');
   }
 
   EnumJenisLokasi? getJenisLokasi() {

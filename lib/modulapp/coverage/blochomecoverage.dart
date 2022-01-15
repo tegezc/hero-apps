@@ -42,15 +42,12 @@ class BlocHomePageCoverage {
 
   Future<bool> _setupFirstime() async {
     List<Pjp>? lpjp = await _httpDashboard.getPjpHariIni();
-    print("masuk");
     _cacheuicvrg = UIHomeCvrg();
     _cacheuicvrg!.profile = await AccountHore.getProfile();
     _cacheuicvrg!.lpjp = this._filterpjp(lpjp);
     _cacheuicvrg!.enumAccount = await AccountHore.getAccount();
     bool permission = await _setupPermissionlocation();
-    if (permission) {
-      print('permission lokasi: $permission');
-    }
+    if (permission) {}
     this._setJumlah(lpjp);
     this._setTgl();
 
@@ -62,7 +59,6 @@ class BlocHomePageCoverage {
         await location.hasPermission();
     switch (permissionGrantedResult) {
       case PermissionStatus.granted:
-        print('While in use , no permission for background');
         _cacheuicvrg!.enumStateWidget = EnumStateWidget.active;
         return true;
       case PermissionStatus.grantedLimited:
@@ -70,7 +66,6 @@ class BlocHomePageCoverage {
         break;
       case PermissionStatus.denied:
         {
-          print('DENIED');
           // LocationPermission reqLp = await Geolocator.requestPermission();
           // print(reqLp);
           bool isaccept = await requestIjinLokasi();

@@ -148,7 +148,7 @@ class _MapClockInState extends State<MapClockIn> {
                       onTap: () {
                         _buttonClockInOnClick();
                       },
-                      isenable: true, //TODO _isbuttonEnable,
+                      isenable: _isbuttonEnable,
                     ),
                   ),
                 ],

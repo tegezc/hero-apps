@@ -45,8 +45,7 @@ import 'parentlokasi.dart';
 class Outlet extends ParentLokasi {
   @override
   bool isValid() {
-    print('$idkelurahan\n$nors\n$nama\n$alamat\n$idJnsOutlet\n$long\n$lat');
-    print('test: ${cstr(alamat)}');
+    // print('$idkelurahan\n$nors\n$nama\n$alamat\n$idJnsOutlet\n$long\n$lat');
     if (cstr(idkelurahan) &&
         cstr(nors) &&
         cstr(nama) &&

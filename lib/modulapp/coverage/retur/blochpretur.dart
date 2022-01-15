@@ -25,10 +25,9 @@ class BlocHpRetur {
     _httpRetur
         .getRetur(_cacheItem!.tglAwal, _cacheItem!.tglAkhir, 1)
         .then((value) {
-      print(value);
       if (value != null) {
         _cacheItem!.lretur = value;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
     // _cacheItem.lretur = _dummy();
@@ -54,7 +53,6 @@ class BlocHpRetur {
     _httpRetur
         .getRetur(_cacheItem!.tglAwal, _cacheItem!.tglAkhir, _cacheItem!.page)
         .then((value) {
-      print(value);
       if (value != null) {
         _cacheItem!.lretur!.addAll(value);
         this._sinkItem(_cacheItem);
@@ -70,7 +68,6 @@ class BlocHpRetur {
     _httpRetur
         .cariRetur(_cacheItem!.tglAwal, _cacheItem!.tglAkhir, serial)
         .then((value) {
-      print(value);
       if (value != null) {
         _cacheItem!.lretur = value;
         this._sinkItem(_cacheItem);
@@ -82,7 +79,7 @@ class BlocHpRetur {
     _cacheItem!.tglAwal = dt;
     if (_cacheItem!.tglAkhir != null) {
       bool ok = _cacheItem!.tglAkhir!.isBefore(_cacheItem!.tglAwal!);
-      print(ok);
+
       if (ok) {
         _cacheItem!.tglAkhir = _cacheItem!.tglAwal;
       }

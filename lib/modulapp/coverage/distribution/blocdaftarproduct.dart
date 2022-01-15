@@ -28,7 +28,6 @@ class BlocDaftarProduct {
     if (lp != null) {
       for (int i = 0; i < lp.length; i++) {
         Product p = lp[i];
-        print('harga: ${p.hargajual}');
 
         int? qty = await _daoSerial.getCountByIdProduct(p.id);
         ItemTransaksi item = new ItemTransaksi(p, qty);

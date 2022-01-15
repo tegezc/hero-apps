@@ -6,7 +6,7 @@ import 'package:rxdart/subjects.dart';
 
 class BlocPageTabDs {
   UIPageTabDs? _cacheItem;
-  HttphpsearchDs _httpPageDs = HttphpsearchDs();
+  final HttphpsearchDs _httpPageDs = HttphpsearchDs();
 
   final BehaviorSubject<UIPageTabDs?> _uihpsurvey = BehaviorSubject();
 
@@ -16,7 +16,7 @@ class BlocPageTabDs {
     _cacheItem = UIPageTabDs();
     _cacheItem!.tglAkhir = null;
     _cacheItem!.tglAwal = null;
-    _cacheItem!.loutlet = [];
+    _cacheItem!.lLokasi = [];
     _cacheItem!.page = 1;
     _cacheItem!.query = '';
     //  _cacheItem.lcombo = ItemUi.getcombojenislokasi();
@@ -31,8 +31,8 @@ class BlocPageTabDs {
       if (value != null) {
         UIPageTabDs item = value;
         _cacheItem!.maxrecordperhit = item.maxrecordperhit;
-        _cacheItem!.loutlet!.clear();
-        _cacheItem!.loutlet!.addAll(item.loutlet!);
+        _cacheItem!.lLokasi!.clear();
+        _cacheItem!.lLokasi!.addAll(item.lLokasi!);
         _cacheItem!.total = item.total;
         _sinkItem(_cacheItem);
       }
@@ -47,7 +47,7 @@ class BlocPageTabDs {
         .then((value) {
       if (value != null) {
         UIPageTabDs item = value;
-        _cacheItem!.loutlet!.addAll(item.loutlet!);
+        _cacheItem!.lLokasi!.addAll(item.lLokasi!);
         _sinkItem(_cacheItem);
       }
     });
@@ -56,11 +56,10 @@ class BlocPageTabDs {
   void searchByQuery(EnumTab enumTab, String query) {
     _cacheItem!.page = 0;
     _httpPageDs
-        .cariOutlet(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, query)
+        .cariLokasi(enumTab, _cacheItem!.tglAwal, _cacheItem!.tglAkhir, query)
         .then((value) {
-      print(value);
       if (value != null) {
-        _cacheItem!.loutlet = value;
+        _cacheItem!.lLokasi = value;
         _sinkItem(_cacheItem);
       }
     });
@@ -70,7 +69,7 @@ class BlocPageTabDs {
     _cacheItem!.tglAwal = dt;
     if (_cacheItem!.tglAkhir != null) {
       bool ok = _cacheItem!.tglAkhir!.isBefore(_cacheItem!.tglAwal!);
-      print(ok);
+
       if (ok) {
         _cacheItem!.tglAkhir = _cacheItem!.tglAwal;
       }
@@ -98,7 +97,7 @@ class BlocPageTabDs {
 }
 
 class UIPageTabDs {
-  List<LokasiSearch>? loutlet;
+  List<LokasiSearch>? lLokasi;
   DateTime? tglAwal;
   DateTime? tglAkhir;
   int page = 1;
@@ -109,22 +108,22 @@ class UIPageTabDs {
   // List<ItemComboJenisLokasi> lcombo;
 
   int getCountList() {
-    if (loutlet == null) {
+    if (lLokasi == null) {
       return 0;
     }
 
     if (isShowmoreVisible()) {
-      return loutlet!.length + 1;
+      return lLokasi!.length + 1;
     }
-    return loutlet!.length;
+    return lLokasi!.length;
   }
 
   bool isShowmoreVisible() {
-    if (loutlet == null) {
+    if (lLokasi == null) {
       return false;
     }
 
-    if (loutlet!.isEmpty) {
+    if (lLokasi!.isEmpty) {
       return false;
     }
 
@@ -132,7 +131,7 @@ class UIPageTabDs {
       return false;
     }
 
-    int hm = loutlet!.length % 50;
+    int hm = lLokasi!.length % 50;
     if (hm == 0) {
       return true;
     }
