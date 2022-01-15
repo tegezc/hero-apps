@@ -211,7 +211,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
   EnumStateLogin? _stateLogin;
   EnumAccount? _enumAccount;
   String? _iduser = '';
- // late List<BottomNavigationBarItem> _btmMenu;
+  // late List<BottomNavigationBarItem> _btmMenu;
 
   /// test only
   final bool _test = false;
