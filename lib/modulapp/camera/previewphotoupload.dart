@@ -158,7 +158,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
     print("proses clockin clockout");
     print("hasil clock in: $isclockin");
     if (isclockin) {
-      bool value = await _uploadPhotoDistributionIsSuccess();
+      bool value = await _uploadPhotoDistributionIsSuccess(isClose: true);
       print("hasil upload photo: $isclockin");
       if (value) {
         bool isclockout = await clockInClockOutController.clockOut();
@@ -172,7 +172,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
 
   /// ambil photo menu distribusi sekaligus tag as finish
   Future<FinishMenu?> _uploadPhotoDistribution() async {
-    bool value = await _uploadPhotoDistributionIsSuccess();
+    bool value = await _uploadPhotoDistributionIsSuccess(isClose: false);
     if (value) {
       HttpDashboard httpDashboard = HttpDashboard();
       FinishMenu vcheckout =
@@ -182,8 +182,9 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
     return null;
   }
 
-  Future<bool> _uploadPhotoDistributionIsSuccess() async {
+  Future<bool> _uploadPhotoDistributionIsSuccess(
+      {required bool isClose}) async {
     HttpDIstribution httpDist = HttpDIstribution();
-    return await httpDist.uploadPhoto(_urlImageOrNull!, isclose: false);
+    return await httpDist.uploadPhoto(_urlImageOrNull!, isclose: isClose);
   }
 }
