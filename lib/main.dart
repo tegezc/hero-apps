@@ -211,7 +211,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
   EnumStateLogin? _stateLogin;
   EnumAccount? _enumAccount;
   String? _iduser = '';
-  late List<BottomNavigationBarItem> _btmMenu;
+ // late List<BottomNavigationBarItem> _btmMenu;
 
   /// test only
   final bool _test = false;
@@ -350,7 +350,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
               ),
               label: '', // 'Coverage'
             ),
-            if (_enumAccount == EnumAccount.sf)
+            if (_enumAccount == EnumAccount.sf ||
+                _enumAccount == EnumAccount.ds)
               BottomNavigationBarItem(
                 // icon: Icon(Icons.location_on),
                 icon: Image(
@@ -415,6 +416,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
         {
           if (_enumAccount == EnumAccount.sf) {
             return PageSurvey();
+          } else if (_enumAccount == EnumAccount.ds) {
+            return PageMarketAudit();
           }
         }
     }

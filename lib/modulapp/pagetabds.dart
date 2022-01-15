@@ -3,7 +3,7 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
 import 'package:hero/modulapp/blocpagetabds.dart';
 import 'package:hero/modulapp/coverage/faktur/fakturbelanjads.dart';
-import 'package:hero/modulapp/marketaudit/sf/hphistorysurvey.dart';
+//import 'package:hero/modulapp/marketaudit/sf/hphistorysurvey.dart';
 import 'package:hero/modulapp/promotion/hpviewpromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -12,6 +12,7 @@ import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 
+import 'marketaudit/ds/marketauditdsview.dart';
 import 'merchandising/homeviewmerchandising.dart';
 
 class PageDistribusiDs extends StatelessWidget {
@@ -41,6 +42,15 @@ class PagePromotionDs extends StatelessWidget {
   }
 }
 
+class PageMarketAudit extends StatelessWidget {
+  const PageMarketAudit({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const PageTabDs(EnumTab.marketaudit);
+  }
+}
+
 class PageTabDs extends StatefulWidget {
   final EnumTab enumTab;
   const PageTabDs(this.enumTab, {Key? key}) : super(key: key);
@@ -49,12 +59,12 @@ class PageTabDs extends StatefulWidget {
 }
 
 class _PageTabDsState extends State<PageTabDs> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   late BlocPageTabDs _blocPageTabDs;
   late bool _isbtnfiltershow;
   int _counterBuild = 0;
-  HoreBoxDecoration _horeBoxDecoration = HoreBoxDecoration();
+  final HoreBoxDecoration _horeBoxDecoration = HoreBoxDecoration();
   @override
   void initState() {
     _isbtnfiltershow = false;
@@ -242,7 +252,7 @@ class _PageTabDsState extends State<PageTabDs> {
         return _btnShowMore();
       }
     }
-    LokasiSearch item = uiPageTabDs.loutlet![index];
+    LokasiSearch item = uiPageTabDs.lLokasi![index];
     return widget.enumTab != EnumTab.distribution
         ? _cellOutlet(item)
         : _cellOutletDistibusi(item);
@@ -360,7 +370,7 @@ class _PageTabDsState extends State<PageTabDs> {
         break;
       case EnumTab.marketaudit:
         {
-          CommonUi.openPage(context, HomeHistorySurvey(item));
+          CommonUi.openPage(context, MarketAuditDsView(lokasiSearch: item));
         }
         break;
       case EnumTab.mt:

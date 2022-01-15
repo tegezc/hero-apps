@@ -20,10 +20,14 @@ class LokasiSearch {
   // "no_hp_pembeli": "82280521988"
 
   LokasiSearch.fromJson(Map<String, dynamic> map) {
-    if (map['id_outlet'] == null) {
-      idoutlet = map['id_tempat'] == null ? '' : map['id_tempat'];
-    } else {
+    if (map['id_outlet'] != null) {
       idoutlet = map['id_outlet'];
+    } else if (map['id_tempat'] != null) {
+      idoutlet = map['id_tempat'];
+    }
+    if (map['id'] != null) {}
+    {
+      idoutlet = map['id'];
     }
 
     idjnslokasi = map['id_jenis_lokasi'] == null ? '' : map['id_jenis_lokasi'];
