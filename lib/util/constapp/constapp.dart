@@ -1,5 +1,5 @@
 class ConstApp {
-//  static const String _host = 'horedev.com';//Development
+//  static const String _host = 'horedev.com'; //Development
   static const String _host = 'sihore.com'; //Production
   static const String domain = 'https://$_host/apihore/index.php';
   static const String keyOutlet = 'OUT';

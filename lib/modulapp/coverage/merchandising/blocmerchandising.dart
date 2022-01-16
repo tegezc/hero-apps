@@ -46,31 +46,7 @@ class BlocMerchandising {
     HttpMerchandising httpm = HttpMerchandising();
     Map<String, Merchandising>? map = await httpm.getDetailMerch(
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
-    if (map != null) {
-      if (map[Merchandising.tagPerdana] != null) {
-        _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
-      }
-
-      if (map[Merchandising.tagVoucherFisik] != null) {
-        _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
-      }
-
-      if (map[Merchandising.tagSpanduk] != null) {
-        _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
-      }
-
-      if (map[Merchandising.tagPoster] != null) {
-        _cacheUiMerc!.poster = map[Merchandising.tagPoster];
-      }
-
-      if (map[Merchandising.tagPapan] != null) {
-        _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
-      }
-
-      if (map[Merchandising.tagBackdrop] != null) {
-        _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
-      }
-    }
+    _setChacehMerchadisingFromInternet(map);
 
     if (_cacheUiMerc!.perdana == null) {
       _cacheUiMerc!.perdana =
@@ -107,12 +83,7 @@ class BlocMerchandising {
         pjp.id, DateTime.now(), pjp.getJenisLokasi());
     FinishMenu vcheckout = FinishMenu(false, null);
     if (map != null) {
-      _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
-      _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
-      _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
-      _cacheUiMerc!.poster = map[Merchandising.tagPoster];
-      _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
-      _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
+      _setChacehMerchadisingFromInternet(map);
 
       // print(_cacheUiMerc!.etalase);
       // print(_cacheUiMerc!.spanduk);
@@ -172,32 +143,36 @@ class BlocMerchandising {
       Map<String, Merchandising>? map = await httpm.getDetailMerch(
           _cachePjp.id, DateTime.now(), _cachePjp.getJenisLokasi());
 
-      if (map != null) {
-        if (map[Merchandising.tagPerdana] != null) {
-          _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
-        }
-        if (map[Merchandising.tagVoucherFisik] != null) {
-          _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
-        }
-
-        if (map[Merchandising.tagSpanduk] != null) {
-          _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
-        }
-
-        if (map[Merchandising.tagPoster] != null) {
-          _cacheUiMerc!.poster = map[Merchandising.tagPoster];
-        }
-
-        if (map[Merchandising.tagPapan] != null) {
-          _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
-        }
-
-        if (map[Merchandising.tagBackdrop] != null) {
-          _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
-        }
-      }
+      _setChacehMerchadisingFromInternet(map);
     }
     return result;
+  }
+
+  void _setChacehMerchadisingFromInternet(Map<String, Merchandising>? map) {
+    if (map != null) {
+      if (map[Merchandising.tagPerdana] != null) {
+        _cacheUiMerc!.perdana = map[Merchandising.tagPerdana];
+      }
+      if (map[Merchandising.tagVoucherFisik] != null) {
+        _cacheUiMerc!.voucherFisik = map[Merchandising.tagVoucherFisik];
+      }
+
+      if (map[Merchandising.tagSpanduk] != null) {
+        _cacheUiMerc!.spanduk = map[Merchandising.tagSpanduk];
+      }
+
+      if (map[Merchandising.tagPoster] != null) {
+        _cacheUiMerc!.poster = map[Merchandising.tagPoster];
+      }
+
+      if (map[Merchandising.tagPapan] != null) {
+        _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
+      }
+
+      if (map[Merchandising.tagBackdrop] != null) {
+        _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
+      }
+    }
   }
 
   void changeText(

@@ -46,7 +46,7 @@ class HttpDashboard {
       "id_tempat": pjp.id,
       "id_jenis_lokasi": pjp.idjenilokasi,
     };
-
+    print(map);
     Uri uri = ConstApp.uri('/clockin/pjp_clockin');
     http.Response? response;
     try {
