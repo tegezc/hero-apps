@@ -116,6 +116,7 @@ flutter:
     - assets/image/feature_button/ic_cari_outlet.png
     - assets/image/feature_button/ic_retur.png
     - assets/image/feature_button/ic_tambah_outlet.png
+    - assets/image/feature_button/ic_extra_penjualan.png
     - assets/csv/kecamatan.csv
     - assets/csv/kabupaten.csv
     - assets/csv/provinsi.csv

@@ -6,7 +6,7 @@ class Configuration {
   }
 
   Configuration._internal();
-  final bool _isProduction = true;
+  final bool _isProduction = false;
   String host() {
     if (_isProduction) {
       return 'sihore.com';

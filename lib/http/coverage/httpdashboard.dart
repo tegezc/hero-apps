@@ -10,18 +10,16 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:http/http.dart' as http;
 
-import '../httputil.dart';
-
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {
     Uri uri = configuration.uri('/lokasi/pjp_daftar');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarPjp(value);
+        return _olahDaftarPjp(value);
       }
       return null;
     } catch (e) {
@@ -35,7 +33,7 @@ class HttpDashboard extends HttpBase {
   // "status" : "OPEN"
 
   Future<String?> clockin(Pjp pjp, EnumStatusTempat enumStatusTempat) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String status = 'CLOSE';
     if (enumStatusTempat == EnumStatusTempat.open) {
       status = 'OPEN';
@@ -87,7 +85,7 @@ class HttpDashboard extends HttpBase {
     // Position userLocation = await Geolocator.getCurrentPosition(
     //     desiredAccuracy: LocationAccuracy.high);
 
-    final Map<String, String> headers = await HttpUtil.getHeader();
+    final Map<String, String> headers = await getHeader();
 
     Map param = {
       "id_sales": "${sales}",
@@ -118,7 +116,7 @@ class HttpDashboard extends HttpBase {
   }
 
   Future<Menu?> getMenu() async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idhistoryPjp};
     print("ID HISTORY: $idhistoryPjp");
@@ -163,7 +161,7 @@ class HttpDashboard extends HttpBase {
   // REPORT MT
 
   Future<bool> startMenu(EnumTab enumTab) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     String keyTag = '';
     switch (enumTab) {
@@ -215,7 +213,7 @@ class HttpDashboard extends HttpBase {
       print('delete directory tidak berhasil');
     }
 
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     String keyTag = '';
     switch (enumTab) {
@@ -270,7 +268,7 @@ class HttpDashboard extends HttpBase {
   }
 
   Future<bool> clockout() async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhistorypjp = await AccountHore.getIdHistoryPjp();
 
     Map map = {"id_history_pjp": idhistorypjp};
@@ -303,7 +301,7 @@ class HttpDashboard extends HttpBase {
 
   Future<EnumStatusClockIn?> checkStatusClockIn(String idpjp) async {
     print("IDPJP CHECK: $idpjp");
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     //  String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idpjp};
 

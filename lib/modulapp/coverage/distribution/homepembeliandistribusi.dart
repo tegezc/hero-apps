@@ -279,17 +279,17 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Ya', () {
-                    Navigator.of(context).pop();
+                  child: ButtonApp.black('Ya', () async {
                     ParamPreviewPhoto params = ParamPreviewPhoto(
                       EnumTakePhoto.distribusi,
                       pathPhoto: null,
                     );
                     // CommonUi.openPage(context, CameraView(params));
-                    Navigator.push(
+                    await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CameraView(params)));
+                    Navigator.of(context).pop();
                   }),
                 ),
                 Padding(

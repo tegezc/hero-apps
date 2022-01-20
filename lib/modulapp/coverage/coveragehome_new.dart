@@ -20,6 +20,8 @@ import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 
 class CoverageHome extends StatefulWidget {
+  const CoverageHome({Key? key}) : super(key: key);
+
   @override
   _CoverageHomeState createState() => _CoverageHomeState();
 }
@@ -89,64 +91,82 @@ class _CoverageHomeState extends State<CoverageHome> {
                       child: _account(
                           item.profile.namaSales, item.profile.namaTap)),
                   const SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                if (item.enumAccount == EnumAccount.sf) {
-                                  // CommonUi.openPage(context, SearchLocation());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SearchLocation()));
-                                } else {
-                                  // CommonUi.openPage(context, SearchLocationDs());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SearchLocationDs()));
-                                }
-                              },
-                              child: const Image(
-                                  image: AssetImage(
-                                      'assets/image/feature_button/ic_cari_outlet.png'),
-                                  height: 35)),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                if (item.enumAccount == EnumAccount.sf) {
-                                  Navigator.pushNamed(
-                                      context, EditorOutlet.routeName,
-                                      arguments: null);
-                                } else {
-                                  _showDialogPilihTambahLokasi();
-                                }
-                              },
-                              child: const Image(
-                                  image: AssetImage(
-                                      'assets/image/feature_button/ic_tambah_outlet.png'),
-                                  height: 35)),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          GestureDetector(
-                              onTap: () {
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              if (item.enumAccount == EnumAccount.sf) {
+                                // CommonUi.openPage(context, SearchLocation());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SearchLocation()));
+                              } else {
+                                // CommonUi.openPage(context, SearchLocationDs());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchLocationDs()));
+                              }
+                            },
+                            child: const Image(
+                                image: AssetImage(
+                                    'assets/image/feature_button/ic_cari_outlet.png'),
+                                height: 35)),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              if (item.enumAccount == EnumAccount.sf) {
                                 Navigator.pushNamed(
-                                    context, HomePageRetur.routeName);
-                              },
-                              child: const Image(
-                                  image: AssetImage(
-                                      'assets/image/feature_button/ic_retur.png'),
-                                  height: 35)),
-                        ]),
+                                    context, EditorOutlet.routeName,
+                                    arguments: null);
+                              } else {
+                                _showDialogPilihTambahLokasi();
+                              }
+                            },
+                            child: const Image(
+                                image: AssetImage(
+                                    'assets/image/feature_button/ic_tambah_outlet.png'),
+                                height: 35)),
+                      ]),
+                  const SizedBox(
+                    height: 10.0,
                   ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              if (item.enumAccount == EnumAccount.sf) {
+                                Navigator.pushNamed(
+                                    context, EditorOutlet.routeName,
+                                    arguments: null);
+                              } else {
+                                _showDialogPilihTambahLokasi();
+                              }
+                            },
+                            child: const Image(
+                                image: AssetImage(
+                                    'assets/image/feature_button/ic_extra_penjualan.png'),
+                                height: 35)),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, HomePageRetur.routeName);
+                            },
+                            child: const Image(
+                                image: AssetImage(
+                                    'assets/image/feature_button/ic_retur.png'),
+                                height: 35)),
+                      ]),
                   Expanded(
                     child: Container(
                         padding: const EdgeInsets.only(top: 10),
