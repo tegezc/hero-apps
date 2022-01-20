@@ -1,18 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../httputil.dart';
-
-class HttpMerchandising {
+class HttpMerchandising extends HttpBase {
   // -form 'id_history_pjp="35"' \
   // --form 'id_jenis_share="SPANDUK"' \
   // --form 'telkomsel="1"' \
@@ -27,7 +25,7 @@ class HttpMerchandising {
   // --form 'myfile3=@"/path/to/file"'
 
   Future<bool> createMerchadising(Merchandising merchandising) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String? path1 = merchandising.pathPhoto1;
     String? path2 = merchandising.pathPhoto2;
@@ -35,10 +33,8 @@ class HttpMerchandising {
     print("ID JENIS Share: ${merchandising.idjenisshare}");
 
     ///===================================
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            '${ConstApp.domain}/clockinmerchandising/merchandising_create'));
+    var request = http.MultipartRequest('POST',
+        configuration.uri('/clockinmerchandising/merchandising_create'));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_share'] = merchandising.idjenisshare!;
@@ -149,11 +145,11 @@ class HttpMerchandising {
       default:
         namalokasi = '';
     }
-    Uri uri = ConstApp.uri(
+    Uri uri = configuration.uri(
         '/bottommenumerchandising/merchandising_detail/$idoutlet/$namalokasi/$strDt');
 
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       print(response.statusCode);

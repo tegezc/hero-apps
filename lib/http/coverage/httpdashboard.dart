@@ -1,20 +1,20 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/model/tgzlocation.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:http/http.dart' as http;
 
 import '../httputil.dart';
 
-class HttpDashboard {
+class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {
-    Uri uri = ConstApp.uri('/lokasi/pjp_daftar');
+    Uri uri = configuration.uri('/lokasi/pjp_daftar');
     try {
       final Map<String, String> headers = await HttpUtil.getHeader();
       final response = await http.get(uri, headers: headers);
@@ -47,7 +47,7 @@ class HttpDashboard {
       "id_jenis_lokasi": pjp.idjenilokasi,
     };
     print(map);
-    Uri uri = ConstApp.uri('/clockin/pjp_clockin');
+    Uri uri = configuration.uri('/clockin/pjp_clockin');
     http.Response? response;
     try {
       response = await http.post(
@@ -95,7 +95,7 @@ class HttpDashboard {
       "latitude": "${userLocation.latitute}",
       "waktu_user": "$dateString"
     };
-    Uri uri = ConstApp.uri('/tracking/tracking_pjp');
+    Uri uri = configuration.uri('/tracking/tracking_pjp');
     http.Response? response;
     try {
       response = await http.post(
@@ -122,7 +122,7 @@ class HttpDashboard {
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idhistoryPjp};
     print("ID HISTORY: $idhistoryPjp");
-    Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_status');
+    Uri uri = configuration.uri('/clockinmenu/pjp_clockin_menu_status');
     http.Response? response;
     try {
       response = await http.post(
@@ -184,7 +184,7 @@ class HttpDashboard {
         break;
     }
     Map map = {"menu_clockin": keyTag, "id_history_pjp": idhistoryPjp};
-    Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_start');
+    Uri uri = configuration.uri('/clockinmenu/pjp_clockin_menu_start');
     http.Response? response;
     try {
       response = await http.post(
@@ -238,7 +238,7 @@ class HttpDashboard {
     Map map = {"menu_clockin": keyTag, "id_history_pjp": idhistoryPjp};
     print("liat map: $map");
     http.Response? response;
-    Uri uri = ConstApp.uri('/clockinmenu/pjp_clockin_menu_finish');
+    Uri uri = configuration.uri('/clockinmenu/pjp_clockin_menu_finish');
     FinishMenu finishMenu = FinishMenu(false, null);
     try {
       response = await http.post(
@@ -276,7 +276,7 @@ class HttpDashboard {
     Map map = {"id_history_pjp": idhistorypjp};
     print(jsonEncode(map));
 
-    Uri uri = ConstApp.uri('/clockout/pjp_clockout');
+    Uri uri = configuration.uri('/clockout/pjp_clockout');
     http.Response? response;
     try {
       response = await http.post(
@@ -307,7 +307,7 @@ class HttpDashboard {
     //  String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idpjp};
 
-    Uri uri = ConstApp.uri('/clockin/pjp_clockin_status');
+    Uri uri = configuration.uri('/clockin/pjp_clockin_status');
     http.Response? response;
     try {
       response = await http.post(

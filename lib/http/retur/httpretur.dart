@@ -1,23 +1,21 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/retur.dart';
 import 'package:hero/model/serialnumber.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
-import '../httputil.dart';
-
-class HttpRetur {
+class HttpRetur extends HttpBase {
   Future<List<AlasanRetur>?> comboAlasanRetur() async {
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/combobox/retur_alasan');
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/combobox/retur_alasan');
       final response = await http.get(uri, headers: headers);
       print(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarAlasan(value);
+        return _olahDaftarAlasan(value);
       }
       return null;
     } catch (e) {
@@ -32,13 +30,13 @@ class HttpRetur {
     String starDt = DateUtility.dateToStringParam(dtstar);
     String finishDt = DateUtility.dateToStringParam(dtfinish);
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/lokasi/retur_list/$starDt/$finishDt/$page');
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/lokasi/retur_list/$starDt/$finishDt/$page');
       final response = await http.get(uri, headers: headers);
       print(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarRetur(value);
+        return _olahDaftarRetur(value);
       }
       return null;
     } catch (e) {
@@ -51,14 +49,14 @@ class HttpRetur {
       DateTime? tglAwal, DateTime? tglAkhir, String serial) async {
     String starDt = DateUtility.dateToStringYYYYMMDD(tglAwal);
     String finishDt = DateUtility.dateToStringYYYYMMDD(tglAkhir);
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     Map map = {
       "tglawal": starDt,
       "tglakhir": finishDt,
       "serial_number": serial
     };
-    Uri uri = ConstApp.uri('/lokasi/retur_list_sn');
+    Uri uri = configuration.uri('/lokasi/retur_list_sn');
     http.Response? response;
     try {
       response = await http.post(
@@ -68,7 +66,7 @@ class HttpRetur {
       );
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarRetur(value);
+        return _olahDaftarRetur(value);
       } else {
         print(response.body);
         return null;
@@ -82,13 +80,13 @@ class HttpRetur {
 
   Future<List<SerialNumber>?> getSerialnumberByRange(
       String serialawal, String serialakhir) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     // "sn_awal" : "9000011113",
     // "sn_akhir" : "9000011121"
 
     Map map = {"sn_awal": serialawal, "sn_akhir": serialakhir};
-    Uri uri = ConstApp.uri('/lokasi/retur_sn');
+    Uri uri = configuration.uri('/lokasi/retur_sn');
     http.Response? response;
     try {
       response = await http.post(
@@ -111,14 +109,14 @@ class HttpRetur {
   }
 
   Future<bool> submitRetur(List<SerialNumber> lsn, String alasan) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     List<Map> lmap = [];
-    lsn.forEach((element) {
+    for (var element in lsn) {
       lmap.add(element.toJson());
-    });
+    }
     Map map = {"alasan": alasan, "data": lmap};
-    Uri uri = ConstApp.uri('/lokasi/retur_submit');
+    Uri uri = configuration.uri('/lokasi/retur_submit');
     http.Response? response;
     try {
       response = await http.post(
@@ -146,7 +144,7 @@ class HttpRetur {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Retur retur = Retur.fromJson(map);

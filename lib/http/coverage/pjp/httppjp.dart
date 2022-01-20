@@ -1,16 +1,17 @@
 import 'dart:convert';
 
-import 'package:hero/http/httputil.dart';
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 
-class HttpPjp {
-  Future<List<Pjp>?> getHistoryPJP(String key, String? idlokasi, int? page) async {
-    Uri uri = ConstApp.uri('/lokasi/tampil_history_pjp/$key/$idlokasi/$page');
+class HttpPjp extends HttpBase {
+  Future<List<Pjp>?> getHistoryPJP(
+      String key, String? idlokasi, int? page) async {
+    Uri uri =
+        configuration.uri('/lokasi/tampil_history_pjp/$key/$idlokasi/$page');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.statusCode);
       print(response.body);
@@ -26,9 +27,9 @@ class HttpPjp {
   }
 
   Future<int?> getJmlHistoryPjp(String? idlokasi, String key) async {
-    Uri uri = ConstApp.uri('/lokasi/jumlah_history_pjp/$key/$idlokasi');
+    Uri uri = configuration.uri('/lokasi/jumlah_history_pjp/$key/$idlokasi');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.statusCode);
       if (response.statusCode == 200) {

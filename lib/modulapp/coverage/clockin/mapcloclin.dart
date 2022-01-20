@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hero/configuration.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
@@ -33,6 +34,7 @@ class _MapClockInState extends State<MapClockIn> {
   late final ClockInClockOutController _clockInClockOutController;
 
   EnumStatusTempat? _valueRadioButton;
+  Configuration _configuration = Configuration();
 
   double _distanceInMeters = 0.0;
   Set<Circle>? circles;
@@ -85,7 +87,7 @@ class _MapClockInState extends State<MapClockIn> {
     if (widget.pjp != null && widget.pjp?.radius != null) {
       radius = widget.pjp?.radius;
     }
-    bool _isbuttonEnable = _distanceInMeters <= radius!;
+    // bool _isbuttonEnable = _distanceInMeters <= radius!;
 
     String textButton =
         'Clock In : Radius ( ${_distanceInMeters.toInt()} m ) - Max($radius)';
@@ -148,7 +150,8 @@ class _MapClockInState extends State<MapClockIn> {
                       onTap: () {
                         _buttonClockInOnClick();
                       },
-                      isenable: _isbuttonEnable,
+                      isenable: _configuration.radiusClockin(
+                          maxradius: radius, actualradius: _distanceInMeters),
                     ),
                   ),
                 ],

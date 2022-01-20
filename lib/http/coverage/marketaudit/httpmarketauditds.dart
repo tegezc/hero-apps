@@ -1,21 +1,19 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/marketaudit/frekuensipaket.dart';
 import 'package:hero/model/marketaudit/operator.dart';
 import 'package:hero/model/marketaudit/quisioner.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
-import '../../httputil.dart';
-
-class HttpMarketAuditDs {
+class HttpMarketAuditDs extends HttpBase {
   Future<bool> createQuisioner(Quisioner quisioner) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/clockinmarketaudit/marketaudit_create_quisioner');
+    Map<String, String> headers = await getHeader();
+    Uri uri =
+        configuration.uri('/clockinmarketaudit/marketaudit_create_quisioner');
     http.Response? response;
     try {
-      print("json di kirim: ${quisioner.toJson()}");
       response = await http.post(
         uri,
         headers: headers,
@@ -37,9 +35,9 @@ class HttpMarketAuditDs {
 
   Future<List<Operator>> getListOperator() async {
     List<Operator> lOperator = List.empty(growable: true);
-    Uri uri = ConstApp.uri('/combobox/provider');
+    Uri uri = configuration.uri('/combobox/provider');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
@@ -62,9 +60,9 @@ class HttpMarketAuditDs {
 
   Future<List<FrekuensiPaket>> getListFrekuensi() async {
     List<FrekuensiPaket> lFrekuensi = List.empty(growable: true);
-    Uri uri = ConstApp.uri('/combobox/frekuensi_paket');
+    Uri uri = configuration.uri('/combobox/frekuensi_paket');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
@@ -90,10 +88,10 @@ class HttpMarketAuditDs {
       required String idloksi,
       required DateTime tgl}) async {
     String strDt = DateUtility.dateToStringParam(tgl);
-    Uri uri = ConstApp.uri(
+    Uri uri = configuration.uri(
         '/bottommenumarketaudit/marketaudit_detail_quisioner/$jenislokasi/$idloksi/$strDt');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print("${uri.path}: ${response.body} : code ${response.statusCode}");
       if (response.statusCode == 200) {
@@ -102,7 +100,6 @@ class HttpMarketAuditDs {
       }
       return null;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }

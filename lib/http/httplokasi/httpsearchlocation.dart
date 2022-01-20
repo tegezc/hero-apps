@@ -1,17 +1,14 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:http/http.dart' as http;
 
-import '../httputil.dart';
-
-class HttpSearchLocation {
-
+class HttpSearchLocation extends HttpBase {
   Future<List<dynamic>?> cari(
       String query, EnumJenisLokasi enumJenisLokasi) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     Map<String, dynamic> map;
     String namalokasi = '';
@@ -33,9 +30,10 @@ class HttpSearchLocation {
         break;
     }
     map = {"id_jenis_lokasi": namalokasi, "cari": query};
-    Uri uri = ConstApp.uri('/lokasi/cari');
+    Uri uri = configuration.uri('/lokasi/cari');
     try {
-      http.Response response = await http.post(uri,
+      http.Response response = await http.post(
+        uri,
         headers: headers,
         body: jsonEncode(map),
       );
@@ -52,15 +50,14 @@ class HttpSearchLocation {
   }
 
   Future<List<Provinsi>?> getDaftarProvinsi() async {
-    Uri uri = ConstApp.uri('/combobox/provinsi');
+    Uri uri = configuration.uri('/combobox/provinsi');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      final response =
-          await http.get(uri, headers: headers);
+      final Map<String, String> headers = await getHeader();
+      final response = await http.get(uri, headers: headers);
       //  print(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahProvinsi(value);
+        return _olahProvinsi(value);
       }
       return null;
     } catch (e) {
@@ -70,9 +67,9 @@ class HttpSearchLocation {
   }
 
   Future<List<Kecamatan>?> getListKecamatan(String? idkab) async {
-    Uri uri = ConstApp.uri('/combobox/kecamatan');
+    Uri uri = configuration.uri('/combobox/kecamatan');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_kabupaten": "$idkab"}));
       //  print(json.decode(response.body));
@@ -88,9 +85,9 @@ class HttpSearchLocation {
   }
 
   Future<List<Kabupaten>?> getListKabupaten(String? idprov) async {
-    Uri uri = ConstApp.uri('/combobox/kabupaten');
+    Uri uri = configuration.uri('/combobox/kabupaten');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_provinsi": "$idprov"}));
       //   print(json.decode(response.body));
@@ -107,8 +104,8 @@ class HttpSearchLocation {
 
   Future<List<Kelurahan>?> getListKelurahan(String? idkecamatan) async {
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/combobox/kelurahan');
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/combobox/kelurahan');
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_kecamatan": "$idkecamatan"}));
       // print(response.statusCode);
@@ -127,28 +124,25 @@ class HttpSearchLocation {
 
   Future<Kecamatan?> getKec(String? idkelurahan) async {
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/combobox/select_kecamatan/$idkelurahan');
-      final response = await http.get(uri,
-          headers: headers);
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/combobox/select_kecamatan/$idkelurahan');
+      final response = await http.get(uri, headers: headers);
       //  print(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahKec(value);
+        return _olahKec(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
 
   Future<Kabupaten?> getKab(String? idkec) async {
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/combobox/select_kabupaten/$idkec');
-      final response = await http.get(uri,
-          headers: headers);
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/combobox/select_kabupaten/$idkec');
+      final response = await http.get(uri, headers: headers);
       //   print(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -163,10 +157,9 @@ class HttpSearchLocation {
 
   Future<Provinsi?> getProv(String? idkab) async {
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
-      Uri uri = ConstApp.uri('/combobox/select_provinsi/$idkab');
-      final response = await http.get(uri,
-          headers: headers);
+      final Map<String, String> headers = await getHeader();
+      Uri uri = configuration.uri('/combobox/select_provinsi/$idkab');
+      final response = await http.get(uri, headers: headers);
       //  print(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -223,7 +216,7 @@ class HttpSearchLocation {
 
   List<Kabupaten> _olahKabupaten(dynamic value) {
     print(value);
-    List<Kabupaten> lkab =[];
+    List<Kabupaten> lkab = [];
     try {
       List<dynamic> ld = value;
       if (ld.length > 0) {

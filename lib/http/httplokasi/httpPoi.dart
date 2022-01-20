@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:hero/http/httputil.dart';
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/poi.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:http/http.dart' as http;
 
-class HttpPoi {
+class HttpPoi extends HttpBase {
   Future<List<dynamic>?> detailPoi(String? idpoi) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/tampil/POI/$idpoi');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/tampil/POI/$idpoi');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -21,9 +20,8 @@ class HttpPoi {
   }
 
   Future<Map<String, dynamic>?> createPoi(Poi poi) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/poi_create');
-    print(poi.toJson());
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/poi_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -46,8 +44,8 @@ class HttpPoi {
   }
 
   Future<Map<String, dynamic>?> updatePoi(Poi poi) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/poi_update/${poi.idpoi}');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/poi_update/${poi.idpoi}');
     http.Response? response;
     try {
       response = await http.post(

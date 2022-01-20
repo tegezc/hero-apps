@@ -1,16 +1,14 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/Fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:http/http.dart' as http;
 
-import '../httputil.dart';
-
-class HttpFakultas {
+class HttpFakultas extends HttpBase {
   Future<List<dynamic>?> detailFakultas(String? idfak) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/tampil/FAK/$idfak');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/tampil/FAK/$idfak');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -23,8 +21,8 @@ class HttpFakultas {
   }
 
   Future<Map<String, dynamic>?> createFakultas(Fakultas outlet) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/fakultas_create');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/fakultas_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -47,8 +45,8 @@ class HttpFakultas {
   }
 
   Future<Map<String, dynamic>?> updateFakultas(Fakultas outlet) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/fakultas_update/${outlet.idfak}');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/fakultas_update/${outlet.idfak}');
     http.Response? response;
     try {
       response = await http.post(
@@ -71,9 +69,9 @@ class HttpFakultas {
   }
 
   Future<List<Universitas>?> getComboUniv() async {
-    Uri uri = ConstApp.uri('/combobox/universitas');
+    Uri uri = configuration.uri('/combobox/universitas');
     try {
-      Map<String, String> headers = await HttpUtil.getHeader();
+      Map<String, String> headers = await getHeader();
       http.Response response = await http.get(uri, headers: headers);
 
       print(response.body);

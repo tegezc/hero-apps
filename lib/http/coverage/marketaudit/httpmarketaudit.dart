@@ -1,23 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../../httputil.dart';
+//import '../../httputil.dart';
 
-class HttpMarketAuditSF {
+class HttpMarketAuditSF extends HttpBase {
   Future<bool> createSurvey(Map<String, dynamic> map) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     print(jsonEncode(map));
-    Uri uri = ConstApp.uri(
-        '/clockinmarketaudit/marketaudit_create_broadband_voucher');
+    Uri uri = configuration
+        .uri('/clockinmarketaudit/marketaudit_create_broadband_voucher');
     http.Response? response;
     try {
       response = await http.post(
@@ -52,7 +52,7 @@ class HttpMarketAuditSF {
   // --form 'myfile1=@"/Users/nofyanugrahputri/Desktop/sa.jpeg"'
 
   Future<bool> createSurveyBelanja(Map<String, dynamic> map) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String path1 = map['path'];
     // Map<String, dynamic> mp = {
@@ -68,10 +68,8 @@ class HttpMarketAuditSF {
     //   "path":""
     // };
     ///===================================
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            '${ConstApp.domain}/clockinmarketaudit/marketaudit_create_belanja'));
+    var request = http.MultipartRequest('POST',
+        configuration.uri('/clockinmarketaudit/marketaudit_create_belanja'));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_share'] = map['id_jenis_share'];
@@ -121,10 +119,10 @@ class HttpMarketAuditSF {
         break;
     }
     String strDt = DateUtility.dateToStringParam(tgl);
-    Uri uri = ConstApp.uri(
+    Uri uri = configuration.uri(
         '/bottommenumarketaudit/marketaudit_detail/$idshare/$idoutlet/$strDt');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print("$idshare : ${response.body}");
       if (response.statusCode == 200) {

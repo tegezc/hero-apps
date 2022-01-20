@@ -1,15 +1,13 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/universitas.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:http/http.dart' as http;
 
-import '../httputil.dart';
-
-class HttpKampus {
+class HttpKampus extends HttpBase {
   Future<List<dynamic>?> detailUniv(String? iduniv) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/tampil/KAM/$iduniv');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/tampil/KAM/$iduniv');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -22,10 +20,10 @@ class HttpKampus {
   }
 
   Future<Map<String, dynamic>?> createKampus(Universitas univ) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     print(univ.toJson());
-    Uri uri = ConstApp.uri('/lokasi/kampus_create');
+    Uri uri = configuration.uri('/lokasi/kampus_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -48,8 +46,8 @@ class HttpKampus {
   }
 
   Future<Map<String, dynamic>?> updateKampus(Universitas univ) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/kampus_update/${univ.iduniv}');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/kampus_update/${univ.iduniv}');
     http.Response? response;
     try {
       response = await http.post(

@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:hero/http/httputil.dart';
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/outlet.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:http/http.dart' as http;
 
-class HttpOutlet {
+class HttpOutlet extends HttpBase {
   Future<List<ItemComboJenisOutlet>?> comboJenisOutlet() async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/combobox/outlet_jenis');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/combobox/outlet_jenis');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -25,8 +24,8 @@ class HttpOutlet {
   }
 
   Future<List<dynamic>?> detailOutlet(String? idoutlet) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/lokasi/tampil/OUT/$idoutlet');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/lokasi/tampil/OUT/$idoutlet');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -39,10 +38,10 @@ class HttpOutlet {
   }
 
   Future<Map<String, dynamic>?> createOutlet(Outlet outlet) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     print(jsonEncode(outlet.toJson()));
-    Uri uri = ConstApp.uri('/lokasi/outlet_create');
+    Uri uri = configuration.uri('/lokasi/outlet_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -65,9 +64,9 @@ class HttpOutlet {
   }
 
   Future<Map<String, dynamic>?> updateOutlet(Outlet outlet) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     print(outlet.toJson());
-    Uri uri = ConstApp.uri('/lokasi/outlet_update/${outlet.idoutlet}');
+    Uri uri = configuration.uri('/lokasi/outlet_update/${outlet.idoutlet}');
     http.Response? response;
     try {
       response = await http.post(

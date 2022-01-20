@@ -1,15 +1,13 @@
 import 'dart:convert';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/sf/itemsearchoutlet.dart';
 import 'package:hero/modulapp/blocpagetabds.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
-import 'httputil.dart';
-
-class HttphpsearchDs {
+class HttphpsearchDs extends HttpBase {
   /// dtstart dab dtfinish tidak boleh null
   Future<UIPageTabDs?> getDaftarLokasi(
       EnumTab enumTab, DateTime? dtstar, DateTime? dtfinish, int page) async {
@@ -35,9 +33,9 @@ class HttphpsearchDs {
       //   // TODO: Handle this case.
       //   break;
     }
-    Uri uri = ConstApp.uri('/$url/$starDt/$finishDt/$page');
+    Uri uri = configuration.uri('/$url/$starDt/$finishDt/$page');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.statusCode);
       print(response.body);
@@ -56,7 +54,7 @@ class HttphpsearchDs {
       DateTime? tglAkhir, String query) async {
     String starDt = DateUtility.dateToStringYYYYMMDD(tglAwal);
     String finishDt = DateUtility.dateToStringYYYYMMDD(tglAkhir);
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     String url = '';
     switch (enumTab) {
@@ -80,7 +78,7 @@ class HttphpsearchDs {
     }
 
     Map map = {"tglawal": starDt, "tglakhir": finishDt, "cari": query};
-    Uri uri = ConstApp.uri('/$url');
+    Uri uri = configuration.uri('/$url');
 
     http.Response? response;
     try {
@@ -93,7 +91,7 @@ class HttphpsearchDs {
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarOutletquery(value);
+        return _olahDaftarOutletquery(value);
       } else {
         return null;
       }

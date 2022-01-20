@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/distribusi/nota.dart';
 import 'package:hero/model/distribusi/rekomendasi.dart';
@@ -8,24 +9,21 @@ import 'package:hero/model/pjp.dart';
 import 'package:hero/model/distribusi/product.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../httputil.dart';
-
-class HttpDIstribution {
+class HttpDIstribution extends HttpBase {
   Future<List<Product>?> getDaftarProduct() async {
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_daftar_produk');
+    Uri uri = configuration.uri('/clockindistribusi/penjualan_daftar_produk');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarProduct(value);
+        return _olahDaftarProduct(value);
       }
       return null;
     } catch (e) {
@@ -35,9 +33,9 @@ class HttpDIstribution {
   }
 
   Future<int?> getSisaLinkaja() async {
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_limit_linkaja');
+    Uri uri = configuration.uri('/clockindistribusi/penjualan_limit_linkaja');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
@@ -59,9 +57,10 @@ class HttpDIstribution {
   }
 
   Future<DetailNota?> getDetailNota(String? nota) async {
-    Uri uri = ConstApp.uri('/clockindistribusi/distribusi_detail_nota/$nota');
+    Uri uri =
+        configuration.uri('/clockindistribusi/distribusi_detail_nota/$nota');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print("detail nota: ${response.body}");
       if (response.statusCode == 200) {
@@ -78,15 +77,15 @@ class HttpDIstribution {
   Future<List<Nota>?> getDaftarNota(Pjp pjp) async {
     try {
       String tglparam = DateUtility.dateToStringParam(DateTime.now());
-      Uri uri = ConstApp.uri(
-          '/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      Uri uri = configuration
+          .uri('/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print("daftar nota: ${response.body}");
 
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarNota(value);
+        return _olahDaftarNota(value);
       }
       return null;
     } catch (e) {
@@ -96,11 +95,12 @@ class HttpDIstribution {
   }
 
   Future<Rekomendasi?> getRekomendasi(Pjp pjp) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     Map map = {"id_tempat": pjp.tempat!.id};
 
-    Uri uri = ConstApp.uri('/clockindistribusi/distribusi_history_rekomendasi');
+    Uri uri =
+        configuration.uri('/clockindistribusi/distribusi_history_rekomendasi');
     http.Response? response;
     try {
       response = await http.post(
@@ -124,13 +124,13 @@ class HttpDIstribution {
   }
 
   Future<List<SerialNumber>?> getAllDaftarSn(String? idproduct) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     Map map = {
       "id_produk": idproduct,
     };
 
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_daftar_sn_all');
+    Uri uri = configuration.uri('/clockindistribusi/penjualan_daftar_sn_all');
 
     http.Response? response;
     try {
@@ -156,7 +156,7 @@ class HttpDIstribution {
 
   Future<List<SerialNumber>?> getDaftarSn(
       String? idproduct, String serialawal, String serialakhir) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     Map map = {
       "id_produk": idproduct,
@@ -164,7 +164,7 @@ class HttpDIstribution {
       "sn_akhir": serialakhir
     };
 
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_daftar_sn');
+    Uri uri = configuration.uri('/clockindistribusi/penjualan_daftar_sn');
     print("URL DAFTAR SERIAL NUMBER: ${uri.path}");
 
     http.Response? response;
@@ -190,8 +190,9 @@ class HttpDIstribution {
   }
 
   Future<bool> submitKonsinyasi(DataPembeli dataPembeli) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_bayar_konsinyasi');
+    Map<String, String> headers = await getHeader();
+    Uri uri =
+        configuration.uri('/clockindistribusi/penjualan_bayar_konsinyasi');
     http.Response? response;
     print(dataPembeli.toJson());
     try {
@@ -215,7 +216,7 @@ class HttpDIstribution {
   }
 
   Future<bool> uploadPhoto(String filepath, {required bool isclose}) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String url = '';
     print(isclose);
@@ -225,11 +226,8 @@ class HttpDIstribution {
       url = 'clockindistribusi/distribusi_foto';
     }
 
-    String uri = '${ConstApp.domain}/$url';
-    print("URL upload foto clockout:  $uri");
-
     ///===================================
-    var request = http.MultipartRequest('POST', Uri.parse(uri));
+    var request = http.MultipartRequest('POST', configuration.uri(url));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
     request.files.add(http.MultipartFile.fromBytes(
@@ -255,26 +253,22 @@ class HttpDIstribution {
   }
 
   Future<bool> submitLunas(DataPembeli dataPembeli) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
-    Uri uri = ConstApp.uri('/clockindistribusi/penjualan_bayar_lunas');
+    Map<String, String> headers = await getHeader();
+    Uri uri = configuration.uri('/clockindistribusi/penjualan_bayar_lunas');
     http.Response? response;
     try {
-      print("data pembeli: ${jsonEncode(dataPembeli.toJson())}");
       response = await http.post(
         uri,
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
-      print("submit lunas: ${response.body}");
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
       return false;
     }
   }

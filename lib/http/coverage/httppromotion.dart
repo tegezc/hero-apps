@@ -2,53 +2,46 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/constapp/constapp.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../httputil.dart';
-
-class HttpPromotion {
+class HttpPromotion extends HttpBase {
   Future<bool> createPromotion(Promotion promotion) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
 
     http.Response? response;
-    Uri uri = ConstApp.uri('/clockinpromotion/promotion_create');
+    Uri uri = configuration.uri('/clockinpromotion/promotion_create');
     try {
       response = await http.post(
         uri,
         headers: headers,
         body: jsonEncode(promotion.toJson()),
       );
-      print(jsonEncode(promotion.toJson()));
-      print(response.body);
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
       return false;
     }
   }
 
   Future<List<Promotion>?> getDaftarPromotion() async {
-    Uri uri = ConstApp.uri('/clockinpromotion/promotion_jenis');
+    Uri uri = configuration.uri('/clockinpromotion/promotion_jenis');
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarPromotion(value);
+        return _olahDaftarPromotion(value);
       }
       return null;
     } catch (e) {
@@ -58,10 +51,10 @@ class HttpPromotion {
   }
 
   Future<List<Promotion>?> getPromotionFinish() async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhistorypjp = await AccountHore.getIdHistoryPjp();
     Map<String, String?> map = {"id_history_pjp": idhistorypjp};
-    Uri uri = ConstApp.uri('/clockinpromotion/promotion_list');
+    Uri uri = configuration.uri('/clockinpromotion/promotion_list');
     http.Response? response;
     try {
       response = await http.post(
@@ -109,16 +102,16 @@ class HttpPromotion {
         namalokasi = '';
     }
 
-    Uri uri = ConstApp.uri(
+    Uri uri = configuration.uri(
         '/bottommenupromotion/promotion_detail/$idoutlet/$namalokasi/$strDt');
 
     try {
-      final Map<String, String> headers = await HttpUtil.getHeader();
+      final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarPromotionDetail(value);
+        return _olahDaftarPromotionDetail(value);
       }
       return null;
     } catch (e) {
@@ -133,12 +126,13 @@ class HttpPromotion {
   // --form 'myfile1=@"/Users/nofyanugrahputri/Downloads/file_example_MP4_480_1_5MG.mp4"'
 
   Future<bool> uploadVideo(String filepath, Promotion promotion) async {
-    Map<String, String> headers = await HttpUtil.getHeader();
+    Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     Uint8List file = File(filepath).readAsBytesSync();
+
     ///===================================
-    var request = http.MultipartRequest('POST',
-        Uri.parse('${ConstApp.domain}/clockinpromotion/promotion_create'));
+    var request = http.MultipartRequest(
+        'POST', configuration.uri('/clockinpromotion/promotion_create'));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
     request.fields['id_jenis_weekly'] = promotion.idjnsweekly!;
@@ -151,16 +145,11 @@ class HttpPromotion {
       contentType: MediaType('video', 'mp4'),
       filename: 'myfile1',
     ));
-    
+
     try {
       var res = await request.send();
       var response = await http.Response.fromStream(res);
-      print('idhistory:$idhitory');
-      print(filepath);
-      print(idhitory);
-      print(promotion.idjnsweekly);
-      print(response.body);
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         int? i = ConverterNumber.stringToInt(map['status']);
