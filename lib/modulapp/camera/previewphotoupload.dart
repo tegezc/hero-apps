@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/coverage/httpdistibusi.dart';
 import 'package:hero/model/enumapp.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/util/component/button/component_button.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
 class PreviewPhotoWithUpload extends StatefulWidget {

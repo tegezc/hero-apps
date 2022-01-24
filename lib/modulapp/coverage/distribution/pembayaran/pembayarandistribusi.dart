@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/distribution/homepembeliandistribusi.dart';
 import 'package:hero/modulapp/coverage/distribution/pembayaran/blocpembayaran.dart';
 import 'package:hero/modulapp/coverage/pagesuccess.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
@@ -109,14 +109,19 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                           if (isproses) {
                             TgzDialog.loadingDialog(context);
                             _blocPembayaran.bayar().then((value) {
-                              Navigator.of(context).pop();
-                              Navigator.pushNamed(
-                                  context, PageSuccess.routeName,
-                                  arguments: PageSuccessParam(
-                                      HomePembelianDistribusi.routeName,
-                                      ConstString.textDistribusi,
-                                      'Transaksi Anda Berhasil',
-                                      ''));
+                              if (value) {
+                                Navigator.of(context).pop();
+                                Navigator.pushNamed(
+                                    context, PageSuccess.routeName,
+                                    arguments: PageSuccessParam(
+                                        HomePembelianDistribusi.routeName,
+                                        ConstString.textDistribusi,
+                                        'Transaksi Anda Berhasil',
+                                        ''));
+                              } else {
+                                Navigator.of(context).pop();
+                                _confirmPembayaranGagal();
+                              }
                             });
                           }
                         },
@@ -414,7 +419,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
 
   Widget _perhitungan(UIPembayaran item) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: size.width,
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -431,7 +436,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 _cellTextfield(_controller1),
               ],
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 18.0),
               child: Row(
@@ -465,11 +470,11 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -523,7 +528,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -568,6 +573,34 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     });
   }
 
+  _confirmPembayaranGagal() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => SimpleDialog(
+              title: LabelApp.size1(
+                'Confirm',
+                color: Colors.red,
+              ),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: LabelBlack.size2(
+                      'Proses pembayaran mengalami gangguan. Silahkan coba lagi.'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 16.0, left: 16.0, bottom: 3.0),
+                  child: ButtonApp.black('Ok', () {
+                    Navigator.of(context).pop();
+                  }),
+                ),
+              ],
+            ));
+  }
+
   _confirmSuksesSisa() {
     showDialog<String>(
         context: context,
@@ -576,7 +609,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id_jenis_share": "BELANJA",
+      "telkomsel": "1000",
+      "isat": "2000",
+      "xl": "3000",
+      "tri": "2000",
+      "smartfren": "1000",
+      "axis": "1000",
+      "other": "2000",
+      "foto_belanja": "https://horedev.com/apihore/assets/marketaudit_foto/103_BELANJA.jpeg"
+    }
+  ]
+}

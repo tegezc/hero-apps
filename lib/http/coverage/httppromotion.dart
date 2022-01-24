@@ -12,27 +12,27 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class HttpPromotion extends HttpBase {
-  Future<bool> createPromotion(Promotion promotion) async {
-    Map<String, String> headers = await getHeader();
-
-    http.Response? response;
-    Uri uri = configuration.uri('/clockinpromotion/promotion_create');
-    try {
-      response = await http.post(
-        uri,
-        headers: headers,
-        body: jsonEncode(promotion.toJson()),
-      );
-
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-  }
+  // Future<bool> createPromotionj(Promotion promotion) async {
+  //   Map<String, String> headers = await getHeader();
+  //
+  //   http.Response? response;
+  //   Uri uri = configuration.uri('/clockinpromotion/promotion_create');
+  //   try {
+  //     response = await http.post(
+  //       uri,
+  //       headers: headers,
+  //       body: jsonEncode(promotion.toJson()),
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
 
   Future<List<Promotion>?> getDaftarPromotion() async {
     Uri uri = configuration.uri('/clockinpromotion/promotion_jenis');
@@ -63,11 +63,11 @@ class HttpPromotion extends HttpBase {
         body: jsonEncode(map),
       );
 
-      print('promotion uploaded: ${response.body}');
+      print('promotion : ${response.body}');
       print(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahDaftarPromotion(value);
+        return _olahDaftarPromotion(value);
       } else {
         return null;
       }

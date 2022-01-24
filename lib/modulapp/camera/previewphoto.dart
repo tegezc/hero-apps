@@ -180,7 +180,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                           break;
                         case EnumTakePhoto.merchbackdrop:
                           StoredPathPhoto.setPhotoMerchandising(
-                                  EnumMerchandising.backdrop,
+                                  EnumMerchandising.StikerScanQR,
                                   widget.param!.enumNumber,
                                   _urlImageOrNull!)
                               .then((value) {

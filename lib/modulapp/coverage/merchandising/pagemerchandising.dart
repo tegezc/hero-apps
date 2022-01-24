@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
@@ -38,7 +38,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
   void initState() {
     switch (widget.enumMerchandising) {
       case EnumMerchandising.spanduk:
-        _title = 'Spanduk';
+        _title = 'Layar Toko';
         break;
       case EnumMerchandising.poster:
         _title = 'Poster';
@@ -46,8 +46,8 @@ class _PageMerchandisingState extends State<PageMerchandising> {
       case EnumMerchandising.papan:
         _title = 'Papan';
         break;
-      case EnumMerchandising.backdrop:
-        _title = 'Backdrop';
+      case EnumMerchandising.StikerScanQR:
+        _title = 'Stiker Scan QR';
         break;
       case EnumMerchandising.perdana:
         _title = 'Perdana';
@@ -199,7 +199,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
           params = ParamPreviewPhoto(EnumTakePhoto.merchpapan,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
-        case EnumMerchandising.backdrop:
+        case EnumMerchandising.StikerScanQR:
           params = ParamPreviewPhoto(EnumTakePhoto.merchbackdrop,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;

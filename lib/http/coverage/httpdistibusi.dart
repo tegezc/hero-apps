@@ -20,14 +20,12 @@ class HttpDIstribution extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarProduct(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -37,7 +35,7 @@ class HttpDIstribution extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      //  print(response.body);
       if (response.statusCode == 200) {
         //"status": 200,
         // "data": 10000000
@@ -51,7 +49,7 @@ class HttpDIstribution extends HttpBase {
       }
       return 0;
     } catch (e) {
-      print(e.toString());
+      //  print(e.toString());
       return 0;
     }
   }
@@ -62,14 +60,14 @@ class HttpDIstribution extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print("detail nota: ${response.body}");
+      //  print("detail nota: ${response.body}");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return DetailNota.fromJson(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       return null;
     }
   }
@@ -81,7 +79,7 @@ class HttpDIstribution extends HttpBase {
           .uri('/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print("daftar nota: ${response.body}");
+      //  print("daftar nota: ${response.body}");
 
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -89,7 +87,7 @@ class HttpDIstribution extends HttpBase {
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       return null;
     }
   }
@@ -117,8 +115,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      // print(e);
+      // print(response?.body);
       return null;
     }
   }
@@ -139,8 +137,8 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      // print(response.body);
+      // print(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarSn(value);
@@ -148,8 +146,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      // print(e);
+      // print(response?.body);
       return null;
     }
   }
@@ -165,7 +163,7 @@ class HttpDIstribution extends HttpBase {
     };
 
     Uri uri = configuration.uri('/clockindistribusi/penjualan_daftar_sn');
-    print("URL DAFTAR SERIAL NUMBER: ${uri.path}");
+    // print("URL DAFTAR SERIAL NUMBER: ${uri.path}");
 
     http.Response? response;
     try {
@@ -174,8 +172,8 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      // print(response.body);
+      // print(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarSn(value);
@@ -183,8 +181,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      // print(e);
+      // print(response?.body);
       return null;
     }
   }
@@ -201,13 +199,15 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
+      print("Submit kosinyansi");
       print(response.body);
       print(response.statusCode);
+      print("=========");
       if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
+        dynamic value = json.decode(response.body);
+        return _olahCreateSuccess(value);
       }
+      return false;
     } catch (e) {
       print(e);
       print(response?.body);
@@ -219,17 +219,18 @@ class HttpDIstribution extends HttpBase {
     Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String url = '';
-    print(isclose);
+    // print(isclose);
     if (isclose) {
-      url = 'clockout/pjp_upload_foto';
+      url = '/clockout/pjp_upload_foto';
     } else {
-      url = 'clockindistribusi/distribusi_foto';
+      url = '/clockindistribusi/distribusi_foto';
     }
 
     ///===================================
     var request = http.MultipartRequest('POST', configuration.uri(url));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
+    //  print('url: ${configuration.uri(url).path}');
     request.files.add(http.MultipartFile.fromBytes(
       'myfile1', File(filepath).readAsBytesSync(),
       // filename: filepath.split("/").last,
@@ -238,16 +239,13 @@ class HttpDIstribution extends HttpBase {
     ));
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print('idhistory:$idhitory');
-    print(filepath);
-    print(response.body);
-    print(response.statusCode);
+    // print('idhistory:$idhitory');
+    // print(filepath);
+    // print(response.body);
+    // print(response.statusCode);
     if (response.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(response.body);
-      int? i = ConverterNumber.stringToInt(map['status']);
-      if (i == 1) {
-        return true;
-      }
+      dynamic value = json.decode(response.body);
+      return _olahCreateSuccess(value);
     }
     return false;
   }
@@ -262,13 +260,18 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
-
+      print("Submit LUNAS");
+      print(response.body);
+      print(response.statusCode);
+      print("=========");
       if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
+        dynamic value = json.decode(response.body);
+        return _olahCreateSuccess(value);
       }
+      return false;
     } catch (e) {
+      print(e);
+      print(response!.body);
       return false;
     }
   }
@@ -357,7 +360,7 @@ class HttpDIstribution extends HttpBase {
           List<ItemRekomendasi> litemrek = [];
           List<dynamic> litem = ld[tag];
           if (litem.length > 0) {
-            print('2 : ${litem.length}');
+            // print('2 : ${litem.length}');
             for (int i = 0; i < litem.length; i++) {
               Map<String, dynamic> map = litem[i];
               ItemRekomendasi n = ItemRekomendasi.fromJson(map);
@@ -415,6 +418,28 @@ class HttpDIstribution extends HttpBase {
       return lsn;
     } catch (e) {
       return lsn;
+    }
+  }
+
+  bool _olahCreateSuccess(dynamic value) {
+    try {
+      Map<String, dynamic> map = value;
+      if (map['status'] is String) {
+        int? i = int.tryParse(map['status']);
+        print('nilai status berapa $i');
+        if (i == 1) {
+          return true;
+        }
+      } else if (map['status'] is int) {
+        if (map['status'] == 1) {
+          return true;
+        }
+      }
+
+      return false;
+    } catch (e) {
+      print(e.toString());
+      return false;
     }
   }
 }

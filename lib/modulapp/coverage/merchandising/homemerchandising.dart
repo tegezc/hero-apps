@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/merchandising/pagemerchandising.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
@@ -113,16 +113,16 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                         child: LabelWhite.size2('Voucher Fisik'),
                       ),
                       Tab(
-                        child: LabelWhite.size2('Spanduk'),
+                        child: LabelWhite.size2('Poster'),
                       ),
                       Tab(
-                        child: LabelWhite.size2('Poster'),
+                        child: LabelWhite.size2('Layar Toko'),
                       ),
                       Tab(
                         child: LabelWhite.size2('Papan Nama Toko'),
                       ),
                       Tab(
-                        child: LabelWhite.size2('Backdrop'),
+                        child: LabelWhite.size2('Stiker Scan QR'),
                       ),
                     ],
                   ),
@@ -142,14 +142,14 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                         _blocMerchandising),
                     PageMerchandising(EnumMerchandising.voucherfisik,
                         item.voucherFisik, _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.spanduk, item.spanduk,
-                        _blocMerchandising),
                     PageMerchandising(EnumMerchandising.poster, item.poster,
+                        _blocMerchandising),
+                    PageMerchandising(EnumMerchandising.spanduk, item.spanduk,
                         _blocMerchandising),
                     PageMerchandising(EnumMerchandising.papan, item.papanNama,
                         _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.backdrop, item.backdrop,
-                        _blocMerchandising),
+                    PageMerchandising(EnumMerchandising.StikerScanQR,
+                        item.StikerScanQR, _blocMerchandising),
                   ],
                 ),
               ),

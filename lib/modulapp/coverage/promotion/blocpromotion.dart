@@ -10,7 +10,7 @@ class UIPromotion {
 
 class BlocPromotion {
   UIPromotion? _cacheUiMerc;
-  HttpPromotion _httpPromotion = new HttpPromotion();
+  final HttpPromotion _httpPromotion = HttpPromotion();
   final BehaviorSubject<UIPromotion?> _uiProm = BehaviorSubject();
 
   Stream<UIPromotion?> get uiProm => _uiProm.stream;
@@ -18,7 +18,7 @@ class BlocPromotion {
   void reloadDataFromInternet(Pjp? pjp) {
     _cacheUiMerc = UIPromotion();
     _setupPromotion().then((value) {
-      this._sink(_cacheUiMerc);
+      _sink(_cacheUiMerc);
     });
   }
 
@@ -27,14 +27,14 @@ class BlocPromotion {
     List<Promotion>? lp = await _httpPromotion.getPromotionFinish();
     if (lp != null && _cacheUiMerc!.lprom != null) {
       _cacheUiMerc!.jmlfinish = lp.length;
-      lp.forEach((a) {
+      for (var a in lp) {
         for (int i = 0; i < _cacheUiMerc!.lprom!.length; i++) {
           Promotion p = _cacheUiMerc!.lprom![i];
           if (a.idjnsweekly == p.idjnsweekly) {
             _cacheUiMerc!.lprom![i].isVideoExist = true;
           }
         }
-      });
+      }
     }
 
     return true;

@@ -10,21 +10,17 @@ class BlocSearchLocation {
   Stream<UISearchLocation?> get uidashboard => _uidashboard.stream;
 
   void firstTime() {
-    // Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-    //     .then((value) {
-    //   print(value);
-    // });
     _cacheItem = UISearchLocation();
     _cacheItem!.ltempat = [];
 
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void searchLokasi(String query, EnumJenisLokasi enumJenisLokasi) {
     _cacheItem!.isloading = true;
     _cacheItem!.ltempat = [];
-    this._sinkItem(_cacheItem);
-    HttpSearchLocation httpDashboard = new HttpSearchLocation();
+    _sinkItem(_cacheItem);
+    HttpSearchLocation httpDashboard = HttpSearchLocation();
     List<LokasiSimple?> ltempat = [];
     httpDashboard.cari(query, enumJenisLokasi).then((value) {
       if (value != null) {
@@ -55,7 +51,7 @@ class BlocSearchLocation {
         }
         _cacheItem!.ltempat = ltempat;
         _cacheItem!.isloading = false;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }

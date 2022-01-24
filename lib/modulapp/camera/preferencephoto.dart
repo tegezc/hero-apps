@@ -59,7 +59,7 @@ class StoredPathPhoto {
       case EnumMerchandising.papan:
         p = '${p}papan';
         break;
-      case EnumMerchandising.backdrop:
+      case EnumMerchandising.StikerScanQR:
         p = '${p}backdrop';
         break;
       case EnumMerchandising.voucherfisik:

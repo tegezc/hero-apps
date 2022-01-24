@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/modulapp/coverage/location/editoroutlet.dart';
 import 'package:hero/modulapp/coverage/location/view/viewoutlet.dart';
-import 'package:hero/util/colorutil.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/horeboxdecoration.dart';
@@ -63,7 +62,6 @@ class _SearchLocationState extends State<SearchLocation> {
               child: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    //image: AssetImage('assets/image/coverage/BG.png'),
                     image: AssetImage('assets/image/new/BG.png'),
                     fit: BoxFit.cover,
                   ),
@@ -141,7 +139,6 @@ class _SearchLocationState extends State<SearchLocation> {
   }
 
   Widget _containerSearch(UISearchLocation item) {
-    print(item);
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
@@ -169,7 +166,7 @@ class _SearchLocationState extends State<SearchLocation> {
       if (_controller.text.isNotEmpty) {
         lw.add(WidgetPencarianKosong(
             text:
-                'Tidak ada hasil pencarian untuk\nkata kunci \"${_controller.text}\"'));
+                'Tidak ada hasil pencarian untuk\nkata kunci "${_controller.text}"'));
       } else {
         lw.add(const WidgetPencarianKosong(
             text:

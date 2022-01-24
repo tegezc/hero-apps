@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id_jenis_share": "SALES_BROADBAND",
+      "telkomsel_ld": "0",
+      "telkomsel_md": "0",
+      "telkomsel_hd": "0",
+      "isat_ld": "0",
+      "isat_md": "0",
+      "isat_hd": "0",
+      "xl_ld": "0",
+      "xl_md": "0",
+      "xl_hd": "0",
+      "tri_ld": "0",
+      "tri_md": "0",
+      "tri_hd": "0",
+      "smartfren_ld": "0",
+      "smartfren_md": "0",
+      "smartfren_hd": "0",
+      "axis_ld": "0",
+      "axis_md": "0",
+      "axis_hd": "0",
+      "other_ld": "0",
+      "other_md": "0",
+      "other_hd": "0"
+    }
+  ]
+}

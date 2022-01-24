@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
@@ -9,6 +8,7 @@ import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
@@ -241,6 +241,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                           File(url),
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
+                            widget.blocSurvey?.setpathphoto(null);
                             return Container();
                           },
                         )),
@@ -317,7 +318,8 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: LabelBlack.size2('Harus lebih dari 1000 rupiah.'),
+                  child: LabelBlack.size2(
+                      'Harus lebih dari 1000 rupiah atau 0 rupiah dan wajib mengambil photo.'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

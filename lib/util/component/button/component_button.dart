@@ -10,7 +10,8 @@ class ButtonLogin extends StatefulWidget {
   final Function onTap;
   final bool? isfreshstate;
 
-  ButtonLogin(this.text, {required this.onTap, this.isfreshstate});
+  ButtonLogin(this.text, {Key? key, required this.onTap, this.isfreshstate})
+      : super(key: key);
 
   @override
   _ButtonLoginState createState() => _ButtonLoginState();

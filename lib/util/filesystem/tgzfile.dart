@@ -37,10 +37,10 @@ class TgzFile implements ITgzFile {
   }
 
   Future<bool> deleteDirectory() async {
-    final Directory? extDir = await getExternalStorageDirectory();
     // extDir.deleteSync(recursive: true);
     try {
-      await extDir!.delete();
+      final Directory? extDir = await getExternalStorageDirectory();
+      await extDir!.delete(recursive: true);
       return true;
     } catch (e) {
       return false;

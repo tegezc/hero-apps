@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/inputcodeverification.dart';
 // ! Ubah path login {
@@ -21,7 +22,6 @@ import 'package:hero/modulapp/coverage/distribution/pembelianitem/pembelian_item
 import 'package:hero/modulapp/coverage/location/editoroutlet.dart';
 import 'package:hero/modulapp/coverage/merchandising/homemerchandising.dart';
 import 'package:hero/modulapp/coverage/pagesuccess.dart';
-import 'package:hero/modulapp/coverage/penilaian/uipenilaian.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
 import 'package:hero/modulapp/coverage/retur/hpretur.dart';
 import 'package:hero/modulapp/coverage/retur/retureditor.dart';
@@ -30,11 +30,11 @@ import 'package:hero/modulapp/pagetabds.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
-import 'package:hero/util/loadingpage/loadinglogin.dart';
 import 'package:hero/util/uiutil.dart';
 
 import 'model/distribusi/datapembeli.dart';
 import 'model/profile.dart';
+import 'modulapp/camera/loadingview.dart';
 import 'modulapp/camera/pagerecordvideo.dart';
 import 'modulapp/camera/pagetakephoto.dart';
 import 'modulapp/camera/previewphoto.dart';
@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
       home: HomeControllpage(
         statelogin: HomeControllpageParam(EnumStateLogin.loading),
       ),
-      //home: LoadingLoginPage(),
       navigatorObservers: <NavigatorObserver>[
         SwipeBackObserver(),
       ],
@@ -211,33 +210,47 @@ class _HomeControllpageState extends State<HomeControllpage> {
   EnumStateLogin? _stateLogin;
   EnumAccount? _enumAccount;
   String? _iduser = '';
-  // late List<BottomNavigationBarItem> _btmMenu;
-
-  /// test only
-  final bool _test = false;
+  int _counterBuild = 0;
 
   @override
   void initState() {
     _stateLogin = widget.statelogin!.enumStateLogin;
-    if (_stateLogin == EnumStateLogin.loading) {
-      _stateLogin = EnumStateLogin.loginonprogress;
-    }
     _selectedtab = 0;
     super.initState();
   }
 
+  void _cekLogin() {
+    _isAlreadyLogin().then((value) {
+      if (value) {
+        _stateLogin = EnumStateLogin.loginsuccess;
+      } else {
+        _stateLogin = EnumStateLogin.loginonprogress;
+      }
+      setState(() {});
+    });
+  }
+
+  Future<bool> _isAlreadyLogin() async {
+    HttpDashboard httpDashboard = HttpDashboard();
+    var pjphariini = await httpDashboard.getPjpHariIni();
+    if (pjphariini == null) {
+      return false;
+    }
+    return true;
+  }
+
   Widget _titleCoverage() {
     return Row(children: [
-      Image(
+      const Image(
         image: AssetImage('assets/image/coverage/ic_logo_hore.png'),
         height: 40,
       ),
-      Spacer(),
+      const Spacer(),
       GestureDetector(
           onTap: () {
             _showDialogConfirmLogout();
           },
-          child: Image(
+          child: const Image(
             image: AssetImage('assets/image/coverage/logout.png'),
             height: 40,
           ))
@@ -247,23 +260,23 @@ class _HomeControllpageState extends State<HomeControllpage> {
   Widget _titleWidget(String id) {
     return Row(
       children: [
-        Image(
+        const Image(
           image: AssetImage('assets/image/logoappbar.png'),
           height: 40,
         ),
-        SizedBox(
+        const SizedBox(
           width: 12,
         ),
         Text(
           id,
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
-        Spacer(),
+        const Spacer(),
         GestureDetector(
             onTap: () {
               _showDialogConfirmLogout();
             },
-            child: Image(
+            child: const Image(
               image: AssetImage('assets/image/coverage/logout.png'),
               height: 40,
             )),
@@ -273,21 +286,21 @@ class _HomeControllpageState extends State<HomeControllpage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_test) {
-      return UIPenilaian();
-    } else if (_stateLogin == EnumStateLogin.loading) {
-      return LoadingLoginPage();
+    if (_counterBuild == 0) {
+      _counterBuild++;
+      _cekLogin();
+    }
+    if (_stateLogin == EnumStateLogin.loading) {
+      return LoadingNunggu("Mempersiapkan data\n mohon menunggu");
     } else if (_stateLogin == EnumStateLogin.loginonprogress) {
       return LoginPage(_callbackSuccessLogin);
     } else if (_stateLogin == EnumStateLogin.loginsuccess) {
       return Scaffold(
-        extendBodyBehindAppBar: true, //_selectedtab == 0 ? true : false,
-        extendBody: true, //_selectedtab == 0 ? true : false,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
         appBar: AppBar(
-          // backgroundColor: Colors.white,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          // _selectedtab != 0 ? Colors.red[600] : Colors.transparent,
           title: _selectedtab != 0 ? _titleWidget(_iduser!) : _titleCoverage(),
         ),
         body: _getSelectedWidget(_selectedtab),
@@ -296,7 +309,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
           unselectedFontSize: 10,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          // _selectedtab == 0 ? Colors.transparent : Colors.white,
+
           type: BottomNavigationBarType.fixed,
           onTap: (v) {
             setState(() {
@@ -312,8 +325,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
               // icon: Icon(Icons.location_on),
               icon: Image(
                 image: _selectedtab == 0
-                    ? AssetImage('assets/image/icon/new/ic_coverage.png')
-                    : AssetImage('assets/image/icon/new/disable/coverage.png'),
+                    ? const AssetImage('assets/image/icon/new/ic_coverage.png')
+                    : const AssetImage(
+                        'assets/image/icon/new/disable/coverage.png'),
                 height: 50,
               ),
               label: '', // 'Coverage'
@@ -322,8 +336,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
               // icon: Icon(Icons.location_on),
               icon: Image(
                 image: _selectedtab == 1
-                    ? AssetImage('assets/image/icon/new/ic_distribution.png')
-                    : AssetImage(
+                    ? const AssetImage(
+                        'assets/image/icon/new/ic_distribution.png')
+                    : const AssetImage(
                         'assets/image/icon/new/disable/distribution.png'),
                 height: 50,
               ),
@@ -333,8 +348,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
               // icon: Icon(Icons.location_on),
               icon: Image(
                 image: _selectedtab == 2
-                    ? AssetImage('assets/image/icon/new/ic_merchandising.png')
-                    : AssetImage(
+                    ? const AssetImage(
+                        'assets/image/icon/new/ic_merchandising.png')
+                    : const AssetImage(
                         'assets/image/icon/new/disable/merchandising.png'),
                 height: 50,
               ),
@@ -344,8 +360,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
               // icon: Icon(Icons.location_on),
               icon: Image(
                 image: _selectedtab == 3
-                    ? AssetImage('assets/image/icon/new/ic_promotion.png')
-                    : AssetImage('assets/image/icon/new/disable/promotion.png'),
+                    ? const AssetImage('assets/image/icon/new/ic_promotion.png')
+                    : const AssetImage(
+                        'assets/image/icon/new/disable/promotion.png'),
                 height: 50,
               ),
               label: '', // 'Coverage'
@@ -392,7 +409,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
     switch (selectedtab) {
       case 0:
         {
-          return CoverageHome();
+          return const CoverageHome();
         }
       case 1:
         {
@@ -403,21 +420,21 @@ class _HomeControllpageState extends State<HomeControllpage> {
       case 2:
         {
           return _enumAccount == EnumAccount.sf
-              ? PageMerchandising()
-              : PageMerchandisingDs();
+              ? const PageMerchandising()
+              : const PageMerchandisingDs();
         }
       case 3:
         {
           return _enumAccount == EnumAccount.sf
-              ? PagePromotion()
-              : PagePromotionDs();
+              ? const PagePromotion()
+              : const PagePromotionDs();
         }
       case 4:
         {
           if (_enumAccount == EnumAccount.sf) {
-            return PageSurvey();
+            return const PageSurvey();
           } else if (_enumAccount == EnumAccount.ds) {
-            return PageMarketAudit();
+            return const PageMarketAudit();
           }
         }
     }
@@ -428,8 +445,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: Text('Confirm'),
-              shape: RoundedRectangleBorder(
+              title: const Text('Confirm'),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

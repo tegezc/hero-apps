@@ -22,6 +22,8 @@ import 'blocsearchlocation.dart';
 import 'hostorypjp.dart';
 
 class SearchLocationDs extends StatefulWidget {
+  const SearchLocationDs({Key? key}) : super(key: key);
+
   @override
   _SearchLocationDsState createState() => _SearchLocationDsState();
 }

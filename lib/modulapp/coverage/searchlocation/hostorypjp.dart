@@ -14,7 +14,7 @@ import 'blocsearchlocation.dart';
 class HistoryPJP extends StatefulWidget {
   // static const String routeName = '/historypjp';
   final LokasiSimple lokasi;
-  HistoryPJP(this.lokasi);
+  HistoryPJP(this.lokasi, {Key? key}) : super(key: key);
   @override
   _HistoryPJPState createState() => _HistoryPJPState();
 }

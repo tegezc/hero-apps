@@ -10,7 +10,7 @@ import 'package:rxdart/subjects.dart';
 class UIMerchan {
   Merchandising? perdana;
   Merchandising? voucherFisik;
-  Merchandising? backdrop;
+  Merchandising? StikerScanQR;
   Merchandising? papanNama;
   Merchandising? poster;
   Merchandising? spanduk;
@@ -56,8 +56,8 @@ class BlocMerchandising {
       _cacheUiMerc!.voucherFisik =
           Merchandising.kosong(pjp, Merchandising.tagVoucherFisik);
     }
-    if (_cacheUiMerc!.backdrop == null) {
-      _cacheUiMerc!.backdrop =
+    if (_cacheUiMerc!.StikerScanQR == null) {
+      _cacheUiMerc!.StikerScanQR =
           Merchandising.kosong(pjp, Merchandising.tagBackdrop);
     }
     if (_cacheUiMerc!.papanNama == null) {
@@ -84,8 +84,9 @@ class BlocMerchandising {
     FinishMenu vcheckout = FinishMenu(false, null);
     if (map != null) {
       _setChacehMerchadisingFromInternet(map);
-
-      // print(_cacheUiMerc!.etalase);
+      //
+      // print(_cacheUiMerc!.voucherFisik);
+      // print(_cacheUiMerc!.perdana);
       // print(_cacheUiMerc!.spanduk);
       // print(_cacheUiMerc!.poster);
       // print(_cacheUiMerc!.papanNama);
@@ -95,7 +96,7 @@ class BlocMerchandising {
       if (enumAccount == EnumAccount.sf) {
         if (_cacheUiMerc!.perdana == null ||
             _cacheUiMerc!.voucherFisik == null ||
-            _cacheUiMerc!.spanduk == null) {
+            _cacheUiMerc!.poster == null) {
         } else {
           HttpDashboard httpDashboard = HttpDashboard();
           vcheckout = await httpDashboard.finishMenu(EnumTab.merchandising);
@@ -126,8 +127,8 @@ class BlocMerchandising {
       case EnumMerchandising.papan:
         merchandising = _cacheUiMerc!.papanNama;
         break;
-      case EnumMerchandising.backdrop:
-        merchandising = _cacheUiMerc!.backdrop;
+      case EnumMerchandising.StikerScanQR:
+        merchandising = _cacheUiMerc!.StikerScanQR;
         break;
       case EnumMerchandising.perdana:
         merchandising = _cacheUiMerc!.perdana;
@@ -170,7 +171,7 @@ class BlocMerchandising {
       }
 
       if (map[Merchandising.tagBackdrop] != null) {
-        _cacheUiMerc!.backdrop = map[Merchandising.tagBackdrop];
+        _cacheUiMerc!.StikerScanQR = map[Merchandising.tagBackdrop];
       }
     }
   }
@@ -193,9 +194,9 @@ class BlocMerchandising {
         _cacheUiMerc!.papanNama =
             _textChanged(_cacheUiMerc!.papanNama, enumOperator, text);
         break;
-      case EnumMerchandising.backdrop:
-        _cacheUiMerc!.backdrop =
-            _textChanged(_cacheUiMerc!.backdrop, enumOperator, text);
+      case EnumMerchandising.StikerScanQR:
+        _cacheUiMerc!.StikerScanQR =
+            _textChanged(_cacheUiMerc!.StikerScanQR, enumOperator, text);
         break;
       case EnumMerchandising.perdana:
         _cacheUiMerc!.perdana =
@@ -253,16 +254,16 @@ class BlocMerchandising {
           default:
         }
         break;
-      case EnumMerchandising.backdrop:
-        switch (_cacheUiMerc!.backdrop!.getPhotoKe()) {
+      case EnumMerchandising.StikerScanQR:
+        switch (_cacheUiMerc!.StikerScanQR!.getPhotoKe()) {
           case EnumNumber.satu:
-            _cacheUiMerc!.backdrop!.pathPhoto1 = path;
+            _cacheUiMerc!.StikerScanQR!.pathPhoto1 = path;
             break;
           case EnumNumber.dua:
-            _cacheUiMerc!.backdrop!.pathPhoto2 = path;
+            _cacheUiMerc!.StikerScanQR!.pathPhoto2 = path;
             break;
           case EnumNumber.tiga:
-            _cacheUiMerc!.backdrop!.pathPhoto3 = path;
+            _cacheUiMerc!.StikerScanQR!.pathPhoto3 = path;
             break;
           default:
         }

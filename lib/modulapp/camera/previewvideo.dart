@@ -9,6 +9,7 @@ import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:video_player/video_player.dart';
@@ -16,7 +17,7 @@ import 'package:video_player/video_player.dart';
 class PreviewVideoUpload extends StatefulWidget {
   static const String routeName = '/pagevideoupload';
   final ParamPreviewVideo? param;
-  PreviewVideoUpload(this.param);
+  const PreviewVideoUpload(this.param, {Key? key}) : super(key: key);
   @override
   _PreviewVideoUploadState createState() => _PreviewVideoUploadState();
 }
@@ -72,14 +73,14 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   LabelBlack.size1(
                     widget.param!.promotion!.nama,
                     bold: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   _promotion!.nama == programlocal
@@ -89,7 +90,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                               TextFieldLogin('Nama Program', _controllerText),
                         )
                       : Container(),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(
@@ -161,7 +162,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -193,7 +194,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,7 +14,7 @@ import 'package:http_parser/http_parser.dart';
 class HttpMarketAuditSF extends HttpBase {
   Future<bool> createSurvey(Map<String, dynamic> map) async {
     Map<String, String> headers = await getHeader();
-    print(jsonEncode(map));
+    print('DATA YANG DIKIRIM: ${jsonEncode(map)}');
     Uri uri = configuration
         .uri('/clockinmarketaudit/marketaudit_create_broadband_voucher');
     http.Response? response;
@@ -24,10 +25,13 @@ class HttpMarketAuditSF extends HttpBase {
         body: jsonEncode(map),
       );
 
+      print("Sales Broadband RESPONSE");
       print(response.body);
       print(response.statusCode);
+      print('======================');
       if (response.statusCode == 200) {
-        return true;
+        dynamic value = json.decode(response.body);
+        return _olahSurveySukses(value);
       } else {
         return false;
       }
@@ -50,52 +54,61 @@ class HttpMarketAuditSF extends HttpBase {
   // --form 'myfile1=@"/Users/nofyanugrahputri/Desktop/sa.jpeg"'
 
   Future<bool> createSurveyBelanja(Map<String, dynamic> map) async {
-    Map<String, String> headers = await getHeader();
-    String? idhitory = await AccountHore.getIdHistoryPjp();
-    String path1 = map['path'];
-    // Map<String, dynamic> mp = {
-    //   "id_outlet": _cacheuisurvey.pjp.id,
-    //   "id_jenis_share": "BELANJA",
-    //   "telkomsel": _cacheuisurvey.telkomsel,
-    //   "isat": _cacheuisurvey.isat,
-    //   "xl": _cacheuisurvey.xl,
-    //   "tri": _cacheuisurvey.tri,
-    //   "smartfren": _cacheuisurvey.sf,
-    //   "axis": _cacheuisurvey.axis,
-    //   "other": _cacheuisurvey.other,
-    //   "path":""
-    // };
-    ///===================================
-    var request = http.MultipartRequest('POST',
-        configuration.uri('/clockinmarketaudit/marketaudit_create_belanja'));
-    request.headers.addAll(headers);
-    request.fields['id_history_pjp'] = idhitory!;
-    request.fields['id_jenis_share'] = map['id_jenis_share'];
-    request.fields['telkomsel'] = '${map['telkomsel']}';
-    request.fields['isat'] = '${map['isat']}';
-    request.fields['xl'] = '${map['xl']}';
-    request.fields['tri'] = '${map['tri']}';
-    request.fields['smartfren'] = '${map['smartfren']}';
-    request.fields['axis'] = '${map['axis']}';
-    request.fields['other'] = '${map['other']}';
+    try {
+      Map<String, String> headers = await getHeader();
+      String? idhitory = await AccountHore.getIdHistoryPjp();
+      String path1 = map['path'];
+      // Map<String, dynamic> mp = {
+      //   "id_outlet": _cacheuisurvey.pjp.id,
+      //   "id_jenis_share": "BELANJA",
+      //   "telkomsel": _cacheuisurvey.telkomsel,
+      //   "isat": _cacheuisurvey.isat,
+      //   "xl": _cacheuisurvey.xl,
+      //   "tri": _cacheuisurvey.tri,
+      //   "smartfren": _cacheuisurvey.sf,
+      //   "axis": _cacheuisurvey.axis,
+      //   "other": _cacheuisurvey.other,
+      //   "path":""
+      // };
+      ///===================================
+      var request = http.MultipartRequest('POST',
+          configuration.uri('/clockinmarketaudit/marketaudit_create_belanja'));
+      request.headers.addAll(headers);
+      request.fields['id_history_pjp'] = idhitory!;
+      request.fields['id_jenis_share'] = map['id_jenis_share'];
+      request.fields['telkomsel'] = '${map['telkomsel']}';
+      request.fields['isat'] = '${map['isat']}';
+      request.fields['xl'] = '${map['xl']}';
+      request.fields['tri'] = '${map['tri']}';
+      request.fields['smartfren'] = '${map['smartfren']}';
+      request.fields['axis'] = '${map['axis']}';
+      request.fields['other'] = '${map['other']}';
 
-    request.files.add(http.MultipartFile.fromBytes(
-      'myfile1', File(path1).readAsBytesSync(),
-      filename: path1.split("/").last,
-      contentType: MediaType('application', 'jpeg'),
-      //      filename: 'myfile1'),
-    ));
+      request.files.add(http.MultipartFile.fromBytes(
+        'myfile1', File(path1).readAsBytesSync(),
+        filename: path1.split("/").last,
+        contentType: MediaType('application', 'jpeg'),
+        //      filename: 'myfile1'),
+      ));
 
-    var res = await request.send();
-    var response = await http.Response.fromStream(res);
-    print('idhistory:$idhitory');
-
-    print(response.body);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      return true;
+      var res = await request.send();
+      var response = await http.Response.fromStream(res);
+      // print("Market AUDIT BELANJA SF");
+      // print('idhistory:$idhitory');
+      // print(response.body);
+      // print(response.statusCode);
+      if (response.statusCode == 200) {
+        dynamic value = json.decode(response.body);
+        return _olahCreateBelanjaSukses(value);
+      }
+      return false;
+    } on SocketException catch (se) {
+      return false;
+    } on TimeoutException catch (te) {
+      return false;
+    } on Exception catch (e) {
+      return false;
     }
-    return false;
   }
 
   Future<UISurvey?> getDetailMarketAuditSF(
@@ -122,7 +135,11 @@ class HttpMarketAuditSF extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print("$idshare : ${response.body}");
+      print('Get Detail $idshare');
+      print("LINK NYA: ${uri.path}");
+      print(" : ${response.body}");
+
+      print("============");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         if (enumSurvey == EnumSurvey.belanja) {
@@ -226,5 +243,29 @@ class HttpMarketAuditSF extends HttpBase {
       }
     }
     return item;
+  }
+
+  bool _olahCreateBelanjaSukses(dynamic value) {
+    try {
+      Map<String, dynamic> map = value;
+      if (map["status"] == "1") {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool _olahSurveySukses(dynamic value) {
+    try {
+      Map<String, dynamic> map = value;
+      if (map["status"] == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }

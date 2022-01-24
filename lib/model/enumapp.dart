@@ -9,7 +9,7 @@ enum EnumMerchandising {
   spanduk,
   poster,
   papan,
-  backdrop
+  StikerScanQR
 }
 
 enum EnumPjp { done, notclockinyet, progress, belum }

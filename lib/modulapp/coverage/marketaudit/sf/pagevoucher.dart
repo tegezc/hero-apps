@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
 import 'blocsurvey.dart';
@@ -12,7 +12,9 @@ class PageVoucherSurvey extends StatefulWidget {
   final BlocSurvey? blocSurvey;
   final EnumSurvey enumSurvey;
 
-  const PageVoucherSurvey(this.uiSurvey, this.blocSurvey, this.enumSurvey);
+  const PageVoucherSurvey(this.uiSurvey, this.blocSurvey, this.enumSurvey,
+      {Key? key})
+      : super(key: key);
 
   @override
   _PageVoucherSurveyState createState() => _PageVoucherSurveyState();
@@ -32,13 +34,8 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   void initState() {
     _blocSurvey = widget.blocSurvey;
     _item = widget.uiSurvey;
-    _lcontroller = [];
-    if (widget.enumSurvey == EnumSurvey.broadband) {
-      _issubmitbuttonshowing = _item!.isbroadbandsubmitted;
-    } else {
-      _issubmitbuttonshowing = _item!.isfisiksubmitted;
-    }
 
+    _lcontroller = [];
     for (int i = 0; i < 21; i++) {
       _lcontroller.add(TextEditingController());
     }
@@ -47,6 +44,12 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   }
 
   void _setvalue() {
+    if (widget.enumSurvey == EnumSurvey.broadband) {
+      _issubmitbuttonshowing = _item!.isbroadbandsubmitted == false;
+    } else {
+      _issubmitbuttonshowing = _item!.isfisiksubmitted == false;
+    }
+
     List<ItemSurveyVoucher>? lsurvey = [];
     if (widget.enumSurvey == EnumSurvey.broadband) {
       lsurvey = _item!.lsurveyBroadband;
@@ -103,15 +106,20 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
       _setvalue();
       _countBuild++;
     }
+    List<ItemSurveyVoucher>? lsurvey = [];
+    if (widget.enumSurvey == EnumSurvey.broadband) {
+      lsurvey = _item!.lsurveyBroadband;
+    } else {
+      lsurvey = _item!.lsurveyFisik;
+    }
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          _issubmitbuttonshowing ? _successDisubmit() : Container(),
-          _dataTable(_item!.lsurveyBroadband!, ''),
+          _issubmitbuttonshowing ? Container() : _successDisubmit(),
+          _dataTable(lsurvey, '', _issubmitbuttonshowing),
           _issubmitbuttonshowing
-              ? Container()
-              : ButtonStrectWidth(
+              ? ButtonStrectWidth(
                   buttonColor: Colors.red,
                   text: "SUBMIT",
                   onTap: () {
@@ -135,7 +143,8 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                       TgzDialog.confirmHarusDiisi(context);
                     }
                   },
-                  isenable: true),
+                  isenable: true)
+              : Container(),
           const SizedBox(
             height: 150,
           ),
@@ -151,7 +160,11 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     );
   }
 
-  Widget _dataTable(List<ItemSurveyVoucher> lrek, String title) {
+  Widget _dataTable(
+      List<ItemSurveyVoucher>? lrek, String title, bool isenable) {
+    if (lrek == null) {
+      return Container();
+    }
     const TextStyle _tstyleheader = TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.bold,
@@ -167,9 +180,9 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
       ldr.add(DataRow(
         cells: <DataCell>[
           DataCell(_label(element.getNama())),
-          DataCell(_textField(element, i1)),
-          DataCell(_textField(element, i2)),
-          DataCell(_textField(element, i3)),
+          DataCell(_textField(element, i1, isenable)),
+          DataCell(_textField(element, i2, isenable)),
+          DataCell(_textField(element, i3, isenable)),
         ],
       ));
     }
@@ -229,7 +242,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     return LabelApp.size3(nama);
   }
 
-  Widget _textField(ItemSurveyVoucher item, int index) {
+  Widget _textField(ItemSurveyVoucher item, int index, bool isenable) {
     return SizedBox(
       width: 60,
       child: TextFieldNumberOnly(
@@ -238,6 +251,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
         onChanged: (str) {
           _blocSurvey!.changedText(index, str, widget.enumSurvey);
         },
+        enable: isenable,
       ),
     );
   }

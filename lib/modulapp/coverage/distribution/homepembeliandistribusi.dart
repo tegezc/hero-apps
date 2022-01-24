@@ -142,7 +142,6 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                 buttonColor: Colors.green,
                 text: 'Ambil Foto',
                 onTap: () {
-                  //CommonUi.openPage(context, DummyView());
                   _showDialogConfirmClockOut();
                 },
                 isenable: _lnota!.isNotEmpty,
@@ -289,7 +288,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CameraView(params)));
-                    Navigator.of(context).pop();
+                    //  Navigator.of(context).pop();
                   }),
                 ),
                 Padding(

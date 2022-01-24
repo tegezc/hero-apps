@@ -32,13 +32,13 @@ class UISurvey {
         axis != null &&
         other != null &&
         pathphotobelanja != null) {
-      if (telkomsel! >= 1000 &&
-          isat! >= 1000 &&
-          xl! >= 1000 &&
-          tri! >= 1000 &&
-          sf! >= 1000 &&
-          axis! >= 1000 &&
-          other! >= 1000) {
+      if ((telkomsel! >= 1000 || telkomsel == 0) &&
+          (isat! >= 1000 || isat == 0) &&
+          (xl! >= 1000 || xl == 0) &&
+          (tri! >= 1000 || tri == 0) &&
+          (sf! >= 1000 || sf == 0) &&
+          (axis! >= 1000 || axis == 0) &&
+          (other! >= 1000 || other == 0)) {
         return true;
       }
     }
@@ -99,14 +99,14 @@ class BlocSurvey {
   }
 
   Future<bool> _loadDrInternet() async {
-    bool b = await _loadDataBelanja();
-    b = await _loadDataVoucher(EnumSurvey.fisik);
-    b = await _loadDataVoucher(EnumSurvey.broadband);
+    await _loadDataBelanja();
+    await _loadDataVoucher(EnumSurvey.fisik);
+    await _loadDataVoucher(EnumSurvey.broadband);
 
     return true;
   }
 
-  Future<bool> _loadDataBelanja() async {
+  Future<void> _loadDataBelanja() async {
     String? idtempat = _cachePjp!.id;
     DateTime dt = DateTime.now();
     HttpMarketAuditSF httpSurvey = HttpMarketAuditSF();
@@ -123,10 +123,9 @@ class BlocSurvey {
       _cacheuisurvey!.pathphotobelanja = item.pathphotobelanja;
       _cacheuisurvey!.isbelanjasubmitted = true;
     }
-    return false;
   }
 
-  Future<bool> _loadDataVoucher(EnumSurvey enumSurvey) async {
+  Future<void> _loadDataVoucher(EnumSurvey enumSurvey) async {
     String? idtempat = _cachePjp!.id;
     DateTime dt = DateTime.now();
     HttpMarketAuditSF httpSurvey = HttpMarketAuditSF();
@@ -145,8 +144,6 @@ class BlocSurvey {
         _cacheuisurvey!.isbroadbandsubmitted = true;
       }
     }
-
-    return true;
   }
 
   Future<bool> submitVoucher(EnumSurvey es) async {
@@ -192,14 +189,9 @@ class BlocSurvey {
 
     bool result = await _httpSurvey.createSurvey(map);
     if (result) {
-      bool b = await _loadDataVoucher(es);
+      await _loadDataVoucher(es);
     }
     return result;
-  }
-
-  void setpathphoto(String? path) {
-    _cacheuisurvey!.pathphotobelanja = path;
-    _sink(_cacheuisurvey);
   }
 
   Future<bool> submitBelanja() async {
@@ -218,7 +210,7 @@ class BlocSurvey {
 
     bool result = await _httpSurvey.createSurveyBelanja(map);
     if (result) {
-      bool b = await _loadDataBelanja();
+      await _loadDataBelanja();
     }
     return result;
   }
@@ -334,6 +326,11 @@ class BlocSurvey {
   }
 
   void refresh() {
+    _sink(_cacheuisurvey);
+  }
+
+  void setpathphoto(String? path) {
+    _cacheuisurvey!.pathphotobelanja = path;
     _sink(_cacheuisurvey);
   }
 

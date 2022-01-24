@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "message": "Successfully login.",
+  "id": "SSF0001",
+  "role": "5",
+  "nama_sales": "PMAN",
+  "id_tap": "TAP001",
+  "nama_tap": "TAP KALIANDA",
+  "id_cluster": "CTR005",
+  "nama_cluster": "BANDAR LAMPUNG",
+  "token": "3915eae94381d35a03bb82ff1c1110b9"
+}

@@ -3,18 +3,18 @@ import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/model/promotion/promotion.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/camera/pagerecordvideo.dart';
 import 'package:hero/modulapp/coverage/promotion/blocpromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomePagePromotion extends StatefulWidget {
   static const String routeName = '/homepagepromotion';
   final Pjp? pjp;
-  HomePagePromotion(this.pjp);
+  const HomePagePromotion(this.pjp, {Key? key}) : super(key: key);
   @override
   _HomePagePromotionState createState() => _HomePagePromotionState();
 }
@@ -55,7 +55,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     width: size.width,
                     height: size.height - 123,
                     child: SingleChildScrollView(
@@ -63,7 +63,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Padding(
@@ -125,12 +125,12 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
 
   Widget _content(UIPromotion item, double width) {
     List<Widget> lw = [];
-    lw.add(SizedBox(
+    lw.add(const SizedBox(
       height: 4,
     ));
-    item.lprom!.forEach((element) {
+    for (var element in item.lprom!) {
       lw.add(_cell(element, width, item.jmlfinish));
-    });
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -170,15 +170,15 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                 Row(
                   children: [
                     item.isVideoExist
-                        ? Icon(
+                        ? const Icon(
                             Icons.check_circle,
                             color: Colors.green,
                           )
-                        : SizedBox(
+                        : const SizedBox(
                             height: 24,
                             width: 24,
                           ),
-                    SizedBox(
+                    const SizedBox(
                       width: 4,
                     ),
                     Column(
@@ -196,7 +196,8 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                     ),
                   ],
                 ),
-                Icon(Icons.videocam_rounded, size: 48, color: Colors.white),
+                const Icon(Icons.videocam_rounded,
+                    size: 48, color: Colors.white),
               ],
             ),
           ),
@@ -213,7 +214,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

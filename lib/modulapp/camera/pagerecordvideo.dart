@@ -7,7 +7,6 @@ import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:path_provider/path_provider.dart';
-//import 'package:video_player/video_player.dart';
 
 import 'loadingview.dart';
 import 'previewvideo.dart';
@@ -31,7 +30,7 @@ class PageTakeVideo extends StatefulWidget {
   static const routeName = 'pagevideopromotion';
   final Promotion? promotion;
 
-  PageTakeVideo(this.promotion);
+  PageTakeVideo(this.promotion, {Key? key}) : super(key: key);
 
   @override
   _PageTakeVideoState createState() => _PageTakeVideoState();
@@ -55,7 +54,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     if (_timer != null) {
       _timer!.cancel();
     }
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_counter > 0) {
           _counter--;
@@ -88,7 +87,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     _initialCamera().then((value) {
       setState(() {
         _isloading = false;
-        if (cameras.length > 0) {
+        if (cameras.isNotEmpty) {
           onNewCameraSelected(cameras[0]);
         }
       });
@@ -204,7 +203,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
           child: Column(
             children: [
               LabelApp.size2('$_counter'),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               LabelAppMiring.size3(
@@ -275,7 +274,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
     _controller = CameraController(
       cameraDescription!,
-      ResolutionPreset.low,
+      ResolutionPreset.medium,
       enableAudio: _enableAudio,
     );
 
@@ -331,7 +330,6 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   Future<void> startVideoRecording() async {
     if (!_controller!.value.isInitialized) {
       print('Error: select a camera first.');
-      // return null;
     }
 
     final Directory? extDir =
@@ -352,7 +350,6 @@ class _PageTakeVideoState extends State<PageTakeVideo>
       ///end
     } on CameraException catch (e) {
       _showCameraException(e);
-      return null;
     }
     // return filePath;
   }

@@ -117,7 +117,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
               ViewMerchandising(EnumMerchandising.spanduk, _mspanduk),
               ViewMerchandising(EnumMerchandising.poster, _mposter),
               ViewMerchandising(EnumMerchandising.papan, _mpapan),
-              ViewMerchandising(EnumMerchandising.backdrop, _mbackdrop),
+              ViewMerchandising(EnumMerchandising.StikerScanQR, _mbackdrop),
             ],
           ),
         ),

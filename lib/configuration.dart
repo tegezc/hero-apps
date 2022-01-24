@@ -6,7 +6,7 @@ class Configuration {
   }
 
   Configuration._internal();
-  final bool _isProduction = false;
+  final bool _isProduction = true;
   String host() {
     if (_isProduction) {
       return 'sihore.com';
@@ -22,9 +22,9 @@ class Configuration {
     if (maxradius == null || actualradius == null) {
       return false;
     }
-    if (_isProduction) {
-      return actualradius <= maxradius;
-    }
+    // if (_isProduction) {
+    //   return actualradius <= maxradius;
+    // }
     return true;
   }
 }

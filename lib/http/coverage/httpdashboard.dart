@@ -15,7 +15,9 @@ class HttpDashboard extends HttpBase {
     Uri uri = configuration.uri('/lokasi/pjp_daftar');
     try {
       final Map<String, String> headers = await getHeader();
-      final response = await http.get(uri, headers: headers);
+      final response = await http
+          .get(uri, headers: headers)
+          .timeout(const Duration(seconds: 20));
       print(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -286,15 +288,36 @@ class HttpDashboard extends HttpBase {
       print('cloclout: ${response.body}');
       print('cloclout SC: ${response.statusCode}');
       if (response.statusCode == 200) {
-        // Map<String, dynamic>? map = json.decode(response.body);
-        // if(map == null){}
-        // int? i = ConverterNumber.stringToInt(map['status']);
+        Map<String, dynamic>? map = json.decode(response.body);
+        _olahCreateSuccess(map);
         return true;
       }
       return false;
     } catch (e) {
       print('error $e');
       print(response?.body);
+      return false;
+    }
+  }
+
+  bool _olahCreateSuccess(dynamic value) {
+    try {
+      Map<String, dynamic> map = value;
+      if (map['status'] is String) {
+        int? i = int.tryParse(map['status']);
+        print('nilai status berapa $i');
+        if (i == 1) {
+          return true;
+        }
+      } else if (map['status'] is int) {
+        if (map['status'] == 1) {
+          return true;
+        }
+      }
+
+      return false;
+    } catch (e) {
+      print(e.toString());
       return false;
     }
   }
