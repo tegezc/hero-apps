@@ -204,7 +204,7 @@ class _MenuSalesState extends State<MenuSales> {
   }
 
   Widget _openDsPoi() {
-    bool isComplete = _menu!.isSfComplete();
+    bool isComplete = _menu!.isPoiComplete();
     return Column(
       children: [
         Row(

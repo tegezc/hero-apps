@@ -22,9 +22,9 @@ class Configuration {
     if (maxradius == null || actualradius == null) {
       return false;
     }
-    // if (_isProduction) {
-    //   return actualradius <= maxradius;
-    // }
+    if (_isProduction) {
+      return actualradius <= maxradius;
+    }
     return true;
   }
 }
