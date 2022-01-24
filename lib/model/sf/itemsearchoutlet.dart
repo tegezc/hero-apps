@@ -24,9 +24,7 @@ class LokasiSearch {
       idoutlet = map['id_outlet'];
     } else if (map['id_tempat'] != null) {
       idoutlet = map['id_tempat'];
-    }
-    if (map['id'] != null) {}
-    {
+    } else if (map['id'] != null) {
       idoutlet = map['id'];
     }
 

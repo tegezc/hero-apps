@@ -25,6 +25,7 @@ class _ResolutionsPageState extends State<ResolutionsPage> {
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
     );
+
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       // "http://channelsumbagsel.com/apihore/assets/promotion_video/46_10.mp4",

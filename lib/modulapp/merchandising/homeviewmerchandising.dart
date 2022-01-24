@@ -96,7 +96,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
                   child: LabelBlack.size2('Papan Nama Toko'),
                 ),
                 Tab(
-                  child: LabelBlack.size2('Backdrop'),
+                  child: LabelBlack.size2('Stiker Scan QR'),
                 ),
               ],
             ),

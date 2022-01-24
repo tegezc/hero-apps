@@ -170,7 +170,10 @@ class _PageTabDsState extends State<PageTabDs> {
                                   child: Column(
                                     children: [
                                       _headerPencarian(),
-                                      _controllContentPencarian(item),
+                                      SizedBox(
+                                          height: s.height - 400,
+                                          child:
+                                              _controllContentPencarian(item)),
                                       // _content(item),
                                     ],
                                   ),

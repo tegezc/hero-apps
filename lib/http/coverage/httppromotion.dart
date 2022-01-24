@@ -104,6 +104,7 @@ class HttpPromotion extends HttpBase {
 
     Uri uri = configuration.uri(
         '/bottommenupromotion/promotion_detail/$idoutlet/$namalokasi/$strDt');
+    print('url detail promotion: ${uri.path}');
 
     try {
       final Map<String, String> headers = await getHeader();
