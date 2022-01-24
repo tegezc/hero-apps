@@ -132,9 +132,11 @@ class HttpMarketAuditSF extends HttpBase {
     String strDt = DateUtility.dateToStringParam(tgl);
     Uri uri = configuration.uri(
         '/bottommenumarketaudit/marketaudit_detail/$idshare/$idoutlet/$strDt');
+    var resp;
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
+      resp = response;
       print('Get Detail $idshare');
       print("LINK NYA: ${uri.path}");
       print(" : ${response.body}");
@@ -150,6 +152,10 @@ class HttpMarketAuditSF extends HttpBase {
       }
       return null;
     } catch (e) {
+      if (resp != null) {
+        print("Error : ${resp.body}");
+      }
+
       print(e.toString());
       return null;
     }

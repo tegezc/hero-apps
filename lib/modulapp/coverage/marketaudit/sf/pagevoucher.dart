@@ -24,17 +24,15 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   late List<TextEditingController> _lcontroller;
 
   UISurvey? _item;
-  bool _issubmitbuttonshowing = true;
+  // bool _issubmitbuttonshowing = true;
 
   int _countBuild = 0;
 
   BlocSurvey? _blocSurvey;
-
+  late bool _isSubmited;
   @override
   void initState() {
     _blocSurvey = widget.blocSurvey;
-    _item = widget.uiSurvey;
-
     _lcontroller = [];
     for (int i = 0; i < 21; i++) {
       _lcontroller.add(TextEditingController());
@@ -44,11 +42,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
   }
 
   void _setvalue() {
-    if (widget.enumSurvey == EnumSurvey.broadband) {
-      _issubmitbuttonshowing = _item!.isbroadbandsubmitted == false;
-    } else {
-      _issubmitbuttonshowing = _item!.isfisiksubmitted == false;
-    }
+    _item = widget.uiSurvey;
 
     List<ItemSurveyVoucher>? lsurvey = [];
     if (widget.enumSurvey == EnumSurvey.broadband) {
@@ -100,6 +94,14 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     super.dispose();
   }
 
+  _printDebug(List<ItemSurveyVoucher>? lsurvey) {
+    print('Enum ${widget.enumSurvey}');
+    print('panjang list ${lsurvey!.length}');
+    print('isbelanjasubmitted ${widget.uiSurvey!.isbelanjasubmitted}');
+    print('isbroadbandsubmitted ${widget.uiSurvey!.isbroadbandsubmitted}');
+    print('isfisiksubmitted ${widget.uiSurvey!.isfisiksubmitted}');
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_countBuild == 0) {
@@ -113,13 +115,21 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
       lsurvey = _item!.lsurveyFisik;
     }
 
+    if (widget.enumSurvey == EnumSurvey.broadband) {
+      _isSubmited = widget.uiSurvey!.isbroadbandsubmitted;
+    } else {
+      _isSubmited = widget.uiSurvey!.isfisiksubmitted;
+    }
+    _printDebug(lsurvey);
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          _issubmitbuttonshowing ? Container() : _successDisubmit(),
-          _dataTable(lsurvey, '', _issubmitbuttonshowing),
-          _issubmitbuttonshowing
-              ? ButtonStrectWidth(
+          _isSubmited ? _successDisubmit() : Container(),
+          _dataTable(lsurvey, '', !_isSubmited),
+          _isSubmited
+              ? Container()
+              : ButtonStrectWidth(
                   buttonColor: Colors.red,
                   text: "SUBMIT",
                   onTap: () {
@@ -143,8 +153,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
                       TgzDialog.confirmHarusDiisi(context);
                     }
                   },
-                  isenable: true)
-              : Container(),
+                  isenable: true),
           const SizedBox(
             height: 150,
           ),
