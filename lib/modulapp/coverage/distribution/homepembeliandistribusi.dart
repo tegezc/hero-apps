@@ -47,7 +47,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
     _lsa = [];
     _lvoint = [];
     _lvog = [];
-    _lnota = [];
+    // _lnota = [];
     super.initState();
   }
 
@@ -144,7 +144,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                 onTap: () {
                   _showDialogConfirmClockOut();
                 },
-                isenable: _lnota!.isNotEmpty,
+                isenable: _lnota == null ? false : _lnota!.isNotEmpty,
               ),
             ),
             _contentStruk(_lnota),
@@ -175,11 +175,9 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
 
   Widget _contentStruk(List<Nota>? lnota) {
     List<Widget> lw = [];
-    lw.add(Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: lnota != null
-          ? LabelWhite.size2('Daftar Nota')
-          : LabelBlack.size2('Daftar Nota'),
+    lw.add(const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: LabelWhite.size2('Daftar Nota'),
     ));
 
     if (lnota != null) {
@@ -194,7 +192,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
-          border: Border.all(color: lnota != null ? Colors.white : Colors.red),
+          border: Border.all(color: Colors.red),
           borderRadius: BorderRadius.circular(4),
           color: lnota != null ? Colors.red[600] : Colors.white,
         ),

@@ -272,7 +272,6 @@ class HttpDIstribution extends HttpBase {
       return false;
     } catch (e) {
       ph(e);
-      ph(response!.body);
       return false;
     }
   }

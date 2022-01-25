@@ -209,13 +209,13 @@ class HttpDashboard extends HttpBase {
 
   Future<FinishMenu> finishMenu(EnumTab enumTab) async {
     /// saat finish delete directory untuk menghapus semua photo dan video
-    TgzFile tgzFile = TgzFile();
-    bool hasildelete = await tgzFile.deleteDirectory();
-    if (hasildelete) {
-      ph('delete directory berhasil');
-    } else {
-      ph('delete directory tidak berhasil');
-    }
+    // TgzFile tgzFile = TgzFile();
+    // bool hasildelete = await tgzFile.deleteDirectory();
+    // if (hasildelete) {
+    //   ph('delete directory berhasil');
+    // } else {
+    //   ph('delete directory tidak berhasil');
+    // }
 
     Map<String, String> headers = await getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();

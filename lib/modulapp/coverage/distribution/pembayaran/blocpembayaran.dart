@@ -93,23 +93,30 @@ class BlocPembayaran {
     pembeliKonsinyasi.idtempat = _cachePembelian.dataPembeli.idtempat;
     pembeliKonsinyasi.lserial = snkonsinyasi;
 
-    int res = await _daoSerial.deleteAllSerial();
-    if (res > 0) {}
+    bool returnvalue = false;
     if (snlunas.isNotEmpty) {
       bool value = await _httpDIstribution.submitLunas(pembeliLunas);
       if (value == false) {
-        return false;
+        returnvalue = false;
+      } else {
+        returnvalue = true;
       }
     }
 
     if (snkonsinyasi.isNotEmpty) {
       bool value = await _httpDIstribution.submitKonsinyasi(pembeliKonsinyasi);
       if (value == false) {
-        return false;
+        returnvalue = false;
+      } else {
+        returnvalue = true;
       }
     }
 
-    return true;
+    if (returnvalue) {
+      int res = await _daoSerial.deleteAllSerial();
+      if (res > 0) {}
+    }
+    return returnvalue;
   }
 
   Future<EnumDelete> deleteITem(int index) async {
