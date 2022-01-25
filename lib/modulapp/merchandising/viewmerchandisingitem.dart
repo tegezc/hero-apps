@@ -7,7 +7,9 @@ import 'package:hero/util/component/widget/component_widget.dart';
 class ViewMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
   final Merchandising? merchandising;
-  ViewMerchandising(this.enumMerchandising, this.merchandising);
+  const ViewMerchandising(this.enumMerchandising, this.merchandising,
+      {Key? key})
+      : super(key: key);
   @override
   _ViewMerchandisingState createState() => _ViewMerchandisingState();
 }
@@ -55,7 +57,7 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: s.width,
             height: s.height - 130,
             child: SingleChildScrollView(
@@ -73,12 +75,12 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
                       ),
                     )),
                     _cardForm(s.width),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     _listPhoto(s.width, _m!.pathPhoto1, _m!.pathPhoto2,
                         _m!.pathPhoto3),
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                     ),
                   ],
@@ -116,7 +118,7 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
       child: Row(
         children: [
           SizedBox(width: 80, child: LabelBlack.size2(label)),
-          LabelBlack.size2(': '),
+          const LabelBlack.size2(': '),
           LabelBlack.size2('$jumlah')
         ],
       ),

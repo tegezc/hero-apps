@@ -11,7 +11,7 @@ import 'package:hero/util/constapp/accountcontroller.dart';
 class LoginPage extends StatefulWidget {
   final Function callbackSuccessLogin;
 
-  LoginPage(this.callbackSuccessLogin);
+  const LoginPage(this.callbackSuccessLogin, {Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         PropertyImage.bgatas(),
         PropertyImage.bgbawah(),
-        Container(
+        SizedBox(
           height: size.height,
           child: SingleChildScrollView(
             child: Form(

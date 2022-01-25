@@ -13,12 +13,16 @@ import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
+import '../../../configuration.dart';
+
 class PageMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
   final Merchandising? merchandising;
   final BlocMerchandising? blocMerchandising;
   const PageMerchandising(
-      this.enumMerchandising, this.merchandising, this.blocMerchandising);
+      this.enumMerchandising, this.merchandising, this.blocMerchandising,
+      {Key? key})
+      : super(key: key);
   @override
   _PageMerchandisingState createState() => _PageMerchandisingState();
 }
@@ -79,8 +83,8 @@ class _PageMerchandisingState extends State<PageMerchandising> {
   }
 
   void _setValue() {
-    // print(widget.merchandising);
-    // print(widget.merchandising.isPhotoShowing());
+    // ph(widget.merchandising);
+    // ph(widget.merchandising.isPhotoShowing());
     _telkomselController!.text = widget.merchandising!.telkomsel != null
         ? '${widget.merchandising!.telkomsel}'
         : '';
@@ -328,7 +332,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
                     url,
                     errorBuilder: (BuildContext context, Object exception,
                         StackTrace? stackTrace) {
-                      print(exception);
+                      ph(exception);
                       return Container();
                     },
                   )),
@@ -340,16 +344,16 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Merchandising berhasil disimpan.'),
                 ),
                 Padding(
@@ -368,16 +372,16 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Merchandising gagal disimpan.'),
                 ),
                 Padding(
@@ -395,16 +399,16 @@ class _PageMerchandisingState extends State<PageMerchandising> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Tidak dapat mengambil photo karena semua bernilai nol.'),
                 ),

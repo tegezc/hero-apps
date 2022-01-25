@@ -17,7 +17,7 @@ class PageDistribusi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTab(EnumTab.distribution);
+    return const PageTab(EnumTab.distribution);
   }
 }
 
@@ -26,7 +26,7 @@ class PageMerchandising extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTab(EnumTab.merchandising);
+    return const PageTab(EnumTab.merchandising);
   }
 }
 
@@ -35,7 +35,7 @@ class PagePromotion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTab(EnumTab.promotion);
+    return const PageTab(EnumTab.promotion);
   }
 }
 
@@ -44,13 +44,13 @@ class PageSurvey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTab(EnumTab.marketaudit);
+    return const PageTab(EnumTab.marketaudit);
   }
 }
 
 class PageTab extends StatefulWidget {
   final EnumTab enumTab;
-  PageTab(this.enumTab, {Key? key}) : super(key: key);
+  const PageTab(this.enumTab, {Key? key}) : super(key: key);
   @override
   _PageTabState createState() => _PageTabState();
 }
@@ -242,9 +242,9 @@ class _PageTabState extends State<PageTab> {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           LabelWhite.size1("Berikut Daftar Pencarian : "),
-          const Divider(
+          Divider(
             color: Colors.white,
           ),
         ],
@@ -283,7 +283,7 @@ class _PageTabState extends State<PageTab> {
 
   Widget _btnShowMore() {
     return RaisedButton(
-        child: Text('show more'),
+        child: const Text('show more'),
         color: Colors.green,
         onPressed: () {
           _blocPageTabSf.showmore(widget.enumTab);
@@ -291,7 +291,7 @@ class _PageTabState extends State<PageTab> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 4,
     );
   }
@@ -379,7 +379,7 @@ class _PageTabState extends State<PageTab> {
                     Icons.playlist_add_check,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Expanded(
@@ -410,7 +410,7 @@ class _PageTabState extends State<PageTab> {
             ],
           ),
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }
@@ -418,7 +418,7 @@ class _PageTabState extends State<PageTab> {
   void _tapNota(String? nota) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => FakturPembayaran(nota, true)));
-    // CommonUi.openPage(context, new FakturPembayaran(nota, true));
+    // CommonUi.openPage(context,   FakturPembayaran(nota, true));
   }
 
   void _controllerTap(LokasiSearch item) {
@@ -430,7 +430,7 @@ class _PageTabState extends State<PageTab> {
             context,
             MaterialPageRoute(
                 builder: (context) => HomeViewMerchandising(item)));
-        // CommonUi.openPage(context, new HomeViewMerchandising(item));
+        // CommonUi.openPage(context,   HomeViewMerchandising(item));
 
         break;
       case EnumTab.promotion:
@@ -438,7 +438,7 @@ class _PageTabState extends State<PageTab> {
             context,
             MaterialPageRoute(
                 builder: (context) => HomePageViewPromotion(item)));
-        // CommonUi.openPage(context, new HomePageViewPromotion(item));
+        // CommonUi.openPage(context,   HomePageViewPromotion(item));
         break;
       case EnumTab.marketaudit:
         {
@@ -460,7 +460,7 @@ class _PageTabState extends State<PageTab> {
     if (!isawal) {
       if (item.tglAwal != null) {
         dtawal = item.tglAwal;
-        initialDt = dtawal!.add(new Duration(days: 1));
+        initialDt = dtawal!.add(const Duration(days: 1));
       }
     }
     DateTime? picked = await showDatePicker(

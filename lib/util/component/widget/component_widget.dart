@@ -7,23 +7,25 @@ class ContainerRounded extends StatelessWidget {
   final double? height;
   final double? width;
 
-  ContainerRounded(
-      {required this.child,
+  const ContainerRounded(
+      {Key? key,
+      required this.child,
       required this.radius,
       this.borderColor = Colors.transparent,
       this.height,
-      this.width});
+      this.width})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: this.height,
-      width: this.width,
+      height: height,
+      width: width,
       child: child,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(this.radius),
+          borderRadius: BorderRadius.circular(radius),
           color: Colors.white,
-          border: Border.all(color: this.borderColor)),
+          border: Border.all(color: borderColor)),
     );
   }
 }
@@ -32,27 +34,29 @@ class CustomScaffold extends StatelessWidget {
   final Widget body;
   final String title;
   final bool automaticallyImplyLeading;
-  CustomScaffold(
-      {required this.body,
+  const CustomScaffold(
+      {Key? key,
+      required this.body,
       required this.title,
-      this.automaticallyImplyLeading = true});
+      this.automaticallyImplyLeading = true})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: this.automaticallyImplyLeading,
+        automaticallyImplyLeading: automaticallyImplyLeading,
         backgroundColor: Colors.red[600],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         title: Text(
-          this.title,
-          style: TextStyle(color: Colors.white),
+          title,
+          style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        actions: [],
+        actions: const [],
       ),
-      body: this.body,
+      body: body,
     );
   }
 }
@@ -62,30 +66,32 @@ class CustomScaffoldWithAction extends StatelessWidget {
   final String title;
   final Widget action;
   final bool automaticallyImplyLeading;
-  CustomScaffoldWithAction(
-      {required this.body,
+  const CustomScaffoldWithAction(
+      {Key? key,
+      required this.body,
       required this.title,
       required this.action,
-      this.automaticallyImplyLeading = true});
+      this.automaticallyImplyLeading = true})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: this.automaticallyImplyLeading,
+        automaticallyImplyLeading: automaticallyImplyLeading,
         backgroundColor: Colors.red[600],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         title: Text(
-          this.title,
-          style: TextStyle(color: Colors.white),
+          title,
+          style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         actions: [
-          this.action,
+          action,
         ],
       ),
-      body: this.body,
+      body: body,
     );
   }
 }

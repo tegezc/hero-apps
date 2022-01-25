@@ -4,6 +4,8 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/outlet.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpOutlet extends HttpBase {
   Future<List<ItemComboJenisOutlet>?> comboJenisOutlet() async {
     Map<String, String> headers = await getHeader();
@@ -11,14 +13,14 @@ class HttpOutlet extends HttpBase {
     try {
       http.Response response = await http.get(uri, headers: headers);
 
-      print(response.statusCode);
-      print(response.body);
+      ph(response.statusCode);
+      ph(response.body);
       if (response.statusCode == 200) {
         return _olahComboJenisOutlet(json.decode(response.body));
       }
       return null;
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -29,10 +31,10 @@ class HttpOutlet extends HttpBase {
     try {
       http.Response response = await http.get(uri, headers: headers);
 
-      // print(response.body);
+      // ph(response.body);
       return json.decode(response.body);
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -40,7 +42,7 @@ class HttpOutlet extends HttpBase {
   Future<Map<String, dynamic>?> createOutlet(Outlet outlet) async {
     Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
-    print(jsonEncode(outlet.toJson()));
+    ph(jsonEncode(outlet.toJson()));
     Uri uri = configuration.uri('/lokasi/outlet_create');
     http.Response? response;
     try {
@@ -50,22 +52,22 @@ class HttpOutlet extends HttpBase {
         body: jsonEncode(outlet.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> updateOutlet(Outlet outlet) async {
     Map<String, String> headers = await getHeader();
-    print(outlet.toJson());
+    ph(outlet.toJson());
     Uri uri = configuration.uri('/lokasi/outlet_update/${outlet.idoutlet}');
     http.Response? response;
     try {
@@ -75,15 +77,15 @@ class HttpOutlet extends HttpBase {
         body: jsonEncode(outlet.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -92,7 +94,7 @@ class HttpOutlet extends HttpBase {
     List<ItemComboJenisOutlet> result = [];
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           ItemComboJenisOutlet itemComboJnsOutlet =

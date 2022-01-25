@@ -92,23 +92,6 @@ class Merchandising {
     return null;
   }
 
-  var m = {
-    "id_jenis_share": "ETALASE",
-    "telkomsel": "1",
-    "isat": "2",
-    "xl": "3",
-    "tri": "4",
-    "smartfren": "1",
-    "axis": "1",
-    "other": "1",
-    "foto_1":
-        "http:\/\/channelsumbagsel.com\/apihore\/assets\/merchandising_foto\/35_F1.jpeg",
-    "foto_2":
-        "http:\/\/channelsumbagsel.com\/apihore\/assets\/merchandising_foto\/35_F2.jpeg",
-    "foto_3":
-        "http:\/\/channelsumbagsel.com\/apihore\/assets\/merchandising_foto\/"
-  };
-
   Merchandising.fromJson(Map<String, dynamic> map) {
     telkomsel = ConverterNumber.stringToInt(map['telkomsel']);
     isat = ConverterNumber.stringToInt(map['isat']);

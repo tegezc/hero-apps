@@ -7,7 +7,7 @@ class PageSuccess extends StatelessWidget {
   static const String routeName = 'pagesuccess';
   final PageSuccessParam? pageSuccessParam;
 
-  const PageSuccess(this.pageSuccessParam);
+  const PageSuccess(this.pageSuccessParam, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

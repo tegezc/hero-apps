@@ -38,15 +38,15 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   void firstTimeEdit(String? idsekolah) async {
-    _cacheUisekolah = new UISekolah();
+    _cacheUisekolah = UISekolah();
     _cacheUisekolah!.enumEditorState = EnumEditorState.edit;
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idsekolah).then((value) {
       if (value) {
-        // print('masuk');
+        // ph('masuk');
         _cacheUisekolah!.currentJenjang = ItemUi.getJenjangSekolah()[
             _cacheUisekolah!.sekolah.jenjang!.getIntJenjang()];
-        //  print(_cacheUisekolah.sekolah.owner);
+        //  ph(_cacheUisekolah.sekolah.owner);
         controllPic!.firstTimeEdit(_cacheUisekolah!.sekolah.pic);
         controllOwner!.firstTimeEdit(_cacheUisekolah!.sekolah.owner);
         this._sink(_cacheUisekolah);
@@ -55,7 +55,7 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   Future<bool> _firtimeEditSetup(String? idsekolah) async {
-    HttpSekolah httpController = new HttpSekolah();
+    HttpSekolah httpController = HttpSekolah();
     List<dynamic>? response = await httpController.detailSekolah(idsekolah);
     if (response != null) {
       if (response.length > 0) {
@@ -73,14 +73,14 @@ class BlocSekolah extends AbsBlocLokasi {
 
   void firstTimeBaru() {
     super.init(EnumEditorState.baru, null);
-    _cacheUisekolah = new UISekolah();
+    _cacheUisekolah = UISekolah();
     _cacheUisekolah!.enumEditorState = EnumEditorState.baru;
     _cacheUisekolah!.sekolah = Sekolah.kosong();
 
     controllPic!.firstTimePic();
     controllOwner!.firstTimeOwner();
     setupAsync().then((value) {
-      //   print(value);
+      //   ph(value);
       if (value) {
         this._sink(_cacheUisekolah);
       }
@@ -98,7 +98,7 @@ class BlocSekolah extends AbsBlocLokasi {
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUisekolah);
 
-    HttpSekolah httpController = new HttpSekolah();
+    HttpSekolah httpController = HttpSekolah();
     Map<String, dynamic>? response =
         await httpController.createSekolah(_cacheUisekolah!.sekolah);
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.done;
@@ -113,11 +113,11 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   Future<bool> updateSekolah() async {
-    // print('update');
+    // ph('update');
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUisekolah);
 
-    HttpSekolah httpController = new HttpSekolah();
+    HttpSekolah httpController = HttpSekolah();
     Map<String, dynamic>? response =
         await httpController.updateSekolah(_cacheUisekolah!.sekolah);
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.done;

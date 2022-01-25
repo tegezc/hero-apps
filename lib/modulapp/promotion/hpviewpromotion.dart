@@ -10,7 +10,7 @@ import 'previewvideopromotion.dart';
 
 class HomePageViewPromotion extends StatefulWidget {
   final LokasiSearch itemOutlet;
-  HomePageViewPromotion(this.itemOutlet);
+  const HomePageViewPromotion(this.itemOutlet, {Key? key}) : super(key: key);
   @override
   _HomePageViewPromotionState createState() => _HomePageViewPromotionState();
 }
@@ -65,7 +65,7 @@ class _HomePageViewPromotionState extends State<HomePageViewPromotion> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: size.width,
               height: size.height - 85,
               child: SingleChildScrollView(
@@ -73,15 +73,15 @@ class _HomePageViewPromotionState extends State<HomePageViewPromotion> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 16.0),
                         child: LabelBlack.size1('Jenis Promosi'),
                       ),
                       _content(_lpromotion!, size.width),
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                       ),
                     ],
@@ -97,14 +97,14 @@ class _HomePageViewPromotionState extends State<HomePageViewPromotion> {
 
   Widget _content(List<Promotion> litem, double width) {
     List<Widget> lw = [];
-    lw.add(SizedBox(
+    lw.add(const SizedBox(
       height: 4,
     ));
-    litem.forEach((element) {
+    for (var element in litem) {
       if (element.isVideoExist) {
         lw.add(_cell(element, width));
       }
-    });
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -137,15 +137,15 @@ class _HomePageViewPromotionState extends State<HomePageViewPromotion> {
                 Row(
                   children: [
                     item.isVideoExist
-                        ? Icon(
+                        ? const Icon(
                             Icons.check_circle,
                             color: Colors.green,
                           )
-                        : SizedBox(
+                        : const SizedBox(
                             height: 24,
                             width: 24,
                           ),
-                    SizedBox(
+                    const SizedBox(
                       width: 4,
                     ),
                     LabelBlack.size2(

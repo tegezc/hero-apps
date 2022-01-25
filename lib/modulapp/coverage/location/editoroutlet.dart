@@ -37,7 +37,7 @@ class _EditorOutletState extends State<EditorOutlet> {
     } else {
       _enumEditorState = EnumEditorState.edit;
     }
-    _blocOutlet = new BlocOutlet();
+    _blocOutlet = BlocOutlet();
     _title = _enumEditorState == EnumEditorState.baru
         ? _title = 'Tambah Lokasi'
         : 'Edit Lokasi';
@@ -241,14 +241,14 @@ class TabDataOutlet2 extends StatefulWidget {
 }
 
 class _TabDataOutlet2State extends State<TabDataOutlet2> {
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = new TextEditingController();
-  TextEditingController _cnors = new TextEditingController();
-  TextEditingController _calamat = new TextEditingController();
-  TextEditingController _clatitude = new TextEditingController();
-  TextEditingController _clongitude = new TextEditingController();
+  TextEditingController _cnama = TextEditingController();
+  TextEditingController _cnors = TextEditingController();
+  TextEditingController _calamat = TextEditingController();
+  TextEditingController _clatitude = TextEditingController();
+  TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -263,7 +263,7 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
     _cnors.text = item.outlet.nors == null ? '' : '${item.outlet.nors}';
     _calamat.text = item.outlet.alamat == null ? '' : '${item.outlet.alamat}';
     //
-    // _ljnsoutlet = new List();
+    // _ljnsoutlet =   List();
     // ItemUi.getComboJenisOutlet().forEach((key, value) {
     //   _ljnsoutlet.add(value);
     // });
@@ -287,7 +287,7 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
       child: Form(
         key: _formKeyValue,
         autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           children: <Widget>[
             SizedBox(height: 20.0),

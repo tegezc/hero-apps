@@ -10,9 +10,10 @@ import 'package:hero/model/distribusi/product.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/dateutil.dart';
-import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+
+import '../../configuration.dart';
 
 class HttpDIstribution extends HttpBase {
   Future<List<Product>?> getDaftarProduct() async {
@@ -35,7 +36,7 @@ class HttpDIstribution extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      //  print(response.body);
+      //  ph(response.body);
       if (response.statusCode == 200) {
         //"status": 200,
         // "data": 10000000
@@ -49,7 +50,7 @@ class HttpDIstribution extends HttpBase {
       }
       return 0;
     } catch (e) {
-      //  print(e.toString());
+      //  ph(e.toString());
       return 0;
     }
   }
@@ -60,14 +61,14 @@ class HttpDIstribution extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      //  print("detail nota: ${response.body}");
+      //  ph("detail nota: ${response.body}");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return DetailNota.fromJson(value);
       }
       return null;
     } catch (e) {
-      // print(e.toString());
+      // ph(e.toString());
       return null;
     }
   }
@@ -79,7 +80,7 @@ class HttpDIstribution extends HttpBase {
           .uri('/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      //  print("daftar nota: ${response.body}");
+      //  ph("daftar nota: ${response.body}");
 
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -87,7 +88,7 @@ class HttpDIstribution extends HttpBase {
       }
       return null;
     } catch (e) {
-      // print(e.toString());
+      // ph(e.toString());
       return null;
     }
   }
@@ -106,8 +107,8 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      // print(response.body);
-      // print(response.statusCode);
+      // ph(response.body);
+      // ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahRekomendasi(value);
@@ -115,8 +116,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      // print(e);
-      // print(response?.body);
+      // ph(e);
+      // ph(response?.body);
       return null;
     }
   }
@@ -137,8 +138,8 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      // print(response.body);
-      // print(response.statusCode);
+      // ph(response.body);
+      // ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarSn(value);
@@ -146,8 +147,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      // print(e);
-      // print(response?.body);
+      // ph(e);
+      // ph(response?.body);
       return null;
     }
   }
@@ -163,7 +164,7 @@ class HttpDIstribution extends HttpBase {
     };
 
     Uri uri = configuration.uri('/clockindistribusi/penjualan_daftar_sn');
-    // print("URL DAFTAR SERIAL NUMBER: ${uri.path}");
+    // ph("URL DAFTAR SERIAL NUMBER: ${uri.path}");
 
     http.Response? response;
     try {
@@ -172,8 +173,8 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      // print(response.body);
-      // print(response.statusCode);
+      // ph(response.body);
+      // ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarSn(value);
@@ -181,8 +182,8 @@ class HttpDIstribution extends HttpBase {
         return null;
       }
     } catch (e) {
-      // print(e);
-      // print(response?.body);
+      // ph(e);
+      // ph(response?.body);
       return null;
     }
   }
@@ -192,25 +193,25 @@ class HttpDIstribution extends HttpBase {
     Uri uri =
         configuration.uri('/clockindistribusi/penjualan_bayar_konsinyasi');
     http.Response? response;
-    print(dataPembeli.toJson());
+    ph(dataPembeli.toJson());
     try {
       response = await http.post(
         uri,
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
-      print("Submit kosinyansi");
-      print(response.body);
-      print(response.statusCode);
-      print("=========");
+      ph("Submit kosinyansi");
+      ph(response.body);
+      ph(response.statusCode);
+      ph("=========");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahCreateSuccess(value);
       }
       return false;
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -219,7 +220,7 @@ class HttpDIstribution extends HttpBase {
     Map<String, String> headers = await getHeader();
     String? idhitory = await AccountHore.getIdHistoryPjp();
     String url = '';
-    // print(isclose);
+    // ph(isclose);
     if (isclose) {
       url = '/clockout/pjp_upload_foto';
     } else {
@@ -230,7 +231,7 @@ class HttpDIstribution extends HttpBase {
     var request = http.MultipartRequest('POST', configuration.uri(url));
     request.headers.addAll(headers);
     request.fields['id_history_pjp'] = idhitory!;
-    //  print('url: ${configuration.uri(url).path}');
+    //  ph('url: ${configuration.uri(url).path}');
     request.files.add(http.MultipartFile.fromBytes(
       'myfile1', File(filepath).readAsBytesSync(),
       // filename: filepath.split("/").last,
@@ -239,10 +240,10 @@ class HttpDIstribution extends HttpBase {
     ));
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    // print('idhistory:$idhitory');
-    // print(filepath);
-    // print(response.body);
-    // print(response.statusCode);
+    // ph('idhistory:$idhitory');
+    // ph(filepath);
+    // ph(response.body);
+    // ph(response.statusCode);
     if (response.statusCode == 200) {
       dynamic value = json.decode(response.body);
       return _olahCreateSuccess(value);
@@ -260,18 +261,18 @@ class HttpDIstribution extends HttpBase {
         headers: headers,
         body: jsonEncode(dataPembeli.toJson()),
       );
-      print("Submit LUNAS");
-      print(response.body);
-      print(response.statusCode);
-      print("=========");
+      ph("Submit LUNAS");
+      ph(response.body);
+      ph(response.statusCode);
+      ph("=========");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahCreateSuccess(value);
       }
       return false;
     } catch (e) {
-      print(e);
-      print(response!.body);
+      ph(e);
+      ph(response!.body);
       return false;
     }
   }
@@ -301,7 +302,7 @@ class HttpDIstribution extends HttpBase {
       if (md['data'] != null) {
         List<dynamic> ld = md['data'];
 
-        if (ld.length > 0) {
+        if (ld.isNotEmpty) {
           for (int i = 0; i < ld.length; i++) {
             Map<String, dynamic> map = ld[i];
 
@@ -325,7 +326,7 @@ class HttpDIstribution extends HttpBase {
       if (md['data'] != null) {
         List<dynamic> ld = md['data'];
 
-        if (ld.length > 0) {
+        if (ld.isNotEmpty) {
           for (int i = 0; i < ld.length; i++) {
             Map<String, dynamic> map = ld[i];
 
@@ -359,8 +360,8 @@ class HttpDIstribution extends HttpBase {
         if (ld![tag] != null) {
           List<ItemRekomendasi> litemrek = [];
           List<dynamic> litem = ld[tag];
-          if (litem.length > 0) {
-            // print('2 : ${litem.length}');
+          if (litem.isNotEmpty) {
+            // ph('2 : ${litem.length}');
             for (int i = 0; i < litem.length; i++) {
               Map<String, dynamic> map = litem[i];
               ItemRekomendasi n = ItemRekomendasi.fromJson(map);
@@ -426,7 +427,7 @@ class HttpDIstribution extends HttpBase {
       Map<String, dynamic> map = value;
       if (map['status'] is String) {
         int? i = int.tryParse(map['status']);
-        print('nilai status berapa $i');
+        ph('nilai status berapa $i');
         if (i == 1) {
           return true;
         }
@@ -438,7 +439,7 @@ class HttpDIstribution extends HttpBase {
 
       return false;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return false;
     }
   }

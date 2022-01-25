@@ -13,7 +13,7 @@ class HomeHistorySurvey extends StatefulWidget {
   static const routeName = '/homehistorysurvey';
   final LokasiSearch itemOutlet;
 
-  HomeHistorySurvey(this.itemOutlet);
+  const HomeHistorySurvey(this.itemOutlet, {Key? key}) : super(key: key);
   @override
   _HomeHistorySurveyState createState() => _HomeHistorySurveyState();
 }
@@ -40,7 +40,7 @@ class _HomeHistorySurveyState extends State<HomeHistorySurvey> {
   Future<bool> _loadDataInternet() async {
     String? idtempat = widget.itemOutlet.idoutlet;
     DateTime? dt = widget.itemOutlet.tgl;
-    HttpMarketAuditSF httpSurvey = new HttpMarketAuditSF();
+    HttpMarketAuditSF httpSurvey = HttpMarketAuditSF();
     _item = await httpSurvey.getDetailMarketAuditSF(
         EnumSurvey.belanja, idtempat, dt);
     UISurvey? uiSurvey = await httpSurvey.getDetailMarketAuditSF(
@@ -73,7 +73,7 @@ class _HomeHistorySurveyState extends State<HomeHistorySurvey> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
+            bottom: const TabBar(
               isScrollable: true,
               tabs: [
                 // wallet share, sales broadband share, voucher fisik share
@@ -89,12 +89,12 @@ class _HomeHistorySurveyState extends State<HomeHistorySurvey> {
               ],
             ),
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.black, //change your color here
             ),
             title: Text(
               ConstString.textSurvey,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             centerTitle: true,
           ),

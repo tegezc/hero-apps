@@ -5,6 +5,8 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpSearchLocation extends HttpBase {
   Future<List<dynamic>?> cari(
       String query, EnumJenisLokasi enumJenisLokasi) async {
@@ -37,14 +39,14 @@ class HttpSearchLocation extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.statusCode);
-      print(response.body);
+      ph(response.statusCode);
+      ph(response.body);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }
       return null;
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -54,14 +56,14 @@ class HttpSearchLocation extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      //  print(json.decode(response.body));
+      //  ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahProvinsi(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -72,14 +74,14 @@ class HttpSearchLocation extends HttpBase {
       final Map<String, String> headers = await getHeader();
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_kabupaten": "$idkab"}));
-      //  print(json.decode(response.body));
+      //  ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahKecamatan(value);
+        return _olahKecamatan(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -90,14 +92,14 @@ class HttpSearchLocation extends HttpBase {
       final Map<String, String> headers = await getHeader();
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_provinsi": "$idprov"}));
-      //   print(json.decode(response.body));
+      //   ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahKabupaten(value);
+        return _olahKabupaten(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -108,16 +110,16 @@ class HttpSearchLocation extends HttpBase {
       Uri uri = configuration.uri('/combobox/kelurahan');
       final response = await http.post(uri,
           headers: headers, body: jsonEncode({"id_kecamatan": "$idkecamatan"}));
-      // print(response.statusCode);
-      //  print(json.decode(response.body));
+      // ph(response.statusCode);
+      //  ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        //   print(value);
-        return this._olahKelurahan(value);
+        //   ph(value);
+        return _olahKelurahan(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -127,7 +129,7 @@ class HttpSearchLocation extends HttpBase {
       final Map<String, String> headers = await getHeader();
       Uri uri = configuration.uri('/combobox/select_kecamatan/$idkelurahan');
       final response = await http.get(uri, headers: headers);
-      //  print(json.decode(response.body));
+      //  ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahKec(value);
@@ -143,14 +145,14 @@ class HttpSearchLocation extends HttpBase {
       final Map<String, String> headers = await getHeader();
       Uri uri = configuration.uri('/combobox/select_kabupaten/$idkec');
       final response = await http.get(uri, headers: headers);
-      //   print(json.decode(response.body));
+      //   ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahKab(value);
+        return _olahKab(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -160,14 +162,14 @@ class HttpSearchLocation extends HttpBase {
       final Map<String, String> headers = await getHeader();
       Uri uri = configuration.uri('/combobox/select_provinsi/$idkab');
       final response = await http.get(uri, headers: headers);
-      //  print(json.decode(response.body));
+      //  ph(json.decode(response.body));
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahProv(value);
+        return _olahProv(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -203,7 +205,7 @@ class HttpSearchLocation extends HttpBase {
   Kecamatan? _olahKec(dynamic value) {
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         Map<String, dynamic> map = ld[0];
         Kecamatan kec = Kecamatan.fromJson(map);
         return kec;
@@ -215,7 +217,7 @@ class HttpSearchLocation extends HttpBase {
   }
 
   List<Kabupaten> _olahKabupaten(dynamic value) {
-    print(value);
+    ph(value);
     List<Kabupaten> lkab = [];
     try {
       List<dynamic> ld = value;
@@ -228,7 +230,7 @@ class HttpSearchLocation extends HttpBase {
       }
       return lkab;
     } catch (e) {
-      print(e);
+      ph(e);
       return lkab;
     }
   }
@@ -254,7 +256,7 @@ class HttpSearchLocation extends HttpBase {
     List<Provinsi> lprov = [];
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Provinsi kec = Provinsi.fromJson(map);
@@ -271,7 +273,7 @@ class HttpSearchLocation extends HttpBase {
     List<Kelurahan> lprov = [];
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Kelurahan kec = Kelurahan.fromJson(map);

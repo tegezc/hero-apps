@@ -88,7 +88,7 @@ class _HomeSurveyState extends State<HomeSurvey> {
                       ),
                     ),
                   ],
-                  bottom: TabBar(
+                  bottom: const TabBar(
                     indicatorColor: Colors.white,
                     isScrollable: true,
                     tabs: [

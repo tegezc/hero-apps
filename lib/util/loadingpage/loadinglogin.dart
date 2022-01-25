@@ -3,6 +3,8 @@ import 'package:hero/util/component/image/component_image.dart';
 import 'package:hero/util/component/loading/component_loading.dart';
 
 class LoadingLoginPage extends StatefulWidget {
+  const LoadingLoginPage({Key? key}) : super(key: key);
+
   @override
   _LoadingLoginPageState createState() => _LoadingLoginPageState();
 }
@@ -24,9 +26,9 @@ class _LoadingLoginPageState extends State<LoadingLoginPage> {
     return Scaffold(
         body: Stack(
       children: [
-        PropertyImage.bgatas(),
-        PropertyImage.bgbawah(),
-        Container(
+        const PropertyImage.bgatas(),
+        const PropertyImage.bgbawah(),
+        SizedBox(
           height: size.height,
           child: SingleChildScrollView(
             child: Form(
@@ -34,15 +36,15 @@ class _LoadingLoginPageState extends State<LoadingLoginPage> {
                 color: Colors.transparent,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
-                    PropertyImage.map(),
-                    SizedBox(
+                    const PropertyImage.map(),
+                    const SizedBox(
                       height: 30,
                     ),
-                    PropertyImage.textWelcome(),
-                    SizedBox(
+                    const PropertyImage.textWelcome(),
+                    const SizedBox(
                       height: 30,
                     ),
                     _contentForm(),
@@ -65,20 +67,20 @@ class _LoadingLoginPageState extends State<LoadingLoginPage> {
           children: <Widget>[
             // _label('Username'),
             // _entryField1(_idTextController),
-            LoadingTextFieldLogin(0.9),
-            SizedBox(
+            const LoadingTextFieldLogin(0.9),
+            const SizedBox(
               height: 20,
             ),
-            LoadingTextFieldLogin(0.9),
+            const LoadingTextFieldLogin(0.9),
             // _label('Password'),
             // _entryFieldPassword(_passwordTextController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             //_animationLogin(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 LoadComponent1(45, 100),
                 LoadComponent1(45, 120),
               ],

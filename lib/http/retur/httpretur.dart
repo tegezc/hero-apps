@@ -6,20 +6,22 @@ import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpRetur extends HttpBase {
   Future<List<AlasanRetur>?> comboAlasanRetur() async {
     try {
       final Map<String, String> headers = await getHeader();
       Uri uri = configuration.uri('/combobox/retur_alasan');
       final response = await http.get(uri, headers: headers);
-      print(response.statusCode);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarAlasan(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -33,14 +35,14 @@ class HttpRetur extends HttpBase {
       final Map<String, String> headers = await getHeader();
       Uri uri = configuration.uri('/lokasi/retur_list/$starDt/$finishDt/$page');
       final response = await http.get(uri, headers: headers);
-      print(response.statusCode);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarRetur(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -68,12 +70,12 @@ class HttpRetur extends HttpBase {
         dynamic value = json.decode(response.body);
         return _olahDaftarRetur(value);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -95,15 +97,15 @@ class HttpRetur extends HttpBase {
         body: jsonEncode(map),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return _olahDaftarSn(json.decode(response.body));
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -124,16 +126,16 @@ class HttpRetur extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -163,7 +165,7 @@ class HttpRetur extends HttpBase {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           SerialNumber serialNumber = SerialNumber.fromJson(map);
@@ -182,7 +184,7 @@ class HttpRetur extends HttpBase {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           AlasanRetur alasanretur = AlasanRetur.fromJson(map);

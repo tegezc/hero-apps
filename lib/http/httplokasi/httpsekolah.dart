@@ -4,6 +4,8 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/sekolah.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpSekolah extends HttpBase {
   Future<List<dynamic>?> detailSekolah(String? idsekolah) async {
     Map<String, String> headers = await getHeader();
@@ -49,15 +51,15 @@ class HttpSekolah extends HttpBase {
         body: jsonEncode(sekolah.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }

@@ -24,7 +24,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
   int _page = 0;
   int? _totalrecord = 0;
   String _keyLok = '';
-  HttpPjp _httpPjp = new HttpPjp();
+  final HttpPjp _httpPjp = HttpPjp();
   EnumAccount? _enumAccount;
 
   @override
@@ -138,7 +138,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
     }
     Size s = MediaQuery.of(context).size;
     return CustomScaffold(
-        body: Container(
+        body: SizedBox(
           height: s.height,
           width: s.width,
           child: Padding(
@@ -211,17 +211,15 @@ class _HistoryPJPState extends State<HistoryPJP> {
       durasi = difference.inMinutes;
     }
 
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _rowCell('Tanggal', DateUtility.dateToStringPanjang(pjp.clockin)),
-          _rowCell('Clock In', DateUtility.dateToStringjam(pjp.clockin)),
-          _rowCell('Clock Out', DateUtility.dateToStringjam(pjp.clockout)),
-          _rowCell('Durasi', '$durasi menit'),
-          _rowCell('Status', status)
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _rowCell('Tanggal', DateUtility.dateToStringPanjang(pjp.clockin)),
+        _rowCell('Clock In', DateUtility.dateToStringjam(pjp.clockin)),
+        _rowCell('Clock Out', DateUtility.dateToStringjam(pjp.clockout)),
+        _rowCell('Durasi', '$durasi menit'),
+        _rowCell('Status', status)
+      ],
     );
   }
 
@@ -231,7 +229,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
       child: Row(
         children: [
           SizedBox(width: 100, child: LabelBlack.size2(nama)),
-          LabelBlack.size2(': '),
+          const LabelBlack.size2(': '),
           LabelBlack.size2(ket),
         ],
       ),

@@ -235,14 +235,14 @@ class TabDataKampus extends StatefulWidget {
 }
 
 class _TabDataKampusState extends State<TabDataKampus> {
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = new TextEditingController();
-  TextEditingController _cnpsn = new TextEditingController();
-  TextEditingController _calamat = new TextEditingController();
-  TextEditingController _clatitude = new TextEditingController();
-  TextEditingController _clongitude = new TextEditingController();
+  TextEditingController _cnama = TextEditingController();
+  TextEditingController _cnpsn = TextEditingController();
+  TextEditingController _calamat = TextEditingController();
+  TextEditingController _clatitude = TextEditingController();
+  TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -276,7 +276,7 @@ class _TabDataKampusState extends State<TabDataKampus> {
       child: Form(
         key: _formKeyValue,
         autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           children: <Widget>[
             SizedBox(height: 20.0),

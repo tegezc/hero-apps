@@ -36,7 +36,7 @@ class _EditorFakultasState extends State<EditorFakultas> {
     } else {
       _enumEditorState = EnumEditorState.edit;
     }
-    _blocFakultas = new BlocFakultas();
+    _blocFakultas = BlocFakultas();
     _title = widget.idfakultas == null ? 'Tambah Fakultas' : 'Edit Fakultas';
     _textBtn = widget.idfakultas == null ? 'Submit' : 'Save';
     super.initState();
@@ -236,16 +236,16 @@ class TabDataFakultas extends StatefulWidget {
 }
 
 class _TabDataFakultasState extends State<TabDataFakultas> {
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = new TextEditingController();
-  TextEditingController _calamat = new TextEditingController();
-  TextEditingController _cjmlDosen = new TextEditingController();
-  TextEditingController _cnpsn = new TextEditingController();
-  TextEditingController _cjmlmahasiswa = new TextEditingController();
-  TextEditingController _clatitude = new TextEditingController();
-  TextEditingController _clongitude = new TextEditingController();
+  TextEditingController _cnama = TextEditingController();
+  TextEditingController _calamat = TextEditingController();
+  TextEditingController _cjmlDosen = TextEditingController();
+  TextEditingController _cnpsn = TextEditingController();
+  TextEditingController _cjmlmahasiswa = TextEditingController();
+  TextEditingController _clatitude = TextEditingController();
+  TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {

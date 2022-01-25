@@ -5,6 +5,7 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
+import '../../../../configuration.dart';
 import 'blocsurvey.dart';
 
 class PageVoucherSurvey extends StatefulWidget {
@@ -75,14 +76,14 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
 
   bool _isbolehsubmit() {
     bool adanull = false;
-    _lcontroller.forEach((element) {
+    for (var element in _lcontroller) {
       if (!adanull) {
         int? value = int.tryParse(element.text);
         if (value == null) {
           adanull = true;
         }
       }
-    });
+    }
     return !adanull;
   }
 
@@ -94,12 +95,12 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     super.dispose();
   }
 
-  _printDebug(List<ItemSurveyVoucher>? lsurvey) {
-    print('Enum ${widget.enumSurvey}');
-    print('panjang list ${lsurvey!.length}');
-    print('isbelanjasubmitted ${widget.uiSurvey!.isbelanjasubmitted}');
-    print('isbroadbandsubmitted ${widget.uiSurvey!.isbroadbandsubmitted}');
-    print('isfisiksubmitted ${widget.uiSurvey!.isfisiksubmitted}');
+  _phDebug(List<ItemSurveyVoucher>? lsurvey) {
+    ph('Enum ${widget.enumSurvey}');
+    ph('panjang list ${lsurvey!.length}');
+    ph('isbelanjasubmitted ${widget.uiSurvey!.isbelanjasubmitted}');
+    ph('isbroadbandsubmitted ${widget.uiSurvey!.isbroadbandsubmitted}');
+    ph('isfisiksubmitted ${widget.uiSurvey!.isfisiksubmitted}');
   }
 
   @override
@@ -120,7 +121,7 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     } else {
       _isSubmited = widget.uiSurvey!.isfisiksubmitted;
     }
-    _printDebug(lsurvey);
+    _phDebug(lsurvey);
 
     return SingleChildScrollView(
       child: Column(
@@ -269,16 +270,16 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Market Audit berhasil disimpan.'),
                 ),
                 Padding(
@@ -297,16 +298,16 @@ class _PageVoucherSurveyState extends State<PageVoucherSurvey> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Market Audit gagal disimpan.'),
                 ),
                 Padding(

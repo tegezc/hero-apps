@@ -8,7 +8,8 @@ class ViewPageIdentitas extends StatelessWidget {
   final EnumPicOwner enumPicOwner;
   final Pic? pic;
   final Owner? owner;
-  ViewPageIdentitas(this.enumPicOwner, {this.pic, this.owner});
+  const ViewPageIdentitas(this.enumPicOwner, {Key? key, this.pic, this.owner})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     String? nama = '-';
@@ -33,37 +34,35 @@ class ViewPageIdentitas extends StatelessWidget {
       fb = pic!.getFb();
       ig = pic!.getIg();
     }
-    return Container(
-      child: Form(
-        autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Label2row('Nama:', nama),
-            _spasi(),
-            Label2row('No Telp:', nohp),
-            _spasi(),
-            Label2row('Tanggal Lahir:', tglLahir),
-            _spasi(),
-            Label2row('Hobi:', hobi),
-            _spasi(),
-            Label2row('Account Facebook:', fb),
-            _spasi(),
-            Label2row('Account Instagram:', ig),
-            _spasi(),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+    return Form(
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          const SizedBox(height: 20.0),
+          Label2row('Nama:', nama),
+          _spasi(),
+          Label2row('No Telp:', nohp),
+          _spasi(),
+          Label2row('Tanggal Lahir:', tglLahir),
+          _spasi(),
+          Label2row('Hobi:', hobi),
+          _spasi(),
+          Label2row('Account Facebook:', fb),
+          _spasi(),
+          Label2row('Account Instagram:', ig),
+          _spasi(),
+          const SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }
 
   Widget _spasi() {
     return Column(
-      children: [
+      children: const [
         SizedBox(height: 12),
         Divider(),
       ],

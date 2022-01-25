@@ -11,10 +11,12 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
+import '../../../configuration.dart';
+
 class HttpMarketAuditSF extends HttpBase {
   Future<bool> createSurvey(Map<String, dynamic> map) async {
     Map<String, String> headers = await getHeader();
-    print('DATA YANG DIKIRIM: ${jsonEncode(map)}');
+    ph('DATA YANG DIKIRIM: ${jsonEncode(map)}');
     Uri uri = configuration
         .uri('/clockinmarketaudit/marketaudit_create_broadband_voucher');
     http.Response? response;
@@ -25,10 +27,10 @@ class HttpMarketAuditSF extends HttpBase {
         body: jsonEncode(map),
       );
 
-      print("Sales Broadband RESPONSE");
-      print(response.body);
-      print(response.statusCode);
-      print('======================');
+      ph("Sales Broadband RESPONSE");
+      ph(response.body);
+      ph(response.statusCode);
+      ph('======================');
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahSurveySukses(value);
@@ -36,8 +38,8 @@ class HttpMarketAuditSF extends HttpBase {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -93,10 +95,10 @@ class HttpMarketAuditSF extends HttpBase {
 
       var res = await request.send();
       var response = await http.Response.fromStream(res);
-      // print("Market AUDIT BELANJA SF");
-      // print('idhistory:$idhitory');
-      // print(response.body);
-      // print(response.statusCode);
+      // ph("Market AUDIT BELANJA SF");
+      // ph('idhistory:$idhitory');
+      // ph(response.body);
+      // ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahCreateBelanjaSukses(value);
@@ -132,16 +134,16 @@ class HttpMarketAuditSF extends HttpBase {
     String strDt = DateUtility.dateToStringParam(tgl);
     Uri uri = configuration.uri(
         '/bottommenumarketaudit/marketaudit_detail/$idshare/$idoutlet/$strDt');
-    var resp;
+    late http.Response response;
     try {
       final Map<String, String> headers = await getHeader();
-      final response = await http.get(uri, headers: headers);
-      resp = response;
-      print('Get Detail $idshare');
-      print("LINK NYA: ${uri.path}");
-      print(" : ${response.body}");
+      response = await http.get(uri, headers: headers);
 
-      print("============");
+      ph('Get Detail $idshare');
+      ph("LINK NYA: ${uri.path}");
+      ph(" : ${response.body}");
+
+      ph("============");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         if (enumSurvey == EnumSurvey.belanja) {
@@ -152,11 +154,11 @@ class HttpMarketAuditSF extends HttpBase {
       }
       return null;
     } catch (e) {
-      if (resp != null) {
-        print("Error : ${resp.body}");
+      if (response != null) {
+        ph("Error : ${response.body}");
       }
 
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -167,7 +169,7 @@ class HttpMarketAuditSF extends HttpBase {
     Map<String, dynamic> mp = value;
     if (mp['data'] != null) {
       List<dynamic> ld = mp['data'];
-      print('ld.length: ${ld.length}');
+      ph('ld.length: ${ld.length}');
       if (ld.isEmpty) {
         return null;
       }

@@ -1,9 +1,3 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 import 'dart:io';
 
@@ -16,6 +10,7 @@ import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../configuration.dart';
 import 'loadingview.dart';
 import 'preferencephoto.dart';
 import 'previewphoto.dart';
@@ -25,7 +20,7 @@ List<CameraDescription> cameras = [];
 class CameraView extends StatefulWidget {
   static const routeName = '/takephoto';
   final ParamPreviewPhoto? params;
-  CameraView(this.params);
+  CameraView(this.params, {Key? key}) : super(key: key);
   @override
   _CameraViewState createState() {
     return _CameraViewState();
@@ -46,7 +41,7 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
 }
 
 void logError(String code, String? message) =>
-    debugPrint('Error: $code\nError Message: $message');
+    ph('Error: $code\nError Message: $message');
 
 class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   List<CameraDescription> cameras = [];
@@ -58,6 +53,8 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   bool enableAudio = true;
 
   late bool _isLoading;
+
+  final Configuration _configuration = Configuration();
 
   @override
   void initState() {
@@ -227,9 +224,10 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     if (controller != null) {
       await controller!.dispose();
     }
+    ResolutionPreset resolutionPreset = _configuration.resultPhoto();
     controller = CameraController(
       cameraDescription!,
-      ResolutionPreset.low,
+      resolutionPreset,
       enableAudio: enableAudio,
     );
 

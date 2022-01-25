@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../configuration.dart';
 import '../../colorutil.dart';
 import '../../dateutil.dart';
 import '../label/component_label.dart';
@@ -10,7 +11,8 @@ class ButtonLogin extends StatefulWidget {
   final Function onTap;
   final bool? isfreshstate;
 
-  ButtonLogin(this.text, {Key? key, required this.onTap, this.isfreshstate})
+  const ButtonLogin(this.text,
+      {Key? key, required this.onTap, this.isfreshstate})
       : super(key: key);
 
   @override
@@ -51,9 +53,9 @@ class _ButtonLoginState extends State<ButtonLogin> {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 2),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           // alignment: Alignment.center,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.all(Radius.circular(8)),
             // boxShadow: <BoxShadow>[
@@ -66,7 +68,7 @@ class _ButtonLoginState extends State<ButtonLogin> {
           ),
           child: Text(
             widget.text,
-            style: TextStyle(fontSize: 14, color: Colors.white),
+            style: const TextStyle(fontSize: 14, color: Colors.white),
           ),
         ),
       ),
@@ -80,12 +82,12 @@ class _ButtonLoginState extends State<ButtonLogin> {
         //  width: MediaQuery.of(context).size.width,
         width: 70,
         // height: 50,
-        padding: EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        child: CircularProgressIndicator(
+        child: const CircularProgressIndicator(
           backgroundColor: Colors.white,
         ),
       ),
@@ -97,7 +99,8 @@ class ButtonGray extends StatelessWidget {
   final String text;
   final Function onTap;
 
-  ButtonGray(this.text, {required this.onTap});
+  const ButtonGray(this.text, {Key? key, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +111,11 @@ class ButtonGray extends StatelessWidget {
           onTap();
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
           // alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
             border: Border.all(width: 1, color: Colors.grey[600]!),
           ),
           child: Text(
@@ -129,7 +132,7 @@ class ButtonRed extends StatelessWidget {
   final String text;
   final Function onTap;
 
-  ButtonRed(this.text, {required this.onTap});
+  const ButtonRed(this.text, {Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -140,11 +143,11 @@ class ButtonRed extends StatelessWidget {
           onTap();
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
           // alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.red[600]!,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
             // border: Border.all(width: 1, color: Colors.red[600]!),
           ),
           child: Text(
@@ -166,29 +169,35 @@ class ButtonApp extends StatefulWidget {
   final EnumWarnaButton enumWarnaButton;
   final bool enable;
 
-  ButtonApp.red(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.red;
+  const ButtonApp.red(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.red,
+        super(key: key);
 
-  ButtonApp.blue(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.blue;
+  const ButtonApp.blue(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.blue,
+        super(key: key);
 
-  ButtonApp.yellow(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.yellow;
+  const ButtonApp.yellow(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.yellow,
+        super(key: key);
 
-  ButtonApp.green(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.green;
+  const ButtonApp.green(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.green,
+        super(key: key);
 
-  ButtonApp.black(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.black;
+  const ButtonApp.black(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.black,
+        super(key: key);
 
-  ButtonApp.white(this.text, this.onTap,
-      {this.enable = true, this.bgColor = Colors.transparent})
-      : enumWarnaButton = EnumWarnaButton.white;
+  const ButtonApp.white(this.text, this.onTap,
+      {Key? key, this.enable = true, this.bgColor = Colors.transparent})
+      : enumWarnaButton = EnumWarnaButton.white,
+        super(key: key);
 
   @override
   _ButtonAppState createState() => _ButtonAppState();
@@ -207,7 +216,7 @@ class _ButtonAppState extends State<ButtonApp> {
         _color = Colors.red;
         break;
       case EnumWarnaButton.yellow:
-        _color = Color(0xFFFF7F50);
+        _color = const Color(0xFFFF7F50);
         break;
       case EnumWarnaButton.green:
         _color = Colors.green;
@@ -286,11 +295,13 @@ class ButtonMenu extends StatefulWidget {
   final double iconSize;
   final bool? enable;
 
-  ButtonMenu(this.icon, this.text, this.onTap,
-      {this.height = 110,
+  const ButtonMenu(this.icon, this.text, this.onTap,
+      {Key? key,
+      this.height = 110,
       this.width = 140,
       this.iconSize = 60,
-      this.enable = true});
+      this.enable = true})
+      : super(key: key);
 
   @override
   _ButtonMenuState createState() => _ButtonMenuState();
@@ -301,7 +312,7 @@ class _ButtonMenuState extends State<ButtonMenu> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.enable! ? widget.onTap() : print('');
+        widget.enable! ? widget.onTap() : ph('');
       },
       child: Container(
         height: widget.height,
@@ -321,7 +332,7 @@ class _ButtonMenuState extends State<ButtonMenu> {
               size: widget.iconSize,
               color: widget.enable! ? Colors.black : Colors.grey,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             LabelApp.size1(
@@ -338,7 +349,8 @@ class _ButtonMenuState extends State<ButtonMenu> {
 class ButtonAppSolid extends StatelessWidget {
   final String text;
   final Function onTap;
-  ButtonAppSolid(this.text, {required this.onTap});
+  const ButtonAppSolid(this.text, {Key? key, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -348,12 +360,12 @@ class ButtonAppSolid extends StatelessWidget {
   Widget _loginButton() {
     return InkWell(
       onTap: () {
-        this.onTap();
+        onTap();
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 2),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           // alignment: Alignment.center,
           decoration: const BoxDecoration(
             color: Colors.blue,
@@ -361,7 +373,7 @@ class ButtonAppSolid extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              this.text,
+              text,
               style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -378,7 +390,8 @@ class ButtonAppTanggal extends StatelessWidget {
   final String? label;
   final DateTime? dt;
   final Function onTap;
-  ButtonAppTanggal(this.label, this.dt, {required this.onTap});
+  const ButtonAppTanggal(this.label, this.dt, {Key? key, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -386,37 +399,37 @@ class ButtonAppTanggal extends StatelessWidget {
   }
 
   Widget _loginButton() {
-    String strDate = DateUtility.dateToStringDdMmYyyy(this.dt);
+    String strDate = DateUtility.dateToStringDdMmYyyy(dt);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabelBlack.size2(label),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           GestureDetector(
             onTap: () {
-              this.onTap();
+              onTap();
             },
             child: Container(
               // padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
               // alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(color: Colors.black),
               ),
               child: ListTile(
                 title: Text(
                   strDate,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.calendar_today,
                   color: Colors.black,
                 ),
@@ -434,7 +447,9 @@ class ButtonTglVer1 extends StatelessWidget {
   final DateTime? dt;
   final double width;
   final Function onTap;
-  ButtonTglVer1(this.width, this.label, this.dt, {required this.onTap});
+  const ButtonTglVer1(this.width, this.label, this.dt,
+      {Key? key, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -442,19 +457,19 @@ class ButtonTglVer1 extends StatelessWidget {
   }
 
   Widget _layout() {
-    String strDate = DateUtility.dateToStringDdMmYyyy(this.dt);
+    String strDate = DateUtility.dateToStringDdMmYyyy(dt);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabelBlack.size2(label),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           GestureDetector(
             onTap: () {
-              this.onTap();
+              onTap();
             },
             child: Container(
               width: width,
@@ -462,7 +477,7 @@ class ButtonTglVer1 extends StatelessWidget {
               // alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(color: Colors.blue),
               ),
               child: Padding(
@@ -472,12 +487,12 @@ class ButtonTglVer1 extends StatelessWidget {
                   children: [
                     Text(
                       strDate,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.calendar_today,
                       color: Colors.black,
                     )
@@ -493,6 +508,8 @@ class ButtonTglVer1 extends StatelessWidget {
 }
 
 class ButtonAppLoading extends StatelessWidget {
+  const ButtonAppLoading({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return _loadingLogin();
@@ -505,12 +522,12 @@ class ButtonAppLoading extends StatelessWidget {
         //  width: MediaQuery.of(context).size.width,
         width: 70,
         // height: 50,
-        padding: EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        child: CircularProgressIndicator(
+        child: const CircularProgressIndicator(
           backgroundColor: Colors.white,
         ),
       ),
@@ -522,7 +539,9 @@ class ButtonClockIn extends StatelessWidget {
   final String text;
   final Function onTap;
   final Color? borderColor;
-  ButtonClockIn({required this.text, required this.onTap, this.borderColor});
+  const ButtonClockIn(
+      {Key? key, required this.text, required this.onTap, this.borderColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -573,7 +592,9 @@ class ButtonClockIn extends StatelessWidget {
 class ButtonClockInGradient extends StatelessWidget {
   final String text;
   final Function onTap;
-  ButtonClockInGradient({required this.text, required this.onTap});
+  const ButtonClockInGradient(
+      {Key? key, required this.text, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -654,7 +675,7 @@ class ButtonStrectWidth extends StatelessWidget {
           : null,
       child: Text(
         text,
-        style: TextStyle(fontSize: 11, color: Colors.white),
+        style: const TextStyle(fontSize: 11, color: Colors.white),
       ),
     );
   }

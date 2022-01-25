@@ -7,6 +7,8 @@ import 'package:hero/modulapp/blocpagetabds.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
+import '../configuration.dart';
+
 class HttphpsearchDs extends HttpBase {
   /// dtstart dab dtfinish tidak boleh null
   Future<UIPageTabDs?> getDaftarLokasi(
@@ -37,15 +39,15 @@ class HttphpsearchDs extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.statusCode);
-      print(response.body);
+      ph(response.statusCode);
+      ph(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarLokasiDs(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -87,8 +89,8 @@ class HttphpsearchDs extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.statusCode);
-      print(response.body);
+      ph(response.statusCode);
+      ph(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarOutletquery(value);
@@ -96,8 +98,8 @@ class HttphpsearchDs extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -163,7 +165,7 @@ class HttphpsearchDs extends HttpBase {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           LokasiSearch retur = LokasiSearch.fromJson(map);

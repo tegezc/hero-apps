@@ -10,6 +10,8 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
+import '../../configuration.dart';
+
 class HttpMerchandising extends HttpBase {
   // -form 'id_history_pjp="35"' \
   // --form 'id_jenis_share="SPANDUK"' \
@@ -30,7 +32,7 @@ class HttpMerchandising extends HttpBase {
     String? path1 = merchandising.pathPhoto1;
     String? path2 = merchandising.pathPhoto2;
     String? path3 = merchandising.pathPhoto3;
-    print("ID JENIS Share: ${merchandising.idjenisshare}");
+    ph("ID JENIS Share: ${merchandising.idjenisshare}");
 
     ///===================================
     var request = http.MultipartRequest('POST',
@@ -100,14 +102,14 @@ class HttpMerchandising extends HttpBase {
         //      filename: 'myfile1'),
       ));
     }
-    late var response;
+    late http.Response response;
     try {
       var res = await request.send();
       response = await http.Response.fromStream(res);
-      print('idhistory:$idhitory');
+      ph('idhistory:$idhitory');
 
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         int? i = ConverterNumber.stringToInt(map['status']);
@@ -117,7 +119,7 @@ class HttpMerchandising extends HttpBase {
       }
       return false;
     } catch (e) {
-      print(response.body);
+      ph(response.body);
       return false;
     }
   }
@@ -151,15 +153,15 @@ class HttpMerchandising extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
-        return this._olahMapMerchandising(value);
+        return _olahMapMerchandising(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -172,18 +174,18 @@ class HttpMerchandising extends HttpBase {
   }
 
   Map<String, Merchandising> _olahMapMerchandising(dynamic value) {
-    Map<String, Merchandising> moutlet = Map();
+    Map<String, Merchandising> moutlet = {};
 
     try {
       Map<String, dynamic> mp = value;
       List<dynamic> ld = mp['data'];
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Merchandising merchandising = Merchandising.fromJson(map);
           merchandising.isServerExist = true;
-          print(merchandising.idjenisshare);
+          ph(merchandising.idjenisshare);
           if (merchandising.idjenisshare == Merchandising.tagPerdana) {
             moutlet[Merchandising.tagPerdana] = merchandising;
           }

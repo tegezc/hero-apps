@@ -10,7 +10,7 @@ import 'package:rxdart/subjects.dart';
 class UIMerchan {
   Merchandising? perdana;
   Merchandising? voucherFisik;
-  Merchandising? StikerScanQR;
+  Merchandising? stikerScanQR;
   Merchandising? papanNama;
   Merchandising? poster;
   Merchandising? spanduk;
@@ -56,8 +56,8 @@ class BlocMerchandising {
       _cacheUiMerc!.voucherFisik =
           Merchandising.kosong(pjp, Merchandising.tagVoucherFisik);
     }
-    if (_cacheUiMerc!.StikerScanQR == null) {
-      _cacheUiMerc!.StikerScanQR =
+    if (_cacheUiMerc!.stikerScanQR == null) {
+      _cacheUiMerc!.stikerScanQR =
           Merchandising.kosong(pjp, Merchandising.tagBackdrop);
     }
     if (_cacheUiMerc!.papanNama == null) {
@@ -85,12 +85,12 @@ class BlocMerchandising {
     if (map != null) {
       _setChacehMerchadisingFromInternet(map);
       //
-      // print(_cacheUiMerc!.voucherFisik);
-      // print(_cacheUiMerc!.perdana);
-      // print(_cacheUiMerc!.spanduk);
-      // print(_cacheUiMerc!.poster);
-      // print(_cacheUiMerc!.papanNama);
-      // print(_cacheUiMerc!.backdrop);
+      // ph(_cacheUiMerc!.voucherFisik);
+      // ph(_cacheUiMerc!.perdana);
+      // ph(_cacheUiMerc!.spanduk);
+      // ph(_cacheUiMerc!.poster);
+      // ph(_cacheUiMerc!.papanNama);
+      // ph(_cacheUiMerc!.backdrop);
 
       // karena wajib diisi semua maka tidak ada yg boleh null
       if (enumAccount == EnumAccount.sf) {
@@ -128,7 +128,7 @@ class BlocMerchandising {
         merchandising = _cacheUiMerc!.papanNama;
         break;
       case EnumMerchandising.StikerScanQR:
-        merchandising = _cacheUiMerc!.StikerScanQR;
+        merchandising = _cacheUiMerc!.stikerScanQR;
         break;
       case EnumMerchandising.perdana:
         merchandising = _cacheUiMerc!.perdana;
@@ -171,7 +171,7 @@ class BlocMerchandising {
       }
 
       if (map[Merchandising.tagBackdrop] != null) {
-        _cacheUiMerc!.StikerScanQR = map[Merchandising.tagBackdrop];
+        _cacheUiMerc!.stikerScanQR = map[Merchandising.tagBackdrop];
       }
     }
   }
@@ -195,8 +195,8 @@ class BlocMerchandising {
             _textChanged(_cacheUiMerc!.papanNama, enumOperator, text);
         break;
       case EnumMerchandising.StikerScanQR:
-        _cacheUiMerc!.StikerScanQR =
-            _textChanged(_cacheUiMerc!.StikerScanQR, enumOperator, text);
+        _cacheUiMerc!.stikerScanQR =
+            _textChanged(_cacheUiMerc!.stikerScanQR, enumOperator, text);
         break;
       case EnumMerchandising.perdana:
         _cacheUiMerc!.perdana =
@@ -255,15 +255,15 @@ class BlocMerchandising {
         }
         break;
       case EnumMerchandising.StikerScanQR:
-        switch (_cacheUiMerc!.StikerScanQR!.getPhotoKe()) {
+        switch (_cacheUiMerc!.stikerScanQR!.getPhotoKe()) {
           case EnumNumber.satu:
-            _cacheUiMerc!.StikerScanQR!.pathPhoto1 = path;
+            _cacheUiMerc!.stikerScanQR!.pathPhoto1 = path;
             break;
           case EnumNumber.dua:
-            _cacheUiMerc!.StikerScanQR!.pathPhoto2 = path;
+            _cacheUiMerc!.stikerScanQR!.pathPhoto2 = path;
             break;
           case EnumNumber.tiga:
-            _cacheUiMerc!.StikerScanQR!.pathPhoto3 = path;
+            _cacheUiMerc!.stikerScanQR!.pathPhoto3 = path;
             break;
           default:
         }

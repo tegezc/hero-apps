@@ -4,13 +4,13 @@ class LoadComponent1 extends StatelessWidget {
   final double height;
   final double width;
 
-  LoadComponent1(this.height, this.width);
+  const LoadComponent1(this.height, this.width, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: this.height,
-        width: this.width,
+        height: height,
+        width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
           color: Colors.grey[200],
@@ -22,14 +22,15 @@ class LoadComponentFractional extends StatelessWidget {
   final double heightFactor;
   final double widthFactor;
 
-  LoadComponentFractional(this.heightFactor, this.widthFactor);
+  const LoadComponentFractional(this.heightFactor, this.widthFactor, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: FractionallySizedBox(
-          heightFactor: this.heightFactor,
-          widthFactor: this.widthFactor,
+          heightFactor: heightFactor,
+          widthFactor: widthFactor,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
@@ -42,14 +43,15 @@ class LoadComponentFractionalWidth extends StatelessWidget {
   final double height;
   final double widthFactor;
 
-  LoadComponentFractionalWidth(this.height, this.widthFactor);
+  const LoadComponentFractionalWidth(this.height, this.widthFactor, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: this.height,
+        height: height,
         child: FractionallySizedBox(
-          widthFactor: this.widthFactor,
+          widthFactor: widthFactor,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
@@ -62,14 +64,15 @@ class LoadComponentFractionalHeight extends StatelessWidget {
   final double heightFactor;
   final double width;
 
-  LoadComponentFractionalHeight(this.heightFactor, this.width);
+  const LoadComponentFractionalHeight(this.heightFactor, this.width, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: this.width,
+        width: width,
         child: FractionallySizedBox(
-          heightFactor: this.heightFactor,
+          heightFactor: heightFactor,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
@@ -81,7 +84,7 @@ class LoadComponentFractionalHeight extends StatelessWidget {
 class LoadingTextFieldLogin extends StatelessWidget {
   final double widthFactor;
 
-  LoadingTextFieldLogin(this.widthFactor);
+  const LoadingTextFieldLogin(this.widthFactor, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +92,7 @@ class LoadingTextFieldLogin extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _label(),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         _entryField(),
@@ -98,10 +101,10 @@ class LoadingTextFieldLogin extends StatelessWidget {
   }
 
   Widget _label() {
-    return LoadComponent1(20, 100);
+    return const LoadComponent1(20, 100);
   }
 
   Widget _entryField() {
-    return LoadComponentFractionalWidth(50, this.widthFactor);
+    return LoadComponentFractionalWidth(50, widthFactor);
   }
 }

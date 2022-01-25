@@ -2,7 +2,7 @@ import 'package:hero/database/stringdb.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'Database.dart';
+import 'database.dart';
 
 class DaoSerial {
   Future<bool> batchInsert(List<SerialNumber>? lserial) async {

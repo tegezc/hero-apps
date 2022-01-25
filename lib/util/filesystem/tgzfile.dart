@@ -27,6 +27,7 @@ class TgzFile implements ITgzFile {
   //   }
   // }
 
+  @override
   Future<bool> isPathExist(String path) async {
     try {
       final file = File(path);
@@ -36,6 +37,7 @@ class TgzFile implements ITgzFile {
     }
   }
 
+  @override
   Future<bool> deleteDirectory() async {
     // extDir.deleteSync(recursive: true);
     try {

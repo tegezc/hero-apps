@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LabelGray extends StatelessWidget {
   final String text;
 
-  LabelGray(this.text);
+  LabelGray(this.text, {Key? key}) : super(key: key);
 
   final TextStyle _labelStyle = TextStyle(color: Colors.grey[600]);
 
@@ -20,11 +20,21 @@ class LabelBlack extends StatelessWidget {
   final String? text;
   final double _fontsize;
   final bool bold;
-  LabelBlack.title(this.text, {this.bold = false}) : _fontsize = 20.0;
-  LabelBlack.size1(this.text, {this.bold = false}) : _fontsize = 16.0;
-  LabelBlack.size2(this.text, {this.bold = false}) : _fontsize = 14.0;
-  LabelBlack.size3(this.text, {this.bold = false}) : _fontsize = 12.0;
-  LabelBlack.size4(this.text, {this.bold = false}) : _fontsize = 10.0;
+  const LabelBlack.title(this.text, {Key? key, this.bold = false})
+      : _fontsize = 20.0,
+        super(key: key);
+  const LabelBlack.size1(this.text, {Key? key, this.bold = false})
+      : _fontsize = 16.0,
+        super(key: key);
+  const LabelBlack.size2(this.text, {Key? key, this.bold = false})
+      : _fontsize = 14.0,
+        super(key: key);
+  const LabelBlack.size3(this.text, {Key? key, this.bold = false})
+      : _fontsize = 12.0,
+        super(key: key);
+  const LabelBlack.size4(this.text, {Key? key, this.bold = false})
+      : _fontsize = 10.0,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +42,7 @@ class LabelBlack extends StatelessWidget {
         color: Colors.black,
         fontSize: _fontsize,
         fontWeight: FontWeight.normal);
-    if (this.bold) {
+    if (bold) {
       _labelStyle = TextStyle(
           color: Colors.black,
           fontSize: _fontsize,
@@ -51,11 +61,21 @@ class LabelWhite extends StatelessWidget {
   final String? text;
   final double _fontsize;
   final bool bold;
-  LabelWhite.title(this.text, {this.bold = false}) : _fontsize = 20.0;
-  LabelWhite.size1(this.text, {this.bold = false}) : _fontsize = 16.0;
-  LabelWhite.size2(this.text, {this.bold = false}) : _fontsize = 14.0;
-  LabelWhite.size3(this.text, {this.bold = false}) : _fontsize = 12.0;
-  LabelWhite.size4(this.text, {this.bold = false}) : _fontsize = 10.0;
+  const LabelWhite.title(this.text, {Key? key, this.bold = false})
+      : _fontsize = 20.0,
+        super(key: key);
+  const LabelWhite.size1(this.text, {Key? key, this.bold = false})
+      : _fontsize = 16.0,
+        super(key: key);
+  const LabelWhite.size2(this.text, {Key? key, this.bold = false})
+      : _fontsize = 14.0,
+        super(key: key);
+  const LabelWhite.size3(this.text, {Key? key, this.bold = false})
+      : _fontsize = 12.0,
+        super(key: key);
+  const LabelWhite.size4(this.text, {Key? key, this.bold = false})
+      : _fontsize = 10.0,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +83,7 @@ class LabelWhite extends StatelessWidget {
         color: Colors.white,
         fontSize: _fontsize,
         fontWeight: FontWeight.normal);
-    if (this.bold) {
+    if (bold) {
       _labelStyle = TextStyle(
           color: Colors.white,
           fontSize: _fontsize,
@@ -83,26 +103,40 @@ class LabelApp extends StatelessWidget {
   final double fontsize;
   final bool bold;
   final Color color;
-  LabelApp.title(this.text, {this.bold = false, this.color = Colors.black})
-      : fontsize = 20.0;
-  LabelApp.size1(this.text, {this.bold = false, this.color = Colors.black})
-      : fontsize = 16.0;
-  LabelApp.size2(this.text, {this.bold = false, this.color = Colors.black})
-      : fontsize = 14.0;
-  LabelApp.size3(this.text, {this.bold = false, this.color = Colors.black})
-      : fontsize = 12.0;
-  LabelApp.size4(this.text, {this.bold = false, this.color = Colors.black})
-      : fontsize = 10.0;
-  LabelApp.flexSize(this.text,
-      {this.bold = false, this.color = Colors.black, this.fontsize = 12});
+  const LabelApp.title(this.text,
+      {Key? key, this.bold = false, this.color = Colors.black})
+      : fontsize = 20.0,
+        super(key: key);
+  const LabelApp.size1(this.text,
+      {Key? key, this.bold = false, this.color = Colors.black})
+      : fontsize = 16.0,
+        super(key: key);
+  const LabelApp.size2(this.text,
+      {Key? key, this.bold = false, this.color = Colors.black})
+      : fontsize = 14.0,
+        super(key: key);
+  const LabelApp.size3(this.text,
+      {Key? key, this.bold = false, this.color = Colors.black})
+      : fontsize = 12.0,
+        super(key: key);
+  const LabelApp.size4(this.text,
+      {Key? key, this.bold = false, this.color = Colors.black})
+      : fontsize = 10.0,
+        super(key: key);
+  const LabelApp.flexSize(this.text,
+      {Key? key,
+      this.bold = false,
+      this.color = Colors.black,
+      this.fontsize = 12})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextStyle _labelStyle = TextStyle(
-        color: this.color, fontSize: fontsize, fontWeight: FontWeight.normal);
-    if (this.bold) {
+        color: color, fontSize: fontsize, fontWeight: FontWeight.normal);
+    if (bold) {
       _labelStyle = TextStyle(
-          color: this.color, fontSize: fontsize, fontWeight: FontWeight.bold);
+          color: color, fontSize: fontsize, fontWeight: FontWeight.bold);
     }
 
     return Text(
@@ -119,47 +153,59 @@ class LabelAppMiring extends StatelessWidget {
   final bool bold;
   final Color? color;
   final TextAlign textAlign;
-  LabelAppMiring.title(this.text,
-      {this.bold = false,
+  const LabelAppMiring.title(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.textAlign = TextAlign.left})
-      : fontsize = 20.0;
-  LabelAppMiring.size1(this.text,
-      {this.bold = false,
+      : fontsize = 20.0,
+        super(key: key);
+  const LabelAppMiring.size1(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.textAlign = TextAlign.left})
-      : fontsize = 16.0;
-  LabelAppMiring.size2(this.text,
-      {this.bold = false,
+      : fontsize = 16.0,
+        super(key: key);
+  const LabelAppMiring.size2(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.textAlign = TextAlign.left})
-      : fontsize = 14.0;
-  LabelAppMiring.size3(this.text,
-      {this.bold = false,
+      : fontsize = 14.0,
+        super(key: key);
+  const LabelAppMiring.size3(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.textAlign = TextAlign.left})
-      : fontsize = 12.0;
-  LabelAppMiring.size4(this.text,
-      {this.bold = false,
+      : fontsize = 12.0,
+        super(key: key);
+  const LabelAppMiring.size4(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.textAlign = TextAlign.left})
-      : fontsize = 10.0;
-  LabelAppMiring.flexSize(this.text,
-      {this.bold = false,
+      : fontsize = 10.0,
+        super(key: key);
+  const LabelAppMiring.flexSize(this.text,
+      {Key? key,
+      this.bold = false,
       this.color = Colors.black,
       this.fontsize = 12,
-      this.textAlign = TextAlign.left});
+      this.textAlign = TextAlign.left})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextStyle _labelStyle = TextStyle(
-        color: this.color,
+        color: color,
         fontSize: fontsize,
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.italic);
-    if (this.bold) {
+    if (bold) {
       _labelStyle = TextStyle(
-          color: this.color,
+          color: color,
           fontSize: fontsize,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.italic);
@@ -177,23 +223,21 @@ class LabelAppMiring extends StatelessWidget {
 class Label2row extends StatelessWidget {
   final String text1;
   final String? text2;
-  Label2row(this.text1, this.text2);
+  const Label2row(this.text1, this.text2, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LabelApp.size2(
-            text1,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          LabelApp.size1(text2),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LabelApp.size2(
+          text1,
+          color: Colors.grey,
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        LabelApp.size1(text2),
+      ],
     );
   }
 }
@@ -201,26 +245,24 @@ class Label2row extends StatelessWidget {
 class Label2rowv1 extends StatelessWidget {
   final String text1;
   final String text2;
-  Label2rowv1(this.text1, this.text2);
+  const Label2rowv1(this.text1, this.text2, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LabelApp.size2(
-            text1,
-            color: Colors.black,
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          LabelApp.size3(
-            text2,
-            color: Colors.red,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LabelApp.size2(
+          text1,
+          color: Colors.black,
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        LabelApp.size3(
+          text2,
+          color: Colors.red,
+        ),
+      ],
     );
   }
 }
@@ -231,34 +273,56 @@ class LabelAppRich extends StatelessWidget {
   final double fontsize;
   final bool bold;
   final Color? color;
-  LabelAppRich.title(this.text1,
-      {this.text2 = '*', this.bold = false, this.color = Colors.black})
-      : fontsize = 20.0;
-  LabelAppRich.size1(this.text1,
-      {this.text2 = '*', this.bold = false, this.color = Colors.black})
-      : fontsize = 16.0;
-  LabelAppRich.size2(this.text1,
-      {this.text2 = '*', this.bold = false, this.color = Colors.black})
-      : fontsize = 14.0;
-  LabelAppRich.size3(this.text1,
-      {this.text2 = '*', this.bold = false, this.color = Colors.black})
-      : fontsize = 12.0;
-  LabelAppRich.size4(this.text1,
-      {this.text2 = '*', this.bold = false, this.color = Colors.black})
-      : fontsize = 10.0;
-  LabelAppRich.flexSize(this.text1,
-      {this.text2 = '*',
+  const LabelAppRich.title(this.text1,
+      {Key? key,
+      this.text2 = '*',
+      this.bold = false,
+      this.color = Colors.black})
+      : fontsize = 20.0,
+        super(key: key);
+  const LabelAppRich.size1(this.text1,
+      {Key? key,
+      this.text2 = '*',
+      this.bold = false,
+      this.color = Colors.black})
+      : fontsize = 16.0,
+        super(key: key);
+  const LabelAppRich.size2(this.text1,
+      {Key? key,
+      this.text2 = '*',
+      this.bold = false,
+      this.color = Colors.black})
+      : fontsize = 14.0,
+        super(key: key);
+  const LabelAppRich.size3(this.text1,
+      {Key? key,
+      this.text2 = '*',
+      this.bold = false,
+      this.color = Colors.black})
+      : fontsize = 12.0,
+        super(key: key);
+  const LabelAppRich.size4(this.text1,
+      {Key? key,
+      this.text2 = '*',
+      this.bold = false,
+      this.color = Colors.black})
+      : fontsize = 10.0,
+        super(key: key);
+  const LabelAppRich.flexSize(this.text1,
+      {Key? key,
+      this.text2 = '*',
       this.bold = false,
       this.color = Colors.black,
-      this.fontsize = 12});
+      this.fontsize = 12})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextStyle _labelStyle = TextStyle(
-        color: this.color, fontSize: fontsize, fontWeight: FontWeight.normal);
-    if (this.bold) {
+        color: color, fontSize: fontsize, fontWeight: FontWeight.normal);
+    if (bold) {
       _labelStyle = TextStyle(
-          color: this.color, fontSize: fontsize, fontWeight: FontWeight.bold);
+          color: color, fontSize: fontsize, fontWeight: FontWeight.bold);
     }
     TextStyle _textstyle2 = TextStyle(
         color: Colors.red,

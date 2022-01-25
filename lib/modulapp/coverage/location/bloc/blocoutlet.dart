@@ -1,4 +1,4 @@
-import 'package:hero/http/httplokasi/httpOutlet.dart';
+import 'package:hero/http/httplokasi/http_outlet.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/outlet.dart';
 import 'package:hero/util/locationutil.dart';
@@ -38,7 +38,7 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   void firstTimeEdit(String? idoutlet) async {
-    _cacheUioutlet = new UIOutlet();
+    _cacheUioutlet = UIOutlet();
     _cacheUioutlet!.enumEditorState = EnumEditorState.edit;
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idoutlet).then((value) {
@@ -51,7 +51,7 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   Future<bool> _firtimeEditSetup(String? idoutlet) async {
-    HttpOutlet httpController = new HttpOutlet();
+    HttpOutlet httpController = HttpOutlet();
     List<dynamic>? response = await httpController.detailOutlet(idoutlet);
     _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
 
@@ -78,7 +78,7 @@ class BlocOutlet extends AbsBlocLokasi {
 
   void firstTimeBaru() {
     super.init(EnumEditorState.baru, null);
-    _cacheUioutlet = new UIOutlet();
+    _cacheUioutlet = UIOutlet();
     _cacheUioutlet!.enumEditorState = EnumEditorState.baru;
     _cacheUioutlet!.outlet = Outlet.kosong();
 
@@ -93,7 +93,7 @@ class BlocOutlet extends AbsBlocLokasi {
 
   Future<bool> setupAsync() async {
     LocationData position = await LocationUtil.getCurrentLocation();
-    HttpOutlet httpController = new HttpOutlet();
+    HttpOutlet httpController = HttpOutlet();
     _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
     _cacheUioutlet!.outlet.long = position.longitude;
     _cacheUioutlet!.outlet.lat = position.latitude;
@@ -104,7 +104,7 @@ class BlocOutlet extends AbsBlocLokasi {
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUioutlet);
 
-    HttpOutlet httpController = new HttpOutlet();
+    HttpOutlet httpController = HttpOutlet();
     Map<String, dynamic>? response =
         await httpController.createOutlet(_cacheUioutlet!.outlet);
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.done;
@@ -122,7 +122,7 @@ class BlocOutlet extends AbsBlocLokasi {
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.loading;
     _sink(_cacheUioutlet);
 
-    HttpOutlet httpController = new HttpOutlet();
+    HttpOutlet httpController = HttpOutlet();
     Map<String, dynamic>? response =
         await httpController.updateOutlet(_cacheUioutlet!.outlet);
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.done;
@@ -223,7 +223,7 @@ class BlocOutlet extends AbsBlocLokasi {
   //
   // @override
   // void finishPickProv(List<Kabupaten> lkab, Provinsi prov) {
-  //   print('finish pick prov');
+  //   ph('finish pick prov');
   //   this._sink(_cacheUioutlet);
   // }
   //

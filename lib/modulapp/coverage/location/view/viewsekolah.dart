@@ -28,12 +28,12 @@ class _ViewSekolahState extends State<ViewSekolah> {
   void initState() {
     _isloading = true;
     _title = 'Detail Sekolah';
-    this._setup();
+    _setup();
     super.initState();
   }
 
   void _setup() {
-    this._setupdata().then((value) {
+    _setupdata().then((value) {
       if (value) {
         setState(() {
           _isloading = false;
@@ -44,7 +44,7 @@ class _ViewSekolahState extends State<ViewSekolah> {
 
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
-    HttpSekolah httpOutlet = new HttpSekolah();
+    HttpSekolah httpOutlet = HttpSekolah();
     List<dynamic>? ld = await httpOutlet.detailSekolah(widget.idsekolah);
     if (ld == null) {
       return false;
@@ -69,11 +69,11 @@ class _ViewSekolahState extends State<ViewSekolah> {
             List<Kelurahan>? lkel =
                 await _httpDashboard.getListKelurahan(kec.realid);
             if (lkel != null) {
-              lkel.forEach((element) {
+              for (var element in lkel) {
                 if (element.idkel == _sekolah!.idkel) {
                   _sekolah!.kel = element;
                 }
-              });
+              }
             }
           }
         }

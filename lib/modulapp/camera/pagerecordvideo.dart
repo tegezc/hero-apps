@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:hero/configuration.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -24,7 +25,7 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
 }
 
 void logError(String code, String? message) =>
-    print('Error: $code\nError Message: $message');
+    ph('Error VIDREC: $code :Message: $message');
 
 class PageTakeVideo extends StatefulWidget {
   static const routeName = 'pagevideopromotion';
@@ -62,7 +63,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
           _timer!.cancel();
           stopVideoRecording().then((file) async {
             if (mounted) setState(() {});
-            print('Video recorded to: $_videoPath');
+            ph('Video recorded to: $_videoPath');
             _videoPath = file;
             ParamPreviewVideo param =
                 ParamPreviewVideo(_videoPath, widget.promotion);
@@ -79,6 +80,8 @@ class _PageTakeVideoState extends State<PageTakeVideo>
       });
     });
   }
+
+  final Configuration _configuration = Configuration();
 
   @override
   void initState() {
@@ -272,9 +275,10 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     if (_controller != null) {
       await _controller!.dispose();
     }
+    ResolutionPreset resolutionPreset = _configuration.resulusiVid();
     _controller = CameraController(
       cameraDescription!,
-      ResolutionPreset.medium,
+      resolutionPreset,
       enableAudio: _enableAudio,
     );
 
@@ -282,7 +286,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     _controller!.addListener(() {
       if (mounted) setState(() {});
       if (_controller!.value.hasError) {
-        print('Camera error ${_controller!.value.errorDescription}');
+        ph('Camera error ${_controller!.value.errorDescription}');
       }
     });
 
@@ -309,14 +313,14 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   // void onStopButtonPressed() {
   //   stopVideoRecording().then((_) {
   //     if (mounted) setState(() {});
-  //     print('Video recorded to: $_videoPath');
+  //     ph('Video recorded to: $_videoPath');
   //   });
   // }
 
   // void onPauseButtonPressed() {
   //   pauseVideoRecording().then((_) {
   //     if (mounted) setState(() {});
-  //     print('Video recording paused');
+  //     ph('Video recording paused');
   //   });
   // }
   //
@@ -329,7 +333,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
 
   Future<void> startVideoRecording() async {
     if (!_controller!.value.isInitialized) {
-      print('Error: select a camera first.');
+      ph('Error: select a camera first.');
     }
 
     final Directory? extDir =
@@ -393,6 +397,6 @@ class _PageTakeVideoState extends State<PageTakeVideo>
 
   void _showCameraException(CameraException e) {
     logError(e.code, e.description);
-    // print('Error: ${e.code}\n${e.description}');
+    // ph('Error: ${e.code}\n${e.description}');
   }
 }

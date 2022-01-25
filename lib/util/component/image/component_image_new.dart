@@ -6,13 +6,21 @@ class PropertyImage extends StatelessWidget {
 
   // PropertyImage.bgatas() : _enumProperty = EnumPropertyImage.bgatas;
 
-  PropertyImage.bgbawah() : _enumProperty = EnumPropertyImage.bgbawah;
+  const PropertyImage.bgbawah({Key? key})
+      : _enumProperty = EnumPropertyImage.bgbawah,
+        super(key: key);
 
-  PropertyImage.map() : _enumProperty = EnumPropertyImage.map;
+  const PropertyImage.map({Key? key})
+      : _enumProperty = EnumPropertyImage.map,
+        super(key: key);
 
-  PropertyImage.textWelcome() : _enumProperty = EnumPropertyImage.textwelcome;
+  const PropertyImage.textWelcome({Key? key})
+      : _enumProperty = EnumPropertyImage.textwelcome,
+        super(key: key);
 
-  PropertyImage.textReset() : _enumProperty = EnumPropertyImage.textreset;
+  const PropertyImage.textReset({Key? key})
+      : _enumProperty = EnumPropertyImage.textreset,
+        super(key: key);
 
   // PropertyImage.logo() : _enumProperty = EnumPropertyImage.logo;
 
@@ -38,7 +46,7 @@ class PropertyImage extends StatelessWidget {
   }
 
   Widget _map() {
-    return Center(
+    return const Center(
       child: FractionallySizedBox(
           widthFactor: 0.6,
           child: Image(image: AssetImage('assets/image/new/big_logo.png'))),
@@ -46,8 +54,8 @@ class PropertyImage extends StatelessWidget {
   }
 
   Widget _textresetpassword() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 16.0),
       child: FractionallySizedBox(
           widthFactor: 0.6,
           child: Image(image: AssetImage('assets/image/textreset.png'))),
@@ -66,7 +74,7 @@ class PropertyImage extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         height: height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/image/new/BG.png'),
             fit: BoxFit.cover,
@@ -108,12 +116,14 @@ class ClockInImageIcon extends StatefulWidget {
   final EnumBtnMenuState enable;
 
   const ClockInImageIcon(
-      {required this.onTap,
+      {Key? key,
+      required this.onTap,
       required this.image,
       required this.disableImage,
       required this.completeImage,
       required this.enable,
-      this.width = 120});
+      this.width = 120})
+      : super(key: key);
 
   @override
   State<ClockInImageIcon> createState() => _ClockInImageIconState();

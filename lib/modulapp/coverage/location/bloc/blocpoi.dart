@@ -1,4 +1,4 @@
-import 'package:hero/http/httplokasi/httpPoi.dart';
+import 'package:hero/http/httplokasi/http_poi.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/poi.dart';
 import 'package:hero/util/locationutil.dart';
@@ -27,7 +27,7 @@ class BlocPoi extends AbsBlocLokasi {
 
   void firstTimeEdit(String? idpoi) async {
     //super.init(EnumEditorState.edit);
-    _cacheUipoi = new UIPoi();
+    _cacheUipoi = UIPoi();
     _cacheUipoi!.enumEditorState = EnumEditorState.edit;
     _cacheUipoi!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idpoi).then((value) {
@@ -38,7 +38,7 @@ class BlocPoi extends AbsBlocLokasi {
   }
 
   Future<bool> _firtimeEditSetup(String? idpoi) async {
-    HttpPoi httpController = new HttpPoi();
+    HttpPoi httpController = HttpPoi();
     List<dynamic>? response = await httpController.detailPoi(idpoi);
     if (response != null) {
       if (response.length > 0) {
@@ -57,7 +57,7 @@ class BlocPoi extends AbsBlocLokasi {
 
   void firstTimeBaru() {
     super.init(EnumEditorState.baru, null);
-    _cacheUipoi = new UIPoi();
+    _cacheUipoi = UIPoi();
     _cacheUipoi!.enumEditorState = EnumEditorState.baru;
     _cacheUipoi!.poi = Poi.kosong();
     setupAsync().then((value) {
@@ -86,7 +86,7 @@ class BlocPoi extends AbsBlocLokasi {
     _cacheUipoi!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUipoi);
 
-    HttpPoi httpController = new HttpPoi();
+    HttpPoi httpController = HttpPoi();
     Map<String, dynamic>? response =
         await httpController.createPoi(_cacheUipoi!.poi);
     _cacheUipoi!.enumStateWidget = EnumStateWidget.done;
@@ -104,7 +104,7 @@ class BlocPoi extends AbsBlocLokasi {
     _cacheUipoi!.enumStateWidget = EnumStateWidget.loading;
     this._sink(_cacheUipoi);
 
-    HttpPoi httpController = new HttpPoi();
+    HttpPoi httpController = HttpPoi();
     Map<String, dynamic>? response =
         await httpController.updatePoi(_cacheUipoi!.poi);
     _cacheUipoi!.enumStateWidget = EnumStateWidget.done;

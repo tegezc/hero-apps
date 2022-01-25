@@ -4,7 +4,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httppromotion.dart';
 import 'package:hero/model/promotion/promotion.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/promotion/hppromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -67,87 +66,83 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
       return CustomScaffold(body: Container(), title: 'Loading...');
     }
     return CustomScaffold(
-        body: Container(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  LabelBlack.size1(
-                    widget.param!.promotion!.nama,
-                    bold: true,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _promotion!.nama == programlocal
-                      ? Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              TextFieldLogin('Nama Program', _controllerText),
-                        )
-                      : Container(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ContainerRounded(
-                      borderColor: Colors.black,
-                      radius: 4.0,
-                      child: AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        // Use the VideoPlayer widget to display the video.
-                        child: VideoPlayer(_controller),
-                      ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                LabelBlack.size1(
+                  widget.param!.promotion!.nama,
+                  bold: true,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                _promotion!.nama == programlocal
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFieldLogin('Nama Program', _controllerText),
+                      )
+                    : Container(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ContainerRounded(
+                    borderColor: Colors.black,
+                    radius: 4.0,
+                    child: AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      // Use the VideoPlayer widget to display the video.
+                      child: VideoPlayer(_controller),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        // If the video is playing, pause it.
-                        if (_controller.value.isPlaying) {
-                          _controller.pause();
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      // If the video is playing, pause it.
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                      } else {
+                        // If the video is paused, play it.
+                        _controller.play();
+                      }
+                    });
+                  },
+                  child: Text(_controller.value.isPlaying ? "PAUSE" : "PLAY"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ButtonApp.blue('Upload', () {
+                      if (_promotion!.nama == programlocal) {
+                        _promotion!.nmlocal = _controllerText.text;
+                      }
+                      TgzDialog.loadingDialog(context);
+                      HttpPromotion httpPromotion = HttpPromotion();
+                      httpPromotion
+                          .uploadVideo(widget.param!.source!.path, _promotion!)
+                          .then((value) {
+                        Navigator.of(context).pop();
+                        if (value) {
+                          _confirmSuccessSimpan();
                         } else {
-                          // If the video is paused, play it.
-                          _controller.play();
+                          _confirmGagalMenyimpan();
                         }
                       });
-                    },
-                    child: Text(_controller.value.isPlaying ? "PAUSE" : "PLAY"),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ButtonApp.blue('Upload', () {
-                        if (_promotion!.nama == programlocal) {
-                          _promotion!.nmlocal = _controllerText.text;
-                        }
-                        TgzDialog.loadingDialog(context);
-                        HttpPromotion httpPromotion = HttpPromotion();
-                        httpPromotion
-                            .uploadVideo(
-                                widget.param!.source!.path, _promotion!)
-                            .then((value) {
-                          Navigator.of(context).pop();
-                          if (value) {
-                            _confirmSuccessSimpan();
-                          } else {
-                            _confirmGagalMenyimpan();
-                          }
-                        });
-                      }),
-                      ButtonApp.blue('Ambil Lagi', () {
-                        Navigator.of(context).pop();
-                      }),
-                      //   ButtonApp.blue('Cancel', () {}),
-                    ],
-                  ),
-                ],
-              ),
+                    }),
+                    ButtonApp.blue('Ambil Lagi', () {
+                      Navigator.of(context).pop();
+                    }),
+                    //   ButtonApp.blue('Cancel', () {}),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

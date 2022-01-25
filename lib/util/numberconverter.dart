@@ -13,7 +13,7 @@ class ConverterNumber {
     if (str != null) {
       List<String> ls = str.split('.');
       String svalue = str;
-      if (ls.length > 0) {
+      if (ls.isNotEmpty) {
         svalue = ls[0];
       }
       int? tmp = int.tryParse(svalue) == null ? 0 : int.tryParse(svalue);

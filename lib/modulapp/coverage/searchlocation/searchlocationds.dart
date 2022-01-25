@@ -18,6 +18,7 @@ import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
 
+import '../../../configuration.dart';
 import 'blocsearchlocation.dart';
 import 'hostorypjp.dart';
 
@@ -116,9 +117,9 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           LabelWhite.size1("Berikut Daftar Pencarian : "),
-          const Divider(
+          Divider(
             color: Colors.white,
           ),
         ],
@@ -150,8 +151,8 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 12.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 12.0, top: 12.0),
                     child: LabelAppRich.size3(
                       'Jenis Lokasi ',
                       color: Colors.black,
@@ -183,7 +184,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                       },
                       value: _currentJenisLokasi,
                       isExpanded: false,
-                      hint: LabelBlack.size2('Pilih Jenis Lokasi'),
+                      hint: const LabelBlack.size2('Pilih Jenis Lokasi'),
                     ),
                   )
                 ],
@@ -208,7 +209,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
                           // suffixIcon:
-                          //     new Icon(Icons.search, color: Colors.black),
+                          //       Icon(Icons.search, color: Colors.black),
                           hintText: ConstString.hintSearchDs,
                           hintStyle: const TextStyle(fontSize: 14)),
                       onChanged: (v) {},
@@ -238,7 +239,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
   }
 
   Widget _containerSearch(UISearchLocation item) {
-    print(item);
+    ph(item);
     Size size = MediaQuery.of(context).size;
     return Expanded(
       child: Container(
@@ -396,9 +397,9 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelApp.size2(
                       'Tentukan spesifik jenis lokasi terlebih dulu.'),
                 ),

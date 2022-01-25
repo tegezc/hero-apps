@@ -4,6 +4,8 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpKampus extends HttpBase {
   Future<List<dynamic>?> detailUniv(String? iduniv) async {
     Map<String, String> headers = await getHeader();
@@ -11,10 +13,10 @@ class HttpKampus extends HttpBase {
     try {
       http.Response response = await http.get(uri, headers: headers);
 
-      print(response.body);
+      ph(response.body);
       return json.decode(response.body);
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -22,7 +24,7 @@ class HttpKampus extends HttpBase {
   Future<Map<String, dynamic>?> createKampus(Universitas univ) async {
     Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
-    print(univ.toJson());
+    ph(univ.toJson());
     Uri uri = configuration.uri('/lokasi/kampus_create');
     http.Response? response;
     try {
@@ -32,15 +34,15 @@ class HttpKampus extends HttpBase {
         body: jsonEncode(univ.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -56,15 +58,15 @@ class HttpKampus extends HttpBase {
         body: jsonEncode(univ.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }

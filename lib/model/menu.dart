@@ -16,11 +16,11 @@ class Menu {
   // "clockin_report_mt": "ENABLED"
 
   Menu.fromJson(Map<String, dynamic> map) {
-    isDistEnable = this._olahtag(map['clockin_distribusi']);
-    isMerchEnable = this._olahtag(map['clockin_merchandising']);
-    isPromEnable = this._olahtag(map['clockin_promotion']);
-    isMarketEnable = this._olahtag(map['clockin_marketaudit']);
-    isReportMtEnable = this._olahtag(map['clockin_report_mt']);
+    isDistEnable = _olahtag(map['clockin_distribusi']);
+    isMerchEnable = _olahtag(map['clockin_merchandising']);
+    isPromEnable = _olahtag(map['clockin_promotion']);
+    isMarketEnable = _olahtag(map['clockin_marketaudit']);
+    isReportMtEnable = _olahtag(map['clockin_report_mt']);
 
     if (map['status'] != null) {
       if (map['status'] == 'OPEN') {

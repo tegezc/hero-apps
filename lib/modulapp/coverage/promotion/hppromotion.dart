@@ -66,8 +66,8 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                             const SizedBox(
                               height: 12,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 16.0),
                               child: LabelBlack.size1('Jenis Promosi'),
                             ),
                             _content(item, size.width),
@@ -184,7 +184,7 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        LabelWhite.size3("Promotion"),
+                        const LabelWhite.size3("Promotion"),
                         const SizedBox(height: 4),
                         LabelWhite.size2(
                           item.nama,
@@ -210,16 +210,16 @@ class _HomePagePromotionState extends State<HomePagePromotion> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Maksimal promosi yang bisa di lakukan adalah 3 kali. '
                       'Klik button \'Selesai\' untuk mengakhiri proses ini.'),

@@ -109,8 +109,8 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                           if (isproses) {
                             TgzDialog.loadingDialog(context);
                             _blocPembayaran.bayar().then((value) {
+                              Navigator.of(context).pop();
                               if (value) {
-                                Navigator.of(context).pop();
                                 Navigator.pushNamed(
                                     context, PageSuccess.routeName,
                                     arguments: PageSuccessParam(
@@ -119,7 +119,6 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                                         'Transaksi Anda Berhasil',
                                         ''));
                               } else {
-                                Navigator.of(context).pop();
                                 _confirmPembayaranGagal();
                               }
                             });

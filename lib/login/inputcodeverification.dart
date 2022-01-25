@@ -5,7 +5,8 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 
 class InputCodeVerification extends StatefulWidget {
   static const routeName = 'inputcodeverification';
-  InputCodeVerification();
+
+  const InputCodeVerification({Key? key}) : super(key: key);
 
   @override
   _InputCodeVerificationState createState() => _InputCodeVerificationState();
@@ -27,18 +28,18 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
           children: <Widget>[
             //  _entryField1("Enter Code", idTextController),
             TextFieldLogin('Enter Kode Verifikasi', idTextController),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             //   _entryFieldPassword("Password", passwordTextController),
             TextFieldPassword('Password Baru', passwordTextController),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             TextFieldPassword(
                 'Konfirmasi Password Baru', _confirmpasswordTextController),
             //     _entryFieldPassword("Confirm Password", _confirmpasswordTextController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             //  _animationLogin(),
@@ -46,7 +47,7 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ButtonLogin('Submit', onTap: () {
-                  new Future.delayed(const Duration(seconds: 1), () {
+                  Future.delayed(const Duration(seconds: 1), () {
                     Navigator.popUntil(
                         context,
                         ModalRoute.withName(
@@ -73,7 +74,7 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
       children: [
         PropertyImage.bgatas(),
         PropertyImage.bgbawah(),
-        Container(
+        SizedBox(
           height: m.height,
           child: SingleChildScrollView(
             child: Form(
@@ -83,11 +84,11 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     PropertyImage.textReset(),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -95,7 +96,7 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
                       child: _label(
                           'Kode Verifikasi sudah terkirim ke email terdaftar'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     _emailPasswordWidget(),

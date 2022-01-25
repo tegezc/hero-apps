@@ -5,7 +5,7 @@ import 'package:hero/util/csvutil.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:developer' as logger;
 
-import 'Database.dart';
+import 'database.dart';
 import 'stringdb.dart';
 
 class SetupData1 {
@@ -13,14 +13,14 @@ class SetupData1 {
     try {
       bool isDataExist = await _checkIsExist();
       if (!isDataExist) {
-        CSVReader csvReader = new CSVReader();
+        CSVReader csvReader = CSVReader();
 
         List<Provinsi> lprov = await csvReader.getListProvinsi();
         List<Kabupaten> lkab = await csvReader.getListKabupaten();
         List<Kecamatan> lkec = await csvReader.getListKecamatan();
         List<Kelurahan> lkel = await csvReader.getListKelurahan();
 
-        // print('prov: ${lprov.length}'
+        // ph('prov: ${lprov.length}'
         //     '|kab: ${lkab.length}'
         //     '|lkec: ${lkec.length}'
         //     '|lkel: ${lkel.length}');
@@ -75,7 +75,7 @@ class SetupData1 {
 
 class DaoProvinsi1 {
   Provinsi _createObject(Map<String, dynamic> map) {
-    return new Provinsi.formDb(
+    return Provinsi.formDb(
         map[TbProv.id], map[TbProv.realid], map[TbProv.nama]);
   }
 
@@ -86,7 +86,7 @@ class DaoProvinsi1 {
     List<Provinsi> lprov = [];
 
     for (int i = 0; i < list.length; i++) {
-      Provinsi prov = this._createObject(list[i] as Map<String, dynamic>);
+      Provinsi prov = _createObject(list[i] as Map<String, dynamic>);
 
       lprov.add(prov);
     }
@@ -99,8 +99,8 @@ class DaoProvinsi1 {
         'SELECT * FROM ${TbProv.tableName} WHERE ${TbProv.realid}=\'$idprov\'');
 
     Provinsi? prov;
-    if (list.length > 0) {
-      prov = this._createObject(list[0] as Map<String, dynamic>);
+    if (list.isNotEmpty) {
+      prov = _createObject(list[0] as Map<String, dynamic>);
     }
     return prov;
   }
@@ -108,7 +108,7 @@ class DaoProvinsi1 {
 
 class DaoKecamatan1 {
   Kecamatan _createObject(Map<String, dynamic> map) {
-    return new Kecamatan.fromDb(map[TbKec.id], map[TbKec.realid],
+    return Kecamatan.fromDb(map[TbKec.id], map[TbKec.realid],
         map[TbKec.idcluster], map[TbKec.idkab], map[TbKec.nama]);
   }
 
@@ -119,7 +119,7 @@ class DaoKecamatan1 {
 
     List<Kecamatan> lkec = [];
     for (int i = 0; i < list.length; i++) {
-      Kecamatan prov = this._createObject(list[i] as Map<String, dynamic>);
+      Kecamatan prov = _createObject(list[i] as Map<String, dynamic>);
 
       lkec.add(prov);
     }
@@ -133,7 +133,7 @@ class DaoKecamatan1 {
 
     List<Kecamatan> lkec = [];
     for (int i = 0; i < list.length; i++) {
-      Kecamatan prov = this._createObject(list[i] as Map<String, dynamic>);
+      Kecamatan prov = _createObject(list[i] as Map<String, dynamic>);
 
       lkec.add(prov);
     }
@@ -146,7 +146,7 @@ class DaoKecamatan1 {
         'SELECT * FROM ${TbKec.tableName} WHERE ${TbKec.realid}=\'$idkec\'');
 
     Kecamatan? kec;
-    if (list.length > 0) {
+    if (list.isNotEmpty) {
       kec = _createObject(list[0] as Map<String, dynamic>);
     }
     return kec;
@@ -155,7 +155,7 @@ class DaoKecamatan1 {
 
 class DaoKabupaten1 {
   Kabupaten _createObject(Map<String, dynamic> map) {
-    return new Kabupaten.formDb(
+    return Kabupaten.formDb(
         map[TbKab.id], map[TbKab.realid], map[TbKab.idprov], map[TbKab.nama]);
   }
 
@@ -166,7 +166,7 @@ class DaoKabupaten1 {
 
     List<Kabupaten> lkab = [];
     for (int i = 0; i < list.length; i++) {
-      Kabupaten prov = this._createObject(list[i] as Map<String, dynamic>);
+      Kabupaten prov = _createObject(list[i] as Map<String, dynamic>);
 
       lkab.add(prov);
     }
@@ -180,7 +180,7 @@ class DaoKabupaten1 {
 
     List<Kabupaten> lkab = [];
     for (int i = 0; i < list.length; i++) {
-      Kabupaten prov = this._createObject(list[i] as Map<String, dynamic>);
+      Kabupaten prov = _createObject(list[i] as Map<String, dynamic>);
 
       lkab.add(prov);
     }
@@ -193,8 +193,8 @@ class DaoKabupaten1 {
         'SELECT * FROM ${TbKab.tableName} WHERE ${TbKab.realid}=\'$idkab\'');
 
     Kabupaten? kab;
-    if (list.length > 0) {
-      kab = this._createObject(list[0] as Map<String, dynamic>);
+    if (list.isNotEmpty) {
+      kab = _createObject(list[0] as Map<String, dynamic>);
     }
     return kab;
   }
@@ -202,7 +202,7 @@ class DaoKabupaten1 {
 
 class DaoKelurahan1 {
   Kelurahan _createObject(Map<String, dynamic> map) {
-    return new Kelurahan.fromDb(
+    return Kelurahan.fromDb(
         map[TbKel.id], map[TbKel.idkec], map[TbKel.idkel], map[TbKel.nama]);
   }
 
@@ -210,11 +210,11 @@ class DaoKelurahan1 {
     var dbClient = await (DatabaseHelper().db as Future<Database>);
     List<Map> list =
         await dbClient.rawQuery('SELECT * FROM ${TbKel.tableName}');
-    //print('kab: ${list.length}');
+    //ph('kab: ${list.length}');
     logger.log('kab: ${list.length}');
     List<Kelurahan> lkel = [];
     for (int i = 0; i < list.length; i++) {
-      Kelurahan kel = this._createObject(list[i] as Map<String, dynamic>);
+      Kelurahan kel = _createObject(list[i] as Map<String, dynamic>);
 
       lkel.add(kel);
     }
@@ -228,7 +228,7 @@ class DaoKelurahan1 {
 
     List<Kelurahan> lkel = [];
     for (int i = 0; i < list.length; i++) {
-      Kelurahan kel = this._createObject(list[i] as Map<String, dynamic>);
+      Kelurahan kel = _createObject(list[i] as Map<String, dynamic>);
 
       lkel.add(kel);
     }
@@ -241,8 +241,8 @@ class DaoKelurahan1 {
         'SELECT * FROM ${TbKel.tableName} WHERE ${TbKel.idkel}=\'$kelid\'');
 
     Kelurahan? kel;
-    if (list.length > 0) {
-      kel = this._createObject(list[0] as Map<String, dynamic>);
+    if (list.isNotEmpty) {
+      kel = _createObject(list[0] as Map<String, dynamic>);
     }
     return kel;
   }

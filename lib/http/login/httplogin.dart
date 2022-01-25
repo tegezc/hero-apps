@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpLogin extends HttpBase {
   Future<Map<String, dynamic>?> login(String username, String password) async {
     Map<String, String> map = {
@@ -17,15 +19,15 @@ class HttpLogin extends HttpBase {
         headers: headers,
         body: map,
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
         return null;
       }
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -40,14 +42,14 @@ class HttpLogin extends HttpBase {
         uri,
         headers: headers,
       );
-      print(response.body);
+      ph(response.body);
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
+      ph(e);
       return false;
     }
   }

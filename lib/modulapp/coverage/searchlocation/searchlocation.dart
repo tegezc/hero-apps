@@ -86,9 +86,9 @@ class _SearchLocationState extends State<SearchLocation> {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           LabelWhite.size1("Berikut Daftar Pencarian : "),
-          const Divider(
+          Divider(
             color: Colors.white,
           ),
         ],
@@ -120,7 +120,7 @@ class _SearchLocationState extends State<SearchLocation> {
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                         ),
                         // suffixIcon:
-                        //     new Icon(Icons.search, color: Colors.black),
+                        //       Icon(Icons.search, color: Colors.black),
                         hintText: ConstString.hintSearch,
                         hintStyle: const TextStyle(fontSize: 14)),
                     onChanged: (v) {},

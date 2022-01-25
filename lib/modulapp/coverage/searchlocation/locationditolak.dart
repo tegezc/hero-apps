@@ -20,11 +20,11 @@ class _LocationDitolakState extends State<LocationDitolak> {
           const SizedBox(
             height: 150,
           ),
-          LabelApp.size1('Aplikasi ini tidak dapat digunakan tanpa '),
+          const LabelApp.size1('Aplikasi ini tidak dapat digunakan tanpa '),
           const SizedBox(
             height: 8,
           ),
-          LabelApp.size1(
+          const LabelApp.size1(
             'ijin akses lokasi.',
             color: Colors.red,
           ),
@@ -47,16 +47,16 @@ class _LocationDitolakState extends State<LocationDitolak> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Aplikasi ini butuh akses lokasi'),
                 ),
                 Padding(

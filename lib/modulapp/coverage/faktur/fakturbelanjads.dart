@@ -48,7 +48,7 @@ class _FakturPembayaranDsState extends State<FakturPembayaranDs> {
   Future<bool> _setup() async {
     await Future.delayed(const Duration(milliseconds: 500), () {});
     _profile = await AccountHore.getProfile();
-    HttpDIstribution httpDIstribution = new HttpDIstribution();
+    HttpDIstribution httpDIstribution = HttpDIstribution();
     _nota = await httpDIstribution.getDetailNota(widget.nonota);
 
     return true;
@@ -254,7 +254,7 @@ class _FakturPembayaranDsState extends State<FakturPembayaranDs> {
         .then((Uint8List? image) async {
       _imageFile = image;
       final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/screenshot.png').create();
+      final file = await File('${tempDir.path}/screenshot.png').create();
       await file.writeAsBytes(_imageFile!);
       _onShare(context, '${tempDir.path}/screenshot.png', 'Faktur');
       showDialog(

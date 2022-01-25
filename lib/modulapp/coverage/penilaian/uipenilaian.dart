@@ -6,6 +6,8 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
 class UIPenilaian extends StatefulWidget {
+  const UIPenilaian({Key? key}) : super(key: key);
+
   @override
   _UIPenilaianState createState() => _UIPenilaianState();
 }
@@ -46,21 +48,21 @@ class _UIPenilaianState extends State<UIPenilaian> {
 
   @override
   void dispose() {
-    _lcontrollerPersonaliti!.forEach((element) {
+    for (var element in _lcontrollerPersonaliti!) {
       element.dispose();
-    });
+    }
 
-    _lcontrollerDistribusi!.forEach((element) {
+    for (var element in _lcontrollerDistribusi!) {
       element.dispose();
-    });
+    }
 
-    _lcontrollerMerchandising!.forEach((element) {
+    for (var element in _lcontrollerMerchandising!) {
       element.dispose();
-    });
+    }
 
-    _lcontrollerPromotion!.forEach((element) {
+    for (var element in _lcontrollerPromotion!) {
       element.dispose();
-    });
+    }
     super.dispose();
   }
 
@@ -69,28 +71,26 @@ class _UIPenilaianState extends State<UIPenilaian> {
     ItemPenilaian itemPenilaian = ItemPenilaian.empty();
 
     return CustomScaffold(
-        body: Container(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  _cardPenilaian('Personality', itemPenilaian.lpersonality,
-                      EnumPenilaian.personality),
-                  _spasi(),
-                  _cardPenilaian('Distribution', itemPenilaian.ldistribusi,
-                      EnumPenilaian.distribusi),
-                  _spasi(),
-                  _cardPenilaian('Merchandising', itemPenilaian.lmerchandising,
-                      EnumPenilaian.merchandising),
-                  _spasi(),
-                  _cardPenilaian('Promotion', itemPenilaian.lpromotion,
-                      EnumPenilaian.promotion),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
-              ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                _cardPenilaian('Personality', itemPenilaian.lpersonality,
+                    EnumPenilaian.personality),
+                _spasi(),
+                _cardPenilaian('Distribution', itemPenilaian.ldistribusi,
+                    EnumPenilaian.distribusi),
+                _spasi(),
+                _cardPenilaian('Merchandising', itemPenilaian.lmerchandising,
+                    EnumPenilaian.merchandising),
+                _spasi(),
+                _cardPenilaian('Promotion', itemPenilaian.lpromotion,
+                    EnumPenilaian.promotion),
+                const SizedBox(
+                  height: 50,
+                ),
+              ],
             ),
           ),
         ),
@@ -108,7 +108,7 @@ class _UIPenilaianState extends State<UIPenilaian> {
               label,
               bold: true,
             ),
-            Divider(),
+            const Divider(),
             _fieldPenilaian(lpenilaian, enumPenilaian),
           ],
         ),
@@ -150,7 +150,7 @@ class _UIPenilaianState extends State<UIPenilaian> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 16,
     );
   }

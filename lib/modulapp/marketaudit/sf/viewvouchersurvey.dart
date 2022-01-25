@@ -6,7 +6,8 @@ class ViewVoucherSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;
   final EnumSurvey enumSurvey;
 
-  ViewVoucherSurvey(this.enumSurvey, this.uiSurvey);
+  const ViewVoucherSurvey(this.enumSurvey, this.uiSurvey, {Key? key})
+      : super(key: key);
 
   @override
   _ViewVoucherSurveyState createState() => _ViewVoucherSurveyState();
@@ -34,16 +35,14 @@ class _ViewVoucherSurveyState extends State<ViewVoucherSurvey> {
     if (_lsurvey == null) {
       return Container();
     }
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _dataTable(_lsurvey!, ''),
-            SizedBox(
-              height: 150,
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _dataTable(_lsurvey!, ''),
+          const SizedBox(
+            height: 150,
+          ),
+        ],
       ),
     );
   }

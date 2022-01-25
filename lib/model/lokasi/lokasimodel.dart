@@ -68,7 +68,7 @@ class Kabupaten {
   }
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map[TbKab.id] = id;
     map[TbKab.realid] = realid;
     map[TbKab.idprov] = idprov;
@@ -76,16 +76,17 @@ class Kabupaten {
     return map;
   }
 
-  bool operator ==(dynamic other) =>
-      other != null && other is Kabupaten && this.realid == other.realid;
-
   @override
-  int get hashCode => super.hashCode;
+  bool operator ==(dynamic other) =>
+      other != null && other is Kabupaten && realid == other.realid;
 
   @override
   String toString() {
-    return '${this.nama}';
+    return '$nama';
   }
+
+  @override
+  int get hashCode => super.hashCode;
 }
 
 class Kecamatan {
@@ -110,10 +111,10 @@ class Kecamatan {
     // "nama_kecamatan": "BUMI WARAS",
     // "lastmodified": "2020-11-29 09:00:00"
 
-    this.realid = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
-    this.idkab = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
-    this.idcluster = map['id_cluster'] == null ? '' : map['id_cluster'];
-    this.nama = map['nama_kecamatan'] == null ? '' : map['nama_kecamatan'];
+    realid = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
+    idkab = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
+    idcluster = map['id_cluster'] == null ? '' : map['id_cluster'];
+    nama = map['nama_kecamatan'] == null ? '' : map['nama_kecamatan'];
   }
 
   Kecamatan.fromDb(
@@ -125,7 +126,7 @@ class Kecamatan {
   );
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map[TbKec.id] = id;
     map[TbKec.realid] = realid;
     map[TbKec.idkab] = idkab;
@@ -134,14 +135,13 @@ class Kecamatan {
     return map;
   }
 
+  @override
   bool operator ==(dynamic other) =>
-      other != null && other is Kecamatan && this.realid == other.realid;
+      other != null && other is Kecamatan && realid == other.realid;
 
   @override
-  int get hashCode => super.hashCode;
-  @override
   String toString() {
-    return '${this.nama}';
+    return '$nama';
   }
 }
 
@@ -160,13 +160,13 @@ class Kelurahan {
   // "nama_kelurahan": "BUMI RAYA",
   // "lastmodified": "2020-11-29 09:00:00"
   Kelurahan.fromJson(Map<String, dynamic> map) {
-    this.idkel = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
-    this.idkec = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
-    this.nama = map['nama_kelurahan'] == null ? '' : map['nama_kelurahan'];
+    idkel = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
+    idkec = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
+    nama = map['nama_kelurahan'] == null ? '' : map['nama_kelurahan'];
   }
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map[TbKel.id] = id;
     map[TbKel.idkel] = idkel;
     map[TbKel.idkec] = idkec;

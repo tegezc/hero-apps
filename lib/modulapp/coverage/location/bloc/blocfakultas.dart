@@ -28,7 +28,7 @@ class BlocFakultas extends AbsBlocLokasi {
   ControllOwner? controllOwner;
   ControllPic? controllPic;
   UIFakultas? _cacheUiFakultas;
-  HttpFakultas _httpController = new HttpFakultas();
+  HttpFakultas _httpController = HttpFakultas();
 
   final BehaviorSubject<UIFakultas?> _uifakultas = BehaviorSubject();
 
@@ -39,7 +39,7 @@ class BlocFakultas extends AbsBlocLokasi {
   }
 
   void firstTimeEdit(String? idfak) async {
-    _cacheUiFakultas = new UIFakultas();
+    _cacheUiFakultas = UIFakultas();
     _cacheUiFakultas!.enumEditorState = EnumEditorState.edit;
     _cacheUiFakultas!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idfak).then((value) {

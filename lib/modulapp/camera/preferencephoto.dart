@@ -1,6 +1,8 @@
 import 'package:hero/model/enumapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../configuration.dart';
+
 const String keyPhotoDist = 'photo_dist';
 const String keyPhotoMarketAudit = 'photo_ma';
 
@@ -39,7 +41,7 @@ class StoredPathPhoto {
     String key = _getKeyMerch(enumMerchandising, enumNumber);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, path);
-    print('key: $key | path: $path | number: $enumNumber');
+    ph('key: $key | path: $path | number: $enumNumber');
     return true;
   }
 

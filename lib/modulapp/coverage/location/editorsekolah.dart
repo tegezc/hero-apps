@@ -42,7 +42,7 @@ class _EditorSekolahState extends State<EditorSekolah> {
     } else {
       _enumEditorState = EnumEditorState.edit;
     }
-    _blocSekolah = new BlocSekolah();
+    _blocSekolah = BlocSekolah();
     _title = widget.idsekolah == null ? 'Tambah Sekolah' : 'Edit Sekolah';
     _textBtn = widget.idsekolah == null ? 'Submit' : 'Save';
     super.initState();
@@ -243,18 +243,18 @@ class TabDataSekolah extends StatefulWidget {
 }
 
 class _TabDataSekolahState extends State<TabDataSekolah> {
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   late List<JenjangSekolah> _ljenjang;
 
   //Texteditcontroller
-  TextEditingController _cnama = new TextEditingController();
-  TextEditingController _calamat = new TextEditingController();
-  TextEditingController _cjmlguru = new TextEditingController();
-  TextEditingController _cnpsn = new TextEditingController();
-  TextEditingController _cjmlmurid = new TextEditingController();
-  TextEditingController _clatitude = new TextEditingController();
-  TextEditingController _clongitude = new TextEditingController();
+  TextEditingController _cnama = TextEditingController();
+  TextEditingController _calamat = TextEditingController();
+  TextEditingController _cjmlguru = TextEditingController();
+  TextEditingController _cnpsn = TextEditingController();
+  TextEditingController _cjmlmurid = TextEditingController();
+  TextEditingController _clatitude = TextEditingController();
+  TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -298,7 +298,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
       child: Form(
         key: _formKeyValue,
         autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           children: <Widget>[
             SizedBox(height: 20.0),

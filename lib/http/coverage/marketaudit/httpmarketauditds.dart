@@ -7,6 +7,8 @@ import 'package:hero/model/marketaudit/quisioner.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../configuration.dart';
+
 class HttpMarketAuditDs extends HttpBase {
   Future<bool> createQuisioner(Quisioner quisioner) async {
     Map<String, String> headers = await getHeader();
@@ -19,16 +21,16 @@ class HttpMarketAuditDs extends HttpBase {
         headers: headers,
         body: quisioner.toJson(),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -39,7 +41,7 @@ class HttpMarketAuditDs extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      ph(response.body);
       if (response.statusCode == 200) {
         List<dynamic> value = json.decode(response.body);
         if (value.isNotEmpty) {
@@ -53,7 +55,7 @@ class HttpMarketAuditDs extends HttpBase {
       }
       return List.unmodifiable(lOperator);
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return List.unmodifiable(lOperator);
     }
   }
@@ -64,7 +66,7 @@ class HttpMarketAuditDs extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      ph(response.body);
       if (response.statusCode == 200) {
         List<dynamic> value = json.decode(response.body);
         if (value.isNotEmpty) {
@@ -78,7 +80,7 @@ class HttpMarketAuditDs extends HttpBase {
       }
       return List.unmodifiable(lFrekuensi);
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return List.unmodifiable(lFrekuensi);
     }
   }
@@ -93,7 +95,7 @@ class HttpMarketAuditDs extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print("${uri.path}: ${response.body} : code ${response.statusCode}");
+      ph("${uri.path}: ${response.body} : code ${response.statusCode}");
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahJsonToQuisioner(value);

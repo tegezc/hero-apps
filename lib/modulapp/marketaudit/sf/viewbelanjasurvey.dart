@@ -6,9 +6,7 @@ import 'package:hero/util/component/widget/component_widget.dart';
 
 class ViewBelanjaSurvey extends StatefulWidget {
   final UISurvey? uiSurvey;
-  ViewBelanjaSurvey(
-    this.uiSurvey,
-  );
+  const ViewBelanjaSurvey(this.uiSurvey, {Key? key}) : super(key: key);
   @override
   _ViewBelanjaSurveyState createState() => _ViewBelanjaSurveyState();
 }
@@ -37,11 +35,11 @@ class _ViewBelanjaSurveyState extends State<ViewBelanjaSurvey> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _cardForm(s.width),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             _listPhoto(s.width),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -100,7 +98,7 @@ class _ViewBelanjaSurveyState extends State<ViewBelanjaSurvey> {
       child: Row(
         children: [
           SizedBox(width: 80, child: LabelBlack.size2(label)),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           LabelApp.size2(

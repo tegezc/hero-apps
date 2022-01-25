@@ -5,6 +5,8 @@ import 'package:hero/model/lokasi/Fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpFakultas extends HttpBase {
   Future<List<dynamic>?> detailFakultas(String? idfak) async {
     Map<String, String> headers = await getHeader();
@@ -12,10 +14,10 @@ class HttpFakultas extends HttpBase {
     try {
       http.Response response = await http.get(uri, headers: headers);
 
-      print(response.body);
+      ph(response.body);
       return json.decode(response.body);
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -31,15 +33,15 @@ class HttpFakultas extends HttpBase {
         body: jsonEncode(outlet.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -55,15 +57,15 @@ class HttpFakultas extends HttpBase {
         body: jsonEncode(outlet.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -74,11 +76,11 @@ class HttpFakultas extends HttpBase {
       Map<String, String> headers = await getHeader();
       http.Response response = await http.get(uri, headers: headers);
 
-      print(response.body);
+      ph(response.body);
       // return json.decode(response.body);
       return _olahComboUniv(json.decode(response.body));
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -87,7 +89,7 @@ class HttpFakultas extends HttpBase {
     List<Universitas> luniv = [];
 
     List<dynamic> ld = value;
-    if (ld.length > 0) {
+    if (ld.isNotEmpty) {
       for (int i = 0; i < ld.length; i++) {
         Map<String, dynamic> map = ld[i];
         Universitas kec = Universitas.fromJson(map);

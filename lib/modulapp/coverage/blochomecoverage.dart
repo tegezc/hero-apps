@@ -8,6 +8,8 @@ import 'package:hero/util/dateutil.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
+import '../../configuration.dart';
+
 class UIHomeCvrg {
   EnumStateWidget? enumStateWidget;
   late Profile profile;
@@ -67,7 +69,7 @@ class BlocHomePageCoverage {
       case PermissionStatus.denied:
         {
           // LocationPermission reqLp = await Geolocator.requestPermission();
-          // print(reqLp);
+          // ph(reqLp);
           bool isaccept = await requestIjinLokasi();
 
           if (isaccept) {
@@ -81,9 +83,9 @@ class BlocHomePageCoverage {
 
       case PermissionStatus.deniedForever:
         {
-          print('DENIED');
+          ph('DENIED');
           // LocationPermission reqLp = await Geolocator.requestPermission();
-          // print(reqLp);
+          // ph(reqLp);
           bool isaccept = await requestIjinLokasi();
 
           if (isaccept) {

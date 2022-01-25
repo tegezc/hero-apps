@@ -1,4 +1,3 @@
-
 class Profile {
   String? id;
   String? role;
@@ -71,6 +70,7 @@ class Profile {
     return false;
   }
 
+  @override
   String toString() {
     return 'id:$id | role: $role | idtap: $idtap | namaTap: $namaTap '
         '| namasales: $namaSales | idcluster: $idcluster | namacluster: $namaCluster '

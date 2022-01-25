@@ -11,6 +11,8 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
+import '../../configuration.dart';
+
 class HttpPromotion extends HttpBase {
   // Future<bool> createPromotionj(Promotion promotion) async {
   //   Map<String, String> headers = await getHeader();
@@ -45,7 +47,7 @@ class HttpPromotion extends HttpBase {
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -63,8 +65,8 @@ class HttpPromotion extends HttpBase {
         body: jsonEncode(map),
       );
 
-      print('promotion : ${response.body}');
-      print(response.statusCode);
+      ph('promotion : ${response.body}');
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarPromotion(value);
@@ -72,8 +74,8 @@ class HttpPromotion extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -104,19 +106,19 @@ class HttpPromotion extends HttpBase {
 
     Uri uri = configuration.uri(
         '/bottommenupromotion/promotion_detail/$idoutlet/$namalokasi/$strDt');
-    print('url detail promotion: ${uri.path}');
+    ph('url detail promotion: ${uri.path}');
 
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      print(response.body);
+      ph(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarPromotionDetail(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -154,7 +156,7 @@ class HttpPromotion extends HttpBase {
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         int? i = ConverterNumber.stringToInt(map['status']);
-        print(i);
+        ph(i);
         if (i == 1) {
           return true;
         }

@@ -9,13 +9,14 @@ import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
+import '../../../configuration.dart';
 import 'blocmerchandising.dart';
 
 class HomeMerchandising extends StatefulWidget {
   static const routeName = '/homemerchandising';
   final Pjp? pjp;
 
-  HomeMerchandising(this.pjp, {Key? key}) : super(key: key);
+  const HomeMerchandising(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _HomeMerchandisingState createState() => _HomeMerchandisingState();
@@ -27,7 +28,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
   EnumAccount? enumAccount;
   @override
   void initState() {
-    print('idtempat pjp home merchandising: ${widget.pjp!.tempat!.id}');
+    ph('idtempat pjp home merchandising: ${widget.pjp!.tempat!.id}');
     _blocMerchandising = BlocMerchandising();
     getEnumAccount().then((value) => setState(() {}));
     super.initState();
@@ -46,7 +47,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
 
   @override
   Widget build(BuildContext context) {
-    print('masuk build');
+    ph('masuk build');
     if (_counterBuild == 0) {
       _blocMerchandising!.firstTime(widget.pjp!);
       _counterBuild++;
@@ -102,7 +103,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                       ),
                     ),
                   ],
-                  bottom: TabBar(
+                  bottom: const TabBar(
                     indicatorColor: Colors.white,
                     isScrollable: true,
                     tabs: [
@@ -149,7 +150,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                     PageMerchandising(EnumMerchandising.papan, item.papanNama,
                         _blocMerchandising),
                     PageMerchandising(EnumMerchandising.StikerScanQR,
-                        item.StikerScanQR, _blocMerchandising),
+                        item.stikerScanQR, _blocMerchandising),
                   ],
                 ),
               ),

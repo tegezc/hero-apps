@@ -11,18 +11,20 @@ import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 class HomePageRetur extends StatefulWidget {
   static const routeName = '/homepagerektur';
 
+  const HomePageRetur({Key? key}) : super(key: key);
+
   @override
   _HomePageReturState createState() => _HomePageReturState();
 }
 
 class _HomePageReturState extends State<HomePageRetur> {
-  TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   late BlocHpRetur _blocHpRetur;
   int _counterBuild = 0;
-  HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
+  final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
   @override
   void initState() {
-    _blocHpRetur = new BlocHpRetur();
+    _blocHpRetur = BlocHpRetur();
     super.initState();
   }
 
@@ -40,7 +42,6 @@ class _HomePageReturState extends State<HomePageRetur> {
       _counterBuild++;
     }
     Size s = MediaQuery.of(context).size;
-    double widthbtntgl = (s.width / 2) - 38;
     return StreamBuilder<UIHpRetur?>(
       stream: _blocHpRetur.uihpretur,
       builder: (context, snapshot) {
@@ -51,7 +52,7 @@ class _HomePageReturState extends State<HomePageRetur> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.red[600],
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.white, //change your color here
             ),
             title: Row(
@@ -154,7 +155,7 @@ class _HomePageReturState extends State<HomePageRetur> {
                                           Radius.circular(10.0)),
                                     ),
                                     // suffixIcon:
-                                    //     new Icon(Icons.search, color: Colors.black),
+                                    //       Icon(Icons.search, color: Colors.black),
                                     hintText: "Serial number...",
                                     hintStyle:
                                         TextStyle(color: Colors.black45)),
@@ -208,9 +209,9 @@ class _HomePageReturState extends State<HomePageRetur> {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           LabelWhite.size1("Berikut Daftar Pencarian : "),
-          const Divider(
+          Divider(
             color: Colors.white,
           ),
         ],
@@ -345,7 +346,7 @@ class _HomePageReturState extends State<HomePageRetur> {
     if (!isawal) {
       if (item.tglAwal != null) {
         dtawal = item.tglAwal;
-        initialDt = dtawal!.add(new Duration(days: 1));
+        initialDt = dtawal!.add(Duration(days: 1));
       }
     }
     DateTime? picked = await showDatePicker(

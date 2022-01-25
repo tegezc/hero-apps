@@ -6,7 +6,7 @@ import 'package:better_player/better_player.dart';
 
 class ResolutionsPage extends StatefulWidget {
   final Promotion itemPromotion;
-  ResolutionsPage(this.itemPromotion);
+  const ResolutionsPage(this.itemPromotion, {Key? key}) : super(key: key);
 
   @override
   _ResolutionsPageState createState() => _ResolutionsPageState();
@@ -21,7 +21,7 @@ class _ResolutionsPageState extends State<ResolutionsPage> {
   void initState() {
     _isprogramlocalshowing = widget.itemPromotion.nama == programlocal;
     BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
+        const BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
     );
@@ -70,7 +70,7 @@ class _ResolutionsPageState extends State<ResolutionsPage> {
                 ),
               )
             : Container(),
-        SizedBox(
+        const SizedBox(
           height: 12,
         )
       ],

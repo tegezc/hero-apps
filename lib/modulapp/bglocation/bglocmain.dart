@@ -16,6 +16,7 @@ import 'package:hero/util/locationutil.dart';
 import 'package:location/location.dart' as loc;
 import 'package:location_permissions/location_permissions.dart';
 
+import '../../configuration.dart';
 import '../../util/constapp/accountcontroller.dart';
 import 'file_manager.dart';
 import 'location_callback_handler.dart';
@@ -69,11 +70,11 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
   //exp:1616047601802=-6.6191326|106.8161784=isMocked: false
   // untul loc format lat|long
   void _olahLog(String log) async {
-    print('1');
+    ph('1');
     HttpDashboard httpDashboard = HttpDashboard();
     String? flagtimeint = await AccountHore.getIdlokasi();
     Profile? profile = await AccountHore.getProfile();
-    //  print('key: $flagtimeint');
+    //  ph('key: $flagtimeint');
     int? flagint = 0;
     if (flagtimeint != null) {
       flagint = int.tryParse(flagtimeint);
@@ -93,14 +94,14 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
           if (timeint > flagint!) {
             List<String> loc = lineloc[1].split('|');
             if (loc.length == 2) {
-              //        print('send loc $tmp');
+              //        ph('send loc $tmp');
               TgzLocation tgzLocation =
                   TgzLocation(latitute: loc[0], longitute: loc[1]);
               String dateString =
                   DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
               bool value = await httpDashboard.trackingSales(
                   profile.id!, tgzLocation, dateString);
-              //        print(value);
+              //        ph(value);
             }
 
             flagint = timeint;
@@ -114,10 +115,10 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
   }
 
   Future<void> initPlatformState() async {
-    print('Initializing...');
+    ph('Initializing...');
     await BackgroundLocator.initialize();
 
-    print('Initialization done');
+    ph('Initialization done');
     final _isRunning = await BackgroundLocator.isServiceRunning();
     isRunning = _isRunning;
 
@@ -154,7 +155,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
 
   @override
   Widget build(BuildContext context) {
-    print('is running build: $isRunning');
+    ph('is running build: $isRunning');
     return Container();
   }
 

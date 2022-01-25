@@ -14,8 +14,8 @@ class ReturEditor extends StatefulWidget {
 }
 
 class _ReturEditorState extends State<ReturEditor> {
-  TextEditingController _textController1 = new TextEditingController();
-  TextEditingController _textController2 = new TextEditingController();
+  final TextEditingController _textController1 = TextEditingController();
+  final TextEditingController _textController2 = TextEditingController();
 
   late bool _isRange;
   late BlocReturEditor _blocReturEditor;

@@ -44,7 +44,7 @@ class _ViewFakultasState extends State<ViewFakultas> {
 
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
-    HttpFakultas httpOutlet = new HttpFakultas();
+    HttpFakultas httpOutlet = HttpFakultas();
     List<dynamic> ld = await (httpOutlet.detailFakultas(widget.idfakultas)
         as Future<List<dynamic>>);
     if (ld.length == 1) {
@@ -136,7 +136,7 @@ class TabViewFakultas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-        child: new Padding(
+        child: Padding(
           padding: const EdgeInsets.only(left: 18.0, right: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

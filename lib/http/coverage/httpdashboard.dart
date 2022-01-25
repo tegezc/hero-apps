@@ -10,6 +10,8 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {
     Uri uri = configuration.uri('/lokasi/pjp_daftar');
@@ -18,14 +20,14 @@ class HttpDashboard extends HttpBase {
       final response = await http
           .get(uri, headers: headers)
           .timeout(const Duration(seconds: 20));
-      print(response.body);
+      ph(response.body);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
         return _olahDaftarPjp(value);
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return null;
     }
   }
@@ -46,7 +48,7 @@ class HttpDashboard extends HttpBase {
       "id_tempat": pjp.id,
       "id_jenis_lokasi": pjp.idjenilokasi,
     };
-    print(map);
+    ph(map);
     Uri uri = configuration.uri('/clockin/pjp_clockin');
     http.Response? response;
     try {
@@ -55,8 +57,8 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       // "status": 201,
       // "message": "Data has been created.",
       // "id_history_pjp": "27"
@@ -64,8 +66,8 @@ class HttpDashboard extends HttpBase {
       Map<String, dynamic> value = json.decode(response.body);
       return value['id_history_pjp'];
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -90,10 +92,10 @@ class HttpDashboard extends HttpBase {
     final Map<String, String> headers = await getHeader();
 
     Map param = {
-      "id_sales": "${sales}",
-      "longitude": "${userLocation.longitute}",
-      "latitude": "${userLocation.latitute}",
-      "waktu_user": "$dateString"
+      "id_sales": sales,
+      "longitude": '${userLocation.longitute}',
+      "latitude": '${userLocation.latitute}',
+      "waktu_user": '$dateString'
     };
     Uri uri = configuration.uri('/tracking/tracking_pjp');
     http.Response? response;
@@ -103,16 +105,16 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(param),
       );
-      //   print("tracking sales : ${response.body}");
-      //   print("tracking sales : ${response.statusCode}");
+      //   ph("tracking sales : ${response.body}");
+      //   ph("tracking sales : ${response.statusCode}");
       if (response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -121,7 +123,7 @@ class HttpDashboard extends HttpBase {
     Map<String, String> headers = await getHeader();
     String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idhistoryPjp};
-    print("ID HISTORY: $idhistoryPjp");
+    ph("ID HISTORY: $idhistoryPjp");
     Uri uri = configuration.uri('/clockinmenu/pjp_clockin_menu_status');
     http.Response? response;
     try {
@@ -130,8 +132,8 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         //  "status": "OPEN",
         //  "clockin_distribusi": "ENABLED",
@@ -141,7 +143,7 @@ class HttpDashboard extends HttpBase {
         //  "clockin_report_mt": "ENABLED"
 
         List<dynamic> ld = json.decode(response.body);
-        if (ld.length > 0) {
+        if (ld.isNotEmpty) {
           Map<String, dynamic> mvalue = ld[0];
           return Menu.fromJson(mvalue);
         }
@@ -150,8 +152,8 @@ class HttpDashboard extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -192,15 +194,15 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         return true;
       }
       return false;
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return false;
     }
   }
@@ -210,9 +212,9 @@ class HttpDashboard extends HttpBase {
     TgzFile tgzFile = TgzFile();
     bool hasildelete = await tgzFile.deleteDirectory();
     if (hasildelete) {
-      print('delete directory berhasil');
+      ph('delete directory berhasil');
     } else {
-      print('delete directory tidak berhasil');
+      ph('delete directory tidak berhasil');
     }
 
     Map<String, String> headers = await getHeader();
@@ -236,7 +238,7 @@ class HttpDashboard extends HttpBase {
         break;
     }
     Map map = {"menu_clockin": keyTag, "id_history_pjp": idhistoryPjp};
-    print("liat map: $map");
+    ph("liat map: $map");
     http.Response? response;
     Uri uri = configuration.uri('/clockinmenu/pjp_clockin_menu_finish');
     FinishMenu finishMenu = FinishMenu(false, null);
@@ -246,15 +248,15 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print('=======================');
-      print(response.body);
-      print(response.statusCode);
+      ph('=======================');
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         int? i = ConverterNumber.stringToInt(map['status']);
         String? message = map['message'];
         finishMenu.message = message;
-        print(i);
+        ph(i);
         if (i == 1) {
           finishMenu.issuccess = true;
           return finishMenu;
@@ -262,8 +264,8 @@ class HttpDashboard extends HttpBase {
       }
       return finishMenu;
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
 
       return finishMenu;
     }
@@ -274,7 +276,7 @@ class HttpDashboard extends HttpBase {
     String? idhistorypjp = await AccountHore.getIdHistoryPjp();
 
     Map map = {"id_history_pjp": idhistorypjp};
-    print(jsonEncode(map));
+    ph(jsonEncode(map));
 
     Uri uri = configuration.uri('/clockout/pjp_clockout');
     http.Response? response;
@@ -284,9 +286,9 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print('cloclout: ${response.contentLength}');
-      print('cloclout: ${response.body}');
-      print('cloclout SC: ${response.statusCode}');
+      ph('cloclout: ${response.contentLength}');
+      ph('cloclout: ${response.body}');
+      ph('cloclout SC: ${response.statusCode}');
       if (response.statusCode == 200) {
         Map<String, dynamic>? map = json.decode(response.body);
         _olahCreateSuccess(map);
@@ -294,8 +296,8 @@ class HttpDashboard extends HttpBase {
       }
       return false;
     } catch (e) {
-      print('error $e');
-      print(response?.body);
+      ph('error $e');
+      ph(response?.body);
       return false;
     }
   }
@@ -305,7 +307,7 @@ class HttpDashboard extends HttpBase {
       Map<String, dynamic> map = value;
       if (map['status'] is String) {
         int? i = int.tryParse(map['status']);
-        print('nilai status berapa $i');
+        ph('nilai status berapa $i');
         if (i == 1) {
           return true;
         }
@@ -317,13 +319,13 @@ class HttpDashboard extends HttpBase {
 
       return false;
     } catch (e) {
-      print(e.toString());
+      ph(e.toString());
       return false;
     }
   }
 
   Future<EnumStatusClockIn?> checkStatusClockIn(String idpjp) async {
-    print("IDPJP CHECK: $idpjp");
+    ph("IDPJP CHECK: $idpjp");
     Map<String, String> headers = await getHeader();
     //  String? idhistoryPjp = await AccountHore.getIdHistoryPjp();
     Map map = {"id_history_pjp": idpjp};
@@ -336,8 +338,8 @@ class HttpDashboard extends HttpBase {
         headers: headers,
         body: jsonEncode(map),
       );
-      print(response.body);
-      print(response.statusCode);
+      ph(response.body);
+      ph(response.statusCode);
       if (response.statusCode == 200) {
         //  {
         //  "status":"0"
@@ -348,7 +350,7 @@ class HttpDashboard extends HttpBase {
         if (ld != null) {
           if (ld["status"] != null) {
             String status = ld["status"];
-            //print(status == "2");
+            //ph(status == "2");
             if (status == "0") {
               return EnumStatusClockIn.belum;
             } else if (status == "1") {
@@ -363,8 +365,8 @@ class HttpDashboard extends HttpBase {
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -375,18 +377,18 @@ class HttpDashboard extends HttpBase {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
 
           Pjp pjp = Pjp.fromJson(map);
 
-          print('nama: ${pjp.idjenilokasi}');
+          ph('nama: ${pjp.idjenilokasi}');
           lpjp.add(pjp);
         }
         lpjp.sort((a, b) => a.nokunjungan!.compareTo(b.nokunjungan!));
         // lpjp.forEach((element) {
-        //   print(element.nokunjungan);
+        //   ph(element.nokunjungan);
         // });
       }
       return lpjp;

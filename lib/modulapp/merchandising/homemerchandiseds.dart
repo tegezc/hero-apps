@@ -5,6 +5,8 @@ import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
 class HomeViewMerchandisingDs extends StatefulWidget {
+  const HomeViewMerchandisingDs({Key? key}) : super(key: key);
+
   @override
   _HomeViewMerchandisingDsState createState() =>
       _HomeViewMerchandisingDsState();
@@ -18,7 +20,7 @@ class _HomeViewMerchandisingDsState extends State<HomeViewMerchandisingDs> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
+            bottom: const TabBar(
               isScrollable: true,
               tabs: [
                 Tab(
@@ -30,16 +32,16 @@ class _HomeViewMerchandisingDsState extends State<HomeViewMerchandisingDs> {
               ],
             ),
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.black, //change your color here
             ),
             title: Text(
               ConstString.textMerchandising,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             centerTitle: true,
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               ViewMerchandising(EnumMerchandising.poster, null),
               ViewMerchandising(EnumMerchandising.spanduk, null),

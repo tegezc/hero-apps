@@ -41,7 +41,7 @@ class _MarketAuditDsViewState extends State<MarketAuditDsView> {
   }
 
   Future<bool> _loadDataInternet() async {
-    // print('${_lokasiSearch.idoutlet} || '
+    // ph('${_lokasiSearch.idoutlet} || '
     //     '${_lokasiSearch.tgl} || '
     //     '${_lokasiSearch.idjnslokasi} || '
     //     '${_lokasiSearch.namapembeli} || '
@@ -51,7 +51,7 @@ class _MarketAuditDsViewState extends State<MarketAuditDsView> {
         jenislokasi: _lokasiSearch.idjnslokasi!,
         idloksi: _lokasiSearch.idoutlet!,
         tgl: _lokasiSearch.tgl!);
-    // print(q?.toJson());
+    // ph(q?.toJson());
     if (q != null) {
       return true;
     }
@@ -75,7 +75,7 @@ class _MarketAuditDsViewState extends State<MarketAuditDsView> {
     }
 
     if (q == null) {
-      return CustomScaffold(
+      return const CustomScaffold(
         title: 'Market Audit',
         body: Center(
           child: LabelBlack.size1("Terjadi Kesalahan"),
@@ -179,7 +179,7 @@ class _MarketAuditDsViewState extends State<MarketAuditDsView> {
         child: Row(
           children: [
             LabelApp.size2(ket),
-            SizedBox(
+            const SizedBox(
               width: 30,
               child: LabelBlack.size2(":"),
             ),

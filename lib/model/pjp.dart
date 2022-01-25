@@ -105,7 +105,7 @@ class Pjp {
 
   EnumJenisLokasi? getJenisLokasi() {
     EnumJenisLokasi? enumJenisLokasi;
-    switch (this.idjenilokasi) {
+    switch (idjenilokasi) {
       case 'OUT':
         enumJenisLokasi = EnumJenisLokasi.outlet;
         break;

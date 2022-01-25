@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/http/httplokasi/httpOutlet.dart';
+import 'package:hero/http/httplokasi/http_outlet.dart';
 import 'package:hero/http/httplokasi/httpsearchlocation.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
@@ -14,7 +14,7 @@ class ViewOutlet extends StatefulWidget {
   static const routeName = '/viewOutlet';
   final String? idoutlet;
 
-  ViewOutlet(this.idoutlet);
+  const ViewOutlet(this.idoutlet, {Key? key}) : super(key: key);
 
   @override
   _ViewOutletState createState() => _ViewOutletState();
@@ -28,12 +28,12 @@ class _ViewOutletState extends State<ViewOutlet> {
   void initState() {
     _isloading = true;
     _title = 'Detail Outlet';
-    this._setup();
+    _setup();
     super.initState();
   }
 
   void _setup() {
-    this._setupdata().then((value) {
+    _setupdata().then((value) {
       if (value) {
         setState(() {
           _isloading = false;
@@ -93,7 +93,7 @@ class _ViewOutletState extends State<ViewOutlet> {
         length: 3,
         child: ScaffoldLocView(
             title: _title,
-            bottom: TabBar(
+            bottom: const TabBar(
               indicatorColor: Colors.white,
               isScrollable: true,
               tabs: [
@@ -130,52 +130,54 @@ class _ViewOutletState extends State<ViewOutlet> {
 class TabViewOutlet extends StatelessWidget {
   final Outlet? outlet;
 
-  TabViewOutlet(this.outlet);
+  const TabViewOutlet(this.outlet, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0, right: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Label2row('Nama', outlet!.nama),
-              _spasi(),
-              Divider(),
-              Label2row('Nomor RS', outlet!.nors),
-              _spasi(),
-              Divider(),
-              Label2row('Jenis Outlet', '${outlet!.getStrJenisOutlet()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Provinsi:', '${outlet!.getStrProv()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kabupaten:', '${outlet!.getStrKab()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kecamatan:', '${outlet!.getStrKec()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kelurahan:', '${outlet!.getStrKel()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Alamat:', '${outlet!.alamat}'),
-              SizedBox(
-                height: 12,
-              ),
-              _koordinatWidget(context),
-              SizedBox(
-                height: 150.0,
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 18.0, right: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 20.0),
+            Label2row('Nama', outlet!.nama),
+            _spasi(),
+            const Divider(),
+            Label2row('Nomor RS', outlet!.nors),
+            _spasi(),
+            const Divider(),
+            Label2row('Jenis Outlet', '${outlet!.getStrJenisOutlet()}'),
+            _spasi(),
+            _div(),
+            Label2row('Provinsi:', '${outlet!.getStrProv()}'),
+            _spasi(),
+            _div(),
+            Label2row('Kabupaten:', '${outlet!.getStrKab()}'),
+            _spasi(),
+            _div(),
+            Label2row('Kecamatan:', '${outlet!.getStrKec()}'),
+            _spasi(),
+            _div(),
+            Label2row('Kelurahan:', '${outlet!.getStrKel()}'),
+            _spasi(),
+            _div(),
+            Label2row('Alamat:', '${outlet!.alamat}'),
+            const SizedBox(
+              height: 12,
+            ),
+            _koordinatWidget(context),
+            const SizedBox(
+              height: 150.0,
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _div() {
+    return const Divider();
   }
 
   Widget _koordinatWidget(BuildContext context) {
@@ -190,7 +192,7 @@ class TabViewOutlet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Label2row('Longitude:', '${outlet!.long}'),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Label2row('Latitude:', '${outlet!.lat}'),
@@ -201,7 +203,7 @@ class TabViewOutlet extends StatelessWidget {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 12,
     );
   }

@@ -198,7 +198,7 @@ class TabViewKampus extends StatelessWidget {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 12,
     );
   }

@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:background_locator/location_dto.dart';
 
+import '../../configuration.dart';
 import 'file_manager.dart';
 
 class LocationServiceRepository {
@@ -20,7 +21,7 @@ class LocationServiceRepository {
   int _count = -1;
 
   Future<void> init(Map<dynamic, dynamic> params) async {
-    print("***********Init callback handler");
+    ph("***********Init callback handler");
     if (params.containsKey('countInit')) {
       dynamic tmpCount = params['countInit'];
       if (tmpCount is double) {
@@ -35,22 +36,22 @@ class LocationServiceRepository {
     } else {
       _count = 0;
     }
-    print("$_count");
+    ph("$_count");
     await setLogLabel("start");
     final SendPort? send = IsolateNameServer.lookupPortByName(isolateName);
     send?.send(null);
   }
 
   Future<void> dispose() async {
-    print("***********Dispose callback handler");
-    print("$_count");
+    ph("***********Dispose callback handler");
+    ph("$_count");
     await setLogLabel("end");
     final SendPort? send = IsolateNameServer.lookupPortByName(isolateName);
     send?.send(null);
   }
 
   Future<void> callback(LocationDto locationDto) async {
-    print('$_count location in dart: ${locationDto.toString()}');
+    ph('$_count location in dart: ${locationDto.toString()}');
     await setLogPosition(_count, locationDto);
     final SendPort? send = IsolateNameServer.lookupPortByName(isolateName);
     send?.send(locationDto);

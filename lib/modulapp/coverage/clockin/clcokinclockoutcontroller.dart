@@ -4,11 +4,13 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 
+import '../../../configuration.dart';
+
 class ClockInClockOutController {
   Future<bool> clockin(EnumStatusTempat enumStatusTempat, Pjp pjp) async {
     HttpDashboard httpdashboard = HttpDashboard();
     String? idhistorypjp = await httpdashboard.clockin(pjp, enumStatusTempat);
-    print(idhistorypjp);
+    ph(idhistorypjp);
     if (idhistorypjp != null) {
       await AccountHore.setIdHistoryPjp(idhistorypjp);
       _deleteAllSerial();

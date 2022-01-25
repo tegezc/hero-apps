@@ -2,7 +2,7 @@ import 'package:hero/database/stringdb.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/dateutil.dart';
 
-import 'Database.dart';
+import 'database.dart';
 
 class DaoSerial {
   Future<int> saveLongLat(String long, String lat) async {
@@ -20,7 +20,7 @@ class DaoSerial {
 
     List<SerialNumber> lseri = [];
     for (int i = 0; i < list.length; i++) {
-      SerialNumber serial = this._createSeri(list[i] as Map<String, dynamic>);
+      SerialNumber serial = _createSeri(list[i] as Map<String, dynamic>);
 
       lseri.add(serial);
     }
@@ -29,7 +29,7 @@ class DaoSerial {
   }
 
   SerialNumber _createSeri(Map<String, dynamic> map) {
-    return new SerialNumber.fromDb(
+    return SerialNumber.fromDb(
       serial: map[TbSerial.serial],
       hargajual: map[TbSerial.hargajual],
       hargamodal: map[TbSerial.hargamodal],

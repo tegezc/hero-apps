@@ -8,7 +8,7 @@ class CSVReader {
     String value = await rootBundle.loadString('assets/csv/kecamatan.csv');
     List<String> ls = value.split('\n');
     ls.removeAt(0);
-    ls.forEach((element) {
+    for (var element in ls) {
       List<String> lsplit = element.split(',');
       if (lsplit.length == 4) {
         //   id_kabupaten,id_cluster,id_kecamatan,nama_kecamatan
@@ -20,7 +20,7 @@ class CSVReader {
             nama: lsplit[3]);
         lkec.add(kecamatan);
       } else {}
-    });
+    }
     return lkec;
   }
 
@@ -29,7 +29,7 @@ class CSVReader {
     String value = await rootBundle.loadString('assets/csv/kelurahan.csv');
     List<String> ls = value.split('\n');
     ls.removeAt(0);
-    ls.forEach((element) {
+    for (var element in ls) {
       List<String> lsplit = element.split(',');
       if (lsplit.length == 3) {
         //   KELURAHAN ID,KECAMATAN ID,NAMA KELURAHAN
@@ -43,7 +43,7 @@ class CSVReader {
             Kelurahan(idkel: lsplit[0], idkec: lsplit[1], nama: gabungannama);
         lkec.add(kelurahan);
       }
-    });
+    }
     return lkec;
   }
 
@@ -52,7 +52,7 @@ class CSVReader {
     String value = await rootBundle.loadString('assets/csv/kabupaten.csv');
     List<String> ls = value.split('\n');
     ls.removeAt(0);
-    ls.forEach((element) {
+    for (var element in ls) {
       List<String> lsplit = element.split(',');
       if (lsplit.length == 3) {
         //   id_provinsi,id_kabupaten,nama_kabupaten
@@ -61,7 +61,7 @@ class CSVReader {
             Kabupaten(realid: lsplit[1], nama: lsplit[2], idprov: lsplit[0]);
         lkab.add(kabupaten);
       } else {}
-    });
+    }
     return lkab;
   }
 
@@ -70,7 +70,7 @@ class CSVReader {
     String value = await rootBundle.loadString('assets/csv/provinsi.csv');
     List<String> ls = value.split('\n');
     ls.removeAt(0);
-    ls.forEach((element) {
+    for (var element in ls) {
       List<String> lsplit = element.split(',');
       if (lsplit.length == 2) {
         //   id_provinsi,nama_provinsi
@@ -78,7 +78,7 @@ class CSVReader {
         Provinsi provinsi = Provinsi(realid: lsplit[0], nama: lsplit[1]);
         lprov.add(provinsi);
       } else {}
-    });
+    }
     return lprov;
   }
 }

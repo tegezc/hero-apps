@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/http/httplokasi/httpPoi.dart';
+import 'package:hero/http/httplokasi/http_poi.dart';
 import 'package:hero/http/httplokasi/httpsearchlocation.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:hero/model/lokasi/poi.dart';
@@ -12,7 +12,7 @@ class ViewPoi extends StatefulWidget {
   static const routeName = '/viewpoi';
   final String? idpoi;
 
-  ViewPoi(this.idpoi);
+  const ViewPoi(this.idpoi, {Key? key}) : super(key: key);
 
   @override
   _ViewPoiState createState() => _ViewPoiState();
@@ -26,12 +26,12 @@ class _ViewPoiState extends State<ViewPoi> {
   void initState() {
     _isloading = true;
     _title = 'Detail POI';
-    this._setup();
+    _setup();
     super.initState();
   }
 
   void _setup() {
-    this._setupdata().then((value) {
+    _setupdata().then((value) {
       if (value) {
         setState(() {
           _isloading = false;
@@ -42,7 +42,7 @@ class _ViewPoiState extends State<ViewPoi> {
 
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
-    HttpPoi httpOutlet = new HttpPoi();
+    HttpPoi httpOutlet = HttpPoi();
     List<dynamic> ld =
         await (httpOutlet.detailPoi(widget.idpoi) as Future<List<dynamic>>);
     if (ld.length == 1) {
@@ -65,11 +65,11 @@ class _ViewPoiState extends State<ViewPoi> {
             List<Kelurahan> lkel = await (_httpDashboard
                 .getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
 
-            lkel.forEach((element) {
+            for (var element in lkel) {
               if (element.idkel == _poi!.idkel) {
                 _poi!.kel = element;
               }
-            });
+            }
           }
         }
         return true;
@@ -90,39 +90,37 @@ class _ViewPoiState extends State<ViewPoi> {
     } else {
       return ScaffoldLocView(
           title: _title,
-          body: Container(
-            child: SingleChildScrollView(
-              child: new Padding(
-                padding: const EdgeInsets.only(left: 18.0, right: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20.0),
-                    Label2row('Nama', _poi!.nama),
-                    _spasi(),
-                    Divider(),
-                    Label2row('Provinsi:', '${_poi!.getStrProv()}'),
-                    _spasi(),
-                    Divider(),
-                    Label2row('Kabupaten:', '${_poi!.getStrKab()}'),
-                    _spasi(),
-                    Divider(),
-                    Label2row('Kecamatan:', '${_poi!.getStrKec()}'),
-                    _spasi(),
-                    Divider(),
-                    Label2row('Kelurahan:', '${_poi!.getStrKel()}'),
-                    _spasi(),
-                    Divider(),
-                    Label2row('Alamat:', '${_poi!.alamat}'),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    _koordinatWidget(context),
-                    SizedBox(
-                      height: 150.0,
-                    ),
-                  ],
-                ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 18.0, right: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 20.0),
+                  Label2row('Nama', _poi!.nama),
+                  _spasi(),
+                  const Divider(),
+                  Label2row('Provinsi:', '${_poi!.getStrProv()}'),
+                  _spasi(),
+                  const Divider(),
+                  Label2row('Kabupaten:', '${_poi!.getStrKab()}'),
+                  _spasi(),
+                  const Divider(),
+                  Label2row('Kecamatan:', '${_poi!.getStrKec()}'),
+                  _spasi(),
+                  const Divider(),
+                  Label2row('Kelurahan:', '${_poi!.getStrKel()}'),
+                  _spasi(),
+                  const Divider(),
+                  Label2row('Alamat:', '${_poi!.alamat}'),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  _koordinatWidget(context),
+                  const SizedBox(
+                    height: 150.0,
+                  ),
+                ],
               ),
             ),
           ));
@@ -141,7 +139,7 @@ class _ViewPoiState extends State<ViewPoi> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Label2row('Longitude:', '${_poi!.long}'),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Label2row('Latitude:', '${_poi!.lat}'),
@@ -152,7 +150,7 @@ class _ViewPoiState extends State<ViewPoi> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 12,
     );
   }

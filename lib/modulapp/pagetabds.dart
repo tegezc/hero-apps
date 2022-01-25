@@ -195,9 +195,9 @@ class _PageTabDsState extends State<PageTabDs> {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           LabelWhite.size1("Berikut Daftar Pencarian : "),
-          const Divider(
+          Divider(
             color: Colors.white,
           ),
         ],

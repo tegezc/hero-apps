@@ -45,7 +45,7 @@ import 'parentlokasi.dart';
 class Outlet extends ParentLokasi {
   @override
   bool isValid() {
-    // print('$idkelurahan\n$nors\n$nama\n$alamat\n$idJnsOutlet\n$long\n$lat');
+    // ph('$idkelurahan\n$nors\n$nama\n$alamat\n$idJnsOutlet\n$long\n$lat');
     if (cstr(idkelurahan) &&
         cstr(nors) &&
         cstr(nama) &&
@@ -117,14 +117,14 @@ class Outlet extends ParentLokasi {
 
   Outlet.fromJson(Map<String, dynamic> map) {
     String strlong = map[tagLong] == null ? '0' : map[tagLong];
-    if (strlong.length > 0) {
+    if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
     }
 
     String strlat = map[tagLat] == null ? '0' : map[tagLat];
-    if (strlat.length > 0) {
+    if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
       lat = 0.0;

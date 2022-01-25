@@ -4,6 +4,8 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/poi.dart';
 import 'package:http/http.dart' as http;
 
+import '../../configuration.dart';
+
 class HttpPoi extends HttpBase {
   Future<List<dynamic>?> detailPoi(String? idpoi) async {
     Map<String, String> headers = await getHeader();
@@ -11,10 +13,10 @@ class HttpPoi extends HttpBase {
     try {
       http.Response response = await http.get(uri, headers: headers);
 
-      print(response.body);
+      ph(response.body);
       return json.decode(response.body);
     } catch (e) {
-      print(e);
+      ph(e);
       return null;
     }
   }
@@ -30,15 +32,15 @@ class HttpPoi extends HttpBase {
         body: jsonEncode(poi.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }
@@ -54,15 +56,15 @@ class HttpPoi extends HttpBase {
         body: jsonEncode(poi.toJson()),
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        ph(response.body);
         return json.decode(response.body);
       } else {
-        print(response.body);
+        ph(response.body);
         return null;
       }
     } catch (e) {
-      print(e);
-      print(response?.body);
+      ph(e);
+      ph(response?.body);
       return null;
     }
   }

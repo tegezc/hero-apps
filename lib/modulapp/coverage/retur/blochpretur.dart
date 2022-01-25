@@ -5,7 +5,7 @@ import 'package:rxdart/subjects.dart';
 
 class BlocHpRetur {
   UIHpRetur? _cacheItem;
-  HttpRetur _httpRetur = HttpRetur();
+  final HttpRetur _httpRetur = HttpRetur();
 
   final BehaviorSubject<UIHpRetur?> _uihpretur = BehaviorSubject();
 
@@ -17,7 +17,7 @@ class BlocHpRetur {
     _cacheItem!.tglAwal = null;
     _cacheItem!.lretur = [];
     _cacheItem!.page = 1;
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void searchRangeTanggal() {
@@ -55,7 +55,7 @@ class BlocHpRetur {
         .then((value) {
       if (value != null) {
         _cacheItem!.lretur!.addAll(value);
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
 
@@ -70,7 +70,7 @@ class BlocHpRetur {
         .then((value) {
       if (value != null) {
         _cacheItem!.lretur = value;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -148,7 +148,7 @@ class UIHpRetur {
       return false;
     }
 
-    if (this.page == 0) {
+    if (page == 0) {
       return false;
     }
 

@@ -32,6 +32,7 @@ import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 
+import 'configuration.dart';
 import 'model/distribusi/datapembeli.dart';
 import 'model/profile.dart';
 import 'modulapp/camera/loadingview.dart';
@@ -461,9 +462,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
                     HttpLogin httpLogin = HttpLogin();
                     httpLogin.logout().then((value) {
                       if (value) {
-                        print('Log Out');
+                        ph('Log Out');
                       } else {
-                        print('gagal log out');
+                        ph('gagal log out');
                       }
                     });
                     Navigator.of(context).pop();

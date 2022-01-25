@@ -6,7 +6,7 @@ import 'package:rxdart/subjects.dart';
 
 class BlocReturEditor {
   UIReturEditor? _cacheItem;
-  HttpRetur _httpRetur = HttpRetur();
+  final HttpRetur _httpRetur = HttpRetur();
 
   final BehaviorSubject<UIReturEditor?> _uiretureditor = BehaviorSubject();
 
@@ -18,7 +18,7 @@ class BlocReturEditor {
     _cacheItem!.lserial = [];
     _httpRetur.comboAlasanRetur().then((value) {
       _cacheItem!.comboAlasan = value;
-      this._sinkItem(_cacheItem);
+      _sinkItem(_cacheItem);
     });
   }
 
@@ -26,7 +26,7 @@ class BlocReturEditor {
     _httpRetur.getSerialnumberByRange(seriawal, seriakhir).then((value) {
       _cacheItem!.lserial = value;
       _cacheItem!.lserialChecked = [];
-      this._sinkItem(_cacheItem);
+      _sinkItem(_cacheItem);
     });
   }
 
@@ -38,7 +38,7 @@ class BlocReturEditor {
 
   void comboAlasan(AlasanRetur? alasanRetur) {
     _cacheItem!.currentAlasan = alasanRetur;
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void checkRadio(int index, bool ischecked) {
@@ -49,7 +49,7 @@ class BlocReturEditor {
     } else {
       _cacheItem!.lserialChecked.remove(serial);
     }
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void _sinkItem(UIReturEditor? item) {
@@ -72,7 +72,7 @@ class UIReturEditor {
   }
 
   bool isSafetosubmit() {
-    if (currentAlasan != null && lserialChecked.length > 0) {
+    if (currentAlasan != null && lserialChecked.isNotEmpty) {
       return true;
     }
     return false;

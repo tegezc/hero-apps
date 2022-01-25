@@ -1,48 +1,48 @@
 class TbProv {
-  static final String tableName = 'tb_provinsi';
-  static final String id = 'id';
-  static final String realid = 'realid';
-  static final String nama = 'nama';
+  static const String tableName = 'tb_provinsi';
+  static const String id = 'id';
+  static const String realid = 'realid';
+  static const String nama = 'nama';
 }
 
 class TbKab {
-  static final String tableName = 'tb_kabupaten';
-  static final String id = 'id';
-  static final String realid = 'realid';
-  static final String idprov = 'idprov';
-  static final String nama = 'nama';
+  static const String tableName = 'tb_kabupaten';
+  static const String id = 'id';
+  static const String realid = 'realid';
+  static const String idprov = 'idprov';
+  static const String nama = 'nama';
 }
 
 class TbKec {
-  static final String tableName = 'tb_kecamatan';
-  static final String id = 'id';
-  static final String idcluster = 'idcluster';
-  static final String realid = 'realid';
-  static final String idkab = 'idkab';
-  static final String nama = 'nama';
+  static const String tableName = 'tb_kecamatan';
+  static const String id = 'id';
+  static const String idcluster = 'idcluster';
+  static const String realid = 'realid';
+  static const String idkab = 'idkab';
+  static const String nama = 'nama';
 }
 
 class TbKel {
-  static final String tableName = 'tb_kelurahan';
-  static final String id = 'id';
-  static final String idkec = 'idkec';
-  static final String idkel = 'idkel';
-  static final String nama = 'nama';
+  static const String tableName = 'tb_kelurahan';
+  static const String id = 'id';
+  static const String idkec = 'idkec';
+  static const String idkel = 'idkel';
+  static const String nama = 'nama';
 }
 
 class TbSerial {
-  static final String tableName = 'tb_serial';
-  static final String id = 'id';
-  static final String idproduk = 'idproduk';
-  static final String hargamodal = 'hargamodal';
-  static final String hargajual = 'hargajual';
-  static final String serial = 'serial';
+  static const String tableName = 'tb_serial';
+  static const String id = 'id';
+  static const String idproduk = 'idproduk';
+  static const String hargamodal = 'hargamodal';
+  static const String hargajual = 'hargajual';
+  static const String serial = 'serial';
 }
 
 class TbLongLat {
-  static final String tableName = 'tb_longlat';
-  static final String id = 'id';
-  static final String long = 'long';
-  static final String lat = 'lat';
-  static final String tgl = 'tgl';
+  static const String tableName = 'tb_longlat';
+  static const String id = 'id';
+  static const String long = 'long';
+  static const String lat = 'lat';
+  static const String tgl = 'tgl';
 }

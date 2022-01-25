@@ -5,7 +5,7 @@ import 'package:loading_animations/loading_animations.dart';
 class LoadingNunggu extends StatelessWidget {
   final String strContent;
 
-  LoadingNunggu(this.strContent);
+  const LoadingNunggu(this.strContent, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LoadingNunggu extends StatelessWidget {
             children: [
               LoadingBouncingLine.circle(backgroundColor: Colors.deepOrange),
               Text(strContent,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.bold)),
@@ -32,33 +32,37 @@ class LoadingNunggu extends StatelessWidget {
 }
 
 class BelumAdaData extends StatelessWidget {
+  const BelumAdaData({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: Text(''),
+          title: const Text(''),
         ),
-        body: Center(child: Text('Belum ada data ')));
+        body: const Center(child: Text('Belum ada data ')));
   }
 }
 
 class ErrorPage extends StatelessWidget {
+  const ErrorPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: Text(''),
+          title: const Text(''),
         ),
-        body: Center(child: Text('Terjadi Kesalahan')));
+        body: const Center(child: Text('Terjadi Kesalahan')));
   }
 }
 
 class LoadingTransparan extends StatelessWidget {
   final String strContent;
 
-  LoadingTransparan(this.strContent);
+  const LoadingTransparan(this.strContent, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +79,13 @@ class LoadingTransparan extends StatelessWidget {
                 height: mediaQueryData.size.height,
               ),
             ),
-            Container(
+            SizedBox(
               width: mediaQueryData.size.width,
               height: mediaQueryData.size.height,
               child: Center(
                   child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 200,
                   ),
                   _contentLoading(),
@@ -100,7 +104,7 @@ class LoadingTransparan extends StatelessWidget {
           children: [
             LoadingBouncingLine.circle(backgroundColor: Colors.deepOrange),
             Text(strContent,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     color: Colors.black,
                     fontWeight: FontWeight.bold)),

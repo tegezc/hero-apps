@@ -10,10 +10,12 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
+import '../../configuration.dart';
+
 class PreviewPhotoWithUpload extends StatefulWidget {
   static const routeName = '/previewphotoupload';
   final ParamPreviewPhoto? param;
-  PreviewPhotoWithUpload(this.param);
+  const PreviewPhotoWithUpload(this.param);
 
   @override
   _PreviewPhotoWithUploadState createState() => _PreviewPhotoWithUploadState();
@@ -108,7 +110,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
                         EnumTakePhoto.distribusi) {
                       _uploadPhotoDistribution().then((value) {
                         Navigator.of(context).pop();
-                        print(widget.param!.enumTakePhoto);
+                        ph(widget.param!.enumTakePhoto);
                         if (value != null) {
                           if (value.issuccess) {
                             Navigator.popUntil(
@@ -155,14 +157,14 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
         ClockInClockOutController();
     bool isclockin = await clockInClockOutController.clockin(
         EnumStatusTempat.close, widget.param!.pjp!);
-    print("proses clockin clockout");
-    print("hasil clock in: $isclockin");
+    ph("proses clockin clockout");
+    ph("hasil clock in: $isclockin");
     if (isclockin) {
       bool value = await _uploadPhotoDistributionIsSuccess(isClose: true);
-      print("hasil upload photo: $isclockin");
+      ph("hasil upload photo: $isclockin");
       if (value) {
         bool isclockout = await clockInClockOutController.clockOut();
-        print("hasil clockout : $isclockin");
+        ph("hasil clockout : $isclockin");
         return isclockout;
       }
     }

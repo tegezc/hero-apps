@@ -10,7 +10,7 @@ import 'package:hero/util/constapp/consstring.dart';
 
 class HomeViewMerchandising extends StatefulWidget {
   final LokasiSearch itemOutlet;
-  HomeViewMerchandising(this.itemOutlet);
+  const HomeViewMerchandising(this.itemOutlet, {Key? key}) : super(key: key);
   @override
   _HomeViewMerchandisingState createState() => _HomeViewMerchandisingState();
 }
@@ -77,7 +77,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
+            bottom: const TabBar(
               isScrollable: true,
               tabs: [
                 Tab(
@@ -101,12 +101,12 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
               ],
             ),
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.black, //change your color here
             ),
             title: Text(
               ConstString.textMerchandising,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             centerTitle: true,
           ),
