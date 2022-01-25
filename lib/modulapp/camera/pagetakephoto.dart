@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/previewphotoupload.dart';
 import 'package:hero/util/filesystem/itgzfile.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../configuration.dart';
@@ -53,6 +51,8 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   bool enableAudio = true;
 
   late bool _isLoading;
+
+  final TgzFile _tgzFile = TgzFile();
 
   final Configuration _configuration = Configuration();
 
@@ -214,8 +214,6 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     return Row(children: toggles);
   }
 
-  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
-
   void showInSnackBar(String message) {
     //_scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(message)));
   }
@@ -299,30 +297,9 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
     try {
       XFile rawImage = await controller!.takePicture();
-      return await _copyPhotoFroCacheToDestinationDirectory(rawImage);
+      return await _tgzFile.copyPhotoFroCacheToDestinationDirectory(rawImage);
     } on CameraException catch (e) {
       _showCameraException(e);
-      return null;
-    }
-  }
-
-  Future<String?> _copyPhotoFroCacheToDestinationDirectory(
-      XFile sourceFile) async {
-    try {
-      final Directory? extDir =
-          await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
-      final String dirPath = '${extDir!.path}/photo';
-      await Directory(dirPath).create(recursive: true);
-
-      final String filePath = '$dirPath/${timestamp()}.jpeg';
-
-      File imageFile = File(sourceFile.path);
-
-      await imageFile.copy(
-        filePath,
-      );
-      return filePath;
-    } catch (e) {
       return null;
     }
   }

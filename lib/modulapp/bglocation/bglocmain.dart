@@ -18,7 +18,7 @@ import 'package:location_permissions/location_permissions.dart';
 
 import '../../configuration.dart';
 import '../../util/constapp/accountcontroller.dart';
-import 'file_manager.dart';
+import '../../util/filesystem/file_manager.dart';
 import 'location_callback_handler.dart';
 import 'location_service_repository.dart';
 

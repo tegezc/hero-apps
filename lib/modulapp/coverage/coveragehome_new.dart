@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero/configuration.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/bglocation/bglocmain.dart';
@@ -399,8 +400,13 @@ class _CoverageHomeState extends State<CoverageHome> {
 
   Future<bool> _prepareClockIn(String? idhistorypjp) async {
     // delete file
-    TgzFile tgzFile = TgzFile();
-    tgzFile.deleteDirectory();
+    try {
+      TgzFile tgzFile = TgzFile();
+      await tgzFile.deleteDirectory();
+    } catch (e) {
+      ph(e.toString());
+    }
+
     //=======
     if (idhistorypjp != null) {
       await AccountHore.setIdHistoryPjp(idhistorypjp);

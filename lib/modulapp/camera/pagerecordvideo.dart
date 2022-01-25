@@ -7,6 +7,7 @@ import 'package:hero/configuration.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
+import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'loadingview.dart';
@@ -39,11 +40,11 @@ class PageTakeVideo extends StatefulWidget {
 
 class _PageTakeVideoState extends State<PageTakeVideo>
     with WidgetsBindingObserver {
+  final TgzFile _tgzFile = TgzFile();
   List<CameraDescription> cameras = [];
   CameraController? _controller;
-  XFile? _videoPath;
-  // VideoPlayerController _videoController;
-//  VoidCallback _videoPlayerListener;
+  String? _videoPath;
+
   final bool _enableAudio = true;
   late bool _isloading;
   Timer? _timer;
@@ -265,11 +266,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     return Row(children: toggles);
   }
 
-  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
-
-  // void showInSnackBar(String message) {
-  //    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(message)));
-  //  }
+  // String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
   void onNewCameraSelected(CameraDescription? cameraDescription) async {
     if (_controller != null) {
@@ -310,37 +307,10 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     });
   }
 
-  // void onStopButtonPressed() {
-  //   stopVideoRecording().then((_) {
-  //     if (mounted) setState(() {});
-  //     ph('Video recorded to: $_videoPath');
-  //   });
-  // }
-
-  // void onPauseButtonPressed() {
-  //   pauseVideoRecording().then((_) {
-  //     if (mounted) setState(() {});
-  //     ph('Video recording paused');
-  //   });
-  // }
-  //
-  // void onResumeButtonPressed() {
-  //   resumeVideoRecording().then((_) {
-  //     if (mounted) setState(() {});
-  //     showInSnackBar('Video recording resumed');
-  //   });
-  // }
-
   Future<void> startVideoRecording() async {
     if (!_controller!.value.isInitialized) {
       ph('Error: select a camera first.');
     }
-
-    final Directory? extDir =
-        await getExternalStorageDirectory(); //getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir!.path}/video/';
-    await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath${timestamp()}.mp4';
 
     if (_controller!.value.isRecordingVideo) {
       // A recording is already started, do nothing.
@@ -358,13 +328,14 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     // return filePath;
   }
 
-  Future<XFile?> stopVideoRecording() async {
+  Future<String?> stopVideoRecording() async {
     if (!_controller!.value.isRecordingVideo) {
       return null;
     }
 
     try {
-      return _controller!.stopVideoRecording();
+      XFile rawImage = await await _controller!.stopVideoRecording();
+      return await _tgzFile.copyVideoFromCacheToDestinationDirectory(rawImage);
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;

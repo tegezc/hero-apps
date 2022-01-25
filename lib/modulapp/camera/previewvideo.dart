@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httppromotion.dart';
 import 'package:hero/model/promotion/promotion.dart';
@@ -36,7 +35,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
     // offers several different constructors to play videos from assets, files,
     // or the internet.
     _controller = VideoPlayerController.file(
-      File(widget.param!.source!.path),
+      File(widget.param!.source!),
     );
 
     // Initialize the controller and store the Future for later use.
@@ -126,7 +125,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                       TgzDialog.loadingDialog(context);
                       HttpPromotion httpPromotion = HttpPromotion();
                       httpPromotion
-                          .uploadVideo(widget.param!.source!.path, _promotion!)
+                          .uploadVideo(widget.param!.source!, _promotion!)
                           .then((value) {
                         Navigator.of(context).pop();
                         if (value) {
@@ -210,7 +209,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
 }
 
 class ParamPreviewVideo {
-  XFile? source;
+  String? source;
   Promotion? promotion;
 
   ParamPreviewVideo(this.source, this.promotion);

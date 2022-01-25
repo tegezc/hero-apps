@@ -1,32 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:hero/util/filesystem/itgzfile.dart';
 import 'package:path_provider/path_provider.dart';
 
-class TgzFile implements ITgzFile {
-  // Future<List<FileSystemEntity>> dirContents() async {
-  //   final Directory extDir = await getExternalStorageDirectory();
-  //   // extDir.deleteSync(recursive: true);
-  //
-  //   if (await extDir.exists()) {
-  //     Directory dir = Directory('${extDir.path}/video');
-  //     if (await dir.exists()) {
-  //       var files = <FileSystemEntity>[];
-  //       var completer = Completer<List<FileSystemEntity>>();
-  //       var lister = dir.list(recursive: false);
-  //       lister.listen((file) => files.add(file),
-  //           // should also register onError
-  //           onDone: () => completer.complete(files));
-  //       return completer.future;
-  //     } else {
-  //       return null;
-  //     }
-  //   } else {
-  //     return null;
-  //   }
-  // }
+const photo = 'photo';
+const video = 'video';
 
+class TgzFile implements ITgzFile {
   @override
   Future<bool> isPathExist(String path) async {
     try {
@@ -39,33 +21,77 @@ class TgzFile implements ITgzFile {
 
   @override
   Future<bool> deleteDirectory() async {
-    // extDir.deleteSync(recursive: true);
     try {
-      final Directory? extDir = await getExternalStorageDirectory();
-      await extDir!.delete(recursive: true);
+      final Directory? dirVideo = await _getDirectoryVideo();
+      await dirVideo!.delete(recursive: true);
+
+      final Directory? dirPhoto = await _getDirectoryPhoto();
+      await dirPhoto!.delete(recursive: true);
       return true;
     } catch (e) {
       return false;
     }
   }
-  //
-  // Future<void> deleteFile() async {
-  //   try {
-  //     var file = File('your_file_path');
-  //
-  //     if (await file.exists()) {
-  //       // file exits, it is safe to call delete on it
-  //       await file.delete();
-  //     }
-  //   } catch (e) {
-  //     // error in getting access to the file
-  //   }
-  // }
 
-  // Future<bool> deleteAllFile() async {
-  //   final Directory extDir = await getExternalStorageDirectory();
-  //   final String dirPathVideo = '${extDir.path}/video/';
-  //   await Directory(dirPathVideo).create(recursive: true);
-  //   return true;
-  // }
+  String _timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
+
+  Future<String?> copyPhotoFroCacheToDestinationDirectory(
+      XFile sourceFile) async {
+    try {
+      final String dirPath = await _createDirPathIfNotExist(photo);
+      final String filePath = '$dirPath/${_timestamp()}.jpeg';
+
+      File imageFile = File(sourceFile.path);
+
+      await imageFile.copy(
+        filePath,
+      );
+      return filePath;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<String> _createDirPathIfNotExist(String foldername) async {
+    final Directory? extDir =
+        await _getDirectory(); //await getApplicationDocumentsDirectory();
+    final String dirPath = '${extDir!.path}/$foldername';
+    await Directory(dirPath).create(recursive: true);
+    return dirPath;
+  }
+
+  Future<Directory?> _getDirectory() async {
+    return await getTemporaryDirectory();
+  }
+
+  Future<Directory?> _getDirectoryVideo() async {
+    return await _getDirectoryByFolderName(video);
+  }
+
+  Future<Directory?> _getDirectoryPhoto() async {
+    return await _getDirectoryByFolderName(photo);
+  }
+
+  Future<Directory?> _getDirectoryByFolderName(String foldername) async {
+    final Directory? extDir = await _getDirectory();
+    final String dirPath = '${extDir!.path}/$foldername';
+    return await Directory(dirPath).create(recursive: true);
+  }
+
+  Future<String?> copyVideoFromCacheToDestinationDirectory(
+      XFile sourceFile) async {
+    try {
+      final String dirPath = await _createDirPathIfNotExist(video);
+      final String filePath = '$dirPath/${_timestamp()}.mp4';
+
+      File imageFile = File(sourceFile.path);
+
+      await imageFile.copy(
+        filePath,
+      );
+      return filePath;
+    } catch (e) {
+      return null;
+    }
+  }
 }
