@@ -107,24 +107,6 @@ class HttpMarketAuditDs extends HttpBase {
   }
 
   Quisioner? _olahJsonToQuisioner(dynamic value) {
-    var contoh = {
-      "status": 200,
-      "data": [
-        {
-          "nama_pelanggan": "silasila",
-          "op_telepon": "telkomsel",
-          "msisdn_telepon": "08523565356",
-          "op_internet": "telkomsel",
-          "msisdn_internet": "0852365287",
-          "op_digital": "xl",
-          "msisdn_digital": "086328624554",
-          "jenis": "Bulanan",
-          "kuota_per_bulan": "30",
-          "pulsa_per_bulan": "100000"
-        }
-      ]
-    };
-
     if (value == null) {
       return null;
     }
