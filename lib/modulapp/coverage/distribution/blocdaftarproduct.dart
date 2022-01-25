@@ -5,13 +5,13 @@ import 'package:hero/model/distribusi/product.dart';
 import 'package:rxdart/subjects.dart';
 
 class BlocDaftarProduct {
-  UIDaftarProduct _cacheuiproduct = UIDaftarProduct();
+  final UIDaftarProduct _cacheuiproduct = UIDaftarProduct();
 
   final BehaviorSubject<UIDaftarProduct> _uiproduct = BehaviorSubject();
 
   Stream<UIDaftarProduct> get uiproduct => _uiproduct.stream;
-  DaoSerial _daoSerial = new DaoSerial();
-  HttpDIstribution _httpDIstribution = HttpDIstribution();
+  final DaoSerial _daoSerial = DaoSerial();
+  final HttpDIstribution _httpDIstribution = HttpDIstribution();
 
   void loadData() {
     _setupdata().then((value) {
@@ -30,13 +30,13 @@ class BlocDaftarProduct {
         Product p = lp[i];
 
         int? qty = await _daoSerial.getCountByIdProduct(p.id);
-        ItemTransaksi item = new ItemTransaksi(p, qty);
+        ItemTransaksi item = ItemTransaksi(p, qty);
         litem.add(item);
       }
 
-      litem.forEach((element) {
+      for (var element in litem) {
         totalkeranjang = totalkeranjang + element.jumlah!;
-      });
+      }
       _cacheuiproduct.litemtrx = litem;
       _cacheuiproduct.jmlkeranjang = totalkeranjang;
       return true;
@@ -62,9 +62,9 @@ class BlocDaftarProduct {
       _cacheuiproduct.litemtrx![i].jumlah = qty;
     }
 
-    _cacheuiproduct.litemtrx!.forEach((element) {
+    for (var element in _cacheuiproduct.litemtrx!) {
       totalKeranjang = totalKeranjang + element.jumlah!;
-    });
+    }
 
     _cacheuiproduct.jmlkeranjang = totalKeranjang;
     return true;

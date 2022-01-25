@@ -11,7 +11,7 @@ import 'package:hero/util/component/widget/component_widget.dart';
 class DaftarProductDistribusi extends StatefulWidget {
   static const routeName = '/daftarproductdistribusi';
   final Pjp? pjp;
-  DaftarProductDistribusi(this.pjp, {Key? key}) : super(key: key);
+  const DaftarProductDistribusi(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _DaftarProductDistribusiState createState() =>

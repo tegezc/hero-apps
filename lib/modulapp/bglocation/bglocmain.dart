@@ -23,6 +23,8 @@ import 'location_callback_handler.dart';
 import 'location_service_repository.dart';
 
 class BackgroundLocationUi extends StatefulWidget {
+  const BackgroundLocationUi({Key? key}) : super(key: key);
+
   @override
   _BackgroundLocationUiState createState() => _BackgroundLocationUiState();
 }
@@ -78,9 +80,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
     int? flagint = 0;
     if (flagtimeint != null) {
       flagint = int.tryParse(flagtimeint);
-      if (flagint == null) {
-        flagint = 0;
-      }
+      flagint ??= 0;
     }
     List<String> ls = log.split('\n');
     for (int i = 0; i < ls.length; i++) {
@@ -101,7 +101,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
                   DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
               bool value = await httpDashboard.trackingSales(
                   profile.id!, tgzLocation, dateString);
-              //        ph(value);
+              ph(value);
             }
 
             flagint = timeint;

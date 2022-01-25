@@ -244,11 +244,11 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
   final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = TextEditingController();
-  TextEditingController _cnors = TextEditingController();
-  TextEditingController _calamat = TextEditingController();
-  TextEditingController _clatitude = TextEditingController();
-  TextEditingController _clongitude = TextEditingController();
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _cnors = TextEditingController();
+  final TextEditingController _calamat = TextEditingController();
+  final TextEditingController _clatitude = TextEditingController();
+  final TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {

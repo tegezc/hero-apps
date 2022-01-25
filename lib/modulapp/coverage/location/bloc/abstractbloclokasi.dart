@@ -42,7 +42,7 @@ class ControllLokasi {
 
   void initLokasi() {
     dataLokasiAlamat = DataLokasiAlamat();
-    _httpDashboard = new HttpSearchLocation();
+    _httpDashboard = HttpSearchLocation();
     _httpDashboard.getDaftarProvinsi().then((value) {
       dataLokasiAlamat!.lprov = value;
       operationCompleted();
@@ -50,7 +50,7 @@ class ControllLokasi {
   }
 
   void initLokasiEdit(String? idkelurahan) {
-    _httpDashboard = new HttpSearchLocation();
+    _httpDashboard = HttpSearchLocation();
     _setupinitEdit(idkelurahan).then((value) {
       if (value) {
         operationCompleted();
@@ -84,11 +84,11 @@ class ControllLokasi {
             await _httpDashboard.getListKelurahan(kec.realid);
         dataLokasiAlamat!.lprov = await _httpDashboard.getDaftarProvinsi();
 
-        dataLokasiAlamat!.lkel!.forEach((element) {
+        for (var element in dataLokasiAlamat!.lkel!) {
           if (element.idkel == idkelurahan) {
             dataLokasiAlamat!.currentKelurahan = element;
           }
-        });
+        }
 
         dataLokasiAlamat!.kondisikan();
       }

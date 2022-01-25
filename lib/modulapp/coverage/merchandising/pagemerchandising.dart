@@ -50,7 +50,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
       case EnumMerchandising.papan:
         _title = 'Papan';
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         _title = 'Stiker Scan QR';
         break;
       case EnumMerchandising.perdana:
@@ -203,7 +203,7 @@ class _PageMerchandisingState extends State<PageMerchandising> {
           params = ParamPreviewPhoto(EnumTakePhoto.merchpapan,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;
-        case EnumMerchandising.StikerScanQR:
+        case EnumMerchandising.stikerScanQR:
           params = ParamPreviewPhoto(EnumTakePhoto.merchbackdrop,
               pathPhoto: null, enumNumber: widget.merchandising!.getPhotoKe());
           break;

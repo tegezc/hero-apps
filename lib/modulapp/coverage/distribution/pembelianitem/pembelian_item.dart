@@ -11,15 +11,15 @@ class PembelianItem extends StatefulWidget {
   static const routeName = '/pembelianitem';
   final ItemTransaksi? trx;
 
-  PembelianItem(this.trx);
+  const PembelianItem(this.trx, {Key? key}) : super(key: key);
 
   @override
   _PembelianItemState createState() => _PembelianItemState();
 }
 
 class _PembelianItemState extends State<PembelianItem> {
-  TextEditingController _textController1 = new TextEditingController();
-  TextEditingController _textController2 = new TextEditingController();
+  final TextEditingController _textController1 = TextEditingController();
+  final TextEditingController _textController2 = TextEditingController();
   late BlocPembelian _blocPembelian;
   int _counterBuild = 0;
   late bool _isRange;
@@ -333,16 +333,16 @@ class _PembelianItemState extends State<PembelianItem> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Transaksi berhasil di tambahkan ke keranjang belanja.'),
                 ),
@@ -362,16 +362,16 @@ class _PembelianItemState extends State<PembelianItem> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Transaksi gagal di tambahkan ke keranjang belanja.'),
                 ),

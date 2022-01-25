@@ -149,7 +149,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                         _blocMerchandising),
                     PageMerchandising(EnumMerchandising.papan, item.papanNama,
                         _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.StikerScanQR,
+                    PageMerchandising(EnumMerchandising.stikerScanQR,
                         item.stikerScanQR, _blocMerchandising),
                   ],
                 ),

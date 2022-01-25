@@ -7,7 +7,7 @@ class SwipeBackObserver extends NavigatorObserver {
 
   @override
   void didStartUserGesture(Route route, Route? previousRoute) {
-    // make a new promise
+    // make a promise
     promise = Completer();
     super.didStartUserGesture(route, previousRoute);
   }

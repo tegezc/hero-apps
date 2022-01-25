@@ -54,7 +54,7 @@ class LokasiSearch {
 
   EnumJenisLokasi? getJenisLokasi() {
     EnumJenisLokasi? enumJenisLokasi;
-    switch (this.idjnslokasi) {
+    switch (idjnslokasi) {
       case 'OUT':
         enumJenisLokasi = EnumJenisLokasi.outlet;
         break;

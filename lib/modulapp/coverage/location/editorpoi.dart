@@ -21,15 +21,15 @@ class EditorPOI extends StatefulWidget {
 class _EditorPOIState extends State<EditorPOI> {
   String? _title;
   String? _textBtn;
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _clatitude = new TextEditingController();
-  TextEditingController _clongitude = new TextEditingController();
+  final TextEditingController _clatitude = TextEditingController();
+  final TextEditingController _clongitude = TextEditingController();
 
-  TextEditingController _cnama = new TextEditingController();
-  TextEditingController _calamat = new TextEditingController();
-  late BlocPoi _blocPoi;
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _calamat = TextEditingController();
+  final BlocPoi _blocPoi = BlocPoi();
   int _counterBuild = 0;
   EnumEditorState? _enumEditorState;
 
@@ -42,7 +42,7 @@ class _EditorPOIState extends State<EditorPOI> {
     } else {
       _enumEditorState = EnumEditorState.edit;
     }
-    _blocPoi = BlocPoi();
+
     _counterBuild = 0;
 
     super.initState();
@@ -125,42 +125,40 @@ class _EditorPOIState extends State<EditorPOI> {
                     }
                   }
                 },
-                body: Container(
-                  child: Form(
-                    key: _formKeyValue,
-                    autovalidateMode: AutovalidateMode.always,
-                    child: new ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      children: <Widget>[
-                        SizedBox(height: 20.0),
-                        TextFieldNormal(
-                          'Nama Poi *',
-                          _cnama,
-                          onChange: (str) {
-                            _blocPoi.setNamaPoi(str);
-                          },
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        FormAlamat(_blocPoi.controllLokasi,
-                            _blocPoi.controllLokasi!.dataLokasiAlamat),
-                        TextFieldNormal(
-                          'Alamat (min 10 char) *',
-                          _calamat,
-                          onChange: (str) {
-                            _blocPoi.setAlamat(str);
-                          },
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        _koordinatWidget(),
-                        SizedBox(
-                          height: 150.0,
-                        ),
-                      ],
-                    ),
+                body: Form(
+                  key: _formKeyValue,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    children: <Widget>[
+                      SizedBox(height: 20.0),
+                      TextFieldNormal(
+                        'Nama Poi *',
+                        _cnama,
+                        onChange: (str) {
+                          _blocPoi.setNamaPoi(str);
+                        },
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FormAlamat(_blocPoi.controllLokasi,
+                          _blocPoi.controllLokasi!.dataLokasiAlamat),
+                      TextFieldNormal(
+                        'Alamat (min 10 char) *',
+                        _calamat,
+                        onChange: (str) {
+                          _blocPoi.setAlamat(str);
+                        },
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      _koordinatWidget(),
+                      SizedBox(
+                        height: 150.0,
+                      ),
+                    ],
                   ),
                 ),
               ),

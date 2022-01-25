@@ -463,7 +463,7 @@ class _PageTabDsState extends State<PageTabDs> {
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
                           // suffixIcon:
-                          //     new Icon(Icons.search, color: Colors.black),
+                          //     Icon(Icons.search, color: Colors.black),
                           hintText: ConstString.hintSearchDs,
                           hintStyle: const TextStyle(color: Colors.black)),
                       onChanged: (v) {},

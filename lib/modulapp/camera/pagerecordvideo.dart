@@ -31,7 +31,7 @@ class PageTakeVideo extends StatefulWidget {
   static const routeName = 'pagevideopromotion';
   final Promotion? promotion;
 
-  PageTakeVideo(this.promotion, {Key? key}) : super(key: key);
+  const PageTakeVideo(this.promotion, {Key? key}) : super(key: key);
 
   @override
   _PageTakeVideoState createState() => _PageTakeVideoState();
@@ -44,7 +44,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   XFile? _videoPath;
   // VideoPlayerController _videoController;
 //  VoidCallback _videoPlayerListener;
-  bool _enableAudio = true;
+  final bool _enableAudio = true;
   late bool _isloading;
   Timer? _timer;
   int _counter = 30;
@@ -130,7 +130,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
   @override
   Widget build(BuildContext context) {
     if (_isloading) {
-      return LoadingNunggu('Menunggu camera');
+      return const LoadingNunggu('Menunggu camera');
     }
     return Scaffold(
       key: _scaffoldKey,

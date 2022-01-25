@@ -1,5 +1,3 @@
-
-
 import 'package:hero/model/itemui.dart';
 import 'package:hero/util/dateutil.dart';
 
@@ -133,11 +131,11 @@ class Sekolah extends ParentLokasi {
     }
 
     Map<int, JenjangSekolah> mapJenjang = ItemUi.getJenjangSekolah();
-    this.jenjang = mapJenjang[intJenjang!];
+    jenjang = mapJenjang[intJenjang!];
 
 // set long
     String strlong = map[tagLong] == null ? '0' : map[tagLong];
-    if (strlong.length > 0) {
+    if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
@@ -145,7 +143,7 @@ class Sekolah extends ParentLokasi {
 
 // set lat
     String strlat = map[tagLat] == null ? '0' : map[tagLat];
-    if (strlat.length > 0) {
+    if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
       lat = 0.0;
@@ -158,9 +156,9 @@ class Sekolah extends ParentLokasi {
     noNpsn = map[tagNpsn];
     alamat = map[tagAlamat] == null ? '' : map[tagAlamat];
 
-    this.owner = Owner.fromJson(map, tagNmKepsek, tagHpKep, tagTglLahirKep,
+    owner = Owner.fromJson(map, tagNmKepsek, tagHpKep, tagTglLahirKep,
         tagHobKep, tagFbKep, tagIgKep);
-    this.pic = Pic.fromJson(map);
+    pic = Pic.fromJson(map);
   }
 
   Map toJson() {
@@ -176,18 +174,18 @@ class Sekolah extends ParentLokasi {
       tagJmlGuru: jmlGuru,
       tagJmlMurid: jmlMurid,
       tagJenjang: jenjang!.getIntJenjang(),
-      tagNmKepsek: this.owner!.getNama(),
-      tagHpKep: this.owner!.getNohp(),
+      tagNmKepsek: owner!.getNama(),
+      tagHpKep: owner!.getNohp(),
       tagTglLahirKep: DateUtility.dateToStringYYYYMMDD(owner!.tglLahir),
-      tagHobKep: this.owner!.getHobi(),
-      tagFbKep: this.owner!.getFb(),
-      tagIgKep: this.owner!.getIg(),
-      tagNmPic: this.pic!.getNama(),
-      tagHpPic: this.pic!.getNohp(),
-      tagTglLhrPic: DateUtility.dateToStringYYYYMMDD(this.pic!.tglLahir),
-      tagHobiPic: this.pic!.getHobi(),
-      tagFbPic: this.pic!.getFb(),
-      tagIgPic: this.pic!.getIg()
+      tagHobKep: owner!.getHobi(),
+      tagFbKep: owner!.getFb(),
+      tagIgKep: owner!.getIg(),
+      tagNmPic: pic!.getNama(),
+      tagHpPic: pic!.getNohp(),
+      tagTglLhrPic: DateUtility.dateToStringYYYYMMDD(pic!.tglLahir),
+      tagHobiPic: pic!.getHobi(),
+      tagFbPic: pic!.getFb(),
+      tagIgPic: pic!.getIg()
     };
   }
 

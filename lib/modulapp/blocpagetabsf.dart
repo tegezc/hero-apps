@@ -6,7 +6,7 @@ import 'package:rxdart/subjects.dart';
 
 class BlocPageTabSf {
   UIPageTabSf? _cacheItem;
-  Httphpsearchsf _httpPageSf = Httphpsearchsf();
+  final Httphpsearchsf _httpPageSf = Httphpsearchsf();
 
   final BehaviorSubject<UIPageTabSf?> _uihpsurvey = BehaviorSubject();
 
@@ -19,7 +19,7 @@ class BlocPageTabSf {
     _cacheItem!.loutlet = [];
     _cacheItem!.page = 1;
     _cacheItem!.query = '';
-    this._sinkItem(_cacheItem);
+    _sinkItem(_cacheItem);
   }
 
   void searchRangeTanggal(EnumTab enumTab) {
@@ -33,7 +33,7 @@ class BlocPageTabSf {
         _cacheItem!.loutlet!.clear();
         _cacheItem!.loutlet!.addAll(item.loutlet!);
         _cacheItem!.total = item.total;
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -47,7 +47,7 @@ class BlocPageTabSf {
       if (value != null) {
         UIPageTabSf item = value;
         _cacheItem!.loutlet!.addAll(item.loutlet!);
-        this._sinkItem(_cacheItem);
+        _sinkItem(_cacheItem);
       }
     });
   }
@@ -119,7 +119,7 @@ class UIPageTabSf {
       return false;
     }
 
-    if (this.page == 0) {
+    if (page == 0) {
       return false;
     }
 

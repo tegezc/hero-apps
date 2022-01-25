@@ -48,7 +48,7 @@ class ScaffoldLocation extends StatelessWidget {
         ],
         bottom: bottom,
       ),
-      body: this.body,
+      body: body,
     );
   }
 }
@@ -76,7 +76,7 @@ class ScaffoldLocView extends StatelessWidget {
         ),
         bottom: bottom,
       ),
-      body: this.body,
+      body: body,
     );
   }
 }

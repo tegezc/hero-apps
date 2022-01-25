@@ -42,7 +42,7 @@ class SerialNumber {
   }
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map[TbSerial.idproduk] = idproduct;
     map[TbSerial.hargajual] = hargajual;
     map[TbSerial.hargamodal] = hargamodal;
@@ -51,11 +51,9 @@ class SerialNumber {
     return map;
   }
 
-  bool operator ==(dynamic other) =>
-      other != null && other is SerialNumber && this.serial == other.serial;
-
   @override
-  int get hashCode => super.hashCode;
+  bool operator ==(dynamic other) =>
+      other != null && other is SerialNumber && serial == other.serial;
 
   @override
   String toString() {

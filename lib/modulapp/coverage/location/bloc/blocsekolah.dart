@@ -49,7 +49,7 @@ class BlocSekolah extends AbsBlocLokasi {
         //  ph(_cacheUisekolah.sekolah.owner);
         controllPic!.firstTimeEdit(_cacheUisekolah!.sekolah.pic);
         controllOwner!.firstTimeEdit(_cacheUisekolah!.sekolah.owner);
-        this._sink(_cacheUisekolah);
+        _sink(_cacheUisekolah);
       }
     });
   }
@@ -58,7 +58,7 @@ class BlocSekolah extends AbsBlocLokasi {
     HttpSekolah httpController = HttpSekolah();
     List<dynamic>? response = await httpController.detailSekolah(idsekolah);
     if (response != null) {
-      if (response.length > 0) {
+      if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
         Sekolah sekolah = Sekolah.fromJson(map);
         super.init(EnumEditorState.edit, sekolah.idkel);
@@ -82,7 +82,7 @@ class BlocSekolah extends AbsBlocLokasi {
     setupAsync().then((value) {
       //   ph(value);
       if (value) {
-        this._sink(_cacheUisekolah);
+        _sink(_cacheUisekolah);
       }
     });
   }
@@ -96,13 +96,13 @@ class BlocSekolah extends AbsBlocLokasi {
 
   Future<bool> saveSekolah() async {
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
 
     HttpSekolah httpController = HttpSekolah();
     Map<String, dynamic>? response =
         await httpController.createSekolah(_cacheUisekolah!.sekolah);
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
     if (response != null) {
       if (response['status'] == 201) {
         return true;
@@ -115,13 +115,13 @@ class BlocSekolah extends AbsBlocLokasi {
   Future<bool> updateSekolah() async {
     // ph('update');
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
 
     HttpSekolah httpController = HttpSekolah();
     Map<String, dynamic>? response =
         await httpController.updateSekolah(_cacheUisekolah!.sekolah);
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
     if (response != null) {
       if (response['status'] == 200) {
         return true;
@@ -135,7 +135,7 @@ class BlocSekolah extends AbsBlocLokasi {
     LocationUtil.getCurrentLocation().then((value) {
       _cacheUisekolah!.sekolah.long = value.longitude;
       _cacheUisekolah!.sekolah.lat = value.latitude;
-      this._sink(_cacheUisekolah);
+      _sink(_cacheUisekolah);
     });
   }
 
@@ -149,7 +149,7 @@ class BlocSekolah extends AbsBlocLokasi {
 
   void comboJenjang(JenjangSekolah? item) {
     _cacheUisekolah!.currentJenjang = item;
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
   }
 
   void setNamaSekolah(String t) {
@@ -165,13 +165,13 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   void setLongitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUisekolah!.sekolah.long = double.tryParse(t);
     }
   }
 
   void setLatitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUisekolah!.sekolah.lat = double.tryParse(t);
     }
   }
@@ -188,12 +188,12 @@ class BlocSekolah extends AbsBlocLokasi {
 
   @override
   void operationCompleted() {
-    this._sink(_cacheUisekolah);
+    _sink(_cacheUisekolah);
   }
 
   @override
   bool isValid() {
-    this.setValueBeforeCreateUpdate();
+    setValueBeforeCreateUpdate();
     return _cacheUisekolah!.sekolah.isValid();
   }
 

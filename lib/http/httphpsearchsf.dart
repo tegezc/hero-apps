@@ -128,7 +128,7 @@ class Httphpsearchsf extends HttpBase {
       uiPageTabSf.maxrecordperhit = map['limit_per_halaman'];
 
       List<dynamic> ld = map['data'];
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           LokasiSearch retur = LokasiSearch.fromJson(map);
@@ -165,7 +165,7 @@ class Httphpsearchsf extends HttpBase {
     try {
       List<dynamic> ld = value;
 
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           LokasiSearch retur = LokasiSearch.fromJson(map);

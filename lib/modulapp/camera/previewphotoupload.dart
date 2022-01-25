@@ -15,7 +15,7 @@ import '../../configuration.dart';
 class PreviewPhotoWithUpload extends StatefulWidget {
   static const routeName = '/previewphotoupload';
   final ParamPreviewPhoto? param;
-  const PreviewPhotoWithUpload(this.param);
+  const PreviewPhotoWithUpload(this.param, {Key? key}) : super(key: key);
 
   @override
   _PreviewPhotoWithUploadState createState() => _PreviewPhotoWithUploadState();

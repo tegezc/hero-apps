@@ -238,11 +238,11 @@ class _TabDataKampusState extends State<TabDataKampus> {
   final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = TextEditingController();
-  TextEditingController _cnpsn = TextEditingController();
-  TextEditingController _calamat = TextEditingController();
-  TextEditingController _clatitude = TextEditingController();
-  TextEditingController _clongitude = TextEditingController();
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _cnpsn = TextEditingController();
+  final TextEditingController _calamat = TextEditingController();
+  final TextEditingController _clatitude = TextEditingController();
+  final TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -270,43 +270,41 @@ class _TabDataKampusState extends State<TabDataKampus> {
   @override
   Widget build(BuildContext context) {
     UIUniv item = widget.blocUniversitas!.getUiUniv()!;
-    this._setupvalue(item);
+    _setupvalue(item);
 
-    return Container(
-      child: Form(
-        key: _formKeyValue,
-        autovalidateMode: AutovalidateMode.always,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            _npsn(),
-            TextFieldNormal(
-              'Nama Universitas *',
-              _cnama,
-              onChange: (str) {
-                widget.blocUniversitas!.setNamaUniv(str);
-              },
-            ),
-            _spasi(),
-            FormAlamat(widget.blocUniversitas!.controllLokasi,
-                widget.dataLokasiAlamat),
-            TextFieldNormal(
-              'Alamat (min 10 char) *',
-              _calamat,
-              onChange: (str) {
-                widget.blocUniversitas!.setAlamat(str);
-              },
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            _koordinatWidget(),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+    return Form(
+      key: _formKeyValue,
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          SizedBox(height: 20.0),
+          _npsn(),
+          TextFieldNormal(
+            'Nama Universitas *',
+            _cnama,
+            onChange: (str) {
+              widget.blocUniversitas!.setNamaUniv(str);
+            },
+          ),
+          _spasi(),
+          FormAlamat(
+              widget.blocUniversitas!.controllLokasi, widget.dataLokasiAlamat),
+          TextFieldNormal(
+            'Alamat (min 10 char) *',
+            _calamat,
+            onChange: (str) {
+              widget.blocUniversitas!.setAlamat(str);
+            },
+          ),
+          SizedBox(
+            height: 24,
+          ),
+          _koordinatWidget(),
+          SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }

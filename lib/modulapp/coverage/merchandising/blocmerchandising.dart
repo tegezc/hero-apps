@@ -127,7 +127,7 @@ class BlocMerchandising {
       case EnumMerchandising.papan:
         merchandising = _cacheUiMerc!.papanNama;
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         merchandising = _cacheUiMerc!.stikerScanQR;
         break;
       case EnumMerchandising.perdana:
@@ -194,7 +194,7 @@ class BlocMerchandising {
         _cacheUiMerc!.papanNama =
             _textChanged(_cacheUiMerc!.papanNama, enumOperator, text);
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         _cacheUiMerc!.stikerScanQR =
             _textChanged(_cacheUiMerc!.stikerScanQR, enumOperator, text);
         break;
@@ -254,7 +254,7 @@ class BlocMerchandising {
           default:
         }
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         switch (_cacheUiMerc!.stikerScanQR!.getPhotoKe()) {
           case EnumNumber.satu:
             _cacheUiMerc!.stikerScanQR!.pathPhoto1 = path;

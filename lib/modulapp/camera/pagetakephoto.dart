@@ -20,7 +20,7 @@ List<CameraDescription> cameras = [];
 class CameraView extends StatefulWidget {
   static const routeName = '/takephoto';
   final ParamPreviewPhoto? params;
-  CameraView(this.params, {Key? key}) : super(key: key);
+  const CameraView(this.params, {Key? key}) : super(key: key);
   @override
   _CameraViewState createState() {
     return _CameraViewState();

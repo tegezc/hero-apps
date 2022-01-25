@@ -269,11 +269,9 @@ class ItemComboJenisOutlet {
 
     text = map['nama_jenis_outlet'] == null ? '' : map['nama_jenis_outlet'];
   }
+  @override
   bool operator ==(dynamic other) =>
       other != null &&
       other is ItemComboJenisOutlet &&
-      this.enumJenisOutlet == other.enumJenisOutlet;
-
-  @override
-  int get hashCode => super.hashCode;
+      enumJenisOutlet == other.enumJenisOutlet;
 }

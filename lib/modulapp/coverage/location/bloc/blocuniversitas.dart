@@ -17,9 +17,8 @@ class UIUniv {
 }
 
 class BlocUniversitas extends AbsBlocLokasi {
-  late HttpKampus _httpController;
+  final HttpKampus _httpController = HttpKampus();
   BlocUniversitas() {
-    _httpController = new HttpKampus();
     controllOwner = ControllOwner();
     controllPic = ControllPic();
   }
@@ -37,14 +36,14 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   void firstTimeEdit(String? iduniv) async {
-    _cacheUiUniv = new UIUniv();
+    _cacheUiUniv = UIUniv();
     _cacheUiUniv!.enumEditorState = EnumEditorState.edit;
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(iduniv).then((value) {
       if (value) {
         controllPic!.firstTimeEdit(_cacheUiUniv!.univ.pic);
         controllOwner!.firstTimeEdit(_cacheUiUniv!.univ.owner);
-        this._sink(_cacheUiUniv);
+        _sink(_cacheUiUniv);
       }
     });
   }
@@ -52,7 +51,7 @@ class BlocUniversitas extends AbsBlocLokasi {
   Future<bool> _firtimeEditSetup(String? iduniv) async {
     List<dynamic>? response = await _httpController.detailUniv(iduniv);
     if (response != null) {
-      if (response.length > 0) {
+      if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
         Universitas univ = Universitas.fromJson(map);
         super.init(EnumEditorState.edit, univ.idkel);
@@ -67,7 +66,7 @@ class BlocUniversitas extends AbsBlocLokasi {
 
   void firstTimeBaru() {
     super.init(EnumEditorState.baru, null);
-    _cacheUiUniv = new UIUniv();
+    _cacheUiUniv = UIUniv();
     _cacheUiUniv!.enumEditorState = EnumEditorState.baru;
     _cacheUiUniv!.univ = Universitas.kosong();
 
@@ -89,12 +88,12 @@ class BlocUniversitas extends AbsBlocLokasi {
 
   Future<bool> saveUniv() async {
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUiUniv);
+    _sink(_cacheUiUniv);
 
     Map<String, dynamic>? response =
         await _httpController.createKampus(_cacheUiUniv!.univ);
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUiUniv);
+    _sink(_cacheUiUniv);
 
     if (response != null) {
       if (response['status'] == 201) {
@@ -107,12 +106,12 @@ class BlocUniversitas extends AbsBlocLokasi {
 
   Future<bool> updateUniv() async {
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUiUniv);
+    _sink(_cacheUiUniv);
 
     Map<String, dynamic>? response =
         await _httpController.updateKampus(_cacheUiUniv!.univ);
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUiUniv);
+    _sink(_cacheUiUniv);
     if (response != null) {
       if (response['status'] == 200) {
         return true;
@@ -126,7 +125,7 @@ class BlocUniversitas extends AbsBlocLokasi {
     LocationUtil.getCurrentLocation().then((value) {
       _cacheUiUniv!.univ.long = value.longitude;
       _cacheUiUniv!.univ.lat = value.latitude;
-      this._sink(_cacheUiUniv);
+      _sink(_cacheUiUniv);
     });
   }
 
@@ -151,25 +150,25 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   void setLongitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUiUniv!.univ.long = double.tryParse(t);
     }
   }
 
   void setLatitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUiUniv!.univ.lat = double.tryParse(t);
     }
   }
 
   @override
   void operationCompleted() {
-    this._sink(_cacheUiUniv);
+    _sink(_cacheUiUniv);
   }
 
   @override
   bool isValid() {
-    this.setValueBeforeCreateUpdate();
+    setValueBeforeCreateUpdate();
     return _cacheUiUniv!.univ.isValid();
   }
 

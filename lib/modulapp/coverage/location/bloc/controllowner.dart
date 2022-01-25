@@ -8,7 +8,7 @@ class ControllOwner {
   }
 
   void firstTimeOwner() {
-    _cahceOwner = new Owner.kosong();
+    _cahceOwner = Owner.kosong();
   }
 
   Owner? getOwner() {

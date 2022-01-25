@@ -20,12 +20,12 @@ class PageIdentitas extends StatefulWidget {
 }
 
 class _PageIdentitasState extends State<PageIdentitas> {
-  final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
-  TextEditingController _cnama = TextEditingController();
-  TextEditingController _cnotelp = TextEditingController();
-  TextEditingController _chobi = TextEditingController();
-  TextEditingController _cfb = TextEditingController();
-  TextEditingController _cig = TextEditingController();
+  final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _cnotelp = TextEditingController();
+  final TextEditingController _chobi = TextEditingController();
+  final TextEditingController _cfb = TextEditingController();
+  final TextEditingController _cig = TextEditingController();
 
   DateTime? _currentTgl;
 
@@ -86,85 +86,83 @@ class _PageIdentitasState extends State<PageIdentitas> {
       labelnohp = 'No Telp';
       labelTglLahir = 'Tgl Lahir';
     }
-    this._setValue();
-    return Container(
-      child: Form(
-        key: _formKeyValue,
-        autovalidateMode: AutovalidateMode.always,
-        child: new ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            new TextFieldNormal(
-              labelNama,
-              _cnama,
-              onChange: (str) {
-                if (widget.enumPicOwner == EnumPicOwner.owner) {
-                  widget.controllOwner!.setNamaOwner(str);
-                } else {
-                  widget.controllPic!.setNamaPic(str);
-                }
-              },
-            ),
-            new TextFieldNormalNumberOnly(
-              labelnohp,
-              _cnotelp,
-              onChange: (str) {
-                if (widget.enumPicOwner == EnumPicOwner.owner) {
-                  widget.controllOwner!.setNoHp(str);
-                } else {
-                  widget.controllPic!.setNoHp(str);
-                }
-              },
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            ButtonAppTanggal(
-              labelTglLahir,
-              _currentTgl,
-              onTap: () {
-                _datePicker();
-              },
-            ),
-            new TextFieldNormal(
-              'Hobi',
-              _chobi,
-              onChange: (str) {
-                if (widget.enumPicOwner == EnumPicOwner.owner) {
-                  widget.controllOwner!.setHobi(str);
-                } else {
-                  widget.controllPic!.setHobi(str);
-                }
-              },
-            ),
-            new TextFieldNormal(
-              'Akun Facebook',
-              _cfb,
-              onChange: (str) {
-                if (widget.enumPicOwner == EnumPicOwner.owner) {
-                  widget.controllOwner!.setFb(str);
-                } else {
-                  widget.controllPic!.setFb(str);
-                }
-              },
-            ),
-            new TextFieldNormal(
-              'Akun Instagram',
-              _cig,
-              onChange: (str) {
-                if (widget.enumPicOwner == EnumPicOwner.owner) {
-                  widget.controllOwner!.setIg(str);
-                } else {
-                  widget.controllPic!.setIg(str);
-                }
-              },
-            ),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+    _setValue();
+    return Form(
+      key: _formKeyValue,
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          const SizedBox(height: 20.0),
+          TextFieldNormal(
+            labelNama,
+            _cnama,
+            onChange: (str) {
+              if (widget.enumPicOwner == EnumPicOwner.owner) {
+                widget.controllOwner!.setNamaOwner(str);
+              } else {
+                widget.controllPic!.setNamaPic(str);
+              }
+            },
+          ),
+          TextFieldNormalNumberOnly(
+            labelnohp,
+            _cnotelp,
+            onChange: (str) {
+              if (widget.enumPicOwner == EnumPicOwner.owner) {
+                widget.controllOwner!.setNoHp(str);
+              } else {
+                widget.controllPic!.setNoHp(str);
+              }
+            },
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          ButtonAppTanggal(
+            labelTglLahir,
+            _currentTgl,
+            onTap: () {
+              _datePicker();
+            },
+          ),
+          TextFieldNormal(
+            'Hobi',
+            _chobi,
+            onChange: (str) {
+              if (widget.enumPicOwner == EnumPicOwner.owner) {
+                widget.controllOwner!.setHobi(str);
+              } else {
+                widget.controllPic!.setHobi(str);
+              }
+            },
+          ),
+          TextFieldNormal(
+            'Akun Facebook',
+            _cfb,
+            onChange: (str) {
+              if (widget.enumPicOwner == EnumPicOwner.owner) {
+                widget.controllOwner!.setFb(str);
+              } else {
+                widget.controllPic!.setFb(str);
+              }
+            },
+          ),
+          TextFieldNormal(
+            'Akun Instagram',
+            _cig,
+            onChange: (str) {
+              if (widget.enumPicOwner == EnumPicOwner.owner) {
+                widget.controllOwner!.setIg(str);
+              } else {
+                widget.controllPic!.setIg(str);
+              }
+            },
+          ),
+          SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }

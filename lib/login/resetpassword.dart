@@ -6,7 +6,7 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 
 class ResetPassword extends StatefulWidget {
   static const routeName = '/resetpassword';
-  ResetPassword();
+  const ResetPassword({Key? key}) : super(key: key);
 
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
@@ -30,36 +30,34 @@ class _ResetPasswordState extends State<ResetPassword> {
         body: Stack(
       children: [
         //   _bgatas(),
-        PropertyImage.bgatas(),
+        const PropertyImage.bgatas(),
         //   _bgbawah(m.height),
-        PropertyImage.bgbawah(),
-        Container(
+        const PropertyImage.bgbawah(),
+        SizedBox(
           height: m.height,
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    PropertyImage.textReset(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: _label(
-                          'Kode Verifikasi akan dikirim ke email terdaftar'),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _emailPasswordWidget(),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const PropertyImage.textReset(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: _label(
+                        'Kode Verifikasi akan dikirim ke email terdaftar'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _emailPasswordWidget(),
+                ],
               ),
             ),
           ),
@@ -77,14 +75,14 @@ class _ResetPasswordState extends State<ResetPassword> {
           children: <Widget>[
             //  _entryField1("User Id", _idTextController),
             TextFieldLogin('Username', _idTextController),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ButtonLogin('Kirim Kode Verifikasi', onTap: () {
-                  new Future.delayed(const Duration(milliseconds: 500), () {
+                  Future.delayed(const Duration(milliseconds: 500), () {
                     _handleResetPassword();
                     Navigator.pushNamed(
                       context,

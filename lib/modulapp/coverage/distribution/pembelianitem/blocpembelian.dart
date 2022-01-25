@@ -84,10 +84,10 @@ class BlocPembelian {
     }
 
     List<SerialNumber> lsn = List.from(_cacheLsn!);
-    _cachePembelian.lserialChecked!.forEach((element) {
+    for (var element in _cachePembelian.lserialChecked!) {
       int index = lsn.indexOf(element);
       lsn[index].ischecked = true;
-    });
+    }
     _cachePembelian.lserial = lsn;
     _sink(_cachePembelian);
   }
@@ -123,7 +123,7 @@ class UIPembelian {
     if (lserialChecked == null) {
       return false;
     }
-    if (lserialChecked!.length > 0) {
+    if (lserialChecked!.isNotEmpty) {
       return true;
     }
     return false;

@@ -44,8 +44,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: Stack(
       children: [
-        PropertyImage.bgatas(),
-        PropertyImage.bgbawah(),
+        const PropertyImage.bgatas(),
+        const PropertyImage.bgbawah(),
         SizedBox(
           height: size.height,
           child: SingleChildScrollView(
@@ -55,15 +55,15 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.transparent,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
-                    PropertyImage.map(),
-                    SizedBox(
+                    const PropertyImage.map(),
+                    const SizedBox(
                       height: 30,
                     ),
-                    PropertyImage.textWelcome(),
-                    SizedBox(
+                    const PropertyImage.textWelcome(),
+                    const SizedBox(
                       height: 30,
                     ),
                     _contentForm(),
@@ -87,14 +87,14 @@ class _LoginPageState extends State<LoginPage> {
             // _label('Username'),
             // _entryField1(_idTextController),
             TextFieldLogin('Username', _idTextController),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextFieldPassword('Password', _passwordTextController),
             // _label('Password'),
             // _entryFieldPassword(_passwordTextController),
             _isShowLoginGagal ? _ketLoginGagal() : Container(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             //_animationLogin(),
@@ -102,13 +102,12 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _isloading
-                    ? new ButtonAppLoading()
-                    : new ButtonAppSolid('Login', onTap: () {
+                    ? const ButtonAppLoading()
+                    : ButtonAppSolid('Login', onTap: () {
                         setState(() {
                           _isloading = true;
                         });
-                        new Future.delayed(const Duration(milliseconds: 500),
-                            () {
+                        Future.delayed(const Duration(milliseconds: 500), () {
                           _proseslogin();
                         });
                       }),
@@ -127,8 +126,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _ketLoginGagal() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+    return const Padding(
+      padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: LabelAppMiring.size3(
         'Username atau Password salah.',
         color: Colors.red,
@@ -152,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<bool> _extractJsonLogin() async {
     String username = _idTextController.text;
     String password = _passwordTextController.text;
-    HttpLogin httpLogin = new HttpLogin();
+    HttpLogin httpLogin = HttpLogin();
     Map<String, dynamic>? map = await httpLogin.login(username, password);
     if (map != null) {
       Profile profile = Profile.fromJson(map);

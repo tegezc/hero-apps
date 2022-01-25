@@ -34,7 +34,7 @@ class _MapClockInState extends State<MapClockIn> {
   late final ClockInClockOutController _clockInClockOutController;
 
   EnumStatusTempat? _valueRadioButton;
-  Configuration _configuration = Configuration();
+  final Configuration _configuration = Configuration();
 
   double _distanceInMeters = 0.0;
   Set<Circle>? circles;
@@ -248,8 +248,8 @@ class _MapClockInState extends State<MapClockIn> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: LabelApp.size2('Anda memilih open, anda yakin ?'),
                 ),
                 Padding(
@@ -279,8 +279,8 @@ class _MapClockInState extends State<MapClockIn> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: LabelApp.size2(
                       'Anda belum menentukan status tempat di radio button.'),
                 ),
@@ -303,8 +303,8 @@ class _MapClockInState extends State<MapClockIn> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: LabelApp.size2('Anda memilih Close, anda yakin?'),
                 ),
                 Padding(

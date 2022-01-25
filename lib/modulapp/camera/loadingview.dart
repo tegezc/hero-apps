@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hero/util/component/button/component_button.dart';
-import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 class LoadingNunggu extends StatelessWidget {
   final String strContent;
 
-  LoadingNunggu(this.strContent);
+  const LoadingNunggu(this.strContent, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +32,16 @@ class LoadingNunggu extends StatelessWidget {
 }
 
 class BelumAdaData extends StatelessWidget {
+  const BelumAdaData({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: Text('Google Drive'),
+          title: const Text('Google Drive'),
         ),
-        body: Center(child: Text('Belum ada data kontrak.')));
+        body: const Center(child: Text('Belum ada data kontrak.')));
   }
 }
 
@@ -51,8 +51,8 @@ class ErrorPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: Text('Google Drive'),
+          title: const Text('Google Drive'),
         ),
-        body: Center(child: Text('Terjadi Kesalahan')));
+        body: const Center(child: Text('Terjadi Kesalahan')));
   }
 }

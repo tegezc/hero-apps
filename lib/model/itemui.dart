@@ -3,15 +3,15 @@ import 'enumapp.dart';
 class ItemUi {
   static List<ItemComboJenisLokasi> getcombojenislokasi() {
     List<ItemComboJenisLokasi> list = [];
-    list.add(new ItemComboJenisLokasi(EnumJenisLokasi.poi, 'POI'));
-    list.add(new ItemComboJenisLokasi(EnumJenisLokasi.sekolah, 'Sekolah'));
-    list.add(new ItemComboJenisLokasi(EnumJenisLokasi.kampus, 'Kampus'));
-    list.add(new ItemComboJenisLokasi(EnumJenisLokasi.fakultas, 'Fakultas'));
+    list.add(ItemComboJenisLokasi(EnumJenisLokasi.poi, 'POI'));
+    list.add(ItemComboJenisLokasi(EnumJenisLokasi.sekolah, 'Sekolah'));
+    list.add(ItemComboJenisLokasi(EnumJenisLokasi.kampus, 'Kampus'));
+    list.add(ItemComboJenisLokasi(EnumJenisLokasi.fakultas, 'Fakultas'));
     return list;
   }
 
   // static Map<int, ItemComboJenisOutlet> getComboJenisOutlet() {
-  //   Map<int, ItemComboJenisOutlet> map = new Map();
+  //   Map<int, ItemComboJenisOutlet> map = Map();
   //   map[1] = ItemComboJenisOutlet(EnumJenisOutlet.device, 'Device');
   //   map[2] = ItemComboJenisOutlet(EnumJenisOutlet.reguler, 'Reguler');
   //   map[3] = ItemComboJenisOutlet(EnumJenisOutlet.pareto, 'Pareto');
@@ -20,11 +20,11 @@ class ItemUi {
   // }
 
   static Map<int, JenjangSekolah> getJenjangSekolah() {
-    Map<int, JenjangSekolah> map = new Map();
-    map[1] = JenjangSekolah(EnumJenjangSekolah.SD, 'SD');
-    map[2] = JenjangSekolah(EnumJenjangSekolah.SMP, 'SMP');
-    map[3] = JenjangSekolah(EnumJenjangSekolah.SMA, 'SMA');
-    map[4] = JenjangSekolah(EnumJenjangSekolah.PONPES, 'PONPES');
+    Map<int, JenjangSekolah> map = {};
+    map[1] = JenjangSekolah(EnumJenjangSekolah.sd, 'SD');
+    map[2] = JenjangSekolah(EnumJenjangSekolah.smp, 'SMP');
+    map[3] = JenjangSekolah(EnumJenjangSekolah.sma, 'SMA');
+    map[4] = JenjangSekolah(EnumJenjangSekolah.ponpes, 'PONPES');
 
     return map;
   }
@@ -176,24 +176,22 @@ class JenjangSekolah {
 
   int getIntJenjang() {
     switch (enumJenjangSekolah) {
-      case EnumJenjangSekolah.SD:
+      case EnumJenjangSekolah.sd:
         return 1;
-      case EnumJenjangSekolah.SMP:
+      case EnumJenjangSekolah.smp:
         return 2;
-      case EnumJenjangSekolah.SMA:
+      case EnumJenjangSekolah.sma:
         return 3;
-      case EnumJenjangSekolah.PONPES:
+      case EnumJenjangSekolah.ponpes:
         return 4;
       default:
         return -1;
     }
   }
 
+  @override
   bool operator ==(dynamic other) =>
       other != null &&
       other is JenjangSekolah &&
-      this.enumJenjangSekolah == other.enumJenjangSekolah;
-
-  @override
-  int get hashCode => super.hashCode;
+      enumJenjangSekolah == other.enumJenjangSekolah;
 }

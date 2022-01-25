@@ -32,7 +32,7 @@ class BlocPoi extends AbsBlocLokasi {
     _cacheUipoi!.enumStateWidget = EnumStateWidget.active;
     _firtimeEditSetup(idpoi).then((value) {
       if (value) {
-        this._sink(_cacheUipoi);
+        _sink(_cacheUipoi);
       }
     });
   }
@@ -41,7 +41,7 @@ class BlocPoi extends AbsBlocLokasi {
     HttpPoi httpController = HttpPoi();
     List<dynamic>? response = await httpController.detailPoi(idpoi);
     if (response != null) {
-      if (response.length > 0) {
+      if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
         Poi poi = Poi.fromJson(map);
 
@@ -78,19 +78,19 @@ class BlocPoi extends AbsBlocLokasi {
     LocationUtil.getCurrentLocation().then((value) {
       _cacheUipoi!.poi.long = value.longitude;
       _cacheUipoi!.poi.lat = value.latitude;
-      this._sink(_cacheUipoi);
+      _sink(_cacheUipoi);
     });
   }
 
   Future<bool> savePoi() async {
     _cacheUipoi!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUipoi);
+    _sink(_cacheUipoi);
 
     HttpPoi httpController = HttpPoi();
     Map<String, dynamic>? response =
         await httpController.createPoi(_cacheUipoi!.poi);
     _cacheUipoi!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUipoi);
+    _sink(_cacheUipoi);
     if (response != null) {
       if (response['status'] == 201) {
         return true;
@@ -102,13 +102,13 @@ class BlocPoi extends AbsBlocLokasi {
 
   Future<bool> updatePoi() async {
     _cacheUipoi!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUipoi);
+    _sink(_cacheUipoi);
 
     HttpPoi httpController = HttpPoi();
     Map<String, dynamic>? response =
         await httpController.updatePoi(_cacheUipoi!.poi);
     _cacheUipoi!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUipoi);
+    _sink(_cacheUipoi);
     if (response != null) {
       if (response['status'] == 200) {
         return true;
@@ -135,25 +135,25 @@ class BlocPoi extends AbsBlocLokasi {
   }
 
   void setLongitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUipoi!.poi.long = double.tryParse(t);
     }
   }
 
   void setLatitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUipoi!.poi.lat = double.tryParse(t);
     }
   }
 
   @override
   void operationCompleted() {
-    this._sink(_cacheUipoi);
+    _sink(_cacheUipoi);
   }
 
   @override
   bool isValid() {
-    this.setValueBeforeCreateUpdate();
+    setValueBeforeCreateUpdate();
     return _cacheUipoi!.poi.isValid();
   }
 

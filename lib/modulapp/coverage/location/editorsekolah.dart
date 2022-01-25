@@ -293,75 +293,73 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
   @override
   Widget build(BuildContext context) {
     UISekolah uiSekolah = widget.blocSekolah!.getUiSekolah()!;
-    this._setupvalue(uiSekolah);
-    return Container(
-      child: Form(
-        key: _formKeyValue,
-        autovalidateMode: AutovalidateMode.always,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            _npsn(),
-            TextFieldNormal(
-              'Nama Sekolah *',
-              _cnama,
-              onChange: (str) {
-                widget.blocSekolah!.setNamaSekolah(str);
-              },
-            ),
-            _spasi(),
-            LabelAppRich.size3(
-              'Jenjang Sekolah ',
-              color: Colors.grey[700],
-            ),
-            DropdownButton(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-              },
-              items: _ljenjang
-                  .map((value) => DropdownMenuItem(
-                        child: LabelBlack.size2(value.text),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (dynamic item) {
-                widget.blocSekolah!.comboJenjang(item);
-              },
-              value: uiSekolah.currentJenjang,
-              isExpanded: false,
-              hint: LabelBlack.size2('Pilih Jenjang Sekolah'),
-            ),
-            FormAlamat(
-                widget.blocSekolah!.controllLokasi, widget.dataLokasiAlamat),
-            TextFieldNormal(
-              'Alamat (min 10 char) *',
-              _calamat,
-              onChange: (str) {
-                widget.blocSekolah!.setAlamat(str);
-              },
-            ),
-            SizedBox(height: 24),
-            _koordinatWidget(),
-            TextFieldNormalNumberOnly(
-              'Jumlah Guru',
-              _cjmlguru,
-              onChange: (str) {
-                widget.blocSekolah!.setJJmlGuru(str);
-              },
-            ),
-            TextFieldNormalNumberOnly(
-              'Jumlah Siswa',
-              _cjmlmurid,
-              onChange: (str) {
-                widget.blocSekolah!.setJJmlSiswa(str);
-              },
-            ),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+    _setupvalue(uiSekolah);
+    return Form(
+      key: _formKeyValue,
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          SizedBox(height: 20.0),
+          _npsn(),
+          TextFieldNormal(
+            'Nama Sekolah *',
+            _cnama,
+            onChange: (str) {
+              widget.blocSekolah!.setNamaSekolah(str);
+            },
+          ),
+          _spasi(),
+          LabelAppRich.size3(
+            'Jenjang Sekolah ',
+            color: Colors.grey[700],
+          ),
+          DropdownButton(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            items: _ljenjang
+                .map((value) => DropdownMenuItem(
+                      child: LabelBlack.size2(value.text),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (dynamic item) {
+              widget.blocSekolah!.comboJenjang(item);
+            },
+            value: uiSekolah.currentJenjang,
+            isExpanded: false,
+            hint: LabelBlack.size2('Pilih Jenjang Sekolah'),
+          ),
+          FormAlamat(
+              widget.blocSekolah!.controllLokasi, widget.dataLokasiAlamat),
+          TextFieldNormal(
+            'Alamat (min 10 char) *',
+            _calamat,
+            onChange: (str) {
+              widget.blocSekolah!.setAlamat(str);
+            },
+          ),
+          SizedBox(height: 24),
+          _koordinatWidget(),
+          TextFieldNormalNumberOnly(
+            'Jumlah Guru',
+            _cjmlguru,
+            onChange: (str) {
+              widget.blocSekolah!.setJJmlGuru(str);
+            },
+          ),
+          TextFieldNormalNumberOnly(
+            'Jumlah Siswa',
+            _cjmlmurid,
+            onChange: (str) {
+              widget.blocSekolah!.setJJmlSiswa(str);
+            },
+          ),
+          SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }
@@ -419,14 +417,14 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
                 widget.blocSekolah!.setNPSN(str);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             GestureDetector(
                 onTap: () {
-                  this._launchURL();
+                  _launchURL();
                 },
-                child: LabelAppMiring.size2(
+                child: const LabelAppMiring.size2(
                   'Cek NPSN',
                   color: Colors.blue,
                 )),

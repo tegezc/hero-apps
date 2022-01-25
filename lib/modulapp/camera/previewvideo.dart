@@ -23,7 +23,7 @@ class PreviewVideoUpload extends StatefulWidget {
 
 class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
   late VideoPlayerController _controller;
-  TextEditingController _controllerText = TextEditingController();
+  final TextEditingController _controllerText = TextEditingController();
   String programlocal = 'PROGRAM LOKAL';
   bool _isloading = true;
   Promotion? _promotion;
@@ -153,16 +153,16 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Video berhasil di upload.'),
                 ),
                 Padding(
@@ -185,16 +185,16 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Video gagal di upload.'),
                 ),
                 Padding(

@@ -56,17 +56,17 @@ class BlocOutlet extends AbsBlocLokasi {
     _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
 
     if (response != null) {
-      if (response.length > 0) {
+      if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
         Outlet outlet = Outlet.fromJson(map);
         super.init(EnumEditorState.edit, outlet.idkelurahan);
         _cacheUioutlet!.outlet = outlet;
         if (_cacheUioutlet!.ljnsoutlet != null) {
-          _cacheUioutlet!.ljnsoutlet!.forEach((element) {
+          for (var element in _cacheUioutlet!.ljnsoutlet!) {
             if (outlet.getEnumJenisOUtlet() == element.enumJenisOutlet) {
               _cacheUioutlet!.currentjnsOutlet = element;
             }
-          });
+          }
         }
         return true;
       }
@@ -102,13 +102,13 @@ class BlocOutlet extends AbsBlocLokasi {
 
   Future<bool> saveOutlet() async {
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.loading;
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
 
     HttpOutlet httpController = HttpOutlet();
     Map<String, dynamic>? response =
         await httpController.createOutlet(_cacheUioutlet!.outlet);
     _cacheUioutlet!.enumStateWidget = EnumStateWidget.done;
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
     if (response != null) {
       if (response['status'] == 201) {
         return true;
@@ -140,7 +140,7 @@ class BlocOutlet extends AbsBlocLokasi {
     LocationUtil.getCurrentLocation().then((value) {
       _cacheUioutlet!.outlet.long = value.longitude;
       _cacheUioutlet!.outlet.lat = value.latitude;
-      this._sink(_cacheUioutlet);
+      _sink(_cacheUioutlet);
     });
   }
 
@@ -154,7 +154,7 @@ class BlocOutlet extends AbsBlocLokasi {
 
   void comboJnsOutletOnChange(ItemComboJenisOutlet? item) {
     _cacheUioutlet!.currentjnsOutlet = item;
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
   }
 
   void setNamaOutlet(String t) {
@@ -170,25 +170,25 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   void setLongitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUioutlet!.outlet.long = double.tryParse(t);
     }
   }
 
   void setLatitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUioutlet!.outlet.lat = double.tryParse(t);
     }
   }
 
   @override
   void operationCompleted() {
-    this._sink(_cacheUioutlet);
+    _sink(_cacheUioutlet);
   }
 
   @override
   bool isValid() {
-    this.setValueBeforeCreateUpdate();
+    setValueBeforeCreateUpdate();
     return _cacheUioutlet!.outlet.isValid();
   }
 
@@ -208,27 +208,27 @@ class BlocOutlet extends AbsBlocLokasi {
 
   // @override
   // void finishPickKab(List<Kecamatan> lkab, Kabupaten kab) {
-  //   this._sink(_cacheUioutlet);
+  //   _sink(_cacheUioutlet);
   // }
   //
   // @override
   // void finishPickKec(List<Kelurahan> lkel, Kecamatan kec) {
-  //   this._sink(_cacheUioutlet);
+  //   _sink(_cacheUioutlet);
   // }
   //
   // @override
   // void finishPickKel(Kelurahan kel) {
-  //   this._sink(_cacheUioutlet);
+  //   _sink(_cacheUioutlet);
   // }
   //
   // @override
   // void finishPickProv(List<Kabupaten> lkab, Provinsi prov) {
   //   ph('finish pick prov');
-  //   this._sink(_cacheUioutlet);
+  //   _sink(_cacheUioutlet);
   // }
   //
   // @override
   // void initlokasiComplete(List<Provinsi> lprov) {
-  //   this._sink(_cacheUioutlet);
+  //   _sink(_cacheUioutlet);
   // }
 }

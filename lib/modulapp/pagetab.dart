@@ -444,7 +444,7 @@ class _PageTabState extends State<PageTab> {
         {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeHistorySurvey(item)));
-          // CommonUi.openPage(context, new HomeHistorySurvey(item));
+          // CommonUi.openPage(context, HomeHistorySurvey(item));
         }
         break;
       case EnumTab.mt:

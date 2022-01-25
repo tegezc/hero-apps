@@ -17,7 +17,7 @@ class HomePembelianDistribusi extends StatefulWidget {
   static const String routeName = '/homepembeliandistribusi';
   final Pjp? pjp;
 
-  HomePembelianDistribusi(this.pjp, {Key? key}) : super(key: key);
+  const HomePembelianDistribusi(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _HomePembelianDistribusiState createState() =>
@@ -217,7 +217,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
         AccountHore.getAccount().then((value) {
           if (value == EnumAccount.sf) {
             // CommonUi.openPage(
-            //     context, new FakturPembayaran(nota.noNota, false));
+            //     context, FakturPembayaran(nota.noNota, false));
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -225,7 +225,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
                         FakturPembayaran(nota.noNota, false)));
           } else {
             // CommonUi.openPage(
-            //     context, new FakturPembayaranDs(nota.noNota, false));
+            //     context, FakturPembayaranDs(nota.noNota, false));
             Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -20,7 +20,8 @@ class FakturPembayaran extends StatefulWidget {
   final String? nonota;
   final bool isHideShare;
 
-  FakturPembayaran(this.nonota, this.isHideShare);
+  const FakturPembayaran(this.nonota, this.isHideShare, {Key? key})
+      : super(key: key);
 
   @override
   _FakturPembayaranState createState() => _FakturPembayaranState();
@@ -69,7 +70,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
       controller: screenshotController,
       child: CustomScaffold(
         automaticallyImplyLeading: true,
-        body: Container(
+        body: SizedBox(
           height: s.height,
           width: s.width,
           child: SingleChildScrollView(

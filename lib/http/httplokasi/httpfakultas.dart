@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hero/http/core/httpbase.dart';
-import 'package:hero/model/lokasi/Fakultas.dart';
+import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:http/http.dart' as http;
 

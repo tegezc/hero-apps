@@ -72,8 +72,8 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
     return Scaffold(
         body: Stack(
       children: [
-        PropertyImage.bgatas(),
-        PropertyImage.bgbawah(),
+        const PropertyImage.bgatas(),
+        const PropertyImage.bgbawah(),
         SizedBox(
           height: m.height,
           child: SingleChildScrollView(
@@ -87,7 +87,7 @@ class _InputCodeVerificationState extends State<InputCodeVerification> {
                     const SizedBox(
                       height: 50,
                     ),
-                    PropertyImage.textReset(),
+                    const PropertyImage.textReset(),
                     const SizedBox(
                       height: 20,
                     ),

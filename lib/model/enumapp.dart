@@ -9,7 +9,7 @@ enum EnumMerchandising {
   spanduk,
   poster,
   papan,
-  StikerScanQR
+  stikerScanQR
 }
 
 enum EnumPjp { done, notclockinyet, progress, belum }
@@ -22,6 +22,6 @@ enum EnumJenisLokasi { outlet, poi, sekolah, kampus, fakultas }
 enum EnumStateWidget { startup, active, loading, done, failed }
 enum EnumPicOwner { pic, owner }
 enum EnumEditorState { baru, edit }
-enum EnumJenjangSekolah { SD, SMP, SMA, PONPES }
+enum EnumJenjangSekolah { sd, smp, sma, ponpes }
 
 enum EnumBtnMenuState { enable, disable, complete }

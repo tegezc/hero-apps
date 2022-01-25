@@ -19,7 +19,7 @@ import 'package:hero/util/constapp/constapp.dart';
 class MenuSales extends StatefulWidget {
   static const routeName = '/menusales';
   final Pjp? pjp;
-  MenuSales(this.pjp);
+  const MenuSales(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _MenuSalesState createState() => _MenuSalesState();
@@ -100,9 +100,9 @@ class _MenuSalesState extends State<MenuSales> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2("Apakah anda yakin akan clockout?"),
                 ),
                 Padding(

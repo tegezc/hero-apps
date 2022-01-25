@@ -29,7 +29,7 @@ class BlocHomePageCoverage {
   final BehaviorSubject<UIHomeCvrg?> _uihpcvrg = BehaviorSubject();
 
   Stream<UIHomeCvrg?> get uihpcvrg => _uihpcvrg.stream;
-  HttpDashboard _httpDashboard = new HttpDashboard();
+  final HttpDashboard _httpDashboard = HttpDashboard();
   UIHomeCvrg? getUiFakultas() {
     return _cacheuicvrg;
   }
@@ -37,7 +37,7 @@ class BlocHomePageCoverage {
   void firstTime() {
     _setupFirstime().then((value) {
       if (value) {
-        this._sink(_cacheuicvrg);
+        _sink(_cacheuicvrg);
       }
     });
   }
@@ -46,12 +46,12 @@ class BlocHomePageCoverage {
     List<Pjp>? lpjp = await _httpDashboard.getPjpHariIni();
     _cacheuicvrg = UIHomeCvrg();
     _cacheuicvrg!.profile = await AccountHore.getProfile();
-    _cacheuicvrg!.lpjp = this._filterpjp(lpjp);
+    _cacheuicvrg!.lpjp = _filterpjp(lpjp);
     _cacheuicvrg!.enumAccount = await AccountHore.getAccount();
     bool permission = await _setupPermissionlocation();
     if (permission) {}
-    this._setJumlah(lpjp);
-    this._setTgl();
+    _setJumlah(lpjp);
+    _setTgl();
 
     return true;
   }
@@ -107,7 +107,7 @@ class BlocHomePageCoverage {
     switch (permissionRequestedResult) {
       case PermissionStatus.granted:
         _cacheuicvrg!.enumStateWidget = EnumStateWidget.active;
-        this._sink(_cacheuicvrg);
+        _sink(_cacheuicvrg);
         return true;
       case PermissionStatus.grantedLimited:
         // nothing (only ios)
@@ -128,7 +128,7 @@ class BlocHomePageCoverage {
     if (lpjp == null) {
       return ltmp;
     }
-    lpjp.forEach((element) {
+    for (var element in lpjp) {
       if (element.isStatusDone()) {
         element.enumPjp = EnumPjp.done;
       } else {
@@ -145,7 +145,7 @@ class BlocHomePageCoverage {
         }
       }
       ltmp.add(element);
-    });
+    }
     return ltmp;
   }
 
@@ -155,11 +155,11 @@ class BlocHomePageCoverage {
       _cacheuicvrg!.strJumlah = '0/0';
     } else {
       int tmpdone = 0;
-      lpjp.forEach((element) {
+      for (var element in lpjp) {
         if (element.enumPjp == EnumPjp.done) {
           tmpdone++;
         }
-      });
+      }
       _cacheuicvrg!.jmlDone = tmpdone;
       _cacheuicvrg!.strJumlah = '$tmpdone/${lpjp.length}';
     }

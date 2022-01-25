@@ -8,7 +8,7 @@ class ControllPic {
   }
 
   void firstTimePic() {
-    _cachePic = new Pic.kosong();
+    _cachePic = Pic.kosong();
   }
 
   Pic? getPic() {

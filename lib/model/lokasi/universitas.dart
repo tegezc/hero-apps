@@ -40,7 +40,7 @@ class Universitas extends ParentLokasi {
     alamat = map[tagalamat] == null ? '' : map[tagalamat];
 
     String strlong = map[taglong] == null ? '0' : map[taglong];
-    if (strlong.length > 0) {
+    if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
@@ -48,7 +48,7 @@ class Universitas extends ParentLokasi {
 
 // set lat
     String strlat = map[taglat] == null ? '0' : map[taglat];
-    if (strlat.length > 0) {
+    if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
       lat = 0.0;
@@ -103,11 +103,10 @@ class Universitas extends ParentLokasi {
   static const String tabFbPic = 'akun_fb_pic';
   static const String tagIgPic = 'akun_ig_pic';
 
+  @override
   bool operator ==(dynamic other) =>
       other != null && other is Universitas && this.iduniv == other.iduniv;
 
-  @override
-  int get hashCode => super.hashCode;
 // "id_tap": "TAP001",
 // "status": "WAITING APPROVAL",
 // "tgl_open": "2020-11-29",

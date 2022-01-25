@@ -44,7 +44,7 @@ import 'modulapp/coverage/marketaudit/ds/uidsmarketaudit.dart';
 import 'modulapp/coverage/marketaudit/sf/hpsurvey.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -87,9 +87,9 @@ class MyApp extends StatelessWidget {
               ));
         }
       case ResetPassword.routeName:
-        return _buildRoute(settings, ResetPassword());
+        return _buildRoute(settings, const ResetPassword());
       case InputCodeVerification.routeName:
-        return _buildRoute(settings, InputCodeVerification());
+        return _buildRoute(settings, const InputCodeVerification());
       case MapClockIn.routeName:
         final Pjp? args = settings.arguments as Pjp?;
         return _buildRoute(settings, MapClockIn(args));
@@ -132,7 +132,7 @@ class MyApp extends StatelessWidget {
         }
       case HomePageRetur.routeName:
         {
-          return _buildRoute(settings, HomePageRetur());
+          return _buildRoute(settings, const HomePageRetur());
         }
       case ReturEditor.routeName:
         {
@@ -270,7 +270,7 @@ class _HomeControllpageState extends State<HomeControllpage> {
         ),
         Text(
           id,
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          style: const TextStyle(color: Colors.black, fontSize: 14),
         ),
         const Spacer(),
         GestureDetector(
@@ -450,9 +450,9 @@ class _HomeControllpageState extends State<HomeControllpage> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Apakah anda yakin akan logout?'),
                 ),
                 Padding(

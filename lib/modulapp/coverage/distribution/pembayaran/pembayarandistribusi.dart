@@ -17,7 +17,8 @@ class PembayaranDistribusi extends StatefulWidget {
   static const routeName = '/pembayarandistribusi';
   final ParamPembayaran? paramPembayaran;
 
-  PembayaranDistribusi(this.paramPembayaran);
+  const PembayaranDistribusi(this.paramPembayaran, {Key? key})
+      : super(key: key);
 
   @override
   _PembayaranDistribusiState createState() => _PembayaranDistribusiState();
@@ -26,8 +27,8 @@ class PembayaranDistribusi extends StatefulWidget {
 class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   // EnumCaraBayar _carabayar = EnumCaraBayar.lunas;
 
-  TextEditingController _controller1 = new TextEditingController();
-  TextEditingController _controller2 = new TextEditingController();
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
   late BlocPembayaran _blocPembayaran;
   int _counterBuild = 0;
 
@@ -165,7 +166,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 4,
     );
   }
@@ -200,12 +201,12 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              LabelBlack.size1('Data Pembeli'),
-              SizedBox(
+              const LabelBlack.size1('Data Pembeli'),
+              const SizedBox(
                 height: 8,
               ),
               _cellInfoPembeli('NAMA PEMBELI', dp.namapembeli),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               _cellInfoPembeli('NO HP PEMBELI', dp.nohppembeli),
@@ -224,12 +225,12 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              LabelBlack.size1('Data Pembeli'),
-              SizedBox(
+              const LabelBlack.size1('Data Pembeli'),
+              const SizedBox(
                 height: 8,
               ),
               _cellInfoPembeli('NAMA PEMBELI', dp.namapembeli),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               TextFieldNumberOnly(
@@ -249,7 +250,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   Widget _contentTransaksi(ItemPembayaran item, int index) {
     Size size = MediaQuery.of(context).size;
     return Card(
-      child: Container(
+      child: SizedBox(
         width: size.width - 32,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -261,32 +262,32 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 children: [
                   LabelBlack.size1(item.trx.product!.nama),
                   IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
                         _confirmDelete(index);
                       }),
                 ],
               ),
-              Divider(),
+              const Divider(),
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Qty'),
                   ),
-                  LabelBlack.size2(': '),
+                  const LabelBlack.size2(': '),
                   LabelBlack.size2('${item.trx.jumlah} pcs'),
                 ],
               ),
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Harga Per Item'),
                   ),
-                  LabelBlack.size2(': '),
+                  const LabelBlack.size2(': '),
                   LabelBlack.size2(
                       'Rp ${ConverterNumber.getCurrentcy(item.trx.product!.hargajual)}'),
                 ],
@@ -294,11 +295,11 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Total'),
                   ),
-                  LabelBlack.size2(': '),
+                  const LabelBlack.size2(': '),
                   LabelBlack.size2(
                       'Rp ${ConverterNumber.getCurrentcy(item.trx.jumlah! * item.trx.product!.hargajual!)}'),
                 ],
@@ -311,7 +312,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         LabelBlack.size2('Pembayaran'),
                       ],
                     ),
@@ -337,7 +338,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   Widget _contentTransaksiDs(ItemPembayaran item, int index) {
     Size size = MediaQuery.of(context).size;
     return Card(
-      child: Container(
+      child: SizedBox(
         width: size.width - 32,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -348,14 +349,14 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LabelBlack.size1(item.trx.product!.nama),
-                  IconButton(icon: Icon(Icons.delete), onPressed: () {}),
+                  IconButton(icon: const Icon(Icons.delete), onPressed: () {}),
                 ],
               ),
-              Divider(),
+              const Divider(),
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Qty'),
                   ),
@@ -366,11 +367,11 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Harga Per Item'),
                   ),
-                  LabelBlack.size2(': '),
+                  const LabelBlack.size2(': '),
                   LabelBlack.size2('Rp ${item.trx.product!.hargajual}'),
                 ],
               ),
@@ -388,7 +389,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               ),
               _spasi(),
               Row(
-                children: [
+                children: const [
                   SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Pembayaran'),
@@ -410,7 +411,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     return Row(
       children: [
         SizedBox(width: 120, child: LabelBlack.size2(ts)),
-        LabelBlack.size2(': '),
+        const LabelBlack.size2(': '),
         LabelBlack.size2(sv),
       ],
     );
@@ -441,7 +442,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LabelBlack.size2('Sub Total Lunas'),
+                  const LabelBlack.size2('Sub Total Lunas'),
                   LabelBlack.size2(
                       'Rp ${ConverterNumber.getCurrentcy(item.getTotalLunas())}'),
                 ],
@@ -485,8 +486,8 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
   Widget _cellTextfield(TextEditingController controller) {
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0, top: 18.0),
+        const Padding(
+          padding: EdgeInsets.only(right: 8.0, top: 18.0),
           child: LabelBlack.size2('Rp'),
         ),
         SizedBox(
@@ -523,16 +524,16 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Anda yakin akan menghapus item transaksi ini?'),
                 ),
@@ -583,9 +584,9 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Proses pembayaran mengalami gangguan. Silahkan coba lagi.'),
                 ),

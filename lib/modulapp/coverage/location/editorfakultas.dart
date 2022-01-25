@@ -15,7 +15,7 @@ import 'widgetforlocation.dart';
 class EditorFakultas extends StatefulWidget {
   static const routeName = '/editorfakultas';
   final String? idfakultas;
-  EditorFakultas(this.idfakultas);
+  const EditorFakultas(this.idfakultas, {Key? key}) : super(key: key);
   @override
   _EditorFakultasState createState() => _EditorFakultasState();
 }
@@ -105,7 +105,7 @@ class _EditorFakultasState extends State<EditorFakultas> {
                         }
                       }
                     },
-                    bottom: TabBar(
+                    bottom: const TabBar(
                       isScrollable: true,
                       tabs: [
                         // wallet share, sales broadband share, voucher fisik share
@@ -136,7 +136,7 @@ class _EditorFakultasState extends State<EditorFakultas> {
                     )),
               ),
               isloading
-                  ? LoadingTransparan('Sedang menyimpan...')
+                  ? const LoadingTransparan('Sedang menyimpan...')
                   : Container(),
             ],
           );
@@ -147,16 +147,16 @@ class _EditorFakultasState extends State<EditorFakultas> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data Fakultas berhasil disimpan.'),
                 ),
                 Padding(
@@ -175,16 +175,16 @@ class _EditorFakultasState extends State<EditorFakultas> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data fakultas gagal disimpan.'),
                 ),
                 Padding(
@@ -202,11 +202,11 @@ class _EditorFakultasState extends State<EditorFakultas> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -229,7 +229,8 @@ class _EditorFakultasState extends State<EditorFakultas> {
 class TabDataFakultas extends StatefulWidget {
   final BlocFakultas? blocFakultas;
   final DataLokasiAlamat? dataLokasiAlamat;
-  TabDataFakultas(this.blocFakultas, this.dataLokasiAlamat);
+  const TabDataFakultas(this.blocFakultas, this.dataLokasiAlamat, {Key? key})
+      : super(key: key);
 
   @override
   _TabDataFakultasState createState() => _TabDataFakultasState();
@@ -239,13 +240,13 @@ class _TabDataFakultasState extends State<TabDataFakultas> {
   final GlobalKey<FormState> _formKeyValue = GlobalKey<FormState>();
 
   //Texteditcontroller
-  TextEditingController _cnama = TextEditingController();
-  TextEditingController _calamat = TextEditingController();
-  TextEditingController _cjmlDosen = TextEditingController();
-  TextEditingController _cnpsn = TextEditingController();
-  TextEditingController _cjmlmahasiswa = TextEditingController();
-  TextEditingController _clatitude = TextEditingController();
-  TextEditingController _clongitude = TextEditingController();
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _calamat = TextEditingController();
+  final TextEditingController _cjmlDosen = TextEditingController();
+  final TextEditingController _cnpsn = TextEditingController();
+  final TextEditingController _cjmlmahasiswa = TextEditingController();
+  final TextEditingController _clatitude = TextEditingController();
+  final TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -280,93 +281,91 @@ class _TabDataFakultasState extends State<TabDataFakultas> {
   @override
   Widget build(BuildContext context) {
     UIFakultas uifakultas = widget.blocFakultas!.getUiFakultas()!;
-    this._setupvalue(uifakultas);
-    return Container(
-      child: Form(
-        key: _formKeyValue,
-        autovalidateMode: AutovalidateMode.always,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            const SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 2.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  LabelAppRich.size3(
-                    'Universitas ',
-                    color: Colors.grey[700],
-                  ),
-                  DropdownButton(
-                    items: uifakultas.luniv == null
-                        ? null
-                        : uifakultas.luniv!
-                            .map((value) => DropdownMenuItem(
-                                  child: LabelBlack.size2(value.nama),
-                                  value: value,
-                                ))
-                            .toList(),
-                    onChanged: (dynamic item) {
-                      setState(() {
-                        widget.blocFakultas!.comboUniv(item);
-                      });
-                    },
-                    value: uifakultas.currentUniversitas,
-                    isExpanded: false,
-                    hint: LabelBlack.size2('Pilih Universitas'),
-                  )
-                ],
-              ),
+    _setupvalue(uifakultas);
+    return Form(
+      key: _formKeyValue,
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          const SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 2.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                LabelAppRich.size3(
+                  'Universitas ',
+                  color: Colors.grey[700],
+                ),
+                DropdownButton(
+                  items: uifakultas.luniv == null
+                      ? null
+                      : uifakultas.luniv!
+                          .map((value) => DropdownMenuItem(
+                                child: LabelBlack.size2(value.nama),
+                                value: value,
+                              ))
+                          .toList(),
+                  onChanged: (dynamic item) {
+                    setState(() {
+                      widget.blocFakultas!.comboUniv(item);
+                    });
+                  },
+                  value: uifakultas.currentUniversitas,
+                  isExpanded: false,
+                  hint: const LabelBlack.size2('Pilih Universitas'),
+                )
+              ],
             ),
-            _spasi(),
-            TextFieldNormal(
-              'Nama Fakultas *',
-              _cnama,
-              onChange: (str) {
-                widget.blocFakultas!.setNamaFak(str);
-              },
-            ),
-            _spasi(),
-            FormAlamat(
-                widget.blocFakultas!.controllLokasi, widget.dataLokasiAlamat),
-            TextFieldNormal(
-              'Alamat (min 10 char) *',
-              _calamat,
-              onChange: (str) {
-                widget.blocFakultas!.setAlamat(str);
-              },
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            _koordinatWidget(),
-            TextFieldNormalNumberOnly(
-              'Jumlah Dosen',
-              _cjmlDosen,
-              onChange: (str) {
-                widget.blocFakultas!.setJmlDosen(str);
-              },
-            ),
-            TextFieldNormalNumberOnly(
-              'Jumlah Mahasiswa',
-              _cjmlmahasiswa,
-              onChange: (str) {
-                widget.blocFakultas!.setJmlMahasiswa(str);
-              },
-            ),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+          ),
+          _spasi(),
+          TextFieldNormal(
+            'Nama Fakultas *',
+            _cnama,
+            onChange: (str) {
+              widget.blocFakultas!.setNamaFak(str);
+            },
+          ),
+          _spasi(),
+          FormAlamat(
+              widget.blocFakultas!.controllLokasi, widget.dataLokasiAlamat),
+          TextFieldNormal(
+            'Alamat (min 10 char) *',
+            _calamat,
+            onChange: (str) {
+              widget.blocFakultas!.setAlamat(str);
+            },
+          ),
+          SizedBox(
+            height: 24,
+          ),
+          _koordinatWidget(),
+          TextFieldNormalNumberOnly(
+            'Jumlah Dosen',
+            _cjmlDosen,
+            onChange: (str) {
+              widget.blocFakultas!.setJmlDosen(str);
+            },
+          ),
+          TextFieldNormalNumberOnly(
+            'Jumlah Mahasiswa',
+            _cjmlmahasiswa,
+            onChange: (str) {
+              widget.blocFakultas!.setJmlMahasiswa(str);
+            },
+          ),
+          const SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 8,
     );
   }

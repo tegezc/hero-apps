@@ -177,7 +177,7 @@ class HttpSearchLocation extends HttpBase {
   Provinsi? _olahProv(dynamic value) {
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         Map<String, dynamic> map = ld[0];
         Provinsi provinsi = Provinsi.fromJson(map);
         return provinsi;
@@ -191,7 +191,7 @@ class HttpSearchLocation extends HttpBase {
   Kabupaten? _olahKab(dynamic value) {
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         Map<String, dynamic> map = ld[0];
         Kabupaten kabupaten = Kabupaten.fromJson(map);
         return kabupaten;
@@ -221,7 +221,7 @@ class HttpSearchLocation extends HttpBase {
     List<Kabupaten> lkab = [];
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Kabupaten kab = Kabupaten.fromJson(map);
@@ -239,7 +239,7 @@ class HttpSearchLocation extends HttpBase {
     List<Kecamatan> lkec = [];
     try {
       List<dynamic> ld = value;
-      if (ld.length > 0) {
+      if (ld.isNotEmpty) {
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
           Kecamatan kec = Kecamatan.fromJson(map);

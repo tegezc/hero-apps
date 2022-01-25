@@ -61,14 +61,14 @@ class Fakultas extends ParentLokasi {
 
   Fakultas.fromJson(Map<String, dynamic> map) {
     String strlong = map[taglong] == null ? '0' : map[taglong];
-    if (strlong.length > 0) {
+    if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
     }
 
     String strlat = map[taglat] == null ? '0' : map[taglat];
-    if (strlat.length > 0) {
+    if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
       lat = 0.0;

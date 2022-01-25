@@ -59,7 +59,7 @@ class _ReturEditorState extends State<ReturEditor> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: size.width,
                         height: size.height,
                         child: SingleChildScrollView(
@@ -121,7 +121,6 @@ class _ReturEditorState extends State<ReturEditor> {
   }
 
   Widget _contentTransaksi(UIReturEditor item) {
-    String judul = _isRange ? 'Hide' : 'Range';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

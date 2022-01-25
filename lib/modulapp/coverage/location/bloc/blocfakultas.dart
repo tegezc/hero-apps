@@ -1,6 +1,6 @@
 import 'package:hero/http/httplokasi/httpfakultas.dart';
 import 'package:hero/model/enumapp.dart';
-import 'package:hero/model/lokasi/Fakultas.dart';
+import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:hero/util/locationutil.dart';
 import 'package:location/location.dart';
@@ -28,7 +28,7 @@ class BlocFakultas extends AbsBlocLokasi {
   ControllOwner? controllOwner;
   ControllPic? controllPic;
   UIFakultas? _cacheUiFakultas;
-  HttpFakultas _httpController = HttpFakultas();
+  final HttpFakultas _httpController = HttpFakultas();
 
   final BehaviorSubject<UIFakultas?> _uifakultas = BehaviorSubject();
 
@@ -46,7 +46,7 @@ class BlocFakultas extends AbsBlocLokasi {
       if (value) {
         controllPic!.firstTimeEdit(_cacheUiFakultas!.fakultas.pic);
         controllOwner!.firstTimeEdit(_cacheUiFakultas!.fakultas.dekan);
-        this._sink(_cacheUiFakultas);
+        _sink(_cacheUiFakultas);
       }
     });
   }
@@ -55,7 +55,7 @@ class BlocFakultas extends AbsBlocLokasi {
     List<dynamic>? response = await _httpController.detailFakultas(idsekolah);
     _cacheUiFakultas!.luniv = await _httpController.getComboUniv();
     if (response != null) {
-      if (response.length > 0) {
+      if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
         Fakultas fakultas = Fakultas.fromJson(map);
         super.init(EnumEditorState.edit, fakultas.idkel);
@@ -133,7 +133,7 @@ class BlocFakultas extends AbsBlocLokasi {
     LocationUtil.getCurrentLocation().then((value) {
       _cacheUiFakultas!.fakultas.long = value.longitude;
       _cacheUiFakultas!.fakultas.lat = value.latitude;
-      this._sink(_cacheUiFakultas);
+      _sink(_cacheUiFakultas);
     });
   }
 
@@ -147,7 +147,7 @@ class BlocFakultas extends AbsBlocLokasi {
 
   void comboUniv(Universitas? item) {
     _cacheUiFakultas!.currentUniversitas = item;
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
   }
 
   void setNamaFak(String t) {
@@ -159,13 +159,13 @@ class BlocFakultas extends AbsBlocLokasi {
   }
 
   void setLongitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUiFakultas!.fakultas.long = double.tryParse(t);
     }
   }
 
   void setLatitude(String t) {
-    if (t.length > 0) {
+    if (t.isNotEmpty) {
       _cacheUiFakultas!.fakultas.lat = double.tryParse(t);
     }
   }
@@ -182,12 +182,12 @@ class BlocFakultas extends AbsBlocLokasi {
 
   @override
   void operationCompleted() {
-    this._sink(_cacheUiFakultas);
+    _sink(_cacheUiFakultas);
   }
 
   @override
   bool isValid() {
-    this.setValueBeforeCreateUpdate();
+    setValueBeforeCreateUpdate();
     return _cacheUiFakultas!.fakultas.isValid();
   }
 

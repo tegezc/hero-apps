@@ -7,9 +7,9 @@ class DataPembeli {
   Map<String, dynamic> toJson() {
     List<Map<String, dynamic>> ls = [];
     if (lserial != null) {
-      lserial!.forEach((element) {
+      for (var element in lserial!) {
         ls.add(element.toJson());
-      });
+      }
     }
     return {
       "id_tempat": idtempat,

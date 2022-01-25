@@ -86,7 +86,7 @@ class _CoverageHomeState extends State<CoverageHome> {
             Container(
                 padding: const EdgeInsets.only(left: 8, right: 8, top: 110),
                 child: Column(children: [
-                  BackgroundLocationUi(),
+                  const BackgroundLocationUi(),
                   SizedBox(
                       height: 50,
                       child: _account(
@@ -343,7 +343,7 @@ class _CoverageHomeState extends State<CoverageHome> {
           text: text);
     } else if (pjp.enumPjp == EnumPjp.belum) {
       colorIcon = Colors.white;
-      action = LabelWhite.size3('Not Clock In ');
+      action = const LabelWhite.size3('Not Clock In ');
     }
     String? nama = pjp.tempat!.nama;
     if (pjp.tempat!.nama!.length > 17) {

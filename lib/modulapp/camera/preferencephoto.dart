@@ -61,7 +61,7 @@ class StoredPathPhoto {
       case EnumMerchandising.papan:
         p = '${p}papan';
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         p = '${p}backdrop';
         break;
       case EnumMerchandising.voucherfisik:
@@ -100,14 +100,14 @@ class StoredPathPhoto {
   static Future<bool> deleteMerchAll() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    EnumMerchandising.values.forEach((element) {
+    for (var element in EnumMerchandising.values) {
       String key = _getKeyMerch(element, EnumNumber.satu);
       prefs.remove(key);
       key = _getKeyMerch(element, EnumNumber.dua);
       prefs.remove(key);
       key = _getKeyMerch(element, EnumNumber.dua);
       prefs.remove(key);
-    });
+    }
 
     return true;
   }

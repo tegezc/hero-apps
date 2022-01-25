@@ -13,7 +13,7 @@ import 'package:hero/util/component/widget/component_widget.dart';
 class PreviewPhoto extends StatefulWidget {
   static const routeName = '/previewphoto';
   final ParamPreviewPhoto? param;
-  PreviewPhoto(this.param);
+  const PreviewPhoto(this.param, {Key? key}) : super(key: key);
   @override
   _PreviewPhotoState createState() => _PreviewPhotoState();
 }
@@ -47,11 +47,9 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                 SizedBox(
                     width: s.width,
                     height: s.height - 140,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Container(
-                        child: LabelBlack.size1("Photo gagal di tampilkan"),
-                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: LabelBlack.size1("Photo gagal di tampilkan"),
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -180,7 +178,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
                           break;
                         case EnumTakePhoto.merchbackdrop:
                           StoredPathPhoto.setPhotoMerchandising(
-                                  EnumMerchandising.StikerScanQR,
+                                  EnumMerchandising.stikerScanQR,
                                   widget.param!.enumNumber,
                                   _urlImageOrNull!)
                               .then((value) {

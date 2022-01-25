@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hero/http/httplokasi/httpfakultas.dart';
 import 'package:hero/http/httplokasi/httpsearchlocation.dart';
 import 'package:hero/model/enumapp.dart';
-import 'package:hero/model/lokasi/Fakultas.dart';
+import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:hero/modulapp/coverage/location/view/viewpageidentitas.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -28,12 +28,12 @@ class _ViewFakultasState extends State<ViewFakultas> {
   void initState() {
     _isloading = true;
     _title = 'Detail Fakultas';
-    this._setup();
+    _setup();
     super.initState();
   }
 
   void _setup() {
-    this._setupdata().then((value) {
+    _setupdata().then((value) {
       if (value) {
         setState(() {
           _isloading = false;
@@ -67,11 +67,11 @@ class _ViewFakultasState extends State<ViewFakultas> {
             List<Kelurahan> lkel = await (_httpDashboard
                 .getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
 
-            lkel.forEach((element) {
+            for (var element in lkel) {
               if (element.idkel == fakultas!.idkel) {
                 fakultas!.kel = element;
               }
-            });
+            }
           }
         }
         return true;
@@ -134,49 +134,47 @@ class TabViewFakultas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0, right: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Label2row('Nama', sekolah!.nama),
-              _spasi(),
-              Divider(),
-              Label2row('Nama Universitas', sekolah!.namaUniv),
-              _spasi(),
-              Divider(),
-              Label2row('Provinsi:', '${sekolah!.getStrProv()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kabupaten:', '${sekolah!.getStrKab()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kecamatan:', '${sekolah!.getStrKec()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kelurahan:', '${sekolah!.getStrKel()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Alamat:', '${sekolah!.alamat}'),
-              _spasi(),
-              Divider(),
-              Label2row('Jumlah Dosen:', '${sekolah!.jmlDosen}'),
-              _spasi(),
-              Divider(),
-              Label2row('Jumlah Mahasiswa:', '${sekolah!.jmlMahasiswa}'),
-              _spasi(),
-              SizedBox(
-                height: 12,
-              ),
-              _koordinatWidget(context),
-              SizedBox(
-                height: 150.0,
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 18.0, right: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 20.0),
+            Label2row('Nama', sekolah!.nama),
+            _spasi(),
+            Divider(),
+            Label2row('Nama Universitas', sekolah!.namaUniv),
+            _spasi(),
+            Divider(),
+            Label2row('Provinsi:', '${sekolah!.getStrProv()}'),
+            _spasi(),
+            Divider(),
+            Label2row('Kabupaten:', '${sekolah!.getStrKab()}'),
+            _spasi(),
+            Divider(),
+            Label2row('Kecamatan:', '${sekolah!.getStrKec()}'),
+            _spasi(),
+            Divider(),
+            Label2row('Kelurahan:', '${sekolah!.getStrKel()}'),
+            _spasi(),
+            Divider(),
+            Label2row('Alamat:', '${sekolah!.alamat}'),
+            _spasi(),
+            Divider(),
+            Label2row('Jumlah Dosen:', '${sekolah!.jmlDosen}'),
+            _spasi(),
+            Divider(),
+            Label2row('Jumlah Mahasiswa:', '${sekolah!.jmlMahasiswa}'),
+            _spasi(),
+            SizedBox(
+              height: 12,
+            ),
+            _koordinatWidget(context),
+            SizedBox(
+              height: 150.0,
+            ),
+          ],
         ),
       ),
     );

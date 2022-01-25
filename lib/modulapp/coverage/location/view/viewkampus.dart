@@ -28,12 +28,12 @@ class _ViewKampusState extends State<ViewKampus> {
   void initState() {
     _isloading = true;
     _title = 'Detail Kampus';
-    this._setup();
+    _setup();
     super.initState();
   }
 
   void _setup() {
-    this._setupdata().then((value) {
+    _setupdata().then((value) {
       if (value) {
         setState(() {
           _isloading = false;
@@ -44,7 +44,7 @@ class _ViewKampusState extends State<ViewKampus> {
 
   Future<bool> _setupdata() async {
     HttpSearchLocation _httpDashboard = HttpSearchLocation();
-    HttpKampus httpOutlet = new HttpKampus();
+    HttpKampus httpOutlet = HttpKampus();
     List<dynamic> ld =
         await (httpOutlet.detailUniv(widget.iduniv) as Future<List<dynamic>>);
     if (ld.length == 1) {
@@ -67,11 +67,11 @@ class _ViewKampusState extends State<ViewKampus> {
             List<Kelurahan> lkel = await (_httpDashboard
                 .getListKelurahan(kec.realid) as Future<List<Kelurahan>>);
 
-            lkel.forEach((element) {
+            for (var element in lkel) {
               if (element.idkel == _kampus!.idkel) {
                 _kampus!.kel = element;
               }
-            });
+            }
           }
         }
         return true;
@@ -134,42 +134,40 @@ class TabViewKampus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: new Padding(
-          padding: const EdgeInsets.only(left: 18.0, right: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Label2row('Nama', sekolah!.nama),
-              _spasi(),
-              Divider(),
-              Label2row('NPSN', sekolah!.npsn),
-              _spasi(),
-              Divider(),
-              Label2row('Provinsi:', '${sekolah!.getStrProv()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kabupaten:', '${sekolah!.getStrKab()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kecamatan:', '${sekolah!.getStrKec()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Kelurahan:', '${sekolah!.getStrKel()}'),
-              _spasi(),
-              Divider(),
-              Label2row('Alamat:', '${sekolah!.alamat}'),
-              SizedBox(
-                height: 12,
-              ),
-              _koordinatWidget(context),
-              SizedBox(
-                height: 150.0,
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 18.0, right: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 20.0),
+            Label2row('Nama', sekolah!.nama),
+            _spasi(),
+            const Divider(),
+            Label2row('NPSN', sekolah!.npsn),
+            _spasi(),
+            const Divider(),
+            Label2row('Provinsi:', '${sekolah!.getStrProv()}'),
+            _spasi(),
+            const Divider(),
+            Label2row('Kabupaten:', '${sekolah!.getStrKab()}'),
+            _spasi(),
+            const Divider(),
+            Label2row('Kecamatan:', '${sekolah!.getStrKec()}'),
+            _spasi(),
+            const Divider(),
+            Label2row('Kelurahan:', '${sekolah!.getStrKel()}'),
+            _spasi(),
+            const Divider(),
+            Label2row('Alamat:', '${sekolah!.alamat}'),
+            const SizedBox(
+              height: 12,
+            ),
+            _koordinatWidget(context),
+            const SizedBox(
+              height: 150.0,
+            ),
+          ],
         ),
       ),
     );

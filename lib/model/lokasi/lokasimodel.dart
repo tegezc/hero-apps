@@ -13,11 +13,11 @@ class Provinsi {
     // "lastmodified": "2020-11-29 09:00:00"
     //
 
-    this.realid = map['id_provinsi'] == null ? '' : map['id_provinsi'];
-    this.nama = map['nama_provinsi'] == null ? '' : map['nama_provinsi'];
+    realid = map['id_provinsi'] == null ? '' : map['id_provinsi'];
+    nama = map['nama_provinsi'] == null ? '' : map['nama_provinsi'];
   }
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = Map<String, dynamic>();
     map[TbProv.id] = id;
     map[TbProv.realid] = realid;
     map[TbProv.nama] = nama;
@@ -26,15 +26,13 @@ class Provinsi {
 
   Provinsi.formDb(this.id, this.realid, this.nama);
 
-  bool operator ==(dynamic other) =>
-      other != null && other is Provinsi && this.realid == other.realid;
-
   @override
-  int get hashCode => super.hashCode;
+  bool operator ==(dynamic other) =>
+      other != null && other is Provinsi && realid == other.realid;
 
   @override
   String toString() {
-    return '${this.nama}';
+    return '$nama';
   }
 }
 
@@ -55,13 +53,13 @@ class Kabupaten {
     // "nama_kabupaten": "KOTA BANDAR LAMPUNG",
     // "radius_clock_in": "0",
     // "lastmodified": "2020-11-29 09:00:00"
-    this.realid = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
-    this.idprov = map['id_provinsi'] == null ? '' : map['id_provinsi'];
-    this.nama = map['nama_kabupaten'] == null ? '' : map['nama_kabupaten'];
+    realid = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
+    idprov = map['id_provinsi'] == null ? '' : map['id_provinsi'];
+    nama = map['nama_kabupaten'] == null ? '' : map['nama_kabupaten'];
     if (map['radius_clock_in'] == null) {
-      this.radiusClockin = 25;
+      radiusClockin = 25;
     } else {
-      this.radiusClockin = int.tryParse(map['radius_clock_in']) == null
+      radiusClockin = int.tryParse(map['radius_clock_in']) == null
           ? 25
           : int.tryParse(map['radius_clock_in']);
     }
@@ -84,9 +82,6 @@ class Kabupaten {
   String toString() {
     return '$nama';
   }
-
-  @override
-  int get hashCode => super.hashCode;
 }
 
 class Kecamatan {
@@ -174,14 +169,12 @@ class Kelurahan {
     return map;
   }
 
-  bool operator ==(dynamic other) =>
-      other != null && other is Kelurahan && this.idkel == other.idkel;
-
   @override
-  int get hashCode => super.hashCode;
+  bool operator ==(dynamic other) =>
+      other != null && other is Kelurahan && idkel == other.idkel;
 
   @override
   String toString() {
-    return '${this.nama}';
+    return '$nama';
   }
 }

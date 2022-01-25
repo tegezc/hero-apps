@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/pagebelanjasurvey.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/pagevoucher.dart';
@@ -15,7 +14,7 @@ import 'package:hero/util/constapp/consstring.dart';
 class HomeSurvey extends StatefulWidget {
   static const routeName = '/homesurvey';
   final Pjp? pjp;
-  HomeSurvey(this.pjp);
+  const HomeSurvey(this.pjp, {Key? key}) : super(key: key);
 
   @override
   _HomeSurveyState createState() => _HomeSurveyState();
@@ -41,6 +40,7 @@ class _HomeSurveyState extends State<HomeSurvey> {
   @override
   Widget build(BuildContext context) {
     if (_counterBuild == 0) {
+      _counterBuild++;
       _blocSurvey!.firstime(widget.pjp);
     }
 

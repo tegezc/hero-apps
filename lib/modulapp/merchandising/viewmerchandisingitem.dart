@@ -33,7 +33,7 @@ class _ViewMerchandisingState extends State<ViewMerchandising> {
       case EnumMerchandising.papan:
         _title = 'Papan';
         break;
-      case EnumMerchandising.StikerScanQR:
+      case EnumMerchandising.stikerScanQR:
         _title = 'Backdrop';
         break;
       case EnumMerchandising.voucherfisik:

@@ -9,9 +9,9 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:rxdart/subjects.dart';
 
 class BlocPembayaran {
-  UIPembayaran _cachePembelian = UIPembayaran();
-  HttpDIstribution _httpDIstribution = HttpDIstribution();
-  DaoSerial _daoSerial = DaoSerial();
+  final UIPembayaran _cachePembelian = UIPembayaran();
+  final HttpDIstribution _httpDIstribution = HttpDIstribution();
+  final DaoSerial _daoSerial = DaoSerial();
 
   final BehaviorSubject<UIPembayaran> _uipembayaran = BehaviorSubject();
 
@@ -33,11 +33,11 @@ class BlocPembayaran {
     _cachePembelian.enumAccount = await AccountHore.getAccount();
 
     List<ItemPembayaran> lpemb = [];
-    ltrx.forEach((element) {
+    for (var element in ltrx) {
       if (element.jumlah! > 0) {
         lpemb.add(ItemPembayaran(element, EnumCaraBayar.lunas));
       }
-    });
+    }
     _cachePembelian.lpembayaran = lpemb;
     DataPembeli dp = DataPembeli();
     dp.lserial = await _daoSerial.getAllSn();
@@ -95,14 +95,14 @@ class BlocPembayaran {
 
     int res = await _daoSerial.deleteAllSerial();
     if (res > 0) {}
-    if (snlunas.length > 0) {
+    if (snlunas.isNotEmpty) {
       bool value = await _httpDIstribution.submitLunas(pembeliLunas);
       if (value == false) {
         return false;
       }
     }
 
-    if (snkonsinyasi.length > 0) {
+    if (snkonsinyasi.isNotEmpty) {
       bool value = await _httpDIstribution.submitKonsinyasi(pembeliKonsinyasi);
       if (value == false) {
         return false;
@@ -117,7 +117,7 @@ class BlocPembayaran {
     int res = await _daoSerial.deleteSerialByIdProduct(item.trx.product!.id);
     if (res > 0) {
       _cachePembelian.lpembayaran!.removeAt(index);
-      if (_cachePembelian.lpembayaran!.length > 0) {
+      if (_cachePembelian.lpembayaran!.isNotEmpty) {
         return EnumDelete.suksessisa;
       } else {
         return EnumDelete.sukseshabis;
@@ -160,11 +160,11 @@ class UIPembayaran {
   int getTotalLunas() {
     int tmp = 0;
     if (lpembayaran != null) {
-      lpembayaran!.forEach((element) {
+      for (var element in lpembayaran!) {
         if (element.groupRadio == EnumCaraBayar.lunas) {
           tmp = tmp + (element.trx.jumlah! * element.trx.product!.hargajual!);
         }
-      });
+      }
     }
     _totalLunas = tmp;
     return tmp;
@@ -173,11 +173,11 @@ class UIPembayaran {
   int getTotalKonsinyasi() {
     int tmp = 0;
     if (lpembayaran != null) {
-      lpembayaran!.forEach((element) {
+      for (var element in lpembayaran!) {
         if (element.groupRadio == EnumCaraBayar.konsinyasi) {
           tmp = tmp + (element.trx.jumlah! * element.trx.product!.hargajual!);
         }
-      });
+      }
     }
     _totalKonsinyasi = tmp;
     return tmp;

@@ -171,10 +171,10 @@ class _FakturPembayaranDsState extends State<FakturPembayaranDs> {
   Widget _contentTransaksi(List<ItemTransaksi>? ltrx) {
     List<Widget> lw = [];
     if (ltrx != null) {
-      ltrx.forEach((element) {
+      for (var element in ltrx) {
         lw.add(_cellTransaksi(element.product!.nama,
             element.product!.hargajual!, element.jumlah!));
-      });
+      }
     }
 
     return Column(

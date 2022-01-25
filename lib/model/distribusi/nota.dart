@@ -55,7 +55,7 @@ class DetailNota {
       Map<String, dynamic> md = value;
       if (md['data_pembeli'] != null) {
         List<dynamic> ld = md['data_pembeli'];
-        if (ld.length > 0) {
+        if (ld.isNotEmpty) {
           Map<String, dynamic> mapp = ld[0];
           mitra = mapp['mitra_ad'] == null ? '' : mapp['mitra_ad'];
           namasales = mapp['nama_sales'] == null ? '' : mapp['nama_sales'];
@@ -83,7 +83,7 @@ class DetailNota {
 
       if (md['data_link_aja'] != null) {
         List<dynamic> ld = md['data_link_aja'];
-        if (ld.length > 0) {
+        if (ld.isNotEmpty) {
           Map<String, dynamic> map = ld[0];
           linkaja = ConverterNumber.stringToInt(map['link_aja']);
         }

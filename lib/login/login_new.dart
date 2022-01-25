@@ -10,7 +10,7 @@ import 'package:hero/util/constapp/accountcontroller.dart';
 class LoginPage extends StatefulWidget {
   final Function callbackSuccessLogin;
 
-  LoginPage(this.callbackSuccessLogin);
+  const LoginPage(this.callbackSuccessLogin, {Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -42,8 +42,8 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(children: [
-        PropertyImage.bgbawah(),
-        Container(
+        const PropertyImage.bgbawah(),
+        SizedBox(
           height: size.height,
           child: SingleChildScrollView(
             child: Form(
@@ -55,8 +55,8 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: size.height * 0.15,
                     ),
-                    PropertyImage.map(),
-                    SizedBox(
+                    const PropertyImage.map(),
+                    const SizedBox(
                       height: 30,
                     ),
                     // PropertyImage.textWelcome(),
@@ -84,14 +84,14 @@ class _LoginPageState extends State<LoginPage> {
             // _label('Username'),
             // _entryField1(_idTextController),
             TextFieldLogin('Username', _idTextController),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextFieldPassword('Password', _passwordTextController),
             // _label('Password'),
             // _entryFieldPassword(_passwordTextController),
             _isShowLoginGagal ? _ketLoginGagal() : Container(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             //_animationLogin(),
@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _isloading
-                    ? ButtonAppLoading()
+                    ? const ButtonAppLoading()
                     : ButtonAppSolid('Login', onTap: () {
                         setState(() {
                           _isloading = true;
@@ -123,8 +123,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _ketLoginGagal() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+    return const Padding(
+      padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: LabelAppMiring.size3(
         'Username atau Password salah.',
         color: Colors.red,
