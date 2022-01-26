@@ -6,7 +6,7 @@ import 'model/distribusi/datapembeli.dart';
 import 'model/pjp.dart';
 import 'model/promotion/promotion.dart';
 import 'modul_sales/sf_main.dart';
-import 'modulapp/camera/pagerecordvideo.dart';
+import 'modulapp/camera/recordvideo/pagerecordvideo.dart';
 import 'modulapp/camera/pagetakephoto.dart';
 import 'modulapp/camera/previewphoto.dart';
 import 'modulapp/camera/previewphotoupload.dart';

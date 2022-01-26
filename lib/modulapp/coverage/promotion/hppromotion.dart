@@ -3,7 +3,7 @@ import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/model/promotion/promotion.dart';
-import 'package:hero/modulapp/camera/pagerecordvideo.dart';
+import 'package:hero/modulapp/camera/recordvideo/pagerecordvideo.dart';
 import 'package:hero/modulapp/coverage/promotion/blocpromotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
