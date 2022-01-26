@@ -80,22 +80,22 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
   void _setValue() {
     // ph(widget.merchandising);
     // ph(widget.merchandising.isPhotoShowing());
-    _telkomselController!.text = widget.merchandising!.telkomsel != null
+    _telkomselController.text = widget.merchandising!.telkomsel != null
         ? '${widget.merchandising!.telkomsel}'
         : '';
-    _isatController!.text = widget.merchandising!.isat == null
+    _isatController.text = widget.merchandising!.isat == null
         ? ''
         : '${widget.merchandising!.isat}';
-    _xlController!.text =
+    _xlController.text =
         widget.merchandising!.xl == null ? '' : '${widget.merchandising!.xl}';
-    _triController!.text =
+    _triController.text =
         widget.merchandising!.tri == null ? '' : '${widget.merchandising!.tri}';
-    _smartController!.text =
+    _smartController.text =
         widget.merchandising!.sf == null ? '' : '${widget.merchandising!.sf}';
-    _axisController!.text = widget.merchandising!.axis == null
+    _axisController.text = widget.merchandising!.axis == null
         ? ''
         : '${widget.merchandising!.axis}';
-    _otherController!.text = widget.merchandising!.other == null
+    _otherController.text = widget.merchandising!.other == null
         ? ''
         : '${widget.merchandising!.other}';
   }

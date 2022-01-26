@@ -34,27 +34,6 @@ class DatabaseHelper {
 //  }
 
   void _onCreate(Database db, int version) async {
-    // await db.execute("CREATE TABLE "
-    //     "${TbProv.tableName}(${TbProv.id} INTEGER PRIMARY KEY, "
-    //     "${TbProv.realid} TEXT,"
-    //     "${TbProv.nama} TEXT)");
-    // await db.execute(
-    //     "CREATE TABLE ${TbKab.tableName}(${TbKab.id} INTEGER PRIMARY KEY, "
-    //     "${TbKab.realid} TEXT,"
-    //     "${TbKab.idprov} TEXT, "
-    //     "${TbKab.nama} TEXT)");
-    // await db.execute(
-    //     "CREATE TABLE ${TbKec.tableName}(${TbKec.id} INTEGER PRIMARY KEY, "
-    //     "${TbKec.realid} TEXT,"
-    //     "${TbKec.idcluster} TEXT, "
-    //     "${TbKec.idkab} TEXT, "
-    //     "${TbKec.nama} TEXT)");
-    // await db.execute(
-    //     "CREATE TABLE ${TbKel.tableName}(${TbKel.id} INTEGER PRIMARY KEY, "
-    //     "${TbKel.idkec} TEXT, "
-    //     "${TbKel.idkel} TEXT, "
-    //     "${TbKel.nama} TEXT)");
-
     await db.execute(
         "CREATE TABLE ${TbSerial.tableName}(${TbSerial.id} INTEGER PRIMARY KEY, "
         "${TbSerial.idproduk} TEXT, "

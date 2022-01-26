@@ -3,6 +3,7 @@ import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/login.dart';
 import 'package:hero/model/profile.dart';
+import 'package:hero/modul_sales/sf_main.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/coveragehome_new.dart';
 import 'package:hero/modulapp/pagetab.dart';
@@ -15,17 +16,17 @@ import 'package:hero/util/uiutil.dart';
 
 import '../configuration.dart';
 
-class HomeControllpage extends StatefulWidget {
+class MTHomeControllpage extends StatefulWidget {
   static const routeName = '/';
-  const HomeControllpage({Key? key, required this.statelogin})
+  const MTHomeControllpage({Key? key, required this.statelogin})
       : super(key: key);
   final HomeControllpageParam? statelogin;
 
   @override
-  _HomeControllpageState createState() => _HomeControllpageState();
+  _MTHomeControllpageState createState() => _MTHomeControllpageState();
 }
 
-class _HomeControllpageState extends State<HomeControllpage> {
+class _MTHomeControllpageState extends State<MTHomeControllpage> {
   int? _selectedtab;
   EnumStateLogin? _stateLogin;
   EnumAccount? _enumAccount;
@@ -310,15 +311,8 @@ class _HomeControllpageState extends State<HomeControllpage> {
   }
 }
 
-enum EnumStateLogin { loading, loginonprogress, loginsuccess }
-
-class HomeControllpageParam {
-  EnumStateLogin enumStateLogin;
-  HomeControllpageParam(this.enumStateLogin);
-}
-
-class SFRootApp extends StatelessWidget {
-  SFRootApp({Key? key}) : super(key: key);
+class MTRootApp extends StatelessWidget {
+  MTRootApp({Key? key}) : super(key: key);
   final HoreRoute _route = HoreRoute();
   @override
   Widget build(BuildContext context) {
@@ -328,7 +322,7 @@ class SFRootApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeControllpage(
+      home: MTHomeControllpage(
         statelogin: HomeControllpageParam(EnumStateLogin.loading),
       ),
       navigatorObservers: <NavigatorObserver>[
