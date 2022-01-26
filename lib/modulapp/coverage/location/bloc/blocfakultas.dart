@@ -89,7 +89,7 @@ class BlocFakultas extends AbsBlocLokasi {
   Future<bool> setupAsync() async {
     _cacheUiFakultas!.luniv = await _httpController.getComboUniv();
 
-    LocationData position = await LocationUtil.getCurrentLocation();
+    LocationData position = await LocationUtil().getCurrentLocation();
 
     _cacheUiFakultas!.fakultas.long = position.longitude;
     _cacheUiFakultas!.fakultas.lat = position.latitude;
@@ -130,7 +130,7 @@ class BlocFakultas extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil.getCurrentLocation().then((value) {
+    LocationUtil().getCurrentLocation().then((value) {
       _cacheUiFakultas!.fakultas.long = value.longitude;
       _cacheUiFakultas!.fakultas.lat = value.latitude;
       _sink(_cacheUiFakultas);

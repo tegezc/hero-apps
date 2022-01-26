@@ -21,7 +21,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
   Merchandising? _mspanduk;
   Merchandising? _mposter;
   Merchandising? _mpapan;
-  Merchandising? _mbackdrop;
+  Merchandising? _stikerScanQR;
 
   bool _isloading = true;
 
@@ -53,7 +53,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
       _mspanduk = map[Merchandising.tagSpanduk];
       _mposter = map[Merchandising.tagPoster];
       _mpapan = map[Merchandising.tagPapan];
-      _mbackdrop = map[Merchandising.tagBackdrop];
+      _stikerScanQR = map[Merchandising.tagStikerScanQR];
       return true;
     }
     return false;
@@ -117,7 +117,7 @@ class _HomeViewMerchandisingState extends State<HomeViewMerchandising> {
               ViewMerchandising(EnumMerchandising.spanduk, _mspanduk),
               ViewMerchandising(EnumMerchandising.poster, _mposter),
               ViewMerchandising(EnumMerchandising.papan, _mpapan),
-              ViewMerchandising(EnumMerchandising.stikerScanQR, _mbackdrop),
+              ViewMerchandising(EnumMerchandising.stikerScanQR, _stikerScanQR),
             ],
           ),
         ),

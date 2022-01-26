@@ -92,7 +92,7 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil.getCurrentLocation();
+    LocationData position = await LocationUtil().getCurrentLocation();
     HttpOutlet httpController = HttpOutlet();
     _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
     _cacheUioutlet!.outlet.long = position.longitude;
@@ -137,7 +137,7 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil.getCurrentLocation().then((value) {
+    LocationUtil().getCurrentLocation().then((value) {
       _cacheUioutlet!.outlet.long = value.longitude;
       _cacheUioutlet!.outlet.lat = value.latitude;
       _sink(_cacheUioutlet);

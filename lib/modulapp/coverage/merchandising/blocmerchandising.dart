@@ -58,7 +58,7 @@ class BlocMerchandising {
     }
     if (_cacheUiMerc!.stikerScanQR == null) {
       _cacheUiMerc!.stikerScanQR =
-          Merchandising.kosong(pjp, Merchandising.tagBackdrop);
+          Merchandising.stikerScanQR(pjp, Merchandising.tagStikerScanQR);
     }
     if (_cacheUiMerc!.papanNama == null) {
       _cacheUiMerc!.papanNama =
@@ -170,8 +170,8 @@ class BlocMerchandising {
         _cacheUiMerc!.papanNama = map[Merchandising.tagPapan];
       }
 
-      if (map[Merchandising.tagBackdrop] != null) {
-        _cacheUiMerc!.stikerScanQR = map[Merchandising.tagBackdrop];
+      if (map[Merchandising.tagStikerScanQR] != null) {
+        _cacheUiMerc!.stikerScanQR = map[Merchandising.tagStikerScanQR];
       }
     }
   }

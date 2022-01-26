@@ -197,8 +197,9 @@ class HttpMerchandising extends HttpBase {
             moutlet[Merchandising.tagPoster] = merchandising;
           } else if (merchandising.idjenisshare == Merchandising.tagPapan) {
             moutlet[Merchandising.tagPapan] = merchandising;
-          } else if (merchandising.idjenisshare == Merchandising.tagBackdrop) {
-            moutlet[Merchandising.tagBackdrop] = merchandising;
+          } else if (merchandising.idjenisshare ==
+              Merchandising.tagStikerScanQR) {
+            moutlet[Merchandising.tagStikerScanQR] = merchandising;
           }
         }
       }

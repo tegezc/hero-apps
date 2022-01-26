@@ -68,14 +68,14 @@ class BlocPoi extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil.getCurrentLocation();
+    LocationData position = await LocationUtil().getCurrentLocation();
     _cacheUipoi!.poi.long = position.longitude;
     _cacheUipoi!.poi.lat = position.latitude;
     return true;
   }
 
   void updateLongLat() {
-    LocationUtil.getCurrentLocation().then((value) {
+    LocationUtil().getCurrentLocation().then((value) {
       _cacheUipoi!.poi.long = value.longitude;
       _cacheUipoi!.poi.lat = value.latitude;
       _sink(_cacheUipoi);

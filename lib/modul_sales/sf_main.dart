@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/login/httplogin.dart';
-import 'package:hero/login/login.dart';
+import 'package:hero/login/login_new.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/modulapp/coverage/coveragehome_new.dart';

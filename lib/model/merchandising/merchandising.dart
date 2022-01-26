@@ -3,7 +3,7 @@ import 'package:hero/modulapp/camera/preferencephoto.dart';
 import 'package:hero/util/numberconverter.dart';
 
 class Merchandising {
-  static String tagBackdrop = 'BACKDROP';
+  static String tagStikerScanQR = 'BACKDROP';
   static String tagPerdana = 'PERDANA';
   static String tagVoucherFisik = 'VOUCHER_FISIK';
   static String tagPapan = 'PAPAN_NAMA';
@@ -71,6 +71,19 @@ class Merchandising {
     // sf = 0;
     // axis = 0;
     // other = 0;
+    isServerExist = false;
+    pathPhoto1 = null;
+    pathPhoto2 = null;
+    pathPhoto3 = null;
+  }
+
+  Merchandising.stikerScanQR(this.pjp, this.idjenisshare) {
+    isat = 0;
+    xl = 0;
+    tri = 0;
+    sf = 0;
+    axis = 0;
+    other = 0;
     isServerExist = false;
     pathPhoto1 = null;
     pathPhoto2 = null;

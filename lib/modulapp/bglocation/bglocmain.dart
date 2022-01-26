@@ -143,7 +143,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
     DateTime dt6 = DateTime(dt.year, dt.month, dt.day, 6, dt.minute, dt.second);
     DateTime dt18 = DateTime(dt.year, dt.month, dt.day, 18, 0, 0);
     if (dt.isAfter(dt6) && dt.isBefore(dt18)) {
-      loc.LocationData locationData = await LocationUtil.getCurrentLocation();
+      loc.LocationData locationData = await LocationUtil().getCurrentLocation();
       TgzLocation tgzLocation = TgzLocation(
           latitute: '${locationData.latitude}',
           longitute: '${locationData.longitude}');

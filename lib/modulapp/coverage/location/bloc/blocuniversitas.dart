@@ -80,7 +80,7 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil.getCurrentLocation();
+    LocationData position = await LocationUtil().getCurrentLocation();
     _cacheUiUniv!.univ.long = position.longitude;
     _cacheUiUniv!.univ.lat = position.latitude;
     return true;
@@ -122,7 +122,7 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil.getCurrentLocation().then((value) {
+    LocationUtil().getCurrentLocation().then((value) {
       _cacheUiUniv!.univ.long = value.longitude;
       _cacheUiUniv!.univ.lat = value.latitude;
       _sink(_cacheUiUniv);

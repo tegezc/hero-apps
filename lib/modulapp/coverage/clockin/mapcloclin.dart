@@ -62,7 +62,7 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   Future<bool> _setupLocation() async {
-    LocationData position = await LocationUtil.getCurrentLocation();
+    LocationData position = await LocationUtil().getCurrentLocation();
 
     _distanceInMeters = Geolocator.distanceBetween(position.latitude!,
         position.longitude!, _lokasi.latitude, _lokasi.longitude);

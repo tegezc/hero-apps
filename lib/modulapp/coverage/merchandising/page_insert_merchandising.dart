@@ -149,20 +149,38 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
                     buttonColor: Colors.red,
                     text: "SUBMIT",
                     onTap: () {
-                      if (widget.merchandising!.isvalidtosubmit()) {
-                        TgzDialog.loadingDialog(context);
-                        widget.blocMerchandising!
-                            .submit(widget.enumMerchandising)
-                            .then((value) {
-                          Navigator.of(context).pop();
-                          if (value) {
-                            _confirmSuccessSimpan();
-                          } else {
-                            _confirmGagalMenyimpan();
-                          }
-                        });
+                      bool isValidToSubmit;
+                      if (widget.enumMerchandising ==
+                          EnumMerchandising.stikerScanQR) {
+                        if (widget.merchandising!.telkomsel == 0 ||
+                            widget.merchandising!.telkomsel == 1) {
+                          isValidToSubmit = true;
+                        } else {
+                          isValidToSubmit = false;
+                          TgzDialog.confirmHarusDiisiStickerScanQr(context);
+                        }
                       } else {
-                        TgzDialog.confirmHarusDiisi(context);
+                        isValidToSubmit =
+                            widget.merchandising!.isvalidtosubmit();
+                        if (!isValidToSubmit) {
+                          TgzDialog.confirmHarusDiisi(context);
+                        }
+                      }
+
+                      if (isValidToSubmit) {
+                        if (widget.merchandising!.isvalidtosubmit()) {
+                          TgzDialog.loadingDialog(context);
+                          widget.blocMerchandising!
+                              .submit(widget.enumMerchandising)
+                              .then((value) {
+                            Navigator.of(context).pop();
+                            if (value) {
+                              _confirmSuccessSimpan();
+                            } else {
+                              _confirmGagalMenyimpan();
+                            }
+                          });
+                        }
                       }
                     },
                     isenable: true),
@@ -250,6 +268,13 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
 
   Widget _cellForm(double width, String label,
       TextEditingController? controller, EnumOperator enumOperator) {
+    bool enableTextfield = !widget.merchandising!.isServerExist;
+    if (enableTextfield &&
+        widget.enumMerchandising == EnumMerchandising.stikerScanQR) {
+      if (enumOperator != EnumOperator.telkomsel) {
+        enableTextfield = false;
+      }
+    }
     return Row(
       children: [
         SizedBox(width: 80, child: LabelBlack.size2(label)),
@@ -262,7 +287,7 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
                 widget.blocMerchandising!
                     .changeText(widget.enumMerchandising, str, enumOperator);
               },
-              enable: !widget.merchandising!.isServerExist,
+              enable: enableTextfield,
             ))
       ],
     );
@@ -417,20 +442,4 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
               ],
             ));
   }
-
-  // _loadingDialog() {
-  //   showDialog<String>(
-  //       context: context,
-  //       builder: (BuildContext context) => SimpleDialog(
-  //             title: LabelApp.size1(
-  //               'Loading...',
-  //               color: Colors.red,
-  //             ),
-  //             shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
-  //             children: <Widget>[
-  //               LoadingBouncingLine.circle(backgroundColor: Colors.deepOrange),
-  //             ],
-  //           ));
-  // }
 }
