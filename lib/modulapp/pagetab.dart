@@ -253,6 +253,7 @@ class _PageTabState extends State<PageTab> {
   }
 
   Widget _controllContentPencarian(UIPageTabSf item) {
+    Size s = MediaQuery.of(context).size;
     if (item.getCountList() == 0) {
       if (_controller.text.isNotEmpty) {
         return const WidgetPencarianKosong(
@@ -263,7 +264,7 @@ class _PageTabState extends State<PageTab> {
                 'Silahkan masukkan kata kunci \nuntuk mendapatkan hasil pencarian');
       }
     } else {
-      return _content(item);
+      return SizedBox(height: s.height - 365, child: _content(item));
     }
   }
 
