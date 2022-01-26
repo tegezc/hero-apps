@@ -96,20 +96,14 @@ class BlocPembayaran {
     bool returnvalue = false;
     if (snlunas.isNotEmpty) {
       bool value = await _httpDIstribution.submitLunas(pembeliLunas);
-      if (value == false) {
-        returnvalue = false;
-      } else {
-        returnvalue = true;
-      }
+
+      returnvalue = value;
     }
 
     if (snkonsinyasi.isNotEmpty) {
       bool value = await _httpDIstribution.submitKonsinyasi(pembeliKonsinyasi);
-      if (value == false) {
-        returnvalue = false;
-      } else {
-        returnvalue = true;
-      }
+
+      returnvalue = value;
     }
 
     if (returnvalue) {

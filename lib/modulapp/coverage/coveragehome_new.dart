@@ -32,6 +32,7 @@ class _CoverageHomeState extends State<CoverageHome> {
   final BlocHomePageCoverage _blocDashboard = BlocHomePageCoverage();
   int _counterBuild = 0;
   final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
+  final Configuration _configuration = Configuration();
 
   @override
   void initState() {
@@ -65,6 +66,7 @@ class _CoverageHomeState extends State<CoverageHome> {
           } else if (item.enumStateWidget == EnumStateWidget.startup) {
             return Container();
           }
+
           return Stack(children: [
             SingleChildScrollView(
               child: Container(
@@ -88,6 +90,12 @@ class _CoverageHomeState extends State<CoverageHome> {
                 padding: const EdgeInsets.only(left: 8, right: 8, top: 110),
                 child: Column(children: [
                   const BackgroundLocationUi(),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      LabelBlack.size1(_configuration.versionApp()),
+                    ],
+                  ),
                   SizedBox(
                       height: 50,
                       child: _account(

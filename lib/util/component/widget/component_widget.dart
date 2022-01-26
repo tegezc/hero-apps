@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero/configuration.dart';
 
 class ContainerRounded extends StatelessWidget {
   final Widget child;
@@ -42,6 +43,8 @@ class CustomScaffold extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Configuration configuration = Configuration();
+    String textTitle = '$title ${configuration.versionApp()}';
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: automaticallyImplyLeading,
@@ -50,7 +53,7 @@ class CustomScaffold extends StatelessWidget {
           color: Colors.white, //change your color here
         ),
         title: Text(
-          title,
+          textTitle,
           style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,

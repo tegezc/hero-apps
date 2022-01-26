@@ -38,29 +38,14 @@ class Configuration {
   ResolutionPreset resultPhoto() {
     return ResolutionPreset.medium;
   }
+
+  String versionApp() {
+    return '1.5.0+1';
+  }
 }
 
 void ph(Object? o) {
   if (kDebugMode) {
     print(o);
   }
-}
-
-enum EResulusiVid {
-  low,
-
-  /// 480p (640x480 on iOS, 720x480 on Android and Web)
-  medium,
-
-  /// 720p (1280x720)
-  high,
-
-  /// 1080p (1920x1080)
-  veryHigh,
-
-  /// 2160p (3840x2160 on Android and iOS, 4096x2160 on Web)
-  ultraHigh,
-
-  /// The highest resolution available.
-  max,
 }
