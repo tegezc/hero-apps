@@ -15,26 +15,27 @@ import 'package:hero/util/component/widget/widget_success_submit.dart';
 
 import '../../../configuration.dart';
 
-class PageMerchandising extends StatefulWidget {
+class PageInsertMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;
   final Merchandising? merchandising;
   final BlocMerchandising? blocMerchandising;
-  const PageMerchandising(
+  const PageInsertMerchandising(
       this.enumMerchandising, this.merchandising, this.blocMerchandising,
       {Key? key})
       : super(key: key);
   @override
-  _PageMerchandisingState createState() => _PageMerchandisingState();
+  _PageInsertMerchandisingState createState() =>
+      _PageInsertMerchandisingState();
 }
 
-class _PageMerchandisingState extends State<PageMerchandising> {
-  TextEditingController? _telkomselController;
-  TextEditingController? _isatController;
-  TextEditingController? _xlController;
-  TextEditingController? _triController;
-  TextEditingController? _smartController;
-  TextEditingController? _axisController;
-  TextEditingController? _otherController;
+class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
+  final TextEditingController _telkomselController = TextEditingController();
+  final TextEditingController _isatController = TextEditingController();
+  final TextEditingController _xlController = TextEditingController();
+  final TextEditingController _triController = TextEditingController();
+  final TextEditingController _smartController = TextEditingController();
+  final TextEditingController _axisController = TextEditingController();
+  final TextEditingController _otherController = TextEditingController();
   String? _title;
 
   int _buildCounter = 0;
@@ -60,25 +61,19 @@ class _PageMerchandisingState extends State<PageMerchandising> {
         _title = 'Voucher Fisik';
         break;
     }
-    _telkomselController = TextEditingController();
-    _isatController = TextEditingController();
-    _xlController = TextEditingController();
-    _triController = TextEditingController();
-    _smartController = TextEditingController();
-    _axisController = TextEditingController();
-    _otherController = TextEditingController();
+
     super.initState();
   }
 
   @override
   void dispose() {
-    _telkomselController!.dispose();
-    _isatController!.dispose();
-    _xlController!.dispose();
-    _triController!.dispose();
-    _smartController!.dispose();
-    _axisController!.dispose();
-    _otherController!.dispose();
+    _telkomselController.dispose();
+    _isatController.dispose();
+    _xlController.dispose();
+    _triController.dispose();
+    _smartController.dispose();
+    _axisController.dispose();
+    _otherController.dispose();
     super.dispose();
   }
 

@@ -35,6 +35,8 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
   String logStr = '';
   bool? isRunning;
 
+  int _builderCount = 0;
+
   @override
   void initState() {
     super.initState();
@@ -135,7 +137,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
   }
 
   Future<void> _conditionNotRunning() async {
-    // start jika jam > 06:00
+    // start jika jam > 06:00 && jam < 18:00
     Profile? profile = await AccountHore.getProfile();
     DateTime dt = DateTime.now();
     DateTime dt6 = DateTime(dt.year, dt.month, dt.day, 6, dt.minute, dt.second);
@@ -227,8 +229,7 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
                 notificationChannelName: 'Location tracking',
                 notificationTitle: 'Start Location Tracking',
                 notificationMsg: 'Track location in background',
-                notificationBigMsg:
-                    'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
+                notificationBigMsg: 'Uptodate location',
                 notificationIcon: '',
                 notificationIconColor: Colors.grey,
                 notificationTapCallback:

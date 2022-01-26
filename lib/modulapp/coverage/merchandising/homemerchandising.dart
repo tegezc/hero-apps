@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/modulapp/coverage/merchandising/pagemerchandising.dart';
+import 'package:hero/modulapp/coverage/merchandising/page_insert_merchandising.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/tgzdialog.dart';
@@ -139,17 +139,17 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                 ),
                 body: TabBarView(
                   children: [
-                    PageMerchandising(EnumMerchandising.perdana, item.perdana,
-                        _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.voucherfisik,
+                    PageInsertMerchandising(EnumMerchandising.perdana,
+                        item.perdana, _blocMerchandising),
+                    PageInsertMerchandising(EnumMerchandising.voucherfisik,
                         item.voucherFisik, _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.poster, item.poster,
-                        _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.spanduk, item.spanduk,
-                        _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.papan, item.papanNama,
-                        _blocMerchandising),
-                    PageMerchandising(EnumMerchandising.stikerScanQR,
+                    PageInsertMerchandising(EnumMerchandising.poster,
+                        item.poster, _blocMerchandising),
+                    PageInsertMerchandising(EnumMerchandising.spanduk,
+                        item.spanduk, _blocMerchandising),
+                    PageInsertMerchandising(EnumMerchandising.papan,
+                        item.papanNama, _blocMerchandising),
+                    PageInsertMerchandising(EnumMerchandising.stikerScanQR,
                         item.stikerScanQR, _blocMerchandising),
                   ],
                 ),

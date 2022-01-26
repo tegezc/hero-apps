@@ -87,7 +87,7 @@ class _CoverageHomeState extends State<CoverageHome> {
             Container(
                 padding: const EdgeInsets.only(left: 8, right: 8, top: 110),
                 child: Column(children: [
-                  const BackgroundLocationUi(),
+                  BackgroundLocationUi(),
                   SizedBox(
                       height: 50,
                       child: _account(
