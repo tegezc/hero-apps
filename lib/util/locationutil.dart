@@ -7,8 +7,8 @@ class LocationUtil {
   Future<LocationData> getCurrentLocation() async {
     // bool ispermisstion = await _setupPermissionlocation();
     // if (ispermisstion) {
-      LocationData _locationResult = await location.getLocation();
-      return _locationResult;
+    LocationData _locationResult = await location.getLocation();
+    return _locationResult;
     // }
     // return null;
   }
