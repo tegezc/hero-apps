@@ -98,3 +98,34 @@ class CustomScaffoldWithAction extends StatelessWidget {
     );
   }
 }
+
+class ScaffoldMT extends StatelessWidget {
+  final Widget body;
+  final String title;
+  final bool automaticallyImplyLeading;
+  const ScaffoldMT(
+      {Key? key,
+      required this.body,
+      required this.title,
+      this.automaticallyImplyLeading = true})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: automaticallyImplyLeading,
+        backgroundColor: Colors.red[600],
+        iconTheme: const IconThemeData(
+          color: Colors.white, //change your color here
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        actions: const [],
+      ),
+      body: body,
+    );
+  }
+}

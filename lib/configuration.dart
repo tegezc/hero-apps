@@ -2,14 +2,15 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 
 class Configuration {
-  static final Configuration _configuration = Configuration._internal();
-
-  factory Configuration() {
-    return _configuration;
-  }
-
-  Configuration._internal();
+  // static final Configuration _configuration = Configuration._internal();
+  //
+  // factory Configuration() {
+  //   return _configuration;
+  // }
+  //
+  // Configuration._internal();
   final bool _isProduction = true;
+  bool isSF = false;
   String host() {
     if (_isProduction) {
       return 'sihore.com';
@@ -25,9 +26,9 @@ class Configuration {
     if (maxradius == null || actualradius == null) {
       return false;
     }
-    if (_isProduction) {
-      return actualradius <= maxradius;
-    }
+    // if (_isProduction) {
+    //   return actualradius <= maxradius;
+    // }
     return true;
   }
 
@@ -40,7 +41,7 @@ class Configuration {
   }
 
   String versionApp() {
-    return '1.6.0+1';
+    return '1.7.0';
   }
 }
 

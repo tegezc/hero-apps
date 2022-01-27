@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hero/configuration.dart';
 import 'modul_sales/sf_main.dart';
+import 'module_mt/mt_main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
-    return SFRootApp();
+    Configuration configuration = Configuration();
+    if (configuration.isSF) {
+      return SFRootApp();
+    } else {
+      return MTRootApp();
+    }
   }
 }

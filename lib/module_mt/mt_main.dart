@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/login_new.dart';
 import 'package:hero/model/profile.dart';
@@ -9,6 +8,7 @@ import 'package:hero/modulapp/coverage/coveragehome_new.dart';
 import 'package:hero/modulapp/pagetab.dart';
 import 'package:hero/modulapp/pagetabds.dart';
 import 'package:hero/hore_route.dart';
+import 'package:hero/module_mt/presentation/menu_mt.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
@@ -27,110 +27,28 @@ class MTHomeControllpage extends StatefulWidget {
 }
 
 class _MTHomeControllpageState extends State<MTHomeControllpage> {
-  int? _selectedtab;
   EnumStateLogin? _stateLogin;
   EnumAccount? _enumAccount;
   String? _iduser = '';
-  int _counterBuild = 0;
 
   @override
   void initState() {
     _stateLogin = widget.statelogin!.enumStateLogin;
-    _selectedtab = 0;
     super.initState();
-  }
-
-  void _cekLogin() {
-    _isAlreadyLogin().then((value) {
-      if (value) {
-        _stateLogin = EnumStateLogin.loginsuccess;
-      } else {
-        _stateLogin = EnumStateLogin.loginonprogress;
-      }
-      setState(() {});
-    });
-  }
-
-  Future<bool> _isAlreadyLogin() async {
-    HttpDashboard httpDashboard = HttpDashboard();
-    var pjphariini = await httpDashboard.getPjpHariIni();
-    if (pjphariini == null) {
-      return false;
-    }
-    _enumAccount = await _getAccount();
-    return true;
   }
 
   Future<EnumAccount> _getAccount() async {
     return await AccountHore.getAccount();
   }
 
-  Widget _titleCoverage() {
-    return Row(children: [
-      const Image(
-        image: AssetImage('assets/image/coverage/ic_logo_hore.png'),
-        height: 40,
-      ),
-      const Spacer(),
-      GestureDetector(
-          onTap: () {
-            _showDialogConfirmLogout();
-          },
-          child: const Image(
-            image: AssetImage('assets/image/coverage/logout.png'),
-            height: 40,
-          ))
-    ]);
-  }
-
-  Widget _titleWidget(String id) {
-    return Row(
-      children: [
-        const Image(
-          image: AssetImage('assets/image/logoappbar.png'),
-          height: 40,
-        ),
-        const SizedBox(
-          width: 12,
-        ),
-        Text(
-          id,
-          style: const TextStyle(color: Colors.black, fontSize: 14),
-        ),
-        const Spacer(),
-        GestureDetector(
-            onTap: () {
-              _showDialogConfirmLogout();
-            },
-            child: const Image(
-              image: AssetImage('assets/image/coverage/logout.png'),
-              height: 40,
-            )),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_counterBuild == 0) {
-      _counterBuild++;
-      _cekLogin();
-    }
     if (_stateLogin == EnumStateLogin.loading) {
       return const LoadingNunggu("Mempersiapkan data\n mohon menunggu");
     } else if (_stateLogin == EnumStateLogin.loginonprogress) {
       return LoginPage(_callbackSuccessLogin);
     } else if (_stateLogin == EnumStateLogin.loginsuccess) {
-      return Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: _selectedtab != 0 ? _titleWidget(_iduser!) : _titleCoverage(),
-        ),
-        body: _getSelectedWidget(_selectedtab),
-      );
+      return const MenuMt();
     } else {
       return Container();
     }
@@ -139,7 +57,6 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
   void _callbackSuccessLogin() {
     _setupLoginSUccess().then((value) {
       setState(() {
-        _selectedtab = 0;
         _stateLogin = EnumStateLogin.loginsuccess;
       });
     });
@@ -151,42 +68,6 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
     _iduser = p.id;
     ph('ID USER LOGIN SUKSES$_iduser');
     return true;
-  }
-
-  Widget _getSelectedWidget(int? selectedtab) {
-    switch (selectedtab) {
-      case 0:
-        {
-          return const CoverageHome();
-        }
-      case 1:
-        {
-          return _enumAccount == EnumAccount.sf
-              ? const PageDistribusi()
-              : const PageDistribusiDs();
-        }
-      case 2:
-        {
-          return _enumAccount == EnumAccount.sf
-              ? const PageMerchandising()
-              : const PageMerchandisingDs();
-        }
-      case 3:
-        {
-          return _enumAccount == EnumAccount.sf
-              ? const PagePromotion()
-              : const PagePromotionDs();
-        }
-      case 4:
-        {
-          if (_enumAccount == EnumAccount.sf) {
-            return const PageSurvey();
-          } else if (_enumAccount == EnumAccount.ds) {
-            return const PageMarketAudit();
-          }
-        }
-    }
-    return Container();
   }
 
   _showDialogConfirmLogout() {
