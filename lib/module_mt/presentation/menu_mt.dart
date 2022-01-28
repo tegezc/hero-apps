@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/homepage/homepage_tandem_selling.dart';
 import 'package:hero/util/component/image/component_image_new.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/uiutil.dart';
 
 class MenuMt extends StatefulWidget {
   static const routeName = '/menumt';
@@ -60,7 +62,7 @@ class _MenuMtState extends State<MenuMt> {
           children: [
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumTab.distribution);
+                _tapMenu(EnumMenuMT.backChecking);
               },
               image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
               disableImage:
@@ -71,7 +73,7 @@ class _MenuMtState extends State<MenuMt> {
             ),
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumTab.promotion);
+                _tapMenu(EnumMenuMT.tandemSelling);
               },
               image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
               disableImage:
@@ -86,5 +88,7 @@ class _MenuMtState extends State<MenuMt> {
     );
   }
 
-  void _tapMenu(EnumTab enumTab) {}
+  void _tapMenu(EnumMenuMT enumTab) {
+    CommonUi().openPage(context, const HomePageTandemSelling());
+  }
 }

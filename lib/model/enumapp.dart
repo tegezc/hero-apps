@@ -1,4 +1,5 @@
 enum EnumTab { distribution, merchandising, promotion, marketaudit, mt }
+enum EnumMenuMT { backChecking, tandemSelling }
 
 //Device, Reguler, Pareto
 enum EnumJenisOutlet { device, reguler, pareto }

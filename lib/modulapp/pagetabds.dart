@@ -356,7 +356,7 @@ class _PageTabDsState extends State<PageTabDs> {
   }
 
   void _tapNota(String? nota) {
-    CommonUi.openPage(context, FakturPembayaranDs(nota, true));
+    CommonUi().openPage(context, FakturPembayaranDs(nota, true));
   }
 
   void _controllerTap(LokasiSearch item) {
@@ -364,15 +364,15 @@ class _PageTabDsState extends State<PageTabDs> {
       case EnumTab.distribution:
         break;
       case EnumTab.merchandising:
-        CommonUi.openPage(context, HomeViewMerchandising(item));
+        CommonUi().openPage(context, HomeViewMerchandising(item));
 
         break;
       case EnumTab.promotion:
-        CommonUi.openPage(context, HomePageViewPromotion(item));
+        CommonUi().openPage(context, HomePageViewPromotion(item));
         break;
       case EnumTab.marketaudit:
         {
-          CommonUi.openPage(context, MarketAuditDsView(lokasiSearch: item));
+          CommonUi().openPage(context, MarketAuditDsView(lokasiSearch: item));
         }
         break;
       case EnumTab.mt:

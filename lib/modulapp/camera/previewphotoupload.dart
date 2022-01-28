@@ -29,8 +29,9 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
     if (_buildCount == 0) {
       if (widget.param != null) {
         widget.param!.getPhotoUrlOrNull().then((value) {
-          _urlImageOrNull = value;
-          setState(() {});
+          setState(() {
+            _urlImageOrNull = value;
+          });
         });
         _buildCount++;
       }

@@ -40,6 +40,8 @@ class Configuration {
     return ResolutionPreset.medium;
   }
 
+  // SF : 1.7.0
+  // MT: 1.0.0
   String versionApp() {
     return '1.7.0';
   }

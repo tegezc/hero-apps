@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hero/model/enumapp.dart';
-import 'package:hero/model/sf/itemsearchoutlet.dart';
-import 'package:hero/modulapp/blocpagetabds.dart';
 import 'package:hero/modulapp/coverage/faktur/fakturbelanjads.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -49,89 +46,79 @@ class _PageTabDsState extends State<PageTabDs> {
   Widget build(BuildContext context) {
     String title = 'Tandem Selling';
     Size s = MediaQuery.of(context).size;
-    // return StreamBuilder<UIPageTabDs?>(
-    //     stream: _blocPageTabDs.uihpretur,
-    //     builder: (context, snapshot) {
-    //       if (!snapshot.hasData) {
-    //         return Container();
-    //       }
-    //       UIPageTabDs item = snapshot.data!;
-    //
-    //       return SingleChildScrollView(
-    //         child: Container(
-    //           decoration: const BoxDecoration(
-    //             image: DecorationImage(
-    //               //image: AssetImage('assets/image/coverage/BG.png'),
-    //               image: AssetImage('assets/image/new/BG.png'),
-    //               fit: BoxFit.cover,
-    //             ),
-    //           ),
-    //           height: s.height,
-    //           width: s.width,
-    //           child: Column(
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             mainAxisSize: MainAxisSize.max,
-    //             mainAxisAlignment: MainAxisAlignment.end,
-    //             children: [
-    //               Container(
-    //                 padding: const EdgeInsets.only(left: 8, right: 8, top: 50),
-    //                 height: s.height,
-    //                 width: s.width,
-    //                 child: Column(
-    //                   children: [
-    //                     const SizedBox(
-    //                       //untuk jarak atas ke tulisan judul
-    //                       height: 30,
-    //                     ),
-    //                     LabelBlack.size1(title, bold: true),
-    //                     const SizedBox(
-    //                       height: 12,
-    //                     ),
-    //                     _isbtnfiltershow
-    //                         ? SizedBox(
-    //                             width: s.width - 12,
-    //                             child: ButtonAppSolid('Edit Filter', onTap: () {
-    //                               setState(() {
-    //                                 _isbtnfiltershow = false;
-    //                               });
-    //                             }),
-    //                           )
-    //                         : _serchFilter(item),
-    //                     Expanded(
-    //                         child: Container(
-    //                             decoration: BoxDecoration(
-    //                                 borderRadius: BorderRadius.circular(10.0),
-    //                                 gradient: _horeBoxDecoration
-    //                                     .gradientBackgroundApp()),
-    //                             margin: const EdgeInsets.only(
-    //                                 top: 10.0, left: 0, right: 0),
-    //                             padding: const EdgeInsets.all(5.0),
-    //                             child: Card(
-    //                               elevation: 0,
-    //                               color: Colors.transparent,
-    //                               child: Column(
-    //                                 children: [
-    //                                   _headerPencarian(),
-    //                                   SizedBox(
-    //                                       height: s.height - 400,
-    //                                       child:
-    //                                           _controllContentPencarian(item)),
-    //                                   // _content(item),
-    //                                 ],
-    //                               ),
-    //                             ))),
-    //                     const SizedBox(
-    //                       height: 70,
-    //                     )
-    //                   ],
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     });
-    return Container();
+
+    return SingleChildScrollView(
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            //image: AssetImage('assets/image/coverage/BG.png'),
+            image: AssetImage('assets/image/new/BG.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        height: s.height,
+        width: s.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 8, right: 8, top: 50),
+              height: s.height,
+              width: s.width,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    //untuk jarak atas ke tulisan judul
+                    height: 30,
+                  ),
+                  LabelBlack.size1(title, bold: true),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  _isbtnfiltershow
+                      ? SizedBox(
+                          width: s.width - 12,
+                          child: ButtonAppSolid('Edit Filter', onTap: () {
+                            setState(() {
+                              _isbtnfiltershow = false;
+                            });
+                          }),
+                        )
+                      : _serchFilter(),
+                  Expanded(
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              gradient:
+                                  _horeBoxDecoration.gradientBackgroundApp()),
+                          margin: const EdgeInsets.only(
+                              top: 10.0, left: 0, right: 0),
+                          padding: const EdgeInsets.all(5.0),
+                          child: Card(
+                            elevation: 0,
+                            color: Colors.transparent,
+                            child: Column(
+                              children: [
+                                _headerPencarian(),
+                                SizedBox(
+                                    height: s.height - 400,
+                                    child: _controllContentPencarian()),
+                                // _content(item),
+                              ],
+                            ),
+                          ))),
+                  const SizedBox(
+                    height: 70,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _headerPencarian() {
@@ -148,8 +135,9 @@ class _PageTabDsState extends State<PageTabDs> {
     );
   }
 
-  Widget _controllContentPencarian(UIPageTabDs item) {
-    if (item.getCountList() == 0) {
+  Widget _controllContentPencarian() {
+    var item = [];
+    if (item.isEmpty) {
       if (_controller.text.isNotEmpty) {
         return const WidgetPencarianKosong(
             text: 'Pencarian dengan kriteria tersebut \nTIDAK DITEMUKAN.');
@@ -159,18 +147,19 @@ class _PageTabDsState extends State<PageTabDs> {
                 'Silahkan masukkan kata kunci \nuntuk mendapatkan hasil pencarian');
       }
     } else {
-      return _content(item);
+      return _content();
     }
   }
 
-  Widget _content(UIPageTabDs uiPageTabDs) {
+  Widget _content() {
+    var coba = [];
     return ListView.builder(
       padding: const EdgeInsets.only(top: 20),
       shrinkWrap: true,
-      itemCount: uiPageTabDs.getCountList(),
+      itemCount: coba.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: _cellController(uiPageTabDs, index),
+          title: _cellController(),
         );
       },
     );
@@ -182,12 +171,11 @@ class _PageTabDsState extends State<PageTabDs> {
     );
   }
 
-  Widget _cellController(UIPageTabDs uiPageTabDs, int index) {
-    LokasiSearch item = uiPageTabDs.lLokasi![index];
-    return _cellOutletDistibusi(item);
+  Widget _cellController() {
+    return _cellOutletDistibusi();
   }
 
-  Widget _cellOutlet(LokasiSearch item) {
+  Widget _cellOutlet() {
     return GestureDetector(
       onTap: () {
         //_controllerTap(item);
@@ -216,14 +204,14 @@ class _PageTabDsState extends State<PageTabDs> {
                         children: [
                           // LabelBlack.size2(item.iddigipos),
                           // _spasi(),
-                          LabelBlack.size3(item.namapembeli),
+                          LabelBlack.size3("dfd"),
                           _spasi(),
-                          LabelBlack.size3('tgl: ${item.getStrTgl()}'),
+                          LabelBlack.size3('tgl: '),
                         ],
                       ),
                     ),
                     ButtonApp.blue('View Detail', () {
-                      _controllerTap(item);
+                      _controllerTap();
                     }),
                   ],
                 ),
@@ -235,11 +223,7 @@ class _PageTabDsState extends State<PageTabDs> {
     );
   }
 
-  Widget _cellOutletDistibusi(LokasiSearch item) {
-    String? nama = item.namapembeli;
-    if (item.namapembeli!.length > 17) {
-      nama = item.namapembeli!.substring(0, 17);
-    }
+  Widget _cellOutletDistibusi() {
     return Column(
       children: [
         const Divider(),
@@ -264,15 +248,13 @@ class _PageTabDsState extends State<PageTabDs> {
                       children: [
                         // LabelBlack.size2(item.iddigipos),
                         // _spasi(),
-                        LabelBlack.size3(nama),
+                        LabelBlack.size3('nama'),
                         _spasi(),
-                        LabelBlack.size3('tgl: ${item.getStrTgl()}'),
+                        LabelBlack.size3('tgl: '),
                       ],
                     ),
                   ),
-                  ButtonApp.blue(item.nonota, () {
-                    _tapNota(item.nonota);
-                  }),
+                  ButtonApp.blue('', () {}),
                 ],
               ),
             ],
@@ -283,12 +265,12 @@ class _PageTabDsState extends State<PageTabDs> {
   }
 
   void _tapNota(String? nota) {
-    CommonUi.openPage(context, FakturPembayaranDs(nota, true));
+    CommonUi().openPage(context, FakturPembayaranDs(nota, true));
   }
 
-  void _controllerTap(LokasiSearch item) {}
+  void _controllerTap() {}
 
-  Widget _serchFilter(UIPageTabDs item) {
+  Widget _serchFilter() {
     double w = MediaQuery.of(context).size.width;
     return Container(
         decoration: BoxDecoration(

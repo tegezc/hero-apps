@@ -247,7 +247,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Sekolah', () {
                     Navigator.of(context).pop();
-                    CommonUi.openPage(context, EditorSekolah(null));
+                    CommonUi().openPage(context, EditorSekolah(null));
                   }),
                 ),
                 Padding(
@@ -255,7 +255,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Kampus', () {
                     Navigator.of(context).pop();
-                    CommonUi.openPage(context, EditorKampus(null));
+                    CommonUi().openPage(context, EditorKampus(null));
                   }),
                 ),
                 Padding(
@@ -263,7 +263,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Fakultas', () {
                     Navigator.of(context).pop();
-                    CommonUi.openPage(context, EditorFakultas(null));
+                    CommonUi().openPage(context, EditorFakultas(null));
                   }),
                 ),
                 Padding(
@@ -271,7 +271,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('POI', () {
                     Navigator.of(context).pop();
-                    CommonUi.openPage(context, EditorPOI(null));
+                    CommonUi().openPage(context, EditorPOI(null));
                   }),
                 ),
                 Padding(

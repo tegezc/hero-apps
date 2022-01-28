@@ -4,10 +4,9 @@ import 'package:hero/login/login_new.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/modul_sales/sf_main.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
-import 'package:hero/modulapp/coverage/coveragehome_new.dart';
-import 'package:hero/modulapp/pagetab.dart';
-import 'package:hero/modulapp/pagetabds.dart';
 import 'package:hero/hore_route.dart';
+import 'package:hero/module_mt/domain/entity/back_checking.dart';
+import 'package:hero/module_mt/domain/usecase/back_checking/back_checking_use_case.dart';
 import 'package:hero/module_mt/presentation/menu_mt.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -28,13 +27,32 @@ class MTHomeControllpage extends StatefulWidget {
 
 class _MTHomeControllpageState extends State<MTHomeControllpage> {
   EnumStateLogin? _stateLogin;
-  EnumAccount? _enumAccount;
   String? _iduser = '';
-
+  final BackCheckingUseCase _backCheckingUseCase = BackCheckingUseCase();
   @override
   void initState() {
-    _stateLogin = widget.statelogin!.enumStateLogin;
     super.initState();
+    _stateLogin = widget.statelogin!.enumStateLogin;
+    _cekLogin();
+  }
+
+  void _cekLogin() {
+    _isAlreadyLogin().then((value) {
+      if (value) {
+        _stateLogin = EnumStateLogin.loginsuccess;
+      } else {
+        _stateLogin = EnumStateLogin.loginonprogress;
+      }
+      setState(() {});
+    });
+  }
+
+  Future<bool> _isAlreadyLogin() async {
+    BackChecking? bc = await _backCheckingUseCase.getBackChecking();
+    if (bc == null) {
+      return false;
+    }
+    return true;
   }
 
   Future<EnumAccount> _getAccount() async {
@@ -63,7 +81,6 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
   }
 
   Future<bool> _setupLoginSUccess() async {
-    _enumAccount = await _getAccount();
     Profile p = await AccountHore.getProfile();
     _iduser = p.id;
     ph('ID USER LOGIN SUKSES$_iduser');

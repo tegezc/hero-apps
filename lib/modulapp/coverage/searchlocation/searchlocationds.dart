@@ -328,7 +328,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                     width: 5,
                   ),
                   ButtonApp.black('PJP', () {
-                    CommonUi.openPage(context, HistoryPJP(lok));
+                    CommonUi().openPage(context, HistoryPJP(lok));
                   }),
                   const SizedBox(
                     width: 8,
@@ -356,16 +356,16 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
       case EnumJenisLokasi.outlet:
         break;
       case EnumJenisLokasi.poi:
-        CommonUi.openPage(context, EditorPOI(lok.idutama));
+        CommonUi().openPage(context, EditorPOI(lok.idutama));
         break;
       case EnumJenisLokasi.sekolah:
-        CommonUi.openPage(context, EditorSekolah(lok.idutama));
+        CommonUi().openPage(context, EditorSekolah(lok.idutama));
         break;
       case EnumJenisLokasi.kampus:
-        CommonUi.openPage(context, EditorKampus(lok.idutama));
+        CommonUi().openPage(context, EditorKampus(lok.idutama));
         break;
       case EnumJenisLokasi.fakultas:
-        CommonUi.openPage(context, EditorFakultas(lok.idutama));
+        CommonUi().openPage(context, EditorFakultas(lok.idutama));
         break;
     }
   }
@@ -375,16 +375,16 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
       case EnumJenisLokasi.outlet:
         break;
       case EnumJenisLokasi.poi:
-        CommonUi.openPage(context, ViewPoi(lok.idutama));
+        CommonUi().openPage(context, ViewPoi(lok.idutama));
         break;
       case EnumJenisLokasi.sekolah:
-        CommonUi.openPage(context, ViewSekolah(lok.idutama));
+        CommonUi().openPage(context, ViewSekolah(lok.idutama));
         break;
       case EnumJenisLokasi.kampus:
-        CommonUi.openPage(context, ViewKampus(lok.idutama));
+        CommonUi().openPage(context, ViewKampus(lok.idutama));
         break;
       case EnumJenisLokasi.fakultas:
-        CommonUi.openPage(context, ViewFakultas(lok.idutama));
+        CommonUi().openPage(context, ViewFakultas(lok.idutama));
         break;
     }
   }
