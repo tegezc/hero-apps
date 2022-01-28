@@ -28,25 +28,33 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
   Promotion? _promotion;
   @override
   void initState() {
-    _promotion = widget.param!.promotion;
-    _controllerText.text =
-        _promotion!.nama == programlocal ? _promotion!.nmlocal! : '';
-    // Create and store the VideoPlayerController. The VideoPlayerController
-    // offers several different constructors to play videos from assets, files,
-    // or the internet.
-    _controller = VideoPlayerController.file(
-      File(widget.param!.source!),
-    );
+    if (widget.param != null) {
+      if (widget.param!.promotion != null) {
+        _promotion = widget.param!.promotion;
+        _controllerText.text =
+            _promotion!.nama == programlocal ? _promotion!.nmlocal! : '';
+        // Create and store the VideoPlayerController. The VideoPlayerController
+        // offers several different constructors to play videos from assets, files,
+        // or the internet.
 
-    // Initialize the controller and store the Future for later use.
-    _controller.initialize().then((value) {
-      setState(() {
-        _isloading = false;
-      });
-    });
+        if (widget.param!.source != null) {
+          _controller = VideoPlayerController.file(
+            File(widget.param!.source!),
+          );
 
-    // Use the controller to loop the video.
-    _controller.setLooping(true);
+          // Initialize the controller and store the Future for later use.
+          _controller.initialize().then((value) {
+            setState(() {
+              _isloading = false;
+            });
+          });
+
+          // Use the controller to loop the video.
+          _controller.setLooping(true);
+        }
+      }
+    }
+
     super.initState();
   }
 
@@ -64,6 +72,12 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
     if (_isloading) {
       return CustomScaffold(body: Container(), title: 'Loading...');
     }
+
+    if (_promotion == null) {
+      if (_promotion!.nama != null) {
+        return CustomScaffold(body: Container(), title: 'Error ');
+      }
+    }
     return CustomScaffold(
         body: SingleChildScrollView(
           child: Padding(
@@ -74,7 +88,7 @@ class _PreviewVideoUploadState extends State<PreviewVideoUpload> {
                   height: 20,
                 ),
                 LabelBlack.size1(
-                  widget.param!.promotion!.nama,
+                  _promotion!.nama,
                   bold: true,
                 ),
                 const SizedBox(
