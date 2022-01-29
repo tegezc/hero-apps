@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hero/configuration.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';
 import 'package:hero/modulapp/coverage/clockin/clcokinclockoutcontroller.dart';
 import 'package:hero/modulapp/coverage/clockin/menusales.dart';
@@ -13,8 +14,7 @@ import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/dateutil.dart';
-import 'package:hero/util/locationutil.dart';
-import 'package:location/location.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 
 class MapClockIn extends StatefulWidget {
   static const routeName = '/mapclockin';
@@ -28,6 +28,7 @@ class _MapClockInState extends State<MapClockIn> {
   GoogleMapController? mapController;
 
   EnumAccount? _enumAccount;
+  TgzLocationData? _currentLocation;
   double _minusWidget = 250.0;
   List<Marker> lmarkers = [];
   late LatLng _lokasi;
@@ -62,14 +63,17 @@ class _MapClockInState extends State<MapClockIn> {
   }
 
   Future<bool> _setupLocation() async {
-    LocationData position = await LocationUtil().getCurrentLocation();
+    _currentLocation =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (_currentLocation != null) {
+      _distanceInMeters = Geolocator.distanceBetween(_currentLocation!.latitude,
+          _currentLocation!.longitude, _lokasi.latitude, _lokasi.longitude);
 
-    _distanceInMeters = Geolocator.distanceBetween(position.latitude!,
-        position.longitude!, _lokasi.latitude, _lokasi.longitude);
+      _enumAccount = await AccountHore.getAccount();
 
-    _enumAccount = await AccountHore.getAccount();
-
-    return true;
+      return true;
+    }
+    return false;
   }
 
   @override
@@ -80,7 +84,7 @@ class _MapClockInState extends State<MapClockIn> {
         ) {
       return CustomScaffold(
         body: Container(),
-        title: '',
+        title: 'Loading . .',
       );
     }
     int? radius = 0;

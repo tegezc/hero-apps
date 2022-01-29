@@ -25,7 +25,7 @@ class _LocationDitolakState extends State<LocationDitolak> {
             height: 8,
           ),
           const LabelApp.size1(
-            'ijin akses lokasi.',
+            'ijin akses location.',
             color: Colors.red,
           ),
           const SizedBox(
@@ -57,7 +57,7 @@ class _LocationDitolakState extends State<LocationDitolak> {
                 const Padding(
                   padding:
                       EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
-                  child: LabelBlack.size2('Aplikasi ini butuh akses lokasi'),
+                  child: LabelBlack.size2('Aplikasi ini butuh akses location'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

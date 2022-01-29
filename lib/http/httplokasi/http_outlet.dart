@@ -27,7 +27,7 @@ class HttpOutlet extends HttpBase {
 
   Future<List<dynamic>?> detailOutlet(String? idoutlet) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/tampil/OUT/$idoutlet');
+    Uri uri = configuration.uri('/location/tampil/OUT/$idoutlet');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -43,7 +43,7 @@ class HttpOutlet extends HttpBase {
     Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     ph(jsonEncode(outlet.toJson()));
-    Uri uri = configuration.uri('/lokasi/outlet_create');
+    Uri uri = configuration.uri('/location/outlet_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -68,7 +68,7 @@ class HttpOutlet extends HttpBase {
   Future<Map<String, dynamic>?> updateOutlet(Outlet outlet) async {
     Map<String, String> headers = await getHeader();
     ph(outlet.toJson());
-    Uri uri = configuration.uri('/lokasi/outlet_update/${outlet.idoutlet}');
+    Uri uri = configuration.uri('/location/outlet_update/${outlet.idoutlet}');
     http.Response? response;
     try {
       response = await http.post(

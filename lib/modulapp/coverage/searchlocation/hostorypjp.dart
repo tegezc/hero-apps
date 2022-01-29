@@ -75,7 +75,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
 
   void _showMore() {
     _page++;
-    // _httpPjp.getHistoryPJP(_keyLok, widget.lokasi.idutama, _page).then((value) {
+    // _httpPjp.getHistoryPJP(_keyLok, widget.location.idutama, _page).then((value) {
     //   if(value!=null){
     //     _lpjp.addAll(value);
     //     setState(() {

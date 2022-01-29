@@ -32,27 +32,30 @@ class LoadingNunggu extends StatelessWidget {
 }
 
 class BelumAdaData extends StatelessWidget {
-  const BelumAdaData({Key? key}) : super(key: key);
+  final String message;
+  const BelumAdaData({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: const Text('Google Drive'),
+          title: const Text('Hore'),
         ),
-        body: const Center(child: Text('Belum ada data kontrak.')));
+        body: Center(child: Text(message)));
   }
 }
 
 class ErrorPage extends StatelessWidget {
+  final String message;
+  const ErrorPage({Key? key, required this.message}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[600],
-          title: const Text('Google Drive'),
+          title: const Text('Error page'),
         ),
-        body: const Center(child: Text('Terjadi Kesalahan')));
+        body: Center(child: Text(message)));
   }
 }

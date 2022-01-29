@@ -2,8 +2,8 @@ import 'package:hero/http/httplokasi/httpsekolah.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/itemui.dart';
 import 'package:hero/model/lokasi/sekolah.dart';
-import 'package:hero/util/locationutil.dart';
-import 'package:location/location.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'abstractbloclokasi.dart';
@@ -88,10 +88,14 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil().getCurrentLocation();
-    _cacheUisekolah!.sekolah.long = position.longitude;
-    _cacheUisekolah!.sekolah.lat = position.latitude;
-    return true;
+    TgzLocationData? position =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (position != null) {
+      _cacheUisekolah!.sekolah.long = position.longitude;
+      _cacheUisekolah!.sekolah.lat = position.latitude;
+      return true;
+    }
+    return false;
   }
 
   Future<bool> saveSekolah() async {
@@ -132,10 +136,12 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil().getCurrentLocation().then((value) {
-      _cacheUisekolah!.sekolah.long = value.longitude;
-      _cacheUisekolah!.sekolah.lat = value.latitude;
-      _sink(_cacheUisekolah);
+    TgzLocationDataSourceImpl().getCurrentLocationOrNull().then((value) {
+      if (value != null) {
+        _cacheUisekolah!.sekolah.long = value.longitude;
+        _cacheUisekolah!.sekolah.lat = value.latitude;
+        _sink(_cacheUisekolah);
+      }
     });
   }
 

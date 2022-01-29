@@ -33,7 +33,8 @@ class HttpRetur extends HttpBase {
     String finishDt = DateUtility.dateToStringParam(dtfinish);
     try {
       final Map<String, String> headers = await getHeader();
-      Uri uri = configuration.uri('/lokasi/retur_list/$starDt/$finishDt/$page');
+      Uri uri =
+          configuration.uri('/location/retur_list/$starDt/$finishDt/$page');
       final response = await http.get(uri, headers: headers);
       ph(response.statusCode);
       if (response.statusCode == 200) {
@@ -58,7 +59,7 @@ class HttpRetur extends HttpBase {
       "tglakhir": finishDt,
       "serial_number": serial
     };
-    Uri uri = configuration.uri('/lokasi/retur_list_sn');
+    Uri uri = configuration.uri('/location/retur_list_sn');
     http.Response? response;
     try {
       response = await http.post(
@@ -88,7 +89,7 @@ class HttpRetur extends HttpBase {
     // "sn_akhir" : "9000011121"
 
     Map map = {"sn_awal": serialawal, "sn_akhir": serialakhir};
-    Uri uri = configuration.uri('/lokasi/retur_sn');
+    Uri uri = configuration.uri('/location/retur_sn');
     http.Response? response;
     try {
       response = await http.post(
@@ -118,7 +119,7 @@ class HttpRetur extends HttpBase {
       lmap.add(element.toJson());
     }
     Map map = {"alasan": alasan, "data": lmap};
-    Uri uri = configuration.uri('/lokasi/retur_submit');
+    Uri uri = configuration.uri('/location/retur_submit');
     http.Response? response;
     try {
       response = await http.post(

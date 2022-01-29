@@ -2,7 +2,8 @@ import 'package:hero/http/httplokasi/httpfakultas.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
-import 'package:hero/util/locationutil.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -89,11 +90,15 @@ class BlocFakultas extends AbsBlocLokasi {
   Future<bool> setupAsync() async {
     _cacheUiFakultas!.luniv = await _httpController.getComboUniv();
 
-    LocationData position = await LocationUtil().getCurrentLocation();
-
-    _cacheUiFakultas!.fakultas.long = position.longitude;
-    _cacheUiFakultas!.fakultas.lat = position.latitude;
-    return true;
+    TgzLocationData? position =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (position != null) {
+      _cacheUiFakultas!.fakultas.long = position.longitude;
+      _cacheUiFakultas!.fakultas.lat = position.latitude;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<bool> saveFakultas() async {
@@ -130,10 +135,12 @@ class BlocFakultas extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil().getCurrentLocation().then((value) {
-      _cacheUiFakultas!.fakultas.long = value.longitude;
-      _cacheUiFakultas!.fakultas.lat = value.latitude;
-      _sink(_cacheUiFakultas);
+    TgzLocationDataSourceImpl().getCurrentLocationOrNull().then((value) {
+      if (value != null) {
+        _cacheUiFakultas!.fakultas.long = value.longitude;
+        _cacheUiFakultas!.fakultas.lat = value.latitude;
+        _sink(_cacheUiFakultas);
+      }
     });
   }
 

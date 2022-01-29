@@ -1,8 +1,8 @@
 import 'package:hero/http/httplokasi/http_poi.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/poi.dart';
-import 'package:hero/util/locationutil.dart';
-import 'package:location/location.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'abstractbloclokasi.dart';
@@ -68,17 +68,23 @@ class BlocPoi extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil().getCurrentLocation();
-    _cacheUipoi!.poi.long = position.longitude;
-    _cacheUipoi!.poi.lat = position.latitude;
-    return true;
+    TgzLocationData? position =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (position != null) {
+      _cacheUipoi!.poi.long = position.longitude;
+      _cacheUipoi!.poi.lat = position.latitude;
+      return true;
+    }
+    return false;
   }
 
   void updateLongLat() {
-    LocationUtil().getCurrentLocation().then((value) {
-      _cacheUipoi!.poi.long = value.longitude;
-      _cacheUipoi!.poi.lat = value.latitude;
-      _sink(_cacheUipoi);
+    TgzLocationDataSourceImpl().getCurrentLocationOrNull().then((value) {
+      if (value != null) {
+        _cacheUipoi!.poi.long = value.longitude;
+        _cacheUipoi!.poi.lat = value.latitude;
+        _sink(_cacheUipoi);
+      }
     });
   }
 

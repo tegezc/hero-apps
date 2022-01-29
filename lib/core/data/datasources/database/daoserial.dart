@@ -1,4 +1,4 @@
-import 'package:hero/core/database/stringdb.dart';
+import 'package:hero/core/data/datasources/database/stringdb.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:sqflite/sqflite.dart';
 

@@ -1,7 +1,8 @@
 import 'package:hero/http/httplokasi/httpkampus.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/universitas.dart';
-import 'package:hero/util/locationutil.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -39,7 +40,7 @@ class BlocUniversitas extends AbsBlocLokasi {
     _cacheUiUniv = UIUniv();
     _cacheUiUniv!.enumEditorState = EnumEditorState.edit;
     _cacheUiUniv!.enumStateWidget = EnumStateWidget.active;
-    _firtimeEditSetup(iduniv).then((value) {
+    _firstTimeEditSetup(iduniv).then((value) {
       if (value) {
         controllPic!.firstTimeEdit(_cacheUiUniv!.univ.pic);
         controllOwner!.firstTimeEdit(_cacheUiUniv!.univ.owner);
@@ -48,7 +49,7 @@ class BlocUniversitas extends AbsBlocLokasi {
     });
   }
 
-  Future<bool> _firtimeEditSetup(String? iduniv) async {
+  Future<bool> _firstTimeEditSetup(String? iduniv) async {
     List<dynamic>? response = await _httpController.detailUniv(iduniv);
     if (response != null) {
       if (response.isNotEmpty) {
@@ -80,10 +81,14 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil().getCurrentLocation();
-    _cacheUiUniv!.univ.long = position.longitude;
-    _cacheUiUniv!.univ.lat = position.latitude;
-    return true;
+    TgzLocationData? position =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (position != null) {
+      _cacheUiUniv!.univ.long = position.longitude;
+      _cacheUiUniv!.univ.lat = position.latitude;
+      return true;
+    }
+    return false;
   }
 
   Future<bool> saveUniv() async {
@@ -122,10 +127,12 @@ class BlocUniversitas extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil().getCurrentLocation().then((value) {
-      _cacheUiUniv!.univ.long = value.longitude;
-      _cacheUiUniv!.univ.lat = value.latitude;
-      _sink(_cacheUiUniv);
+    TgzLocationDataSourceImpl().getCurrentLocationOrNull().then((value) {
+      if (value != null) {
+        _cacheUiUniv!.univ.long = value.longitude;
+        _cacheUiUniv!.univ.lat = value.latitude;
+        _sink(_cacheUiUniv);
+      }
     });
   }
 

@@ -401,7 +401,7 @@ class _SearchLocationDsState extends State<SearchLocationDs> {
                   padding:
                       EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelApp.size2(
-                      'Tentukan spesifik jenis lokasi terlebih dulu.'),
+                      'Tentukan spesifik jenis location terlebih dulu.'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

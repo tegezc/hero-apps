@@ -32,7 +32,7 @@ class HttpSearchLocation extends HttpBase {
         break;
     }
     map = {"id_jenis_lokasi": namalokasi, "cari": query};
-    Uri uri = configuration.uri('/lokasi/cari');
+    Uri uri = configuration.uri('/location/cari');
     try {
       http.Response response = await http.post(
         uri,

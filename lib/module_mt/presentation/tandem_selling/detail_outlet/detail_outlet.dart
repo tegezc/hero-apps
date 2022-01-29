@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/uiutil.dart';
 
 class DetailOutlet extends StatefulWidget {
   const DetailOutlet({Key? key}) : super(key: key);
@@ -26,7 +30,16 @@ class _DetailOutletState extends State<DetailOutlet> {
               child: ButtonStrectWidth(
                   buttonColor: Colors.green,
                   text: 'Check Long Lat',
-                  onTap: () {},
+                  onTap: () {
+                    OutletMT outletMt = OutletMT(
+                        idDigipos: "23",
+                        idOutlet: "72",
+                        location: TgzLocationData(
+                            latitude: -5.404024, longitude: 105.280614),
+                        namaOutlet: "9999",
+                        radiusClockIn: 100);
+                    CommonUi().openPage(context, CheckLongLat(outletMt));
+                  },
                   isenable: true),
             ),
             Padding(

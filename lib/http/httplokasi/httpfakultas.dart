@@ -10,7 +10,7 @@ import '../../configuration.dart';
 class HttpFakultas extends HttpBase {
   Future<List<dynamic>?> detailFakultas(String? idfak) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/tampil/FAK/$idfak');
+    Uri uri = configuration.uri('/location/tampil/FAK/$idfak');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -24,7 +24,7 @@ class HttpFakultas extends HttpBase {
 
   Future<Map<String, dynamic>?> createFakultas(Fakultas outlet) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/fakultas_create');
+    Uri uri = configuration.uri('/location/fakultas_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -48,7 +48,7 @@ class HttpFakultas extends HttpBase {
 
   Future<Map<String, dynamic>?> updateFakultas(Fakultas outlet) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/fakultas_update/${outlet.idfak}');
+    Uri uri = configuration.uri('/location/fakultas_update/${outlet.idfak}');
     http.Response? response;
     try {
       response = await http.post(

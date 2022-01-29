@@ -1,4 +1,4 @@
-import 'package:hero/core/database/stringdb.dart';
+import 'package:hero/core/data/datasources/database/stringdb.dart';
 
 class Provinsi {
   int? id;

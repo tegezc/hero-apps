@@ -11,7 +11,7 @@ class HttpPjp extends HttpBase {
   Future<List<Pjp>?> getHistoryPJP(
       String key, String? idlokasi, int? page) async {
     Uri uri =
-        configuration.uri('/lokasi/tampil_history_pjp/$key/$idlokasi/$page');
+        configuration.uri('/location/tampil_history_pjp/$key/$idlokasi/$page');
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
@@ -29,7 +29,7 @@ class HttpPjp extends HttpBase {
   }
 
   Future<int?> getJmlHistoryPjp(String? idlokasi, String key) async {
-    Uri uri = configuration.uri('/lokasi/jumlah_history_pjp/$key/$idlokasi');
+    Uri uri = configuration.uri('/location/jumlah_history_pjp/$key/$idlokasi');
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);

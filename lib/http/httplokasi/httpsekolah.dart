@@ -11,7 +11,7 @@ class HttpSekolah extends HttpBase {
     Map<String, String> headers = await getHeader();
 
     try {
-      Uri uri = configuration.uri('/lokasi/tampil/SEK/$idsekolah');
+      Uri uri = configuration.uri('/location/tampil/SEK/$idsekolah');
       http.Response response = await http.get(uri, headers: headers);
       return json.decode(response.body);
     } catch (e) {
@@ -23,7 +23,7 @@ class HttpSekolah extends HttpBase {
     Map<String, String> headers = await getHeader();
     http.Response? response;
     try {
-      Uri uri = configuration.uri('/lokasi/sekolah_create');
+      Uri uri = configuration.uri('/location/sekolah_create');
       response = await http.post(
         uri,
         headers: headers,
@@ -44,7 +44,7 @@ class HttpSekolah extends HttpBase {
     http.Response? response;
     try {
       Uri uri =
-          configuration.uri('/lokasi/sekolah_update/${sekolah.idsekolah}');
+          configuration.uri('/location/sekolah_update/${sekolah.idsekolah}');
       response = await http.post(
         uri,
         headers: headers,

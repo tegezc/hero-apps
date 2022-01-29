@@ -4,7 +4,7 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/menu.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/model/tgzlocation.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +13,7 @@ import '../../configuration.dart';
 
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {
-    Uri uri = configuration.uri('/lokasi/pjp_daftar');
+    Uri uri = configuration.uri('/location/pjp_daftar');
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http
@@ -72,7 +72,7 @@ class HttpDashboard extends HttpBase {
   }
 
   Future<bool> trackingSales(
-      String sales, TgzLocation userLocation, String dateString) async {
+      String sales, TgzLocationData? userLocation, String dateString) async {
     // Map<String, String> headers = {
     //   'Auth-Key': 'restapihore',
     //   'Client-Service': 'frontendclienthore',
@@ -89,13 +89,23 @@ class HttpDashboard extends HttpBase {
     //     desiredAccuracy: LocationAccuracy.high);
 
     final Map<String, String> headers = await getHeader();
+    Map param;
+    if (userLocation == null) {
+      param = {
+        "id_sales": sales,
+        "longitude": '',
+        "latitude": '',
+        "waktu_user": '$dateString'
+      };
+    } else {
+      param = {
+        "id_sales": sales,
+        "longitude": '${userLocation.longitude}',
+        "latitude": '${userLocation.latitude}',
+        "waktu_user": '$dateString'
+      };
+    }
 
-    Map param = {
-      "id_sales": sales,
-      "longitude": '${userLocation.longitute}',
-      "latitude": '${userLocation.latitute}',
-      "waktu_user": '$dateString'
-    };
     Uri uri = configuration.uri('/tracking/tracking_pjp');
     http.Response? response;
     try {
@@ -112,8 +122,8 @@ class HttpDashboard extends HttpBase {
         return false;
       }
     } catch (e) {
-      ph(e);
-      ph(response?.body);
+      // ph(e);
+      // ph(response?.body);
       return false;
     }
   }

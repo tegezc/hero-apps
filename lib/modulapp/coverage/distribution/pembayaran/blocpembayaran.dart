@@ -1,4 +1,4 @@
-import 'package:hero/core/database/daoserial.dart';
+import 'package:hero/core/data/datasources/database/daoserial.dart';
 import 'package:hero/http/coverage/httpdistibusi.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/pjp.dart';

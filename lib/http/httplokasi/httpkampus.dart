@@ -9,7 +9,7 @@ import '../../configuration.dart';
 class HttpKampus extends HttpBase {
   Future<List<dynamic>?> detailUniv(String? iduniv) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/tampil/KAM/$iduniv');
+    Uri uri = configuration.uri('/location/tampil/KAM/$iduniv');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -25,7 +25,7 @@ class HttpKampus extends HttpBase {
     Map<String, String> headers = await getHeader();
     //  Outlet o = dummyWajib();
     ph(univ.toJson());
-    Uri uri = configuration.uri('/lokasi/kampus_create');
+    Uri uri = configuration.uri('/location/kampus_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -49,7 +49,7 @@ class HttpKampus extends HttpBase {
 
   Future<Map<String, dynamic>?> updateKampus(Universitas univ) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/kampus_update/${univ.iduniv}');
+    Uri uri = configuration.uri('/location/kampus_update/${univ.iduniv}');
     http.Response? response;
     try {
       response = await http.post(

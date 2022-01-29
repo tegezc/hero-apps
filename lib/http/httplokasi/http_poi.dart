@@ -9,7 +9,7 @@ import '../../configuration.dart';
 class HttpPoi extends HttpBase {
   Future<List<dynamic>?> detailPoi(String? idpoi) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/tampil/POI/$idpoi');
+    Uri uri = configuration.uri('/location/tampil/POI/$idpoi');
     try {
       http.Response response = await http.get(uri, headers: headers);
 
@@ -23,7 +23,7 @@ class HttpPoi extends HttpBase {
 
   Future<Map<String, dynamic>?> createPoi(Poi poi) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/poi_create');
+    Uri uri = configuration.uri('/location/poi_create');
     http.Response? response;
     try {
       response = await http.post(
@@ -47,7 +47,7 @@ class HttpPoi extends HttpBase {
 
   Future<Map<String, dynamic>?> updatePoi(Poi poi) async {
     Map<String, String> headers = await getHeader();
-    Uri uri = configuration.uri('/lokasi/poi_update/${poi.idpoi}');
+    Uri uri = configuration.uri('/location/poi_update/${poi.idpoi}');
     http.Response? response;
     try {
       response = await http.post(

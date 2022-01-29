@@ -10,10 +10,9 @@ import 'package:background_locator/settings/locator_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/profile.dart';
-import 'package:hero/model/tgzlocation.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/util/dateutil.dart';
-import 'package:hero/util/locationutil.dart';
-import 'package:location/location.dart' as loc;
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location_permissions/location_permissions.dart';
 
 import '../../configuration.dart';
@@ -34,8 +33,6 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
 
   String logStr = '';
   bool? isRunning;
-
-  int _builderCount = 0;
 
   @override
   void initState() {
@@ -96,14 +93,17 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
           if (timeint > flagint!) {
             List<String> loc = lineloc[1].split('|');
             if (loc.length == 2) {
-              //        ph('send loc $tmp');
-              TgzLocation tgzLocation =
-                  TgzLocation(latitute: loc[0], longitute: loc[1]);
-              String dateString =
-                  DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
-              bool value = await httpDashboard.trackingSales(
-                  profile.id!, tgzLocation, dateString);
-              ph(value);
+              double? long = double.tryParse(loc[0]);
+              double? lat = double.tryParse(loc[1]);
+              if (long != null && lat != null) {
+                TgzLocationData tgzLocation =
+                    TgzLocationData(latitude: lat, longitude: long);
+                String dateString =
+                    DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
+                bool value = await httpDashboard.trackingSales(
+                    profile.id!, tgzLocation, dateString);
+                ph(value);
+              }
             }
 
             flagint = timeint;
@@ -143,15 +143,15 @@ class _BackgroundLocationUiState extends State<BackgroundLocationUi> {
     DateTime dt6 = DateTime(dt.year, dt.month, dt.day, 6, dt.minute, dt.second);
     DateTime dt18 = DateTime(dt.year, dt.month, dt.day, 18, 0, 0);
     if (dt.isAfter(dt6) && dt.isBefore(dt18)) {
-      loc.LocationData locationData = await LocationUtil().getCurrentLocation();
-      TgzLocation tgzLocation = TgzLocation(
-          latitute: '${locationData.latitude}',
-          longitute: '${locationData.longitude}');
-
-      String dateString = DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
-      HttpDashboard httpDashboard = HttpDashboard();
-      await httpDashboard.trackingSales(profile.id!, tgzLocation, dateString);
-      _onStart();
+      TgzLocationData? locationData =
+          await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+      if (locationData != null) {
+        String dateString = DateUtility.dateToYYYYMMDDHHMMSS(DateTime.now());
+        HttpDashboard httpDashboard = HttpDashboard();
+        await httpDashboard.trackingSales(
+            profile.id!, locationData, dateString);
+        _onStart();
+      }
     }
   }
 

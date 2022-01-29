@@ -1,7 +1,8 @@
 import 'package:hero/http/httplokasi/http_outlet.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/outlet.dart';
-import 'package:hero/util/locationutil.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -92,12 +93,16 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   Future<bool> setupAsync() async {
-    LocationData position = await LocationUtil().getCurrentLocation();
-    HttpOutlet httpController = HttpOutlet();
-    _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
-    _cacheUioutlet!.outlet.long = position.longitude;
-    _cacheUioutlet!.outlet.lat = position.latitude;
-    return true;
+    TgzLocationData? position =
+        await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
+    if (position != null) {
+      HttpOutlet httpController = HttpOutlet();
+      _cacheUioutlet!.ljnsoutlet = await httpController.comboJenisOutlet();
+      _cacheUioutlet!.outlet.long = position.longitude;
+      _cacheUioutlet!.outlet.lat = position.latitude;
+      return true;
+    }
+    return false;
   }
 
   Future<bool> saveOutlet() async {
@@ -137,10 +142,12 @@ class BlocOutlet extends AbsBlocLokasi {
   }
 
   void updateLongLat() {
-    LocationUtil().getCurrentLocation().then((value) {
-      _cacheUioutlet!.outlet.long = value.longitude;
-      _cacheUioutlet!.outlet.lat = value.latitude;
-      _sink(_cacheUioutlet);
+    TgzLocationDataSourceImpl().getCurrentLocationOrNull().then((value) {
+      if (value != null) {
+        _cacheUioutlet!.outlet.long = value.longitude;
+        _cacheUioutlet!.outlet.lat = value.latitude;
+        _sink(_cacheUioutlet);
+      }
     });
   }
 
