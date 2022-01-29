@@ -1,0 +1,26 @@
+[
+  {
+    "id_tap": "TAP001",
+    "nama_tap": "TAP KALIANDA"
+  },
+  {
+    "id_tap": "TAP002",
+    "nama_tap": "TAP KEDATON"
+  },
+  {
+    "id_tap": "TAP003",
+    "nama_tap": "TAP NATAR"
+  },
+  {
+    "id_tap": "TAP004",
+    "nama_tap": "TAP PRINGSEWU"
+  },
+  {
+    "id_tap": "TAP005",
+    "nama_tap": "TAP TANJUNG BINTANG"
+  },
+  {
+    "id_tap": "TAP006",
+    "nama_tap": "TAP TELUK BETUNG"
+  }
+]

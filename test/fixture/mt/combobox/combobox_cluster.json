@@ -1,0 +1,46 @@
+[
+  {
+    "id_cluster": "CTR001",
+    "nama_cluster": "BUMI RAFFLESIA"
+  },
+  {
+    "id_cluster": "CTR002",
+    "nama_cluster": "MUSI RAWAS"
+  },
+  {
+    "id_cluster": "CTR003",
+    "nama_cluster": "JAMBI BARAT"
+  },
+  {
+    "id_cluster": "CTR004",
+    "nama_cluster": "JAMBI INNER"
+  },
+  {
+    "id_cluster": "CTR005",
+    "nama_cluster": "BANDAR LAMPUNG"
+  },
+  {
+    "id_cluster": "CTR006",
+    "nama_cluster": "LAMPUNG TENGAH"
+  },
+  {
+    "id_cluster": "CTR007",
+    "nama_cluster": "LAMPUNG UTARA"
+  },
+  {
+    "id_cluster": "CTR008",
+    "nama_cluster": "BANYUASIN"
+  },
+  {
+    "id_cluster": "CTR009",
+    "nama_cluster": "BUMI SRIWIJAYA"
+  },
+  {
+    "id_cluster": "CTR010",
+    "nama_cluster": "OGAN KOMERING"
+  },
+  {
+    "id_cluster": "CTR011",
+    "nama_cluster": "BANGKA BELITUNG"
+  }
+]
