@@ -1,0 +1,30 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id_pilihan": "1",
+      "pilihan": "Terbaaeek",
+      "angka": "100"
+    },
+    {
+      "id_pilihan": "2",
+      "pilihan": "Baik Sekali",
+      "angka": "90"
+    },
+    {
+      "id_pilihan": "3",
+      "pilihan": "Baik",
+      "angka": "70"
+    },
+    {
+      "id_pilihan": "4",
+      "pilihan": "Kurang",
+      "angka": "50"
+    },
+    {
+      "id_pilihan": "5",
+      "pilihan": "Kurang Sekali",
+      "angka": "30"
+    }
+  ]
+}

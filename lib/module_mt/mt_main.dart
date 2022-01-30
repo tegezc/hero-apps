@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/login_new.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/modul_sales/sf_main.dart';
 import 'package:hero/modulapp/camera/loadingview.dart';
 import 'package:hero/hore_route.dart';
-import 'package:hero/module_mt/domain/entity/back_checking.dart';
 import 'package:hero/module_mt/domain/usecase/back_checking/back_checking_use_case.dart';
 import 'package:hero/module_mt/presentation/menu_mt.dart';
-import 'package:hero/util/component/button/component_button.dart';
-import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 
 import '../configuration.dart';
+import 'domain/entity/back_checking.dart';
 
 class MTHomeControllpage extends StatefulWidget {
   static const routeName = '/';
@@ -55,10 +52,6 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
     return true;
   }
 
-  Future<EnumAccount> _getAccount() async {
-    return await AccountHore.getAccount();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_stateLogin == EnumStateLogin.loading) {
@@ -85,48 +78,6 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
     _iduser = p.id;
     ph('ID USER LOGIN SUKSES$_iduser');
     return true;
-  }
-
-  _showDialogConfirmLogout() {
-    showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => SimpleDialog(
-              title: const Text('Confirm'),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              children: <Widget>[
-                const Padding(
-                  padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
-                  child: LabelBlack.size2('Apakah anda yakin akan logout?'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Logout', () {
-                    HttpLogin httpLogin = HttpLogin();
-                    httpLogin.logout().then((value) {
-                      if (value) {
-                        ph('Log Out');
-                      } else {
-                        ph('gagal log out');
-                      }
-                    });
-                    Navigator.of(context).pop();
-                    setState(() {
-                      _stateLogin = EnumStateLogin.loginonprogress;
-                    });
-                  }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Cancel', () {
-                    Navigator.of(context).pop();
-                  }),
-                ),
-              ],
-            ));
   }
 }
 

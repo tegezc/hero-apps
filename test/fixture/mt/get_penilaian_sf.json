@@ -1,0 +1,81 @@
+{
+  "status": 200,
+  "data": {
+    "Personality": {
+      "parameter": [
+        {
+          "id_parameter": "1",
+          "parameter": "Kunjungan",
+          "bobot": "9"
+        },
+        {
+          "id_parameter": "2",
+          "parameter": "Komunikasi",
+          "bobot": "9"
+        },
+        {
+          "id_parameter": "3",
+          "parameter": "Kejujuran",
+          "bobot": "9"
+        },
+        {
+          "id_parameter": "4",
+          "parameter": "Pelayanan",
+          "bobot": "9"
+        }
+      ]
+    },
+    "Distribution": {
+      "parameter": [
+        {
+          "id_parameter": "5",
+          "parameter": "Pardana/SA Availability",
+          "bobot": "8"
+        },
+        {
+          "id_parameter": "6",
+          "parameter": "Voucher Fisik Availability",
+          "bobot": "8"
+        },
+        {
+          "id_parameter": "7",
+          "parameter": "LinkAja Availability",
+          "bobot": "8"
+        }
+      ]
+    },
+    "Merchandising": {
+      "parameter": [
+        {
+          "id_parameter": "8",
+          "parameter": "Perdana Share",
+          "bobot": "8"
+        },
+        {
+          "id_parameter": "9",
+          "parameter": "Voucher Fisik Share",
+          "bobot": "8"
+        },
+        {
+          "id_parameter": "10",
+          "parameter": "Spanduk Share",
+          "bobot": "8"
+        },
+        {
+          "id_parameter": "11",
+          "parameter": "Poster Share",
+          "bobot": "8"
+        }
+      ]
+    },
+    "Promotion": {
+      "parameter": [
+        {
+          "id_parameter": "12",
+          "parameter": "Clear Socialization",
+          "bobot": "8"
+        }
+      ]
+    }
+  }
+}
