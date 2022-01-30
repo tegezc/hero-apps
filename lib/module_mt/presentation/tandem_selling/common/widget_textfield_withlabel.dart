@@ -4,22 +4,21 @@ class TextFieldNumberOnlyWithLabel extends StatefulWidget {
   final String label;
   final double widthLabel;
   final double widthTextField;
-  final TextEditingController controller;
+  // final TextEditingController controller;
   final Function(String)? onChanged;
   final bool enable;
   final String? validation;
 
-  const TextFieldNumberOnlyWithLabel(
-      {Key? key,
-      required this.widthTextField,
-      this.onChanged,
-      this.enable = true,
-      this.validation,
-      required this.widthLabel,
-      required this.label,
-      required this.controller,
-      l})
-      : super(key: key);
+  const TextFieldNumberOnlyWithLabel({
+    Key? key,
+    required this.widthTextField,
+    this.onChanged,
+    this.enable = true,
+    this.validation,
+    required this.widthLabel,
+    required this.label,
+    // required this.controller,
+  }) : super(key: key);
 
   @override
   _TextFieldNumberOnlyWithLabelState createState() =>
@@ -47,9 +46,7 @@ class _TextFieldNumberOnlyWithLabelState
             child: Text(':'),
           ),
         ),
-        SizedBox(
-            width: widget.widthTextField,
-            child: _entryField(widget.controller)),
+        SizedBox(width: widget.widthTextField, child: _entryField()),
       ],
     );
   }
@@ -67,7 +64,7 @@ class _TextFieldNumberOnlyWithLabelState
     );
   }
 
-  Widget _entryField(TextEditingController? controller) {
+  Widget _entryField() {
     return TextFormField(
       enabled: widget.enable,
       style: _textfieldStyle,
@@ -82,7 +79,7 @@ class _TextFieldNumberOnlyWithLabelState
         }
       },
       maxLines: 1,
-      controller: controller,
+      // controller: controller,
       keyboardType: TextInputType.number,
       decoration: const InputDecoration(
         border: OutlineInputBorder(

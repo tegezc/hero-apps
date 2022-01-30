@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero/configuration.dart';
+import 'package:hero/module_mt/config_mt.dart';
 
 class ContainerRounded extends StatelessWidget {
   final Widget child;
@@ -111,6 +112,8 @@ class ScaffoldMT extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    ConfigurationMT config = ConfigurationMT();
+    String text = '$title ${config.versionApp()}';
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: automaticallyImplyLeading,
@@ -119,7 +122,7 @@ class ScaffoldMT extends StatelessWidget {
           color: Colors.white, //change your color here
         ),
         title: Text(
-          title,
+          text,
           style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,

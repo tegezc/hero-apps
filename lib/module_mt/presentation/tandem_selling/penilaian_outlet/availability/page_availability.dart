@@ -9,7 +9,6 @@ class PageAvailability extends StatefulWidget {
 }
 
 class _PageAvailabilityState extends State<PageAvailability> {
-  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -22,7 +21,7 @@ class _PageAvailabilityState extends State<PageAvailability> {
           child: TextFieldNumberOnlyWithLabel(
               widthLabel: widthLabel,
               widthTextField: widthTextField,
-              controller: _controller,
+              // controller: _controller,
               label: 'Telkomsel'),
         ),
       ],
