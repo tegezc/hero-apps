@@ -4,13 +4,13 @@ class OutletMT {
   String idOutlet;
   String idDigipos;
   String namaOutlet;
-  TgzLocationData location;
-  int radiusClockIn;
+  TgzLocationData? location;
+  int? radiusClockIn;
 
   OutletMT(
       {required this.idDigipos,
       required this.idOutlet,
-      required this.location,
       required this.namaOutlet,
-      required this.radiusClockIn});
+      this.location,
+      this.radiusClockIn});
 }

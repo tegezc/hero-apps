@@ -11,7 +11,7 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 
 class HttpMarketAuditSF extends HttpBase {
   Future<bool> createSurvey(Map<String, dynamic> map) async {

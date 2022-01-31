@@ -5,7 +5,7 @@ import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:http/http.dart' as http;
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpFakultas extends HttpBase {
   Future<List<dynamic>?> detailFakultas(String? idfak) async {

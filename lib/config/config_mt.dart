@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 
 class ConfigurationMT {
-  final bool _isProduction = true;
+  final bool _isProduction = false;
   bool isSF = false;
   String host() {
     if (_isProduction) {

@@ -1,9 +1,9 @@
-import 'package:hero/configuration.dart';
+import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 
 class HttpBase {
-  Configuration configuration = Configuration();
+  ConfigurationSf configuration = ConfigurationSf();
 
   Future<Map<String, String>> getHeader() async {
     Profile profile = await AccountHore.getProfile();

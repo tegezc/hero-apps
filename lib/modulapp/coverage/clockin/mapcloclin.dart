@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero/configuration.dart';
+import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
@@ -35,7 +35,7 @@ class _MapClockInState extends State<MapClockIn> {
   late final ClockInClockOutController _clockInClockOutController;
 
   EnumStatusTempat? _valueRadioButton;
-  final Configuration _configuration = Configuration();
+  final ConfigurationSf _configuration = ConfigurationSf();
 
   double _distanceInMeters = 0.0;
   Set<Circle>? circles;

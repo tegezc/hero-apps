@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:http/http.dart' as http;
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpLogin extends HttpBase {
   Future<Map<String, dynamic>?> login(String username, String password) async {

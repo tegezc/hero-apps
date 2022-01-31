@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 import '../../colorutil.dart';
 import '../../dateutil.dart';
 import '../label/component_label.dart';

@@ -7,7 +7,7 @@ import 'package:hero/modulapp/blocpagetabsf.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
-import '../configuration.dart';
+import '../config/configuration_sf.dart';
 
 class Httphpsearchsf extends HttpBase {
   /// dtstart dab dtfinish tidak boleh null

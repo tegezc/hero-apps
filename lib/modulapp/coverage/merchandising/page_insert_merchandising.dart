@@ -13,7 +13,7 @@ import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 
 class PageInsertMerchandising extends StatefulWidget {
   final EnumMerchandising enumMerchandising;

@@ -15,7 +15,7 @@ import 'package:hero/util/dateutil.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location_permissions/location_permissions.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 import '../../util/constapp/accountcontroller.dart';
 import '../../util/filesystem/file_manager.dart';
 import 'location_callback_handler.dart';

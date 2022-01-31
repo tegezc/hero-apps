@@ -9,7 +9,7 @@ import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {

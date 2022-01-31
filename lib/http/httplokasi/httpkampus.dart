@@ -4,7 +4,7 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:http/http.dart' as http;
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpKampus extends HttpBase {
   Future<List<dynamic>?> detailUniv(String? iduniv) async {

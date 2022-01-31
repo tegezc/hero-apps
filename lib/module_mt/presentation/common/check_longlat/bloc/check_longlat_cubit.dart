@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero/configuration.dart';
+import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
@@ -17,7 +17,9 @@ class CheckLonglatCubit extends Cubit<CheckLonglatState> {
 
   void setup(OutletMT outletMT) {
     emit(CheckLonglatInitial());
-    _handlePjpValid(locationData: outletMT.location).then((_) {});
+    if (outletMT.location != null) {
+      _handlePjpValid(locationData: outletMT.location!).then((_) {});
+    }
   }
 
   Future<void> _handlePjpValid({required TgzLocationData locationData}) async {

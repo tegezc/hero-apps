@@ -2,7 +2,7 @@
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:location/location.dart';
 
-import '../../../../configuration.dart';
+import '../../../../config/configuration_sf.dart';
 
 abstract class TgzLocationDataSource {
   Future<TgzLocationData?> getCurrentLocationOrNull();

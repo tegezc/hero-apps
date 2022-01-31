@@ -18,7 +18,7 @@ import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 import 'blocsearchlocation.dart';
 import 'hostorypjp.dart';
 

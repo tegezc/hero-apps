@@ -8,7 +8,7 @@ import 'package:hero/util/dateutil.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class UIHomeCvrg {
   EnumStateWidget? enumStateWidget;

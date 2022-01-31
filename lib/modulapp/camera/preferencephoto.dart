@@ -1,7 +1,7 @@
 import 'package:hero/model/enumapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 const String keyPhotoDist = 'photo_dist';
 const String keyPhotoMarketAudit = 'photo_ma';

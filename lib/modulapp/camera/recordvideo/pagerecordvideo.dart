@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:camera/camera.dart';
-import 'package:hero/configuration.dart';
+import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/model/promotion/promotion.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -80,7 +80,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     });
   }
 
-  final Configuration _configuration = Configuration();
+  final ConfigurationSf _configuration = ConfigurationSf();
 
   @override
   void initState() {

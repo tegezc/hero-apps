@@ -8,7 +8,7 @@ import 'package:hero/util/filesystem/itgzfile.dart';
 import 'package:hero/util/filesystem/tgzfile.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 import 'loadingview.dart';
 import 'preferencephoto.dart';
 import 'previewphoto.dart';
@@ -54,7 +54,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
   final TgzFile _tgzFile = TgzFile();
 
-  final Configuration _configuration = Configuration();
+  final ConfigurationSf _configuration = ConfigurationSf();
 
   @override
   void initState() {

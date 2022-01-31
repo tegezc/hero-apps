@@ -13,7 +13,7 @@ import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpDIstribution extends HttpBase {
   Future<List<Product>?> getDaftarProduct() async {

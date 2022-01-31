@@ -10,7 +10,7 @@ import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-import '../../configuration.dart';
+import '../../config/configuration_sf.dart';
 
 class HttpMerchandising extends HttpBase {
   // -form 'id_history_pjp="35"' \

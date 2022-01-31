@@ -7,6 +7,7 @@ import 'package:hero/util/uiutil.dart';
 
 class MenuMt extends StatefulWidget {
   static const routeName = '/menumt';
+
   const MenuMt({Key? key}) : super(key: key);
 
   @override
@@ -21,34 +22,37 @@ class _MenuMtState extends State<MenuMt> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ScaffoldMT(
       title: 'Menu',
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            //image: AssetImage('assets/image/coverage/BG.png'),
-            image: AssetImage('assets/image/new/BG.png'),
-            fit: BoxFit.cover,
-          ),
+      body: _menuPage(),
+    );
+  }
+
+  Widget _menuPage() {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          //image: AssetImage('assets/image/coverage/BG.png'),
+          image: AssetImage('assets/image/new/BG.png'),
+          fit: BoxFit.cover,
         ),
-        width: size.width,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Image(
-                  image: AssetImage('assets/image/new/big_logo.png'),
-                  height: 90),
-              const SizedBox(
-                height: 20,
-              ),
-              _openDsPoi(),
-            ],
-          ),
+      ),
+      width: size.width,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const Image(
+                image: AssetImage('assets/image/new/big_logo.png'), height: 90),
+            const SizedBox(
+              height: 20,
+            ),
+            _openDsPoi(),
+          ],
         ),
       ),
     );
@@ -89,6 +93,13 @@ class _MenuMtState extends State<MenuMt> {
   }
 
   void _tapMenu(EnumMenuMT enumTab) {
-    CommonUi().openPage(context, const HomePageTandemSelling());
+    switch (enumTab) {
+      case EnumMenuMT.backChecking:
+        CommonUi().openPage(context, const HomePageTandemSelling());
+        break;
+      case EnumMenuMT.tandemSelling:
+        CommonUi().openPage(context, const HomePageTandemSelling());
+        break;
+    }
   }
 }

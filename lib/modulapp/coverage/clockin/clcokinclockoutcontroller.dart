@@ -4,7 +4,7 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 
 class ClockInClockOutController {
   Future<bool> clockin(EnumStatusTempat enumStatusTempat, Pjp pjp) async {

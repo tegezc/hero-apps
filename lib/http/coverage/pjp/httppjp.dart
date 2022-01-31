@@ -5,7 +5,7 @@ import 'package:hero/model/pjp.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../configuration.dart';
+import '../../../config/configuration_sf.dart';
 
 class HttpPjp extends HttpBase {
   Future<List<Pjp>?> getHistoryPJP(

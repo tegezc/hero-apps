@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/configuration.dart';
+import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/bglocation/bglocmain.dart';
@@ -32,7 +32,7 @@ class _CoverageHomeState extends State<CoverageHome> {
   final BlocHomePageCoverage _blocDashboard = BlocHomePageCoverage();
   int _counterBuild = 0;
   final HoreBoxDecoration _boxDecoration = HoreBoxDecoration();
-  final Configuration _configuration = Configuration();
+  final ConfigurationSf _configuration = ConfigurationSf();
 
   @override
   void initState() {

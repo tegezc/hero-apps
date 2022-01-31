@@ -13,7 +13,7 @@ import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
 
-import '../configuration.dart';
+import '../config/configuration_sf.dart';
 
 class HomeControllpage extends StatefulWidget {
   static const routeName = '/';

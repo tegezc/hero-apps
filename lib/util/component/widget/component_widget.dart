@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hero/configuration.dart';
-import 'package:hero/module_mt/config_mt.dart';
+import 'package:hero/config/configuration_sf.dart';
+import 'package:hero/config/config_mt.dart';
 
 class ContainerRounded extends StatelessWidget {
   final Widget child;
@@ -44,7 +44,7 @@ class CustomScaffold extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Configuration configuration = Configuration();
+    ConfigurationSf configuration = ConfigurationSf();
     String textTitle = '$title ${configuration.versionApp()}';
     return Scaffold(
       appBar: AppBar(
