@@ -1,82 +1,116 @@
-[
-  {
-    "id_outlet": "51",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET A",
-    "longitude": "112.6180734",
-    "latitude": "-7.9425578",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "52",
-    "id_digipos": "1300000002",
-    "nama_outlet": "OUTLET B",
-    "longitude": "112.6180736",
-    "latitude": "-7.9425583",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "53",
-    "id_digipos": "1300000003",
-    "nama_outlet": "OUTLET C",
-    "longitude": "106.729646",
-    "latitude": "-6.3164407",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "54",
-    "id_digipos": "1300000004",
-    "nama_outlet": "OUTLET D",
-    "longitude": "106.7297109",
-    "latitude": "-6.3163768",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "105",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET F",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "104",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET E",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "106",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET G",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "107",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET H",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "108",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET I",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  },
-  {
-    "id_outlet": "109",
-    "id_digipos": "1300000001",
-    "nama_outlet": "OUTLET J",
-    "longitude": "106.5301711",
-    "latitude": "-6.2704553",
-    "radius_clock_in":"100"
-  }
-]
+{
+  "status": 200,
+  "id_sales": "SSF0018",
+  "data": [
+    {
+      "id_outlet": "51",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET A",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "112.6180734",
+      "latitude": "-7.9425578",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "52",
+      "id_digipos": "1300000002",
+      "nama_outlet": "OUTLET B",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "112.6180736",
+      "latitude": "-7.9425583",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "53",
+      "id_digipos": "1300000003",
+      "nama_outlet": "OUTLET C",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.729646",
+      "latitude": "-6.3164407",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "54",
+      "id_digipos": "1300000004",
+      "nama_outlet": "OUTLET D",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.7297109",
+      "latitude": "-6.3163768",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "104",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET E",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "105",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET F",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "106",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET G",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "107",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET H",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "108",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET I",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    },
+    {
+      "id_outlet": "109",
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET J",
+      "no_rs": "6282185172939",
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "longitude": "106.5301711",
+      "latitude": "-6.2704553",
+      "radius_clock_in": "100"
+    }
+  ]
+}

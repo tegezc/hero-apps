@@ -1,3 +1,4 @@
+import 'package:hero/core/data/datasources/database/stringdb.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 
 class OutletMT {
@@ -13,4 +14,15 @@ class OutletMT {
       required this.namaOutlet,
       this.location,
       this.radiusClockIn});
+
+  bool isValid() {
+    if (location != null && radiusClockIn != null) {
+      if (idDigipos.isNotEmpty &&
+          idOutlet.isNotEmpty &&
+          namaOutlet.isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
