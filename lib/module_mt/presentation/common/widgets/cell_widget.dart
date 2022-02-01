@@ -56,3 +56,34 @@ class DynamicTwoColumn extends StatelessWidget {
     );
   }
 }
+
+class TwoColumnFixWidth extends StatelessWidget {
+  final double widthFirsComponent;
+  final String label;
+  final Widget widget;
+  final double widthSecondComponent;
+  const TwoColumnFixWidth(
+      {Key? key,
+      required this.widthFirsComponent,
+      required this.label,
+      required this.widget,
+      required this.widthSecondComponent})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 70, child: LabelApp.size1(label)),
+        const SizedBox(
+          width: 15,
+          child: Text(':'),
+        ),
+        SizedBox(
+          width: widthSecondComponent,
+          child: widget,
+        ),
+      ],
+    );
+  }
+}

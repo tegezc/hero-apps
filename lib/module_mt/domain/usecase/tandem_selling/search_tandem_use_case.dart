@@ -5,6 +5,6 @@ class SearchTandemUseCase {
   IOutletMTRepository outletMTRepository;
   SearchTandemUseCase({required this.outletMTRepository});
   Future<List<OutletMT>?> getListOutletMTTandemSelling(String idSf) async {
-    return await outletMTRepository.cariOutletTandemSelling();
+    return await outletMTRepository.cariOutletTandemSelling(idSf);
   }
 }

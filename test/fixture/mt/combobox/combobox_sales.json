@@ -1,46 +1,49 @@
-[
-  {
-    "id_sales": "SSF0018",
-    "nama_sales": "Afiqa Shofia Putri"
-  },
-  {
-    "id_sales": "SCS0004",
-    "nama_sales": "Afiqa Shofia Putri"
-  },
-  {
-    "id_sales": "SDS0009",
-    "nama_sales": "Andi"
-  },
-  {
-    "id_sales": "SSF0002",
-    "nama_sales": "NCKI"
-  },
-  {
-    "id_sales": "SDS0004",
-    "nama_sales": "NCKI"
-  },
-  {
-    "id_sales": "SCS0003",
-    "nama_sales": "Nicky Erlangga"
-  },
-  {
-    "id_sales": "SSF0017",
-    "nama_sales": "NOFY"
-  },
-  {
-    "id_sales": "SCS0001",
-    "nama_sales": "Nofy Anugrah Putri"
-  },
-  {
-    "id_sales": "SDS0001",
-    "nama_sales": "PMAN"
-  },
-  {
-    "id_sales": "SSF0001",
-    "nama_sales": "PMAN"
-  },
-  {
-    "id_sales": "SCS0002",
-    "nama_sales": "Suparman"
-  }
-]
+{
+  "status": 200,
+  "data": [
+      {
+          "id_sales": "SSF0018",
+          "nama_sales": "Afiqa Shofia Putri"
+      },
+      {
+          "id_sales": "SCS0004",
+          "nama_sales": "Afiqa Shofia Putri"
+      },
+      {
+          "id_sales": "SDS0009",
+          "nama_sales": "Andi"
+      },
+      {
+          "id_sales": "SSF0002",
+          "nama_sales": "NCKI"
+      },
+      {
+          "id_sales": "SDS0004",
+          "nama_sales": "NCKI"
+      },
+      {
+          "id_sales": "SCS0003",
+          "nama_sales": "Nicky Erlangga"
+      },
+      {
+          "id_sales": "SSF0017",
+          "nama_sales": "NOFY"
+      },
+      {
+          "id_sales": "SCS0001",
+          "nama_sales": "Nofy Anugrah Putri"
+      },
+      {
+          "id_sales": "SDS0001",
+          "nama_sales": "PMAN"
+      },
+      {
+          "id_sales": "SSF0001",
+          "nama_sales": "PMAN"
+      },
+      {
+          "id_sales": "SCS0002",
+          "nama_sales": "Suparman"
+      }
+  ]
+}

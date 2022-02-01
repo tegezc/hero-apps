@@ -108,7 +108,7 @@ class _EditorOutletState extends State<EditorOutlet> {
                         }
                       }
                     },
-                    bottom: TabBar(
+                    bottom: const TabBar(
                       indicatorColor: Colors.white,
                       isScrollable: true,
                       tabs: [
@@ -140,7 +140,7 @@ class _EditorOutletState extends State<EditorOutlet> {
                     )),
               ),
               isloading
-                  ? LoadingTransparan('Sedang menyimpan...')
+                  ? const LoadingTransparan('Sedang menyimpan...')
                   : Container(),
             ]);
           }
@@ -234,7 +234,7 @@ class TabDataOutlet2 extends StatefulWidget {
   final BlocOutlet? blocOutlet;
   final DataLokasiAlamat? dataLokasiAlamat;
 
-  TabDataOutlet2(this.blocOutlet, this.dataLokasiAlamat);
+  const TabDataOutlet2(this.blocOutlet, this.dataLokasiAlamat, {Key? key});
 
   @override
   _TabDataOutlet2State createState() => _TabDataOutlet2State();

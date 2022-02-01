@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
 import 'package:hero/util/component/label/component_label.dart';
 
 class CellOutlet extends StatelessWidget {
   final Function onTap;
-  const CellOutlet({Key? key, required this.onTap}) : super(key: key);
+  final OutletMT outletMT;
+  const CellOutlet({Key? key, required this.onTap, required this.outletMT})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,11 @@ class CellOutlet extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  LabelWhite.size3('0387888'),
+                  LabelWhite.size3(outletMT.idDigipos),
                   const SizedBox(
                     height: 5,
                   ),
-                  LabelWhite.size3('Cell Bintang'),
+                  LabelWhite.size3(outletMT.namaOutlet),
                 ],
               ),
               const Spacer(),

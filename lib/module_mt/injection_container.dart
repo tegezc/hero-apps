@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data/datasources/datasources/auth/get_local_session_login.dart';
-import 'data/datasources/datasources/auth/get_remote_login.dart';
+import 'data/datasources/auth/get_local_session_login.dart';
+import 'data/datasources/auth/get_remote_login.dart';
 import 'data/repositories/auth/login_session_repository.dart';
 import 'data/repositories/auth/remote_login_repository.dart';
 import 'domain/repositories/auth/i_login_session_repository.dart';

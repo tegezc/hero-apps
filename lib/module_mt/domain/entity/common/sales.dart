@@ -1,7 +1,9 @@
-class Sales {
+import 'package:equatable/equatable.dart';
+
+class Sales extends Equatable {
   final String idSales;
   final String namaSales;
-  Sales({required this.idSales, required this.namaSales});
+  const Sales({required this.idSales, required this.namaSales});
 
   bool isValid() {
     if (idSales.isNotEmpty && namaSales.isNotEmpty) {
@@ -9,4 +11,12 @@ class Sales {
     }
     return false;
   }
+
+  @override
+  String toString() {
+    return idSales;
+  }
+
+  @override
+  List<Object?> get props => [idSales];
 }
