@@ -1,4 +1,4 @@
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 
 abstract class IOutletMTRepository {
   Future<List<OutletMT>?> cariOutletTandemSelling(String idSales);

@@ -1,5 +1,5 @@
 import 'package:hero/module_mt/data/datasources/auth/get_local_session_login.dart';
-import 'package:hero/module_mt/data/model/account_model.dart';
+import 'package:hero/module_mt/data/model/auth/account_model.dart';
 import 'package:hero/module_mt/domain/entity/auth/account.dart';
 import 'package:hero/module_mt/domain/repositories/auth/i_login_session_repository.dart';
 

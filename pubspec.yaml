@@ -125,6 +125,9 @@ flutter:
     - assets/csv/kabupaten.csv
     - assets/csv/provinsi.csv
     - assets/csv/kelurahan.csv
+    #MT ASSET
+    - assets/image/mt/ic_back_chek_menu.png
+    - assets/image/mt/ic_tandem_menu.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

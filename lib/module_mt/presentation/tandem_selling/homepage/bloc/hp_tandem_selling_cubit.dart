@@ -8,7 +8,7 @@ import 'package:hero/module_mt/data/repositories/common/outletmt_repository.dart
 import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/usecase/tandem_selling/prepare_tandem_selling_use_case.dart';
 import 'package:hero/module_mt/domain/usecase/tandem_selling/search_tandem_use_case.dart';
 import 'package:meta/meta.dart';
@@ -144,10 +144,14 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
   }
 
   void searchOutletMt() {
-    String idSales = currentSales!.idSales;
-    sTandem.getListOutletMTTandemSelling(idSales).then((value) {
-      lOutlet = value;
-      emit(_createStateTandemLoaded());
-    });
+    if (currentSales != null) {
+      if (currentSales!.idSales.length > 1) {
+        String idSales = currentSales!.idSales;
+        sTandem.getListOutletMTTandemSelling(idSales).then((value) {
+          lOutlet = value;
+          emit(_createStateTandemLoaded());
+        });
+      }
+    }
   }
 }

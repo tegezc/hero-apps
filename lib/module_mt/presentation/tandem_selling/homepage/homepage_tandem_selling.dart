@@ -4,7 +4,7 @@ import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/homepage_search/cell_outlet.dart';
 import 'package:hero/module_mt/presentation/common/widgets/Page_mt_error.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';

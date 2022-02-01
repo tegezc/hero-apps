@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/widgets/cell_widget.dart';
 
 class InfoOutlet extends StatelessWidget {

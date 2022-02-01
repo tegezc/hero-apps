@@ -1,4 +1,4 @@
-import 'package:hero/module_mt/domain/entity/tandem_selling/question.dart';
+import 'question.dart';
 
 class Questions {
   List<Question> lquestion;

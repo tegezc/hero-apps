@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/common/widget_textfield_withlabel.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/availability/card_question.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
+import 'package:hero/util/component/button/component_button.dart';
+
+import 'card_table.dart';
 
 class PageAvailability extends StatefulWidget {
-  const PageAvailability({Key? key}) : super(key: key);
+  const PageAvailability({Key? key, required this.availability})
+      : super(key: key);
+
+  final Availability availability;
 
   @override
   _PageAvailabilityState createState() => _PageAvailabilityState();
@@ -11,20 +20,39 @@ class PageAvailability extends StatefulWidget {
 class _PageAvailabilityState extends State<PageAvailability> {
   @override
   Widget build(BuildContext context) {
-    Size s = MediaQuery.of(context).size;
-    double widthLabel = 80;
-    double widthTextField = s.width - 110;
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 4.0),
-          child: TextFieldNumberOnlyWithLabel(
-              widthLabel: widthLabel,
-              widthTextField: widthTextField,
-              // controller: _controller,
-              label: 'Telkomsel'),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CardTableParameter(
+              kategories: widget.availability.kategoriOperator,
+              eJenisParam: EJenisParam.perdana),
+          const SizedBox(
+            height: 8,
+          ),
+          CardTableParameter(
+            kategories: widget.availability.kategoriVF,
+            eJenisParam: EJenisParam.VK,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          CardQuestion(questions: widget.availability.question),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ButtonStrectWidth(
+                buttonColor: Colors.red,
+                text: 'Submit',
+                onTap: () {},
+                isenable: true),
+          ),
+          const SizedBox(
+            height: 80,
+          ),
+        ],
+      ),
     );
   }
 }

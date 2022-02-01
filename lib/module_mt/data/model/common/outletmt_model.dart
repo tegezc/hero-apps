@@ -1,5 +1,5 @@
 import 'package:hero/core/domain/entities/tgzlocation.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 
 class OutletMTData extends OutletMT {
   TgzLocationData? locationData;

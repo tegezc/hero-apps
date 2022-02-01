@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:hero/module_mt/domain/entity/tandem_selling/kategories.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/kategories.dart';
+import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/common/widget_textfield_withlabel.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
+import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 
 class CardTableParameter extends StatefulWidget {
-  final String title;
   final Kategories kategories;
-  const CardTableParameter(
-      {Key? key, required this.title, required this.kategories})
-      : super(key: key);
+  final EJenisParam eJenisParam;
+  const CardTableParameter({
+    Key? key,
+    required this.kategories,
+    required this.eJenisParam,
+  }) : super(key: key);
 
   @override
   _CardTableParameterState createState() => _CardTableParameterState();
@@ -17,28 +23,54 @@ class CardTableParameter extends StatefulWidget {
 class _CardTableParameterState extends State<CardTableParameter> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      child: Column(
-        children: _recordsParam(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 2,
+        child: Column(
+          children: _recordsParam(),
+        ),
       ),
     );
   }
 
   List<Widget> _recordsParam() {
+    Kategories k = widget.kategories;
+
     Size s = MediaQuery.of(context).size;
-    double widthLabel = 80;
-    double widthTextField = s.width - 110;
+    double widthLabel = s.width - 150;
+    double widthTextField = 80;
     List<Widget> lw = [];
-    lw.add(LabelBlack.size1(widget.title));
+    lw.add(LabelBlack.size1(k.kategori));
     lw.add(const Divider());
-    for (int i = 0; i < widget.kategories.lparams.length; i++) {
-      lw.add(TextFieldNumberOnlyWithLabel(
-          widthLabel: widthLabel,
-          widthTextField: widthTextField,
-          // controller: _controller,
-          label: 'Telkomsel'));
+    for (int i = 0; i < k.lparams.length; i++) {
+      ParamPenilaian p = k.lparams[i];
+      lw.add(Padding(
+        padding: const EdgeInsets.only(left: 8.0, top: 4, bottom: 4),
+        child: TextFieldNumberOnlyWithLabel(
+            widthLabel: widthLabel,
+            widthTextField: widthTextField,
+            onChanged: (value) {
+              BlocProvider.of<PenilaianoutletCubit>(context)
+                  .changeTextAvailibity(i, value, widget.eJenisParam);
+            },
+            // controller: _controller,
+            label: p.param),
+      ));
     }
+    lw.add(const SizedBox(
+      height: 8,
+    ));
+    lw.add(
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ButtonStrectWidth(
+            buttonColor: Colors.green,
+            text: 'Ambil Photo',
+            onTap: () {},
+            isenable: true),
+      ),
+    );
     return lw;
   }
 }

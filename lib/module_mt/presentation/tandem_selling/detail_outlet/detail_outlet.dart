@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/parent_tab.dart';

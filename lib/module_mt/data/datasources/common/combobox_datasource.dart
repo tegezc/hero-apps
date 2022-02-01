@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
-import 'package:hero/module_mt/data/model/cluster_data.dart';
-import 'package:hero/module_mt/data/model/sales_model.dart';
-import 'package:hero/module_mt/data/model/tap_data.dart';
+import 'package:hero/module_mt/data/model/common/cluster_data.dart';
+import 'package:hero/module_mt/data/model/common/sales_model.dart';
+import 'package:hero/module_mt/data/model/common/tap_data.dart';
 import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';

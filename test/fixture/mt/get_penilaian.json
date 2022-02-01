@@ -2,219 +2,226 @@
   "status": 200,
   "id_outlet": "51",
   "data": {
-    "AVAILABILITY": [
-      {
-        "parameter": "Perdana Segel",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "SA LD",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "SA MD",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "SA HD",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Perdana XL",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Perdana Indosat",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Perdana Axis",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Perdana Tri",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Perdana Smartfren",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "Perdana"
-      },
-      {
-        "parameter": "Voucher Fisik Segel",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF LD",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF MD",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF HD",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF XL",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF Indosat",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF Axis",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF Tri",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "VF Smartfren",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "VF"
-      },
-      {
-        "parameter": "Apakah menggunakan Digipos?",
-        "kategori": "Question"
-      },
-      {
-        "parameter": "Apakah Memilik Saldo LA?",
-        "kategori": "Question"
-      }
-    ],
-    "VISIBILITY": [
-      {
-        "parameter": "Apakah Produk Telkomsel pada Posisi Diamond Hotspot?",
-        "kategori": "Question"
-      },
-      {
-        "parameter": "Poster Telkomsel",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster XL",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Indosat",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Axis",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Tri",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Smartfren",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Layar Toko Telkomsel",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko XL",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Indosat",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Axis",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Tri",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Apakah memiliki Acrylic/Stiker Scan QR OMNI Channel ?",
-        "kategori": "Question"
-      }
-    ],
-    "ADVOKASI": [
-      {
-        "parameter": "Apakah Produk Telkomsel pada Posisi Diamond Hotspot?",
-        "kategori": "Question"
-      },
-      {
-        "parameter": "Poster Telkomsel",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster XL",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Indosat",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Axis",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Tri",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Poster Smartfren",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "Poster"
-      },
-      {
-        "parameter": "Layar Toko Telkomsel",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko XL",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Indosat",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Axis",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Layar Toko Tri",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Others",
-        "kategori": "Layar Toko"
-      },
-      {
-        "parameter": "Apakah memiliki Acrylic/Stiker Scan QR OMNI Channel ?",
-        "kategori": "Question"
-      }
-    ]
+      "AVAILABILITY": [
+          {
+              "id_parameter": "1",
+              "parameter": "Perdana Segel",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "2",
+              "parameter": "SA LD",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "3",
+              "parameter": "SA MD",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "4",
+              "parameter": "SA HD",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "5",
+              "parameter": "Perdana XL",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "6",
+              "parameter": "Perdana Indosat",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "7",
+              "parameter": "Perdana Axis",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "8",
+              "parameter": "Perdana Tri",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "9",
+              "parameter": "Perdana Smartfren",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "10",
+              "parameter": "Others",
+              "kategori": "Perdana"
+          },
+          {
+              "id_parameter": "11",
+              "parameter": "Voucher Fisik Segel",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "12",
+              "parameter": "VF LD",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "13",
+              "parameter": "VF MD",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "14",
+              "parameter": "VF HD",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "15",
+              "parameter": "VF XL",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "16",
+              "parameter": "VF Indosat",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "17",
+              "parameter": "VF Axis",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "18",
+              "parameter": "VF Tri",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "19",
+              "parameter": "VF Smartfren",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "20",
+              "parameter": "Others",
+              "kategori": "VF"
+          },
+          {
+              "id_parameter": "21",
+              "parameter": "Apakah menggunakan Digipos?",
+              "kategori": "Question"
+          },
+          {
+              "id_parameter": "22",
+              "parameter": "Apakah Memilik Saldo LA?",
+              "kategori": "Question"
+          }
+      ],
+      "VISIBILITY": [
+          {
+              "id_parameter": "23",
+              "parameter": "Apakah Produk Telkomsel pada Posisi Diamond Hotspot?",
+              "kategori": "Question"
+          },
+          {
+              "id_parameter": "24",
+              "parameter": "Poster Telkomsel",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "25",
+              "parameter": "Poster XL",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "26",
+              "parameter": "Poster Indosat",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "27",
+              "parameter": "Poster Axis",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "28",
+              "parameter": "Poster Tri",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "29",
+              "parameter": "Poster Smartfren",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "30",
+              "parameter": "Others",
+              "kategori": "Poster"
+          },
+          {
+              "id_parameter": "31",
+              "parameter": "Layar Toko Telkomsel",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "32",
+              "parameter": "Layar Toko XL",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "33",
+              "parameter": "Layar Toko Indosat",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "34",
+              "parameter": "Layar Toko Axis",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "35",
+              "parameter": "Layar Toko Tri",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "36",
+              "parameter": "Others",
+              "kategori": "Layar Toko"
+          },
+          {
+              "id_parameter": "37",
+              "parameter": "Apakah memiliki Acrylic/Stiker Scan QR OMNI Channel ?",
+              "kategori": "Question"
+          }
+      ],
+      "ADVOKASI": [
+          {
+              "id_parameter": "38",
+              "parameter": "Ijo - Ijo",
+              "kategori": "Promotion"
+          },
+          {
+              "id_parameter": "39",
+              "parameter": "Combo Sakti",
+              "kategori": "Promotion"
+          },
+          {
+              "id_parameter": "40",
+              "parameter": "Aktivasi Paket via Scan QR",
+              "kategori": "Promotion"
+          },
+          {
+              "id_parameter": "41",
+              "parameter": "Bundling NEW IMEI",
+              "kategori": "Promotion"
+          },
+          {
+              "id_parameter": "42",
+              "parameter": "Flash Sale",
+              "kategori": "Promotion"
+          },
+          {
+              "id_parameter": "43",
+              "parameter": "Scan Sell Out Barcode",
+              "kategori": "Promotion"
+          }
+      ]
   }
 }

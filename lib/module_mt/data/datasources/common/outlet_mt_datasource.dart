@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
-import 'package:hero/module_mt/data/model/outletmt_model.dart';
-import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
+import 'package:hero/module_mt/data/model/common/outletmt_model.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 
 abstract class OutletMTDatasource {
   Future<List<OutletMT>?> cariOutletMTBySales(String idSales);

@@ -1,211 +1,211 @@
 {
   "status": 200,
   "data": {
-    "1": {
-      "id_pertanyaan": "1",
-      "pertanyaan": "Bagaimana Tarif Produk Telkomsel?",
-      "pilihan": [
-        {
-          "id_pilihan": "1",
-          "pilihan": "Tarif Lebih mahal"
-        },
-        {
-          "id_pilihan": "2",
-          "pilihan": "Masih bersaing"
-        },
-        {
-          "id_pilihan": "3",
-          "pilihan": "Masih terjangkau"
-        }
-      ]
-    },
-    "2": {
-      "id_pertanyaan": "2",
-      "pertanyaan": "Bagaimana Jaringan Telkomsel?",
-      "pilihan": [
-        {
-          "id_pilihan": "4",
-          "pilihan": "Jaringan Telkomsel Stabil"
-        },
-        {
-          "id_pilihan": "5",
-          "pilihan": "Jaringan Internet tidak stabil"
-        },
-        {
-          "id_pilihan": "6",
-          "pilihan": "Jaringan kurang bagus pada jam sibuk"
-        },
-        {
-          "id_pilihan": "7",
-          "pilihan": "Tidak stabil di jam 18:00 - 23:00 Wib."
-        },
-        {
-          "id_pilihan": "8",
-          "pilihan": "Jaringan Down pada saat listrik mati"
-        },
-        {
-          "id_pilihan": "9",
-          "pilihan": "Kurang bagus saat main game/streaming"
-        }
-      ]
-    },
-    "3": {
-      "id_pertanyaan": "3",
-      "pertanyaan": "Jaringan Operator mana yang paling Bagus?",
-      "pilihan": [
-        {
-          "id_pilihan": "10",
-          "pilihan": "TELKOMSEL"
-        },
-        {
-          "id_pilihan": "11",
-          "pilihan": "INDOSAT"
-        },
-        {
-          "id_pilihan": "12",
-          "pilihan": "XL"
-        },
-        {
-          "id_pilihan": "13",
-          "pilihan": "AXIS"
-        },
-        {
-          "id_pilihan": "14",
-          "pilihan": "TRI"
-        },
-        {
-          "id_pilihan": "15",
-          "pilihan": "SMARTFREN"
-        },
-        {
-          "id_pilihan": "16",
-          "pilihan": "OTHERS"
-        }
-      ]
-    },
-    "4": {
-      "id_pertanyaan": "4",
-      "pertanyaan": "Bagaimana Program Penjualan Product Telkomsel?",
-      "pilihan": [
-        {
-          "id_pilihan": "17",
-          "pilihan": "Program Penjualan Product Telkomsel saat ini menarik"
-        },
-        {
-          "id_pilihan": "18",
-          "pilihan": "Bonus bintang 0.5% untuk setiap transaksi dimasukkan lagi ke Program"
-        },
-        {
-          "id_pilihan": "19",
-          "pilihan": "Program Digistar mohon tetap berjalan walau Pandemi"
-        },
-        {
-          "id_pilihan": "20",
-          "pilihan": "Program Outlet Telkomsel kalah dengan operator lain"
-        },
-        {
-          "id_pilihan": "21",
-          "pilihan": "Mohon buat Program dengan hadiah Kaos, Sembako, dll"
-        },
-        {
-          "id_pilihan": "22",
-          "pilihan": "Flash Sale mohon dibuat lebih sering dan bonus lebih besar"
-        }
-      ]
-    },
-    "5": {
-      "id_pertanyaan": "5",
-      "pertanyaan": "Kelebihan Program Operator lain dibanding Telkomsel",
-      "pilihan": [
-        {
-          "id_pilihan": "23",
-          "pilihan": "Simple gak ribet"
-        },
-        {
-          "id_pilihan": "24",
-          "pilihan": "Pasti dapat hadiah/ insentifnya"
-        },
-        {
-          "id_pilihan": "25",
-          "pilihan": "Jarang gangguan"
-        },
-        {
-          "id_pilihan": "26",
-          "pilihan": "Complaint handling yang jelas"
-        },
-        {
-          "id_pilihan": "27",
-          "pilihan": "Hadiah besar"
-        },
-        {
-          "id_pilihan": "28",
-          "pilihan": "Margin penjualan di atas 5%"
-        }
-      ]
-    },
-    "6": {
-      "id_pertanyaan": "6",
-      "pertanyaan": "Masukan Terkait Aplikasi Penjualan Digipos",
-      "pilihan": [
-        {
-          "id_pilihan": "29",
-          "pilihan": "Tidak ada keluhan"
-        },
-        {
-          "id_pilihan": "30",
-          "pilihan": "Notifikasi error sulit dipahami"
-        },
-        {
-          "id_pilihan": "31",
-          "pilihan": "Tampilan menu terlalu banyak/ rumit"
-        },
-        {
-          "id_pilihan": "32",
-          "pilihan": "Ijo-ijo terlalu panjang kalimatnya"
-        },
-        {
-          "id_pilihan": "33",
-          "pilihan": "Sering gangguan"
-        },
-        {
-          "id_pilihan": "34",
-          "pilihan": "Complaint handling yang Cepat"
-        },
-        {
-          "id_pilihan": "35",
-          "pilihan": "Ada nya Pop-up Info Gangguan/Jaringan"
-        },
-        {
-          "id_pilihan": "36",
-          "pilihan": "Harga sama dengan MyTelkomsel"
-        }
-      ]
-    },
-    "7": {
-      "id_pertanyaan": "7",
-      "pertanyaan": "Kelebihan Aplikasi Penjualan Operator Lain",
-      "pilihan": [
-        {
-          "id_pilihan": "37",
-          "pilihan": "Mudah digunakan dan dipahami"
-        },
-        {
-          "id_pilihan": "38",
-          "pilihan": "Tampilan menunya menarik"
-        },
-        {
-          "id_pilihan": "39",
-          "pilihan": "Jarang gangguan/ minta update"
-        },
-        {
-          "id_pilihan": "40",
-          "pilihan": "Complaint handling yang interaktif"
-        },
-        {
-          "id_pilihan": "41",
-          "pilihan": "Hadiah/insentif yang menarik untuk penggunaan transaksi via aplikasi"
-        }
-      ]
-    }
+      "1": {
+          "id_pertanyaan": "1",
+          "pertanyaan": "Bagaimana Tarif Produk Telkomsel?",
+          "pilihan": [
+              {
+                  "id_pilihan": "1",
+                  "pilihan": "Tarif Lebih mahal"
+              },
+              {
+                  "id_pilihan": "2",
+                  "pilihan": "Masih bersaing"
+              },
+              {
+                  "id_pilihan": "3",
+                  "pilihan": "Masih terjangkau"
+              }
+          ]
+      },
+      "2": {
+          "id_pertanyaan": "2",
+          "pertanyaan": "Bagaimana Jaringan Telkomsel?",
+          "pilihan": [
+              {
+                  "id_pilihan": "4",
+                  "pilihan": "Jaringan Telkomsel Stabil"
+              },
+              {
+                  "id_pilihan": "5",
+                  "pilihan": "Jaringan Internet tidak stabil"
+              },
+              {
+                  "id_pilihan": "6",
+                  "pilihan": "Jaringan kurang bagus pada jam sibuk"
+              },
+              {
+                  "id_pilihan": "7",
+                  "pilihan": "Tidak stabil di jam 18:00 - 23:00 Wib."
+              },
+              {
+                  "id_pilihan": "8",
+                  "pilihan": "Jaringan Down pada saat listrik mati"
+              },
+              {
+                  "id_pilihan": "9",
+                  "pilihan": "Kurang bagus saat main game/streaming"
+              }
+          ]
+      },
+      "3": {
+          "id_pertanyaan": "3",
+          "pertanyaan": "Jaringan Operator mana yang paling Bagus?",
+          "pilihan": [
+              {
+                  "id_pilihan": "10",
+                  "pilihan": "TELKOMSEL"
+              },
+              {
+                  "id_pilihan": "11",
+                  "pilihan": "INDOSAT"
+              },
+              {
+                  "id_pilihan": "12",
+                  "pilihan": "XL"
+              },
+              {
+                  "id_pilihan": "13",
+                  "pilihan": "AXIS"
+              },
+              {
+                  "id_pilihan": "14",
+                  "pilihan": "TRI"
+              },
+              {
+                  "id_pilihan": "15",
+                  "pilihan": "SMARTFREN"
+              },
+              {
+                  "id_pilihan": "16",
+                  "pilihan": "OTHERS"
+              }
+          ]
+      },
+      "4": {
+          "id_pertanyaan": "4",
+          "pertanyaan": "Bagaimana Program Penjualan Product Telkomsel?",
+          "pilihan": [
+              {
+                  "id_pilihan": "17",
+                  "pilihan": "Program Penjualan Product Telkomsel saat ini menarik"
+              },
+              {
+                  "id_pilihan": "18",
+                  "pilihan": "Bonus bintang 0.5% untuk setiap transaksi dimasukkan lagi ke Program"
+              },
+              {
+                  "id_pilihan": "19",
+                  "pilihan": "Program Digistar mohon tetap berjalan walau Pandemi"
+              },
+              {
+                  "id_pilihan": "20",
+                  "pilihan": "Program Outlet Telkomsel kalah dengan operator lain"
+              },
+              {
+                  "id_pilihan": "21",
+                  "pilihan": "Mohon buat Program dengan hadiah Kaos, Sembako, dll"
+              },
+              {
+                  "id_pilihan": "22",
+                  "pilihan": "Flash Sale mohon dibuat lebih sering dan bonus lebih besar"
+              }
+          ]
+      },
+      "5": {
+          "id_pertanyaan": "5",
+          "pertanyaan": "Kelebihan Program Operator lain dibanding Telkomsel",
+          "pilihan": [
+              {
+                  "id_pilihan": "23",
+                  "pilihan": "Simple gak ribet"
+              },
+              {
+                  "id_pilihan": "24",
+                  "pilihan": "Pasti dapat hadiah/ insentifnya"
+              },
+              {
+                  "id_pilihan": "25",
+                  "pilihan": "Jarang gangguan"
+              },
+              {
+                  "id_pilihan": "26",
+                  "pilihan": "Complaint handling yang jelas"
+              },
+              {
+                  "id_pilihan": "27",
+                  "pilihan": "Hadiah besar"
+              },
+              {
+                  "id_pilihan": "28",
+                  "pilihan": "Margin penjualan di atas 5%"
+              }
+          ]
+      },
+      "6": {
+          "id_pertanyaan": "6",
+          "pertanyaan": "Masukan Terkait Aplikasi Penjualan Digipos",
+          "pilihan": [
+              {
+                  "id_pilihan": "29",
+                  "pilihan": "Tidak ada keluhan"
+              },
+              {
+                  "id_pilihan": "30",
+                  "pilihan": "Notifikasi error sulit dipahami"
+              },
+              {
+                  "id_pilihan": "31",
+                  "pilihan": "Tampilan menu terlalu banyak/ rumit"
+              },
+              {
+                  "id_pilihan": "32",
+                  "pilihan": "Ijo-ijo terlalu panjang kalimatnya"
+              },
+              {
+                  "id_pilihan": "33",
+                  "pilihan": "Sering gangguan"
+              },
+              {
+                  "id_pilihan": "34",
+                  "pilihan": "Complaint handling yang Cepat"
+              },
+              {
+                  "id_pilihan": "35",
+                  "pilihan": "Ada nya Pop-up Info Gangguan/Jaringan"
+              },
+              {
+                  "id_pilihan": "36",
+                  "pilihan": "Harga sama dengan MyTelkomsel"
+              }
+          ]
+      },
+      "7": {
+          "id_pertanyaan": "7",
+          "pertanyaan": "Kelebihan Aplikasi Penjualan Operator Lain",
+          "pilihan": [
+              {
+                  "id_pilihan": "37",
+                  "pilihan": "Mudah digunakan dan dipahami"
+              },
+              {
+                  "id_pilihan": "38",
+                  "pilihan": "Tampilan menunya menarik"
+              },
+              {
+                  "id_pilihan": "39",
+                  "pilihan": "Jarang gangguan/ minta update"
+              },
+              {
+                  "id_pilihan": "40",
+                  "pilihan": "Complaint handling yang interaktif"
+              },
+              {
+                  "id_pilihan": "41",
+                  "pilihan": "Hadiah/insentif yang menarik untuk penggunaan transaksi via aplikasi"
+              }
+          ]
+      }
   }
 }

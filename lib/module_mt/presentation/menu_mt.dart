@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
+import 'package:hero/module_mt/presentation/back_checking/homepage_back_checking.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/homepage/homepage_tandem_selling.dart';
 import 'package:hero/util/component/image/component_image_new.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
@@ -66,24 +67,20 @@ class _MenuMtState extends State<MenuMt> {
           children: [
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumMenuMT.backChecking);
+                _tapMenu(EnumMenuMT.tandemSelling);
               },
-              image: 'assets/image/icon/clockin/enable/ic_en_distribution.png',
-              disableImage:
-                  'assets/image/icon/clockin/disable/ic_ds_distribution.png',
-              completeImage:
-                  'assets/image/icon/clockin/complete/ic_ck_distribution.png',
+              image: 'assets/image/mt/ic_tandem_menu.png',
+              disableImage: 'assets/image/mt/ic_tandem_menu.png',
+              completeImage: 'assets/image/mt/ic_tandem_menu.png',
               enable: EnumBtnMenuState.enable,
             ),
             ClockInImageIcon(
               onTap: () {
-                _tapMenu(EnumMenuMT.tandemSelling);
+                _tapMenu(EnumMenuMT.backChecking);
               },
-              image: 'assets/image/icon/clockin/enable/ic_en_promotion.png',
-              disableImage:
-                  'assets/image/icon/clockin/disable/ic_ds_promotion.png',
-              completeImage:
-                  'assets/image/icon/clockin/complete/ic_ck_promotion.png',
+              image: 'assets/image/mt/ic_back_chek_menu.png',
+              disableImage: 'assets/image/mt/ic_back_chek_menu.png',
+              completeImage: 'assets/image/mt/ic_back_chek_menu.png',
               enable: EnumBtnMenuState.enable,
             ),
           ],
@@ -95,7 +92,7 @@ class _MenuMtState extends State<MenuMt> {
   void _tapMenu(EnumMenuMT enumTab) {
     switch (enumTab) {
       case EnumMenuMT.backChecking:
-        CommonUi().openPage(context, const HomePageTandemSelling());
+        CommonUi().openPage(context, const HPBackChecking());
         break;
       case EnumMenuMT.tandemSelling:
         CommonUi().openPage(context, const HomePageTandemSelling());

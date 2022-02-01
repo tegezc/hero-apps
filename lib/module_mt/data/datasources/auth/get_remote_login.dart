@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
-import 'package:hero/module_mt/data/model/account_model.dart';
+import 'package:hero/module_mt/data/model/auth/account_model.dart';
 
 abstract class GetRemoteLogin {
   Future<AccountModel?> login(String id, String password);

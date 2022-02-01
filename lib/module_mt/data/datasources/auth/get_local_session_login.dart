@@ -1,4 +1,4 @@
-import 'package:hero/module_mt/data/model/account_model.dart';
+import 'package:hero/module_mt/data/model/auth/account_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class GetLocalSessionLogin {
