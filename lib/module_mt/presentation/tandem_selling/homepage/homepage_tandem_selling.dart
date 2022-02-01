@@ -7,15 +7,13 @@ import 'package:hero/module_mt/domain/entity/common/tap.dart';
 import 'package:hero/module_mt/domain/entity/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/homepage_search/cell_outlet.dart';
 import 'package:hero/module_mt/presentation/common/widgets/Page_mt_error.dart';
-import 'package:hero/module_mt/presentation/common/widgets/cell_widget.dart';
-import 'package:hero/module_mt/presentation/common/widgets/comboboxhore.dart';
+import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/detail_outlet.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/component/widget/horeboxdecoration.dart';
 import 'package:hero/util/component/widget/widgetpencariankosong.dart';
-import 'package:hero/util/loadingpage/loadingview.dart';
 import 'package:hero/util/uiutil.dart';
 
 import 'bloc/hp_tandem_selling_cubit.dart';
@@ -63,7 +61,8 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
           }
 
           if (state is HpTandemSellingLoading) {
-            return const LoadingNunggu('Mohon tunggu\nSedang menyiapkan data.');
+            return const LoadingNungguMT(
+                'Mohon tunggu\nSedang menyiapkan data.');
           }
 
           if (state is HpTandemSellingLoaded) {
@@ -93,7 +92,7 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
                               borderRadius: BorderRadius.circular(10.0),
                               gradient: getGradientBackground()),
                           child: controllContentPencarian(
-                              heightContentSearch, item.lOutlet)),
+                              heightContentSearch, item)),
                     ],
                   ),
                 ),
@@ -123,7 +122,8 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
     );
   }
 
-  Widget controllContentPencarian(double height, List<OutletMT>? lOutlet) {
+  Widget controllContentPencarian(double height, HpTandemSellingLoaded item) {
+    List<OutletMT>? lOutlet = item.lOutlet;
     if (lOutlet == null) {
       return const WidgetPencarianKosong(
           text:
@@ -136,14 +136,15 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
         return Column(
           children: [
             headerPencarian(),
-            SizedBox(height: height - 100, child: content(lOutlet)),
+            SizedBox(height: height - 100, child: content(item)),
           ],
         );
       }
     }
   }
 
-  Widget content(List<OutletMT> items) {
+  Widget content(HpTandemSellingLoaded item) {
+    List<OutletMT> items = item.lOutlet!;
     return ListView.builder(
       padding: const EdgeInsets.only(top: 20),
       // shrinkWrap: true,
@@ -152,60 +153,150 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
         return CellOutlet(
             outletMT: items[index],
             onTap: () {
-              CommonUi().openPage(context, const DetailOutlet());
+              CommonUi().openPage(
+                  context,
+                  DetailOutlet(
+                    outletMT: items[index],
+                    cluster: item.currentCluster!.namaCluster,
+                    tap: item.currentTap!.namaTap,
+                  ));
             });
       },
     );
   }
 
-  Widget combo<T>(
-      {required String label,
-      required Function(dynamic?) onChange,
-      required List<T>? listObject,
-      required T? currentValue}) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: DynamicTwoColumn(
-        widget: HoreComboBox<T>(
-          lcombo: listObject,
-          currentValue: currentValue,
-          hint: 'Pilih',
-          onChanged: (value) {
-            onChange(value);
-          },
+  Widget comboCluster(HpTandemSellingLoaded item) {
+    Size s = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        const SizedBox(
+          width: 70,
+          child: LabelBlack.size1('Cluster'),
         ),
-        widthFirsComponent: 70,
-        label: label,
-      ),
+        const SizedBox(
+          width: 15,
+          child: LabelBlack.size1(':'),
+        ),
+        SizedBox(
+          width: s.width - 130,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: DropdownButton<Cluster>(
+              items: item.lCluster
+                  .map((o) => DropdownMenuItem<Cluster>(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            o.toString(),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 14),
+                          ),
+                        ),
+                        value: o,
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                _bloc.changeCombobox(value);
+              },
+              value: item.currentCluster,
+              isExpanded: false,
+              hint: const LabelBlack.size2('Pilih'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget comboSales(
-      {required String label,
-      required Function(dynamic?) onChange,
-      required List<Sales>? listObject,
-      required Sales? currentValue}) {
+  Widget comboTap(HpTandemSellingLoaded item) {
     Size s = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: TwoColumnFixWidth(
-        widget: HoreComboBox<Sales>(
-          lcombo: listObject,
-          currentValue: currentValue,
-          hint: 'Pilih',
-          onChanged: (value) {
-            onChange(value);
-          },
+    return Row(
+      children: [
+        const SizedBox(
+          width: 70,
+          child: LabelBlack.size1('Tap'),
         ),
-        widthFirsComponent: 70,
-        widthSecondComponent: s.width - 190,
-        label: label,
-      ),
+        const SizedBox(
+          width: 15,
+          child: LabelBlack.size1(':'),
+        ),
+        SizedBox(
+          width: s.width - 130,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: DropdownButton<Tap>(
+              items: item.lTap
+                  .map((o) => DropdownMenuItem<Tap>(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            o.toString(),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 14),
+                          ),
+                        ),
+                        value: o,
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                _bloc.changeCombobox(value);
+              },
+              value: item.currentTap,
+              isExpanded: false,
+              hint: const LabelBlack.size2('Pilih'),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget comboSales(HpTandemSellingLoaded item) {
+    Size s = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        const SizedBox(
+          width: 70,
+          child: LabelBlack.size1('ID Sales'),
+        ),
+        const SizedBox(
+          width: 15,
+          child: LabelBlack.size1(':'),
+        ),
+        SizedBox(
+          width: s.width - 190,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: DropdownButton<Sales>(
+              items: item.lSales
+                  .map((o) => DropdownMenuItem<Sales>(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            o.toString(),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 14),
+                          ),
+                        ),
+                        value: o,
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                _bloc.changeCombobox(value);
+              },
+              value: item.currentSales,
+              isExpanded: false,
+              hint: const LabelBlack.size2('Pilih'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   Widget searchFilter(HpTandemSellingLoaded item) {
     //double w = MediaQuery.of(context).size.width;
+    ph('curretnTap: ${item.currentTap}');
     return Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -214,31 +305,23 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            combo<Cluster>(
-                label: 'Cluster',
-                onChange: (value) {
-                  ph(value);
-                  _bloc.changeCombobox(value);
-                },
-                listObject: item.lCluster,
-                currentValue: item.currentCluster),
-            combo<Tap>(
-                label: 'TAP',
-                onChange: (value) {
-                  ph(value);
-                },
-                listObject: item.lTap,
-                currentValue: item.currentTap),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: comboCluster(item),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: comboTap(item),
+            ),
             Padding(
               padding:
                   const EdgeInsets.only(left: 4.0, bottom: 8, right: 4, top: 8),
               child: Row(
                 children: [
-                  comboSales(
-                      label: 'ID Sales',
-                      onChange: (value) {},
-                      listObject: item.lSales,
-                      currentValue: item.currentSales),
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  comboSales(item),
                   IconButton(
                       icon: const Icon(Icons.search, size: 30),
                       onPressed: () {

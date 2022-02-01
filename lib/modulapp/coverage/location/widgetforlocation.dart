@@ -24,19 +24,19 @@ class ScaffoldLocation extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[600],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         title: Container(
           alignment: Alignment.center,
           child: Text(title!,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               )),
         ),
         actions: <Widget>[
           Container(
-            margin: EdgeInsets.all(15),
+            margin: const EdgeInsets.all(15),
             child: ButtonApp.black(
               textBtn,
               () {
@@ -184,7 +184,7 @@ class _FormAlamatState extends State<FormAlamat> {
                 },
                 value: _currentKab,
                 isExpanded: false,
-                hint: LabelBlack.size2('Pilih Kabupaten'),
+                hint: const LabelBlack.size2('Pilih Kabupaten'),
               )
             ],
           ),

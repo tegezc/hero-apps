@@ -63,8 +63,8 @@ class ComboboxDatasourceImpl implements ComboboxDatasource {
 
         Sales sales = SalesModel.fromJson(map);
         if (sales.isValid()) lSales.add(sales);
-        return lSales;
       }
+      return lSales;
     } catch (e) {
       ph(e);
       return null;
@@ -92,8 +92,8 @@ class ComboboxDatasourceImpl implements ComboboxDatasource {
 
         Tap tap = TapModel.fromJson(map);
         if (tap.isValid()) lTap.add(tap);
-        return lTap;
       }
+      return lTap;
     } catch (e) {
       ph(e);
       return null;

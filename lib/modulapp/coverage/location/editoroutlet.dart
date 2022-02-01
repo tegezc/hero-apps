@@ -282,79 +282,77 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
   @override
   Widget build(BuildContext context) {
     UIOutlet item = widget.blocOutlet!.getUiOutlet()!;
-    this._setupvalue(item);
-    return Container(
-      child: Form(
-        key: _formKeyValue,
-        autovalidateMode: AutovalidateMode.always,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 2.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextFieldNormal(
-                    'Nama Outlet *',
-                    _cnama,
-                    onChange: (str) {
-                      widget.blocOutlet!.setNamaOutlet(str);
-                    },
-                  ),
-                  TextFieldNormalNumberOnly(
-                    'Nomor RS *',
-                    _cnors,
-                    onChange: (str) {
-                      widget.blocOutlet!.setNors(str);
-                    },
-                  ),
-                  SizedBox(height: 8),
-                  LabelAppRich.size3(
-                    'Jenis Outlet ',
-                    color: Colors.grey[700],
-                  ),
-                  DropdownButton(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                    },
-                    items: item.ljnsoutlet == null
-                        ? null
-                        : item.ljnsoutlet!
-                            .map((value) => DropdownMenuItem(
-                                  child: LabelBlack.size2(value.text),
-                                  value: value,
-                                ))
-                            .toList(),
-                    onChanged: (dynamic item) {
-                      widget.blocOutlet!.comboJnsOutletOnChange(item);
-                    },
-                    value: item.currentjnsOutlet,
-                    isExpanded: false,
-                    hint: LabelBlack.size2('Pilih Jenis Outlet'),
-                  )
-                ],
-              ),
+    _setupvalue(item);
+    return Form(
+      key: _formKeyValue,
+      autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: <Widget>[
+          const SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 2.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                TextFieldNormal(
+                  'Nama Outlet *',
+                  _cnama,
+                  onChange: (str) {
+                    widget.blocOutlet!.setNamaOutlet(str);
+                  },
+                ),
+                TextFieldNormalNumberOnly(
+                  'Nomor RS *',
+                  _cnors,
+                  onChange: (str) {
+                    widget.blocOutlet!.setNors(str);
+                  },
+                ),
+                SizedBox(height: 8),
+                LabelAppRich.size3(
+                  'Jenis Outlet ',
+                  color: Colors.grey[700],
+                ),
+                DropdownButton(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                  },
+                  items: item.ljnsoutlet == null
+                      ? null
+                      : item.ljnsoutlet!
+                          .map((value) => DropdownMenuItem(
+                                child: LabelBlack.size2(value.text),
+                                value: value,
+                              ))
+                          .toList(),
+                  onChanged: (dynamic item) {
+                    widget.blocOutlet!.comboJnsOutletOnChange(item);
+                  },
+                  value: item.currentjnsOutlet,
+                  isExpanded: false,
+                  hint: LabelBlack.size2('Pilih Jenis Outlet'),
+                )
+              ],
             ),
-            _spasi(),
-            FormAlamat(
-                widget.blocOutlet!.controllLokasi, widget.dataLokasiAlamat),
-            TextFieldNormal(
-              'Alamat (min 10 char) ',
-              _calamat,
-              onChange: (str) {
-                widget.blocOutlet!.setAlamat(str);
-              },
-            ),
-            SizedBox(height: 24),
-            _koordinatWidget(item),
-            SizedBox(
-              height: 150.0,
-            ),
-          ],
-        ),
+          ),
+          _spasi(),
+          FormAlamat(
+              widget.blocOutlet!.controllLokasi, widget.dataLokasiAlamat),
+          TextFieldNormal(
+            'Alamat (min 10 char) ',
+            _calamat,
+            onChange: (str) {
+              widget.blocOutlet!.setAlamat(str);
+            },
+          ),
+          SizedBox(height: 24),
+          _koordinatWidget(item),
+          SizedBox(
+            height: 150.0,
+          ),
+        ],
       ),
     );
   }

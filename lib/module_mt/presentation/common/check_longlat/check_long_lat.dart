@@ -53,7 +53,7 @@ class _CheckLongLatState extends State<CheckLongLat> {
 
           if (state is CheckLongLatLoaded) {
             CheckLongLatLoaded checkLongLatLoaded = state;
-            return CustomScaffold(
+            return ScaffoldMT(
               body: SizedBox(
                 height: size.height,
                 width: size.width,

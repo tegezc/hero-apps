@@ -1,10 +1,12 @@
-import 'package:hero/core/data/datasources/database/stringdb.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 
 class OutletMT {
-  String idOutlet;
-  String idDigipos;
-  String namaOutlet;
+  final String idOutlet;
+  final String idDigipos;
+  final String namaOutlet;
+  final String noRs;
+  final String idSales;
+  final String namaSales;
   TgzLocationData? location;
   int? radiusClockIn;
 
@@ -12,6 +14,9 @@ class OutletMT {
       {required this.idDigipos,
       required this.idOutlet,
       required this.namaOutlet,
+      required this.noRs,
+      required this.idSales,
+      required this.namaSales,
       this.location,
       this.radiusClockIn});
 

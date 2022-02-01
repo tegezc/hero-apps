@@ -34,14 +34,14 @@ class OutletMTDatasourceImpl implements OutletMTDatasource {
   List<OutletMT>? _olahJsonSales(dynamic data) {
     try {
       List<OutletMT> lOutlet = [];
-      List<Map<String, dynamic>> lmap = data;
+      List<dynamic> lmap = data;
       for (int i = 0; i < lmap.length; i++) {
         Map<String, dynamic> map = lmap[i];
 
         OutletMT outletMt = OutletMTData.fromJson(map);
         if (outletMt.isValid()) lOutlet.add(outletMt);
-        return lOutlet;
       }
+      return lOutlet;
     } catch (e) {
       ph(e);
       return null;

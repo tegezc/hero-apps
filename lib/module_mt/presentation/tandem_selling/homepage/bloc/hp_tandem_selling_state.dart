@@ -9,16 +9,16 @@ class HpTandemSellingLoading extends HpTandemSellingState {}
 
 class HpTandemSellingLoaded extends HpTandemSellingState {
   final List<Cluster> lCluster;
-  final List<Tap>? lTap;
-  final List<Sales>? lSales;
+  final List<Tap> lTap;
+  final List<Sales> lSales;
   final Cluster? currentCluster;
   final Tap? currentTap;
   final Sales? currentSales;
   final List<OutletMT>? lOutlet;
   HpTandemSellingLoaded(
       {required this.lCluster,
-      this.lTap,
-      this.lSales,
+      required this.lTap,
+      required this.lSales,
       this.currentCluster,
       this.currentTap,
       this.currentSales,

@@ -21,13 +21,13 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
   late PrepareTandemSellingUseCase ptandem;
   late SearchTandemUseCase sTandem;
 
-  List<Cluster>? lCluster;
+  List<Cluster> lCluster = [];
   Cluster? currentCluster;
 
-  List<Tap>? lTap;
+  List<Tap> lTap = [];
   Tap? currentTap;
 
-  List<Sales>? lSales;
+  List<Sales> lSales = [];
   Sales? currentSales;
 
   List<OutletMT>? lOutlet;
@@ -42,19 +42,43 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
         ComboBoxRepositoryImp(comboboxDatasource: comboboxDatasource);
     ptandem =
         PrepareTandemSellingUseCase(comboboxRepository: comboboxRepository);
+
+    // combobox mininal 1 component
+    // dan menjadi default value
+    Sales defaultSales = const Sales(idSales: 'Pilih', namaSales: '0');
+
+    Tap defTap = const Tap(idTap: '0', namaTap: 'Pilih');
+    lSales.add(defaultSales);
+    lTap.add(defTap);
+
     _setupData().then((value) {});
   }
 
   Future<void> _setupData() async {
     emit(HpTandemSellingLoading());
-    lCluster = await ptandem.getListCluster();
-    if (lCluster != null) {
-      emit(
-          HpTandemSellingLoaded(lCluster: lCluster!, lTap: null, lSales: null));
+    List<Cluster>? lc = await ptandem.getListCluster();
+    if (lc != null) {
+      _addToComboboxCluster(lc);
+      emit(_createStateTandemLoaded());
     } else {
       emit(HpTandemSellingError(
           message: 'Kesulitan mendapatkan data dari server.'));
     }
+  }
+
+  HpTandemSellingLoaded _createStateTandemLoaded() {
+    return HpTandemSellingLoaded(
+        lCluster: lCluster,
+        lTap: lTap,
+        lSales: lSales,
+        currentCluster: currentCluster,
+        currentSales: currentSales,
+        currentTap: currentTap,
+        lOutlet: lOutlet);
+  }
+
+  void _addToComboboxCluster(List<Cluster> lObject) {
+    lCluster.addAll(lObject);
   }
 
   void changeCombobox(dynamic selected) {
@@ -62,38 +86,60 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
     if (selected is Cluster) {
       if (currentCluster != selected) {
         currentCluster = selected;
-        currentTap = null;
-        currentSales = null;
-        lTap = null;
-        lSales = null;
+        currentTap = lTap[0];
+        currentSales = lSales[0];
+        _clearListSales();
+        _clearListTap();
         _getComboboxTap();
       }
     } else if (selected is Tap) {
       if (selected != currentTap) {
         currentTap = selected;
-        currentSales = null;
-        lSales = null;
+        currentSales = lSales[0];
+        _clearListSales();
         _getComboboxSales();
       }
     } else if (selected is Sales) {
       currentSales = selected;
+      emit(_createStateTandemLoaded());
     }
+  }
+
+  void _addToComboboxTap(List<Tap> lObject) {
+    _clearListTap();
+    lTap.addAll(lObject);
+  }
+
+  void _addToComboboxSales(List<Sales> lObject) {
+    _clearListSales();
+    lSales.addAll(lObject);
+  }
+
+  void _clearListSales() {
+    lSales.removeWhere((element) => element.namaSales != '0');
+  }
+
+  void _clearListTap() {
+    lTap.removeWhere((element) => element.idTap != '0');
   }
 
   void _getComboboxTap() {
     String idCluster = currentCluster!.idCluster;
     ptandem.getListTap(idCluster).then((value) {
-      lTap = value;
-      emit(HpTandemSellingLoaded(lCluster: lCluster!, lTap: value));
+      if (value != null) {
+        _addToComboboxTap(value);
+        emit(_createStateTandemLoaded());
+      }
     });
   }
 
   void _getComboboxSales() {
     String idTap = currentTap!.idTap;
     ptandem.getListSales(idTap).then((value) {
-      lSales = value;
-      emit(HpTandemSellingLoaded(
-          lCluster: lCluster!, lTap: lTap, lSales: lSales));
+      if (value != null) {
+        _addToComboboxSales(value);
+        emit(_createStateTandemLoaded());
+      }
     });
   }
 
@@ -101,8 +147,7 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
     String idSales = currentSales!.idSales;
     sTandem.getListOutletMTTandemSelling(idSales).then((value) {
       lOutlet = value;
-      emit(HpTandemSellingLoaded(
-          lCluster: lCluster!, lTap: lTap, lSales: lSales, lOutlet: lOutlet));
+      emit(_createStateTandemLoaded());
     });
   }
 }
