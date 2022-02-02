@@ -3,6 +3,7 @@ import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/parent_tab.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/voice_of_reseller/hp_voice_of_retailer.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/uiutil.dart';
@@ -65,7 +66,13 @@ class _DetailOutletState extends State<DetailOutlet> {
               child: ButtonStrectWidth(
                   buttonColor: Colors.green,
                   text: 'Voice of Retailer',
-                  onTap: () {},
+                  onTap: () {
+                    CommonUi().openPage(
+                        context,
+                        HPVoiceOfRetailer(
+                          outletMT: widget.outletMT,
+                        ));
+                  },
                   isenable: true),
             ),
           ],

@@ -9,6 +9,7 @@ import 'package:hero/module_mt/presentation/common/homepage_search/cell_outlet.d
 import 'package:hero/module_mt/presentation/common/widgets/Page_mt_error.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/detail_outlet.dart';
+import 'package:hero/module_mt/presentation/tandem_selling/penilaian_sf/hp_peilaian_sf.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
@@ -80,7 +81,10 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
                         child: ButtonStrectWidth(
                             buttonColor: Colors.green,
                             text: 'Penilain SF',
-                            onTap: () {},
+                            onTap: () {
+                              CommonUi().openPage(context,
+                                  HpPenilaianSf(sales: item.currentSales!));
+                            },
                             isenable: true),
                       ),
                       Container(

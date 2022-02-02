@@ -53,6 +53,12 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       case EJenisParam.VK:
         cacheAvailibility.kategoriVF.lparams[index].nilai = int.tryParse(value);
         break;
+      case EJenisParam.poster:
+        // TODO: Handle this case.
+        break;
+      case EJenisParam.layar:
+        // TODO: Handle this case.
+        break;
     }
   }
 

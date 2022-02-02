@@ -19,7 +19,8 @@ Future<void> init() async {
   // );
 
   //usecase
-  sll.registerLazySingleton(() => CekSessionLogin(loginSession: sll()));
+  sll.registerLazySingleton(
+      () => CekSessionLogin(loginSession: sll(), comboboxRepository: sll()));
 
   sll.registerLazySingleton(() => RequestLoginAndProsesLogin(
       loginSession: sll(), remoteLoginRepository: sll()));

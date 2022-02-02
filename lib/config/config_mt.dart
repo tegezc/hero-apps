@@ -5,7 +5,7 @@ class ConfigurationMT {
   bool isSF = false;
   String host() {
     if (_isProduction) {
-      return 'sihore.com';
+      return 'sihore.com/apimt';
     }
     return 'https://simplifytechno.com/apimt/index.php';
   }
