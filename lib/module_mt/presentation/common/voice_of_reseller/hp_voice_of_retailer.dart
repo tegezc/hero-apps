@@ -21,11 +21,18 @@ class HPVoiceOfRetailer extends StatefulWidget {
 }
 
 class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
+  final VoiceofresellerCubit _cubit = VoiceofresellerCubit();
+  late List<Pertanyaan> lPertanyaan;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          VoiceofresellerCubit()..setupData(widget.outletMT.idOutlet),
+      create: (context) => _cubit..setupData(widget.outletMT.idOutlet),
       child: BlocBuilder<VoiceofresellerCubit, VoiceofresellerState>(
         builder: (context, state) {
           if (state is VoiceofresellerError) {
@@ -42,9 +49,10 @@ class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
 
           if (state is VoiceofresellerLoaded) {
             VoiceofresellerLoaded? item = state;
+            lPertanyaan = item.voiceOfReseller!.lPertanyaan;
             return ScaffoldMT(
               body: SingleChildScrollView(
-                child: searchFilter(item.voiceOfReseller!),
+                child: searchFilter(),
               ),
               title: 'Voice Of Retailer',
             );
@@ -56,12 +64,12 @@ class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
     );
   }
 
-  Widget comboSales(Pertanyaan pertanyaan, int index) {
+  Widget combo(Pertanyaan pertanyaan, int index) {
     Size s = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        LabelBlack.size1('$index. ${pertanyaan.pertanyaan}'),
+        LabelBlack.size1('${index + 1}. ${pertanyaan.pertanyaan}'),
         const SizedBox(
           height: 8,
         ),
@@ -84,7 +92,12 @@ class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
                       value: o,
                     ))
                 .toList(),
-            onChanged: (value) {},
+            onChanged: (value) {
+              _cubit.setCurrentValueCombobox(index, value!);
+              setState(() {
+                lPertanyaan[index].terpilih = value;
+              });
+            },
             value: pertanyaan.terpilih,
             isExpanded: false,
             hint: const LabelBlack.size2('Pilih'),
@@ -94,12 +107,12 @@ class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
     );
   }
 
-  Widget searchFilter(VoiceOfReseller item) {
+  Widget searchFilter() {
     //double w = MediaQuery.of(context).size.width;
     List<Widget> lw = [];
-    for (var i = 0; i < item.lPertanyaan.length; i++) {
-      Pertanyaan p = item.lPertanyaan[i];
-      lw.add(comboSales(p, i + 1));
+    for (var i = 0; i < lPertanyaan.length; i++) {
+      Pertanyaan p = lPertanyaan[i];
+      lw.add(combo(p, i));
       lw.add(const SizedBox(
         height: 16,
       ));
