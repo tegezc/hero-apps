@@ -4,7 +4,7 @@ class Pertanyaan {
   final String idPertanyaan;
   final String pertanyaan;
   final List<Jawaban> lJawaban;
-  final Jawaban? terpilih;
+  Jawaban? terpilih;
 
   Pertanyaan(
       {required this.idPertanyaan,

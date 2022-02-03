@@ -1,14 +1,21 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'config/configuration.dart';
+import 'config/configuration_sf.dart';
 import 'modul_sales/sf_main.dart';
 import 'module_mt/mt_main.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  MainConfiguration configuration = MainConfiguration();
-  if (!configuration.isSf()) {
-    //await dimt.init();
+Future<void> main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    MainConfiguration configuration = MainConfiguration();
+    if (!configuration.isSf()) {
+      //await dimt.init();
+    }
+  } on CameraException catch (e) {
+    ph(e.code);
   }
 
   runApp(const MyApp());

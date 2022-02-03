@@ -1,29 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:video_player/video_player.dart';
 
-class CoreVideoViewer extends StatefulWidget {
+class CoreVideoViewerOnly extends StatefulWidget {
   static const String routeName = '/pagecorevideoviewer';
   final String? pathVideo;
-  final String textSubmitButton;
-  final Function(String) onSubmit;
-  const CoreVideoViewer(
-      {Key? key,
-      required this.pathVideo,
-      required this.textSubmitButton,
-      required this.onSubmit})
-      : super(key: key);
+  const CoreVideoViewerOnly({
+    Key? key,
+    required this.pathVideo,
+  }) : super(key: key);
   @override
-  _CoreVideoViewerState createState() => _CoreVideoViewerState();
+  _CoreVideoViewerOnlyState createState() => _CoreVideoViewerOnlyState();
 }
 
-class _CoreVideoViewerState extends State<CoreVideoViewer> {
+class _CoreVideoViewerOnlyState extends State<CoreVideoViewerOnly> {
   late VideoPlayerController _controller;
-
   bool _isLoading = true;
   bool _isError = false;
 
@@ -118,18 +112,6 @@ class _CoreVideoViewerState extends State<CoreVideoViewer> {
                 });
               },
               child: Text(_controller.value.isPlaying ? "PAUSE" : "PLAY"),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ButtonApp.blue(widget.textSubmitButton, () {
-                  widget.onSubmit(widget.pathVideo!);
-                }),
-                ButtonApp.blue('Ambil Lagi', () {
-                  Navigator.of(context).pop();
-                }),
-                //   ButtonApp.blue('Cancel', () {}),
-              ],
             ),
           ],
         ),

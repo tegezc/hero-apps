@@ -9,6 +9,7 @@ import 'core/dio_config.dart';
 
 abstract class IVoiceOfResellerDatasource {
   Future<VoiceOfReseller?> getData(String idoutlet);
+
 }
 
 class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {

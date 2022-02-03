@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/questions.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'package:hero/module_mt/presentation/common/widgets/label_multiline.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'package:hero/util/component/label/component_label.dart';
 
 class CardQuestion extends StatefulWidget {

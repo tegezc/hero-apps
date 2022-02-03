@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/parent_tab.dart';
+import 'package:hero/module_mt/presentation/common/voice_of_reseller/hp_voice_of_retailer.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/parent_tab.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/voice_of_reseller/hp_voice_of_retailer.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/uiutil.dart';
@@ -31,7 +31,7 @@ class _DetailOutletState extends State<DetailOutlet> {
             child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: InfoOutlet(
                   outletMT: widget.outletMT,
                   cluster: widget.cluster,

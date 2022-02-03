@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/jawaban.dart';
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/pertanyaan.dart';
-import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/voice_of_reseller.dart';
+import 'package:hero/module_mt/presentation/common/voice_of_reseller/vos_record_video.dart';
 import 'package:hero/module_mt/presentation/common/widgets/Page_mt_error.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
+import 'package:hero/util/uiutil.dart';
 
 import 'cubit/voiceofreseller_cubit.dart';
+import 'vos_video_viewer_only.dart';
 
 class HPVoiceOfRetailer extends StatefulWidget {
   final OutletMT outletMT;
@@ -23,6 +25,7 @@ class HPVoiceOfRetailer extends StatefulWidget {
 class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
   final VoiceofresellerCubit _cubit = VoiceofresellerCubit();
   late List<Pertanyaan> lPertanyaan;
+  String? pathVideo;
 
   @override
   void initState() {
@@ -117,6 +120,32 @@ class _HPVoiceOfRetailerState extends State<HPVoiceOfRetailer> {
         height: 16,
       ));
     }
+
+    lw.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: pathVideo == null
+          ? ButtonStrectWidth(
+              buttonColor: Colors.green,
+              text: 'Ambil Video',
+              onTap: () {
+                CommonUi()
+                    .openPage(context, const VOSRecordVideo())
+                    .then((value) {
+                  if (value != null) {
+                    if (value is String) {
+                      setState(() {
+                        pathVideo = value;
+                      });
+                    }
+                  }
+                });
+              },
+              isenable: true)
+          : FractionallySizedBox(
+              widthFactor: 0.9,
+              child: VOSVideoViewerOnly(pathVideo: pathVideo)),
+    ));
+
     lw.add(Padding(
       padding: const EdgeInsets.all(8.0),
       child: ButtonStrectWidth(

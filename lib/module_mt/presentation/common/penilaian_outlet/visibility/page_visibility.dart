@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/availability/card_question.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/availability/card_table.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/availability/card_table.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'package:hero/util/component/button/component_button.dart';
 
 import 'card_question_single.dart';
