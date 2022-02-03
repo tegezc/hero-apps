@@ -1,8 +1,7 @@
 //import 'package:geolocator/geolocator.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:location/location.dart';
-
-import '../../../../config/configuration_sf.dart';
 
 abstract class TgzLocationDataSource {
   Future<TgzLocationData?> getCurrentLocationOrNull();

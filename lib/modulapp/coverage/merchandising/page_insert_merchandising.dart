@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
 import 'package:hero/modulapp/camera/pagetakephoto.dart';

@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:background_locator/location_dto.dart';
+import 'package:hero/core/log/printlog.dart';
 
 import '../../config/configuration_sf.dart';
 import '../../util/filesystem/file_manager.dart';

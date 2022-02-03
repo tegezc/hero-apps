@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/merchandising/merchandising.dart';
@@ -9,8 +10,6 @@ import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-
-import '../../config/configuration_sf.dart';
 
 class HttpMerchandising extends HttpBase {
   // -form 'id_history_pjp="35"' \

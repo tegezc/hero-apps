@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hero/config/config_mt.dart';
-import 'package:hero/config/configuration_sf.dart';
+import 'package:hero/config/configuration.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
-import 'package:video_player/video_player.dart';
 
 class CoreRecordVideo extends StatefulWidget {
   int maxDurationInSecon;
@@ -53,7 +52,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
   CameraController? controller;
   XFile? imageFile;
   XFile? videoFile;
-  VideoPlayerController? videoController;
+
   VoidCallback? videoPlayerListener;
   bool enableAudio = true;
 
@@ -62,7 +61,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
   double _currentScale = 1.0;
   double _baseScale = 1.0;
 
-  final ConfigurationMT conf = ConfigurationMT();
+  final MainConfiguration conf = MainConfiguration();
 
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
@@ -91,7 +90,6 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
     });
   }
 
-  final ConfigurationSf _configuration = ConfigurationSf();
   @override
   void initState() {
     super.initState();
@@ -100,13 +98,15 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
 
   void setupCamera() {
     _initCamera().then((value) {
-      setState(() {
-        isInitialFinish = true;
-      });
+      if (value) {
+        setState(() {
+          isInitialFinish = true;
+        });
+      }
     });
   }
 
-  Future<void> _initCamera() async {
+  Future<bool> _initCamera() async {
     if (_counterBuild == 0) {
       _counterBuild++;
       try {
@@ -117,10 +117,13 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
             onNewCameraSelected(cameras[0]);
           }
         }
+        return true;
       } on CameraException catch (e) {
         logError(e.code, e.description);
+        return false;
       }
     }
+    return true;
   }
 
   @override
@@ -149,6 +152,12 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
   @override
   Widget build(BuildContext context) {
     setupCamera();
+    if (!isInitialFinish) {
+      return const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: LabelBlack.title('Gagal initialitation camera.'),
+      );
+    }
     return Column(
       children: <Widget>[
         const SizedBox(
@@ -454,35 +463,6 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
       return null;
     }
   }
-
-  // Future<void> _startVideoPlayer() async {
-  //   if (videoFile == null) {
-  //     return;
-  //   }
-  //
-  //   final VideoPlayerController vController = kIsWeb
-  //       ? VideoPlayerController.network(videoFile!.path)
-  //       : VideoPlayerController.file(File(videoFile!.path));
-  //
-  //   videoPlayerListener = () {
-  //     if (videoController != null && videoController!.value.size != null) {
-  //       // Refreshing the state to update video player with the correct ratio.
-  //       if (mounted) setState(() {});
-  //       videoController!.removeListener(videoPlayerListener!);
-  //     }
-  //   };
-  //   vController.addListener(videoPlayerListener!);
-  //   await vController.setLooping(true);
-  //   await vController.initialize();
-  //   await videoController?.dispose();
-  //   if (mounted) {
-  //     setState(() {
-  //       imageFile = null;
-  //       videoController = vController;
-  //     });
-  //   }
-  //   await vController.play();
-  // }
 
   void _showCameraException(CameraException e) {
     logError(e.code, e.description);

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/promotion/promotion.dart';
@@ -10,8 +11,6 @@ import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-
-import '../../config/configuration_sf.dart';
 
 class HttpPromotion extends HttpBase {
   // Future<bool> createPromotionj(Promotion promotion) async {

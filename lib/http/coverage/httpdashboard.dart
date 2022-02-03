@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/menu.dart';
@@ -8,8 +9,6 @@ import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
-
-import '../../config/configuration_sf.dart';
 
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {

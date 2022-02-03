@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
@@ -25,10 +24,10 @@ class CheckLonglatCubit extends Cubit<CheckLonglatState> {
   Future<void> _handlePjpValid({required TgzLocationData locationData}) async {
     List<Marker> lmarkers = [];
     LatLng _lokasi = LatLng(locationData.latitude, locationData.longitude);
-    ph('Hallo');
+
     TgzLocationData? position =
         await TgzLocationDataSourceImpl().getCurrentLocationOrNull();
-    ph(position);
+
     if (position == null) {
       emit(CheckLonglatError(message: 'Tidak dapat mengakses location.'));
     } else {

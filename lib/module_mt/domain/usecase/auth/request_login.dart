@@ -1,4 +1,3 @@
-import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/module_mt/domain/entity/auth/account.dart';
 import 'package:hero/module_mt/domain/repositories/auth/i_login_session_repository.dart';
 import 'package:hero/module_mt/domain/repositories/auth/i_remote_login_repository.dart';
@@ -18,7 +17,6 @@ class RequestLoginAndProsesLogin {
       await loginSession.setAccount(account);
       return true;
     } catch (e) {
-      ph(e);
       return false;
     }
   }

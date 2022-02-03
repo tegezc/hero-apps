@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../config/configuration_sf.dart';
 import '../../colorutil.dart';
 import '../../dateutil.dart';
 import '../label/component_label.dart';
@@ -312,7 +310,7 @@ class _ButtonMenuState extends State<ButtonMenu> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.enable! ? widget.onTap() : ph('');
+        if (widget.enable!) widget.onTap();
       },
       child: Container(
         height: widget.height,

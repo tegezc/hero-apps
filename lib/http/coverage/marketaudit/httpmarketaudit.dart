@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/modulapp/coverage/marketaudit/sf/blocsurvey.dart';
 import 'package:hero/modulapp/coverage/merchandising/blocmerchandising.dart';
@@ -10,8 +11,6 @@ import 'package:hero/util/dateutil.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-
-import '../../../config/configuration_sf.dart';
 
 class HttpMarketAuditSF extends HttpBase {
   Future<bool> createSurvey(Map<String, dynamic> map) async {

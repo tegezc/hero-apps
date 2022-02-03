@@ -1,11 +1,10 @@
 import 'dart:convert';
 
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/util/numberconverter.dart';
 import 'package:http/http.dart' as http;
-
-import '../../../config/configuration_sf.dart';
 
 class HttpPjp extends HttpBase {
   Future<List<Pjp>?> getHistoryPJP(

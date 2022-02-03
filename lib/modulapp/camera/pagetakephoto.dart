@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/model/pjp.dart';
 import 'package:hero/modulapp/camera/previewphotoupload.dart';
 import 'package:hero/util/filesystem/itgzfile.dart';

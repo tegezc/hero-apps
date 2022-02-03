@@ -46,9 +46,3 @@ class ConfigurationSf {
     return '1.7.0';
   }
 }
-
-void ph(Object? o) {
-  if (kDebugMode) {
-    print(o);
-  }
-}

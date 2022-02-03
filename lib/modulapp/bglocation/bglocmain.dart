@@ -8,14 +8,13 @@ import 'package:background_locator/settings/android_settings.dart';
 import 'package:background_locator/settings/ios_settings.dart';
 import 'package:background_locator/settings/locator_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/model/profile.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:location_permissions/location_permissions.dart';
-
-import '../../config/configuration_sf.dart';
 import '../../util/constapp/accountcontroller.dart';
 import '../../util/filesystem/file_manager.dart';
 import 'location_callback_handler.dart';

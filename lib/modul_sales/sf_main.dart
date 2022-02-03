@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/coverage/httpdashboard.dart';
 import 'package:hero/http/login/httplogin.dart';
 import 'package:hero/login/login_new.dart';
@@ -12,8 +13,6 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/uiutil.dart';
-
-import '../config/configuration_sf.dart';
 
 class HomeControllpage extends StatefulWidget {
   static const routeName = '/';
