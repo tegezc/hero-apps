@@ -4,12 +4,11 @@ import 'dart:ui';
 
 import 'package:background_locator/location_dto.dart';
 import 'package:hero/core/log/printlog.dart';
-
-import '../../config/configuration_sf.dart';
 import '../../util/filesystem/file_manager.dart';
 
 class LocationServiceRepository {
-  static LocationServiceRepository _instance = LocationServiceRepository._();
+  static final LocationServiceRepository _instance =
+      LocationServiceRepository._();
 
   LocationServiceRepository._();
 

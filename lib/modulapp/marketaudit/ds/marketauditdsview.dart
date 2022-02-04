@@ -71,7 +71,7 @@ class _MarketAuditDsViewState extends State<MarketAuditDsView> {
     }
 
     if (_isloading) {
-      return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+      return const LoadingNunggu("Mohon tunggu\nSedang loading data.");
     }
 
     if (q == null) {

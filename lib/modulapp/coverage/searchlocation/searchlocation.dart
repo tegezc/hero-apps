@@ -208,9 +208,7 @@ class _SearchLocationState extends State<SearchLocation> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        LabelWhite.size3(outletSimple.idminor == null
-                            ? ''
-                            : outletSimple.idminor),
+                        LabelWhite.size3(outletSimple.idminor ?? ''),
                         LabelWhite.size3(outletSimple.text),
                       ],
                     ),

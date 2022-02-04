@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';
+import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_loading_mt.dart';
 
 class HPBackChecking extends StatefulWidget {
   const HPBackChecking({Key? key}) : super(key: key);

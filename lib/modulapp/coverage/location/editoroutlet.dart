@@ -151,16 +151,16 @@ class _EditorOutletState extends State<EditorOutlet> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Outlet berhasil disimpan.'),
                 ),
                 Padding(
@@ -179,16 +179,16 @@ class _EditorOutletState extends State<EditorOutlet> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Outlet gagal disimpan.'),
                 ),
                 Padding(
@@ -206,11 +206,11 @@ class _EditorOutletState extends State<EditorOutlet> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -310,7 +310,7 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
                     widget.blocOutlet!.setNors(str);
                   },
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 LabelAppRich.size3(
                   'Jenis Outlet ',
                   color: Colors.grey[700],
@@ -332,7 +332,7 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
                   },
                   value: item.currentjnsOutlet,
                   isExpanded: false,
-                  hint: LabelBlack.size2('Pilih Jenis Outlet'),
+                  hint: const LabelBlack.size2('Pilih Jenis Outlet'),
                 )
               ],
             ),
@@ -347,9 +347,9 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
               widget.blocOutlet!.setAlamat(str);
             },
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           _koordinatWidget(item),
-          SizedBox(
+          const SizedBox(
             height: 150.0,
           ),
         ],
@@ -394,7 +394,7 @@ class _TabDataOutlet2State extends State<TabDataOutlet2> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 8,
     );
   }

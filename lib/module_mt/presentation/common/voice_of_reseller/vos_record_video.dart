@@ -33,6 +33,6 @@ class _VOSRecordVideoState extends State<VOSRecordVideo> {
   }
 
   void onStopVideo(String? pathVideo) {
-    push(this.context, pathVideo!);
+    push(context, pathVideo!);
   }
 }

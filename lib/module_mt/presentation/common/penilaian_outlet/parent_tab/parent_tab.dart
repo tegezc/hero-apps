@@ -14,11 +14,14 @@ class ParentTabNilaiOutlet extends StatelessWidget {
   final Availability cacheAvailibility;
   final PenilaianVisibility cacheVisibility;
   final Advokasi cacheAdvokasi;
+  final String idOutlet;
+
   ParentTabNilaiOutlet(
       {Key? key,
       required this.cacheAvailibility,
       required this.cacheVisibility,
-      required this.cacheAdvokasi})
+      required this.cacheAdvokasi,
+      required this.idOutlet})
       : super(key: key);
 
   @override
@@ -26,17 +29,35 @@ class ParentTabNilaiOutlet extends StatelessWidget {
     return BlocProvider(
       lazy: false,
       create: (context) => PenilaianoutletCubit(
-          availibility: cacheAvailibility,
+          availability: cacheAvailibility,
           visibility: cacheVisibility,
-          advokasi: cacheAdvokasi),
+          advokasi: cacheAdvokasi,
+          idOutlet: idOutlet),
       child: BlocListener<PenilaianoutletCubit, PenilaianoutletState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          // if (state is LoadingSubmitData) {
+          //   TgzDialogLoading()
+          //       .loadingDialog(context, text: 'Sedang Submit data');
+          // }
+          // if (state is ConfirmSubmit) {
+          //   TgzDialogConfirm().confirmTwoButton(
+          //       context, "Apakah anda yakin akan submit data", () {
+          //     BlocProvider.of<PenilaianoutletCubit>(context).submit(state.eTab);
+          //   });
+          // }
+          //
+          // if (state is FieldNotValidState) {
+          //   TgzDialogError()
+          //       .warningOneButton(context, 'Semua field harus di isi.');
+          // }
+        },
         child: BlocBuilder<PenilaianoutletCubit, PenilaianoutletState>(
           builder: (context, state) {
             return TabBarView(
               children: [
                 PageAvailability(
                   availability: cacheAvailibility,
+                  idOutlet: idOutlet,
                 ),
                 PageVisibility(penilaianVisibility: cacheVisibility),
                 PageAdvokasi(

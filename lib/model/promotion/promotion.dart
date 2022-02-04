@@ -14,8 +14,8 @@ class Promotion {
 
   Promotion.fromJson(Map<String, dynamic> map) {
     isVideoExist = false;
-    idjnsweekly = map['id_jenis_weekly'] == null ? '' : map['id_jenis_weekly'];
-    nama = map['nama_jenis'] == null ? '' : map['nama_jenis'];
+    idjnsweekly = map['id_jenis_weekly'] ?? '';
+    nama = map['nama_jenis'] ?? '';
   }
 
   // "id_promotion":"1",
@@ -25,16 +25,15 @@ class Promotion {
 
   Promotion.fromJsonDetail(Map<String, dynamic> map) {
     isVideoExist = true;
-    idpromotion = map['id_promotion'] == null ? '' : map['id_promotion'];
-    nama = map['nama_jenis'] == null ? '' : map['nama_jenis'];
+    idpromotion = map['id_promotion'] ?? '';
+    nama = map['nama_jenis'] ?? '';
 
-    nmlocal =
-        map['nama_program_lokal'] == null ? '' : map['nama_program_lokal'];
+    nmlocal = map['nama_program_lokal'] ?? '';
     pathVideo = map['file_video'];
   }
 
   Map<String, dynamic> toJson() {
-    String? nm = nmlocal == null ? "" : nmlocal;
+    String? nm = nmlocal ?? "";
 
     return {
       "id_tempat": pjp.id,

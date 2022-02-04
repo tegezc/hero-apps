@@ -305,7 +305,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                 ],
               ),
               _spasi(),
-              Divider(),
+              const Divider(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -360,7 +360,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
                     width: 110,
                     child: LabelBlack.size2('Qty'),
                   ),
-                  LabelBlack.size2(': '),
+                  const LabelBlack.size2(': '),
                   LabelBlack.size2('${item.trx.jumlah} pcs'),
                 ],
               ),
@@ -378,7 +378,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               _spasi(),
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 110,
                     child: LabelBlack.size2('Total'),
                   ),
@@ -407,7 +407,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
 
   Widget _cellInfoPembeli(String text, String? value) {
     String ts = text;
-    String sv = value == null ? '' : value;
+    String sv = value ?? '';
     return Row(
       children: [
         SizedBox(width: 120, child: LabelBlack.size2(ts)),
@@ -453,7 +453,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LabelBlack.size2('Sub Total Konsinyasi'),
+                  const LabelBlack.size2('Sub Total Konsinyasi'),
                   LabelBlack.size2(
                       'Rp ${ConverterNumber.getCurrentcy(item.getTotalKonsinyasi())}'),
                 ],
@@ -464,7 +464,7 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LabelBlack.size2('Total'),
+                  const LabelBlack.size2('Total'),
                   LabelBlack.size2(
                       'Rp ${ConverterNumber.getCurrentcy(item.getTotalPembayaran())}'),
                 ],
@@ -605,16 +605,16 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Item Transaksi berhasil dihapus.'),
                 ),
                 Padding(
@@ -633,16 +633,16 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
                       'Item Transaksi berhasil dihapus. Keranjang belanja kosong.'),
                 ),
@@ -662,16 +662,16 @@ class _PembayaranDistribusiState extends State<PembayaranDistribusi> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child:
                       LabelBlack.size2('Proses delete item transaksi gagal.'),
                 ),

@@ -266,7 +266,7 @@ class _PembelianItemState extends State<PembelianItem> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              LabelBlack.size1('Serial Number'),
+              const LabelBlack.size1('Serial Number'),
               LabelBlack.size1('Jumlah:${item.getTotal()}'),
             ],
           ),

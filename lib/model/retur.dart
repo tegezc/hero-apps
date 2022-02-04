@@ -24,12 +24,12 @@ class Retur {
     status = showmore;
   }
   Retur.fromJson(Map<String, dynamic> map) {
-    serial = map['serial_number'] == null ? '' : map['serial_number'];
+    serial = map['serial_number'] ?? '';
 
     tglretur = DateUtility.stringToDateTime(map['tgl_retur']);
     tglApproval = DateUtility.stringToDateTime(map['tgl_approval']);
 
-    status = map['status'] == null ? '' : map['status'];
+    status = map['status'] ?? '';
   }
 
   String getStrRetur() {
@@ -78,7 +78,7 @@ class AlasanRetur {
 
   AlasanRetur.fromJson(Map<String, dynamic> map) {
     id = ConverterNumber.stringToIntOrZero(map['id_alasan']);
-    text = map['nama_alasan'] == null ? '' : map['nama_alasan'];
+    text = map['nama_alasan'] ?? '';
   }
   bool isvalid() {
     if (id! > 0 && text != null) {

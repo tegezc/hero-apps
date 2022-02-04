@@ -1,4 +1,3 @@
-import 'package:hero/model/retur.dart';
 import 'package:hero/module_mt/domain/entity/tandem_selling/pertanyaan_sf.dart';
 
 class PenilaianSf {

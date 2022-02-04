@@ -183,13 +183,11 @@ class BlocSekolah extends AbsBlocLokasi {
   }
 
   void setJJmlGuru(String str) {
-    _cacheUisekolah!.sekolah.jmlGuru =
-        int.tryParse(str) == null ? 0 : int.tryParse(str);
+    _cacheUisekolah!.sekolah.jmlGuru = int.tryParse(str) ?? 0;
   }
 
   void setJJmlSiswa(String str) {
-    _cacheUisekolah!.sekolah.jmlMurid =
-        int.tryParse(str) == null ? 0 : int.tryParse(str);
+    _cacheUisekolah!.sekolah.jmlMurid = int.tryParse(str) ?? 0;
   }
 
   @override

@@ -5,8 +5,6 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/outlet.dart';
 import 'package:http/http.dart' as http;
 
-import '../../config/configuration_sf.dart';
-
 class HttpOutlet extends HttpBase {
   Future<List<ItemComboJenisOutlet>?> comboJenisOutlet() async {
     Map<String, String> headers = await getHeader();

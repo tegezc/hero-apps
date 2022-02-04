@@ -1,42 +1,46 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:hero/core/log/printlog.dart';
+import 'package:hero/module_mt/data/datasources/common/penilaian_out/submit_penilaian_out_datasource.dart';
+import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_out_submit_repository.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
+import 'package:hero/module_mt/domain/usecase/common/penilaian/availability/submit_availability_usecase.dart';
 
 import '../../enum_penilaian.dart';
 
 part 'penilaianoutlet_state.dart';
 
 class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
-  Availability availibility;
+  Availability availability;
   PenilaianVisibility visibility;
   Advokasi advokasi;
+  final String idOutlet;
   int counter = 0;
   PenilaianoutletCubit(
-      {required this.availibility,
+      {required this.availability,
       required this.visibility,
-      required this.advokasi})
+      required this.advokasi,
+      required this.idOutlet})
       : super(PenilaianoutletInitial());
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle inded : $index $value');
-    availibility.question.lquestion[index].isYes = value;
+    availability.question.lquestion[index].isYes = value;
   }
 
   void changeTextPenilaian(int index, String value, EJenisParam eJenisParam) {
     ph('change text $eJenisParam');
     switch (eJenisParam) {
       case EJenisParam.perdana:
-        availibility.kategoriOperator.lparams[index].nilai =
+        availability.kategoriOperator.lparams[index].nilai =
             int.tryParse(value) ?? 0;
         //  _setValueParamPenilaian(index, value, availibility.kategoriOperator.lparams);
         break;
       case EJenisParam.vk:
-        _setValueParamPenilaian(index, value, availibility.kategoriVF.lparams);
+        _setValueParamPenilaian(index, value, availability.kategoriVF.lparams);
         break;
       case EJenisParam.poster:
         _setValueParamPenilaian(
@@ -59,10 +63,10 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
 
     switch (ePhotoPenilaian) {
       case EPhotoPenilaian.avPerdana:
-        availibility.pathPhotoOperator = pathImage;
+        availability.pathPhotoOperator = pathImage;
         break;
       case EPhotoPenilaian.avVf:
-        availibility.pathPhotoVF = pathImage;
+        availability.pathPhotoVF = pathImage;
         break;
       case EPhotoPenilaian.etalase:
         visibility.imageEtalase = pathImage;
@@ -74,13 +78,13 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
         visibility.imageLayar = pathImage;
         break;
     }
-    ph('${availibility.pathPhotoOperator}');
-    ph('${availibility.pathPhotoVF}');
+    ph('${availability.pathPhotoOperator}');
+    ph('${availability.pathPhotoVF}');
     emit(_createPenilaianLoaded());
   }
 
   void setQuestionAv(bool value, int index) {
-    availibility.question.lquestion[index].isYes = value;
+    availability.question.lquestion[index].isYes = value;
   }
 
   void setQuestionVis(bool value, bool isbawah) {
@@ -95,15 +99,36 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     advokasi.lquestions[index].isYes = value;
   }
 
-  void submit(dynamic obj) {
-    if (obj is Availability) {
-    } else if (obj is Visibility) {}
+  void confirmSubmit(ETabPenilaian eTab) {
+    if (eTab == ETabPenilaian.availability) {
+      if (availability.isValidToSubmit()) {
+        emit(const ConfirmSubmit(ETabPenilaian.availability));
+      } else {
+        emit(FieldNotValidState());
+      }
+    } else if (eTab == ETabPenilaian.visibility) {
+    } else if (eTab == ETabPenilaian.advokasi) {}
+  }
+
+  void submit(ETabPenilaian eTab) {
+    SubmitPenilaianOutDatasourceImpl submitDatasource =
+        SubmitPenilaianOutDatasourceImpl();
+    PenilaianOutSubmitRepository penilaianOutSubmitRepository =
+        PenilaianOutSubmitRepository(submitDatasource);
+    SubmitAvailabilityUsecase sav =
+        SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
+    emit(LoadingSubmitData());
+    if (eTab == ETabPenilaian.availability) {
+      sav.call(availability, idOutlet);
+    } else if (eTab == ETabPenilaian.visibility) {
+    } else if (eTab == ETabPenilaian.advokasi) {}
+    emit(FinishSubmitSuccessOrNot());
   }
 
   RefreshForm _createPenilaianLoaded() {
     counter++;
     return RefreshForm(
-        availability: availibility,
+        availability: availability,
         visibility: visibility,
         advokasi: advokasi,
         counter: counter);

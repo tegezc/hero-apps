@@ -57,11 +57,11 @@ class _HomePageReturState extends State<HomePageRetur> {
             ),
             title: Row(
               children: [
-                Text(
+                const Text(
                   'Retur',
                   style: TextStyle(color: Colors.white),
                 ),
-                Spacer(),
+                const Spacer(),
                 SizedBox(
                   height: 30,
                   child: ButtonApp.black(
@@ -97,7 +97,7 @@ class _HomePageReturState extends State<HomePageRetur> {
                 ),
               ),
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 child: SizedBox(
                   height: s.height,
                   width: s.width,
@@ -258,9 +258,9 @@ class _HomePageReturState extends State<HomePageRetur> {
   }
 
   Widget _btnShowMore() {
-    return RaisedButton(
+    return ElevatedButton(
         child: Text('show more'),
-        color: Colors.green,
+        //color: Colors.green,
         onPressed: () {
           _blocHpRetur.showMore();
         });
@@ -296,7 +296,7 @@ class _HomePageReturState extends State<HomePageRetur> {
         color: Colors.white,
         child: Column(
           children: [
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.only(
                   left: 8.0, right: 8.0, top: 2.0, bottom: 2.0),
@@ -308,7 +308,7 @@ class _HomePageReturState extends State<HomePageRetur> {
                         Icons.playlist_add_check,
                         color: color,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Expanded(
@@ -346,7 +346,7 @@ class _HomePageReturState extends State<HomePageRetur> {
     if (!isawal) {
       if (item.tglAwal != null) {
         dtawal = item.tglAwal;
-        initialDt = dtawal!.add(Duration(days: 1));
+        initialDt = dtawal!.add(const Duration(days: 1));
       }
     }
     DateTime? picked = await showDatePicker(

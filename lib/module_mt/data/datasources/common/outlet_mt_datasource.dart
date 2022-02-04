@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
 import 'package:hero/module_mt/data/model/common/outletmt_model.dart';

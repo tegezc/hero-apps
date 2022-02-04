@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hero/config/configuration_sf.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/homepage_search/cell_outlet.dart';
-import 'package:hero/module_mt/presentation/common/widgets/Page_mt_error.dart';
-import 'package:hero/module_mt/presentation/common/widgets/page_loading_mt.dart';
+import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_mt_error.dart';
+import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_loading_mt.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/detail_outlet.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/penilaian_sf/hp_peilaian_sf.dart';
 import 'package:hero/util/component/button/component_button.dart';

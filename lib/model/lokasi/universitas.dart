@@ -34,12 +34,12 @@ class Universitas extends ParentLokasi {
   Universitas.kosong();
   Universitas.fromJson(Map<String, dynamic> map) {
     iduniv = map[tagiduniv];
-    idkel = map[tagidkel] == null ? '' : map[tagidkel];
-    npsn = map[tagnpsn] == null ? '' : map[tagnpsn];
-    nama = map[tagnama] == null ? '' : map[tagnama];
-    alamat = map[tagalamat] == null ? '' : map[tagalamat];
+    idkel = map[tagidkel] ?? '';
+    npsn = map[tagnpsn] ?? '';
+    nama = map[tagnama] ?? '';
+    alamat = map[tagalamat] ?? '';
 
-    String strlong = map[taglong] == null ? '0' : map[taglong];
+    String strlong = map[taglong] ?? '0';
     if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
@@ -47,7 +47,7 @@ class Universitas extends ParentLokasi {
     }
 
 // set lat
-    String strlat = map[taglat] == null ? '0' : map[taglat];
+    String strlat = map[taglat] ?? '0';
     if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {

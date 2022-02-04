@@ -16,7 +16,7 @@ class _CardQuestionState extends State<CardQuestionSingle> {
   bool switchedValue = true;
   @override
   void initState() {
-    switchedValue = widget.question.isYes ?? true;
+    switchedValue = widget.question.isYes;
     super.initState();
   }
 

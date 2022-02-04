@@ -6,8 +6,6 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/lokasimodel.dart';
 import 'package:http/http.dart' as http;
 
-import '../../config/configuration_sf.dart';
-
 class HttpSearchLocation extends HttpBase {
   Future<List<dynamic>?> cari(
       String query, EnumJenisLokasi enumJenisLokasi) async {

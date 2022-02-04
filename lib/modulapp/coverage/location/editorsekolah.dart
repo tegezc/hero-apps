@@ -111,7 +111,7 @@ class _EditorSekolahState extends State<EditorSekolah> {
                         }
                       }
                     },
-                    bottom: TabBar(
+                    bottom: const TabBar(
                       isScrollable: true,
                       tabs: [
                         // wallet share, sales broadband share, voucher fisik share
@@ -142,7 +142,7 @@ class _EditorSekolahState extends State<EditorSekolah> {
                     )),
               ),
               isloading
-                  ? LoadingTransparan('Sedang menyimpan...')
+                  ? const LoadingTransparan('Sedang menyimpan...')
                   : Container(),
             ],
           );
@@ -153,16 +153,16 @@ class _EditorSekolahState extends State<EditorSekolah> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data sekolah berhasil disimpan.'),
                 ),
                 Padding(
@@ -181,16 +181,16 @@ class _EditorSekolahState extends State<EditorSekolah> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data sekolah gagal disimpan.'),
                 ),
                 Padding(
@@ -208,11 +208,11 @@ class _EditorSekolahState extends State<EditorSekolah> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -236,7 +236,8 @@ class TabDataSekolah extends StatefulWidget {
   final BlocSekolah? blocSekolah;
   final DataLokasiAlamat? dataLokasiAlamat;
 
-  TabDataSekolah(this.blocSekolah, this.dataLokasiAlamat);
+  const TabDataSekolah(this.blocSekolah, this.dataLokasiAlamat, {Key? key})
+      : super(key: key);
 
   @override
   _TabDataSekolahState createState() => _TabDataSekolahState();
@@ -248,13 +249,13 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
   late List<JenjangSekolah> _ljenjang;
 
   //Texteditcontroller
-  TextEditingController _cnama = TextEditingController();
-  TextEditingController _calamat = TextEditingController();
-  TextEditingController _cjmlguru = TextEditingController();
-  TextEditingController _cnpsn = TextEditingController();
-  TextEditingController _cjmlmurid = TextEditingController();
-  TextEditingController _clatitude = TextEditingController();
-  TextEditingController _clongitude = TextEditingController();
+  final TextEditingController _cnama = TextEditingController();
+  final TextEditingController _calamat = TextEditingController();
+  final TextEditingController _cjmlguru = TextEditingController();
+  final TextEditingController _cnpsn = TextEditingController();
+  final TextEditingController _cjmlmurid = TextEditingController();
+  final TextEditingController _clatitude = TextEditingController();
+  final TextEditingController _clongitude = TextEditingController();
 
   @override
   void initState() {
@@ -300,7 +301,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         children: <Widget>[
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           _npsn(),
           TextFieldNormal(
             'Nama Sekolah *',
@@ -329,7 +330,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
             },
             value: uiSekolah.currentJenjang,
             isExpanded: false,
-            hint: LabelBlack.size2('Pilih Jenjang Sekolah'),
+            hint: const LabelBlack.size2('Pilih Jenjang Sekolah'),
           ),
           FormAlamat(
               widget.blocSekolah!.controllLokasi, widget.dataLokasiAlamat),
@@ -340,7 +341,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
               widget.blocSekolah!.setAlamat(str);
             },
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           _koordinatWidget(),
           TextFieldNormalNumberOnly(
             'Jumlah Guru',
@@ -356,7 +357,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
               widget.blocSekolah!.setJJmlSiswa(str);
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 150.0,
           ),
         ],
@@ -365,7 +366,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 8,
     );
   }
@@ -389,7 +390,7 @@ class _TabDataSekolahState extends State<TabDataSekolah> {
               _clatitude,
               enable: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             ButtonApp.black('Update Long Lat', () {

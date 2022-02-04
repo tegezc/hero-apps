@@ -6,7 +6,6 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/widget_success_submit.dart';
 
-import '../../../../config/configuration_sf.dart';
 import 'blocsurvey.dart';
 
 class PageVoucherSurvey extends StatefulWidget {

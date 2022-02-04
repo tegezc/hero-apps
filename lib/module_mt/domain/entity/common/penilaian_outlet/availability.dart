@@ -1,9 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 
 import 'kategories.dart';
 import 'questions.dart';
 
-class Availability extends Equatable {
+class Availability {
   Kategories kategoriOperator;
   Kategories kategoriVF;
   Questions question;
@@ -15,6 +15,29 @@ class Availability extends Equatable {
       required this.kategoriVF,
       required this.question});
 
-  @override
-  List<Object?> get props => [pathPhotoOperator, pathPhotoVF];
+  bool isValidToSubmit() {
+    if (pathPhotoOperator == null || pathPhotoVF == null) {
+      return false;
+    }
+
+    if (kategoriOperator.lparams.isEmpty ||
+        kategoriVF.lparams.isEmpty ||
+        question.lquestion.isEmpty) {
+      return false;
+    }
+    bool cekParam = _checkListParams(kategoriOperator.lparams);
+    if (cekParam) {
+      cekParam = _checkListParams(kategoriVF.lparams);
+    }
+    return cekParam;
+  }
+
+  bool _checkListParams(List<ParamPenilaian> lParams) {
+    for (ParamPenilaian p in kategoriOperator.lparams) {
+      if (!p.isValidToSubmit()) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

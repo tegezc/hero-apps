@@ -153,7 +153,7 @@ class _HomePembelianDistribusiState extends State<HomePembelianDistribusi> {
               height: 12,
             ),
             _enumAccount == EnumAccount.sf
-                ? Center(
+                ? const Center(
                     child: LabelApp.size1(
                       'History Order',
                       bold: true,

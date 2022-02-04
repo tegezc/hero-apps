@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class ConverterNumber {
   static double? stringToDouble(String? str) {
     if (str != null) {
-      double? tmp = double.tryParse(str) == null ? 0.0 : double.tryParse(str);
+      double? tmp = double.tryParse(str) ?? 0.0;
       return tmp;
     }
     return 0.0;

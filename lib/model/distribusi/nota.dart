@@ -11,8 +11,8 @@ class Nota {
 
   Nota.fromJson(Map<String, dynamic> map) {
     isShared = false;
-    noNota = map['no_nota'] == null ? '' : map['no_nota'];
-    pembayaran = map['pembayaran'] == null ? '' : map['pembayaran'];
+    noNota = map['no_nota'] ?? '';
+    pembayaran = map['pembayaran'] ?? '';
   }
 }
 
@@ -57,17 +57,13 @@ class DetailNota {
         List<dynamic> ld = md['data_pembeli'];
         if (ld.isNotEmpty) {
           Map<String, dynamic> mapp = ld[0];
-          mitra = mapp['mitra_ad'] == null ? '' : mapp['mitra_ad'];
-          namasales = mapp['nama_sales'] == null ? '' : mapp['nama_sales'];
-          tgl = mapp['tgl_transaksi'] == null ? '' : mapp['tgl_transaksi'];
-          jenislokasi = mapp['nama_jenis_lokasi'] == null
-              ? ''
-              : mapp['nama_jenis_lokasi'];
-          namapembeli =
-              mapp['nama_pembeli'] == null ? '' : mapp['nama_pembeli'];
-          nohppembeli =
-              mapp['no_hp_pembeli'] == null ? '' : mapp['no_hp_pembeli'];
-          jnspembayaran = mapp['pembayaran'] == null ? '' : mapp['pembayaran'];
+          mitra = mapp['mitra_ad'] ?? '';
+          namasales = mapp['nama_sales'] ?? '';
+          tgl = mapp['tgl_transaksi'] ?? '';
+          jenislokasi = mapp['nama_jenis_lokasi'] ?? '';
+          namapembeli = mapp['nama_pembeli'] ?? '';
+          nohppembeli = mapp['no_hp_pembeli'] ?? '';
+          jnspembayaran = mapp['pembayaran'] ?? '';
         }
       }
 

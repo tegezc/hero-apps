@@ -6,7 +6,7 @@ class FrekuensiPaket {
   FrekuensiPaket({required this.idserver, required this.nama});
 
   bool isValid() {
-    if (idserver == null || nama == null) {
+    if (idserver == null) {
       return false;
     }
     return true;

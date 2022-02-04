@@ -24,7 +24,7 @@ class AvailabilityModel extends Availability {
       map[item.idparam] = item.nilai;
     }
     for (Question item in question.lquestion) {
-      map[item.idPertanyaan] = item.isYes! ? 'ya' : 'tidak';
+      map[item.idPertanyaan] = item.isYes ? 'ya' : 'tidak';
     }
     map['id_outlet'] = idoutlet;
     map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());

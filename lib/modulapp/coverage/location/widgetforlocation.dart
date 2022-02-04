@@ -12,12 +12,14 @@ class ScaffoldLocation extends StatelessWidget {
   final Function? onTap;
   final PreferredSizeWidget? bottom;
 
-  ScaffoldLocation(
-      {required this.body,
+  const ScaffoldLocation(
+      {Key? key,
+      required this.body,
       required this.title,
       this.textBtn,
       this.bottom,
-      this.onTap});
+      this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +60,21 @@ class ScaffoldLocView extends StatelessWidget {
   final String? title;
   final PreferredSizeWidget? bottom;
 
-  ScaffoldLocView({required this.body, required this.title, this.bottom});
+  const ScaffoldLocView(
+      {Key? key, required this.body, required this.title, this.bottom})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[600],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         title: Center(
           child: Text(title!,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               )),
         ),
@@ -85,7 +89,8 @@ class FormAlamat extends StatefulWidget {
   final ControllLokasi? controllLokasi;
   final DataLokasiAlamat? dataLokasiAlamat;
 
-  FormAlamat(this.controllLokasi, this.dataLokasiAlamat);
+  const FormAlamat(this.controllLokasi, this.dataLokasiAlamat, {Key? key})
+      : super(key: key);
 
   @override
   _FormAlamatState createState() => _FormAlamatState();
@@ -151,7 +156,7 @@ class _FormAlamatState extends State<FormAlamat> {
                 },
                 value: _currentProv,
                 isExpanded: false,
-                hint: LabelBlack.size2('Pilih Provinsi'),
+                hint: const LabelBlack.size2('Pilih Provinsi'),
               )
             ],
           ),
@@ -210,7 +215,7 @@ class _FormAlamatState extends State<FormAlamat> {
                         .map((value) => DropdownMenuItem(
                               child: Text(
                                 value.nama!,
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                               ),
                               value: value,
                             ))
@@ -220,7 +225,7 @@ class _FormAlamatState extends State<FormAlamat> {
                 },
                 value: _currentKec,
                 isExpanded: false,
-                hint: LabelBlack.size2('Pilih Kecamatan'),
+                hint: const LabelBlack.size2('Pilih Kecamatan'),
               )
             ],
           ),
@@ -246,7 +251,7 @@ class _FormAlamatState extends State<FormAlamat> {
                         .map((value) => DropdownMenuItem(
                               child: Text(
                                 value.nama!,
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                               ),
                               value: value,
                             ))
@@ -256,7 +261,7 @@ class _FormAlamatState extends State<FormAlamat> {
                 },
                 value: _currentKelurahan,
                 isExpanded: false,
-                hint: LabelBlack.size2('Pilih Kelurahan'),
+                hint: const LabelBlack.size2('Pilih Kelurahan'),
               )
             ],
           ),
@@ -266,7 +271,7 @@ class _FormAlamatState extends State<FormAlamat> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 8,
     );
   }

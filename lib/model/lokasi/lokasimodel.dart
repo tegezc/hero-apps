@@ -13,11 +13,11 @@ class Provinsi {
     // "lastmodified": "2020-11-29 09:00:00"
     //
 
-    realid = map['id_provinsi'] == null ? '' : map['id_provinsi'];
-    nama = map['nama_provinsi'] == null ? '' : map['nama_provinsi'];
+    realid = map['id_provinsi'] ?? '';
+    nama = map['nama_provinsi'] ?? '';
   }
   Map<String, dynamic> toMap() {
-    var map = Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map[TbProv.id] = id;
     map[TbProv.realid] = realid;
     map[TbProv.nama] = nama;
@@ -53,15 +53,13 @@ class Kabupaten {
     // "nama_kabupaten": "KOTA BANDAR LAMPUNG",
     // "radius_clock_in": "0",
     // "lastmodified": "2020-11-29 09:00:00"
-    realid = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
-    idprov = map['id_provinsi'] == null ? '' : map['id_provinsi'];
-    nama = map['nama_kabupaten'] == null ? '' : map['nama_kabupaten'];
+    realid = map['id_kabupaten'] ?? '';
+    idprov = map['id_provinsi'] ?? '';
+    nama = map['nama_kabupaten'] ?? '';
     if (map['radius_clock_in'] == null) {
       radiusClockin = 25;
     } else {
-      radiusClockin = int.tryParse(map['radius_clock_in']) == null
-          ? 25
-          : int.tryParse(map['radius_clock_in']);
+      radiusClockin = int.tryParse(map['radius_clock_in']) ?? 25;
     }
   }
 
@@ -106,10 +104,10 @@ class Kecamatan {
     // "nama_kecamatan": "BUMI WARAS",
     // "lastmodified": "2020-11-29 09:00:00"
 
-    realid = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
-    idkab = map['id_kabupaten'] == null ? '' : map['id_kabupaten'];
-    idcluster = map['id_cluster'] == null ? '' : map['id_cluster'];
-    nama = map['nama_kecamatan'] == null ? '' : map['nama_kecamatan'];
+    realid = map['id_kecamatan'] ?? '';
+    idkab = map['id_kabupaten'] ?? '';
+    idcluster = map['id_cluster'] ?? '';
+    nama = map['nama_kecamatan'] ?? '';
   }
 
   Kecamatan.fromDb(
@@ -155,9 +153,9 @@ class Kelurahan {
   // "nama_kelurahan": "BUMI RAYA",
   // "lastmodified": "2020-11-29 09:00:00"
   Kelurahan.fromJson(Map<String, dynamic> map) {
-    idkel = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
-    idkec = map['id_kecamatan'] == null ? '' : map['id_kecamatan'];
-    nama = map['nama_kelurahan'] == null ? '' : map['nama_kelurahan'];
+    idkel = map['id_kelurahan'] ?? '';
+    idkec = map['id_kecamatan'] ?? '';
+    nama = map['nama_kelurahan'] ?? '';
   }
 
   Map<String, dynamic> toMap() {

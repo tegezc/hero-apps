@@ -31,12 +31,10 @@ class PageSuccess extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            pageSuccessParam!.text2 == null
-                ? Container()
-                : Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: LabelBlack.size1(pageSuccessParam!.text2),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: LabelBlack.size1(pageSuccessParam!.text2),
+            ),
             ButtonApp.green('Lanjut ke Proses Selanjutnya', () {
               Navigator.popUntil(
                   context, ModalRoute.withName(pageSuccessParam!.backPage));

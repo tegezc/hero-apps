@@ -6,7 +6,7 @@ class InfoOutlet extends StatelessWidget {
   final OutletMT outletMT;
   final String cluster;
   final String tap;
-  InfoOutlet(
+  const InfoOutlet(
       {Key? key,
       required this.outletMT,
       required this.cluster,

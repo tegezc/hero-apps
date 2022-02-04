@@ -27,4 +27,11 @@ class RefreshForm extends PenilaianoutletState {
   List<Object> get props => [counter];
 }
 
-class ConfirmSubmit extends PenilaianoutletState {}
+class ConfirmSubmit extends PenilaianoutletState {
+  final ETabPenilaian eTab;
+  const ConfirmSubmit(this.eTab);
+}
+
+class LoadingSubmitData extends PenilaianoutletState {}
+
+class FinishSubmitSuccessOrNot extends PenilaianoutletState {}

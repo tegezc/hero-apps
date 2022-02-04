@@ -60,14 +60,14 @@ class Fakultas extends ParentLokasi {
   static const String tagIgPic = 'akun_ig_pic';
 
   Fakultas.fromJson(Map<String, dynamic> map) {
-    String strlong = map[taglong] == null ? '0' : map[taglong];
+    String strlong = map[taglong] ?? '0';
     if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
     }
 
-    String strlat = map[taglat] == null ? '0' : map[taglat];
+    String strlat = map[taglat] ?? '0';
     if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
@@ -83,27 +83,23 @@ class Fakultas extends ParentLokasi {
 
     // set jumlah Dosen
     if (map[tagJmlDosen] != null) {
-      jmlDosen = int.tryParse(map[tagJmlDosen]) == null
-          ? 0
-          : int.tryParse(map[tagJmlDosen]);
+      jmlDosen = int.tryParse(map[tagJmlDosen]) ?? 0;
     } else {
       jmlDosen = 0;
     }
 
 // set jumlah Mahasiswa
     if (map[tagJmlMahasiswa] != null) {
-      jmlMahasiswa = int.tryParse(map[tagJmlMahasiswa]) == null
-          ? 0
-          : int.tryParse(map[tagJmlMahasiswa]);
+      jmlMahasiswa = int.tryParse(map[tagJmlMahasiswa]) ?? 0;
     } else {
       jmlMahasiswa = 0;
     }
 
-    idfak = map[tagidfakultas] == null ? '' : map[tagidfakultas];
-    iduniv = map[tagiduniv] == null ? '' : map[tagiduniv];
-    nama = map[tagnama] == null ? '' : map[tagnama];
-    alamat = map[tagalamat] == null ? '' : map[tagalamat];
-    namaUniv = map[tagNmUniv] == null ? '' : map[tagNmUniv];
+    idfak = map[tagidfakultas] ?? '';
+    iduniv = map[tagiduniv] ?? '';
+    nama = map[tagnama] ?? '';
+    alamat = map[tagalamat] ?? '';
+    namaUniv = map[tagNmUniv] ?? '';
 
     pic = Pic.fromJson(map);
     dekan = Owner.fromJson(map, tagNmOwner, tagNoHpOwner, tagTglLahirOwner,

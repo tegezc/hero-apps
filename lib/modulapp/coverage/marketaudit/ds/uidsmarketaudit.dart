@@ -50,16 +50,19 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
         stream: _blocDsQuisioner.modelUiQuisioner,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+            return const LoadingNunggu("Mohon tunggu\nSedang loading data.");
           } else {
             ModelUiQuisioner? item = snapshot.data;
             switch (item!.enumStateWidget) {
               case EnumStateWidget.startup:
-                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+                return const LoadingNunggu(
+                    "Mohon tunggu\nSedang loading data.");
               case EnumStateWidget.active:
-                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+                return const LoadingNunggu(
+                    "Mohon tunggu\nSedang loading data.");
               case EnumStateWidget.loading:
-                return LoadingNunggu("Mohon tunggu\nSedang loading data.");
+                return const LoadingNunggu(
+                    "Mohon tunggu\nSedang loading data.");
 
               case EnumStateWidget.done:
                 return CustomScaffold(
@@ -77,15 +80,15 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: LabelApp.size1("Operator Nelpon"),
                                 ),
                                 const Divider(),
                                 Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: LabelApp.size2("Operator *"),
                                     ),
                                     const SizedBox(
@@ -115,8 +118,8 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                                         },
                                         value: item.getCurrentOperatorNelpon(),
                                         isExpanded: false,
-                                        hint:
-                                            LabelBlack.size2('Pilih Operator'),
+                                        hint: const LabelBlack.size2(
+                                            'Pilih Operator'),
                                       ),
                                     ),
                                   ],
@@ -136,15 +139,15 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: LabelApp.size1("Operator Internet"),
                                 ),
                                 const Divider(),
                                 Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: LabelApp.size2("Operator *"),
                                     ),
                                     const SizedBox(
@@ -175,8 +178,8 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                                         value:
                                             item.getCurrentOperatorInternet(),
                                         isExpanded: false,
-                                        hint:
-                                            LabelBlack.size2('Pilih Operator'),
+                                        hint: const LabelBlack.size2(
+                                            'Pilih Operator'),
                                       ),
                                     ),
                                   ],
@@ -196,16 +199,16 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: LabelApp.size1(
                                       "Operator Digital (Games & Video)"),
                                 ),
                                 const Divider(),
                                 Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: LabelApp.size2("Operator *"),
                                     ),
                                     const SizedBox(
@@ -235,8 +238,8 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                                         },
                                         value: item.getCurrentOperatorDigital(),
                                         isExpanded: false,
-                                        hint:
-                                            LabelBlack.size2('Pilih Operator'),
+                                        hint: const LabelBlack.size2(
+                                            'Pilih Operator'),
                                       ),
                                     ),
                                   ],
@@ -257,8 +260,8 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: LabelApp.size1(
                                       "Sering membeli paket apa?"),
                                 ),
@@ -284,7 +287,7 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                                     },
                                     value: item.getCurrentFrekuensi(),
                                     isExpanded: false,
-                                    hint: LabelBlack.size2(
+                                    hint: const LabelBlack.size2(
                                         'Pilih Frekuensi pembelian'),
                                   ),
                                 ),
@@ -320,7 +323,7 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
                 );
 
               case EnumStateWidget.failed:
-                return CustomScaffold(
+                return const CustomScaffold(
                   title: 'Market Audit',
                   body: LabelBlack.size1("Terjadi kesalahan."),
                 );
@@ -389,8 +392,8 @@ class _CoverageMarketAuditState extends State<CoverageMarketAudit> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: LabelApp.size2('Anda yakin akan meng-submit data ?'),
                 ),
                 Padding(

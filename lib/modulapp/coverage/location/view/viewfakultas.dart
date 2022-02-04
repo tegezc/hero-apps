@@ -94,7 +94,7 @@ class _ViewFakultasState extends State<ViewFakultas> {
         length: 3,
         child: ScaffoldLocView(
             title: _title,
-            bottom: TabBar(
+            bottom: const TabBar(
               isScrollable: true,
               tabs: [
                 // wallet share, sales broadband share, voucher fisik share
@@ -140,38 +140,38 @@ class TabViewFakultas extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Label2row('Nama', sekolah!.nama),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Nama Universitas', sekolah!.namaUniv),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Provinsi:', '${sekolah!.getStrProv()}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Kabupaten:', '${sekolah!.getStrKab()}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Kecamatan:', '${sekolah!.getStrKec()}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Kelurahan:', '${sekolah!.getStrKel()}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Alamat:', '${sekolah!.alamat}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Jumlah Dosen:', '${sekolah!.jmlDosen}'),
             _spasi(),
-            Divider(),
+            const Divider(),
             Label2row('Jumlah Mahasiswa:', '${sekolah!.jmlMahasiswa}'),
             _spasi(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             _koordinatWidget(context),
-            SizedBox(
+            const SizedBox(
               height: 150.0,
             ),
           ],
@@ -192,7 +192,7 @@ class TabViewFakultas extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Label2row('Longitude:', '${sekolah!.long}'),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Label2row('Latitude:', '${sekolah!.lat}'),
@@ -203,7 +203,7 @@ class TabViewFakultas extends StatelessWidget {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 12,
     );
   }

@@ -131,7 +131,7 @@ class _EditorPOIState extends State<EditorPOI> {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     children: <Widget>[
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       TextFieldNormal(
                         'Nama Poi *',
                         _cnama,
@@ -139,7 +139,7 @@ class _EditorPOIState extends State<EditorPOI> {
                           _blocPoi.setNamaPoi(str);
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       FormAlamat(_blocPoi.controllLokasi,
@@ -151,11 +151,11 @@ class _EditorPOIState extends State<EditorPOI> {
                           _blocPoi.setAlamat(str);
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 24,
                       ),
                       _koordinatWidget(),
-                      SizedBox(
+                      const SizedBox(
                         height: 150.0,
                       ),
                     ],
@@ -163,7 +163,7 @@ class _EditorPOIState extends State<EditorPOI> {
                 ),
               ),
               isloading
-                  ? LoadingTransparan('Sedang menyimpan...')
+                  ? const LoadingTransparan('Sedang menyimpan...')
                   : Container(),
             ],
           );
@@ -205,16 +205,16 @@ class _EditorPOIState extends State<EditorPOI> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data POI berhasil disimpan.'),
                 ),
                 Padding(
@@ -233,16 +233,16 @@ class _EditorPOIState extends State<EditorPOI> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data POI gagal disimpan.'),
                 ),
                 Padding(
@@ -260,11 +260,11 @@ class _EditorPOIState extends State<EditorPOI> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(

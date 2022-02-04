@@ -11,8 +11,6 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/tgzdialog.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 
-import '../../config/configuration_sf.dart';
-
 class PreviewPhotoWithUpload extends StatefulWidget {
   static const routeName = '/previewphotoupload';
   final ParamPreviewPhoto? param;

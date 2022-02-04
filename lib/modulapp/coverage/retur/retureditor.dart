@@ -67,11 +67,11 @@ class _ReturEditorState extends State<ReturEditor> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 _contentTransaksi(item),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 _contentSeri(item),
@@ -97,7 +97,7 @@ class _ReturEditorState extends State<ReturEditor> {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ))),
-                        child: Text(
+                        child: const Text(
                           'RETUR',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -136,7 +136,7 @@ class _ReturEditorState extends State<ReturEditor> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      LabelApp.size2(
+                      const LabelApp.size2(
                         'Alasan Retur :',
                       ),
                       DropdownButton(
@@ -146,7 +146,8 @@ class _ReturEditorState extends State<ReturEditor> {
                                 .map((value) => DropdownMenuItem(
                                       child: Text(
                                         value.text!,
-                                        style: TextStyle(color: Colors.black),
+                                        style: const TextStyle(
+                                            color: Colors.black),
                                       ),
                                       value: value,
                                     ))
@@ -156,12 +157,12 @@ class _ReturEditorState extends State<ReturEditor> {
                         },
                         value: item.currentAlasan,
                         isExpanded: false,
-                        hint: Text(
+                        hint: const Text(
                           'Pilih alasan retur',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: SizedBox(
@@ -169,7 +170,7 @@ class _ReturEditorState extends State<ReturEditor> {
                             child: TextFieldNumberOnly(
                                 'Nomor Seri :', _textController1)),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       _isRange
                           ? Padding(
                               padding:
@@ -180,7 +181,7 @@ class _ReturEditorState extends State<ReturEditor> {
                                       'Nomor Seri', _textController2)),
                             )
                           : Container(),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       ButtonApp.black('SEARCH', () {
                         FocusScope.of(context).unfocus();
                         _blocReturEditor.searchSerialNumber(
@@ -218,7 +219,7 @@ class _ReturEditorState extends State<ReturEditor> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
         Padding(
@@ -226,7 +227,7 @@ class _ReturEditorState extends State<ReturEditor> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              LabelBlack.size1('Serial Number'),
+              const LabelBlack.size1('Serial Number'),
               LabelBlack.size1(item.getTotal()),
             ],
           ),
@@ -238,7 +239,7 @@ class _ReturEditorState extends State<ReturEditor> {
 
   Widget _contentListSeri(List<SerialNumber> lseri) {
     List<Widget> lw = [];
-    lw.add(SizedBox(
+    lw.add(const SizedBox(
       height: 4,
     ));
     for (int i = 0; i < lseri.length; i++) {
@@ -272,16 +273,16 @@ class _ReturEditorState extends State<ReturEditor> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Retur berhasil di submit.'),
                 ),
                 Padding(
@@ -300,16 +301,16 @@ class _ReturEditorState extends State<ReturEditor> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Retur gagal di submit.'),
                 ),
                 Padding(

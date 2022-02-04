@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:background_locator/location_dto.dart';
 import 'package:hero/core/log/printlog.dart';
-
-import '../../config/configuration_sf.dart';
 import 'location_service_repository.dart';
 
 class LocationCallbackHandler {

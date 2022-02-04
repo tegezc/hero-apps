@@ -104,7 +104,7 @@ class _EditorKampusState extends State<EditorKampus> {
                         }
                       }
                     },
-                    bottom: TabBar(
+                    bottom: const TabBar(
                       isScrollable: true,
                       tabs: [
                         Tab(
@@ -134,7 +134,7 @@ class _EditorKampusState extends State<EditorKampus> {
                     )),
               ),
               isloading
-                  ? LoadingTransparan('Sedang menyimpan...')
+                  ? const LoadingTransparan('Sedang menyimpan...')
                   : Container(),
             ],
           );
@@ -145,16 +145,16 @@ class _EditorKampusState extends State<EditorKampus> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data kampus berhasil disimpan.'),
                 ),
                 Padding(
@@ -173,16 +173,16 @@ class _EditorKampusState extends State<EditorKampus> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Data kampus gagal disimpan.'),
                 ),
                 Padding(
@@ -200,11 +200,11 @@ class _EditorKampusState extends State<EditorKampus> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
                 Padding(
@@ -228,7 +228,8 @@ class TabDataKampus extends StatefulWidget {
   final BlocUniversitas? blocUniversitas;
   final DataLokasiAlamat? dataLokasiAlamat;
 
-  TabDataKampus(this.blocUniversitas, this.dataLokasiAlamat);
+  const TabDataKampus(this.blocUniversitas, this.dataLokasiAlamat, {Key? key})
+      : super(key: key);
 
   @override
   _TabDataKampusState createState() => _TabDataKampusState();
@@ -278,7 +279,7 @@ class _TabDataKampusState extends State<TabDataKampus> {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         children: <Widget>[
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           _npsn(),
           TextFieldNormal(
             'Nama Universitas *',
@@ -297,11 +298,11 @@ class _TabDataKampusState extends State<TabDataKampus> {
               widget.blocUniversitas!.setAlamat(str);
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           _koordinatWidget(),
-          SizedBox(
+          const SizedBox(
             height: 150.0,
           ),
         ],
@@ -310,7 +311,7 @@ class _TabDataKampusState extends State<TabDataKampus> {
   }
 
   Widget _spasi() {
-    return SizedBox(
+    return const SizedBox(
       height: 8,
     );
   }
@@ -334,7 +335,7 @@ class _TabDataKampusState extends State<TabDataKampus> {
               _clatitude,
               enable: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             ButtonApp.black('Update Long Lat', () {}),
@@ -360,14 +361,14 @@ class _TabDataKampusState extends State<TabDataKampus> {
                 widget.blocUniversitas!.setNpsn(str);
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             GestureDetector(
                 onTap: () {
-                  this._launchURL();
+                  _launchURL();
                 },
-                child: LabelAppMiring.size2(
+                child: const LabelAppMiring.size2(
                   'Cek NPSN',
                   color: Colors.blue,
                 )),

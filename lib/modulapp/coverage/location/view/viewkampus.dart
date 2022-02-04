@@ -94,7 +94,7 @@ class _ViewKampusState extends State<ViewKampus> {
         length: 3,
         child: ScaffoldLocView(
             title: _title,
-            bottom: TabBar(
+            bottom: const TabBar(
               isScrollable: true,
               tabs: [
                 // wallet share, sales broadband share, voucher fisik share
@@ -185,7 +185,7 @@ class TabViewKampus extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Label2row('Longitude:', '${sekolah!.long}'),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Label2row('Latitude:', '${sekolah!.lat}'),

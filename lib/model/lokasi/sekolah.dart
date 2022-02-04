@@ -104,18 +104,14 @@ class Sekolah extends ParentLokasi {
   Sekolah.fromJson(Map<String, dynamic> map) {
     // set jumlah guru
     if (map[tagJmlGuru] != null) {
-      jmlGuru = int.tryParse(map[tagJmlGuru]) == null
-          ? 0
-          : int.tryParse(map[tagJmlGuru]);
+      jmlGuru = int.tryParse(map[tagJmlGuru]) ?? 0;
     } else {
       jmlGuru = 0;
     }
 
 // set jumlah murid
     if (map[tagJmlMurid] != null) {
-      jmlMurid = int.tryParse(map[tagJmlMurid]) == null
-          ? 0
-          : int.tryParse(map[tagJmlMurid]);
+      jmlMurid = int.tryParse(map[tagJmlMurid]) ?? 0;
     } else {
       jmlMurid = 0;
     }
@@ -123,18 +119,16 @@ class Sekolah extends ParentLokasi {
 // set jenjang
     int? intJenjang;
     if (map[tagJmlMurid] != null) {
-      intJenjang = int.tryParse(map[tagJenjang]) == null
-          ? 1
-          : int.tryParse(map[tagJenjang]);
+      intJenjang = int.tryParse(map[tagJenjang]) ?? 1;
     } else {
       intJenjang = 1;
     }
 
     Map<int, JenjangSekolah> mapJenjang = ItemUi.getJenjangSekolah();
-    jenjang = mapJenjang[intJenjang!];
+    jenjang = mapJenjang[intJenjang];
 
 // set long
-    String strlong = map[tagLong] == null ? '0' : map[tagLong];
+    String strlong = map[tagLong] ?? '0';
     if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
@@ -142,7 +136,7 @@ class Sekolah extends ParentLokasi {
     }
 
 // set lat
-    String strlat = map[tagLat] == null ? '0' : map[tagLat];
+    String strlat = map[tagLat] ?? '0';
     if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
@@ -154,7 +148,7 @@ class Sekolah extends ParentLokasi {
     idkel = map[tagIdKel];
     nama = map[tagNama];
     noNpsn = map[tagNpsn];
-    alamat = map[tagAlamat] == null ? '' : map[tagAlamat];
+    alamat = map[tagAlamat] ?? '';
 
     owner = Owner.fromJson(map, tagNmKepsek, tagHpKep, tagTglLahirKep,
         tagHobKep, tagFbKep, tagIgKep);

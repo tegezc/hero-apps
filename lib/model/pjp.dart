@@ -57,7 +57,7 @@ class Pjp {
       clockout = DateUtility.stringToJam(map['jam_clock_out'], dt);
     }
 
-    status = map['status'] == null ? null : map['status'];
+    status = map['status'];
   }
 
   String? id;
@@ -85,11 +85,11 @@ class Pjp {
   Pjp(this.clockin, this.clockout, this.tempat, this.enumStatusTempat);
 
   Pjp.fromJson(Map<String, dynamic> map) {
-    id = map['id_tempat'] == null ? '' : map['id_tempat'];
+    id = map['id_tempat'] ?? '';
     nokunjungan = ConverterNumber.stringToIntOrZero(map['no_kunjungan']);
     nohp = map['no_hp_owner'] == null ? '' : '${map['no_hp_owner']}';
     radius = ConverterNumber.stringToIntOrZero(map['radius_clock_in']);
-    idjenilokasi = map['id_jenis_lokasi'] == null ? '' : map['id_jenis_lokasi'];
+    idjenilokasi = map['id_jenis_lokasi'] ?? '';
 
     clockin = DateUtility.stringToJam(map['jam_clock_in'], DateTime.now());
     clockout = DateUtility.stringToJam(map['jam_clock_out'], DateTime.now());
@@ -97,10 +97,10 @@ class Pjp {
     lat = ConverterNumber.stringToDouble(map['latitude']);
     long = ConverterNumber.stringToDouble(map['longitude']);
     tempat = Tempat.kosong();
-    tempat!.id = map['id_digipos'] == null ? '' : map['id_digipos'];
-    tempat!.nama = map['nama'] == null ? '' : map['nama'];
-    status = map['status'] == null ? null : map['status'];
-    idhistorypjp = map['id_history_pjp'] == null ? null : map['id_history_pjp'];
+    tempat!.id = map['id_digipos'] ?? '';
+    tempat!.nama = map['nama'] ?? '';
+    status = map['status'];
+    idhistorypjp = map['id_history_pjp'];
   }
 
   EnumJenisLokasi? getJenisLokasi() {

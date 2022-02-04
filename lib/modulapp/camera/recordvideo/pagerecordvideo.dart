@@ -333,7 +333,7 @@ class _PageTakeVideoState extends State<PageTakeVideo>
     }
 
     try {
-      XFile rawImage = await await _controller!.stopVideoRecording();
+      XFile rawImage = await _controller!.stopVideoRecording();
       return await _tgzFile.copyVideoFromCacheToDestinationDirectory(rawImage);
     } on CameraException catch (e) {
       _showCameraException(e);

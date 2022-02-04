@@ -14,7 +14,7 @@ import 'blocsearchlocation.dart';
 class HistoryPJP extends StatefulWidget {
   // static const String routeName = '/historypjp';
   final LokasiSimple lokasi;
-  HistoryPJP(this.lokasi, {Key? key}) : super(key: key);
+  const HistoryPJP(this.lokasi, {Key? key}) : super(key: key);
   @override
   _HistoryPJPState createState() => _HistoryPJPState();
 }
@@ -238,7 +238,7 @@ class _HistoryPJPState extends State<HistoryPJP> {
 
   Widget _btnShowMore() {
     return TextButton(
-        child: Text('SHOW MORE', style: TextStyle(color: Colors.blue)),
+        child: const Text('SHOW MORE', style: TextStyle(color: Colors.blue)),
         onPressed: () {
           _showMore();
         });

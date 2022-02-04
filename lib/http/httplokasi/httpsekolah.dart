@@ -5,8 +5,6 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/sekolah.dart';
 import 'package:http/http.dart' as http;
 
-import '../../config/configuration_sf.dart';
-
 class HttpSekolah extends HttpBase {
   Future<List<dynamic>?> detailSekolah(String? idsekolah) async {
     Map<String, String> headers = await getHeader();

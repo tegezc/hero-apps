@@ -9,9 +9,7 @@ class PageMtError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldMT(
-      body: Container(
-        child: LabelBlack.title(message),
-      ),
+      body: LabelBlack.title(message),
       title: 'Error',
     );
   }

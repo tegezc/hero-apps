@@ -34,14 +34,14 @@ class Profile {
 
   Profile.fromJson(Map<String, dynamic> map) {
     if (map['status'] == 200) {
-      id = map['id'] == null ? '' : map['id'];
-      role = map['role'] == null ? '' : map['role'];
-      namaSales = map['nama_sales'] == null ? '' : map['nama_sales'];
-      idtap = map['id_tap'] == null ? '' : map['id_tap'];
-      namaTap = map['nama_tap'] == null ? '' : map['nama_tap'];
-      idcluster = map['id_cluster'] == null ? '' : map['id_cluster'];
-      namaCluster = map['nama_cluster'] == null ? '' : map['nama_cluster'];
-      token = map['token'] == null ? '' : map['token'];
+      id = map['id'] ?? '';
+      role = map['role'] ?? '';
+      namaSales = map['nama_sales'] ?? '';
+      idtap = map['id_tap'] ?? '';
+      namaTap = map['nama_tap'] ?? '';
+      idcluster = map['id_cluster'] ?? '';
+      namaCluster = map['nama_cluster'] ?? '';
+      token = map['token'] ?? '';
     }
   }
 

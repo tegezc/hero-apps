@@ -116,14 +116,14 @@ class Outlet extends ParentLokasi {
       this.pic});
 
   Outlet.fromJson(Map<String, dynamic> map) {
-    String strlong = map[tagLong] == null ? '0' : map[tagLong];
+    String strlong = map[tagLong] ?? '0';
     if (strlong.isNotEmpty) {
       long = double.tryParse(strlong);
     } else {
       long = 0.0;
     }
 
-    String strlat = map[tagLat] == null ? '0' : map[tagLat];
+    String strlat = map[tagLat] ?? '0';
     if (strlat.isNotEmpty) {
       lat = double.tryParse(strlat);
     } else {
@@ -135,25 +135,25 @@ class Outlet extends ParentLokasi {
     } else {
       idkec = map['id_kecamatan'];
     }
-    idkelurahan = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
+    idkelurahan = map['id_kelurahan'] ?? '';
     idJnsOutlet = map['id_jenis_outlet'] == null
         ? 1
         : int.tryParse(map['id_jenis_outlet']);
-    idtap = map['id_tap'] == null ? '' : map['id_tap'];
-    idoutlet = map['id_outlet'] == null ? '' : map['id_outlet'];
-    iddigipos = map['id_digipos'] == null ? '' : map['id_digipos'];
-    nama = map['nama_outlet'] == null ? '' : map['nama_outlet'];
-    alamat = map['alamat_outlet'] == null ? '' : map['alamat_outlet'];
-    nors = map['no_rs'] == null ? '' : map['no_rs'];
-    status = map['status'] == null ? '' : map['status'];
+    idtap = map['id_tap'] ?? '';
+    idoutlet = map['id_outlet'] ?? '';
+    iddigipos = map['id_digipos'] ?? '';
+    nama = map['nama_outlet'] ?? '';
+    alamat = map['alamat_outlet'] ?? '';
+    nors = map['no_rs'] ?? '';
+    status = map['status'] ?? '';
     tglopen = DateUtility.stringToDateTime(map['tgl_open']);
     tglClose = DateUtility.stringToDateTime(map['tgl_close']);
     tglWaiting = DateUtility.stringToDateTime(map['tgl_waiting']);
     tglApproval = DateUtility.stringToDateTime(map['tgl_approval']);
-    idsales = map['created_by'] == null ? '' : map['created_by'];
-    approvalBy = map['approval_by'] == null ? '' : map['approval_by'];
+    idsales = map['created_by'] ?? '';
+    approvalBy = map['approval_by'] ?? '';
     lastmodified = DateUtility.stringLongToDateTime(map['lastmodified']);
-    namaTap = map['nama_tap'] == null ? '' : map['nama_tap'];
+    namaTap = map['nama_tap'] ?? '';
 
     pic = Pic.fromJson(map);
     owner = Owner.fromJson(map, tagNmOwner, tagNoHpOwner, tagTglLahirOwner,
@@ -193,7 +193,7 @@ class Outlet extends ParentLokasi {
       tagAlamat: alamat,
       tagLong: long,
       tagLat: lat,
-      tagNoRs: nors == null ? '9999' : nors,
+      tagNoRs: nors ?? '9999',
       tagNmOwner: owner!.nama,
       tagNoHpOwner: owner!.nohp,
       tagTglLahirOwner: DateUtility.dateToStringYYYYMMDD(owner!.tglLahir),
@@ -267,7 +267,7 @@ class ItemComboJenisOutlet {
       enumJenisOutlet = null;
     }
 
-    text = map['nama_jenis_outlet'] == null ? '' : map['nama_jenis_outlet'];
+    text = map['nama_jenis_outlet'] ?? '';
   }
   @override
   bool operator ==(dynamic other) =>

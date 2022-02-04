@@ -35,22 +35,22 @@ class Owner {
   Owner.fromJson(Map<String, dynamic> map, String tagnm, String tagnohp,
       String tagtgllahir, String taghobi, String tagfb, String tagig) {
     tglLahir = DateUtility.stringToDateTime(map[tagtgllahir]);
-    nama = map[tagnm] == null ? '' : map[tagnm];
-    nohp = map[tagnohp] == null ? '' : map[tagnohp];
-    hobi = map[taghobi] == null ? '' : map[taghobi];
-    fb = map[tagfb] == null ? '' : map[tagfb];
-    ig = map[tagig] == null ? '' : map[tagig];
+    nama = map[tagnm] ?? '';
+    nohp = map[tagnohp] ?? '';
+    hobi = map[taghobi] ?? '';
+    fb = map[tagfb] ?? '';
+    ig = map[tagig] ?? '';
   }
 
 // nama_owner, no_hp_owner, tgl_lahir_owner
   Owner.wajib(this.nama, this.nohp, this.tglLahir);
 
   String? getNama() {
-    return nama == null ? '-' : nama;
+    return nama ?? '-';
   }
 
   String? getNohp() {
-    return nohp == null ? '-' : nohp;
+    return nohp ?? '-';
   }
 
   String getTglLahir() {
@@ -58,14 +58,14 @@ class Owner {
   }
 
   String? getHobi() {
-    return hobi == null ? '-' : hobi;
+    return hobi ?? '-';
   }
 
   String? getFb() {
-    return fb == null ? '-' : fb;
+    return fb ?? '-';
   }
 
   String? getIg() {
-    return ig == null ? '-' : ig;
+    return ig ?? '-';
   }
 }

@@ -10,7 +10,6 @@ import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/constapp/consstring.dart';
 
-import '../../../config/configuration_sf.dart';
 import 'blocmerchandising.dart';
 
 class HomeMerchandising extends StatefulWidget {

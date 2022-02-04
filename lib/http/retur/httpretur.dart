@@ -7,8 +7,6 @@ import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/dateutil.dart';
 import 'package:http/http.dart' as http;
 
-import '../../config/configuration_sf.dart';
-
 class HttpRetur extends HttpBase {
   Future<List<AlasanRetur>?> comboAlasanRetur() async {
     try {

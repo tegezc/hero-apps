@@ -116,7 +116,7 @@ class _PageIdentitasState extends State<PageIdentitas> {
               }
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           ButtonAppTanggal(
@@ -159,7 +159,7 @@ class _PageIdentitasState extends State<PageIdentitas> {
               }
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 150.0,
           ),
         ],

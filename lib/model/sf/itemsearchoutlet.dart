@@ -28,19 +28,19 @@ class LokasiSearch {
       idoutlet = map['id'];
     }
 
-    idjnslokasi = map['id_jenis_lokasi'] == null ? '' : map['id_jenis_lokasi'];
+    idjnslokasi = map['id_jenis_lokasi'] ?? '';
 
     if (map['nama_pembeli'] == null) {
       if (map['nama_outlet'] == null) {
-        namapembeli = map['nama'] == null ? '' : map['nama'];
+        namapembeli = map['nama'] ?? '';
       } else {
         namapembeli = map['nama_outlet'];
       }
     } else {
       namapembeli = map['nama_pembeli'];
     }
-    nohppembeli = map['no_hp_pembeli'] == null ? '' : map['no_hp_pembeli'];
-    nonota = map['no_nota'] == null ? '' : map['no_nota'];
+    nohppembeli = map['no_hp_pembeli'] ?? '';
+    nonota = map['no_nota'] ?? '';
     if (map['tgl'] == null) {
       if (map['tgl_transaksi'] == null) {
         tgl = DateUtility.stringToDateTime(map['tanggal']);

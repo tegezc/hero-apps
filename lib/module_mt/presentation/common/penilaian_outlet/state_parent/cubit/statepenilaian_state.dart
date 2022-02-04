@@ -15,11 +15,13 @@ class StatepenilaianLoaded extends StatepenilaianState {
   final Availability availability;
   final PenilaianVisibility visibility;
   final Advokasi advokasi;
+  final String idOutlet;
 
   const StatepenilaianLoaded(
       {required this.availability,
       required this.visibility,
-      required this.advokasi});
+      required this.advokasi,
+      required this.idOutlet});
 }
 
 class StatepenilaianError extends StatepenilaianState {}

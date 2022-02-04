@@ -4,7 +4,6 @@ import 'package:hero/model/lokasi/fakultas.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
-import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'abstractbloclokasi.dart';
@@ -178,13 +177,11 @@ class BlocFakultas extends AbsBlocLokasi {
   }
 
   void setJmlDosen(String str) {
-    _cacheUiFakultas!.fakultas.jmlDosen =
-        int.tryParse(str) == null ? 0 : int.tryParse(str);
+    _cacheUiFakultas!.fakultas.jmlDosen = int.tryParse(str) ?? 0;
   }
 
   void setJmlMahasiswa(String str) {
-    _cacheUiFakultas!.fakultas.jmlMahasiswa =
-        int.tryParse(str) == null ? 0 : int.tryParse(str);
+    _cacheUiFakultas!.fakultas.jmlMahasiswa = int.tryParse(str) ?? 0;
   }
 
   @override

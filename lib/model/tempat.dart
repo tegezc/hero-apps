@@ -11,7 +11,7 @@ class Tempat {
   //         "no_rs": "NO RS 11"
   //     }
   Tempat.fromJson(Map<String, dynamic> map) {
-    id = map['id_digipos'] == null ? '' : map['id_digipos'];
-    nama = map['nama_outlet'] == null ? '' : map['nama_outlet'];
+    id = map['id_digipos'] ?? '';
+    nama = map['nama_outlet'] ?? '';
   }
 }

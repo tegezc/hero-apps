@@ -25,7 +25,7 @@ class ItemRekomendasi {
   // "rekomendasi": 0
 
   ItemRekomendasi.fromJson(Map<String, dynamic> map) {
-    nama = map['nama'] == null ? '' : map['nama'];
+    nama = map['nama'] ?? '';
     w1 = map['w1'] == null ? '' : '${map['w1']}';
     w2 = map['w2'] == null ? '' : '${map['w2']}';
     w3 = map['w3'] == null ? '' : '${map['w3']}';

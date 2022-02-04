@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/common/penilaian_out/get_penilaian_outlet.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_outlet_repository.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
@@ -17,10 +18,12 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
   late Availability cacheAvailibility;
   late PenilaianVisibility cacheVisibility;
   late Advokasi cacheAdvokasi;
+  late String idOutlet;
 
-  void setupData(String idOutlet) {
+  void setupData(String idout) {
+    idOutlet = idout;
     emit(StatepenilaianLoading());
-    _setupData(idOutlet).then((_) {});
+    _setupData(idout).then((_) {});
   }
 
   Future<void> _setupData(String idOutlet) async {
@@ -37,6 +40,7 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
       cacheAvailibility = _penilaianOutletUseCase.getAvailability();
       emit(_createStatepenilaianLoaded());
     } catch (e) {
+      ph(e.toString());
       emit(StatepenilaianError());
     }
   }
@@ -45,6 +49,7 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
     return StatepenilaianLoaded(
         availability: cacheAvailibility,
         visibility: cacheVisibility,
-        advokasi: cacheAdvokasi);
+        advokasi: cacheAdvokasi,
+        idOutlet: idOutlet);
   }
 }

@@ -122,7 +122,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SearchLocationDs()));
+                                              const SearchLocationDs()));
                                 }
                               },
                               child: const Image(
@@ -341,7 +341,7 @@ class _CoverageHomeState extends State<CoverageHome> {
 
     if (pjp.enumPjp == EnumPjp.done) {
       colorIcon = Colors.blue;
-      action = LabelWhite.size3('Status: Done');
+      action = const LabelWhite.size3('Status: Done');
     } else if (pjp.enumPjp == EnumPjp.progress ||
         pjp.enumPjp == EnumPjp.notclockinyet) {
       String text = pjp.enumPjp == EnumPjp.progress ? "Progress" : "Clock In";

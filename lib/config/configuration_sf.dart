@@ -1,6 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
-
 class ConfigurationSf {
   // static final Configuration _configuration = Configuration._internal();
   //

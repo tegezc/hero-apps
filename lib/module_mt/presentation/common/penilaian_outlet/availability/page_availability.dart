@@ -9,9 +9,10 @@ import 'card_question.dart';
 import 'card_table.dart';
 
 class PageAvailability extends StatefulWidget {
-  const PageAvailability({Key? key, required this.availability})
+  const PageAvailability(
+      {Key? key, required this.availability, required this.idOutlet})
       : super(key: key);
-
+  final String idOutlet;
   final Availability availability;
 
   @override
@@ -53,7 +54,7 @@ class _PageAvailabilityState extends State<PageAvailability> {
                 text: 'Submit',
                 onTap: () {
                   BlocProvider.of<PenilaianoutletCubit>(context)
-                      .submit(widget.availability);
+                      .submit(ETabPenilaian.availability);
                 },
                 isenable: true),
           ),

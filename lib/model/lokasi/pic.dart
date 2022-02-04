@@ -5,7 +5,6 @@
 //         "akun_fb_pic": "AKUN FB PIC 1 EDIT",
 //         "akun_ig_pic": "AKUN IG PIC 1 EDIT",
 
-
 import 'package:hero/util/dateutil.dart';
 
 class Pic {
@@ -19,20 +18,20 @@ class Pic {
   Pic.kosong();
 
   Pic.fromJson(Map<String, dynamic> map) {
-    nama = map['nama_pic'] == null ? '' : map['nama_pic'];
-    nohp = map['no_hp_pic'] == null ? '' : map['no_hp_pic'];
-    hobi = map['hobi_pic'] == null ? '' : map['hobi_pic'];
-    fb = map['akun_fb_pic'] == null ? '' : map['akun_fb_pic'];
-    ig = map['akun_ig_pic'] == null ? '' : map['akun_ig_pic'];
+    nama = map['nama_pic'] ?? '';
+    nohp = map['no_hp_pic'] ?? '';
+    hobi = map['hobi_pic'] ?? '';
+    fb = map['akun_fb_pic'] ?? '';
+    ig = map['akun_ig_pic'] ?? '';
     tglLahir = DateUtility.stringToDateTime(map['tgl_lahir_pic']);
   }
 
   String? getNama() {
-    return nama == null ? '-' : nama;
+    return nama ?? '-';
   }
 
   String? getNohp() {
-    return nohp == null ? '-' : nohp;
+    return nohp ?? '-';
   }
 
   String getTglLahir() {
@@ -40,14 +39,14 @@ class Pic {
   }
 
   String? getHobi() {
-    return hobi == null ? '-' : hobi;
+    return hobi ?? '-';
   }
 
   String? getFb() {
-    return fb == null ? '-' : fb;
+    return fb ?? '-';
   }
 
   String? getIg() {
-    return ig == null ? '-' : ig;
+    return ig ?? '-';
   }
 }

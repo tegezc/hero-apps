@@ -201,7 +201,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     return Row(
       children: [
         SizedBox(width: 70, child: LabelBlack.size2(label)),
-        SizedBox(
+        const SizedBox(
           width: 30,
           child: LabelBlack.size1(": Rp"),
         ),
@@ -253,7 +253,7 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.green,
               ),
@@ -281,16 +281,16 @@ class _PageBelanjaSurveyState extends State<PageBelanjaSurvey> {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-              title: LabelApp.size1(
+              title: const LabelApp.size1(
                 'Confirm',
                 color: Colors.red,
               ),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 16.0, left: 16.0, bottom: 3.0),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2('Market Audit gagal disimpan.'),
                 ),
                 Padding(

@@ -14,7 +14,7 @@ import 'package:hero/core/log/printlog.dart';
 
 class CoreTakePhoto extends StatefulWidget {
   final Function(String?) onSubmit;
-  CoreTakePhoto({Key? key, required this.onSubmit}) : super(key: key);
+  const CoreTakePhoto({Key? key, required this.onSubmit}) : super(key: key);
 
   @override
   _CoreTakePhotoState createState() {

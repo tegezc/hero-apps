@@ -18,8 +18,6 @@ import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/uiutil.dart';
 import 'package:loading_animations/loading_animations.dart';
-
-import '../../../config/configuration_sf.dart';
 import 'blocsearchlocation.dart';
 import 'hostorypjp.dart';
 

@@ -13,8 +13,8 @@ class Product {
   // "jumlah_stock": "23"
 
   Product.fromJson(Map<String, dynamic> map) {
-    id = map['id_produk'] == null ? '' : map['id_produk'];
-    nama = map['nama_produk'] == null ? '' : map['nama_produk'];
+    id = map['id_produk'] ?? '';
+    nama = map['nama_produk'] ?? '';
     hargajual = ConverterNumber.stringToIntOrZero(map['harga_jual']);
     hargamodal = ConverterNumber.stringToIntOrZero(map['harga_modal']);
     stock = ConverterNumber.stringToIntOrZero(map['jumlah_stock']);

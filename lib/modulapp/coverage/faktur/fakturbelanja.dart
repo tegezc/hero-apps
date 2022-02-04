@@ -77,19 +77,19 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   _title(),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0, right: 20),
                     child: _resumePembeli(),
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 12.0, right: 12.0),
@@ -114,7 +114,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
                               top: 40, left: 12.0, right: 12.0),
                           child: _buttonShare(),
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   )
                 ],
@@ -138,7 +138,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
       children: [
         LabelBlack.size2(_nota!.mitra),
         _spasi(),
-        LabelBlack.size2('NOTA PEMBAYARAN'),
+        const LabelBlack.size2('NOTA PEMBAYARAN'),
         _spasi(),
         LabelBlack.size2(_profile.id),
       ],
@@ -176,10 +176,10 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
   Widget _contentTransaksi(List<ItemTransaksi>? ltrx) {
     List<Widget> lw = [];
     if (ltrx != null) {
-      ltrx.forEach((element) {
+      for (var element in ltrx) {
         lw.add(_cellTransaksi(element.product!.nama,
             element.product!.hargajual!, element.jumlah!));
-      });
+      }
     }
 
     return Column(
@@ -216,7 +216,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        LabelBlack.size2('Top Up Link Aja (L)'),
+        const LabelBlack.size2('Top Up Link Aja (L)'),
         LabelBlack.size2('Rp ${ConverterNumber.getCurrentcy(_nota!.linkaja)}'),
       ],
     );
@@ -224,9 +224,9 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
 
   Widget _cellTotal() {
     int total = 0;
-    _nota!.ltrax!.forEach((element) {
+    for (var element in _nota!.ltrax!) {
       total = total + (element.jumlah! * element.product!.hargajual!);
-    });
+    }
     if (_nota!.jnspembayaran == 'LUNAS') {
       int link = _nota!.linkaja == null ? 0 : _nota!.linkaja!;
       total = total + link;
@@ -235,7 +235,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        LabelBlack.size2('Total'),
+        const LabelBlack.size2('Total'),
         LabelBlack.size2('Rp ${ConverterNumber.getCurrentcy(total)}'),
       ],
     );
@@ -256,7 +256,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
   _takeScreenshotandShare() async {
     _imageFile = null;
     screenshotController
-        .capture(delay: Duration(milliseconds: 10))
+        .capture(delay: const Duration(milliseconds: 10))
         .then((Uint8List? image) async {
       _imageFile = image;
       final tempDir = await getTemporaryDirectory();
@@ -268,7 +268,7 @@ class _FakturPembayaranState extends State<FakturPembayaran> {
         builder: (context) => Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.red[600],
-            title: Text("CAPTURED SCREENSHOT"),
+            title: const Text("CAPTURED SCREENSHOT"),
           ),
           body: Center(
               child: Padding(

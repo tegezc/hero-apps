@@ -9,7 +9,6 @@ import 'core/dio_config.dart';
 
 abstract class IVoiceOfResellerDatasource {
   Future<VoiceOfReseller?> getData(String idoutlet);
-
 }
 
 class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {
@@ -22,7 +21,6 @@ class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {
 
   VoiceOfReseller _olahJson(dynamic json) {
     List<Pertanyaan> lPertanyaan = [];
-    Map<String, dynamic> map = json;
     Map<String, dynamic> map2 = json['data'];
     for (var i = 1; i < map2.length; i++) {
       Map<String, dynamic> mapPertanyaan = map2['$i'];

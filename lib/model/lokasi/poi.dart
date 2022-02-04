@@ -1,5 +1,3 @@
-
-
 import 'parentlokasi.dart';
 
 class Poi extends ParentLokasi {
@@ -42,24 +40,20 @@ class Poi extends ParentLokasi {
     // "id_kecamatan": "KEC301",
     // "nama_kecamatan": "BAKAUHENI",
     // "nama_tap": "TAP KALIANDA"
-    idpoi = map['id_poi'] == null ? '' : map['id_poi'];
-    idkel = map['id_kelurahan'] == null ? '' : map['id_kelurahan'];
-    nama = map['nama_poi'] == null ? '' : map['nama_poi'];
-    alamat = map['alamat_poi'] == null ? '' : map['alamat_poi'];
+    idpoi = map['id_poi'] ?? '';
+    idkel = map['id_kelurahan'] ?? '';
+    nama = map['nama_poi'] ?? '';
+    alamat = map['alamat_poi'] ?? '';
     if (map['longitude'] == null) {
       long = 0.0;
     } else {
-      long = double.tryParse(map['longitude']) == null
-          ? 0.0
-          : double.tryParse(map['longitude']);
+      long = double.tryParse(map['longitude']) ?? 0.0;
     }
 
     if (map['latitude'] == null) {
       lat = 0.0;
     } else {
-      lat = double.tryParse(map['latitude']) == null
-          ? 0.0
-          : double.tryParse(map['latitude']);
+      lat = double.tryParse(map['latitude']) ?? 0.0;
     }
   }
 
