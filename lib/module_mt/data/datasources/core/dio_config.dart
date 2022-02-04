@@ -72,4 +72,51 @@ class GetDio {
 
     return Dio(optionsLogin);
   }
+
+  Future<Dio> dioForm() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    GetLocalSessionLoginSharedPref getLocalSessionLoginSharedPref =
+        GetLocalSessionLoginSharedPref(sharedPreferences: sharedPreferences);
+    loginSessionRepository = LoginSessionRepositoryImpl(
+        getLocalSessionLoginSharedPref: getLocalSessionLoginSharedPref);
+    String email = '';
+    String token = '';
+    String level = '';
+    String idDivisi = '';
+    String nama = '';
+    Account? account = loginSessionRepository.getAccount();
+    if (account != null && account.isValid()) {
+      email = account.email;
+      token = account.token;
+      level = account.level;
+      idDivisi = account.idDidvisi;
+      nama = account.nama;
+    }
+    var options = BaseOptions(
+        baseUrl: configurationMT.host(),
+        connectTimeout: 30000,
+        receiveTimeout: 30000,
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {
+          "Auth-Key": "restapihore",
+          "Client-Service": "frontendclienthore",
+          "User-ID": email,
+          "Auth-session": token,
+          "Id-Level": level,
+          "Id-Divisi": idDivisi,
+          "Nama": nama,
+        });
+
+    Dio dioInstance = Dio(options);
+    dioInstance.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 110));
+    dioInstance.interceptors.add(AppInterceptors());
+    return dioInstance;
+  }
 }

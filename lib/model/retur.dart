@@ -5,7 +5,7 @@ class Retur {
   static const String approved = 'APPROVED';
   static const String waiting = 'WAITING APPROVAL';
   static const String rejected = 'REJECTED';
-  static const String showmore='SHOWMORE';
+  static const String showmore = 'SHOWMORE';
 
   // "serial_number": "9000011113",
   // "tgl_retur": "2020-12-08",
@@ -17,11 +17,11 @@ class Retur {
   DateTime? tglApproval;
   String? status;
 
-  Retur.showMore(){
-    serial=null;
-    tglretur=null;
-    tglApproval=null;
-    status=showmore;
+  Retur.showMore() {
+    serial = null;
+    tglretur = null;
+    tglApproval = null;
+    status = showmore;
   }
   Retur.fromJson(Map<String, dynamic> map) {
     serial = map['serial_number'] == null ? '' : map['serial_number'];
@@ -77,7 +77,7 @@ class AlasanRetur {
   // "nama_alasan": "Penumpukan Stok"
 
   AlasanRetur.fromJson(Map<String, dynamic> map) {
-    id = ConverterNumber.stringToInt(map['id_alasan']);
+    id = ConverterNumber.stringToIntOrZero(map['id_alasan']);
     text = map['nama_alasan'] == null ? '' : map['nama_alasan'];
   }
   bool isvalid() {

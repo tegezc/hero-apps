@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'package:hero/util/component/button/component_button.dart';
 
 import '../enum_penilaian.dart';
@@ -49,7 +51,10 @@ class _PageAvailabilityState extends State<PageAvailability> {
             child: ButtonStrectWidth(
                 buttonColor: Colors.red,
                 text: 'Submit',
-                onTap: () {},
+                onTap: () {
+                  BlocProvider.of<PenilaianoutletCubit>(context)
+                      .submit(widget.availability);
+                },
                 isenable: true),
           ),
           const SizedBox(

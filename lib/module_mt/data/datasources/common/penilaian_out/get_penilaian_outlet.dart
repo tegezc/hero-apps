@@ -10,7 +10,7 @@ import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.da
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/questions.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 
-import 'core/dio_config.dart';
+import '../../core/dio_config.dart';
 
 abstract class PenilaianOutletDataSource {
   Availability getAvailability();
@@ -28,14 +28,14 @@ class PenilaianOutletDataSourceImpl implements PenilaianOutletDataSource {
   static Future<PenilaianOutletDataSourceImpl> create(String idOutlet) async {
     var component = PenilaianOutletDataSourceImpl._create();
     component.dio = await GetDio().dio();
-    dynamic data = await component.getJsonPenilaian(idOutlet);
+    dynamic data = await component._getJsonPenilaian(idOutlet);
     Map<String, dynamic> map = data;
     component.json = map['data'];
 
     return component;
   }
 
-  Future<dynamic> getJsonPenilaian(String idOutlet) async {
+  Future<dynamic> _getJsonPenilaian(String idOutlet) async {
     var response = await dio.get('/penilaianoutlet/penilaian/$idOutlet');
     return response.data;
   }

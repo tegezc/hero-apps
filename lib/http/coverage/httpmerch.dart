@@ -111,7 +111,7 @@ class HttpMerchandising extends HttpBase {
       ph(response.statusCode);
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
-        int? i = ConverterNumber.stringToInt(map['status']);
+        int? i = ConverterNumber.stringToIntOrZero(map['status']);
         if (i == 1) {
           return true;
         }

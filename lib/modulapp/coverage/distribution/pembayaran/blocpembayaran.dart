@@ -57,7 +57,7 @@ class BlocPembayaran {
 
   void onChagedText(String str) {
     if (str.isNotEmpty) {
-      int? tmp = ConverterNumber.stringToInt(str);
+      int? tmp = ConverterNumber.stringToIntOrZero(str);
       _cachePembelian.dataPembeli.linkaja = tmp;
       _sink(_cachePembelian);
     }

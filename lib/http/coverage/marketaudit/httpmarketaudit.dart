@@ -174,45 +174,45 @@ class HttpMarketAuditSF extends HttpBase {
       }
       Map<String, dynamic> map = ld[0];
       ItemSurveyVoucher p = ItemSurveyVoucher(EnumOperator.telkomsel);
-      p.ld = ConverterNumber.stringToInt(map['telkomsel_ld']);
-      p.md = ConverterNumber.stringToInt(map['telkomsel_md']);
-      p.hd = ConverterNumber.stringToInt(map['telkomsel_hd']);
+      p.ld = ConverterNumber.stringToIntOrZero(map['telkomsel_ld']);
+      p.md = ConverterNumber.stringToIntOrZero(map['telkomsel_md']);
+      p.hd = ConverterNumber.stringToIntOrZero(map['telkomsel_hd']);
       lsurvey.add(p);
 
       ItemSurveyVoucher p1 = ItemSurveyVoucher(EnumOperator.isat);
-      p1.ld = ConverterNumber.stringToInt(map['isat_ld']);
-      p1.md = ConverterNumber.stringToInt(map['isat_md']);
-      p1.hd = ConverterNumber.stringToInt(map['isat_hd']);
+      p1.ld = ConverterNumber.stringToIntOrZero(map['isat_ld']);
+      p1.md = ConverterNumber.stringToIntOrZero(map['isat_md']);
+      p1.hd = ConverterNumber.stringToIntOrZero(map['isat_hd']);
       lsurvey.add(p1);
 
       ItemSurveyVoucher p2 = ItemSurveyVoucher(EnumOperator.xl);
-      p2.ld = ConverterNumber.stringToInt(map['xl_ld']);
-      p2.md = ConverterNumber.stringToInt(map['xl_md']);
-      p2.hd = ConverterNumber.stringToInt(map['xl_hd']);
+      p2.ld = ConverterNumber.stringToIntOrZero(map['xl_ld']);
+      p2.md = ConverterNumber.stringToIntOrZero(map['xl_md']);
+      p2.hd = ConverterNumber.stringToIntOrZero(map['xl_hd']);
       lsurvey.add(p2);
 
       ItemSurveyVoucher p3 = ItemSurveyVoucher(EnumOperator.tri);
-      p3.ld = ConverterNumber.stringToInt(map['tri_ld']);
-      p3.md = ConverterNumber.stringToInt(map['tri_md']);
-      p3.hd = ConverterNumber.stringToInt(map['tri_hd']);
+      p3.ld = ConverterNumber.stringToIntOrZero(map['tri_ld']);
+      p3.md = ConverterNumber.stringToIntOrZero(map['tri_md']);
+      p3.hd = ConverterNumber.stringToIntOrZero(map['tri_hd']);
       lsurvey.add(p3);
 
       ItemSurveyVoucher p4 = ItemSurveyVoucher(EnumOperator.sf);
-      p4.ld = ConverterNumber.stringToInt(map['smartfren_ld']);
-      p4.md = ConverterNumber.stringToInt(map['smartfren_ld']);
-      p4.hd = ConverterNumber.stringToInt(map['smartfren_ld']);
+      p4.ld = ConverterNumber.stringToIntOrZero(map['smartfren_ld']);
+      p4.md = ConverterNumber.stringToIntOrZero(map['smartfren_ld']);
+      p4.hd = ConverterNumber.stringToIntOrZero(map['smartfren_ld']);
       lsurvey.add(p4);
 
       ItemSurveyVoucher p5 = ItemSurveyVoucher(EnumOperator.axis);
-      p5.ld = ConverterNumber.stringToInt(map['axis_ld']);
-      p5.md = ConverterNumber.stringToInt(map['axis_md']);
-      p5.hd = ConverterNumber.stringToInt(map['axis_hd']);
+      p5.ld = ConverterNumber.stringToIntOrZero(map['axis_ld']);
+      p5.md = ConverterNumber.stringToIntOrZero(map['axis_md']);
+      p5.hd = ConverterNumber.stringToIntOrZero(map['axis_hd']);
       lsurvey.add(p5);
 
       ItemSurveyVoucher p6 = ItemSurveyVoucher(EnumOperator.other);
-      p6.ld = ConverterNumber.stringToInt(map['other_ld']);
-      p6.md = ConverterNumber.stringToInt(map['other_md']);
-      p6.hd = ConverterNumber.stringToInt(map['other_hd']);
+      p6.ld = ConverterNumber.stringToIntOrZero(map['other_ld']);
+      p6.md = ConverterNumber.stringToIntOrZero(map['other_md']);
+      p6.hd = ConverterNumber.stringToIntOrZero(map['other_hd']);
       lsurvey.add(p6);
 
       if (lsurvey.isNotEmpty) {
@@ -238,13 +238,13 @@ class HttpMarketAuditSF extends HttpBase {
         item = UISurvey();
         for (int i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
-          item.telkomsel = ConverterNumber.stringToInt(map['telkomsel']);
-          item.isat = ConverterNumber.stringToInt(map['isat']);
-          item.xl = ConverterNumber.stringToInt(map['xl']);
-          item.tri = ConverterNumber.stringToInt(map['tri']);
-          item.axis = ConverterNumber.stringToInt(map['axis']);
-          item.other = ConverterNumber.stringToInt(map['other']);
-          item.sf = ConverterNumber.stringToInt(map['smartfren']);
+          item.telkomsel = ConverterNumber.stringToIntOrZero(map['telkomsel']);
+          item.isat = ConverterNumber.stringToIntOrZero(map['isat']);
+          item.xl = ConverterNumber.stringToIntOrZero(map['xl']);
+          item.tri = ConverterNumber.stringToIntOrZero(map['tri']);
+          item.axis = ConverterNumber.stringToIntOrZero(map['axis']);
+          item.other = ConverterNumber.stringToIntOrZero(map['other']);
+          item.sf = ConverterNumber.stringToIntOrZero(map['smartfren']);
           item.pathphotobelanja = map['foto_belanja'];
         }
       }

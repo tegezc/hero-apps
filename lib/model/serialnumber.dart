@@ -23,8 +23,8 @@ class SerialNumber {
     idsales = map['id_sales'] == null ? '' : map['id_sales'];
     serial = map['serial_number'] == null ? '' : map['serial_number'];
     idproduct = map['id_produk'] == null ? '' : map['id_produk'];
-    hargamodal = ConverterNumber.stringToInt(map['harga_modal']);
-    hargajual = ConverterNumber.stringToInt(map['harga_jual']);
+    hargamodal = ConverterNumber.stringToIntOrZero(map['harga_modal']);
+    hargajual = ConverterNumber.stringToIntOrZero(map['harga_jual']);
   }
 
   Map<String, dynamic> toJson() {

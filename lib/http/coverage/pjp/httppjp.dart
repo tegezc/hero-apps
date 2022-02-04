@@ -73,7 +73,7 @@ class HttpPjp extends HttpBase {
       if (ld.isNotEmpty) {
         Map<String, dynamic> map = ld[0];
 
-        int? jml = ConverterNumber.stringToInt(map['jumlah']);
+        int? jml = ConverterNumber.stringToIntOrZero(map['jumlah']);
         return jml;
       }
 

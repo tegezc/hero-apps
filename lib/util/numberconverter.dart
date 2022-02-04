@@ -9,17 +9,30 @@ class ConverterNumber {
     return 0.0;
   }
 
-  static int? stringToInt(String? str) {
+  static int? stringToIntOrZero(String? str) {
     if (str != null) {
       List<String> ls = str.split('.');
       String svalue = str;
       if (ls.isNotEmpty) {
         svalue = ls[0];
       }
-      int? tmp = int.tryParse(svalue) == null ? 0 : int.tryParse(svalue);
+      int? tmp = int.tryParse(svalue) ?? 0;
       return tmp;
     }
     return 0;
+  }
+
+  static int? stringToIntOrNull(String? str) {
+    if (str != null) {
+      List<String> ls = str.split('.');
+      String svalue = str;
+      if (ls.isNotEmpty) {
+        svalue = ls[0];
+      }
+      int? tmp = int.tryParse(svalue);
+      return tmp;
+    }
+    return null;
   }
 
   static String getCurrentcy(int? value) {

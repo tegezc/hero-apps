@@ -261,7 +261,7 @@ class HttpDashboard extends HttpBase {
       ph(response.statusCode);
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
-        int? i = ConverterNumber.stringToInt(map['status']);
+        int? i = ConverterNumber.stringToIntOrZero(map['status']);
         String? message = map['message'];
         finishMenu.message = message;
         ph(i);

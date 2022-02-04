@@ -1,22 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hero/core/log/printlog.dart';
-import 'package:hero/module_mt/data/datasources/get_penilaian_outlet.dart';
+import 'package:hero/module_mt/data/datasources/common/penilaian_out/get_penilaian_outlet.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_outlet_repository.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
-import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
-import 'package:hero/module_mt/domain/usecase/tandem_selling/penilaian/penilaian_outlet_usecase.dart';
-
-import '../../enum_penilaian.dart';
+import 'package:hero/module_mt/domain/usecase/common/penilaian/availability/get_availability_data.dart';
 
 part 'statepenilaian_state.dart';
 
 class StatepenilaianCubit extends Cubit<StatepenilaianState> {
   StatepenilaianCubit() : super(StatepenilaianInitial());
 
-  late PenilaianOutletUseCase _penilaianOutletUseCase;
+  late GetAvailabilityUseCase _penilaianOutletUseCase;
 
   late Availability cacheAvailibility;
   late PenilaianVisibility cacheVisibility;
@@ -33,7 +29,7 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
     PenilaianOutletRepositoryImpl penilaianOutletRepository =
         PenilaianOutletRepositoryImpl(
             penilaianOutletDataSource: penilaianOutletDataSource);
-    _penilaianOutletUseCase = PenilaianOutletUseCase(
+    _penilaianOutletUseCase = GetAvailabilityUseCase(
         penilaianOutletRepository: penilaianOutletRepository);
     try {
       cacheAdvokasi = _penilaianOutletUseCase.getAdvokasi();

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
@@ -22,15 +23,17 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       : super(PenilaianoutletInitial());
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
-    ph('change toggle');
+    ph('change toggle inded : $index $value');
     availibility.question.lquestion[index].isYes = value;
   }
 
   void changeTextPenilaian(int index, String value, EJenisParam eJenisParam) {
-    ph('change text');
+    ph('change text $eJenisParam');
     switch (eJenisParam) {
       case EJenisParam.perdana:
-        _setValueParamPenilaian(index, value, availibility.kategoriVF.lparams);
+        availibility.kategoriOperator.lparams[index].nilai =
+            int.tryParse(value) ?? 0;
+        //  _setValueParamPenilaian(index, value, availibility.kategoriOperator.lparams);
         break;
       case EJenisParam.vk:
         _setValueParamPenilaian(index, value, availibility.kategoriVF.lparams);
@@ -92,7 +95,10 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     advokasi.lquestions[index].isYes = value;
   }
 
-  void submit(dynamic obj) {}
+  void submit(dynamic obj) {
+    if (obj is Availability) {
+    } else if (obj is Visibility) {}
+  }
 
   RefreshForm _createPenilaianLoaded() {
     counter++;

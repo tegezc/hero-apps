@@ -85,7 +85,7 @@ class DetailNota {
         List<dynamic> ld = md['data_link_aja'];
         if (ld.isNotEmpty) {
           Map<String, dynamic> map = ld[0];
-          linkaja = ConverterNumber.stringToInt(map['link_aja']);
+          linkaja = ConverterNumber.stringToIntOrZero(map['link_aja']);
         }
       }
     } catch (e) {}

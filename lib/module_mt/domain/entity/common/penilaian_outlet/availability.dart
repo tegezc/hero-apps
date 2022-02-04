@@ -4,9 +4,9 @@ import 'kategories.dart';
 import 'questions.dart';
 
 class Availability extends Equatable {
-  final Kategories kategoriOperator;
-  final Kategories kategoriVF;
-  final Questions question;
+  Kategories kategoriOperator;
+  Kategories kategoriVF;
+  Questions question;
   String? pathPhotoOperator;
   String? pathPhotoVF;
 

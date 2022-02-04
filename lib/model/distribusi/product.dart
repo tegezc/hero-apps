@@ -15,9 +15,9 @@ class Product {
   Product.fromJson(Map<String, dynamic> map) {
     id = map['id_produk'] == null ? '' : map['id_produk'];
     nama = map['nama_produk'] == null ? '' : map['nama_produk'];
-    hargajual = ConverterNumber.stringToInt(map['harga_jual']);
-    hargamodal = ConverterNumber.stringToInt(map['harga_modal']);
-    stock = ConverterNumber.stringToInt(map['jumlah_stock']);
+    hargajual = ConverterNumber.stringToIntOrZero(map['harga_jual']);
+    hargamodal = ConverterNumber.stringToIntOrZero(map['harga_modal']);
+    stock = ConverterNumber.stringToIntOrZero(map['jumlah_stock']);
   }
 
   Map toJson() {

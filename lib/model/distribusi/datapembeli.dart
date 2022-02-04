@@ -39,6 +39,6 @@ class ItemTransaksi {
   ItemTransaksi(this.product, this.jumlah);
   ItemTransaksi.fromJson(Map<String, dynamic> map) {
     product = Product.fromJson(map);
-    jumlah = ConverterNumber.stringToInt(map['qty']);
+    jumlah = ConverterNumber.stringToIntOrZero(map['qty']);
   }
 }

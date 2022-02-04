@@ -86,9 +86,9 @@ class Pjp {
 
   Pjp.fromJson(Map<String, dynamic> map) {
     id = map['id_tempat'] == null ? '' : map['id_tempat'];
-    nokunjungan = ConverterNumber.stringToInt(map['no_kunjungan']);
+    nokunjungan = ConverterNumber.stringToIntOrZero(map['no_kunjungan']);
     nohp = map['no_hp_owner'] == null ? '' : '${map['no_hp_owner']}';
-    radius = ConverterNumber.stringToInt(map['radius_clock_in']);
+    radius = ConverterNumber.stringToIntOrZero(map['radius_clock_in']);
     idjenilokasi = map['id_jenis_lokasi'] == null ? '' : map['id_jenis_lokasi'];
 
     clockin = DateUtility.stringToJam(map['jam_clock_in'], DateTime.now());

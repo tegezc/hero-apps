@@ -106,13 +106,13 @@ class Merchandising {
   }
 
   Merchandising.fromJson(Map<String, dynamic> map) {
-    telkomsel = ConverterNumber.stringToInt(map['telkomsel']);
-    isat = ConverterNumber.stringToInt(map['isat']);
-    xl = ConverterNumber.stringToInt(map['xl']);
-    tri = ConverterNumber.stringToInt(map['tri']);
-    sf = ConverterNumber.stringToInt(map['smartfren']);
-    axis = ConverterNumber.stringToInt(map['axis']);
-    other = ConverterNumber.stringToInt(map['other']);
+    telkomsel = ConverterNumber.stringToIntOrZero(map['telkomsel']);
+    isat = ConverterNumber.stringToIntOrZero(map['isat']);
+    xl = ConverterNumber.stringToIntOrZero(map['xl']);
+    tri = ConverterNumber.stringToIntOrZero(map['tri']);
+    sf = ConverterNumber.stringToIntOrZero(map['smartfren']);
+    axis = ConverterNumber.stringToIntOrZero(map['axis']);
+    other = ConverterNumber.stringToIntOrZero(map['other']);
     idjenisshare = map['id_jenis_share'];
     pathPhoto1 = map['foto_1'];
     pathPhoto2 = map['foto_2'];

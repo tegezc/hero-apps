@@ -255,7 +255,7 @@ class ItemComboJenisOutlet {
 
   // {"id_jenis_outlet":"1","nama_jenis_outlet":"DEVICE"}
   ItemComboJenisOutlet.fromJson(Map<String, dynamic> map) {
-    int? i = ConverterNumber.stringToInt(map['id_jenis_outlet']);
+    int? i = ConverterNumber.stringToIntOrZero(map['id_jenis_outlet']);
 
     if (i == 1) {
       enumJenisOutlet = EnumJenisOutlet.device;

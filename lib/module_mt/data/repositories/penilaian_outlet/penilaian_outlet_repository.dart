@@ -1,4 +1,4 @@
-import 'package:hero/module_mt/data/datasources/get_penilaian_outlet.dart';
+import 'package:hero/module_mt/data/datasources/common/penilaian_out/get_penilaian_outlet.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
