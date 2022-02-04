@@ -9,17 +9,22 @@ abstract class PenilaianoutletState extends Equatable {
 
 class PenilaianoutletInitial extends PenilaianoutletState {}
 
-class PenilaianoutletLoading extends PenilaianoutletState {}
+class FieldNotValidState extends PenilaianoutletState {}
 
-class PenilaianoutletLoaded extends PenilaianoutletState {
+class RefreshForm extends PenilaianoutletState {
   final Availability availability;
   final PenilaianVisibility visibility;
   final Advokasi advokasi;
+  final int counter;
 
-  const PenilaianoutletLoaded(
+  const RefreshForm(
       {required this.availability,
       required this.visibility,
-      required this.advokasi});
+      required this.advokasi,
+      required this.counter});
+
+  @override
+  List<Object> get props => [counter];
 }
 
-class PenilaianoutletError extends PenilaianoutletState {}
+class ConfirmSubmit extends PenilaianoutletState {}

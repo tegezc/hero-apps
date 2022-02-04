@@ -13,7 +13,8 @@ import 'package:hero/config/configuration.dart';
 import 'package:hero/core/log/printlog.dart';
 
 class CoreTakePhoto extends StatefulWidget {
-  const CoreTakePhoto({Key? key}) : super(key: key);
+  final Function(String?) onSubmit;
+  CoreTakePhoto({Key? key, required this.onSubmit}) : super(key: key);
 
   @override
   _CoreTakePhotoState createState() {
@@ -290,10 +291,13 @@ class _CoreTakePhotoState extends State<CoreTakePhoto>
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
-
-    cameraController.setFlashMode(FlashMode.off);
-    cameraController.setFocusMode(FocusMode.locked);
-    cameraController.setExposureMode(ExposureMode.auto);
+    try {
+      await cameraController.setFlashMode(FlashMode.off);
+      await cameraController.setFocusMode(FocusMode.locked);
+      await cameraController.setExposureMode(ExposureMode.auto);
+    } on CameraException catch (code, message) {
+      ph('$code : $message');
+    }
 
     controller = cameraController;
 
@@ -333,11 +337,13 @@ class _CoreTakePhotoState extends State<CoreTakePhoto>
 
   void onTakePictureButtonPressed() {
     takePicture().then((XFile? file) {
-      if (mounted) {
-        setState(() {
-          imageFile = file;
-        });
-        if (file != null) ph('Picture saved to ${file.path}');
+      if (mounted) setState(() {});
+
+      imageFile = file;
+      if (imageFile != null) {
+        widget.onSubmit(file!.path);
+      } else {
+        widget.onSubmit(null);
       }
     });
   }
@@ -355,6 +361,7 @@ class _CoreTakePhotoState extends State<CoreTakePhoto>
     }
 
     try {
+      await cameraController.setFlashMode(FlashMode.off);
       XFile file = await cameraController.takePicture();
       return file;
     } on CameraException catch (e) {

@@ -1,73 +1,105 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hero/core/log/printlog.dart';
-import 'package:hero/module_mt/data/datasources/get_penilaian_outlet.dart';
-import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_outlet_repository.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
+import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
-import 'package:hero/module_mt/domain/usecase/tandem_selling/penilaian/penilaian_outlet_usecase.dart';
+
+import '../../enum_penilaian.dart';
 
 part 'penilaianoutlet_state.dart';
 
 class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
-  PenilaianoutletCubit() : super(PenilaianoutletInitial());
-
-  late PenilaianOutletUseCase _penilaianOutletUseCase;
-
-  late Availability cacheAvailibility;
-  late PenilaianVisibility cacheVisibility;
-  late Advokasi cacheAdvokasi;
-
-  void setupData(String idOutlet) {
-    emit(PenilaianoutletLoading());
-    _setupData(idOutlet).then((_) {});
-  }
-
-  Future<void> _setupData(String idOutlet) async {
-    PenilaianOutletDataSourceImpl penilaianOutletDataSource =
-        await PenilaianOutletDataSourceImpl.create(idOutlet);
-    PenilaianOutletRepositoryImpl penilaianOutletRepository =
-        PenilaianOutletRepositoryImpl(
-            penilaianOutletDataSource: penilaianOutletDataSource);
-    _penilaianOutletUseCase = PenilaianOutletUseCase(
-        penilaianOutletRepository: penilaianOutletRepository);
-    cacheAdvokasi = _penilaianOutletUseCase.getAdvokasi();
-    cacheVisibility = _penilaianOutletUseCase.getVisibility();
-    cacheAvailibility = _penilaianOutletUseCase.getAvailability();
-    emit(_createPenilaianLoaded());
-  }
+  Availability availibility;
+  PenilaianVisibility visibility;
+  Advokasi advokasi;
+  int counter = 0;
+  PenilaianoutletCubit(
+      {required this.availibility,
+      required this.visibility,
+      required this.advokasi})
+      : super(PenilaianoutletInitial());
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle');
-    cacheAvailibility.question.lquestion[index].isYes = value;
+    availibility.question.lquestion[index].isYes = value;
   }
 
-  void changeTextAvailibity(int index, String value, EJenisParam eJenisParam) {
+  void changeTextPenilaian(int index, String value, EJenisParam eJenisParam) {
     ph('change text');
     switch (eJenisParam) {
       case EJenisParam.perdana:
-        cacheAvailibility.kategoriOperator.lparams[index].nilai =
-            int.tryParse(value);
+        _setValueParamPenilaian(index, value, availibility.kategoriVF.lparams);
         break;
-      case EJenisParam.VK:
-        cacheAvailibility.kategoriVF.lparams[index].nilai = int.tryParse(value);
+      case EJenisParam.vk:
+        _setValueParamPenilaian(index, value, availibility.kategoriVF.lparams);
         break;
       case EJenisParam.poster:
-        // TODO: Handle this case.
+        _setValueParamPenilaian(
+            index, value, visibility.kategoriesPoster.lparams);
         break;
       case EJenisParam.layar:
-        // TODO: Handle this case.
+        _setValueParamPenilaian(
+            index, value, visibility.kategoriesLayar.lparams);
         break;
     }
   }
 
-  PenilaianoutletLoaded _createPenilaianLoaded() {
-    return PenilaianoutletLoaded(
-        availability: cacheAvailibility,
-        visibility: cacheVisibility,
-        advokasi: cacheAdvokasi);
+  void _setValueParamPenilaian(
+      int index, String value, List<ParamPenilaian> lParam) {
+    lParam[index].nilai = int.tryParse(value) ?? 0;
+  }
+
+  void setPathImage(String pathImage, EPhotoPenilaian ePhotoPenilaian) {
+    ph('$pathImage $ePhotoPenilaian');
+
+    switch (ePhotoPenilaian) {
+      case EPhotoPenilaian.avPerdana:
+        availibility.pathPhotoOperator = pathImage;
+        break;
+      case EPhotoPenilaian.avVf:
+        availibility.pathPhotoVF = pathImage;
+        break;
+      case EPhotoPenilaian.etalase:
+        visibility.imageEtalase = pathImage;
+        break;
+      case EPhotoPenilaian.poster:
+        visibility.imagePoster = pathImage;
+        break;
+      case EPhotoPenilaian.layar:
+        visibility.imageLayar = pathImage;
+        break;
+    }
+    ph('${availibility.pathPhotoOperator}');
+    ph('${availibility.pathPhotoVF}');
+    emit(_createPenilaianLoaded());
+  }
+
+  void setQuestionAv(bool value, int index) {
+    availibility.question.lquestion[index].isYes = value;
+  }
+
+  void setQuestionVis(bool value, bool isbawah) {
+    if (isbawah) {
+      visibility.questionBawah.isYes = value;
+    } else {
+      visibility.questionAtas.isYes = value;
+    }
+  }
+
+  void setQuestionAdv(bool value, int index) {
+    advokasi.lquestions[index].isYes = value;
+  }
+
+  void submit(dynamic obj) {}
+
+  RefreshForm _createPenilaianLoaded() {
+    counter++;
+    return RefreshForm(
+        availability: availibility,
+        visibility: visibility,
+        advokasi: advokasi,
+        counter: counter);
   }
 }
-
-enum EJenisParam { perdana, VK, poster, layar }

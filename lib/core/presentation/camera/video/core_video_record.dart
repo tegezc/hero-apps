@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hero/config/configuration.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/util/component/button/component_button.dart';
@@ -14,8 +15,8 @@ class CoreRecordVideo extends StatefulWidget {
   bool isStopButtonShowing;
   CoreRecordVideo(
       {Key? key,
-      this.maxDurationInSecon = 30,
       required this.onStop,
+      this.maxDurationInSecon = 30,
       this.isStopButtonShowing = true})
       : super(key: key);
 
@@ -300,7 +301,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
           'Setelah ${widget.maxDurationInSecon} detik, video akan berhenti secara otomatis.',
           color: Colors.red[900],
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }
@@ -370,9 +371,15 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
 
-    cameraController.setFlashMode(FlashMode.off);
-    cameraController.setFocusMode(FocusMode.locked);
-    cameraController.setExposureMode(ExposureMode.auto);
+    try {
+      await cameraController.setFlashMode(FlashMode.off);
+      await cameraController.setFocusMode(FocusMode.locked);
+      await cameraController.setExposureMode(ExposureMode.auto);
+    } on CameraException catch (e, m) {
+      ph('$e,$m');
+    } catch (e) {
+      ph(e);
+    }
 
     controller = cameraController;
 
@@ -420,11 +427,13 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
     _isshowtimer = false;
     stopVideoRecording().then((file) {
       if (mounted) setState(() {});
-      if (file != null) {
-        videoFile = file;
+
+      videoFile = file;
+      if (videoFile != null) {
         widget.onStop(videoFile!.path);
+      } else {
+        widget.onStop(null);
       }
-      widget.onStop(null);
     });
   }
 
@@ -442,6 +451,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
     }
 
     try {
+      await cameraController.setFlashMode(FlashMode.off);
       await cameraController.startVideoRecording();
     } on CameraException catch (e) {
       _showCameraException(e);

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hero/core/presentation/camera/video/core_video_record.dart';
 import 'package:hero/module_mt/presentation/common/voice_of_reseller/vos_video_viewer.dart';
 import 'package:hero/util/uiutil.dart';
-import 'package:path/path.dart';
 
 class VOSRecordVideo extends StatefulWidget {
   const VOSRecordVideo({Key? key}) : super(key: key);
@@ -26,9 +25,9 @@ class _VOSRecordVideoState extends State<VOSRecordVideo> {
   void push(BuildContext context, String pathVideo) {
     CommonUi()
         .openPage(this.context, VOSVideoViewer(pathVideo: pathVideo))
-        .then((value) {
-      if (value != null) {
-        Navigator.pop(context, pathVideo);
+        .then((isPakai) {
+      if (isPakai is bool) {
+        if (isPakai) Navigator.pop(context, pathVideo);
       }
     });
   }

@@ -10,7 +10,7 @@ class CoreVideoViewer extends StatefulWidget {
   static const String routeName = '/pagecorevideoviewer';
   final String? pathVideo;
   final String textSubmitButton;
-  final Function(String) onSubmit;
+  final Function(bool) onSubmit;
   const CoreVideoViewer(
       {Key? key,
       required this.pathVideo,
@@ -123,10 +123,10 @@ class _CoreVideoViewerState extends State<CoreVideoViewer> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ButtonApp.blue(widget.textSubmitButton, () {
-                  widget.onSubmit(widget.pathVideo!);
+                  widget.onSubmit(true);
                 }),
                 ButtonApp.blue('Ambil Lagi', () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context, false);
                 }),
                 //   ButtonApp.blue('Cancel', () {}),
               ],

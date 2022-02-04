@@ -17,16 +17,16 @@ class _VOSVideoViewerState extends State<VOSVideoViewer> {
         body: CoreVideoViewer(
           pathVideo: widget.pathVideo,
           textSubmitButton: 'Gunakan',
-          onSubmit: _handlePakaiVideo,
+          onSubmit: (isPakai) {
+            _handlePakai(isPakai);
+          },
         ),
         title: 'Voice of Reseller');
   }
 
-  void _handlePakai(String pathVideo) {
-    Navigator.pop(context, pathVideo);
-  }
-
-  void _handlePakaiVideo(String pathVideo) {
-    _handlePakai(pathVideo);
+  void _handlePakai(bool isPakai) {
+    if (isPakai) {
+      Navigator.pop(context, isPakai);
+    }
   }
 }

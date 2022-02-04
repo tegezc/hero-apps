@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
-import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/parent_tab.dart';
+import 'package:hero/module_mt/presentation/common/penilaian_outlet/state_parent/page_state_penilaian.dart';
 import 'package:hero/module_mt/presentation/common/voice_of_reseller/hp_voice_of_retailer.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
 import 'package:hero/util/component/button/component_button.dart';
@@ -55,7 +55,7 @@ class _DetailOutletState extends State<DetailOutlet> {
                   onTap: () {
                     CommonUi().openPage(
                         context,
-                        ParentTabNilaiOutlet(
+                        ParentStatePenilaian(
                           outletMT: widget.outletMT,
                         ));
                   },
