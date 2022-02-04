@@ -3,8 +3,7 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 
 class TgzDialogConfirm {
-  Future<String?> confirmTwoButton(
-      BuildContext context, String str, Function onTapOk) {
+  Future<String?> confirmTwoButton(BuildContext context, String str) {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
@@ -24,13 +23,15 @@ class TgzDialogConfirm {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Tidak', () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context, null);
                   }),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
-                  child: ButtonApp.black('Ya', onTapOk),
+                  child: ButtonApp.black('Ya', () {
+                    Navigator.pop(context, 'ya');
+                  }),
                 ),
               ],
             ));
@@ -56,7 +57,7 @@ class TgzDialogConfirm {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context, 'ok');
                   }),
                 ),
               ],

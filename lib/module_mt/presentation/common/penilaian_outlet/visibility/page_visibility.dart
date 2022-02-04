@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/availability/card_table.dart';
 import 'package:hero/module_mt/presentation/common/widgets/image_file.dart';
@@ -6,6 +7,7 @@ import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/uiutil.dart';
 
 import '../enum_penilaian.dart';
+import '../parent_tab/cubit/penilaianoutlet_cubit.dart';
 import '../penilaian_take_photo.dart';
 import 'card_question_single.dart';
 
@@ -28,10 +30,33 @@ class _PageVisibilityState extends State<PageVisibility> {
           const SizedBox(
             height: 8,
           ),
+          widget.penilaianVisibility.imageEtalase == null
+              ? ButtonStrectWidth(
+                  buttonColor: Colors.green,
+                  text: 'Foto semua Etalase',
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    CommonUi()
+                        .openPage(context, const PenilaianTakePhoto())
+                        .then((value) {
+                      if (value != null) {
+                        if (value is String) {
+                          BlocProvider.of<PenilaianoutletCubit>(context)
+                              .setPathImage(value, EPhotoPenilaian.etalase);
+                        }
+                      }
+                    });
+                  },
+                  isenable: true)
+              : ImageFile(pathPhoto: widget.penilaianVisibility.imageEtalase),
+          const SizedBox(
+            height: 8,
+          ),
           CardTableParameter(
             kategories: widget.penilaianVisibility.kategoriesPoster,
             eJenisParam: EJenisParam.poster,
             ePhoto: EPhotoPenilaian.poster,
+            textButton: 'Foto Poster',
             pathImage: widget.penilaianVisibility.imagePoster,
           ),
           const SizedBox(
@@ -41,6 +66,7 @@ class _PageVisibilityState extends State<PageVisibility> {
             kategories: widget.penilaianVisibility.kategoriesLayar,
             eJenisParam: EJenisParam.layar,
             ePhoto: EPhotoPenilaian.layar,
+            textButton: 'Foto Layar',
             pathImage: widget.penilaianVisibility.imageLayar,
           ),
           const SizedBox(
@@ -48,22 +74,6 @@ class _PageVisibilityState extends State<PageVisibility> {
           ),
           CardQuestionSingle(
               question: widget.penilaianVisibility.questionBawah),
-          const SizedBox(
-            height: 8.0,
-          ),
-          widget.penilaianVisibility.imageEtalase == null
-              ? ButtonStrectWidth(
-                  buttonColor: Colors.green,
-                  text: 'Ambil Photo',
-                  onTap: () {
-                    CommonUi()
-                        .openPage(context, const PenilaianTakePhoto())
-                        .then((value) {
-                      if (value != null) {}
-                    });
-                  },
-                  isenable: true)
-              : ImageFile(pathPhoto: widget.penilaianVisibility.imageEtalase),
           const SizedBox(
             height: 20,
           ),

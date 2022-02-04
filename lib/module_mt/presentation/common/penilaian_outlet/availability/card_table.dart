@@ -16,12 +16,14 @@ class CardTableParameter extends StatefulWidget {
   final Kategories kategories;
   final EJenisParam eJenisParam;
   final EPhotoPenilaian ePhoto;
+  final String textButton;
   final String? pathImage;
   const CardTableParameter(
       {Key? key,
       required this.kategories,
       required this.ePhoto,
       required this.eJenisParam,
+      required this.textButton,
       required this.pathImage})
       : super(key: key);
 
@@ -30,8 +32,44 @@ class CardTableParameter extends StatefulWidget {
 }
 
 class _CardTableParameterState extends State<CardTableParameter> {
+  int _counter = 0;
+  int _length = 0;
+  List<TextEditingController> _lController = [];
+
+  @override
+  void initState() {
+    super.initState();
+    Kategories k = widget.kategories;
+    _length = k.lparams.length;
+  }
+
+  void _setupTextFieldFirstTimeOnly() {
+    if (_counter == 0) {
+      _counter++;
+      _setupValueTextField();
+    }
+  }
+
+  void _setupValueTextField() {
+    Kategories k = widget.kategories;
+    for (int i = 0; i < k.lparams.length; i++) {
+      ParamPenilaian p = k.lparams[i];
+      _lController.add(TextEditingController());
+      _lController[i].text = p.nilai == null ? '' : '${p.nilai}';
+    }
+  }
+
+  @override
+  void dispose() {
+    for (int i = 0; i < _length; i++) {
+      _lController[i].dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _setupTextFieldFirstTimeOnly();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -59,6 +97,7 @@ class _CardTableParameterState extends State<CardTableParameter> {
         child: TextFieldNumberOnlyWithLabel(
             widthLabel: widthLabel,
             widthTextField: widthTextField,
+            controller: _lController[i],
             onChanged: (value) {
               BlocProvider.of<PenilaianoutletCubit>(context)
                   .changeTextPenilaian(i, value, widget.eJenisParam);
@@ -76,8 +115,9 @@ class _CardTableParameterState extends State<CardTableParameter> {
         child: widget.pathImage == null
             ? ButtonStrectWidth(
                 buttonColor: Colors.green,
-                text: 'Ambil Photo',
+                text: widget.textButton,
                 onTap: () {
+                  FocusScope.of(context).unfocus();
                   CommonUi()
                       .openPage(context, const PenilaianTakePhoto())
                       .then((value) {

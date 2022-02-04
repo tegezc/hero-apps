@@ -23,7 +23,7 @@ class TgzDialogError {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context, 'ok');
                   }),
                 ),
               ],
@@ -50,7 +50,7 @@ class TgzDialogError {
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Ok', () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context, 'ok');
                   }),
                 ),
               ],

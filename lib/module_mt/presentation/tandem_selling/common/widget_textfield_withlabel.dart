@@ -4,7 +4,7 @@ class TextFieldNumberOnlyWithLabel extends StatefulWidget {
   final String label;
   final double widthLabel;
   final double widthTextField;
-  // final TextEditingController controller;
+  final TextEditingController controller;
   final Function(String)? onChanged;
   final bool enable;
   final String? validation;
@@ -15,6 +15,7 @@ class TextFieldNumberOnlyWithLabel extends StatefulWidget {
     this.onChanged,
     this.enable = true,
     this.validation,
+    required this.controller,
     required this.widthLabel,
     required this.label,
     // required this.controller,
@@ -69,6 +70,7 @@ class _TextFieldNumberOnlyWithLabelState
       enabled: widget.enable,
       style: _textfieldStyle,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: widget.controller,
       onSaved: (str) {},
       validator: (value) {
         return widget.validation;

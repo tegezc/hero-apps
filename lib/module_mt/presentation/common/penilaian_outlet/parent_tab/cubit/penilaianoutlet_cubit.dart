@@ -24,7 +24,7 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       required this.visibility,
       required this.advokasi,
       required this.idOutlet})
-      : super(PenilaianoutletInitial());
+      : super(PenilaianoutletInitial(0));
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle inded : $index $value');
@@ -35,9 +35,8 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     ph('change text $eJenisParam');
     switch (eJenisParam) {
       case EJenisParam.perdana:
-        availability.kategoriOperator.lparams[index].nilai =
-            int.tryParse(value) ?? 0;
-        //  _setValueParamPenilaian(index, value, availibility.kategoriOperator.lparams);
+        _setValueParamPenilaian(
+            index, value, availability.kategoriOperator.lparams);
         break;
       case EJenisParam.vk:
         _setValueParamPenilaian(index, value, availability.kategoriVF.lparams);
@@ -55,7 +54,7 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
 
   void _setValueParamPenilaian(
       int index, String value, List<ParamPenilaian> lParam) {
-    lParam[index].nilai = int.tryParse(value) ?? 0;
+    lParam[index].nilai = int.tryParse(value);
   }
 
   void setPathImage(String pathImage, EPhotoPenilaian ePhotoPenilaian) {
@@ -102,35 +101,57 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   void confirmSubmit(ETabPenilaian eTab) {
     if (eTab == ETabPenilaian.availability) {
       if (availability.isValidToSubmit()) {
-        emit(const ConfirmSubmit(ETabPenilaian.availability));
+        emit(ConfirmSubmit(ETabPenilaian.availability, counter++));
       } else {
-        emit(FieldNotValidState());
+        emit(FieldNotValidState(counter++));
       }
     } else if (eTab == ETabPenilaian.visibility) {
     } else if (eTab == ETabPenilaian.advokasi) {}
   }
 
-  void submit(ETabPenilaian eTab) {
+  void submit(ETabPenilaian eTab) async {
+    emit(LoadingSubmitData(counter++));
+    _prosesSubmit(eTab).then((value) {
+      if (value) {
+        emit(FinishSubmitSuccessOrNot(
+            message: 'Data berhasil di submit',
+            isSuccess: true,
+            counter: counter++));
+      } else {
+        emit(FinishSubmitSuccessOrNot(
+            message: 'Data gagal di submit',
+            isSuccess: false,
+            counter: counter++));
+      }
+    });
+  }
+
+  Future<bool> _prosesSubmit(ETabPenilaian eTab) async {
     SubmitPenilaianOutDatasourceImpl submitDatasource =
         SubmitPenilaianOutDatasourceImpl();
     PenilaianOutSubmitRepository penilaianOutSubmitRepository =
         PenilaianOutSubmitRepository(submitDatasource);
     SubmitAvailabilityUsecase sav =
         SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
-    emit(LoadingSubmitData());
-    if (eTab == ETabPenilaian.availability) {
-      sav.call(availability, idOutlet);
-    } else if (eTab == ETabPenilaian.visibility) {
-    } else if (eTab == ETabPenilaian.advokasi) {}
-    emit(FinishSubmitSuccessOrNot());
+
+    bool isSuccess = false;
+    try {
+      if (eTab == ETabPenilaian.availability) {
+        isSuccess = await sav.call(availability, idOutlet);
+      } else if (eTab == ETabPenilaian.visibility) {
+      } else if (eTab == ETabPenilaian.advokasi) {}
+
+      return isSuccess;
+    } catch (e) {
+      return false;
+    }
   }
 
   RefreshForm _createPenilaianLoaded() {
-    counter++;
     return RefreshForm(
         availability: availability,
         visibility: visibility,
         advokasi: advokasi,
-        counter: counter);
+        counter: counter++);
   }
 }

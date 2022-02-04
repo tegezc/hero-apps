@@ -29,6 +29,7 @@ class _PageAvailabilityState extends State<PageAvailability> {
             kategories: widget.availability.kategoriOperator,
             eJenisParam: EJenisParam.perdana,
             ePhoto: EPhotoPenilaian.avPerdana,
+            textButton: 'Foto Perdana',
             pathImage: widget.availability.pathPhotoOperator,
           ),
           const SizedBox(
@@ -38,6 +39,7 @@ class _PageAvailabilityState extends State<PageAvailability> {
             kategories: widget.availability.kategoriVF,
             eJenisParam: EJenisParam.vk,
             ePhoto: EPhotoPenilaian.avVf,
+            textButton: 'Foto Voucher Fisik',
             pathImage: widget.availability.pathPhotoVF,
           ),
           const SizedBox(
@@ -53,8 +55,9 @@ class _PageAvailabilityState extends State<PageAvailability> {
                 buttonColor: Colors.red,
                 text: 'Submit',
                 onTap: () {
+                  FocusScope.of(context).unfocus();
                   BlocProvider.of<PenilaianoutletCubit>(context)
-                      .submit(ETabPenilaian.availability);
+                      .confirmSubmit(ETabPenilaian.availability);
                 },
                 isenable: true),
           ),

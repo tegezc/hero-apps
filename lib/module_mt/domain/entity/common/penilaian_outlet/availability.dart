@@ -33,7 +33,7 @@ class Availability {
   }
 
   bool _checkListParams(List<ParamPenilaian> lParams) {
-    for (ParamPenilaian p in kategoriOperator.lparams) {
+    for (ParamPenilaian p in lParams) {
       if (!p.isValidToSubmit()) {
         return false;
       }

@@ -19,7 +19,7 @@ class _CardQuestionState extends State<CardQuestion> {
   @override
   void initState() {
     for (var i = 0; i < widget.questions.lquestion.length; i++) {
-      switchedValue.add(true);
+      switchedValue.add(widget.questions.lquestion[i].isYes);
     }
     super.initState();
   }
