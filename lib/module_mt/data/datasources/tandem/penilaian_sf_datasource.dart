@@ -12,7 +12,7 @@ class PenilaianSfDataSourceImpl implements PenilaianSfDataSource {
   @override
   Future<PenilaianSf?> getData(String idSf) async {
     Dio dio = await GetDio().dio();
-    var response = await dio.get('/penilaiansf/penilaian/$idSf');
+    var response = await dio.get('/penilaiansf/penilaian_outlet/$idSf');
 
     return _olahJson(response.data);
   }

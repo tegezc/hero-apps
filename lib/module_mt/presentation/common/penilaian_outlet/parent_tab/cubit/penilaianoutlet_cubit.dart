@@ -7,8 +7,10 @@ import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.da
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
-import 'package:hero/module_mt/domain/usecase/common/penilaian/availability/submit_availability_usecase.dart';
+import 'package:hero/module_mt/domain/usecase/common/penilaian_outlet/advokat/submit_advokat_usecase.dart';
 
+import '../../../../../domain/usecase/common/penilaian_outlet/visibility/submit_visibility_usecase.dart';
+import '../../../../../domain/usecase/common/penilaian_outlet/availability/submit_availability_usecase.dart';
 import '../../enum_penilaian.dart';
 
 part 'penilaianoutlet_state.dart';
@@ -31,6 +33,18 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     availability.question.lquestion[index].isYes = value;
   }
 
+  void changeSwitchedToggleVisibility(bool isBawah, bool value) {
+    if (isBawah) {
+      visibility.questionBawah.isYes = value;
+    } else {
+      visibility.questionAtas.isYes = value;
+    }
+  }
+
+  void changeSwitchedToggleAdvokat(int index, bool value) {
+    advokasi.lquestions[index].isYes = value;
+  }
+
   void changeTextPenilaian(int index, String value, EJenisParam eJenisParam) {
     ph('change text $eJenisParam');
     switch (eJenisParam) {
@@ -42,6 +56,7 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
         _setValueParamPenilaian(index, value, availability.kategoriVF.lparams);
         break;
       case EJenisParam.poster:
+        ph('masuk poster : $value');
         _setValueParamPenilaian(
             index, value, visibility.kategoriesPoster.lparams);
         break;
@@ -99,14 +114,20 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   }
 
   void confirmSubmit(ETabPenilaian eTab) {
+    bool isValid = true;
     if (eTab == ETabPenilaian.availability) {
-      if (availability.isValidToSubmit()) {
-        emit(ConfirmSubmit(ETabPenilaian.availability, counter++));
-      } else {
-        emit(FieldNotValidState(counter++));
-      }
+      isValid = availability.isValidToSubmit();
     } else if (eTab == ETabPenilaian.visibility) {
-    } else if (eTab == ETabPenilaian.advokasi) {}
+      isValid = visibility.isValidToSubmit();
+    } else if (eTab == ETabPenilaian.advokasi) {
+      isValid = true;
+    }
+
+    if (isValid) {
+      emit(ConfirmSubmit(eTab, counter++));
+    } else {
+      emit(FieldNotValidState(counter++));
+    }
   }
 
   void submit(ETabPenilaian eTab) async {
@@ -131,15 +152,24 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
         SubmitPenilaianOutDatasourceImpl();
     PenilaianOutSubmitRepository penilaianOutSubmitRepository =
         PenilaianOutSubmitRepository(submitDatasource);
-    SubmitAvailabilityUsecase sav =
-        SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
 
     bool isSuccess = false;
     try {
       if (eTab == ETabPenilaian.availability) {
-        isSuccess = await sav.call(availability, idOutlet);
+        SubmitAvailabilityUsecase sav =
+            SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
+        isSuccess = await sav(availability, idOutlet);
       } else if (eTab == ETabPenilaian.visibility) {
-      } else if (eTab == ETabPenilaian.advokasi) {}
+        // Map<String, dynamic> map = VisibilityModel(visibility).toMap(idOutlet);
+        // ph(map);
+        SubmitVisibilityUsecase sv =
+            SubmitVisibilityUsecase(penilaianOutSubmitRepository);
+        isSuccess = await sv(visibility, idOutlet);
+      } else if (eTab == ETabPenilaian.advokasi) {
+        SubmitAdvokatUsecase ad =
+            SubmitAdvokatUsecase(penilaianOutSubmitRepository);
+        isSuccess = await ad(advokasi, idOutlet);
+      }
 
       return isSuccess;
     } catch (e) {

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
+import 'package:hero/module_mt/data/model/common/penilaian_outlet/advokasi_model.dart';
 import 'package:hero/module_mt/data/model/common/penilaian_outlet/availability_model.dart';
+import 'package:hero/module_mt/data/model/common/penilaian_outlet/visibility_model.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
@@ -16,9 +18,15 @@ abstract class ISubmitPenilaianOutDatasource {
 class SubmitPenilaianOutDatasourceImpl
     implements ISubmitPenilaianOutDatasource {
   @override
-  Future<bool> submitAdvokat(Advokasi advokasi, String idOutlet) {
-    // TODO: implement submitAdvokat
-    throw UnimplementedError();
+  Future<bool> submitAdvokat(Advokasi advokasi, String idOutlet) async {
+    Map<String, dynamic> ad = AdvokasiModel(advokasi).toMap(idOutlet);
+
+    GetDio getDio = GetDio();
+    Dio dio = await getDio.dioForm();
+    var formData = FormData.fromMap(ad);
+    var response =
+        await dio.post('/penilaianoutlet/kirim_advokasi', data: formData);
+    return _olahJsonResponseSubmit(response.data);
   }
 
   @override
@@ -54,8 +62,16 @@ class SubmitPenilaianOutDatasourceImpl
 
   @override
   Future<bool> submitVisibility(
-      PenilaianVisibility visibility, String idOutlet) {
-    // TODO: implement submitVisibility
-    throw UnimplementedError();
+      PenilaianVisibility visibility, String idOutlet) async {
+    Map<String, dynamic> avm = VisibilityModel(visibility).toMap(idOutlet);
+    avm['myfile1'] = visibility.imageEtalase;
+    avm['myfile2'] = visibility.imagePoster;
+    avm['myfile3'] = visibility.imageLayar;
+    GetDio getDio = GetDio();
+    Dio dio = await getDio.dioForm();
+    var formData = FormData.fromMap(avm);
+    var response =
+        await dio.post('/penilaianoutlet/kirim_visibility', data: formData);
+    return _olahJsonResponseSubmit(response.data);
   }
 }

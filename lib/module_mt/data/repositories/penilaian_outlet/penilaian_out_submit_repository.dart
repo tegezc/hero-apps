@@ -8,9 +8,8 @@ class PenilaianOutSubmitRepository implements IPenilaianOutSubmitRepository {
   final ISubmitPenilaianOutDatasource submitPenilaianOutDatasource;
   PenilaianOutSubmitRepository(this.submitPenilaianOutDatasource);
   @override
-  Future<bool> submitAdvokad(Advokasi advokasi, String idOutlet) {
-    // TODO: implement submitAdvokad
-    throw UnimplementedError();
+  Future<bool> submitAdvokad(Advokasi advokasi, String idOutlet) async {
+    return await submitPenilaianOutDatasource.submitAdvokat(advokasi, idOutlet);
   }
 
   @override
@@ -22,8 +21,8 @@ class PenilaianOutSubmitRepository implements IPenilaianOutSubmitRepository {
 
   @override
   Future<bool> submitVisibility(
-      PenilaianVisibility visibility, String idOutlet) {
-    // TODO: implement submitVisibility
-    throw UnimplementedError();
+      PenilaianVisibility visibility, String idOutlet) async {
+    return await submitPenilaianOutDatasource.submitVisibility(
+        visibility, idOutlet);
   }
 }

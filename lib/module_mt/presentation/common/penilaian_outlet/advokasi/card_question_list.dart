@@ -18,7 +18,7 @@ class _CardQuestionState extends State<CardQuestionList> {
   @override
   void initState() {
     for (var i = 0; i < widget.questions.length; i++) {
-      switchedValue.add(true);
+      switchedValue.add(widget.questions[i].isYes);
     }
     super.initState();
   }
@@ -81,7 +81,7 @@ class _CardQuestionState extends State<CardQuestionList> {
           value: switchedValue[index],
           onChanged: (value) {
             BlocProvider.of<PenilaianoutletCubit>(context)
-                .changeSwitchedToggleAvailibity(index, value);
+                .changeSwitchedToggleAdvokat(index, value);
             setState(() {
               switchedValue[index] = value;
             });

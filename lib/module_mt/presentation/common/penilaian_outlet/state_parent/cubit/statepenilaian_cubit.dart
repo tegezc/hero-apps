@@ -6,7 +6,7 @@ import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_outl
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
-import 'package:hero/module_mt/domain/usecase/common/penilaian/availability/get_availability_data.dart';
+import 'package:hero/module_mt/domain/usecase/common/penilaian_outlet/get_availability_data.dart';
 
 part 'statepenilaian_state.dart';
 

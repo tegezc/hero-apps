@@ -69,8 +69,17 @@ class GetDio {
           "Auth-Key": "restapihore",
           "Client-Service": "frontendclienthore"
         });
-
-    return Dio(optionsLogin);
+    Dio dioInstance = Dio(optionsLogin);
+    dioInstance.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 110));
+    dioInstance.interceptors.add(AppInterceptors());
+    return dioInstance;
   }
 
   Future<Dio> dioForm() async {

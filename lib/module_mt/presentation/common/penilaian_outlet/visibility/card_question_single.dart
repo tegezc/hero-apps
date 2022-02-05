@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.dart';
 import 'package:hero/module_mt/presentation/common/widgets/label_multiline.dart';
 import 'package:hero/util/component/label/component_label.dart';
 
+import '../parent_tab/cubit/penilaianoutlet_cubit.dart';
+
 class CardQuestionSingle extends StatefulWidget {
   final Question question;
-  const CardQuestionSingle({Key? key, required this.question})
+  final bool isBawah;
+  const CardQuestionSingle(
+      {Key? key, required this.question, required this.isBawah})
       : super(key: key);
 
   @override
@@ -16,8 +21,8 @@ class _CardQuestionState extends State<CardQuestionSingle> {
   bool switchedValue = true;
   @override
   void initState() {
-    switchedValue = widget.question.isYes;
     super.initState();
+    switchedValue = widget.question.isYes;
   }
 
   @override
@@ -76,8 +81,8 @@ class _CardQuestionState extends State<CardQuestionSingle> {
         Switch(
           value: switchedValue,
           onChanged: (value) {
-            // BlocProvider.of<PenilaianoutletCubit>(context)
-            //     .changeSwitchedToggleAvailibity(index, value);
+            BlocProvider.of<PenilaianoutletCubit>(context)
+                .changeSwitchedToggleVisibility(widget.isBawah, value);
             setState(() {
               switchedValue = value;
             });

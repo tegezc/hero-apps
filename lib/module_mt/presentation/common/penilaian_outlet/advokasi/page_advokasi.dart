@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/util/component/button/component_button.dart';
 
+import '../enum_penilaian.dart';
+import '../parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'card_question_list.dart';
 
 class PageAdvokasi extends StatefulWidget {
@@ -27,7 +30,11 @@ class _PageAdvokasiState extends State<PageAdvokasi> {
             child: ButtonStrectWidth(
                 buttonColor: Colors.red,
                 text: 'Submit',
-                onTap: () {},
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  BlocProvider.of<PenilaianoutletCubit>(context)
+                      .confirmSubmit(ETabPenilaian.advokasi);
+                },
                 isenable: true),
           ),
           const SizedBox(

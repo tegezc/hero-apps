@@ -8,7 +8,7 @@ class Question {
       required this.idPertanyaan,
       required this.isYes});
 
-  bool isValid() {
+  bool isValiddd() {
     if (idPertanyaan.isNotEmpty && pertanyaan.isNotEmpty) {
       return true;
     }

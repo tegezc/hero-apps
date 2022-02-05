@@ -26,7 +26,10 @@ class _PageVisibilityState extends State<PageVisibility> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CardQuestionSingle(question: widget.penilaianVisibility.questionAtas),
+          CardQuestionSingle(
+            question: widget.penilaianVisibility.questionAtas,
+            isBawah: false,
+          ),
           const SizedBox(
             height: 8,
           ),
@@ -73,7 +76,9 @@ class _PageVisibilityState extends State<PageVisibility> {
             height: 8,
           ),
           CardQuestionSingle(
-              question: widget.penilaianVisibility.questionBawah),
+            question: widget.penilaianVisibility.questionBawah,
+            isBawah: true,
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -82,7 +87,11 @@ class _PageVisibilityState extends State<PageVisibility> {
             child: ButtonStrectWidth(
                 buttonColor: Colors.red,
                 text: 'Submit',
-                onTap: () {},
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  BlocProvider.of<PenilaianoutletCubit>(context)
+                      .confirmSubmit(ETabPenilaian.visibility);
+                },
                 isenable: true),
           ),
           const SizedBox(
