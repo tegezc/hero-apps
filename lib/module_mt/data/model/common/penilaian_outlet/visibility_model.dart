@@ -15,7 +15,7 @@ class VisibilityModel extends PenilaianVisibility {
     super.imageLayar = visibility.imageLayar;
   }
 
-  Map<String, dynamic> toMap(
+  Map<String, dynamic> toMapForSubmit(
     String idoutlet,
   ) {
     Map<String, dynamic> map = {};
@@ -27,6 +27,9 @@ class VisibilityModel extends PenilaianVisibility {
     }
     map[questionAtas.idPertanyaan] = questionAtas.isYes ? 'ya' : 'tidak';
     map[questionBawah.idPertanyaan] = questionBawah.isYes ? 'ya' : 'tidak';
+    map['myfile1'] = imageEtalase;
+    map['myfile2'] = imagePoster;
+    map['myfile3'] = imageLayar;
     map['id_outlet'] = idoutlet;
     map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
     return map;

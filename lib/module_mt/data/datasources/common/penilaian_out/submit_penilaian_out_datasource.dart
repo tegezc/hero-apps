@@ -19,7 +19,7 @@ class SubmitPenilaianOutDatasourceImpl
     implements ISubmitPenilaianOutDatasource {
   @override
   Future<bool> submitAdvokat(Advokasi advokasi, String idOutlet) async {
-    Map<String, dynamic> ad = AdvokasiModel(advokasi).toMap(idOutlet);
+    Map<String, dynamic> ad = AdvokasiModel(advokasi).toMapForSubmit(idOutlet);
 
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();
@@ -32,9 +32,8 @@ class SubmitPenilaianOutDatasourceImpl
   @override
   Future<bool> submitAvailability(
       Availability availability, String idOutlet) async {
-    Map<String, dynamic> avm = AvailabilityModel(availability).toMap(idOutlet);
-    avm['myfile1'] = availability.pathPhotoOperator;
-    avm['myfile2'] = availability.pathPhotoVF;
+    Map<String, dynamic> avm =
+        AvailabilityModel(availability).toMapForSubmit(idOutlet);
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();
     var formData = FormData.fromMap(avm);
@@ -63,10 +62,9 @@ class SubmitPenilaianOutDatasourceImpl
   @override
   Future<bool> submitVisibility(
       PenilaianVisibility visibility, String idOutlet) async {
-    Map<String, dynamic> avm = VisibilityModel(visibility).toMap(idOutlet);
-    avm['myfile1'] = visibility.imageEtalase;
-    avm['myfile2'] = visibility.imagePoster;
-    avm['myfile3'] = visibility.imageLayar;
+    Map<String, dynamic> avm =
+        VisibilityModel(visibility).toMapForSubmit(idOutlet);
+
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();
     var formData = FormData.fromMap(avm);

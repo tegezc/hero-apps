@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/common/penilaian_out/submit_penilaian_out_datasource.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_out_submit_repository.dart';
@@ -26,7 +25,7 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       required this.visibility,
       required this.advokasi,
       required this.idOutlet})
-      : super(PenilaianoutletInitial(0));
+      : super(PenilaianoutletInitial(advokasi, availability, visibility));
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle inded : $index $value');
@@ -124,25 +123,21 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     }
 
     if (isValid) {
-      emit(ConfirmSubmit(eTab, counter++));
+      emit(ConfirmSubmit(advokasi, availability, visibility, eTab: eTab));
     } else {
-      emit(FieldNotValidState(counter++));
+      emit(FieldNotValidState(advokasi, availability, visibility));
     }
   }
 
   void submit(ETabPenilaian eTab) async {
-    emit(LoadingSubmitData(counter++));
+    emit(LoadingSubmitData(advokasi, availability, visibility));
     _prosesSubmit(eTab).then((value) {
       if (value) {
-        emit(FinishSubmitSuccessOrNot(
-            message: 'Data berhasil di submit',
-            isSuccess: true,
-            counter: counter++));
+        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
+            message: 'Data berhasil di submit', isSuccess: true));
       } else {
-        emit(FinishSubmitSuccessOrNot(
-            message: 'Data gagal di submit',
-            isSuccess: false,
-            counter: counter++));
+        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
+            message: 'Data gagal di submit', isSuccess: false));
       }
     });
   }
@@ -160,8 +155,6 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
             SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
         isSuccess = await sav(availability, idOutlet);
       } else if (eTab == ETabPenilaian.visibility) {
-        // Map<String, dynamic> map = VisibilityModel(visibility).toMap(idOutlet);
-        // ph(map);
         SubmitVisibilityUsecase sv =
             SubmitVisibilityUsecase(penilaianOutSubmitRepository);
         isSuccess = await sv(visibility, idOutlet);
@@ -178,10 +171,6 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   }
 
   RefreshForm _createPenilaianLoaded() {
-    return RefreshForm(
-        availability: availability,
-        visibility: visibility,
-        advokasi: advokasi,
-        counter: counter++);
+    return RefreshForm(advokasi, availability, visibility);
   }
 }

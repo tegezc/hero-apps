@@ -5,10 +5,13 @@ import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/jawaban.da
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/pertanyaan.dart';
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/voice_of_reseller.dart';
 
+import '../../../util/numberconverter.dart';
+import '../model/common/voice_of_reseller/vor_model.dart';
 import 'core/dio_config.dart';
 
 abstract class IVoiceOfResellerDatasource {
   Future<VoiceOfReseller?> getData(String idoutlet);
+  Future<bool> submit(VoiceOfReseller vor, String idOutlet);
 }
 
 class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {
@@ -35,5 +38,34 @@ class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {
       lPertanyaan.add(pertanyaan);
     }
     return VoiceOfReseller(lPertanyaan: lPertanyaan);
+  }
+
+  @override
+  Future<bool> submit(VoiceOfReseller vor, String idOutlet) async {
+    Map<String, dynamic> ad = VoiceOfResellerModel(vor).toMap(idOutlet);
+
+    GetDio getDio = GetDio();
+    Dio dio = await getDio.dioForm();
+    var formData = FormData.fromMap(ad);
+    var response =
+        await dio.post('/voiceofreseller/kirim_voiceof', data: formData);
+    return _olahJsonResponseSubmit(response.data);
+  }
+
+  bool _olahJsonResponseSubmit(dynamic json) {
+    try {
+      Map<String, dynamic> map = json;
+      if (map['status'] != null) {
+        int? status = ConverterNumber.stringToIntOrNull(map['status']);
+        if (status == null) {
+          return false;
+        } else if (status == 1) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }

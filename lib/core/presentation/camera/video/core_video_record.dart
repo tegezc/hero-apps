@@ -429,6 +429,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
       if (mounted) setState(() {});
 
       videoFile = file;
+      //await Future.delayed(const Duration(milliseconds: 500),);
       if (videoFile != null) {
         widget.onStop(videoFile!.path);
       } else {
@@ -467,7 +468,7 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
     }
 
     try {
-      return cameraController.stopVideoRecording();
+      return await cameraController.stopVideoRecording();
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;

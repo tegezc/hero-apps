@@ -1,44 +1,38 @@
 part of 'penilaianoutlet_cubit.dart';
 
-abstract class PenilaianoutletState extends Equatable {
-  final int counter;
-  const PenilaianoutletState(this.counter);
-
-  @override
-  List<Object> get props => [counter];
+abstract class PenilaianoutletState {
+  final Availability av;
+  final PenilaianVisibility vis;
+  final Advokasi adv;
+  const PenilaianoutletState(this.adv, this.av, this.vis);
 }
 
 class PenilaianoutletInitial extends PenilaianoutletState {
-  PenilaianoutletInitial(int counter) : super(counter);
+  PenilaianoutletInitial(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class FieldNotValidState extends PenilaianoutletState {
-  FieldNotValidState(int counter) : super(counter);
+  FieldNotValidState(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class RefreshForm extends PenilaianoutletState {
-  final Availability availability;
-  final PenilaianVisibility visibility;
-  final Advokasi advokasi;
-
-  const RefreshForm(
-      {required this.availability,
-      required this.visibility,
-      required this.advokasi,
-      required int counter})
-      : super(counter);
-
-  @override
-  List<Object> get props => [counter];
+  RefreshForm(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class ConfirmSubmit extends PenilaianoutletState {
   final ETabPenilaian eTab;
-  ConfirmSubmit(this.eTab, int counter) : super(counter);
+
+  ConfirmSubmit(Advokasi adv, Availability av, PenilaianVisibility vis,
+      {required this.eTab})
+      : super(adv, av, vis);
 }
 
 class LoadingSubmitData extends PenilaianoutletState {
-  LoadingSubmitData(int counter) : super(counter);
+  LoadingSubmitData(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class FinishSubmitSuccessOrNot extends PenilaianoutletState {
@@ -46,6 +40,7 @@ class FinishSubmitSuccessOrNot extends PenilaianoutletState {
   final String message;
 
   FinishSubmitSuccessOrNot(
-      {required this.isSuccess, required this.message, required int counter})
-      : super(0);
+      Advokasi adv, Availability av, PenilaianVisibility vis,
+      {required this.message, required this.isSuccess})
+      : super(adv, av, vis);
 }

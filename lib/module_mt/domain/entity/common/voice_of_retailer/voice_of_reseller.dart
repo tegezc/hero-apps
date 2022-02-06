@@ -2,6 +2,18 @@ import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/pertanyaan
 
 class VoiceOfReseller {
   List<Pertanyaan> lPertanyaan;
-  final String? pathVideo;
+  String? pathVideo;
   VoiceOfReseller({required this.lPertanyaan, this.pathVideo});
+
+  bool isValidToSubmit() {
+    if (pathVideo == null) {
+      return false;
+    }
+    for (int i = 0; i < lPertanyaan.length; i++) {
+      if (lPertanyaan[i].terpilih == null) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

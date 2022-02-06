@@ -1,16 +1,18 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:hero/module_mt/data/datasources/tandem/penilaian_sf_datasource.dart';
-import 'package:hero/module_mt/data/repositories/penilaian_sf/penilaian_sf_repository.dart';
-import 'package:hero/module_mt/domain/entity/tandem_selling/penilaian_sf.dart';
-import 'package:hero/module_mt/domain/usecase/tandem_selling/penilaian_sf/penilaian_sf_usecase.dart';
+import 'package:meta/meta.dart';
 
-part 'penilainsf_state.dart';
+import '../../../../data/datasources/tandem/penilaian_sf_datasource.dart';
+import '../../../../data/repositories/penilaian_sf/penilaian_sf_repository.dart';
+import '../../../../domain/entity/tandem_selling/penilaian_sf.dart';
+import '../../../../domain/usecase/tandem_selling/penilaian_sf/penilaian_sf_usecase.dart';
 
-class PenilainsfCubit extends Cubit<PenilainsfState> {
-  PenilainsfCubit() : super(PenilainsfInitial());
+part 'page_parent_state.dart';
+
+class PageParentCubit extends Cubit<PageParentPenilaianSFState> {
+  PageParentCubit() : super(PageParentPenilaianSFInitial());
   late PeniaianSfUsecase peniaianSfUsecase;
   PenilaianSf? cachePenilaianSf;
+
   void setupData(String idsf) {
     PenilaianSfDataSourceImpl penilaianSfDataSource =
         PenilaianSfDataSourceImpl();
@@ -20,9 +22,9 @@ class PenilainsfCubit extends Cubit<PenilainsfState> {
 
     _setupData(idsf).then((value) {
       if (value) {
-        emit(PenilainsfLoaded(cachePenilaianSf!));
+        emit(PageParentPenilaianSfLoaded(cachePenilaianSf!));
       } else {
-        emit(const PenilainsfError('Ada Kesalahan saat akses server.'));
+        emit(PageParentPenilaianSfError('Ada Kesalahan saat akses server.'));
       }
     });
   }

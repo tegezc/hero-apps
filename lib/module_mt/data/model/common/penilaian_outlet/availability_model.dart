@@ -13,7 +13,7 @@ class AvailabilityModel extends Availability {
     super.pathPhotoVF = av.pathPhotoVF;
   }
 
-  Map<String, dynamic> toMap(
+  Map<String, dynamic> toMapForSubmit(
     String idoutlet,
   ) {
     Map<String, dynamic> map = {};
@@ -26,6 +26,8 @@ class AvailabilityModel extends Availability {
     for (Question item in question.lquestion) {
       map[item.idPertanyaan] = item.isYes ? 'ya' : 'tidak';
     }
+    map['myfile1'] = pathPhotoOperator;
+    map['myfile2'] = pathPhotoVF;
     map['id_outlet'] = idoutlet;
     map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
     return map;
