@@ -9,4 +9,14 @@ class PenilaianSfRepositoryImpl implements IPenilaianSfRepository {
   Future<PenilaianSf?> getData(String idsf) async {
     return await penilaianSfDataSource.getData(idsf);
   }
+
+  @override
+  Future<bool> checkPenilaianSf(PenilaianSf penilaianSf, String idsf) async {
+    return await penilaianSfDataSource.checkPenilaianSf(penilaianSf, idsf);
+  }
+
+  @override
+  Future<bool> submit(PenilaianSf penilaianSf, String idsf) async {
+    return await penilaianSfDataSource.submit(penilaianSf, idsf);
+  }
 }

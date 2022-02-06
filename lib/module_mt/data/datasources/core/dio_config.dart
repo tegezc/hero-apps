@@ -105,7 +105,7 @@ class GetDio {
         baseUrl: configurationMT.host(),
         connectTimeout: 30000,
         receiveTimeout: 30000,
-        contentType: Headers.formUrlEncodedContentType,
+        //  contentType: Headers.formUrlEncodedContentType,
         headers: {
           "Auth-Key": "restapihore",
           "Client-Service": "frontendclienthore",

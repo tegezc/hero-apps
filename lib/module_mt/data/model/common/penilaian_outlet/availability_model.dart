@@ -1,7 +1,6 @@
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.dart';
-import 'package:hero/util/dateutil.dart';
 
 class AvailabilityModel extends Availability {
   AvailabilityModel(Availability av)
@@ -26,10 +25,8 @@ class AvailabilityModel extends Availability {
     for (Question item in question.lquestion) {
       map[item.idPertanyaan] = item.isYes ? 'ya' : 'tidak';
     }
-    map['myfile1'] = pathPhotoOperator;
-    map['myfile2'] = pathPhotoVF;
     map['id_outlet'] = idoutlet;
-    map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
+
     return map;
   }
 }

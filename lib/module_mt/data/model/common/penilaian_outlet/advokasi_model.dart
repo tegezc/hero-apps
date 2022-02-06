@@ -1,8 +1,6 @@
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.dart';
 
-import '../../../../../util/dateutil.dart';
-
 class AdvokasiModel extends Advokasi {
   AdvokasiModel(Advokasi advokasi) : super(lquestions: advokasi.lquestions);
 
@@ -12,7 +10,7 @@ class AdvokasiModel extends Advokasi {
       map[item.idPertanyaan] = item.isYes ? "ya" : "tidak";
     }
     map['id_outlet'] = idOutlet;
-    map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
+
     return map;
   }
 }

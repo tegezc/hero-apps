@@ -14,9 +14,7 @@ class VoiceOfResellerModel extends VoiceOfReseller {
     for (Pertanyaan item in lPertanyaan) {
       map[item.idPertanyaan] = item.terpilih;
     }
-    map['video'] = pathVideo;
     map['id_outlet'] = idOutlet;
-    map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
     return map;
   }
 }

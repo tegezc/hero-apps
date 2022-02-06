@@ -1,6 +1,5 @@
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 
-import '../../../../../util/dateutil.dart';
 import '../../../../domain/entity/common/penilaian_outlet/param_penilaian.dart';
 
 class VisibilityModel extends PenilaianVisibility {
@@ -27,11 +26,8 @@ class VisibilityModel extends PenilaianVisibility {
     }
     map[questionAtas.idPertanyaan] = questionAtas.isYes ? 'ya' : 'tidak';
     map[questionBawah.idPertanyaan] = questionBawah.isYes ? 'ya' : 'tidak';
-    map['myfile1'] = imageEtalase;
-    map['myfile2'] = imagePoster;
-    map['myfile3'] = imageLayar;
+
     map['id_outlet'] = idoutlet;
-    map['tanggal'] = DateUtility.dateToStringYYYYMMDD(DateTime.now());
     return map;
   }
 }

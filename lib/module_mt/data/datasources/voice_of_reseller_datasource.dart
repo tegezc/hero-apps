@@ -42,11 +42,12 @@ class VoiceOfResellerDatasourceImpl implements IVoiceOfResellerDatasource {
 
   @override
   Future<bool> submit(VoiceOfReseller vor, String idOutlet) async {
-    Map<String, dynamic> ad = VoiceOfResellerModel(vor).toMap(idOutlet);
-
+    Map<String, dynamic> vormap = VoiceOfResellerModel(vor).toMap(idOutlet);
+    vormap['myfile1'] =
+        await MultipartFile.fromFile(vor.pathVideo!, filename: 'myfile1');
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();
-    var formData = FormData.fromMap(ad);
+    var formData = FormData.fromMap(vormap);
     var response =
         await dio.post('/voiceofreseller/kirim_voiceof', data: formData);
     return _olahJsonResponseSubmit(response.data);

@@ -14,18 +14,31 @@ import '../../enum_penilaian.dart';
 
 part 'penilaianoutlet_state.dart';
 
+class ProgressPenilaianOutet {
+  bool availability;
+  bool visibility;
+  bool advokat;
+
+  ProgressPenilaianOutet(
+      {required this.availability,
+      required this.visibility,
+      required this.advokat});
+}
+
 class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   Availability availability;
   PenilaianVisibility visibility;
   Advokasi advokasi;
+  ProgressPenilaianOutet progres;
   final String idOutlet;
-  int counter = 0;
   PenilaianoutletCubit(
       {required this.availability,
       required this.visibility,
       required this.advokasi,
+      required this.progres,
       required this.idOutlet})
-      : super(PenilaianoutletInitial(advokasi, availability, visibility));
+      : super(PenilaianoutletInitial(
+            advokasi, availability, visibility, progres));
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle inded : $index $value');
@@ -123,20 +136,23 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     }
 
     if (isValid) {
-      emit(ConfirmSubmit(advokasi, availability, visibility, eTab: eTab));
+      emit(ConfirmSubmit(advokasi, availability, visibility, progres,
+          eTab: eTab));
     } else {
-      emit(FieldNotValidState(advokasi, availability, visibility));
+      emit(FieldNotValidState(advokasi, availability, visibility, progres));
     }
   }
 
   void submit(ETabPenilaian eTab) async {
-    emit(LoadingSubmitData(advokasi, availability, visibility));
+    emit(LoadingSubmitData(advokasi, availability, visibility, progres));
     _prosesSubmit(eTab).then((value) {
       if (value) {
-        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
+        emit(FinishSubmitSuccessOrNot(
+            advokasi, availability, visibility, progres,
             message: 'Data berhasil di submit', isSuccess: true));
       } else {
-        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
+        emit(FinishSubmitSuccessOrNot(
+            advokasi, availability, visibility, progres,
             message: 'Data gagal di submit', isSuccess: false));
       }
     });
@@ -171,6 +187,6 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   }
 
   RefreshForm _createPenilaianLoaded() {
-    return RefreshForm(advokasi, availability, visibility);
+    return RefreshForm(advokasi, availability, visibility, progres);
   }
 }

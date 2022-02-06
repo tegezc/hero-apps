@@ -30,12 +30,14 @@ class ParentTabNilaiOutlet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      lazy: false,
       create: (context) => PenilaianoutletCubit(
-          availability: cacheAvailibility,
-          visibility: cacheVisibility,
-          advokasi: cacheAdvokasi,
-          idOutlet: idOutlet),
+        availability: cacheAvailibility,
+        visibility: cacheVisibility,
+        advokasi: cacheAdvokasi,
+        progres: ProgressPenilaianOutet(
+            availability: false, visibility: false, advokat: false),
+        idOutlet: idOutlet,
+      ),
       child: BlocListener<PenilaianoutletCubit, PenilaianoutletState>(
         listener: (context, state) {
           if (state is LoadingSubmitData) {

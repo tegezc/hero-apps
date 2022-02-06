@@ -36,6 +36,11 @@ class SubmitPenilaianOutDatasourceImpl
         AvailabilityModel(availability).toMapForSubmit(idOutlet);
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();
+    avm['myfile1'] = await MultipartFile.fromFile(
+        availability.pathPhotoOperator!,
+        filename: 'myfile1');
+    avm['myfile2'] = await MultipartFile.fromFile(availability.pathPhotoVF!,
+        filename: 'myfile2');
     var formData = FormData.fromMap(avm);
     var response =
         await dio.post('/penilaianoutlet/kirim_availability', data: formData);
@@ -64,6 +69,13 @@ class SubmitPenilaianOutDatasourceImpl
       PenilaianVisibility visibility, String idOutlet) async {
     Map<String, dynamic> avm =
         VisibilityModel(visibility).toMapForSubmit(idOutlet);
+
+    avm['myfile1'] = await MultipartFile.fromFile(visibility.imageEtalase!,
+        filename: 'myfile1');
+    avm['myfile2'] = await MultipartFile.fromFile(visibility.imagePoster!,
+        filename: 'myfile2');
+    avm['myfile3'] = await MultipartFile.fromFile(visibility.imageLayar!,
+        filename: 'myfile3');
 
     GetDio getDio = GetDio();
     Dio dio = await getDio.dioForm();

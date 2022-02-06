@@ -35,9 +35,11 @@ class _HpPenilaianSfState extends State<HpPenilaianSf> {
           }
 
           if (state is PageParentPenilaianSfLoaded) {
-            PageParentPenilaianSfLoaded item = state;
-            PenilaianSf penilaianSf = item.penilaianSf;
-            return PagePenilaianSf(penilaianSf: penilaianSf);
+            PenilaianSf penilaianSf = state.penilaianSf;
+            return PagePenilaianSf(
+              penilaianSf: penilaianSf,
+              idSF: widget.sales.idSales,
+            );
           }
 
           return ScaffoldMT(body: Container(), title: 'Error..');

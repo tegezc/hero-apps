@@ -7,11 +7,15 @@ import '../../../../util/component/button/component_button.dart';
 import '../../../../util/component/label/component_label.dart';
 import '../../../../util/component/widget/component_widget.dart';
 import '../../../domain/entity/tandem_selling/penilaian_sf.dart';
+import '../../common/widgets/text_area.dart';
+import 'cubit_listener/clpenilaian_sf_cubit.dart';
 import 'cubit_logic/penilainsf_cubit.dart';
 
 class PagePenilaianSf extends StatefulWidget {
   final PenilaianSf penilaianSf;
-  const PagePenilaianSf({Key? key, required this.penilaianSf})
+  final String idSF;
+  const PagePenilaianSf(
+      {Key? key, required this.penilaianSf, required this.idSF})
       : super(key: key);
 
   @override
@@ -20,9 +24,11 @@ class PagePenilaianSf extends StatefulWidget {
 
 class _PagePenilaianSfState extends State<PagePenilaianSf> {
   late PenilainsfCubit _logicCubit;
+  late ClpenilaianSfCubit _cListener;
   @override
   void initState() {
     super.initState();
+    _cListener = ClpenilaianSfCubit();
     _logicCubit = PenilainsfCubit(cachePenilaianSf: widget.penilaianSf);
   }
 
@@ -32,7 +38,8 @@ class _PagePenilaianSfState extends State<PagePenilaianSf> {
       body: BlocProvider(
         create: (context) => _logicCubit,
         child: SingleChildScrollView(
-          child: BlocListener<PenilainsfCubit, PenilainsfState>(
+          child: BlocListener<ClpenilaianSfCubit, ClpenilaianSfState>(
+            bloc: _cListener,
             listener: (context, state) {},
             child: BlocBuilder<PenilainsfCubit, PenilainsfState>(
               builder: (context, state) {
@@ -41,16 +48,16 @@ class _PagePenilaianSfState extends State<PagePenilaianSf> {
                   children: [
                     CardPertanyaanSF(
                         ePenilaianSF: EPenilaianSF.personalities,
-                        lPertanyaan: penilaianSf.personalities),
+                        penilaianSf: penilaianSf),
                     CardPertanyaanSF(
                         ePenilaianSF: EPenilaianSF.distribution,
-                        lPertanyaan: penilaianSf.distribution),
+                        penilaianSf: penilaianSf),
                     CardPertanyaanSF(
                         ePenilaianSF: EPenilaianSF.merchandising,
-                        lPertanyaan: penilaianSf.merchandising),
+                        penilaianSf: penilaianSf),
                     CardPertanyaanSF(
                         ePenilaianSF: EPenilaianSF.promotion,
-                        lPertanyaan: penilaianSf.promotion),
+                        penilaianSf: penilaianSf),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -60,6 +67,13 @@ class _PagePenilaianSfState extends State<PagePenilaianSf> {
                           const LabelBlack.title('cek nilai'),
                         ],
                       ),
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    TextArea(
+                      onChangeText: (value) {},
+                      label: 'Comment',
                     ),
                     const SizedBox(
                       height: 16.0,
@@ -82,7 +96,7 @@ class _PagePenilaianSfState extends State<PagePenilaianSf> {
           ),
         ),
       ),
-      title: 'Voice Of Retailer',
+      title: widget.idSF,
     );
   }
 }
