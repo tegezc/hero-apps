@@ -6,7 +6,7 @@ import '../../../repositories/penilaian_sf/i_penilaian_sf_repository.dart';
 class CheckPenilaianSfUsecase {
   final IPenilaianSfRepository penilaianSfRepository;
   CheckPenilaianSfUsecase(this.penilaianSfRepository);
-  Future<bool> call(PenilaianSf penilaianSf, String idsf) async {
-    return await penilaianSfRepository.checkPenilaianSf(penilaianSf, idsf);
+  Future<double> call(PenilaianSf penilaianSf) async {
+    return await penilaianSfRepository.checkPenilaianSf(penilaianSf);
   }
 }

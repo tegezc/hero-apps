@@ -1,0 +1,1 @@
+enum EKegitatanMt { tandem, backchecking }

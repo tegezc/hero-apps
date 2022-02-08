@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/common/check_longlat/check_long_lat.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/state_parent/page_state_penilaian.dart';
 import 'package:hero/module_mt/presentation/common/voice_of_reseller/hp_voice_of_retailer.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/widget_info_outlet.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/uiutil.dart';
 
+import 'widget_info_outlet.dart';
+
 class DetailOutlet extends StatefulWidget {
   final OutletMT outletMT;
-  final String tap;
-  final String cluster;
+  final String? tap;
+  final String? cluster;
+  final EKegitatanMt eKegitatanMt;
   const DetailOutlet(
       {Key? key,
       required this.outletMT,
       required this.cluster,
-      required this.tap})
+      required this.tap,
+      required this.eKegitatanMt})
       : super(key: key);
 
   @override
@@ -56,8 +60,8 @@ class _DetailOutletState extends State<DetailOutlet> {
                     CommonUi().openPage(
                         context,
                         ParentStatePenilaian(
-                          outletMT: widget.outletMT,
-                        ));
+                            outletMT: widget.outletMT,
+                            eKegiatanMt: widget.eKegitatanMt));
                   },
                   isenable: true),
             ),
@@ -71,12 +75,13 @@ class _DetailOutletState extends State<DetailOutlet> {
                         context,
                         HPVoiceOfRetailer(
                           outletMT: widget.outletMT,
+                          eKegitatanMt: widget.eKegitatanMt,
                         ));
                   },
                   isenable: true),
             ),
           ],
         )),
-        title: 'Cell Bintang');
+        title: 'Detail Outlet');
   }
 }

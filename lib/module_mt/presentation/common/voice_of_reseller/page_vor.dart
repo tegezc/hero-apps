@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/voice_of_reseller.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
+import 'package:hero/module_mt/presentation/common/hive_mt.dart';
 
 import 'package:hero/module_mt/presentation/common/voice_of_reseller/vos_record_video.dart';
 import 'package:hero/module_mt/presentation/common/voice_of_reseller/vos_video_viewer_only.dart';
+import 'package:hero/module_mt/presentation/common/widgets/widget_success.dart';
 
 import '../../../../util/component/button/component_button.dart';
 import '../../../../util/component/label/component_label.dart';
@@ -18,9 +22,13 @@ import 'cobit_logic/logic_cubit.dart';
 
 class PageVoiceOfReseller extends StatefulWidget {
   final VoiceOfReseller vor;
-  final String idOutlet;
+  final OutletMT outletMT;
+  final EKegitatanMt eKegitatanMt;
   const PageVoiceOfReseller(
-      {Key? key, required this.vor, required this.idOutlet})
+      {Key? key,
+      required this.vor,
+      required this.outletMT,
+      required this.eKegitatanMt})
       : super(key: key);
 
   @override
@@ -32,7 +40,10 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
   @override
   void initState() {
     super.initState();
-    _logicCubit = LogicCubit(vor: widget.vor, idOutlet: widget.idOutlet);
+    _logicCubit = LogicCubit(
+        vor: widget.vor,
+        outletMT: widget.outletMT,
+        eKegiatanMt: widget.eKegitatanMt);
   }
 
   @override
@@ -66,7 +77,11 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
               if (state is SubmitSuccessOrNot) {
                 Navigator.pop(context);
                 if (state.isSuccess) {
-                  TgzDialogConfirm().confirmOneButton(context, state.message);
+                  TgzDialogConfirm()
+                      .confirmOneButton(context, state.message)
+                      .then((value) {
+                    _logicCubit.refresh();
+                  });
                 } else {
                   TgzDialogError().warningOneButton(context, state.message);
                 }
@@ -75,7 +90,16 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
             child: BlocBuilder<LogicCubit, LogicState>(
               builder: (context, state) {
                 VoiceOfReseller vor = state.vor;
-                return widgetPertanyaan(vor.lPertanyaan, vor.pathVideo);
+                late bool value;
+                if (widget.eKegitatanMt == EKegitatanMt.backchecking) {
+                  value =
+                      HiveMT.backchecking(widget.outletMT.idOutlet).getVOR();
+                } else {
+                  value = HiveMT.tandem(
+                          widget.outletMT.idOutlet, widget.outletMT.idSales)
+                      .getVOR();
+                }
+                return value ? const WidgetSucces() : widgetPertanyaan(vor);
               },
             ),
           ),
@@ -125,11 +149,11 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
     );
   }
 
-  Widget widgetPertanyaan(List<Pertanyaan> lPertanyaan, String? pathVideo) {
+  Widget widgetPertanyaan(VoiceOfReseller vor) {
     //double w = MediaQuery.of(context).size.width;
     List<Widget> lw = [];
-    for (var i = 0; i < lPertanyaan.length; i++) {
-      Pertanyaan p = lPertanyaan[i];
+    for (var i = 0; i < vor.lPertanyaan.length; i++) {
+      Pertanyaan p = vor.lPertanyaan[i];
       lw.add(combo(p, i));
       lw.add(const SizedBox(
         height: 16,
@@ -138,7 +162,7 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
 
     lw.add(Padding(
       padding: const EdgeInsets.all(8.0),
-      child: pathVideo == null
+      child: vor.pathVideo == null
           ? ButtonStrectWidth(
               buttonColor: Colors.green,
               text: 'Ambil Video',
@@ -156,7 +180,7 @@ class _PageVoiceOfResellerState extends State<PageVoiceOfReseller> {
               isenable: true)
           : FractionallySizedBox(
               widthFactor: 0.9,
-              child: VOSVideoViewerOnly(pathVideo: pathVideo)),
+              child: VOSVideoViewerOnly(pathVideo: vor.pathVideo)),
     ));
 
     lw.add(Padding(

@@ -4,8 +4,10 @@ import 'package:hero/module_mt/data/datasources/core/dio_config.dart';
 import 'package:hero/module_mt/data/model/common/outletmt_model.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 
+import '../../../domain/entity/tandem_selling/pencarian_tandem_selling.dart';
+
 abstract class OutletMTDatasource {
-  Future<List<OutletMT>?> cariOutletMTBySales(String idSales);
+  Future<PencarianTandemSelling?> cariOutletMTBySales(String idSales);
   Future<List<OutletMT>?> cariOutletMTByQueryOutlet(String q);
 }
 
@@ -15,25 +17,52 @@ class OutletMTDatasourceImpl implements OutletMTDatasource {
     GetDio getDio = GetDio();
     Dio dio = await getDio.dio();
     var response = await dio.post('/combobox/cari_outlet', data: {"cari": q});
-    return _olahJsonSales(response.data);
+    return _olahJsonByQuery(response.data);
   }
 
   @override
-  Future<List<OutletMT>?> cariOutletMTBySales(String idSales) async {
+  Future<PencarianTandemSelling?> cariOutletMTBySales(String idSales) async {
     GetDio getDio = GetDio();
     Dio dio = await getDio.dio();
     var response = await dio.get('/pjp/pjp_daftar/$idSales');
     try {
       Map<String, dynamic> map = response.data;
-      return _olahJsonSales(map['data']);
+      return _olahJsonSales(response.data);
     } catch (e) {
       return null;
     }
   }
 
-  List<OutletMT>? _olahJsonSales(dynamic data) {
+  PencarianTandemSelling? _olahJsonSales(dynamic data) {
     try {
       List<OutletMT> lOutlet = [];
+      Map<String, dynamic> map = data;
+      bool isPenilaianSfSubmitted = false;
+      List<dynamic> lmap = map['data'];
+      String status = map['status'];
+      for (int i = 0; i < lmap.length; i++) {
+        Map<String, dynamic> map = lmap[i];
+
+        OutletMT outletMt = OutletMTData.fromJson(map);
+        if (outletMt.isValid()) lOutlet.add(outletMt);
+      }
+
+      if (status == "1") {
+        isPenilaianSfSubmitted = true;
+      }
+      PencarianTandemSelling psf =
+          PencarianTandemSelling(lOutlet, isPenilaianSfSubmitted);
+      return psf;
+    } catch (e) {
+      ph(e);
+      return null;
+    }
+  }
+
+  List<OutletMT>? _olahJsonByQuery(dynamic data) {
+    try {
+      List<OutletMT> lOutlet = [];
+      bool isPenilaianSfSubmitted = false;
       List<dynamic> lmap = data;
       for (int i = 0; i < lmap.length; i++) {
         Map<String, dynamic> map = lmap[i];
@@ -41,6 +70,7 @@ class OutletMTDatasourceImpl implements OutletMTDatasource {
         OutletMT outletMt = OutletMTData.fromJson(map);
         if (outletMt.isValid()) lOutlet.add(outletMt);
       }
+
       return lOutlet;
     } catch (e) {
       ph(e);

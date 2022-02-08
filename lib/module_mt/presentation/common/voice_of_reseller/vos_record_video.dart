@@ -16,7 +16,7 @@ class _VOSRecordVideoState extends State<VOSRecordVideo> {
     return Scaffold(
       body: CoreRecordVideo(
         onStop: onStopVideo,
-        maxDurationInSecon: 5,
+        maxDurationInSecon: 300,
         isStopButtonShowing: true,
       ),
     );

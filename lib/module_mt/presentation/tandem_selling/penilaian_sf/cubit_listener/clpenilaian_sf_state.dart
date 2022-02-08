@@ -5,8 +5,25 @@ abstract class ClpenilaianSfState {}
 
 class ClpenilaianSfInitial extends ClpenilaianSfState {}
 
-class TryToSubmit extends ClpenilaianSfState {}
+class FieldNotCompletedYet extends ClpenilaianSfState {
+  final String message;
+  FieldNotCompletedYet({required this.message});
+}
 
-class FieldNotCompletedYet extends ClpenilaianSfState {}
+class SubmitConfirmed extends ClpenilaianSfState {}
 
-class SubmitConfirm extends ClpenilaianSfState {}
+class CheckNilaiConfirmed extends ClpenilaianSfState {}
+
+class LoadingSubmitOrCheckNilai extends ClpenilaianSfState {}
+
+class SubmitSuccessOrNot extends ClpenilaianSfState {
+  final bool isSuccess;
+  final String message;
+  SubmitSuccessOrNot(this.isSuccess, this.message);
+}
+
+class CheckNilaiSuccessOrNot extends ClpenilaianSfState {
+  final bool isSuccess;
+  double nilai;
+  CheckNilaiSuccessOrNot(this.isSuccess, this.nilai);
+}

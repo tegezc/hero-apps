@@ -4,8 +4,8 @@ import 'package:hero/module_mt/presentation/common/widgets/cell_widget.dart';
 
 class InfoOutlet extends StatelessWidget {
   final OutletMT outletMT;
-  final String cluster;
-  final String tap;
+  final String? cluster;
+  final String? tap;
   const InfoOutlet(
       {Key? key,
       required this.outletMT,
@@ -30,17 +30,21 @@ class InfoOutlet extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            CellDuaColumn(
-              label: 'Cluster',
-              widthFirsComponent: widthLabel,
-              value: cluster,
-            ),
+            cluster == null
+                ? Container()
+                : CellDuaColumn(
+                    label: 'Cluster',
+                    widthFirsComponent: widthLabel,
+                    value: cluster!,
+                  ),
             _space(),
-            CellDuaColumn(
-              label: 'TAP',
-              widthFirsComponent: widthLabel,
-              value: tap,
-            ),
+            tap == null
+                ? Container()
+                : CellDuaColumn(
+                    label: 'TAP',
+                    widthFirsComponent: widthLabel,
+                    value: tap!,
+                  ),
             _space(),
             CellDuaColumn(
               label: 'Nama',

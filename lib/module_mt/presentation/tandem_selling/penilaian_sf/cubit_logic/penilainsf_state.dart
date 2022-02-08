@@ -1,14 +1,19 @@
 part of 'penilainsf_cubit.dart';
 
 abstract class PenilainsfState {
-  PenilaianSf penilaianSf;
-  PenilainsfState(this.penilaianSf);
+  final PenilaianSf penilaianSf;
+  final double? nilai;
+  final bool isSubmitted;
+  PenilainsfState(this.penilaianSf, this.nilai, this.isSubmitted);
 }
 
 class PenilainsfInitial extends PenilainsfState {
-  PenilainsfInitial(PenilaianSf penilaianSf) : super(penilaianSf);
+  PenilainsfInitial(PenilaianSf penilaianSf, double? nilai)
+      : super(penilaianSf, nilai, false);
 }
 
 class PenilaianSFRefresh extends PenilainsfState {
-  PenilaianSFRefresh(PenilaianSf penilaianSf) : super(penilaianSf);
+  final bool isSubmitted;
+  PenilaianSFRefresh(PenilaianSf penilaianSf, double? nilai, this.isSubmitted)
+      : super(penilaianSf, nilai, isSubmitted);
 }

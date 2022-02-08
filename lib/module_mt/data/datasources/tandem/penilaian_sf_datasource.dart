@@ -12,7 +12,7 @@ import '../../../../util/numberconverter.dart';
 abstract class PenilaianSfDataSource {
   Future<PenilaianSf?> getData(String idSf);
   Future<bool> submit(PenilaianSf penilaianSf, String idsf);
-  Future<bool> checkPenilaianSf(PenilaianSf penilaianSf, String idsf);
+  Future<double> checkPenilaianSf(PenilaianSf penilaianSf);
 }
 
 class PenilaianSfDataSourceImpl implements PenilaianSfDataSource {
@@ -81,9 +81,15 @@ class PenilaianSfDataSourceImpl implements PenilaianSfDataSource {
   }
 
   @override
-  Future<bool> checkPenilaianSf(PenilaianSf penilaianSf, String idsf) {
-    // TODO: implement checkPenilaianSf
-    throw UnimplementedError();
+  Future<double> checkPenilaianSf(PenilaianSf penilaianSf) async {
+    Map<String, dynamic> mapsf =
+        PenilaianSfModel(penilaianSf).toMapForCheckNilai();
+
+    GetDio getDio = GetDio();
+    Dio dio = await getDio.dioForm();
+    var formData = FormData.fromMap(mapsf);
+    var response = await dio.post('/penilaiansf/cek_penilaian', data: formData);
+    return _jsonCheckNilai(response.data);
   }
 
   @override
@@ -113,6 +119,16 @@ class PenilaianSfDataSourceImpl implements PenilaianSfDataSource {
       return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  double _jsonCheckNilai(dynamic json) {
+    try {
+      Map<String, dynamic> map = json;
+      double? value = map['data'];
+      return value ?? 0.0;
+    } catch (e) {
+      return 0.0;
     }
   }
 }

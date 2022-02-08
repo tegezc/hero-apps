@@ -22,6 +22,15 @@ class PenilaianSfModel extends PenilaianSf {
     return map;
   }
 
+  Map<String, dynamic> toMapForCheckNilai() {
+    Map<String, dynamic> map = {};
+    map.addAll(_listPertanyaanSfToMap(personalities));
+    map.addAll(_listPertanyaanSfToMap(distribution));
+    map.addAll(_listPertanyaanSfToMap(merchandising));
+    map.addAll(_listPertanyaanSfToMap(promotion));
+    return map;
+  }
+
   Map<String, dynamic> _listPertanyaanSfToMap(List<PertanyaanSf> lPertanyaan) {
     Map<String, dynamic> map = {};
     for (int i = 0; i < lPertanyaan.length; i++) {

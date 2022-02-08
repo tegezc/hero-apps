@@ -4,49 +4,50 @@ abstract class PenilaianoutletState {
   final Availability av;
   final PenilaianVisibility vis;
   final Advokasi adv;
-  final ProgressPenilaianOutet progres;
-  const PenilaianoutletState(this.adv, this.av, this.vis, this.progres);
+  const PenilaianoutletState(
+    this.adv,
+    this.av,
+    this.vis,
+  );
 }
 
 class PenilaianoutletInitial extends PenilaianoutletState {
-  PenilaianoutletInitial(Advokasi adv, Availability av, PenilaianVisibility vis,
-      ProgressPenilaianOutet progress)
-      : super(adv, av, vis, progress);
+  PenilaianoutletInitial(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class FieldNotValidState extends PenilaianoutletState {
-  FieldNotValidState(Advokasi adv, Availability av, PenilaianVisibility vis,
-      ProgressPenilaianOutet progress)
-      : super(adv, av, vis, progress);
+  FieldNotValidState(
+    Advokasi adv,
+    Availability av,
+    PenilaianVisibility vis,
+  ) : super(adv, av, vis);
 }
 
 class RefreshForm extends PenilaianoutletState {
-  RefreshForm(Advokasi adv, Availability av, PenilaianVisibility vis,
-      ProgressPenilaianOutet progress)
-      : super(adv, av, vis, progress);
+  RefreshForm(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class ConfirmSubmit extends PenilaianoutletState {
   final ETabPenilaian eTab;
 
   ConfirmSubmit(Advokasi adv, Availability av, PenilaianVisibility vis,
-      ProgressPenilaianOutet progress,
       {required this.eTab})
-      : super(adv, av, vis, progress);
+      : super(adv, av, vis);
 }
 
 class LoadingSubmitData extends PenilaianoutletState {
-  LoadingSubmitData(Advokasi adv, Availability av, PenilaianVisibility vis,
-      ProgressPenilaianOutet progress)
-      : super(adv, av, vis, progress);
+  LoadingSubmitData(Advokasi adv, Availability av, PenilaianVisibility vis)
+      : super(adv, av, vis);
 }
 
 class FinishSubmitSuccessOrNot extends PenilaianoutletState {
   final bool isSuccess;
   final String message;
 
-  FinishSubmitSuccessOrNot(Advokasi adv, Availability av,
-      PenilaianVisibility vis, ProgressPenilaianOutet progress,
+  FinishSubmitSuccessOrNot(
+      Advokasi adv, Availability av, PenilaianVisibility vis,
       {required this.message, required this.isSuccess})
-      : super(adv, av, vis, progress);
+      : super(adv, av, vis);
 }

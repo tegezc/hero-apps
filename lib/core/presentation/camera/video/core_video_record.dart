@@ -130,7 +130,6 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
   @override
   void dispose() {
     WidgetsBinding.instance?.removeObserver(this);
-
     super.dispose();
   }
 
@@ -424,7 +423,6 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
   }
 
   void onStopButtonPressed() {
-    _isshowtimer = false;
     stopVideoRecording().then((file) {
       if (mounted) setState(() {});
 
@@ -468,6 +466,11 @@ class _CoreRecordVideoState extends State<CoreRecordVideo>
     }
 
     try {
+      _isshowtimer = false;
+      if (_timer != null) {
+        _timer!.cancel();
+      }
+      await Future.delayed(const Duration(milliseconds: 300), () {});
       return await cameraController.stopVideoRecording();
     } on CameraException catch (e) {
       _showCameraException(e);

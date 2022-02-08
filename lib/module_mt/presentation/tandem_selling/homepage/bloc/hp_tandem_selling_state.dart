@@ -14,7 +14,8 @@ class HpTandemSellingLoaded extends HpTandemSellingState {
   final Cluster? currentCluster;
   final Tap? currentTap;
   final Sales? currentSales;
-  final List<OutletMT>? lOutlet;
+  final PencarianTandemSelling? pcts;
+  final bool isFromSearchButton;
   HpTandemSellingLoaded(
       {required this.lCluster,
       required this.lTap,
@@ -22,10 +23,13 @@ class HpTandemSellingLoaded extends HpTandemSellingState {
       this.currentCluster,
       this.currentTap,
       this.currentSales,
-      this.lOutlet});
+      this.pcts,
+      required this.isFromSearchButton});
 }
 
 class HpTandemSellingError extends HpTandemSellingState {
   final String message;
   HpTandemSellingError({required this.message});
 }
+
+class HpTandemSellingSfAlready extends HpTandemSellingState {}

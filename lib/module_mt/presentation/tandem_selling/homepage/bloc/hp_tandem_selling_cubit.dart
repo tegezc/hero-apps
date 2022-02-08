@@ -8,7 +8,7 @@ import 'package:hero/module_mt/data/repositories/common/outletmt_repository.dart
 import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';
-import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
+import 'package:hero/module_mt/domain/entity/tandem_selling/pencarian_tandem_selling.dart';
 import 'package:hero/module_mt/domain/usecase/tandem_selling/prepare_tandem_selling_use_case.dart';
 import 'package:hero/module_mt/domain/usecase/tandem_selling/search_tandem_use_case.dart';
 import 'package:meta/meta.dart';
@@ -30,7 +30,7 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
   List<Sales> lSales = [];
   Sales? currentSales;
 
-  List<OutletMT>? lOutlet;
+  late PencarianTandemSelling pcts;
   void setupData() {
     OutletMTDatasourceImpl outletMTDatasource = OutletMTDatasourceImpl();
     OutletMTRepository outletMTRepository =
@@ -59,14 +59,15 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
     List<Cluster>? lc = await ptandem.getListCluster();
     if (lc != null) {
       _addToComboboxCluster(lc);
-      emit(_createStateTandemLoaded());
+      pcts = PencarianTandemSelling([], false);
+      emit(_createStateTandemLoaded(false));
     } else {
       emit(HpTandemSellingError(
           message: 'Kesulitan mendapatkan data dari server.'));
     }
   }
 
-  HpTandemSellingLoaded _createStateTandemLoaded() {
+  HpTandemSellingLoaded _createStateTandemLoaded(bool isFromSearchButton) {
     return HpTandemSellingLoaded(
         lCluster: lCluster,
         lTap: lTap,
@@ -74,7 +75,8 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
         currentCluster: currentCluster,
         currentSales: currentSales,
         currentTap: currentTap,
-        lOutlet: lOutlet);
+        pcts: pcts,
+        isFromSearchButton: isFromSearchButton);
   }
 
   void _addToComboboxCluster(List<Cluster> lObject) {
@@ -101,8 +103,11 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
       }
     } else if (selected is Sales) {
       currentSales = selected;
-      emit(_createStateTandemLoaded());
+      emit(_createStateTandemLoaded(false));
     }
+
+    pcts = PencarianTandemSelling([], false);
+    emit(_createStateTandemLoaded(false));
   }
 
   void _addToComboboxTap(List<Tap> lObject) {
@@ -128,7 +133,7 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
     ptandem.getListTap(idCluster).then((value) {
       if (value != null) {
         _addToComboboxTap(value);
-        emit(_createStateTandemLoaded());
+        emit(_createStateTandemLoaded(false));
       }
     });
   }
@@ -138,7 +143,7 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
     ptandem.getListSales(idTap).then((value) {
       if (value != null) {
         _addToComboboxSales(value);
-        emit(_createStateTandemLoaded());
+        emit(_createStateTandemLoaded(false));
       }
     });
   }
@@ -148,8 +153,17 @@ class HpTandemSellingCubit extends Cubit<HpTandemSellingState> {
       if (currentSales!.idSales.length > 1) {
         String idSales = currentSales!.idSales;
         sTandem.getListOutletMTTandemSelling(idSales).then((value) {
-          lOutlet = value;
-          emit(_createStateTandemLoaded());
+          if (value == null) {
+            pcts = PencarianTandemSelling([], false);
+            emit(_createStateTandemLoaded(false));
+          } else {
+            pcts = value;
+            if (pcts.isPenilaianSfSubmitted) {
+              emit(_createStateTandemLoaded(true));
+            } else {
+              emit(_createStateTandemLoaded(false));
+            }
+          }
         });
       }
     }

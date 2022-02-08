@@ -1,10 +1,7 @@
 part of 'voiceofreseller_cubit.dart';
 
-abstract class VoiceofresellerState extends Equatable {
+abstract class VoiceofresellerState {
   const VoiceofresellerState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class VoiceofresellerInitial extends VoiceofresellerState {}
@@ -13,7 +10,9 @@ class VoiceofresellerLoading extends VoiceofresellerState {}
 
 class VoiceofresellerLoaded extends VoiceofresellerState {
   final VoiceOfReseller? voiceOfReseller;
-  const VoiceofresellerLoaded({required this.voiceOfReseller});
+  final OutletMT outletMT;
+  const VoiceofresellerLoaded(
+      {required this.voiceOfReseller, required this.outletMT});
 }
 
 class VoiceofresellerError extends VoiceofresellerState {

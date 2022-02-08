@@ -4,11 +4,11 @@ import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/kategories.
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/cubit/penilaianoutlet_cubit.dart';
 import 'package:hero/module_mt/presentation/common/widgets/image_file.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/common/widget_textfield_withlabel.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/uiutil.dart';
 
+import '../../widgets/textfield_number_only_with_label.dart';
 import '../enum_penilaian.dart';
 import '../penilaian_take_photo.dart';
 

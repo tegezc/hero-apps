@@ -1,0 +1,33 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET A",
+      "lastmodified": "2022-02-07 14:11:33",
+      "keterangan": "penilaian outlet"
+    },
+    {
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET A",
+      "lastmodified": "2022-02-07 14:11:38",
+      "keterangan": "penilaian outlet"
+    },
+    {
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET A",
+      "lastmodified": "2022-02-07 14:11:41",
+      "keterangan": "penilaian outlet"
+    },
+    {
+      "id_digipos": "1300000001",
+      "nama_outlet": "OUTLET A",
+      "lastmodified": "2022-02-07 14:12:14",
+      "penilaiansf": 0,
+      "availability": 1,
+      "visibility": 0,
+      "advokat": 1,
+      "vor": 1
+    }
+  ]
+}

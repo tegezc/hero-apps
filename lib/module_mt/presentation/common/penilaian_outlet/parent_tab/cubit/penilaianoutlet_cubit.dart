@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/common/penilaian_out/submit_penilaian_out_datasource.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_out_submit_repository.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/param_penilaian.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 import 'package:hero/module_mt/domain/usecase/common/penilaian_outlet/advokat/submit_advokat_usecase.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
+import 'package:hero/module_mt/presentation/common/hive_mt.dart';
 
 import '../../../../../domain/usecase/common/penilaian_outlet/visibility/submit_visibility_usecase.dart';
 import '../../../../../domain/usecase/common/penilaian_outlet/availability/submit_availability_usecase.dart';
@@ -14,31 +18,19 @@ import '../../enum_penilaian.dart';
 
 part 'penilaianoutlet_state.dart';
 
-class ProgressPenilaianOutet {
-  bool availability;
-  bool visibility;
-  bool advokat;
-
-  ProgressPenilaianOutet(
-      {required this.availability,
-      required this.visibility,
-      required this.advokat});
-}
-
 class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   Availability availability;
   PenilaianVisibility visibility;
   Advokasi advokasi;
-  ProgressPenilaianOutet progres;
-  final String idOutlet;
+  final OutletMT outletMT;
+  final EKegitatanMt eKegitatanMt;
   PenilaianoutletCubit(
       {required this.availability,
       required this.visibility,
       required this.advokasi,
-      required this.progres,
-      required this.idOutlet})
-      : super(PenilaianoutletInitial(
-            advokasi, availability, visibility, progres));
+      required this.outletMT,
+      required this.eKegitatanMt})
+      : super(PenilaianoutletInitial(advokasi, availability, visibility));
 
   void changeSwitchedToggleAvailibity(int index, bool value) {
     ph('change toggle inded : $index $value');
@@ -136,23 +128,20 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     }
 
     if (isValid) {
-      emit(ConfirmSubmit(advokasi, availability, visibility, progres,
-          eTab: eTab));
+      emit(ConfirmSubmit(advokasi, availability, visibility, eTab: eTab));
     } else {
-      emit(FieldNotValidState(advokasi, availability, visibility, progres));
+      emit(FieldNotValidState(advokasi, availability, visibility));
     }
   }
 
   void submit(ETabPenilaian eTab) async {
-    emit(LoadingSubmitData(advokasi, availability, visibility, progres));
+    emit(LoadingSubmitData(advokasi, availability, visibility));
     _prosesSubmit(eTab).then((value) {
       if (value) {
-        emit(FinishSubmitSuccessOrNot(
-            advokasi, availability, visibility, progres,
+        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
             message: 'Data berhasil di submit', isSuccess: true));
       } else {
-        emit(FinishSubmitSuccessOrNot(
-            advokasi, availability, visibility, progres,
+        emit(FinishSubmitSuccessOrNot(advokasi, availability, visibility,
             message: 'Data gagal di submit', isSuccess: false));
       }
     });
@@ -169,15 +158,37 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       if (eTab == ETabPenilaian.availability) {
         SubmitAvailabilityUsecase sav =
             SubmitAvailabilityUsecase(penilaianOutSubmitRepository);
-        isSuccess = await sav(availability, idOutlet);
+        isSuccess = await sav(availability, outletMT.idOutlet);
+        if (isSuccess) {
+          if (eKegitatanMt == EKegitatanMt.backchecking) {
+            HiveMT.backchecking(outletMT.idOutlet).setAvailability();
+          } else {
+            HiveMT.tandem(outletMT.idOutlet, outletMT.idSales)
+                .setAvailability();
+          }
+        }
       } else if (eTab == ETabPenilaian.visibility) {
         SubmitVisibilityUsecase sv =
             SubmitVisibilityUsecase(penilaianOutSubmitRepository);
-        isSuccess = await sv(visibility, idOutlet);
+        isSuccess = await sv(visibility, outletMT.idOutlet);
+        if (isSuccess) {
+          if (eKegitatanMt == EKegitatanMt.backchecking) {
+            HiveMT.backchecking(outletMT.idOutlet).setVisibility();
+          } else {
+            HiveMT.tandem(outletMT.idOutlet, outletMT.idSales).setVisibility();
+          }
+        }
       } else if (eTab == ETabPenilaian.advokasi) {
         SubmitAdvokatUsecase ad =
             SubmitAdvokatUsecase(penilaianOutSubmitRepository);
-        isSuccess = await ad(advokasi, idOutlet);
+        isSuccess = await ad(advokasi, outletMT.idOutlet);
+        if (isSuccess) {
+          if (eKegitatanMt == EKegitatanMt.backchecking) {
+            HiveMT.backchecking(outletMT.idOutlet).setAdvokat();
+          } else {
+            HiveMT.tandem(outletMT.idOutlet, outletMT.idSales).setAdvokat();
+          }
+        }
       }
 
       return isSuccess;
@@ -186,7 +197,11 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     }
   }
 
+  void refresh() {
+    emit(_createPenilaianLoaded());
+  }
+
   RefreshForm _createPenilaianLoaded() {
-    return RefreshForm(advokasi, availability, visibility, progres);
+    return RefreshForm(advokasi, availability, visibility);
   }
 }

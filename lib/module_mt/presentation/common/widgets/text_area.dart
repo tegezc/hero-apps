@@ -4,7 +4,12 @@ import 'package:hero/util/component/label/component_label.dart';
 class TextArea extends StatefulWidget {
   final Function(String) onChangeText;
   final String label;
-  const TextArea({Key? key, required this.onChangeText, required this.label})
+  final TextEditingController controller;
+  const TextArea(
+      {Key? key,
+      required this.onChangeText,
+      required this.label,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -12,11 +17,8 @@ class TextArea extends StatefulWidget {
 }
 
 class _TextAreaState extends State<TextArea> {
-  TextEditingController textarea = TextEditingController();
-
   @override
   void dispose() {
-    textarea.dispose();
     super.dispose();
   }
 
@@ -32,7 +34,7 @@ class _TextAreaState extends State<TextArea> {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextFormField(
-            controller: textarea,
+            controller: widget.controller,
             minLines: 5,
             maxLines: 5,
             keyboardType: TextInputType.multiline,

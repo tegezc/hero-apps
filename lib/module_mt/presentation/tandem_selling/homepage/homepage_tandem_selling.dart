@@ -5,10 +5,11 @@ import 'package:hero/module_mt/domain/entity/common/cluster.dart';
 import 'package:hero/module_mt/domain/entity/common/sales.dart';
 import 'package:hero/module_mt/domain/entity/common/tap.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
 import 'package:hero/module_mt/presentation/common/homepage_search/cell_outlet.dart';
+import 'package:hero/module_mt/presentation/common/widgets/dialog/dialog_confirm.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_mt_error.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_loading_mt.dart';
-import 'package:hero/module_mt/presentation/tandem_selling/detail_outlet/detail_outlet.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/penilaian_sf/hp_peilaian_sf.dart';
 import 'package:hero/util/component/button/component_button.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -17,6 +18,7 @@ import 'package:hero/util/component/widget/horeboxdecoration.dart';
 import 'package:hero/util/component/widget/widgetpencariankosong.dart';
 import 'package:hero/util/uiutil.dart';
 
+import '../../common/detail_outlet/detail_outlet.dart';
 import 'bloc/hp_tandem_selling_cubit.dart';
 
 class HomePageTandemSelling extends StatefulWidget {
@@ -46,64 +48,84 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
   Widget build(BuildContext context) {
     String title = 'Tandem Selling';
     Size s = MediaQuery.of(context).size;
-    double heightContentSearch = s.height - 280;
+
     return BlocProvider<HpTandemSellingCubit>(
       create: (context) => _bloc..setupData(),
-      child: BlocBuilder<HpTandemSellingCubit, HpTandemSellingState>(
-        builder: (context, state) {
-          if (state is HpTandemSellingInitial) {
-            return ScaffoldMT(body: Container(), title: 'Loading..');
-          }
-
-          if (state is HpTandemSellingError) {
-            return const PageMtError(
-              message: 'Terjadi Kesalahan',
-            );
-          }
-
-          if (state is HpTandemSellingLoading) {
-            return const LoadingNungguMT(
-                'Mohon tunggu\nSedang menyiapkan data.');
-          }
-
+      child: BlocListener<HpTandemSellingCubit, HpTandemSellingState>(
+        listener: (context, state) {
           if (state is HpTandemSellingLoaded) {
-            HpTandemSellingLoaded item = state;
-            return ScaffoldMT(
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: searchFilter(item),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: ButtonStrectWidth(
-                            buttonColor: Colors.green,
-                            text: 'Penilain SF',
-                            onTap: () {
-                              CommonUi().openPage(context,
-                                  HpPenilaianSf(sales: item.currentSales!));
-                            },
-                            isenable: true),
-                      ),
-                      Container(
-                          height: heightContentSearch,
-                          margin: const EdgeInsets.all(8.0),
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                              //color: Colors.red[600],
-                              borderRadius: BorderRadius.circular(10.0),
-                              gradient: getGradientBackground()),
-                          child: controllContentPencarian(
-                              heightContentSearch, item)),
-                    ],
-                  ),
-                ),
-                title: title);
+            if (state.isFromSearchButton &&
+                state.pcts!.isPenilaianSfSubmitted) {
+              TgzDialogConfirm().confirmOneButton(context,
+                  "Sales Force bersangkutan sudah dilakukan penilaian hari ini.");
+            }
           }
-          return const PageMtError(message: 'Terjadi Kesalahan.');
         },
+        child: BlocBuilder<HpTandemSellingCubit, HpTandemSellingState>(
+          builder: (context, state) {
+            if (state is HpTandemSellingInitial) {
+              return ScaffoldMT(body: Container(), title: 'Loading..');
+            }
+
+            if (state is HpTandemSellingError) {
+              return const PageMtError(
+                message: 'Terjadi Kesalahan',
+              );
+            }
+
+            if (state is HpTandemSellingLoading) {
+              return const LoadingNungguMT(
+                  'Mohon tunggu\nSedang menyiapkan data.');
+            }
+
+            if (state is HpTandemSellingLoaded) {
+              HpTandemSellingLoaded item = state;
+              bool hideButton = (item.pcts!.isPenilaianSfSubmitted ||
+                  item.pcts!.lOutlet.isEmpty);
+              double heightContentSearch =
+                  hideButton ? s.height - 280 : s.height - 340;
+              return ScaffoldMT(
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: searchFilter(item),
+                        ),
+                        Container(
+                            height: heightContentSearch,
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                                //color: Colors.red[600],
+                                borderRadius: BorderRadius.circular(10.0),
+                                gradient: getGradientBackground()),
+                            child: controllContentPencarian(
+                                heightContentSearch, item)),
+                        hideButton
+                            ? Container()
+                            : Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 8.0),
+                                child: ButtonStrectWidth(
+                                    buttonColor: Colors.green,
+                                    text: 'Penilaian SF',
+                                    onTap: () {
+                                      CommonUi().openPage(
+                                          context,
+                                          HpPenilaianSf(
+                                              sales: item.currentSales!));
+                                    },
+                                    isenable: true),
+                              ),
+                      ],
+                    ),
+                  ),
+                  title: title);
+            }
+            return const PageMtError(message: 'Terjadi Kesalahan.');
+          },
+        ),
       ),
     );
   }
@@ -127,7 +149,12 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
   }
 
   Widget controllContentPencarian(double height, HpTandemSellingLoaded item) {
-    List<OutletMT>? lOutlet = item.lOutlet;
+    List<OutletMT>? lOutlet = item.pcts?.lOutlet;
+    if (item.pcts!.isPenilaianSfSubmitted) {
+      return const WidgetPencarianKosong(
+          text:
+              'Silahkan masukkan kriteria pencarian \nuntuk mendapatkan hasil pencarian');
+    }
     if (lOutlet == null) {
       return const WidgetPencarianKosong(
           text:
@@ -140,7 +167,7 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
         return Column(
           children: [
             headerPencarian(),
-            SizedBox(height: height - 100, child: content(item)),
+            SizedBox(height: height - 70, child: content(item)),
           ],
         );
       }
@@ -148,7 +175,7 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
   }
 
   Widget content(HpTandemSellingLoaded item) {
-    List<OutletMT> items = item.lOutlet!;
+    List<OutletMT> items = item.pcts!.lOutlet;
     return ListView.builder(
       padding: const EdgeInsets.only(top: 20),
       // shrinkWrap: true,
@@ -163,6 +190,7 @@ class _HomePageTandemSellingState extends State<HomePageTandemSelling> {
                     outletMT: items[index],
                     cluster: item.currentCluster!.namaCluster,
                     tap: item.currentTap!.namaTap,
+                    eKegitatanMt: EKegitatanMt.tandem,
                   ));
             });
       },

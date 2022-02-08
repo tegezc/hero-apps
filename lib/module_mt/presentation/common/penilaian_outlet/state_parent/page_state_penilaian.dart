@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/parent_tab/parent_tab.dart';
 import 'package:hero/module_mt/presentation/common/widgets/page_err_loading/page_mt_error.dart';
 import 'package:hero/util/component/label/component_label.dart';
@@ -11,7 +12,9 @@ import 'cubit/statepenilaian_cubit.dart';
 class ParentStatePenilaian extends StatefulWidget {
   static const routeName = '/nilaioutlet';
   final OutletMT outletMT;
-  const ParentStatePenilaian({required this.outletMT, Key? key})
+  final EKegitatanMt eKegiatanMt;
+  const ParentStatePenilaian(
+      {required this.outletMT, Key? key, required this.eKegiatanMt})
       : super(key: key);
 
   @override
@@ -35,8 +38,8 @@ class _ParentStatePenilaianState extends State<ParentStatePenilaian> {
       length: 3,
       child: SafeArea(
         child: BlocProvider(
-          create: (context) =>
-              StatepenilaianCubit()..setupData(widget.outletMT.idOutlet),
+          create: (context) => StatepenilaianCubit()
+            ..setupData(widget.outletMT, widget.eKegiatanMt),
           child: BlocBuilder<StatepenilaianCubit, StatepenilaianState>(
             builder: (context, state) {
               if (state is StatepenilaianInitial) {
@@ -84,7 +87,8 @@ class _ParentStatePenilaianState extends State<ParentStatePenilaian> {
                     cacheAvailibility: item.availability,
                     cacheVisibility: item.visibility,
                     cacheAdvokasi: item.advokasi,
-                    idOutlet: item.idOutlet,
+                    outletMT: item.outletMT,
+                    eKegitatanMt: item.eKegitatanMt,
                   ),
                 );
               }

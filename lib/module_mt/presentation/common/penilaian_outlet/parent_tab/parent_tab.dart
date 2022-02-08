@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/advokasi/page_advokasi.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/availability/page_availability.dart';
 import 'package:hero/module_mt/presentation/common/penilaian_outlet/visibility/page_visibility.dart';
@@ -17,27 +19,27 @@ class ParentTabNilaiOutlet extends StatelessWidget {
   final Availability cacheAvailibility;
   final PenilaianVisibility cacheVisibility;
   final Advokasi cacheAdvokasi;
-  final String idOutlet;
+  final OutletMT outletMT;
+  final EKegitatanMt eKegitatanMt;
 
-  ParentTabNilaiOutlet(
+  const ParentTabNilaiOutlet(
       {Key? key,
       required this.cacheAvailibility,
       required this.cacheVisibility,
       required this.cacheAdvokasi,
-      required this.idOutlet})
+      required this.outletMT,
+      required this.eKegitatanMt})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PenilaianoutletCubit(
-        availability: cacheAvailibility,
-        visibility: cacheVisibility,
-        advokasi: cacheAdvokasi,
-        progres: ProgressPenilaianOutet(
-            availability: false, visibility: false, advokat: false),
-        idOutlet: idOutlet,
-      ),
+          availability: cacheAvailibility,
+          visibility: cacheVisibility,
+          advokasi: cacheAdvokasi,
+          outletMT: outletMT,
+          eKegitatanMt: eKegitatanMt),
       child: BlocListener<PenilaianoutletCubit, PenilaianoutletState>(
         listener: (context, state) {
           if (state is LoadingSubmitData) {
@@ -63,7 +65,11 @@ class ParentTabNilaiOutlet extends StatelessWidget {
           if (state is FinishSubmitSuccessOrNot) {
             Navigator.pop(context);
             if (state.isSuccess) {
-              TgzDialogConfirm().confirmOneButton(context, state.message);
+              TgzDialogConfirm()
+                  .confirmOneButton(context, state.message)
+                  .then((value) {
+                BlocProvider.of<PenilaianoutletCubit>(context).refresh();
+              });
             } else {
               TgzDialogError().warningOneButton(context, state.message);
             }
@@ -74,12 +80,19 @@ class ParentTabNilaiOutlet extends StatelessWidget {
             return TabBarView(
               children: [
                 PageAvailability(
-                  availability: cacheAvailibility,
-                  idOutlet: idOutlet,
+                  availability: state.av,
+                  outletMT: outletMT,
+                  eKegitatanMt: eKegitatanMt,
                 ),
-                PageVisibility(penilaianVisibility: cacheVisibility),
+                PageVisibility(
+                  penilaianVisibility: state.vis,
+                  outletMT: outletMT,
+                  eKegitatanMt: eKegitatanMt,
+                ),
                 PageAdvokasi(
-                  advokasi: cacheAdvokasi,
+                  advokasi: state.adv,
+                  outletMT: outletMT,
+                  eKegitatanMt: eKegitatanMt,
                 ),
               ],
             );

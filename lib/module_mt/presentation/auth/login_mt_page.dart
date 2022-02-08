@@ -105,7 +105,7 @@ class _LoginPageMtState extends State<LoginPageMt> {
                             });
                             // String id = _idTextController.text;
                             // String password = _passwordTextController.text;
-                            String id = 'oetie_dodol@yahoo.co.id';
+                            String id = 'REG001-1';
                             String password = 'REG001-CO';
                             context.read<AuthCubit>().login(id, password);
                           }),

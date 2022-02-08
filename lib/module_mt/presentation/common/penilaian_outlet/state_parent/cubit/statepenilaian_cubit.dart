@@ -3,10 +3,12 @@ import 'package:equatable/equatable.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/common/penilaian_out/get_penilaian_outlet.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_outlet_repository.dart';
+import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/advokasi.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/availability.dart';
 import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/visibility.dart';
 import 'package:hero/module_mt/domain/usecase/common/penilaian_outlet/get_availability_data.dart';
+import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
 
 part 'statepenilaian_state.dart';
 
@@ -18,17 +20,19 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
   late Availability cacheAvailibility;
   late PenilaianVisibility cacheVisibility;
   late Advokasi cacheAdvokasi;
-  late String idOutlet;
+  late OutletMT outletMT;
+  late EKegitatanMt kegitatanMt;
 
-  void setupData(String idout) {
-    idOutlet = idout;
+  void setupData(OutletMT outlet,EKegitatanMt eKegMt) {
+    outletMT = outlet;
+    kegitatanMt = eKegMt;
     emit(StatepenilaianLoading());
-    _setupData(idout).then((_) {});
+    _setupData(outlet).then((_) {});
   }
 
-  Future<void> _setupData(String idOutlet) async {
+  Future<void> _setupData(OutletMT outlet) async {
     PenilaianOutletDataSourceImpl penilaianOutletDataSource =
-        await PenilaianOutletDataSourceImpl.create(idOutlet);
+        await PenilaianOutletDataSourceImpl.create(outlet.idOutlet);
     PenilaianOutletRepositoryImpl penilaianOutletRepository =
         PenilaianOutletRepositoryImpl(
             penilaianOutletDataSource: penilaianOutletDataSource);
@@ -50,6 +54,7 @@ class StatepenilaianCubit extends Cubit<StatepenilaianState> {
         availability: cacheAvailibility,
         visibility: cacheVisibility,
         advokasi: cacheAdvokasi,
-        idOutlet: idOutlet);
+        outletMT: outletMT,
+    eKegitatanMt: kegitatanMt);
   }
 }

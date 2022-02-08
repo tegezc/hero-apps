@@ -1,0 +1,39 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "lastmodified": "2022-02-07 14:17:17",
+      "keterangan": "penilaian sf"
+    },
+    {
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "lastmodified": "2022-02-07 14:17:53",
+      "keterangan": "penilaian sf"
+    },
+    {
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "lastmodified": "2022-02-07 21:29:59",
+      "keterangan": "penilaian sf"
+    },
+    {
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "lastmodified": "2022-02-07 21:44:09",
+      "keterangan": "penilaian sf"
+    },
+    {
+      "id_sales": "SSF0018",
+      "nama_sales": "Afiqa Shofia Putri",
+      "lastmodified": "2022-02-07 23:11:55",
+      "penilaiansf": 0,
+      "availability": 1,
+      "visibility": 0,
+      "advokat": 1,
+      "vor": 1
+    }
+  ]
+}

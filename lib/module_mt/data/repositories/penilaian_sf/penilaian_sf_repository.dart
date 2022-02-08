@@ -11,8 +11,8 @@ class PenilaianSfRepositoryImpl implements IPenilaianSfRepository {
   }
 
   @override
-  Future<bool> checkPenilaianSf(PenilaianSf penilaianSf, String idsf) async {
-    return await penilaianSfDataSource.checkPenilaianSf(penilaianSf, idsf);
+  Future<double> checkPenilaianSf(PenilaianSf penilaianSf) async {
+    return await penilaianSfDataSource.checkPenilaianSf(penilaianSf);
   }
 
   @override
