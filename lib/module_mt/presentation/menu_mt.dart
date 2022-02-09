@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/module_mt/presentation/back_checking/homepage_back_checking.dart';
+import 'package:hero/module_mt/presentation/history_outlet/enum_history.dart';
 import 'package:hero/module_mt/presentation/tandem_selling/homepage/homepage_tandem_selling.dart';
 import 'package:hero/util/component/image/component_image_new.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/uiutil.dart';
+
+import 'history_outlet/hp_history.dart';
 
 class MenuMt extends StatefulWidget {
   static const routeName = '/menumt';
@@ -85,6 +88,32 @@ class _MenuMtState extends State<MenuMt> {
             ),
           ],
         ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumMenuMT.historyOutlet);
+              },
+              image: 'assets/image/mt/ic_history_outlet.png',
+              disableImage: 'assets/image/mt/ic_history_outlet.png',
+              completeImage: 'assets/image/mt/ic_history_outlet.png',
+              enable: EnumBtnMenuState.enable,
+            ),
+            ClockInImageIcon(
+              onTap: () {
+                _tapMenu(EnumMenuMT.historySales);
+              },
+              image: 'assets/image/mt/ic_history_sales.png',
+              disableImage: 'assets/image/mt/ic_history_sales.png',
+              completeImage: 'assets/image/mt/ic_history_sales.png',
+              enable: EnumBtnMenuState.enable,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -96,6 +125,12 @@ class _MenuMtState extends State<MenuMt> {
         break;
       case EnumMenuMT.tandemSelling:
         CommonUi().openPage(context, const HomePageTandemSelling());
+        break;
+      case EnumMenuMT.historyOutlet:
+        CommonUi().openPage(context, const HistorySearchPage(EHistory.outlet));
+        break;
+      case EnumMenuMT.historySales:
+        CommonUi().openPage(context, const HistorySearchPage(EHistory.sales));
         break;
     }
   }

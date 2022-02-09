@@ -1,0 +1,1 @@
+enum EHistory { outlet, sales }
