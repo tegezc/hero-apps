@@ -1,4 +1,3 @@
-import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/domain/repositories/common/i_outletmt_repository.dart';
 
 import '../../entity/tandem_selling/pencarian_tandem_selling.dart';

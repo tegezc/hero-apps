@@ -5,8 +5,10 @@ import 'package:hero/module_mt/domain/entity/common/penilaian_outlet/question.da
 class AvailabilityModel extends Availability {
   AvailabilityModel(Availability av)
       : super(
-            kategoriOperator: av.kategoriOperator,
-            kategoriVF: av.kategoriVF,
+            perdanaTelkomsel: av.perdanaTelkomsel,
+            perdanaOther: av.perdanaOther,
+            fisikTelkomsel: av.fisikTelkomsel,
+            fisikOther: av.fisikOther,
             question: av.question) {
     super.pathPhotoOperator = av.pathPhotoOperator;
     super.pathPhotoVF = av.pathPhotoVF;
@@ -16,10 +18,10 @@ class AvailabilityModel extends Availability {
     String idoutlet,
   ) {
     Map<String, dynamic> map = {};
-    for (ParamPenilaian item in kategoriOperator.lparams) {
+    for (ParamPenilaian item in perdanaTelkomsel.lparams) {
       map[item.idparam] = item.nilai;
     }
-    for (ParamPenilaian item in kategoriVF.lparams) {
+    for (ParamPenilaian item in perdanaOther.lparams) {
       map[item.idparam] = item.nilai;
     }
     for (Question item in question.lquestion) {

@@ -3,7 +3,6 @@ import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/lokasi/universitas.dart';
 import 'package:hero/core/domain/entities/tgzlocation.dart';
 import 'package:hero/core/data/datasources/location/tgz_location.dart';
-import 'package:location/location.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'abstractbloclokasi.dart';

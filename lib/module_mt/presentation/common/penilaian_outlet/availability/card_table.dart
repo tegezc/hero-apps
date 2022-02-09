@@ -16,7 +16,7 @@ class CardTableParameter extends StatefulWidget {
   final Kategories kategories;
   final EJenisParam eJenisParam;
   final EPhotoPenilaian ePhoto;
-  final String textButton;
+  final String? textButton;
   final String? pathImage;
   const CardTableParameter(
       {Key? key,
@@ -88,7 +88,10 @@ class _CardTableParameterState extends State<CardTableParameter> {
     double widthLabel = s.width - 150;
     double widthTextField = 80;
     List<Widget> lw = [];
-    lw.add(LabelBlack.size1(k.kategori));
+    lw.add(Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: LabelBlack.size1(k.kategori),
+    ));
     lw.add(const Divider());
     for (int i = 0; i < k.lparams.length; i++) {
       ParamPenilaian p = k.lparams[i];
@@ -112,25 +115,27 @@ class _CardTableParameterState extends State<CardTableParameter> {
     lw.add(
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: widget.pathImage == null
-            ? ButtonStrectWidth(
-                buttonColor: Colors.green,
-                text: widget.textButton,
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  CommonUi()
-                      .openPage(context, const PenilaianTakePhoto())
-                      .then((value) {
-                    if (value != null) {
-                      if (value is String) {
-                        BlocProvider.of<PenilaianoutletCubit>(context)
-                            .setPathImage(value, widget.ePhoto);
-                      }
-                    }
-                  });
-                },
-                isenable: true)
-            : ImageFile(pathPhoto: widget.pathImage),
+        child: widget.textButton == null
+            ? Container()
+            : (widget.pathImage == null
+                ? ButtonStrectWidth(
+                    buttonColor: Colors.green,
+                    text: widget.textButton!,
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      CommonUi()
+                          .openPage(context, const PenilaianTakePhoto())
+                          .then((value) {
+                        if (value != null) {
+                          if (value is String) {
+                            BlocProvider.of<PenilaianoutletCubit>(context)
+                                .setPathImage(value, widget.ePhoto);
+                          }
+                        }
+                      });
+                    },
+                    isenable: true)
+                : ImageFile(pathPhoto: widget.pathImage)),
       ),
     );
     return lw;

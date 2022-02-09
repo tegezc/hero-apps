@@ -1,6 +1,7 @@
 class ParamPenilaian {
   final String idparam;
   final String param;
+  final String judul;
   int? nilai;
 
   bool isValidToSubmit() {
@@ -10,5 +11,9 @@ class ParamPenilaian {
     return true;
   }
 
-  ParamPenilaian({required this.param, required this.idparam, this.nilai});
+  ParamPenilaian(
+      {required this.param,
+      required this.idparam,
+      this.nilai,
+      required this.judul});
 }

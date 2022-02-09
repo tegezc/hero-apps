@@ -1,8 +1,6 @@
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/pertanyaan.dart';
 import 'package:hero/module_mt/domain/entity/common/voice_of_retailer/voice_of_reseller.dart';
 
-import '../../../../../util/dateutil.dart';
-
 class VoiceOfResellerModel extends VoiceOfReseller {
   VoiceOfResellerModel(VoiceOfReseller vor)
       : super(lPertanyaan: vor.lPertanyaan) {

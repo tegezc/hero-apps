@@ -5,8 +5,6 @@ import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/lokasi/poi.dart';
 import 'package:http/http.dart' as http;
 
-import '../../config/configuration_sf.dart';
-
 class HttpPoi extends HttpBase {
   Future<List<dynamic>?> detailPoi(String? idpoi) async {
     Map<String, String> headers = await getHeader();

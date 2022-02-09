@@ -105,7 +105,7 @@ class Universitas extends ParentLokasi {
 
   @override
   bool operator ==(dynamic other) =>
-      other != null && other is Universitas && this.iduniv == other.iduniv;
+      other != null && other is Universitas && iduniv == other.iduniv;
 
 // "id_tap": "TAP001",
 // "status": "WAITING APPROVAL",

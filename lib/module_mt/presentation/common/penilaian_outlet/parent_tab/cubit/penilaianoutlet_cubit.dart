@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/common/penilaian_out/submit_penilaian_out_datasource.dart';
 import 'package:hero/module_mt/data/repositories/penilaian_outlet/penilaian_out_submit_repository.dart';
@@ -52,12 +51,13 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
   void changeTextPenilaian(int index, String value, EJenisParam eJenisParam) {
     ph('change text $eJenisParam');
     switch (eJenisParam) {
-      case EJenisParam.perdana:
+      case EJenisParam.perdanaTelkomsel:
         _setValueParamPenilaian(
-            index, value, availability.kategoriOperator.lparams);
+            index, value, availability.perdanaTelkomsel.lparams);
         break;
-      case EJenisParam.vk:
-        _setValueParamPenilaian(index, value, availability.kategoriVF.lparams);
+      case EJenisParam.fisikTelkomsel:
+        _setValueParamPenilaian(
+            index, value, availability.fisikTelkomsel.lparams);
         break;
       case EJenisParam.poster:
         ph('masuk poster : $value');
@@ -67,6 +67,13 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
       case EJenisParam.layar:
         _setValueParamPenilaian(
             index, value, visibility.kategoriesLayar.lparams);
+        break;
+      case EJenisParam.perdanaOther:
+        _setValueParamPenilaian(
+            index, value, availability.perdanaOther.lparams);
+        break;
+      case EJenisParam.fisikOther:
+        _setValueParamPenilaian(index, value, availability.fisikOther.lparams);
         break;
     }
   }
@@ -80,12 +87,6 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
     ph('$pathImage $ePhotoPenilaian');
 
     switch (ePhotoPenilaian) {
-      case EPhotoPenilaian.avPerdana:
-        availability.pathPhotoOperator = pathImage;
-        break;
-      case EPhotoPenilaian.avVf:
-        availability.pathPhotoVF = pathImage;
-        break;
       case EPhotoPenilaian.etalase:
         visibility.imageEtalase = pathImage;
         break;
@@ -94,6 +95,12 @@ class PenilaianoutletCubit extends Cubit<PenilaianoutletState> {
         break;
       case EPhotoPenilaian.layar:
         visibility.imageLayar = pathImage;
+        break;
+      case EPhotoPenilaian.avPerdanaOther:
+        availability.pathPhotoOperator = pathImage;
+        break;
+      case EPhotoPenilaian.avFisikOther:
+        availability.pathPhotoVF = pathImage;
         break;
     }
     ph('${availability.pathPhotoOperator}');

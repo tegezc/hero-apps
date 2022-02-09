@@ -59,33 +59,47 @@ class PenilaianOutletDataSourceImpl implements PenilaianOutletDataSource {
     throw FatalObjectNullException('Data Advokasi tidak valid');
   }
 
-  static const tagPerdana = 'Perdana';
-  static const tagVF = 'VF';
+  static const tagPerdanaTelkomsel = 'perdana_telkomsel';
+  static const tagPerdanaOther = 'perdana_all_operator';
+  static const tagFisikTelkomsel = 'vf_telkomsel';
+  static const tagFisikOther = 'vf_all_operator';
   static const tagQuestion = 'Question';
   @override
   Availability getAvailability() {
     Questions questions = Questions(lquestion: []);
-    Kategories paramPerdana = Kategories(kategori: tagPerdana, lparams: []);
-    Kategories paramVF = Kategories(kategori: tagVF, lparams: []);
+    Kategories paramPerdana =
+        Kategories(kategori: 'Parameter Perdana Telkomsel', lparams: []);
+    Kategories paramVF =
+        Kategories(kategori: 'Parameter All Operator', lparams: []);
+    Kategories fisikTelkomsel = Kategories(kategori: 'Parameter', lparams: []);
+    Kategories fisikOther = Kategories(kategori: 'Parameter', lparams: []);
     if (json != null) {
       try {
         List<dynamic> ld = json['AVAILABILITY'];
         for (var i = 0; i < ld.length; i++) {
           Map<String, dynamic> map = ld[i];
-          if (map['kategori'] == tagPerdana) {
+          if (map['key_kategori'] == tagPerdanaTelkomsel) {
             ParamPenilaian param = ParamPenilaianModel.fromJson(map);
             paramPerdana.lparams.add(param);
-          } else if (map['kategori'] == tagVF) {
+          } else if (map['key_kategori'] == tagPerdanaOther) {
             ParamPenilaian param = ParamPenilaianModel.fromJson(map);
             paramVF.lparams.add(param);
+          } else if (map['key_kategori'] == tagFisikTelkomsel) {
+            ParamPenilaian param = ParamPenilaianModel.fromJson(map);
+            fisikTelkomsel.lparams.add(param);
+          } else if (map['key_kategori'] == tagFisikOther) {
+            ParamPenilaian param = ParamPenilaianModel.fromJson(map);
+            fisikOther.lparams.add(param);
           } else if (map['kategori'] == tagQuestion) {
             Question question = QuestionModel.fromJson(map);
             questions.lquestion.add(question);
           }
         }
         return Availability(
-            kategoriOperator: paramPerdana,
-            kategoriVF: paramVF,
+            perdanaTelkomsel: paramPerdana,
+            perdanaOther: paramVF,
+            fisikTelkomsel: fisikTelkomsel,
+            fisikOther: fisikOther,
             question: questions);
       } catch (e) {
         throw FatalObjectNullException(e.toString());
@@ -100,8 +114,8 @@ class PenilaianOutletDataSourceImpl implements PenilaianOutletDataSource {
   @override
   PenilaianVisibility getVisibility() {
     List<Question> lQuestion = [];
-    Kategories paramPoster = Kategories(kategori: tagPerdana, lparams: []);
-    Kategories paramLayar = Kategories(kategori: tagVF, lparams: []);
+    Kategories paramPoster = Kategories(kategori: 'Parameter', lparams: []);
+    Kategories paramLayar = Kategories(kategori: 'Parameter', lparams: []);
 
     if (json != null) {
       try {

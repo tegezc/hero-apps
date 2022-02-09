@@ -4,15 +4,19 @@ import 'kategories.dart';
 import 'questions.dart';
 
 class Availability {
-  Kategories kategoriOperator;
-  Kategories kategoriVF;
+  Kategories perdanaTelkomsel;
+  Kategories perdanaOther;
+  Kategories fisikTelkomsel;
+  Kategories fisikOther;
   Questions question;
   String? pathPhotoOperator;
   String? pathPhotoVF;
 
   Availability(
-      {required this.kategoriOperator,
-      required this.kategoriVF,
+      {required this.perdanaTelkomsel,
+      required this.perdanaOther,
+      required this.fisikTelkomsel,
+      required this.fisikOther,
       required this.question});
 
   bool isValidToSubmit() {
@@ -20,14 +24,14 @@ class Availability {
       return false;
     }
 
-    if (kategoriOperator.lparams.isEmpty ||
-        kategoriVF.lparams.isEmpty ||
+    if (perdanaTelkomsel.lparams.isEmpty ||
+        perdanaOther.lparams.isEmpty ||
         question.lquestion.isEmpty) {
       return false;
     }
-    bool cekParam = _checkListParams(kategoriOperator.lparams);
+    bool cekParam = _checkListParams(perdanaTelkomsel.lparams);
     if (cekParam) {
-      cekParam = _checkListParams(kategoriVF.lparams);
+      cekParam = _checkListParams(perdanaOther.lparams);
     }
     return cekParam;
   }

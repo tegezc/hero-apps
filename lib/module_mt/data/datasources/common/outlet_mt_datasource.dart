@@ -26,7 +26,6 @@ class OutletMTDatasourceImpl implements OutletMTDatasource {
     Dio dio = await getDio.dio();
     var response = await dio.get('/pjp/pjp_daftar/$idSales');
     try {
-      Map<String, dynamic> map = response.data;
       return _olahJsonSales(response.data);
     } catch (e) {
       return null;
@@ -62,7 +61,6 @@ class OutletMTDatasourceImpl implements OutletMTDatasource {
   List<OutletMT>? _olahJsonByQuery(dynamic data) {
     try {
       List<OutletMT> lOutlet = [];
-      bool isPenilaianSfSubmitted = false;
       List<dynamic> lmap = data;
       for (int i = 0; i < lmap.length; i++) {
         Map<String, dynamic> map = lmap[i];

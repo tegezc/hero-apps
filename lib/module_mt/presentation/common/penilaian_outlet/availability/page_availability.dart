@@ -14,7 +14,10 @@ import 'card_table.dart';
 
 class PageAvailability extends StatefulWidget {
   const PageAvailability(
-      {Key? key, required this.availability, required this.outletMT,required this.eKegitatanMt})
+      {Key? key,
+      required this.availability,
+      required this.outletMT,
+      required this.eKegitatanMt})
       : super(key: key);
   final Availability availability;
   final OutletMT outletMT;
@@ -27,11 +30,12 @@ class PageAvailability extends StatefulWidget {
 class _PageAvailabilityState extends State<PageAvailability> {
   @override
   Widget build(BuildContext context) {
-    bool value ;
-    if(widget.eKegitatanMt == EKegitatanMt.backchecking){
+    bool value;
+    if (widget.eKegitatanMt == EKegitatanMt.backchecking) {
       value = HiveMT.backchecking(widget.outletMT.idOutlet).getAvailability();
-    }else{
-      value = HiveMT.tandem(widget.outletMT.idOutlet,widget.outletMT.idSales).getAvailability();
+    } else {
+      value = HiveMT.tandem(widget.outletMT.idOutlet, widget.outletMT.idSales)
+          .getAvailability();
     }
     return value
         ? const WidgetSucces()
@@ -39,9 +43,16 @@ class _PageAvailabilityState extends State<PageAvailability> {
             child: Column(
               children: [
                 CardTableParameter(
-                  kategories: widget.availability.kategoriOperator,
-                  eJenisParam: EJenisParam.perdana,
-                  ePhoto: EPhotoPenilaian.avPerdana,
+                  kategories: widget.availability.perdanaTelkomsel,
+                  eJenisParam: EJenisParam.perdanaTelkomsel,
+                  ePhoto: EPhotoPenilaian.avPerdanaOther,
+                  textButton: null,
+                  pathImage: widget.availability.pathPhotoOperator,
+                ),
+                CardTableParameter(
+                  kategories: widget.availability.perdanaOther,
+                  eJenisParam: EJenisParam.perdanaOther,
+                  ePhoto: EPhotoPenilaian.avPerdanaOther,
                   textButton: 'Foto Perdana',
                   pathImage: widget.availability.pathPhotoOperator,
                 ),
@@ -49,9 +60,16 @@ class _PageAvailabilityState extends State<PageAvailability> {
                   height: 8,
                 ),
                 CardTableParameter(
-                  kategories: widget.availability.kategoriVF,
-                  eJenisParam: EJenisParam.vk,
-                  ePhoto: EPhotoPenilaian.avVf,
+                  kategories: widget.availability.fisikTelkomsel,
+                  eJenisParam: EJenisParam.fisikTelkomsel,
+                  ePhoto: EPhotoPenilaian.avFisikOther,
+                  textButton: null,
+                  pathImage: widget.availability.pathPhotoVF,
+                ),
+                CardTableParameter(
+                  kategories: widget.availability.fisikOther,
+                  eJenisParam: EJenisParam.fisikOther,
+                  ePhoto: EPhotoPenilaian.avFisikOther,
                   textButton: 'Foto Voucher Fisik',
                   pathImage: widget.availability.pathPhotoVF,
                 ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/domain/entity/common/outlet_mt.dart';
 import 'package:hero/module_mt/presentation/back_checking/widget_textfield_withlabel.dart';
 import 'package:hero/module_mt/presentation/common/e_kegiatan_mt.dart';
