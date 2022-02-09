@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+
 class ConfigurationSf {
   // static final Configuration _configuration = Configuration._internal();
   //
@@ -8,10 +9,10 @@ class ConfigurationSf {
   //
   // Configuration._internal();
   final bool _isProduction = true;
-  bool isSF = false;
   String host() {
     if (_isProduction) {
-      return 'sihore.com';
+      // return 'sihore.com';
+      return 'simplifytechno.com';
     }
     return 'horedev.com';
   }

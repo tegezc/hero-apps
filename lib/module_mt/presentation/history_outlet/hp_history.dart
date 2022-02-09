@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero/module_mt/presentation/common/widgets/dialog/dialog_loading.dart';
 import 'package:hero/module_mt/presentation/history_outlet/AdapterHistory.dart';
 import 'package:hero/module_mt/presentation/history_outlet/adapter_item_history.dart';
 import 'package:hero/module_mt/presentation/history_outlet/cubit/history_cubit.dart';
@@ -36,20 +37,12 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    AdapterHistory item = AdapterHistory(
-        lItem: [], isButtonMoreShowing: false, awal: null, akhir: null);
-
-    String strAwal =
-        item.awal == null ? 'Awal' : DateUtility.dateToStringPanjang(item.awal);
-    String strAkhir = item.awal == null
-        ? 'Akhir'
-        : DateUtility.dateToStringPanjang(item.akhir);
     Size s = MediaQuery.of(context).size;
-
+    String title = widget.eHistory == EHistory.sales ? 'Sales' : 'Outlet';
     return BlocProvider(
-      create: (context) => _cubit..setupData(),
+      create: (context) => HistoryCubit(),
       child: ScaffoldMT(
-        title: 'Pencarian',
+        title: title,
         body: SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(
@@ -64,61 +57,86 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
               padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
               height: s.height,
               width: s.width,
-              child: Column(
-                children: [
-                  //  LabelBlack.size1(title, bold: true),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 0.0, bottom: 0.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+              child: BlocListener<HistoryCubit, HistoryState>(
+                bloc: _cubit,
+                listener: (context, state) {
+                  if (state is HistoryLoading) {
+                    TgzDialogLoading().loadingDialog(context);
+                  }
+
+                  if (state is SuccessSearchFinish) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: BlocBuilder<HistoryCubit, HistoryState>(
+                  bloc: _cubit..setupData(),
+                  builder: (context, state) {
+                    // AdapterHistory item = AdapterHistory(
+                    //     lItem: [], isButtonMoreShowing: false, awal: null, akhir: null);
+                    AdapterHistory item = state.adapterHistory;
+                    String strAwal = item.awal == null
+                        ? 'Awal'
+                        : DateUtility.dateToStringPanjang(item.awal);
+                    String strAkhir = item.akhir == null
+                        ? 'Akhir'
+                        : DateUtility.dateToStringPanjang(item.akhir);
+                    return Column(
                       children: [
+                        //  LabelBlack.size1(title, bold: true),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ButtonApp.blue(strAwal, () {
-                            _datePicker(true, item.awal, item.akhir);
-                          }),
+                          padding: const EdgeInsets.only(
+                            left: 10.0,
+                            right: 4.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ButtonApp.blue(strAwal, () {
+                                _datePicker(true, item.awal, item.akhir);
+                              }),
+                              ButtonApp.blue(strAkhir, () {
+                                _datePicker(false, item.awal, item.akhir);
+                              }),
+                              IconButton(
+                                  icon: const Icon(
+                                    Icons.search,
+                                    //   size: 40,
+                                  ),
+                                  onPressed: () {
+                                    _cubit.search(widget.eHistory);
+                                  }),
+                            ],
+                          ),
                         ),
-                        ButtonApp.blue(strAkhir, () {
-                          _datePicker(false, item.awal, item.akhir);
-                        }),
-                        IconButton(
-                            icon: const Icon(
-                              Icons.search,
-                              size: 40,
-                            ),
-                            onPressed: () {}),
+                        SizedBox(
+                          height: s.height - 160,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  gradient:
+                                      _boxDecoration.gradientBackgroundApp()),
+                              margin: const EdgeInsets.only(
+                                  top: 10.0, left: 0, right: 0),
+                              padding: const EdgeInsets.all(5.0),
+                              child: Card(
+                                elevation: 0,
+                                color: Colors.transparent,
+                                child: Column(
+                                  children: [
+                                    _headerPencarian(),
+                                    _controllContentPencarian(item.lItem),
+                                    // _content(item),
+                                  ],
+                                ),
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 70,
+                        )
                       ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: s.height - 160,
-                    child: Expanded(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                gradient:
-                                    _boxDecoration.gradientBackgroundApp()),
-                            margin: const EdgeInsets.only(
-                                top: 10.0, left: 0, right: 0),
-                            padding: const EdgeInsets.all(5.0),
-                            child: Card(
-                              elevation: 0,
-                              color: Colors.transparent,
-                              child: Column(
-                                children: [
-                                  _headerPencarian(),
-                                  _controllContentPencarian([]),
-                                  // _content(item),
-                                ],
-                              ),
-                            ))),
-                  ),
-                  const SizedBox(
-                    height: 70,
-                  )
-                ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -153,7 +171,7 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
           text:
               'Pencarian data pada range tanggal tersebut \nTIDAK DITEMUKAN.');
     } else {
-      return SizedBox(height: s.height - 365, child: _content(lItem));
+      return SizedBox(height: s.height - 225, child: _content(lItem));
     }
   }
 
@@ -222,22 +240,16 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
                       width: 12,
                     ),
                     Expanded(
-                      flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           LabelWhite.size3(item.id),
                           _spasi(),
-                          LabelWhite.size3('tgl: ${item.nama}'),
+                          LabelWhite.size3(item.nama),
+                          _spasi(),
+                          LabelWhite.size3(item.keterangan),
+                          const Divider(),
                         ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: ButtonApp.black(
-                        'View Detail',
-                        () {},
-                        bgColor: Colors.white,
                       ),
                     ),
                   ],
@@ -254,10 +266,10 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
     DateTime? dtawal = DateTime(DateTime.now().year - 5);
     DateTime dtakhir = DateTime(DateTime.now().year + 5);
     DateTime initialDt = DateTime.now();
-    if (!isawal) {
+    if (isawal == false) {
       if (awal != null) {
-        dtawal = akhir;
-        initialDt = dtawal!.add(const Duration(days: 1));
+        dtawal = awal;
+        initialDt = dtawal.add(const Duration(days: 1));
       }
     }
     DateTime? picked = await showDatePicker(
@@ -269,9 +281,9 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
 
     if (picked != null) {
       if (isawal) {
-        //TODO pick date awal
+        _cubit.changeTglAwal(picked);
       } else {
-        //TODO pick date akhir
+        _cubit.chageTglAkhir(picked);
       }
     }
   }

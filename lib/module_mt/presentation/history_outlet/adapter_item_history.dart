@@ -1,10 +1,22 @@
-class AdapterHistoryItem{
+import 'package:hero/module_mt/domain/entity/history/outlet/history_outlet.dart';
+import 'package:hero/module_mt/domain/entity/history/sales/history_sales.dart';
+
+class AdapterHistoryItem {
   final String id;
   final String nama;
   final String keterangan;
 
-  AdapterHistoryItem({required this.id,required this.nama,required this.keterangan});
+  AdapterHistoryItem(
+      {required this.id, required this.nama, required this.keterangan});
 
+  factory AdapterHistoryItem.fromSales(HistorySales hs) {
+    return AdapterHistoryItem(
+        id: hs.idSales, nama: hs.namaSales, keterangan: hs.keterangan);
+  }
+  factory AdapterHistoryItem.fromOutlet(HistoryOutlet ho) {
+    return AdapterHistoryItem(
+        id: ho.idDigipos, nama: ho.namaOutlet, keterangan: ho.keterangan);
+  }
 }
 //============
 // Outlet
