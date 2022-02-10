@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/module_mt/data/datasources/auth/get_local_session_login.dart';
 import 'package:hero/module_mt/data/datasources/auth/get_remote_login.dart';
 import 'package:hero/module_mt/data/datasources/common/combobox_datasource.dart';
@@ -58,6 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
     requestLoginAndProsesLogin
         .requestAndProcessLogin(id, password)
         .then((value) {
+      // ph(value);
       if (value) {
         emit(AuthAlreadyLoggedIn());
       } else {

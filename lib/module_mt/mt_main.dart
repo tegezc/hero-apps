@@ -35,7 +35,10 @@ class _MTHomeControllpageState extends State<MTHomeControllpage> {
             return const LoadingNunggu("Mempersiapkan data\n mohon menunggu");
           }
           if (state is AuthNotLoggedIn) {
-            return const LoginPageMt();
+            print('masuk belum login');
+            return const LoginPageMt(
+              isLoading: false,
+            );
           }
 
           if (state is AuthAlreadyLoggedIn) {

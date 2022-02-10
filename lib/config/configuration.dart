@@ -6,7 +6,7 @@ class MainConfiguration {
   final ConfigurationMT confMT = ConfigurationMT();
   final ConfigurationSf confSF = ConfigurationSf();
 
-  bool isSf() => false;
+  bool isSf() => true;
 
   ResolutionPreset vidResolution() {
     if (isSf()) {

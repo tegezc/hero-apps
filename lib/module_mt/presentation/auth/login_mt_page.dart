@@ -7,7 +7,8 @@ import 'package:hero/util/component/label/component_label.dart';
 import 'package:hero/util/component/textfield/component_textfield.dart';
 
 class LoginPageMt extends StatefulWidget {
-  const LoginPageMt({Key? key}) : super(key: key);
+  final bool isLoading;
+  const LoginPageMt({Key? key, required this.isLoading}) : super(key: key);
 
   @override
   _LoginPageMtState createState() => _LoginPageMtState();
@@ -22,9 +23,9 @@ class _LoginPageMtState extends State<LoginPageMt> {
 
   @override
   void initState() {
-    _isShowLoginGagal = false;
-    _isloading = false;
     super.initState();
+    _isShowLoginGagal = false;
+    _isloading = widget.isLoading;
   }
 
   @override
@@ -100,13 +101,13 @@ class _LoginPageMtState extends State<LoginPageMt> {
                     _isloading
                         ? const ButtonAppLoading()
                         : ButtonAppSolid('Login', onTap: () {
-                            setState(() {
-                              _isloading = true;
-                            });
-                            // String id = _idTextController.text;
-                            // String password = _passwordTextController.text;
-                            String id = 'REG001-1';
-                            String password = 'REG001-CO';
+                            // setState(() {
+                            //   _isloading = true;
+                            // });
+                            String id = _idTextController.text;
+                            String password = _passwordTextController.text;
+                            // String id = 'REG001-1';
+                            // String password = 'REG001-CO';
                             context.read<AuthCubit>().login(id, password);
                           }),
                     // ButtonRed('Reset Password', onTap: () {
