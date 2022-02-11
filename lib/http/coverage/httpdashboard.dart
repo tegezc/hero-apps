@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 class HttpDashboard extends HttpBase {
   Future<List<Pjp>?> getPjpHariIni() async {
-    Uri uri = configuration.uri('/location/pjp_daftar');
+    Uri uri = configuration.uri('/lokasi/pjp_daftar');
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http

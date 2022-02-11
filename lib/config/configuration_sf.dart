@@ -11,12 +11,12 @@ class ConfigurationSf {
   final bool _isProduction = true;
   String host() {
     if (_isProduction) {
-      // return 'sihore.com';
-      return 'simplifytechno.com';
+      return 'sihore.com';
+      // return 'simplifytechno.com';
     }
     return 'horedev.com';
   }
-
+  
   String domain() => 'https://${host()}/apihore/index.php';
 
   Uri uri(String path) => Uri.https(host(), '/apihore/index.php$path');
