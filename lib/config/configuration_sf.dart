@@ -16,7 +16,7 @@ class ConfigurationSf {
     }
     return 'horedev.com';
   }
-  
+
   String domain() => 'https://${host()}/apihore/index.php';
 
   Uri uri(String path) => Uri.https(host(), '/apihore/index.php$path');
@@ -25,9 +25,9 @@ class ConfigurationSf {
     if (maxradius == null || actualradius == null) {
       return false;
     }
-    // if (_isProduction) {
-    //   return actualradius <= maxradius;
-    // }
+    if (_isProduction) {
+      return actualradius <= maxradius;
+    }
     return true;
   }
 

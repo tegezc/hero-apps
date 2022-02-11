@@ -392,7 +392,9 @@ class _TabDataFakultasState extends State<TabDataFakultas> {
             SizedBox(
               height: 8,
             ),
-            ButtonApp.black('Update Long Lat', () {}),
+            ButtonApp.black('Update Long Lat', () {
+              widget.blocFakultas!.updateLongLat();
+            }),
           ],
         ),
       ),
