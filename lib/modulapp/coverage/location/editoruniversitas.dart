@@ -338,7 +338,9 @@ class _TabDataKampusState extends State<TabDataKampus> {
             const SizedBox(
               height: 8,
             ),
-            ButtonApp.black('Update Long Lat', () {}),
+            ButtonApp.black('Update Long Lat', () {
+              widget.blocUniversitas!.updateLongLat();
+            }),
           ],
         ),
       ),
