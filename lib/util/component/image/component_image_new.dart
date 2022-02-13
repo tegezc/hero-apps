@@ -31,7 +31,7 @@ class PropertyImage extends StatelessWidget {
       // case EnumPropertyImage.bgatas:
       //   return _bgatas();
       case EnumPropertyImage.bgbawah:
-        return _bgbawah(size.height + 8.5);
+        return _bgbawah(size.height);
       case EnumPropertyImage.map:
         return _map();
       // case EnumPropertyImage.textwelcome:
@@ -77,7 +77,7 @@ class PropertyImage extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/image/new/BG.png'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         // child:

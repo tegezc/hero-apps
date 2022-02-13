@@ -95,7 +95,7 @@ class TgzDialog {
                   padding:
                       EdgeInsets.only(right: 16.0, left: 16.0, bottom: 3.0),
                   child: LabelBlack.size2(
-                      'Di Stiker Scan QR,\nField telkomsel harus bilangan 0 atau 1.'),
+                      'Di STIKER OMNI CHANNEL,\nField telkomsel harus bilangan 0 atau 1.'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

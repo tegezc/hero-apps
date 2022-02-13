@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             // _label('Username'),
             // _entryField1(_idTextController),
-            TextFieldLogin('Username', _idTextController),
+            TextFieldLogin('Username Sales', _idTextController),
             const SizedBox(
               height: 20,
             ),

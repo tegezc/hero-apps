@@ -123,7 +123,7 @@ class _HomeMerchandisingState extends State<HomeMerchandising> {
                         child: LabelWhite.size2('Papan Nama Toko'),
                       ),
                       Tab(
-                        child: LabelWhite.size2('Stiker Scan QR'),
+                        child: LabelWhite.size2('STIKER OMNI CHANNEL'),
                       ),
                     ],
                   ),

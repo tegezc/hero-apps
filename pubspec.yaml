@@ -3,7 +3,7 @@ description: Project untuk SF di telkomsel Regional Sumbagsel
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.7.0+1
+version: 1.7.0+2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -11,30 +11,30 @@ environment:
 dependencies:
   background_locator: ^1.6.12
   better_player: ^0.0.62
-  camera: ^0.9.4+6
+  camera: ^0.9.4+11
   cupertino_icons: ^1.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_launcher_icons: ^0.9.2
   flutter_native_splash: ^1.0.3
-  geolocator: ^8.0.1
+  geolocator: ^8.1.1
   google_fonts: any
   google_maps_flutter: ^2.0.1
   intl: ^0.17.0
   loading_animations: ^2.1.0
   location: ^4.1.1
   location_permissions: ^4.0.1
-  path: ^1.7.0
+  path: ^1.8.0
 #  path_provider: any
   permission_handler: ^8.2.5
   rxdart: ^0.27.3
   screenshot: ^1.2.3
   share: ^2.0.1
-  shared_preferences: ^2.0.9
+  shared_preferences: ^2.0.13
   sqflite: any
-  url_launcher: ^6.0.2
-  video_player: ^2.0.0
+  url_launcher: ^6.0.20
+  video_player: ^2.2.18
   get_it: ^7.2.0
   dio: ^4.0.4
   pretty_dio_logger: ^1.2.0-beta-1

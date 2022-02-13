@@ -152,7 +152,7 @@ class HttpMerchandising extends HttpBase {
     try {
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      ph(response.body);
+      ph('MERCH DETAIL  ${response.body}');
       ph(response.statusCode);
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);

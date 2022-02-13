@@ -51,7 +51,7 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
         _title = 'Papan';
         break;
       case EnumMerchandising.stikerScanQR:
-        _title = 'Stiker Scan QR';
+        _title = 'STIKER OMNI CHANNEL'; // 'Stiker Scan QR';
         break;
       case EnumMerchandising.perdana:
         _title = 'Perdana';
@@ -245,6 +245,7 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
   }
 
   Widget _cardForm(double width) {
+    ph('TAB: ${widget.enumMerchandising}');
     double w = width - 120;
     return Card(
       child: Padding(
@@ -268,12 +269,17 @@ class _PageInsertMerchandisingState extends State<PageInsertMerchandising> {
   Widget _cellForm(double width, String label,
       TextEditingController? controller, EnumOperator enumOperator) {
     bool enableTextfield = !widget.merchandising!.isServerExist;
+    ph('Merch Enable Button Before $enableTextfield');
+    // kondisi khusus untuk sticker
     if (enableTextfield &&
         widget.enumMerchandising == EnumMerchandising.stikerScanQR) {
       if (enumOperator != EnumOperator.telkomsel) {
         enableTextfield = false;
       }
     }
+    //=============
+
+    ph('Merch Enable Button $enableTextfield');
     return Row(
       children: [
         SizedBox(width: 80, child: LabelBlack.size2(label)),
