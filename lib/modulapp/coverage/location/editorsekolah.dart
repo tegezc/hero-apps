@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/itemui.dart';
@@ -9,12 +8,11 @@ import 'package:hero/util/component/textfield/component_textfield.dart';
 import 'package:hero/util/component/widget/component_widget.dart';
 import 'package:hero/util/constapp/consstring.dart';
 import 'package:hero/util/loadingpage/loadingview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/abstractbloclokasi.dart';
 import 'bloc/blocsekolah.dart';
 import 'widgetforlocation.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 
 class EditorSekolah extends StatefulWidget {
   static const routeName = '/editorsekolah';

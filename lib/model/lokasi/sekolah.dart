@@ -118,8 +118,15 @@ class Sekolah extends ParentLokasi {
 
 // set jenjang
     int? intJenjang;
-    if (map[tagJmlMurid] != null) {
-      intJenjang = int.tryParse(map[tagJenjang]) ?? 1;
+    Map<String, int> mapjjg = {};
+
+    mapjjg['SD'] = 1;
+    mapjjg['SMP'] = 2;
+    mapjjg['SMA'] = 3;
+    mapjjg['PONPES'] = 4;
+    if (map[tagJenjang] != null) {
+      intJenjang = mapjjg[map[tagJenjang]] ?? 1;
+      intJenjang = intJenjang > 4 || intJenjang < 1 ? 1 : intJenjang;
     } else {
       intJenjang = 1;
     }

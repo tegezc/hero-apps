@@ -1,9 +1,10 @@
+import 'package:hero/core/data/datasources/location/tgz_location.dart';
+import 'package:hero/core/domain/entities/tgzlocation.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/httplokasi/httpsekolah.dart';
 import 'package:hero/model/enumapp.dart';
 import 'package:hero/model/itemui.dart';
 import 'package:hero/model/lokasi/sekolah.dart';
-import 'package:hero/core/domain/entities/tgzlocation.dart';
-import 'package:hero/core/data/datasources/location/tgz_location.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'abstractbloclokasi.dart';
@@ -57,6 +58,7 @@ class BlocSekolah extends AbsBlocLokasi {
   Future<bool> _firtimeEditSetup(String? idsekolah) async {
     HttpSekolah httpController = HttpSekolah();
     List<dynamic>? response = await httpController.detailSekolah(idsekolah);
+    ph(response);
     if (response != null) {
       if (response.isNotEmpty) {
         Map<String, dynamic> map = response[0];
@@ -126,6 +128,7 @@ class BlocSekolah extends AbsBlocLokasi {
         await httpController.updateSekolah(_cacheUisekolah!.sekolah);
     _cacheUisekolah!.enumStateWidget = EnumStateWidget.done;
     _sink(_cacheUisekolah);
+    ph(response);
     if (response != null) {
       if (response['status'] == 200) {
         return true;
@@ -155,6 +158,7 @@ class BlocSekolah extends AbsBlocLokasi {
 
   void comboJenjang(JenjangSekolah? item) {
     _cacheUisekolah!.currentJenjang = item;
+    ph('${_cacheUisekolah!.currentJenjang!.enumJenjangSekolah}');
     _sink(_cacheUisekolah);
   }
 

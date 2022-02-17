@@ -70,6 +70,7 @@ class BlocPembelian {
         lsn[index].ischecked = true;
       }
       _cachePembelian.lserial = List.from(lsn);
+      _cachePembelian.lserialChecked = List.from(lsn);
     }
     return true;
   }

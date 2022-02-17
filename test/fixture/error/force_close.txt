@@ -1,0 +1,10 @@
+erforming hot reload...
+Syncing files to device sdk gphone x86...
+I/flutter ( 7041): is running build: false
+Reloaded 1 of 1793 libraries in 1,101ms.
+E/GmsClient( 7041): unable to connect to service: com.google.android.location.internal.GoogleLocationManagerService.START on com.google.android.gms
+E/GmsClient( 7041): unable to connect to service: com.google.android.gms.clearcut.service.START on com.google.android.gms
+I/lsumbagsel.her( 7041): Background concurrent copying GC freed 51149(2304KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 4362KB/8724KB, paused 39us total 106.554ms
+I/ChimeraModuleLdr( 7041): Module config changed, forcing restart due to module com.google.android.gms.googlecertificates
+I/Process ( 7041): Sending signal. PID: 7041 SIG: 9
+Lost connection to device.

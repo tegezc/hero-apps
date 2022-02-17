@@ -68,8 +68,8 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
                         const SizedBox(
                           height: 12,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
                           child: LabelBlack.size1('Daftar Product'),
                         ),
                         _content(item.litemtrx!),
@@ -155,56 +155,60 @@ class _DaftarProductDistribusiState extends State<DaftarProductDistribusi> {
   // }
 
   Widget _content(List<ItemTransaksi> ltrx) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
         color: Colors.white, //Colors.red[600],
-        child: ListView.separated(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: ltrx.length,
-          itemBuilder: (ctx, index) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: TextButton(
-                style: const ButtonStyle(alignment: Alignment.centerLeft),
-                onPressed: () async {
-                  // var result = await CommonUi.openPage(context, PembelianItem(trx));
-                  var result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PembelianItem(ltrx[index])));
-                  if (result == null) {
-                    _blocDaftarProduct.reloadDaftarProduct();
-                  }
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelBlack.size2(ltrx[index].product!.nama),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    LabelBlack.size3(
-                        'Stock : ${ltrx[index].product!.stock} pcs'),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    LabelBlack.size3('Keranjang : ${ltrx[index].jumlah} pcs'),
-                    const Divider(
-                      thickness: 2,
-                    ),
-                  ],
+        child: SizedBox(
+          height: s.height - 190,
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: ltrx.length,
+            itemBuilder: (ctx, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: TextButton(
+                  style: const ButtonStyle(alignment: Alignment.centerLeft),
+                  onPressed: () async {
+                    // var result = await CommonUi.openPage(context, PembelianItem(trx));
+                    var result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PembelianItem(ltrx[index])));
+                    if (result == null) {
+                      _blocDaftarProduct.reloadDaftarProduct();
+                    }
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelBlack.size2(ltrx[index].product!.nama),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      LabelBlack.size3(
+                          'Stock : ${ltrx[index].product!.stock} pcs'),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      LabelBlack.size3('Keranjang : ${ltrx[index].jumlah} pcs'),
+                      const Divider(
+                        thickness: 2,
+                      ),
+                    ],
+                  ),
                 ),
+              );
+            },
+            separatorBuilder: (ctx, index) => const Padding(
+              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+              child: Divider(
+                thickness: 2,
+                color: Colors.white60,
               ),
-            );
-          },
-          separatorBuilder: (ctx, index) => const Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Divider(
-              thickness: 2,
-              color: Colors.white60,
             ),
           ),
         ),

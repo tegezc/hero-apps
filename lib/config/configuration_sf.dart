@@ -25,9 +25,9 @@ class ConfigurationSf {
     if (maxradius == null || actualradius == null) {
       return false;
     }
-    // if (_isProduction) {
-    //   return actualradius <= maxradius;
-    // }
+    if (_isProduction) {
+      return actualradius <= maxradius;
+    }
     return true;
   }
 
@@ -39,9 +39,9 @@ class ConfigurationSf {
     return ResolutionPreset.medium;
   }
 
-  // SF : 1.7.0
+  // SF : 1.8.0
   // MT: 1.0.0
   String versionApp() {
-    return '1.7.0';
+    return '1.8.0';
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero/core/log/printlog.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/component/button/component_button.dart';
@@ -168,11 +169,6 @@ class _PembelianItemState extends State<PembelianItem> {
                             });
                           },
                         ),
-                        // ButtonApp.white(txtbtn, () {
-                        //   setState(() {
-                        //     _isRange = !_isRange;
-                        //   });
-                        // }),
                       ),
                     ],
                   ),
@@ -200,7 +196,7 @@ class _PembelianItemState extends State<PembelianItem> {
                         FocusScope.of(context).unfocus();
                         String snawal = _textController1.text;
                         String snakhir = _textController2.text;
-                        if (snawal == "" && snakhir == "") {
+                        if (snawal.isEmpty && snakhir.isEmpty) {
                           _blocPembelian.semuaSerial();
                         } else {
                           _blocPembelian.cariSerial(snawal, snakhir);
@@ -281,36 +277,15 @@ class _PembelianItemState extends State<PembelianItem> {
 
   Widget _contentListSeri(List<SerialNumber> lseri) {
     Size s = MediaQuery.of(context).size;
-    // List<Widget> lw = [];
-    // lw.add(const SizedBox(
-    //   height: 4,
-    // ));
-    // for (int i = 0; i < lseri.length; i++) {
-    //   SerialNumber item = lseri[i];
-    //   lw.add(_cell(item, i));
-    // }
 
-    // return Padding(
-    //   padding: const EdgeInsets.all(8.0),
-    //   child: Card(
-    //     child: Column(
-    //       children: lw,
-    //     ),
-    //   ),
-    // );
-
-    // return ListView.builder(
-    //   itemCount: lseri.length,
-    //   itemBuilder: (context, index) {
-    //     return _cell(lseri[index], index);
-    //   },
-    // );
     return SizedBox(
       height: s.height - 300,
       width: s.width,
       child: ListView.builder(
-        itemCount: lseri.length,
+        itemCount: lseri.length + 1,
         itemBuilder: (context, index) {
+          if (index == lseri.length) return const SizedBox(height: 200);
+          ph(lseri[index].serial);
           return _cell(lseri[index], index);
         },
       ),
