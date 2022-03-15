@@ -12,12 +12,14 @@ class BlocPembayaran {
   final UIPembayaran _cachePembelian = UIPembayaran();
   final HttpDIstribution _httpDIstribution = HttpDIstribution();
   final DaoSerial _daoSerial = DaoSerial();
+  late Pjp _cachepjp;
 
   final BehaviorSubject<UIPembayaran> _uipembayaran = BehaviorSubject();
 
   Stream<UIPembayaran> get uipembayaran => _uipembayaran.stream;
 
   void firstime(List<ItemTransaksi>? ltrx, Pjp pjp) {
+    _cachepjp = pjp;
     setupPembayaran(ltrx, pjp).then((value) {
       if (value) {
         _sink(_cachePembelian);
@@ -79,28 +81,28 @@ class BlocPembayaran {
       }
     }
 
-    DataPembeli pembeliLunas = DataPembeli();
-    pembeliLunas.linkaja = _cachePembelian.dataPembeli.linkaja;
-    pembeliLunas.nohppembeli = _cachePembelian.dataPembeli.nohppembeli;
-    pembeliLunas.namapembeli = _cachePembelian.dataPembeli.namapembeli;
-    pembeliLunas.idtempat = _cachePembelian.dataPembeli.idtempat;
-    pembeliLunas.lserial = snlunas;
-
-    DataPembeli pembeliKonsinyasi = _cachePembelian.dataPembeli;
-    pembeliKonsinyasi.linkaja = 0;
-    pembeliKonsinyasi.nohppembeli = _cachePembelian.dataPembeli.nohppembeli;
-    pembeliKonsinyasi.namapembeli = _cachePembelian.dataPembeli.namapembeli;
-    pembeliKonsinyasi.idtempat = _cachePembelian.dataPembeli.idtempat;
-    pembeliKonsinyasi.lserial = snkonsinyasi;
-
     bool returnvalue = false;
     if (snlunas.isNotEmpty) {
+      DataPembeli pembeliLunas = DataPembeli();
+      pembeliLunas.idJenisLokasi = _cachepjp.idjenilokasi;
+      pembeliLunas.linkaja = _cachePembelian.dataPembeli.linkaja;
+      pembeliLunas.nohppembeli = _cachePembelian.dataPembeli.nohppembeli;
+      pembeliLunas.namapembeli = _cachePembelian.dataPembeli.namapembeli;
+      pembeliLunas.idtempat = _cachePembelian.dataPembeli.idtempat;
+      pembeliLunas.lserial = snlunas;
       bool value = await _httpDIstribution.submitLunas(pembeliLunas);
 
       returnvalue = value;
     }
 
     if (snkonsinyasi.isNotEmpty) {
+      DataPembeli pembeliKonsinyasi = _cachePembelian.dataPembeli;
+      pembeliKonsinyasi.idJenisLokasi = _cachepjp.idjenilokasi;
+      pembeliKonsinyasi.linkaja = 0;
+      pembeliKonsinyasi.nohppembeli = _cachePembelian.dataPembeli.nohppembeli;
+      pembeliKonsinyasi.namapembeli = _cachePembelian.dataPembeli.namapembeli;
+      pembeliKonsinyasi.idtempat = _cachePembelian.dataPembeli.idtempat;
+      pembeliKonsinyasi.lserial = snkonsinyasi;
       bool value = await _httpDIstribution.submitKonsinyasi(pembeliKonsinyasi);
 
       returnvalue = value;

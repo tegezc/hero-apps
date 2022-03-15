@@ -10,11 +10,7 @@ class ConfigurationSf {
   // Configuration._internal();
   final bool _isProduction = true;
   String host() {
-    if (_isProduction) {
-      return 'sihore.com';
-      // return 'simplifytechno.com';
-    }
-    return 'horedev.com';
+    return 'sihore.com';
   }
 
   String domain() => 'https://${host()}/apihore/index.php';
@@ -42,6 +38,6 @@ class ConfigurationSf {
   // SF : 1.8.0
   // MT: 1.0.0
   String versionApp() {
-    return '1.8.0';
+    return '1.9.0';
   }
 }

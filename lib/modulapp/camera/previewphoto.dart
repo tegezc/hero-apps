@@ -73,7 +73,7 @@ class _PreviewPhotoState extends State<PreviewPhoto> {
               children: [
                 SizedBox(
                     width: s.width,
-                    height: s.height - 140,
+                    height: s.height - 200,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Image.file(

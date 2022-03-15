@@ -41,6 +41,14 @@ class BlocHomePageCoverage {
     });
   }
 
+  void reloadFromServer() {
+    _setupFirstime().then((value) {
+      if (value) {
+        _sink(_cacheuicvrg);
+      }
+    });
+  }
+
   Future<bool> _setupFirstime() async {
     List<Pjp>? lpjp = await _httpDashboard.getPjpHariIni();
     _cacheuicvrg = UIHomeCvrg();

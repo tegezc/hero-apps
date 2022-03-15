@@ -78,7 +78,7 @@ class _PreviewPhotoWithUploadState extends State<PreviewPhotoWithUpload> {
             children: [
               SizedBox(
                   width: s.width,
-                  height: s.height - 140,
+                  height: s.height - 200,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Image.file(

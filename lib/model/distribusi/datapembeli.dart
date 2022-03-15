@@ -16,6 +16,7 @@ class DataPembeli {
       "nama_pembeli": namapembeli,
       "no_hp_pembeli": nohppembeli,
       "link_aja": '$linkaja',
+      "id_jenis_lokasi": idJenisLokasi,
       "data": ls
     };
   }
@@ -23,6 +24,7 @@ class DataPembeli {
   String? idtempat;
   String? namapembeli;
   String? nohppembeli;
+  String? idJenisLokasi;
 
   List<SerialNumber>? lserial;
   int? linkaja;

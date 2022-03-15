@@ -85,9 +85,7 @@ class _MapClockInState extends State<MapClockIn> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (_enumAccount == null
-        //|| circles == null
-        ) {
+    if (_enumAccount == null) {
       return CustomScaffold(
         body: Container(),
         title: 'Loading . .',
@@ -126,7 +124,7 @@ class _MapClockInState extends State<MapClockIn> {
         child: Column(
           children: [
             SizedBox(
-              height: size.height - _minusWidget,
+              height: size.height - 290, //_minusWidget,
               width: size.width,
               child: GoogleMap(
                 myLocationEnabled: true,
@@ -142,7 +140,6 @@ class _MapClockInState extends State<MapClockIn> {
             ),
             Container(
               color: Colors.white,
-              // height: 400,
               width: size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

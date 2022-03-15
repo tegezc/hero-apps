@@ -109,21 +109,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                if (item.enumAccount == EnumAccount.sf) {
-                                  // CommonUi.openPage(context, SearchLocation());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SearchLocation()));
-                                } else {
-                                  // CommonUi.openPage(context, SearchLocationDs());
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SearchLocationDs()));
-                                }
+                                _clickSearchLokasi(item);
                               },
                               child: const Image(
                                   image: AssetImage(
@@ -264,7 +250,7 @@ class _CoverageHomeState extends State<CoverageHome> {
                       right: 16.0, left: 16.0, bottom: 3.0),
                   child: ButtonApp.black('Fakultas', () {
                     Navigator.of(context).pop();
-                    CommonUi().openPage(context, EditorFakultas(null));
+                    CommonUi().openPage(context, const EditorFakultas(null));
                   }),
                 ),
                 Padding(
@@ -405,6 +391,19 @@ class _CoverageHomeState extends State<CoverageHome> {
         _blocDashboard.firstTime();
       });
     });
+  }
+
+  void _clickSearchLokasi(UIHomeCvrg item) async {
+    if (item.enumAccount == EnumAccount.sf) {
+      // CommonUi.openPage(context, SearchLocation());
+      await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const SearchLocation()));
+    } else {
+      // CommonUi.openPage(context, SearchLocationDs());
+      await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const SearchLocationDs()));
+    }
+    _blocDashboard.reloadFromServer();
   }
 
   Future<bool> _prepareClockIn(String? idhistorypjp) async {

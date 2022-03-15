@@ -5,9 +5,9 @@ import 'package:hero/core/log/printlog.dart';
 import 'package:hero/http/core/httpbase.dart';
 import 'package:hero/model/distribusi/datapembeli.dart';
 import 'package:hero/model/distribusi/nota.dart';
+import 'package:hero/model/distribusi/product.dart';
 import 'package:hero/model/distribusi/rekomendasi.dart';
 import 'package:hero/model/pjp.dart';
-import 'package:hero/model/distribusi/product.dart';
 import 'package:hero/model/serialnumber.dart';
 import 'package:hero/util/constapp/accountcontroller.dart';
 import 'package:hero/util/dateutil.dart';
@@ -75,11 +75,12 @@ class HttpDIstribution extends HttpBase {
   Future<List<Nota>?> getDaftarNota(Pjp pjp) async {
     try {
       String tglparam = DateUtility.dateToStringParam(DateTime.now());
-      Uri uri = configuration
-          .uri('/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam');
+      Uri uri = configuration.uri(
+          '/clockindistribusi/distribusi_daftar_nota/${pjp.id}/$tglparam/${pjp.idjenilokasi}');
       final Map<String, String> headers = await getHeader();
       final response = await http.get(uri, headers: headers);
-      //  ph("daftar nota: ${response.body}");
+      ph(uri.path);
+      ph("daftar nota: ${response.body}");
 
       if (response.statusCode == 200) {
         dynamic value = json.decode(response.body);
@@ -192,7 +193,6 @@ class HttpDIstribution extends HttpBase {
     Uri uri =
         configuration.uri('/clockindistribusi/penjualan_bayar_konsinyasi');
     http.Response? response;
-    ph(dataPembeli.toJson());
     try {
       response = await http.post(
         uri,
@@ -200,6 +200,8 @@ class HttpDIstribution extends HttpBase {
         body: jsonEncode(dataPembeli.toJson()),
       );
       ph("Submit kosinyansi");
+      ph(uri.path);
+      ph('${dataPembeli.toJson()}');
       ph(response.body);
       ph(response.statusCode);
       ph("=========");
@@ -261,6 +263,8 @@ class HttpDIstribution extends HttpBase {
         body: jsonEncode(dataPembeli.toJson()),
       );
       ph("Submit LUNAS");
+      ph(uri.path);
+      ph('${dataPembeli.toJson()}');
       ph(response.body);
       ph(response.statusCode);
       ph("=========");

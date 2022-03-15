@@ -75,6 +75,7 @@ class HttpOutlet extends HttpBase {
         headers: headers,
         body: jsonEncode(outlet.toJson()),
       );
+      ph(outlet.toJson());
       if (response.statusCode == 200) {
         ph(response.body);
         return json.decode(response.body);
